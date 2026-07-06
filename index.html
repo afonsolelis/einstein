@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAB · Ciência de Dados e IA — Albert Einstein</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <style>
+    :root {
+      --navy: #1a2f5e;
+      --blue: #1f6fb2;
+      --cyan: #00a3d9;
+      --cyan-light: #4bc4e8;
+      --ink: #16233d;
+      --muted: #64748b;
+      --bg: #f4f8fb;
+      --card: #ffffff;
+      --border: #e2ebf2;
+      --shadow: 0 4px 6px -1px rgba(26, 47, 94, .08), 0 2px 4px -2px rgba(26, 47, 94, .06);
+      --shadow-lg: 0 20px 40px -12px rgba(26, 47, 94, .28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- Header ---------- */
+    .hero {
+      background: linear-gradient(120deg, var(--navy) 0%, var(--blue) 55%, var(--cyan) 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 0l30 30L0 60zM60 0L30 30l30 30z' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.6rem 1.5rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-logo {
+      height: 62px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+    .hero .subtitle {
+      font-size: 1.05rem;
+      opacity: .92;
+      margin-top: .5rem;
+      max-width: 640px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 1.5rem;
+    }
+    .chip {
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .28);
+      backdrop-filter: blur(6px);
+      padding: .4rem .85rem;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* ---------- Layout ---------- */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.6rem 1.5rem 1rem;
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+    .section-title::before {
+      content: "";
+      width: 6px; height: 26px;
+      border-radius: 3px;
+      background: linear-gradient(var(--cyan), var(--blue));
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      font-size: .95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-top {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: #fff;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+    .aula-num {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+    .aula-date {
+      font-size: .78rem;
+      opacity: .85;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .card-body {
+      padding: 1.1rem 1.2rem 1.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-body h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: .7rem;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: #eaf4fb;
+      padding: .25rem .6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    .actions {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1.1rem;
+    }
+    .btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .88rem;
+      padding: .6rem .5rem;
+      border-radius: 10px;
+      transition: background .2s ease, transform .15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-slides {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #fff;
+    }
+    .btn-slides:hover { filter: brightness(1.08); }
+    .btn-mat {
+      background: #eef3f8;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+    .btn-mat:hover { background: #e2ebf3; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      max-width: 1180px;
+      margin: 2.5rem auto 0;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    footer strong { color: var(--navy); }
+
+    @media (max-width: 520px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <img src="assets/einstein-logo.png" alt="Faculdade Israelita de Ciências da Saúde Albert Einstein" class="hero-logo">
+      <h1>Laboratório de Ciência de Dados &amp; IA</h1>
+      <p class="subtitle">
+        Python aplicado à análise de dados, aprendizado de máquina e análise forense numérica para gestão de negócios.
+      </p>
+      <div class="meta-row">
+        <span class="chip">🎓 Graduação em Administração</span>
+        <span class="chip">🧪 Trilha BI &amp; Data Science</span>
+        <span class="chip">⏱️ 80 horas</span>
+        <span class="chip">👨‍🏫 Prof. Afonso Brandão</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Cronograma de Aulas</h2>
+    <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 09/12 · Cada aula reúne os slides e os materiais de apoio.</p>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    <p>Material do <strong>Laboratório de Ciência de Dados &amp; IA</strong> · Faculdade Israelita de Ciências da Saúde <strong>Albert Einstein</strong>.</p>
+    <p style="margin-top:.4rem">Criado pelo professor <strong>Afonso Cesar Lelis Brandão</strong> · 🔓 Licença de leitura aberta</p>
+  </footer>
+
+  <script>
+    const aulas = [
+      { n: 1,  data: "12/08", tema: "Primeiros passos: Configurando sua ferramenta de análise", tag: "Ambiente" },
+      { n: 2,  data: "19/08", tema: "Organizando informações: Dados estruturados para gestão", tag: "Dados" },
+      { n: 3,  data: "26/08", tema: "Limpeza de dados: Preparando a base para análises", tag: "Pandas" },
+      { n: 4,  data: "02/09", tema: "Entendendo o cenário: Estatística para gestão de negócios", tag: "Estatística" },
+      { n: 5,  data: "09/09", tema: "Storytelling, Dashboards e Segmentação de Clientes", tag: "Visualização" },
+      { n: 6,  data: "16/09", tema: "Inteligência Artificial no dia a dia da administração", tag: "IA" },
+      { n: 7,  data: "23/09", tema: "Refinando dados para modelos de decisão", tag: "Feature Eng." },
+      { n: 8,  data: "30/09", tema: "Fazendo previsões com IA: Vendas e Tendências", tag: "ML · Regressão" },
+      { n: 9,  data: "07/10", tema: "Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral", tag: "Inferência" },
+      { n: 10, data: "14/10", tema: "Auditoria automatizada: Detectando anomalias e riscos", tag: "Anomalias" },
+      { n: 11, data: "21/10", tema: "IA aplicada à estratégia e tomada de decisão", tag: "IA · Estratégia" },
+      { n: 12, data: "28/10", tema: "Análise forense de dados: Identificando fraudes", tag: "Forense" },
+      { n: 13, data: "04/11", tema: "Fechando um balanço: Aplicações práticas", tag: "Prática" },
+      { n: 14, data: "11/11", tema: "Projeto Integrador: Resolvendo um problema de negócio real", tag: "Projeto" },
+      { n: 15, data: "18/11", tema: "Apresentação de resultados e recomendações executivas", tag: "Apresentação" },
+      { n: 16, data: "25/11", tema: "Introdução à análise forense numérica", tag: "Forense" },
+      { n: 17, data: "02/12", tema: "Projeto prático: pipeline de dados", tag: "Pipeline" },
+      { n: 18, data: "09/12", tema: "Apresentação de projetos", tag: "Apresentação" },
+    ];
+
+    const pad = n => String(n).padStart(2, "0");
+    const grid = document.getElementById("grid");
+
+    grid.innerHTML = aulas.map(a => {
+      const id = pad(a.n);
+      return `
+      <article class="card">
+        <div class="card-top">
+          <div class="aula-num">${id}</div>
+          <div>
+            <div class="aula-date">Aula ${a.n} · ${a.data}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3>${a.tema}</h3>
+          <span class="tag">${a.tag}</span>
+          <div class="actions">
+            <a class="btn btn-slides" href="slides/aula-${id}.html">📊 Slides</a>
+            <a class="btn btn-mat" href="materiais/aula-${id}/">📎 Materiais</a>
+          </div>
+        </div>
+      </article>`;
+    }).join("");
+  </script>
+</body>
+
+</html>
