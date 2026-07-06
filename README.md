@@ -1,6 +1,6 @@
-# 🔬 Laboratório de Ciência de Dados & IA — Albert Einstein
+# 🔬 Laboratório de Programação, Ciência de Dados & IA — Albert Einstein
 
-Site do **Laboratório de Ciência de Dados e Inteligência Artificial** da
+Site do **Laboratório de Programação, Ciência de Dados e Inteligência Artificial** da
 **Faculdade Israelita de Ciências da Saúde Albert Einstein**, disciplina da
 **Graduação em Administração** (Trilha BI & Data Science).
 
