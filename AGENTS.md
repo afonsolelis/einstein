@@ -9,5 +9,9 @@ A static content site for a Data Science & AI course curriculum.
 - **Slides**: Located in `slides/` (e.g., `aula-01.html`).
 - **Materials**: Located in `materiais/` per lesson (e.g., `materiais/aula-XX/`).
 
-## Development Commands
-- **Local Server**: Run `python3 -m http.server 8000` to serve the site and enable navigation between linked content.
+## Navegação e Arquitetura Offline (Regra de Ouro)
+- **Links Explícitos:** Como o projeto costuma ser aberto diretamente pelos arquivos locais (`file://`) sem um servidor web, **NUNCA** deixe links apontando para diretórios. Links para materiais devem **SEMPRE** apontar explicitamente para o arquivo (ex: `materiais/aula-XX/index.html` ao invés de `materiais/aula-XX/`).
+
+## Regras de Interface (UI)
+- **Cards do Cronograma**: Os cards no `index.html` devem manter um layout de **lista horizontal** no desktop (`flex-direction: row`), com o bloco de data/aula na lateral e conteúdo no restante da linha. No mobile, eles devem empilhar (`flex-direction: column`). Não utilize layouts em grid multi-colunas para os cards.
+- **Aparência Premium**: Mantenha a paleta oficial, utilize gradientes sutis e efeitos de hover para garantir que o projeto mantenha uma estética sofisticada.
