@@ -1,44 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Material · Aula 1</title>
   <style>
-    body { margin: 0; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; background: #f4f8fb; color: #16233d; line-height: 1.6; padding: 2rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-    .container { max-width: 1100px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e2ebf2; }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
     
-    .header { background: linear-gradient(135deg, #1a2f5e, #1f6fb2); color: white; padding: 2.5rem 3rem; position: relative; }
-    .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.4rem 1rem; border-radius: 999px; font-weight: bold; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 1rem; }
-    .header h1 { margin: 0; font-size: 2rem; line-height: 1.3; }
-    .icon-bg { position: absolute; right: 2rem; bottom: -1rem; font-size: 6rem; opacity: 0.1; transform: rotate(-15deg); user-select: none; }
+    body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+    .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
     
-    .content { padding: 3rem; }
-    .desc { font-size: 1.25rem; color: #334155; margin-bottom: 2.5rem; }
+    .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
+    .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
+    .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
     
-    h3 { color: #1a2f5e; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #e2ebf2; padding-bottom: 0.5rem; }
-    ul { list-style-type: none; padding: 0; margin-bottom: 3rem; }
-    li { padding: 0.8rem 0; border-bottom: 1px dashed #e2ebf2; display: flex; align-items: flex-start; }
-    li::before { content: "✓"; color: #00a3d9; font-weight: bold; margin-right: 0.8rem; font-size: 1.1rem; }
-    li:last-child { border-bottom: none; }
+    .content { padding: 4rem; }
+    .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
     
-    .download-box { background: #f8fafc; border: 1px solid #e2ebf2; border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 3rem; }
-    .download-icon { font-size: 2rem; }
-    .download-info h4 { margin: 0 0 0.2rem 0; color: #1a2f5e; }
-    .download-info p { margin: 0; font-size: 0.9rem; color: #64748b; }
+    h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
+    h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
+    h3 { font-size: 1.4rem; color: #00a3d9; }
     
-    .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 1px solid #e2ebf2; padding-top: 2rem; }
-    .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: bold; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.6rem; }
+    p { margin-bottom: 1.5rem; }
+    
+    ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
+    li { padding: 0.4rem 0; }
+    strong { color: #1a2f5e; font-weight: 800; }
+    em { color: #00a3d9; font-style: normal; font-weight: 600; }
+    
+    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
+    
+    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-comment { color: #94a3b8; font-style: italic; }
+    .code-keyword { color: #d946ef; font-weight: 600; }
+    .code-string { color: #16a34a; }
+    
+    .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
+    .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
+    .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
+    
+    .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
+    .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    .btn-home { background: white; color: #1f6fb2; border: 1px solid #c9e3f5; }
-    .btn-home:hover { box-shadow: 0 4px 12px rgba(31,111,178,0.1); background: #f4f8fb; }
-    .btn-slides { background: linear-gradient(135deg, #00a3d9, #1f6fb2); color: white; border: none; box-shadow: 0 4px 15px rgba(0,163,217,0.2); }
-    .btn-slides:hover { box-shadow: 0 6px 20px rgba(0,163,217,0.3); }
+    
+    .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
+    .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    
+    .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
+    .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
 
-    @media (max-width: 600px) {
-      .header, .content { padding: 2rem; }
+    .btn-print { background: #1a2f5e; color: #ffffff; }
+    .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+
+    @media (max-width: 768px) {
+      .header, .content { padding: 2.5rem; }
       .actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; display: block; font-size: 12pt; }
+      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
+      .header, .content { padding: 1rem 0; }
+      .actions, .btn-print, .btn-home, .btn-slides { display: none !important; }
+      h1, h2, h3 { color: black !important; break-after: avoid; }
+      .badge { border: 1px solid #ccc; color: black; background: white; }
+      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
+      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      p, li { color: black; }
+      @page { margin: 2cm; }
     }
   </style>
 </head>
@@ -46,26 +77,124 @@
   <div class="container">
     <div class="header">
       <div class="badge">AULA 1</div>
-      <h1>Primeiros passos: Configurando sua ferramenta de análise</h1>
-      <div class="icon-bg">📖</div>
+      <h1>Seu primeiro ambiente de Dados: Google Colab</h1>
     </div>
     
     <div class="content">
-      <p class="desc">Nesta primeira aula, vamos preparar o terreno. Apresentaremos as principais ferramentas utilizadas em ciência de dados e como configurá-las no seu computador, garantindo que você tenha o ambiente de desenvolvimento pronto para as próximas aulas práticas.</p>
+      <p class="desc">Bem-vindo(a) à sua primeira aula teórica e prática. Este material foi desenhado como um guia definitivo (Wiki) que não apenas explica <em>como</em> apertar botões, mas revela o <em>porquê</em> das escolhas tecnológicas do mercado financeiro e de tecnologia atual. Estudaremos desde a evolução da análise de dados até os primeiros scripts que você rodará na nuvem.</p>
       
-      <h3>Tópicos Abordados</h3>
-      <ul>
-        <li>Instalação do Python e Anaconda</li>
-        <li>Introdução ao Jupyter Notebook e Google Colab</li>
-        <li>Noções básicas de ambientes virtuais</li>
-        <li>Boas práticas de organização de pastas e projetos</li>
-      </ul>
-      
+      <h2>1. Uma Breve História da Análise de Dados</h2>
+      <p>Para entendermos onde estamos, precisamos olhar para trás. Durante as décadas de 80 e 90, a ferramenta hegemônica para gerir negócios e finanças era a planilha eletrônica. O <strong>VisiCalc</strong> e o <strong>Lotus 1-2-3</strong> abriram caminho para o <strong>Microsoft Excel</strong>, que revolucionou o mundo corporativo dando a qualquer gestor o poder de realizar cálculos complexos sem ser um programador.</p>
+      <p>Entretanto, na virada do século XXI, o volume de dados começou a explodir. A internet, as redes sociais, os sensores em celulares e fábricas (IoT) começaram a gerar o que chamamos de <strong>Big Data</strong>. Nesse cenário, o paradigma visual das planilhas encontrou o seu gargalo físico e computacional.</p>
 
+      <h2>2. O Fim da Era das Planilhas?</h2>
+      <p>Muitos profissionais se perguntam: <em>"Por que preciso aprender a programar se o Excel já resolve meus problemas?"</em>. A realidade é que o Excel não resolve os problemas do futuro (e de muitas empresas do presente). Veja os principais limitadores:</p>
+      <ul>
+        <li><strong>O Teto de Vidro dos Dados:</strong> O Excel tem um limite rígido de 1.048.576 linhas. No e-commerce ou no varejo financeiro, uma base transacional mensal ultrapassa facilmente 50 milhões de linhas. O Excel simplesmente congela e corrompe o arquivo.</li>
+        <li><strong>Reprodutibilidade Zero:</strong> Quando você copia, cola e arrasta fórmulas no Excel para gerar um relatório mensal, é impossível rastrear se você cometeu um erro humano no processo. A reprodutibilidade é nula. Em programação, o fluxo de dados (pipeline) é documentado em linhas de código infalíveis.</li>
+        <li><strong>O Caos do Versionamento:</strong> Arquivos como <code>Relatorio_Final_V4_Revisado_Afonso_Copia.xlsx</code> são um pesadelo de gestão de conhecimento. Com código, usamos o <strong>Git</strong> para rastrear alterações exatas.</li>
+      </ul>
+
+      <h2>3. A Ascensão do Python</h2>
+      <p>Em 1991, o matemático holandês <strong>Guido van Rossum</strong> criou uma linguagem de programação durante as festas de fim de ano para manter-se ocupado. Seu objetivo era criar uma linguagem que fosse legível como o inglês, focada no ser humano e não na máquina. Ele a batizou de <strong>Python</strong> (em homenagem ao grupo de comédia britânico Monty Python).</p>
+      <p>Por quase 20 anos, o Python foi apenas mais uma linguagem no mercado. Porém, com a explosão do Big Data, pesquisadores começaram a adotar o Python devido à sua sintaxe limpa para criar bibliotecas estatísticas. Hoje, o Python "venceu" a guerra contra linguagens antigas (como R e SAS) por ser uma <em>linguagem de propósito geral</em>: com Python você pode treinar uma IA, construir um site ou hackear um servidor.</p>
+
+      <h2>4. O Ecossistema: Jupyter e Colab</h2>
+      <p>O maior desafio de programar Python era que os scripts ficavam em telas pretas assustadoras (terminais). Para popularizar a Ciência de Dados, cientistas criaram o <strong>Projeto Jupyter</strong>, que inventou o conceito de <strong>Notebook</strong>: um documento vivo onde se intercala texto explicativo, código executável e gráficos visuais.</p>
+      <p>Evoluindo isso, o <strong>Google Colab</strong> é a versão definitiva desse ecossistema. É um Jupyter Notebook hospedado diretamente nos potentes servidores do Google.</p>
+      
+      <h3>Vantagens Incontestáveis do Colab</h3>
+      <ul>
+        <li><strong>Custo Zero de Hardware:</strong> Seu código roda em computadores no Vale do Silício. Seu notebook velho pode treinar uma IA bilionária sem sequer acionar a ventoinha local.</li>
+        <li><strong>Acesso Universal:</strong> Como tudo roda no navegador e salva no Google Drive, você pode codar do PC do escritório, do laptop de casa ou até do iPad.</li>
+        <li><strong>GPUs Gratuitas:</strong> O Google fornece Placas de Vídeo (GPUs e TPUs) de altíssimo custo gratuitamente para pesquisas e estudos.</li>
+      </ul>
+
+      <div class="alert-box">
+        <h4>Atenção Crítica: A Efemeridade da Máquina</h4>
+        <p>A máquina que o Google lhe empresta é descartável. Se você fizer o upload direto de uma planilha pela barra lateral e fechar a aba do navegador, a máquina é apagada e <strong>você perde seus arquivos</strong>. A única forma segura de ler dados no Colab é integrando-o permanentemente ao seu <strong>Google Drive</strong>.</p>
+      </div>
+
+      <h2>5. Hands-On: A Primeira Conexão</h2>
+      <p>Sempre que iniciar um projeto sério no Colab, o seu primeiro passo absoluto deve ser conectar a máquina virtual à sua conta do Google Drive real. Insira o código abaixo em uma <strong>célula de código</strong> no topo do seu projeto e execute-a.</p>
+      
+      <div class="code-block">
+        <span class="code-comment"># 'from' e 'import' puxam ferramentas prontas da nuvem do Google</span><br>
+        <span class="code-keyword">from</span> google.colab <span class="code-keyword">import</span> drive<br><br>
+        <span class="code-comment"># Monta a sua pasta virtual do Drive para leitura</span><br>
+        drive.mount(<span class="code-string">'/content/drive'</span>)
+      </div>
+      <p><em>Nota: Uma janela aparecerá pedindo autorização (OAuth). Você deve aceitar para permitir que o Python acesse seus arquivos.</em></p>
+
+      <h2>6. Hands-On: Mergulhando no Python de Negócios</h2>
+      <p>Agora que você tem um ambiente de trabalho configurado, veja a elegância e a simplicidade da sintaxe do Python aplicada a cenários corporativos.</p>
+
+      <h3>A) Variáveis e Lógica Básica</h3>
+      <p>No Excel você aloca valores em células ("B2 = 50"). No Python, você aloca valores em <strong>Variáveis</strong> (nomes intuitivos na memória da máquina).</p>
+      <div class="code-block">
+        <span class="code-comment"># Declarando variáveis numéricas e de texto</span><br>
+        faturamento_bruto = <span class="code-keyword">150000.50</span><br>
+        impostos = <span class="code-keyword">0.15</span> <span class="code-comment"># Representa 15%</span><br>
+        nome_filial = <span class="code-string">"São Paulo - Faria Lima"</span><br><br>
+        
+        <span class="code-comment"># Realizando cálculos</span><br>
+        receita_liquida = faturamento_bruto * (1 - impostos)<br><br>
+        
+        <span class="code-comment"># O comando print exibe mensagens na tela</span><br>
+        <span class="code-keyword">print</span>(<span class="code-string">"Filial:"</span>, nome_filial)<br>
+        <span class="code-keyword">print</span>(<span class="code-string">"O lucro líquido do mês foi de R$"</span>, receita_liquida)
+      </div>
+
+      <h3>B) Regras de Negócio (If / Else)</h3>
+      <p>As estruturas condicionais no Python são incrivelmente parecidas com a construção de frases em inglês básico. Não precisamos de mil parênteses como na fórmula <code>=SE()</code> do Excel.</p>
+      <div class="code-block">
+        meta_mensal = <span class="code-keyword">100000</span><br>
+        vendas = <span class="code-keyword">125000</span><br><br>
+        
+        <span class="code-comment"># Os dois pontos (:) indicam o início de um bloco de regra.</span><br>
+        <span class="code-comment"># A indentação (espaço à esquerda) é obrigatória no Python!</span><br>
+        <span class="code-keyword">if</span> vendas >= meta_mensal:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;bonus = vendas * <span class="code-keyword">0.05</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(<span class="code-string">"Meta batida! O bônus da equipe será R$"</span>, bonus)<br>
+        <span class="code-keyword">else</span>:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;deficit = meta_mensal - vendas<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(<span class="code-string">"Meta não alcançada. Faltaram R$"</span>, deficit)
+      </div>
+
+      <h2>7. Hands-On: A biblioteca Pandas (O "Excel do Python")</h2>
+      <p>A biblioteca <strong>Pandas</strong> foi criada especificamente para manipulação e análise de dados tabulares (linhas e colunas). Ela é o coração pulsante da Ciência de Dados.</p>
+
+      <div class="code-block">
+        <span class="code-comment"># 'pd' é o apelido universal (alias) do Pandas</span><br>
+        <span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>
+        
+        <span class="code-comment"># 1. Carregando os dados de um CSV salvo no seu Drive</span><br>
+        df_clientes = pd.read_csv(<span class="code-string">'/content/drive/MyDrive/Aulas/clientes.csv'</span>)<br><br>
+        
+        <span class="code-comment"># 2. Exibe as 5 primeiras linhas para inspeção</span><br>
+        <span class="code-keyword">print</span>(<span class="code-string">"Visualizando os primeiros dados:"</span>)<br>
+        df_clientes.head()<br><br>
+        
+        <span class="code-comment"># 3. Gera um resumo estatístico IMEDIATO de toda a base</span><br>
+        <span class="code-comment"># (Média, Desvio Padrão, Mínimo, Máximo de todas as colunas numéricas)</span><br>
+        <span class="code-keyword">print</span>(<span class="code-string">"\nEstatística Descritiva da Base:"</span>)<br>
+        df_clientes.describe()
+      </div>
+
+      <h2>8. Atalhos Produtivos para o Dia a Dia</h2>
+      <p>Quem domina as ferramentas ganha velocidade impressionante na análise. No teclado do Colab, decore estes atalhos fundamentais:</p>
+      <ul>
+        <li><code>Shift + Enter</code>: Executa a célula em foco e imediatamente pula para a linha abaixo.</li>
+        <li><code>Ctrl + M + B</code>: Insere uma nova <strong>célula de código</strong> abaixo do seu cursor (<em>Below</em>).</li>
+        <li><code>Ctrl + M + M</code>: Converte a célula em foco para formato de <strong>Texto formatado (Markdown)</strong>.</li>
+        <li><code>Ctrl + M + Y</code>: Converte a célula de volta para formato de <strong>Código Python</strong>.</li>
+        <li><code>Ctrl + M + D</code>: Deleta a célula atual instantaneamente.</li>
+      </ul>
       
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
-        <a href="../../slides/aula-01.html" class="btn btn-slides">📊 Ver Slides da Aula</a>
+        <a href="../../slides/aula-01.html" class="btn btn-slides">📊 Ver Slides</a>
+        <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
   </div>

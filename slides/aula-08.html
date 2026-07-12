@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aula 8 · Slides</title>
   <style>
-    body { margin: 0; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; overflow: hidden; background: #16233d; color: white; }
-    #slider { width: 100vw; height: 100vh; position: relative; }
-    .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 2rem 80px; box-sizing: border-box; opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none; z-index: 1; transform: scale(0.95); }
-    .slide.active { opacity: 1; pointer-events: auto; z-index: 2; transform: scale(1); }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
     
-    .slide-start { background: linear-gradient(135deg, #1a2f5e, #1f6fb2); }
-    .slide-start h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 0.5rem; }
-    .slide-start .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.2rem; border-radius: 999px; margin-bottom: 1.5rem; font-weight: bold; letter-spacing: 1px; }
-    .slide-start p { font-size: clamp(1.2rem, 2.5vw, 1.8rem); max-width: 800px; opacity: 0.9; line-height: 1.4; }
-
-    .slide-prof { background: linear-gradient(135deg, #00a3d9, #1f6fb2); }
-    .slide-prof h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
-    .slide-prof p { font-size: clamp(1.1rem, 2vw, 1.6rem); max-width: 700px; opacity: 0.95; line-height: 1.5; }
-    .prof-avatar { font-size: 5rem; margin-bottom: 1rem; }
-
-    .slide-end { background: #f4f8fb; color: #1a2f5e; }
-    .slide-end h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
-    .slide-end p { font-size: clamp(1.1rem, 2vw, 1.6rem); color: #64748b; margin-bottom: 2.5rem; }
+    body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; overflow: hidden; background: #0b1120; color: #f8fafc; }
+    #slider { width: 100vw; height: 100vh; position: relative; background: radial-gradient(circle at 100% 0%, rgba(31, 111, 178, 0.15) 0%, #0b1120 50%), radial-gradient(circle at 0% 100%, rgba(0, 163, 217, 0.1) 0%, #0b1120 50%); }
     
-    /* Controles e Footer */
-    #controls { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: rgba(15, 23, 42, 0.7); display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; box-sizing: border-box; z-index: 10; backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,0.1); }
-    .footer-text { font-size: 0.9rem; opacity: 0.85; font-weight: 600; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 1rem; }
-    .btn-group { display: flex; gap: 0.5rem; }
-    .ctrl-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 1rem; padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; }
-    .ctrl-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.4); }
-    .ctrl-btn:disabled { opacity: 0.2; cursor: not-allowed; background: transparent; }
-    .ctrl-icon { font-size: 1.1rem; margin-right: 0.3rem; }
-    .ctrl-btn-only-icon { font-size: 1.2rem; padding: 0.4rem 1rem; }
+    .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 2rem 80px; box-sizing: border-box; opacity: 0; pointer-events: none; z-index: 1; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: translateY(30px) scale(0.98); }
+    .slide.active { opacity: 1; pointer-events: auto; z-index: 2; transform: translateY(0) scale(1); }
+    
+    h1, h2 { letter-spacing: -0.5px; }
+    
+    /* Capas */
+    .slide-start, .slide-prof, .slide-end { align-items: center; justify-content: center; text-align: center; }
+    .slide-start h1 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 0.5rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #4bc4e8); -webkit-background-clip: text; color: transparent; }
+    .slide-start .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #4bc4e8; padding: 0.6rem 1.5rem; border-radius: 999px; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; border: 1px solid rgba(75, 196, 232, 0.3); box-shadow: 0 0 20px rgba(0, 163, 217, 0.15); }
+    .slide-start p { font-size: clamp(1.2rem, 2.5vw, 1.8rem); max-width: 800px; color: #94a3b8; font-weight: 300; line-height: 1.5; }
+
+    .slide-prof h2, .slide-end h2 { font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 800; margin-bottom: 1rem; color: #f8fafc; }
+    .slide-prof p, .slide-end p { font-size: clamp(1.2rem, 2vw, 1.8rem); max-width: 800px; color: #94a3b8; font-weight: 300; line-height: 1.6; }
+    .prof-avatar { font-size: 6rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(0, 163, 217, 0.3)); }
+    
+    /* Slides de Conteúdo */
+    .slide-content { padding: 5rem 12vw; justify-content: center; text-align: left; align-items: flex-start; }
+    .slide-content h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 2rem; color: #ffffff; padding-bottom: 0.5rem; display: inline-block; position: relative; }
+    .slide-content h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; background: #00a3d9; border-radius: 2px; box-shadow: 0 0 10px #00a3d9; }
+    .slide-content p, .slide-content ul { font-size: clamp(1.2rem, 2.2vw, 1.5rem); color: #cbd5e1; line-height: 1.7; max-width: 1200px; margin-top: 0; font-weight: 300; }
+    .slide-content ul { padding-left: 0; margin-bottom: 2rem; list-style: none; }
+    .slide-content li { margin-bottom: 1rem; position: relative; padding-left: 2rem; }
+    .slide-content li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; background: #00a3d9; border-radius: 50%; box-shadow: 0 0 8px #00a3d9; }
+    .slide-content strong { color: #ffffff; font-weight: 600; }
+    .slide-content code { background: rgba(0, 163, 217, 0.15); border: 1px solid rgba(0, 163, 217, 0.3); padding: 0.2rem 0.6rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #4bc4e8; font-size: 0.9em; }
+    
+    /* Blocos de Código */
+    .code-block { background: rgba(15, 23, 42, 0.6); color: #e2ebf2; padding: 2rem; border-radius: 16px; font-family: 'Fira Code', monospace; font-size: 1.15rem; line-height: 1.6; width: 100%; max-width: 1100px; overflow-x: auto; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00a3d9; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+    .code-comment { color: #64748b; font-style: italic; }
+    .code-keyword { color: #c678dd; font-weight: 600; }
+    .code-string { color: #98c379; }
+    
+    /* Controles Glassmorphism */
+    #controls { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; box-sizing: border-box; z-index: 10; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.05); box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
+    .footer-text { font-size: 0.95rem; color: #94a3b8; font-weight: 400; letter-spacing: 0.5px; white-space: nowrap; }
+    .btn-group { display: flex; gap: 0.8rem; }
+    .ctrl-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; font-size: 1rem; padding: 0.6rem 1rem; border-radius: 10px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-family: 'Outfit', sans-serif; }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.15); color: #ffffff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .ctrl-btn:active { transform: translateY(0); }
+    .ctrl-btn:disabled { opacity: 0.2; cursor: not-allowed; transform: none; }
+    .ctrl-icon { font-size: 1.2rem; margin-right: 0.4rem; }
+    .ctrl-btn-only-icon { font-size: 1.3rem; padding: 0.6rem 1.2rem; }
     
     @media (max-width: 768px) {
        .footer-text { display: none; }
-       #controls { justify-content: center; }
+       #controls { justify-content: center; padding: 0 1rem; }
+       .slide-content { padding: 4rem 2rem; }
     }
   </style>
 </head>
