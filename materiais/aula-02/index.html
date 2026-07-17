@@ -38,6 +38,24 @@
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
+
+    .toc { background: #f8fafc; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; border-radius: 12px; padding: 1.5rem 2rem; margin: 2rem 0 3rem; }
+    .toc h3 { margin-top: 0; }
+    .toc ol { columns: 2; column-gap: 3rem; margin-bottom: 0; }
+    .toc a { color: #1f6fb2; text-decoration: none; font-weight: 600; }
+    .toc a:hover { color: #00a3d9; text-decoration: underline; }
+    .concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .concept-card { background: #f8fafc; border: 1px solid #e2ebf2; border-radius: 12px; padding: 1.25rem; }
+    .concept-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .concept-card p { margin: 0; }
+    .table-wrap { overflow-x: auto; margin: 2rem 0; }
+    table { width: 100%; border-collapse: collapse; min-width: 640px; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #e2ebf2; text-align: left; vertical-align: top; }
+    th { background: #eef7fb; color: #1a2f5e; }
+    caption { text-align: left; color: #64748b; margin-bottom: 0.75rem; font-weight: 600; }
+    .tip-box { background: #ecfdf5; border: 1px solid #a7f3d0; border-left: 4px solid #16a34a; border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 2rem 0; }
+    .tip-box h4 { color: #166534; margin: 0 0 0.5rem; }
+    .tip-box p { color: #14532d; margin: 0; }
     
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
@@ -54,6 +72,8 @@
       .header, .content { padding: 2.5rem; }
       .actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
+      .toc ol { columns: 1; }
+      .concept-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -65,6 +85,8 @@
       .badge { border: 1px solid #ccc; color: black; background: white; }
       .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
       .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      .toc, .concept-card, .tip-box { background: white; border-color: #ccc; break-inside: avoid; }
+      .toc a { color: black; }
       p, li { color: black; }
       @page { margin: 2cm; }
     }
@@ -78,25 +100,206 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Organizando informações: Dados estruturados para gestão'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
+      <p class="desc">Empresas não tomam decisões com números soltos: elas precisam saber a que cliente, filial, produto e período cada valor pertence. Nesta aula, você aprenderá a evoluir de variáveis isoladas para registros e tabelas capazes de sustentar uma análise comercial reproduzível.</p>
+
+      <div class="toc" aria-label="Sumário do material">
+        <h3>Como navegar por este material</h3>
+        <p>Leia os fundamentos na ordem e execute cada bloco no Google Colab. Depois, use a resolução comentada apenas para conferir seu raciocínio.</p>
+        <ol>
+          <li><a href="#objetivos">Objetivos e preparação</a></li>
+          <li><a href="#historia">Por que dados tabulares?</a></li>
+          <li><a href="#estrutura">Granularidade e esquema</a></li>
+          <li><a href="#colecoes">Listas e dicionários</a></li>
+          <li><a href="#dataframe">DataFrames e tipos</a></li>
+          <li><a href="#selecao">Seleção e indexação</a></li>
+          <li><a href="#pratica">Prática guiada</a></li>
+          <li><a href="#desafio">Desafio e entrega</a></li>
+          <li><a href="#resolucao">Resolução comentada</a></li>
+          <li><a href="#erros">Erros frequentes</a></li>
+        </ol>
       </div>
 
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
+      <h2 id="objetivos" data-lesson-section="objectives">Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Distinguir listas, dicionários e DataFrames pela estrutura e pelo uso.</li>
+        <li>Construir uma tabela de gestão a partir de registros comerciais.</li>
+        <li>Selecionar colunas, filtrar linhas e ordenar resultados com Pandas.</li>
+        <li>Calcular indicadores e justificar uma decisão com evidências.</li>
+      </ul>
+
+      <h3>Preparação do ambiente</h3>
+      <p>Você precisa de um notebook no Google Colab ou de um ambiente Python com Pandas instalado. No Colab, o Pandas já costuma estar disponível; em ambiente local, instale-o conforme a documentação oficial da sua distribuição. Crie uma célula por etapa e execute o notebook de cima para baixo.</p>
+      <div class="code-block"><span class="code-comment"># Verificação mínima do ambiente</span><br><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><span class="code-keyword">print</span>(<span class="code-string">"Pandas:"</span>, pd.__version__)</div>
+      <div class="tip-box">
+        <h4>Estratégia de estudo</h4>
+        <p>Antes de executar uma célula, tente prever o formato do resultado: será um valor, uma Series ou um DataFrame? Essa previsão desenvolve leitura de código e reduz tentativas aleatórias.</p>
       </div>
+
+      <h2 id="historia">Por que o mundo dos negócios usa dados tabulares?</h2>
+      <p>Registros comerciais existem há séculos em livros-caixa, fichas e formulários. As planilhas eletrônicas tornaram o cálculo acessível, mas análises baseadas em cliques podem ser difíceis de repetir e auditar. O código acrescenta uma sequência explícita de transformações: outra pessoa pode executar as mesmas instruções sobre a mesma base e conferir o resultado.</p>
+      <p>O Pandas surgiu no ecossistema Python para facilitar a manipulação de dados rotulados e tabulares. Seu nome está associado a <em>panel data</em>, expressão usada para dados observados em múltiplas entidades e períodos. Hoje, seu DataFrame é uma ponte prática entre planilhas, bancos de dados e ferramentas analíticas.</p>
+      <p>A ferramenta, porém, não corrige uma estrutura conceitualmente errada. Antes de importar uma biblioteca, precisamos decidir <strong>o que será observado</strong>, <strong>com qual granularidade</strong> e <strong>quais atributos descrevem cada observação</strong>.</p>
+
+      <h2 id="estrutura" data-lesson-section="concepts">1. Do valor isolado ao dado estruturado</h2>
+      <p>Imagine receber por mensagem apenas o número <code>189.90</code>. Ele poderia ser um preço, uma distância ou uma taxa. Quando o associamos ao nome <code>ticket_medio</code>, à filial Paulista e ao mês de agosto, o número ganha <strong>contexto</strong>. Estruturar dados significa definir esse contexto de maneira consistente.</p>
+      <p>Em uma tabela de negócios, cada <strong>linha</strong> representa uma observação na mesma granularidade — por exemplo, uma filial em um mês. Cada <strong>coluna</strong> representa um atributo dessa observação, como região, vendas ou ticket médio. Essa regra parece simples, mas evita análises que misturam pedidos individuais, totais mensais e cadastros em uma mesma linha.</p>
+
+      <div class="concept-grid">
+        <div class="concept-card"><h3>Observação</h3><p>A entidade medida em uma linha: uma filial, um pedido ou um cliente.</p></div>
+        <div class="concept-card"><h3>Variável</h3><p>Uma característica registrada em coluna: região, receita ou quantidade.</p></div>
+        <div class="concept-card"><h3>Granularidade</h3><p>O nível de detalhe: “uma linha por filial por mês”, por exemplo.</p></div>
+        <div class="concept-card"><h3>Esquema</h3><p>O contrato de nomes, significados e tipos esperados para as colunas.</p></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Exemplo de dicionário de dados para o painel comercial</caption>
+          <thead><tr><th>Coluna</th><th>Significado</th><th>Tipo esperado</th><th>Regra</th></tr></thead>
+          <tbody>
+            <tr><td><code>filial</code></td><td>Nome único da unidade</td><td>texto</td><td>Não vazio</td></tr>
+            <tr><td><code>regiao</code></td><td>Área comercial</td><td>texto/categoria</td><td>Centro, Oeste, Sul etc.</td></tr>
+            <tr><td><code>vendas</code></td><td>Número de transações</td><td>inteiro</td><td>Maior ou igual a zero</td></tr>
+            <tr><td><code>ticket</code></td><td>Valor médio por transação</td><td>decimal</td><td>Maior ou igual a zero</td></tr>
+            <tr><td><code>meta</code></td><td>Receita-alvo da filial</td><td>decimal</td><td>Maior que zero</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="colecoes">2. Listas: sequências ordenadas</h2>
+      <p>A <strong>lista</strong> é uma coleção ordenada e mutável. Ela é útil quando a posição tem significado ou quando queremos percorrer uma sequência de valores. Em Python, os índices começam em zero e índices negativos contam a partir do fim.</p>
+      <div class="code-block"><span class="code-comment"># Vendas de segunda a sexta-feira</span><br>vendas_semana = [120, 145, 138, 172, 160]<br><br>primeiro_dia = vendas_semana[0]<br>ultimo_dia = vendas_semana[-1]<br>total = sum(vendas_semana)<br>media = total / len(vendas_semana)<br><br><span class="code-keyword">print</span>(<span class="code-string">f"Total: {total} | Média: {media:.1f}"</span>)</div>
+      <p>Uma lista preserva a ordem, mas não descreve sozinha o que cada valor representa. Guardar <code>["Paulista", 320, 189.90]</code> exige que todos memorizem o significado de cada posição — uma fonte comum de erros.</p>
+
+      <h2>3. Dicionários: registros com significado</h2>
+      <p>O <strong>dicionário</strong> associa chaves a valores. Ele funciona como uma ficha cadastral: em vez de pedir “a posição 1”, pedimos o valor da chave <code>vendas</code>. Isso aproxima o código da linguagem de negócio.</p>
+      <div class="code-block">filial = {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"nome"</span>: <span class="code-string">"Paulista"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"vendas"</span>: 320,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"ticket"</span>: 189.90<br>}<br><br>receita = filial[<span class="code-string">"vendas"</span>] * filial[<span class="code-string">"ticket"</span>]<br>filial[<span class="code-string">"receita"</span>] = receita<br><span class="code-keyword">print</span>(filial)</div>
+
+      <h2 id="dataframe">4. DataFrame: a tabela analítica</h2>
+      <p>Uma lista de dicionários representa várias fichas com o mesmo esquema. O Pandas converte cada dicionário em uma linha e cada chave em uma coluna de um <strong>DataFrame</strong>. Essa estrutura combina a familiaridade de uma planilha com operações reproduzíveis em código.</p>
+      <div class="code-block"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>registros = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Paulista"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>, <span class="code-string">"vendas"</span>: 320, <span class="code-string">"ticket"</span>: 189.90},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Pinheiros"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Oeste"</span>, <span class="code-string">"vendas"</span>: 280, <span class="code-string">"ticket"</span>: 214.50},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Moema"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Sul"</span>, <span class="code-string">"vendas"</span>: 410, <span class="code-string">"ticket"</span>: 176.00}<br>]<br><br>df = pd.DataFrame(registros)<br>df</div>
+
+      <h2>5. Inspeção: conheça a base antes do cálculo</h2>
+      <p>Uma análise responsável começa pela inspeção. <code>head()</code> mostra uma amostra, <code>shape</code> informa dimensões, <code>columns</code> lista os nomes e <code>dtypes</code> revela como o Pandas interpretou cada coluna.</p>
+      <div class="code-block"><span class="code-keyword">print</span>(df.head())<br><span class="code-keyword">print</span>(<span class="code-string">"Dimensões:"</span>, df.shape)<br><span class="code-keyword">print</span>(<span class="code-string">"Colunas:"</span>, df.columns.tolist())<br><span class="code-keyword">print</span>(df.dtypes)</div>
+      <div class="alert-box">
+        <h4>Granularidade antes da ferramenta</h4>
+        <p>Defina o que uma linha representa antes de montar a tabela. Não misture, por exemplo, uma linha por pedido com outra linha que já seja o total do mês. Verifique também se valores monetários são números: <code>"R$ 1.000"</code> é texto e não pode ser somado corretamente.</p>
+      </div>
+
+      <h2>Tipos de dados e validação do esquema</h2>
+      <p>O tipo determina quais operações são válidas. Números podem ser somados; textos podem ser concatenados; booleanos representam condições verdadeiras ou falsas. No Pandas, os tipos mais comuns neste exercício são <code>object</code> ou <code>string</code> para texto, <code>int64</code> para inteiros, <code>float64</code> para decimais e <code>bool</code> para indicadores lógicos.</p>
+      <div class="code-block"><span class="code-comment"># Conferências simples antes da análise</span><br><span class="code-keyword">print</span>(df.dtypes)<br><span class="code-keyword">print</span>(<span class="code-string">"Nulos por coluna:"</span>)<br><span class="code-keyword">print</span>(df.isna().sum())<br><br><span class="code-comment"># Regras mínimas para este conjunto</span><br><span class="code-keyword">assert</span> df[<span class="code-string">"filial"</span>].notna().all(), <span class="code-string">"Há filial sem nome"</span><br><span class="code-keyword">assert</span> (df[<span class="code-string">"vendas"</span>] &gt;= 0).all(), <span class="code-string">"Vendas não podem ser negativas"</span><br><span class="code-keyword">assert</span> (df[<span class="code-string">"ticket"</span>] &gt;= 0).all(), <span class="code-string">"Ticket não pode ser negativo"</span></div>
+      <p>As instruções <code>assert</code> funcionam como alarmes: se uma regra for falsa, a execução para com uma mensagem clara. Elas não substituem uma política completa de qualidade, mas tornam premissas importantes visíveis no notebook.</p>
+
+      <h2 id="selecao">Seleção e indexação: coluna, linha e célula</h2>
+      <p>Um DataFrame tem rótulos de coluna e um índice para as linhas. O índice padrão começa em zero, mas não deve ser confundido com uma identificação de negócio. Para uma operação legível, prefira selecionar explicitamente linhas e colunas.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Formas frequentes de selecionar dados</caption>
+          <thead><tr><th>Expressão</th><th>Resultado</th><th>Quando usar</th></tr></thead>
+          <tbody>
+            <tr><td><code>df["vendas"]</code></td><td>Series</td><td>Uma coluna</td></tr>
+            <tr><td><code>df[["filial", "vendas"]]</code></td><td>DataFrame</td><td>Várias colunas</td></tr>
+            <tr><td><code>df.loc[condicao, colunas]</code></td><td>Series ou DataFrame</td><td>Rótulos e filtros booleanos</td></tr>
+            <tr><td><code>df.iloc[0:2, 0:3]</code></td><td>DataFrame</td><td>Posições numéricas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-block"><span class="code-comment"># Linhas com pelo menos 300 vendas; somente duas colunas</span><br>alto_volume = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"vendas"</span>] &gt;= 300,<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"vendas"</span>]<br>]<br><br><span class="code-comment"># Duas primeiras linhas e três primeiras colunas, por posição</span><br>amostra = df.iloc[0:2, 0:3]</div>
+      <div class="alert-box">
+        <h4><code>loc</code> e <code>iloc</code> não são sinônimos</h4>
+        <p><code>loc</code> trabalha com rótulos e inclui o limite final de um intervalo rotulado. <code>iloc</code> trabalha com posições e exclui o limite final, seguindo o padrão de fatias do Python.</p>
+      </div>
+
+      <h2 id="pratica" data-lesson-section="guided-practice">6. Prática guiada: painel de filiais</h2>
+      <p>Vamos criar um indicador por linha, selecionar uma visão executiva e ordenar o resultado. A atribuição abaixo é vetorizada: a multiplicação acontece para todas as linhas sem copiar fórmulas.</p>
+      <div class="code-block"><span class="code-comment"># Receita de cada filial</span><br>df[<span class="code-string">"receita"</span>] = df[<span class="code-string">"vendas"</span>] * df[<span class="code-string">"ticket"</span>]<br><br><span class="code-comment"># Seleção de colunas e ordenação decrescente</span><br>painel = df[[<span class="code-string">"filial"</span>, <span class="code-string">"regiao"</span>, <span class="code-string">"receita"</span>]]<br>ranking = painel.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>)<br><span class="code-keyword">print</span>(ranking)</div>
+      <p>Em seguida, traduza uma meta gerencial em uma condição booleana. O Pandas avalia a condição em cada linha e mantém apenas as linhas verdadeiras.</p>
+      <div class="code-block">meta_receita = 60000<br>df[<span class="code-string">"atingiu_meta"</span>] = df[<span class="code-string">"receita"</span>] &gt;= meta_receita<br><br>filiais_na_meta = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"atingiu_meta"</span>],<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>]<br>]<br><span class="code-keyword">print</span>(filiais_na_meta)</div>
+
+      <h2>7. Seleção, filtro e ordenação sem confusão</h2>
+      <ul>
+        <li><code>df["receita"]</code> seleciona uma coluna e retorna uma Series.</li>
+        <li><code>df[["filial", "receita"]]</code> seleciona várias colunas e retorna um DataFrame.</li>
+        <li><code>df.loc[condicao, colunas]</code> escolhe linhas e colunas por rótulo.</li>
+        <li><code>sort_values()</code> muda a ordem da visualização, não o significado das linhas.</li>
+      </ul>
+      <p>Evite encadear operações longas enquanto aprende. Nomear resultados intermediários, como <code>painel</code> e <code>ranking</code>, facilita a conferência e a explicação do raciocínio.</p>
+
+      <h2>Análise consolidada: do cálculo à recomendação</h2>
+      <p>Um indicador isolado raramente conta toda a história. Receita combina volume e ticket; por isso, uma filial pode liderar vendendo muitas unidades com ticket menor, enquanto outra pode compensar menor volume com ticket maior. Compare os componentes antes de recomendar uma ação.</p>
+      <div class="code-block"><span class="code-comment"># Indicadores gerais do pequeno painel</span><br>receita_total = df[<span class="code-string">"receita"</span>].sum()<br>ticket_medio_simples = df[<span class="code-string">"ticket"</span>].mean()<br>lider = df.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>).iloc[0]<br><br><span class="code-keyword">print</span>(<span class="code-string">f"Receita total: R$ {receita_total:,.2f}"</span>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Ticket médio entre filiais: R$ {ticket_medio_simples:,.2f}"</span>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Líder: {lider['filial']} — R$ {lider['receita']:,.2f}"</span>)</div>
+      <p>Observe a precisão da linguagem: <code>df["ticket"].mean()</code> é a média simples dos tickets das filiais, não necessariamente o ticket médio de todas as transações. Para este último, seria necessário calcular uma média ponderada:</p>
+      <div class="code-block">ticket_ponderado = (<br>&nbsp;&nbsp;&nbsp;&nbsp;(df[<span class="code-string">"ticket"</span>] * df[<span class="code-string">"vendas"</span>]).sum()<br>&nbsp;&nbsp;&nbsp;&nbsp;/ df[<span class="code-string">"vendas"</span>].sum()<br>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Ticket ponderado: R$ {ticket_ponderado:.2f}"</span>)</div>
+      <div class="tip-box">
+        <h4>Boa recomendação gerencial</h4>
+        <p>Use a estrutura “evidência → interpretação → ação”. Exemplo: “Moema lidera a receita por combinar o maior volume com ticket competitivo; vale investigar suas práticas comerciais antes de replicá-las nas demais filiais.”</p>
+      </div>
+
+      <h2 id="desafio" data-lesson-section="challenge">8. Desafio: diagnóstico comercial</h2>
+      <p>Crie um notebook chamado <code>Aula_02_SeuNome.ipynb</code>. Monte um DataFrame com cinco filiais e as colunas <code>filial</code>, <code>regiao</code>, <code>vendas</code>, <code>ticket</code> e <code>meta</code>. Você pode usar valores fictícios coerentes.</p>
+      <ol>
+        <li>Calcule <code>receita = vendas * ticket</code>.</li>
+        <li>Crie <code>atingiu_meta</code> comparando receita e meta de cada linha.</li>
+        <li>Ordene as filiais da maior para a menor receita.</li>
+        <li>Filtre as filiais que atingiram a meta.</li>
+        <li>Escreva uma recomendação de duas a três frases citando pelo menos dois indicadores calculados.</li>
+      </ol>
+      <p><strong>Critério de entrega:</strong> todas as células devem executar de cima para baixo sem erro; o DataFrame final deve conter sete colunas; o ranking, o filtro e a recomendação devem estar visíveis.</p>
+
+      <h2 data-lesson-section="checklist">9. Checklist antes de entregar</h2>
+      <ul>
+        <li>O arquivo segue o padrão <code>Aula_02_SeuNome.ipynb</code>.</li>
+        <li>Uma linha representa uma única filial e todas as linhas têm a mesma granularidade.</li>
+        <li><code>vendas</code>, <code>ticket</code>, <code>meta</code> e <code>receita</code> são numéricos.</li>
+        <li>O ranking está em ordem decrescente e o filtro usa uma condição booleana.</li>
+        <li>A recomendação menciona evidências presentes no resultado.</li>
+      </ul>
+
+      <h2 id="resolucao">Resolução comentada do desafio</h2>
+      <p>Tente concluir o desafio antes de abrir esta seção. A solução abaixo é uma referência possível, não a única. Os dados são fictícios e foram escolhidos para produzir casos acima e abaixo da meta.</p>
+      <div class="code-block"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>dados = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Paulista"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>, <span class="code-string">"vendas"</span>: 320, <span class="code-string">"ticket"</span>: 189.90, <span class="code-string">"meta"</span>: 60000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Pinheiros"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Oeste"</span>, <span class="code-string">"vendas"</span>: 280, <span class="code-string">"ticket"</span>: 214.50, <span class="code-string">"meta"</span>: 62000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Moema"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Sul"</span>, <span class="code-string">"vendas"</span>: 410, <span class="code-string">"ticket"</span>: 176.00, <span class="code-string">"meta"</span>: 70000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Santana"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Norte"</span>, <span class="code-string">"vendas"</span>: 250, <span class="code-string">"ticket"</span>: 198.00, <span class="code-string">"meta"</span>: 52000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Tatuapé"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Leste"</span>, <span class="code-string">"vendas"</span>: 360, <span class="code-string">"ticket"</span>: 181.50, <span class="code-string">"meta"</span>: 64000}<br>]<br><br>df = pd.DataFrame(dados)<br>df[<span class="code-string">"receita"</span>] = df[<span class="code-string">"vendas"</span>] * df[<span class="code-string">"ticket"</span>]<br>df[<span class="code-string">"atingiu_meta"</span>] = df[<span class="code-string">"receita"</span>] &gt;= df[<span class="code-string">"meta"</span>]</div>
+      <p>A comparação usa <code>df["meta"]</code>, e não uma constante, porque cada filial tem sua própria meta. O resultado contém exatamente as sete colunas exigidas.</p>
+      <div class="code-block">ranking = df.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>)<br>na_meta = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"atingiu_meta"</span>],<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>, <span class="code-string">"meta"</span>]<br>]<br><br><span class="code-keyword">print</span>(ranking[[<span class="code-string">"filial"</span>, <span class="code-string">"vendas"</span>, <span class="code-string">"ticket"</span>, <span class="code-string">"receita"</span>]])<br><span class="code-keyword">print</span>(na_meta)</div>
+      <p><strong>Leitura possível:</strong> Moema lidera com receita de R$ 72.160,00, apoiada pelo maior volume de vendas, e supera sua meta de R$ 70.000,00. Paulista e Tatuapé também superam suas metas; uma ação coerente seria comparar as práticas das três filiais e investigar por que Pinheiros, apesar do maior ticket, não alcança a meta devido ao volume menor.</p>
+
+      <h2 id="erros">Erros frequentes e como diagnosticá-los</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Como corrigir</th></tr></thead>
+          <tbody>
+            <tr><td><code>KeyError: 'receita'</code></td><td>A coluna não existe ou o nome tem espaço/maiúscula diferente.</td><td>Confira <code>df.columns.tolist()</code> e a ordem de execução.</td></tr>
+            <tr><td>Valores repetidos como texto</td><td>Multiplicação aplicada a uma coluna textual.</td><td>Confira <code>dtypes</code> e converta somente após validar a origem.</td></tr>
+            <tr><td><code>ValueError</code> em filtro</td><td>Uso de <code>and</code>/<code>or</code> com Series.</td><td>Use <code>&amp;</code>/<code>|</code> e parênteses em cada condição.</td></tr>
+            <tr><td>Ranking parece não mudar</td><td>Resultado de <code>sort_values</code> não foi armazenado.</td><td>Atribua a <code>ranking</code> ou use o retorno diretamente.</td></tr>
+            <tr><td>Filtro retorna zero linhas</td><td>Condição ou unidade da meta está incorreta.</td><td>Exiba receita e meta lado a lado antes de filtrar.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-block"><span class="code-comment"># Diagnóstico rápido, sem alterar o DataFrame</span><br><span class="code-keyword">print</span>(df.columns.tolist())<br><span class="code-keyword">print</span>(df.dtypes)<br><span class="code-keyword">print</span>(df[[<span class="code-string">"receita"</span>, <span class="code-string">"meta"</span>]])<br><span class="code-keyword">print</span>(df.isna().sum())</div>
+
+      <h2>Glossário essencial</h2>
+      <dl>
+        <dt><strong>DataFrame</strong></dt><dd>Estrutura tabular bidimensional com linhas e colunas rotuladas.</dd>
+        <dt><strong>Series</strong></dt><dd>Estrutura unidimensional; normalmente representa uma coluna.</dd>
+        <dt><strong>Índice</strong></dt><dd>Rótulo usado pelo Pandas para identificar linhas; não é automaticamente uma chave de negócio.</dd>
+        <dt><strong>Máscara booleana</strong></dt><dd>Sequência de valores verdadeiros e falsos usada para filtrar linhas.</dd>
+        <dt><strong>Vetorização</strong></dt><dd>Operação aplicada a uma coluna inteira sem escrever um laço explícito linha a linha.</dd>
+        <dt><strong>Granularidade</strong></dt><dd>Nível de detalhe representado por cada linha.</dd>
+      </dl>
+
+      <h2 data-lesson-section="summary">10. Síntese</h2>
+      <p>Listas organizam sequências; dicionários dão nomes aos atributos de um registro; DataFrames combinam vários registros em uma tabela analítica. Com seleção, cálculo, ordenação e filtro, você transformou uma estrutura de dados em uma resposta gerencial reproduzível.</p>
+
+      <h2 data-lesson-section="next-steps">11. Continuidade e referências</h2>
+      <p>Na próxima aula, essa tabela chegará com problemas comuns do mundo real: valores ausentes, duplicidades, textos inconsistentes e tipos incorretos. Guarde o notebook, pois ele servirá como base para o laboratório de limpeza de dados.</p>
+      <p>Para aprofundar, consulte a documentação instalada do Pandas diretamente no Colab com <code>help(pd.DataFrame)</code>, <code>help(df.loc)</code> e <code>help(df.sort_values)</code>. Esses comandos funcionam como referência associada à versão efetivamente usada no ambiente.</p>
+      <ul>
+        <li><a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/" target="_blank" rel="noopener noreferrer">Tutoriais introdutórios oficiais do Pandas</a>: DataFrames, seleção, novas colunas e estatísticas.</li>
+        <li><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html" target="_blank" rel="noopener noreferrer">Guia oficial de indexação e seleção</a>: diferenças e usos de <code>loc</code>, <code>iloc</code> e máscaras booleanas.</li>
+        <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html" target="_blank" rel="noopener noreferrer">Referência da API de DataFrame</a>: catálogo detalhado de atributos e métodos.</li>
+      </ul>
+      <p><small>Referências oficiais consultadas em 17/07/2026. Links externos exigem conexão; o conteúdo restante continua utilizável via <code>file://</code>.</small></p>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

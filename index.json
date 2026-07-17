@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-17",
+  "course": {
+    "title": "Laboratório de Programação, Ciência de Dados & IA",
+    "program": "Graduação em Administração",
+    "track": "BI & Data Science",
+    "workload_hours": 80,
+    "instructor": "Prof. Afonso Cesar Lelis Brandão",
+    "lesson_count": 19,
+    "schedule": "Quartas-feiras, 19h–22h · 12/08 a 16/12",
+    "homepage": "index.html"
+  },
+  "project_files": {
+    "root": ["AGENTS.md", "README.md", "index.html", "index.json", "package.json", "package-lock.json", "playwright.config.js"],
+    "assets": ["assets/einstein-cover.png", "assets/einstein-footer.jpg", "assets/einstein-header.jpg", "assets/einstein-logo.png"],
+    "official_documents": ["documentos_oficiais/Modelo de PPT Ensino Einstein 2025.zip", "documentos_oficiais/Plano de Ensino e Aprendizagem - LABS.zip"],
+    "tests": ["tests/e2e/aula-01.spec.js", "tests/e2e/aula-02.spec.js", "tests/test_lesson_standard.py"],
+    "authoring_skills": [".agents/skills/create-complete-lesson/SKILL.md", ".agents/skills/design_system/SKILL.md", ".agents/skills/generate_material_placeholder/SKILL.md", ".agents/skills/generate_slide_placeholder/SKILL.md", ".agents/skills/update-course-index/SKILL.md", ".agents/skills/update-course-index/agents/openai.yaml", ".agents/skills/update-course-index/references/schema.md", ".agents/skills/update-course-index/scripts/validate_index.py"]
+  },
+  "lessons": [
+    {
+      "number": 1,
+      "date": "12/08",
+      "theme": "Primeiros passos: Configurando sua ferramenta de análise",
+      "tag": "Ambiente",
+      "status": "complete",
+      "topics": ["Google Colab", "notebooks", "variáveis", "regras de negócio", "introdução ao Pandas"],
+      "objectives": ["Configurar um notebook no Google Colab", "Representar indicadores com variáveis", "Aplicar regras condicionais", "Produzir uma recomendação baseada em cálculos"],
+      "slides": {"path": "slides/aula-01.html", "slide_count": 15, "sections": ["agenda", "challenge", "concepts", "guided-practice", "next-steps", "objectives", "summary"]},
+      "material": {"path": "materiais/aula-01/index.html", "section_count": 13, "highlights": ["História da análise de dados e limites das planilhas", "Ambiente Google Colab e persistência no Drive", "Python aplicado a faturamento, margem e metas", "Primeira inspeção de dados com Pandas"], "activity": "Construir um notebook executivo com indicadores de uma filial", "deliverable": "Notebook Aula_01_SeuNome.ipynb executável do início ao fim e com recomendação baseada em indicador"}
+    },
+    {
+      "number": 2,
+      "date": "19/08",
+      "theme": "Organizando informações: Dados estruturados para gestão",
+      "tag": "Dados",
+      "status": "complete",
+      "topics": ["granularidade e esquema", "listas", "dicionários", "DataFrames", "tipos de dados", "loc e iloc", "filtros booleanos", "ordenação", "indicadores gerenciais"],
+      "objectives": ["Distinguir listas, dicionários e DataFrames", "Construir uma tabela de gestão", "Selecionar e filtrar dados com Pandas", "Calcular indicadores e justificar uma decisão"],
+      "slides": {"path": "slides/aula-02.html", "slide_count": 16, "sections": ["agenda", "challenge", "concepts", "guided-practice", "next-steps", "objectives", "summary"]},
+      "material": {"path": "materiais/aula-02/index.html", "section_count": 19, "highlights": ["Contexto histórico, granularidade e dicionário de dados", "Listas, dicionários, DataFrames e validação de tipos", "Seleção com loc e iloc, filtros e ordenação", "Indicadores gerenciais e média ponderada", "Resolução comentada, diagnóstico de erros e glossário"], "activity": "Montar e explorar um painel de filiais com receita e atingimento de meta", "deliverable": "Notebook Aula_02_SeuNome.ipynb com cinco filiais, sete colunas, ranking, filtro e recomendação com dois indicadores"}
+    },
+    {"number": 3, "date": "26/08", "theme": "Limpeza de dados: Preparando a base para análises", "tag": "Pandas", "status": "placeholder", "topics": ["limpeza de dados", "Pandas"], "objectives": [], "slides": {"path": "slides/aula-03.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-03/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 4, "date": "02/09", "theme": "Entendendo o cenário: Estatística para gestão de negócios", "tag": "Estatística", "status": "placeholder", "topics": ["estatística descritiva", "gestão"], "objectives": [], "slides": {"path": "slides/aula-04.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-04/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 5, "date": "09/09", "theme": "Storytelling, Dashboards e Segmentação de Clientes", "tag": "Visualização", "status": "placeholder", "topics": ["storytelling", "dashboards", "segmentação"], "objectives": [], "slides": {"path": "slides/aula-05.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-05/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 6, "date": "16/09", "theme": "Inteligência Artificial no dia a dia da administração", "tag": "IA", "status": "placeholder", "topics": ["inteligência artificial", "administração"], "objectives": [], "slides": {"path": "slides/aula-06.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-06/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 7, "date": "23/09", "theme": "Refinando dados para modelos de decisão", "tag": "Feature Eng.", "status": "placeholder", "topics": ["engenharia de atributos", "modelos de decisão"], "objectives": [], "slides": {"path": "slides/aula-07.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-07/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 8, "date": "30/09", "theme": "Fazendo previsões com IA: Vendas e Tendências", "tag": "ML · Regressão", "status": "placeholder", "topics": ["regressão", "previsão de vendas", "tendências"], "objectives": [], "slides": {"path": "slides/aula-08.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-08/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 9, "date": "07/10", "theme": "Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral", "tag": "Inferência", "status": "placeholder", "topics": ["testes A/B", "teste t", "qui-quadrado", "tamanho amostral"], "objectives": [], "slides": {"path": "slides/aula-09.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-09/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 10, "date": "14/10", "theme": "Estudo de Caso: Aplicação prática de Testes Estatísticos", "tag": "Estudo de Caso", "status": "placeholder", "topics": ["testes estatísticos", "estudo de caso"], "objectives": [], "slides": {"path": "slides/aula-10.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-10/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 11, "date": "21/10", "theme": "Auditoria automatizada: Detectando anomalias e riscos", "tag": "Anomalias", "status": "placeholder", "topics": ["auditoria", "anomalias", "riscos"], "objectives": [], "slides": {"path": "slides/aula-11.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-11/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 12, "date": "28/10", "theme": "IA aplicada à estratégia e tomada de decisão", "tag": "IA · Estratégia", "status": "placeholder", "topics": ["inteligência artificial", "estratégia", "decisão"], "objectives": [], "slides": {"path": "slides/aula-12.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-12/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 13, "date": "04/11", "theme": "Análise forense de dados: Identificando fraudes", "tag": "Forense", "status": "placeholder", "topics": ["análise forense", "fraudes"], "objectives": [], "slides": {"path": "slides/aula-13.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-13/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 14, "date": "11/11", "theme": "Estudo de Caso: Análise de dados aplicada ao RH", "tag": "Estudo de Caso", "status": "placeholder", "topics": ["recursos humanos", "análise de dados", "estudo de caso"], "objectives": [], "slides": {"path": "slides/aula-14.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-14/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 15, "date": "18/11", "theme": "Estudo de Caso: Programação para previsão de caixas", "tag": "Estudo de Caso", "status": "placeholder", "topics": ["programação", "previsão de caixa", "estudo de caso"], "objectives": [], "slides": {"path": "slides/aula-15.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-15/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 16, "date": "25/11", "theme": "Estudo de Caso: Previsão de demandas", "tag": "Estudo de Caso", "status": "placeholder", "topics": ["previsão de demanda", "estudo de caso"], "objectives": [], "slides": {"path": "slides/aula-16.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-16/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 17, "date": "02/12", "theme": "Projeto Integrador: Resolvendo um problema de negócio real", "tag": "Projeto", "status": "placeholder", "topics": ["projeto integrador", "problema de negócio"], "objectives": [], "slides": {"path": "slides/aula-17.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-17/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 18, "date": "09/12", "theme": "Apresentação de resultados e recomendações executivas", "tag": "Apresentação", "status": "placeholder", "topics": ["apresentação", "resultados", "recomendações executivas"], "objectives": [], "slides": {"path": "slides/aula-18.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-18/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}},
+    {"number": 19, "date": "16/12", "theme": "Apresentação final de projetos", "tag": "Apresentação", "status": "placeholder", "topics": ["apresentação final", "projetos"], "objectives": [], "slides": {"path": "slides/aula-19.html", "slide_count": 2, "sections": []}, "material": {"path": "materiais/aula-19/index.html", "section_count": 2, "highlights": [], "activity": null, "deliverable": null}}
+  ]
+}

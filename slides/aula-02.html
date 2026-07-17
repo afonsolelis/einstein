@@ -353,6 +353,120 @@
       <p>Organizando informações: Dados estruturados para gestão</p>
     </div>
 
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Ao final desta aula, você será capaz de…</h2>
+      <ul>
+        <li><strong>Distinguir</strong> listas, dicionários e DataFrames pela estrutura e pelo uso.</li>
+        <li><strong>Construir</strong> uma tabela de gestão a partir de registros comerciais.</li>
+        <li><strong>Selecionar</strong> colunas e filtrar linhas com critérios de negócio.</li>
+        <li><strong>Calcular</strong> receita e justificar uma decisão com evidências.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Nosso roteiro de 3 horas</h2>
+      <ul>
+        <li><strong>Conectar:</strong> do valor isolado ao registro estruturado.</li>
+        <li><strong>Modelar:</strong> listas, dicionários, linhas e colunas.</li>
+        <li><strong>Praticar:</strong> montar e explorar um DataFrame comercial.</li>
+        <li><strong>Entregar:</strong> responder uma pergunta gerencial com dados.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Estrutura é contexto</h2>
+      <p>O valor <code>189.90</code> sozinho diz pouco. Quando recebe o nome <strong>ticket_medio</strong>, pertence a uma filial e ocupa uma linha de período, ele se transforma em informação utilizável.</p>
+      <ul>
+        <li><strong>Variável:</strong> guarda um valor.</li>
+        <li><strong>Lista:</strong> mantém uma sequência.</li>
+        <li><strong>Dicionário:</strong> associa nomes a valores.</li>
+        <li><strong>DataFrame:</strong> organiza muitos registros em tabela.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Listas: uma coleção ordenada</h2>
+      <div class="code-block"><span class="code-comment"># Cada posição representa uma observação</span><br>vendas_semana = [120, 145, 138, 172, 160]<br><br><span class="code-keyword">print</span>(vendas_semana[0])&nbsp;&nbsp;<span class="code-comment"># primeira</span><br><span class="code-keyword">print</span>(vendas_semana[-1]) <span class="code-comment"># última</span><br><span class="code-keyword">print</span>(sum(vendas_semana))</div>
+      <p>Índices começam em zero. Uma lista preserva ordem, mas não explica sozinha o significado de cada posição.</p>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Dicionários: um registro com significado</h2>
+      <div class="code-block">filial = {<br>&nbsp;&nbsp;<span class="code-string">"nome"</span>: <span class="code-string">"Paulista"</span>,<br>&nbsp;&nbsp;<span class="code-string">"vendas"</span>: 320,<br>&nbsp;&nbsp;<span class="code-string">"ticket_medio"</span>: 189.90<br>}<br><br>faturamento = filial[<span class="code-string">"vendas"</span>] * filial[<span class="code-string">"ticket_medio"</span>]</div>
+      <p>As chaves funcionam como rótulos: tornam a regra de negócio legível e reduzem ambiguidades.</p>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Da ficha à tabela</h2>
+      <p>Uma lista de dicionários representa várias fichas com o mesmo esquema. Cada dicionário vira uma <strong>linha</strong>; cada chave vira uma <strong>coluna</strong>.</p>
+      <div class="code-block">registros = [<br>&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Paulista"</span>, <span class="code-string">"vendas"</span>: 320, <span class="code-string">"ticket"</span>: 189.90},<br>&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Pinheiros"</span>, <span class="code-string">"vendas"</span>: 280, <span class="code-string">"ticket"</span>: 214.50},<br>&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Moema"</span>, <span class="code-string">"vendas"</span>: 410, <span class="code-string">"ticket"</span>: 176.00}<br>]</div>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>DataFrame: a tabela analítica</h2>
+      <div class="code-block"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>df = pd.DataFrame(registros)<br>df</div>
+      <ul>
+        <li><strong>Linhas</strong> são observações: filiais, clientes ou pedidos.</li>
+        <li><strong>Colunas</strong> são atributos: vendas, região ou custo.</li>
+        <li><strong>Índice</strong> identifica a posição de cada observação.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Inspecione antes de analisar</h2>
+      <div class="code-block">df.head()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># primeiras linhas</span><br>df.shape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># (linhas, colunas)</span><br>df.columns&nbsp;&nbsp;&nbsp;<span class="code-comment"># nomes das colunas</span><br>df.dtypes&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># tipos de dados</span></div>
+      <p>Antes de calcular, confirme se a tabela tem a granularidade, as colunas e os tipos esperados.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Prática guiada: receita por filial</h2>
+      <div class="code-block"><span class="code-comment"># Cria uma coluna calculada para cada linha</span><br>df[<span class="code-string">"receita"</span>] = df[<span class="code-string">"vendas"</span>] * df[<span class="code-string">"ticket"</span>]<br><br><span class="code-comment"># Seleciona uma visão executiva</span><br>painel = df[[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>]]<br>painel.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>)</div>
+      <p>Pergunta: qual filial lidera em receita — e por quê?</p>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Filtrar é transformar regra em evidência</h2>
+      <div class="code-block">meta_receita = 60000<br><br>acima_da_meta = df[df[<span class="code-string">"receita"</span>] &gt;= meta_receita]<br>acima_da_meta[[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>]]</div>
+      <p>A expressão booleana é avaliada linha a linha. O resultado mantém somente os registros que satisfazem o critério.</p>
+    </div>
+
+    <div class="slide slide-content">
+      <h2>Erros que custam decisões</h2>
+      <ul>
+        <li><strong>Confundir posição e rótulo:</strong> índice zero não significa “filial 0”.</li>
+        <li><strong>Misturar tipos:</strong> <code>"R$ 1.000"</code> é texto, não número.</li>
+        <li><strong>Perder granularidade:</strong> misturar pedidos e totais mensais na mesma tabela.</li>
+        <li><strong>Alterar sem conferir:</strong> valide <code>shape</code>, colunas e amostras após cada etapa.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio: diagnóstico comercial</h2>
+      <p>Crie um DataFrame com <strong>5 filiais</strong> e as colunas <code>filial</code>, <code>regiao</code>, <code>vendas</code>, <code>ticket</code> e <code>meta</code>.</p>
+      <ul>
+        <li>Calcule <code>receita</code> e <code>atingiu_meta</code>.</li>
+        <li>Ordene as filiais por receita e filtre as que bateram a meta.</li>
+        <li>Escreva uma recomendação de 2–3 frases citando dois indicadores.</li>
+      </ul>
+      <p><strong>Entrega:</strong> notebook <code>Aula_02_SeuNome.ipynb</code>, executável do início ao fim.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>Fechamento: do dado à decisão</h2>
+      <ul>
+        <li>Listas organizam sequências; dicionários descrevem registros.</li>
+        <li>DataFrames combinam registros em uma estrutura tabular.</li>
+        <li>Seleção, cálculo, ordenação e filtro respondem perguntas de gestão.</li>
+        <li>Uma análise só termina quando a evidência sustenta uma recomendação.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="next-steps">
+      <h2>Próxima aula: preparar a base</h2>
+      <p>Dados reais chegam com campos vazios, duplicidades, grafias diferentes e tipos incorretos. Na aula 3, você transformará uma tabela imperfeita em uma base confiável para análise.</p>
+      <p><strong>Guarde seu notebook:</strong> ele será a matéria-prima do laboratório de limpeza.</p>
+    </div>
+
     <!-- Slide Finalização -->
     <div class="slide slide-end">
       <h2>Fim da Aula 2</h2>

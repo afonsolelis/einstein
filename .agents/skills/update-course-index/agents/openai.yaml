@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atualizar índice do curso"
+  short_description: "Indexa aulas, slides e materiais do curso"
+  default_prompt: "Use $update-course-index para atualizar e validar o index.json do curso."

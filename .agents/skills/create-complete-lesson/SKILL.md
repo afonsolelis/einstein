@@ -14,6 +14,7 @@ description: Criar, completar, revisar e validar aulas deste curso, incluindo sl
 5. Executar `python3 .agents/skills/create-complete-lesson/scripts/validate_lesson.py --lesson XX --complete`.
 6. Executar `python3 -m unittest discover -s tests -v`.
 7. Executar `npm run test:e2e` para validar no Chromium as páginas inicial, slides e material em desktop e mobile. Percorrer os slides por botões e teclado, verificar links, overflow e erros de console.
+8. Ler e aplicar `../update-course-index/SKILL.md` para atualizar e validar `index.json` somente depois que a aula passar nas validações anteriores.
 
 ## Regras de autoria
 
