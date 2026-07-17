@@ -6,58 +6,341 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aula 6 · Slides</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
-    body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; overflow: hidden; background: #0b1120; color: #f8fafc; }
-    #slider { width: 100vw; height: 100vh; position: relative; background: radial-gradient(circle at 100% 0%, rgba(31, 111, 178, 0.15) 0%, #0b1120 50%), radial-gradient(circle at 0% 100%, rgba(0, 163, 217, 0.1) 0%, #0b1120 50%); }
-    
-    .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 2rem 80px; box-sizing: border-box; opacity: 0; pointer-events: none; z-index: 1; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: translateY(30px) scale(0.98); }
-    .slide.active { opacity: 1; pointer-events: auto; z-index: 2; transform: translateY(0) scale(1); }
-    
-    h1, h2 { letter-spacing: -0.5px; }
-    
-    /* Capas */
-    .slide-start, .slide-prof, .slide-end { align-items: center; justify-content: center; text-align: center; }
-    .slide-start h1 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 0.5rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #4bc4e8); -webkit-background-clip: text; color: transparent; }
-    .slide-start .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #4bc4e8; padding: 0.6rem 1.5rem; border-radius: 999px; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; border: 1px solid rgba(75, 196, 232, 0.3); box-shadow: 0 0 20px rgba(0, 163, 217, 0.15); }
-    .slide-start p { font-size: clamp(1.2rem, 2.5vw, 1.8rem); max-width: 800px; color: #94a3b8; font-weight: 300; line-height: 1.5; }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
-    .slide-prof h2, .slide-end h2 { font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 800; margin-bottom: 1rem; color: #f8fafc; }
-    .slide-prof p, .slide-end p { font-size: clamp(1.2rem, 2vw, 1.8rem); max-width: 800px; color: #94a3b8; font-weight: 300; line-height: 1.6; }
-    .prof-avatar { font-size: 6rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(0, 163, 217, 0.3)); }
-    
-    /* Slides de Conteúdo */
-    .slide-content { padding: 5rem 12vw; justify-content: center; text-align: left; align-items: flex-start; }
-    .slide-content h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 2rem; color: #ffffff; padding-bottom: 0.5rem; display: inline-block; position: relative; }
-    .slide-content h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; background: #00a3d9; border-radius: 2px; box-shadow: 0 0 10px #00a3d9; }
-    .slide-content p, .slide-content ul { font-size: clamp(1.2rem, 2.2vw, 1.5rem); color: #cbd5e1; line-height: 1.7; max-width: 1200px; margin-top: 0; font-weight: 300; }
-    .slide-content ul { padding-left: 0; margin-bottom: 2rem; list-style: none; }
-    .slide-content li { margin-bottom: 1rem; position: relative; padding-left: 2rem; }
-    .slide-content li::before { content: ''; position: absolute; left: 0; top: 12px; width: 8px; height: 8px; background: #00a3d9; border-radius: 50%; box-shadow: 0 0 8px #00a3d9; }
-    .slide-content strong { color: #ffffff; font-weight: 600; }
-    .slide-content code { background: rgba(0, 163, 217, 0.15); border: 1px solid rgba(0, 163, 217, 0.3); padding: 0.2rem 0.6rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #4bc4e8; font-size: 0.9em; }
-    
-    /* Blocos de Código */
-    .code-block { background: rgba(15, 23, 42, 0.6); color: #e2ebf2; padding: 2rem; border-radius: 16px; font-family: 'Fira Code', monospace; font-size: 1.15rem; line-height: 1.6; width: 100%; max-width: 1100px; overflow-x: auto; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00a3d9; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
-    .code-comment { color: #64748b; font-style: italic; }
-    .code-keyword { color: #c678dd; font-weight: 600; }
-    .code-string { color: #98c379; }
-    
-    /* Controles Glassmorphism */
-    #controls { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.4); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; box-sizing: border-box; z-index: 10; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.05); box-shadow: 0 -10px 30px rgba(0,0,0,0.2); }
-    .footer-text { font-size: 0.95rem; color: #94a3b8; font-weight: 400; letter-spacing: 0.5px; white-space: nowrap; }
-    .btn-group { display: flex; gap: 0.8rem; }
-    .ctrl-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; font-size: 1rem; padding: 0.6rem 1rem; border-radius: 10px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-family: 'Outfit', sans-serif; }
-    .ctrl-btn:hover { background: rgba(255,255,255,0.15); color: #ffffff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    :root {
+      --navy-950: #071827;
+      --navy-900: #082f49;
+      --navy-800: #0b496b;
+      --blue: #1f6fb2;
+      --cyan: #00a3d9;
+      --cyan-light: #4bc4e8;
+      --teal: #00d7b0;
+      --paper: #f8fafc;
+      --text: #d7e5ef;
+      --muted: #8faabd;
+      --controls-height: 72px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      color: var(--paper);
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: var(--navy-950);
+    }
+    button, a { font: inherit; }
+
+    #slider {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 92% 6%, rgba(0, 163, 217, 0.17), transparent 36%),
+        radial-gradient(circle at 8% 94%, rgba(0, 215, 176, 0.08), transparent 32%),
+        linear-gradient(135deg, var(--navy-950), #0a2033 58%, #082b43);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(4.5rem, 8vh, 7rem) clamp(3rem, 10vw, 10rem) calc(var(--controls-height) + 2.25rem);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(24px) scale(0.988);
+      transition:
+        opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0s;
+    }
+    .slide.active {
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      transition-delay: 0s;
+    }
+
+    .slide::before {
+      content: '»';
+      position: absolute;
+      top: clamp(1.25rem, 3vh, 2rem);
+      left: clamp(1.5rem, 4vw, 4rem);
+      color: var(--teal);
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.32em;
+      opacity: 0.95;
+    }
+    .slide::after {
+      content: 'ENSINO EINSTEIN';
+      position: absolute;
+      right: clamp(1.25rem, 3vw, 3rem);
+      bottom: calc(var(--controls-height) + 0.8rem);
+      width: auto;
+      height: auto;
+      color: rgba(215, 229, 239, 0.78);
+      background: none;
+      font-size: clamp(0.62rem, 0.8vw, 0.76rem);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      opacity: 1;
+    }
+
+    h1, h2, p, ul { position: relative; z-index: 1; }
+    h1, h2 { letter-spacing: -0.04em; }
+    .slide-content h2,
+    .slide-prof h2,
+    .slide-end h2 {
+      max-width: 1120px;
+      margin: 0 0 clamp(1.2rem, 2.6vh, 2rem);
+      color: var(--paper);
+      font-size: clamp(2.35rem, 4.25vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.04;
+    }
+    .slide-content h2::after {
+      content: '';
+      display: block;
+      width: 72px;
+      height: 5px;
+      margin-top: 0.7rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--teal), var(--cyan-light));
+      box-shadow: 0 0 22px rgba(0, 215, 176, 0.34);
+    }
+    .slide-content p,
+    .slide-content ul,
+    .slide-prof p,
+    .slide-end p {
+      max-width: 1120px;
+      margin-top: 0;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ul {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      list-style: none;
+    }
+    .slide-content li {
+      position: relative;
+      margin-bottom: clamp(0.45rem, 1vh, 0.8rem);
+      padding-left: 1.75rem;
+    }
+    .slide-content li::before {
+      content: '';
+      position: absolute;
+      top: 0.58em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 10px rgba(0, 215, 176, 0.75);
+    }
+    .slide-content strong { color: #fff; font-weight: 700; }
+    .slide-content em { color: var(--cyan-light); font-style: normal; }
+    .slide-content code {
+      padding: 0.14em 0.45em;
+      border: 1px solid rgba(75, 196, 232, 0.24);
+      border-radius: 6px;
+      color: var(--cyan-light);
+      background: rgba(0, 163, 217, 0.12);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.86em;
+    }
+
+    .code-block {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      max-height: 44vh;
+      margin-top: 0.6rem;
+      padding: clamp(1rem, 2vw, 1.65rem);
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 5px solid var(--teal);
+      border-radius: 0 14px 14px 0;
+      color: #e5eef5;
+      background: rgba(4, 20, 34, 0.72);
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(0.82rem, 1.15vw, 1.04rem);
+      line-height: 1.52;
+      scrollbar-color: var(--cyan) transparent;
+    }
+    .code-comment { color: #7890a1; font-style: italic; }
+    .code-keyword { color: #d8a7ff; font-weight: 600; }
+    .code-string { color: #8de6b8; }
+
+    .slide-start {
+      padding-left: clamp(3rem, 10vw, 10rem);
+      background:
+        linear-gradient(135deg, transparent 0 64%, rgba(0, 215, 176, 0.18) 64% 68%, transparent 68%),
+        linear-gradient(135deg, var(--navy-900), #073f5f 62%, #075476);
+    }
+    .slide-start::before {
+      content: '';
+      inset: 0 0 0 auto;
+      width: 32%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 23%, var(--teal) 23% 43%, transparent 43% 52%, rgba(255, 255, 255, 0.72) 52% 59%, transparent 59%);
+      opacity: 0.94;
+    }
+    .slide-start .badge {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1.35rem;
+      padding: 0.52rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.28);
+      border-radius: 999px;
+      color: #8eead7;
+      background: rgba(0, 215, 176, 0.1);
+      box-shadow: 0 0 24px rgba(0, 215, 176, 0.13);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+    .slide-start h1 {
+      max-width: 820px;
+      margin: 0 0 1rem;
+      color: #fff;
+      font-size: clamp(3.25rem, 6vw, 6rem);
+      font-weight: 700;
+      line-height: 0.98;
+    }
+    .slide-start p {
+      max-width: 740px;
+      margin: 0;
+      color: #e4f0f5;
+      font-size: clamp(1.3rem, 2.3vw, 2rem);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    .slide-prof,
+    .slide-end {
+      padding-left: clamp(3rem, 10vw, 10rem);
+      background:
+        linear-gradient(120deg, transparent 0 65%, rgba(255, 255, 255, 0.08) 65% 69%, transparent 69%),
+        linear-gradient(135deg, #008d87, #00a990 50%, #00b99c);
+    }
+    .slide-prof::before,
+    .slide-end::before {
+      content: '»';
+      top: 7%;
+      right: 7vw;
+      left: auto;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(7rem, 13vw, 13rem);
+      letter-spacing: -0.35em;
+    }
+    .slide-prof h2,
+    .slide-end h2 { max-width: 840px; color: #062f3c; }
+    .slide-prof p,
+    .slide-end p { max-width: 850px; color: #093f48; font-weight: 400; }
+    .prof-avatar { display: none; }
+    .slide-prof::after,
+    .slide-end::after { color: rgba(255, 255, 255, 0.88); }
+
+    #controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: var(--controls-height);
+      padding: 0 1.6rem;
+      border-top: 3px solid var(--teal);
+      background: rgba(5, 32, 50, 0.9);
+      box-shadow: 0 -14px 36px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .footer-text { color: var(--muted); font-size: 0.86rem; letter-spacing: 0.025em; }
+    .btn-group { display: flex; align-items: center; gap: 0.45rem; }
+    .ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.55rem 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9px;
+      color: #dceaf2;
+      background: rgba(255, 255, 255, 0.055);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .ctrl-btn:hover { border-color: rgba(75, 196, 232, 0.35); background: rgba(75, 196, 232, 0.12); transform: translateY(-1px); }
     .ctrl-btn:active { transform: translateY(0); }
-    .ctrl-btn:disabled { opacity: 0.2; cursor: not-allowed; transform: none; }
-    .ctrl-icon { font-size: 1.2rem; margin-right: 0.4rem; }
-    .ctrl-btn-only-icon { font-size: 1.3rem; padding: 0.6rem 1.2rem; }
-    
+    .ctrl-btn:disabled { opacity: 0.25; cursor: not-allowed; transform: none; }
+    .ctrl-btn:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .ctrl-icon { margin-right: 0.35rem; }
+    .ctrl-btn-only-icon { min-width: 42px; padding-inline: 0.7rem; }
+    .slide-counter { min-width: 4.5rem; color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.84rem; text-align: center; }
+
     @media (max-width: 768px) {
-       .footer-text { display: none; }
-       #controls { justify-content: center; padding: 0 1rem; }
-       .slide-content { padding: 4rem 2rem; }
+      :root { --controls-height: 62px; }
+      .slide { padding: 4.25rem 1.5rem calc(var(--controls-height) + 2rem); }
+      .slide::before { top: 1rem; left: 1.1rem; }
+      .slide::after { right: 0.8rem; bottom: calc(var(--controls-height) + 0.7rem); font-size: 0.54rem; opacity: 0.72; }
+      .slide-content { justify-content: center; }
+      .slide-content h2,
+      .slide-prof h2,
+      .slide-end h2 { margin-bottom: 0.9rem; font-size: clamp(1.75rem, 7.3vw, 2.45rem); line-height: 1.08; }
+      .slide-content h2::after { width: 48px; height: 4px; margin-top: 0.5rem; }
+      .slide-content p,
+      .slide-content ul,
+      .slide-prof p,
+      .slide-end p { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; }
+      .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
+      .slide-content li::before { width: 7px; height: 7px; }
+      .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
+      .slide-start::before { width: 24%; opacity: 0.68; }
+      .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
+      .slide-start p { max-width: 84%; font-size: clamp(1.05rem, 5vw, 1.45rem); }
+      .slide-start .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
+      #controls { justify-content: center; padding: 0 0.35rem; }
+      .footer-text { display: none; }
+      .btn-group { width: 100%; justify-content: center; gap: 0.3rem; }
+      a.ctrl-btn { padding-inline: 0.65rem; font-size: 0; }
+      .ctrl-icon { margin: 0; font-size: 1rem; }
+      .ctrl-btn-only-icon { min-width: 38px; min-height: 40px; padding: 0.5rem; font-size: 0.95rem; }
+      .slide-counter { min-width: 3.4rem; font-size: 0.72rem; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide { padding-top: 4.25rem; }
+      .slide-content h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); margin-bottom: 1rem; }
+      .slide-content p, .slide-content ul { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .code-block { max-height: 42vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .ctrl-btn { transition: none; }
     }
   </style>
 </head>
@@ -82,6 +365,7 @@
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-06/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia">⛶</button>
@@ -94,6 +378,7 @@
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnFs = document.getElementById('btn-fs');
+    const slideCounter = document.getElementById('slide-counter');
 
     function update() {
       slides.forEach((s, i) => {
@@ -102,14 +387,23 @@
       });
       btnPrev.disabled = current === 0;
       btnNext.disabled = current === slides.length - 1;
+      slideCounter.textContent = `${current + 1} / ${slides.length}`;
     }
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
     
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') { if (current < slides.length - 1) { current++; update(); } }
-      if (e.key === 'ArrowLeft') { if (current > 0) { current--; update(); } }
+      const interactiveTarget = e.target.closest('button, a');
+      if (e.key === ' ' && interactiveTarget) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        if (current < slides.length - 1) { current++; update(); }
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (current > 0) { current--; update(); }
+      }
     });
 
     btnFs.addEventListener('click', () => {
