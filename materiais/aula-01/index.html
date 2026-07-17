@@ -82,8 +82,17 @@
     
     <div class="content">
       <p class="desc">Bem-vindo(a) à sua primeira aula teórica e prática. Este material foi desenhado como um guia definitivo (Wiki) que não apenas explica <em>como</em> apertar botões, mas revela o <em>porquê</em> das escolhas tecnológicas do mercado financeiro e de tecnologia atual. Estudaremos desde a evolução da análise de dados até os primeiros scripts que você rodará na nuvem.</p>
+
+      <h2 data-lesson-section="objectives">Objetivos de aprendizagem</h2>
+      <p>Ao concluir a aula, você deverá conseguir criar e organizar um notebook no Google Colab, executar e explicar cálculos simples em Python, diferenciar células de código e texto e manter arquivos persistentes no Google Drive.</p>
+      <ul>
+        <li><strong>Criar</strong> um notebook com nome e estrutura padronizados.</li>
+        <li><strong>Calcular</strong> indicadores básicos de uma operação comercial.</li>
+        <li><strong>Documentar</strong> a análise com uma recomendação executiva.</li>
+        <li><strong>Salvar e compartilhar</strong> o artefato sem expor dados indevidos.</li>
+      </ul>
       
-      <h2>1. Uma Breve História da Análise de Dados</h2>
+      <h2 data-lesson-section="concepts">1. Uma Breve História da Análise de Dados</h2>
       <p>Para entendermos onde estamos, precisamos olhar para trás. Durante as décadas de 80 e 90, a ferramenta hegemônica para gerir negócios e finanças era a planilha eletrônica. O <strong>VisiCalc</strong> e o <strong>Lotus 1-2-3</strong> abriram caminho para o <strong>Microsoft Excel</strong>, que revolucionou o mundo corporativo dando a qualquer gestor o poder de realizar cálculos complexos sem ser um programador.</p>
       <p>Entretanto, na virada do século XXI, o volume de dados começou a explodir. A internet, as redes sociais, os sensores em celulares e fábricas (IoT) começaram a gerar o que chamamos de <strong>Big Data</strong>. Nesse cenário, o paradigma visual das planilhas encontrou o seu gargalo físico e computacional.</p>
 
@@ -115,7 +124,7 @@
         <p>A máquina que o Google lhe empresta é descartável. Se você fizer o upload direto de uma planilha pela barra lateral e fechar a aba do navegador, a máquina é apagada e <strong>você perde seus arquivos</strong>. A única forma segura de ler dados no Colab é integrando-o permanentemente ao seu <strong>Google Drive</strong>.</p>
       </div>
 
-      <h2>5. Hands-On: A Primeira Conexão</h2>
+      <h2 data-lesson-section="guided-practice">5. Hands-On: A Primeira Conexão</h2>
       <p>Sempre que iniciar um projeto sério no Colab, o seu primeiro passo absoluto deve ser conectar a máquina virtual à sua conta do Google Drive real. Insira o código abaixo em uma <strong>célula de código</strong> no topo do seu projeto e execute-a.</p>
       
       <div class="code-block">
@@ -190,6 +199,36 @@
         <li><code>Ctrl + M + Y</code>: Converte a célula de volta para formato de <strong>Código Python</strong>.</li>
         <li><code>Ctrl + M + D</code>: Deleta a célula atual instantaneamente.</li>
       </ul>
+
+      <h2 data-lesson-section="challenge">9. Desafio: Notebook Executivo</h2>
+      <p>Crie um notebook chamado <code>Aula_01_SeuNome.ipynb</code>. Em células separadas, registre os dados de uma filial, calcule faturamento, custo total, lucro e margem e finalize com uma recomendação em Markdown.</p>
+      <div class="code-block">
+        vendas = <span class="code-keyword">320</span><br>
+        ticket_medio = <span class="code-keyword">189.90</span><br>
+        custo_total = <span class="code-keyword">48500</span><br><br>
+        faturamento = vendas * ticket_medio<br>
+        lucro = faturamento - custo_total<br>
+        margem = lucro / faturamento<br><br>
+        <span class="code-keyword">print</span>(<span class="code-string">f"Faturamento: R$ {faturamento:,.2f}"</span>)<br>
+        <span class="code-keyword">print</span>(<span class="code-string">f"Margem: {margem:.1%}"</span>)
+      </div>
+      <p><strong>Entrega:</strong> compartilhe o link conforme a orientação do professor. O notebook está pronto quando todas as células executam de cima para baixo sem erro e a recomendação cita pelo menos um indicador calculado.</p>
+
+      <h2 data-lesson-section="checklist">10. Checklist antes de entregar</h2>
+      <ul>
+        <li>O arquivo segue o padrão de nome solicitado.</li>
+        <li>Há ao menos uma célula de texto explicando o objetivo da análise.</li>
+        <li>Os cálculos executam em ordem, sem depender de uma célula oculta.</li>
+        <li>Valores monetários e percentuais estão formatados.</li>
+        <li>O notebook não contém senhas, tokens nem dados pessoais.</li>
+      </ul>
+
+      <h2 data-lesson-section="summary">11. Síntese</h2>
+      <p>Você configurou um ambiente analítico na nuvem, representou informações com variáveis, aplicou regras de negócio e combinou narrativa e código em um notebook reproduzível. Esse fluxo — pergunta, dados, cálculo e recomendação — será repetido e ampliado durante toda a disciplina.</p>
+
+      <h2 data-lesson-section="next-steps">12. Continuidade</h2>
+      <p>Na próxima aula, valores isolados serão organizados em listas, dicionários e DataFrames. Guarde o notebook desta aula no Drive: ele servirá como ponto de partida para estruturar uma pequena base de gestão.</p>
+      <p>Para aprofundar, consulte a documentação oficial do Colab pelo menu <strong>Ajuda</strong> do próprio ambiente e experimente alterar os valores do desafio, observando como os indicadores respondem.</p>
       
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

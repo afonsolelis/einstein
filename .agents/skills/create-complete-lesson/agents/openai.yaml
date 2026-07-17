@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Complete Lesson"
+  short_description: "Cria e valida aulas completas do curso"
+  default_prompt: "Use $create-complete-lesson para criar uma aula completa e validada."

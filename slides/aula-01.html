@@ -38,7 +38,7 @@
     .slide-content code { background: rgba(0, 163, 217, 0.15); border: 1px solid rgba(0, 163, 217, 0.3); padding: 0.2rem 0.6rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #4bc4e8; font-size: 0.9em; }
     
     /* Blocos de Código */
-    .code-block { background: rgba(15, 23, 42, 0.6); color: #e2ebf2; padding: 2rem; border-radius: 16px; font-family: 'Fira Code', monospace; font-size: 1.15rem; line-height: 1.6; width: 100%; max-width: 1100px; overflow-x: auto; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00a3d9; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+    .code-block { background: rgba(15, 23, 42, 0.6); color: #e2ebf2; padding: 2rem; border-radius: 16px; font-family: 'Fira Code', monospace; font-size: 1.15rem; line-height: 1.6; width: 100%; max-width: 1100px; box-sizing: border-box; overflow-x: auto; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00a3d9; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
     .code-comment { color: #64748b; font-style: italic; }
     .code-keyword { color: #c678dd; font-weight: 600; }
     .code-string { color: #98c379; }
@@ -53,12 +53,23 @@
     .ctrl-btn:disabled { opacity: 0.2; cursor: not-allowed; transform: none; }
     .ctrl-icon { font-size: 1.2rem; margin-right: 0.4rem; }
     .ctrl-btn-only-icon { font-size: 1.3rem; padding: 0.6rem 1.2rem; }
+    .slide-counter { min-width: 4.5rem; color: #4bc4e8; font-family: 'Fira Code', monospace; text-align: center; }
+    .ctrl-btn:focus-visible { outline: 3px solid #4bc4e8; outline-offset: 3px; }
     
     @media (max-width: 768px) {
        .footer-text { display: none; }
-       #controls { justify-content: center; padding: 0 1rem; }
+       #controls { justify-content: center; padding: 0 0.35rem; }
+       .btn-group { gap: 0.35rem; width: 100%; justify-content: center; }
        .slide-content { padding: 4rem 2rem; }
+       .slide-content h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); margin-bottom: 1rem; }
+       .slide-content p, .slide-content ul { font-size: clamp(1rem, 4vw, 1.2rem); line-height: 1.45; }
+       .code-block { font-size: 0.82rem; padding: 1rem; }
+       .ctrl-icon { margin-right: 0; font-size: 1.1rem; }
+       a.ctrl-btn { font-size: 0; padding: 0.55rem 0.7rem; }
+       .ctrl-btn-only-icon { font-size: 1.05rem; padding: 0.55rem 0.75rem; }
+       .slide-counter { min-width: 3.6rem; font-size: 0.85rem; }
     }
+    @media (prefers-reduced-motion: reduce) { .slide, .ctrl-btn { transition: none; } }
   </style>
 </head>
 <body>
@@ -70,6 +81,26 @@
       <p>Primeiros passos: Configurando sua ferramenta de análise</p>
     </div>
 
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Ao final desta aula, você será capaz de…</h2>
+      <ul>
+        <li><strong>Criar e organizar</strong> um notebook no Google Colab.</li>
+        <li><strong>Executar e explicar</strong> um cálculo simples em Python.</li>
+        <li><strong>Distinguir</strong> células de código e de texto.</li>
+        <li><strong>Persistir dados</strong> com segurança no Google Drive.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Nosso roteiro de 3 horas</h2>
+      <ul>
+        <li><strong>Contexto:</strong> do Excel ao notebook analítico.</li>
+        <li><strong>Demonstração:</strong> Colab, células e primeiros comandos.</li>
+        <li><strong>Prática guiada:</strong> indicadores de uma operação comercial.</li>
+        <li><strong>Desafio:</strong> entregar um notebook executivo reproduzível.</li>
+      </ul>
+    </div>
+
     <!-- Slide Professor -->
     <div class="slide slide-prof">
       <div class="prof-avatar">👨‍🏫</div>
@@ -78,7 +109,7 @@
     </div>
 
     <!-- Conteúdo: O que é o Colab -->
-    <div class="slide slide-content">
+    <div class="slide slide-content" data-lesson-section="concepts">
       <h2>O seu novo escritório: Google Colab</h2>
       <p>Esqueça instalações complexas. Em Ciência de Dados, o foco é resolver problemas, não brigar com o sistema operacional do seu computador.</p>
       <p>O <strong>Google Colab</strong> é um ambiente Jupyter Notebook hospedado na nuvem. Ele permite que você escreva e execute código Python diretamente no seu navegador, sem precisar configurar nada.</p>
@@ -87,6 +118,19 @@
         <li><strong>Acesso universal:</strong> Seus códigos e análises ficam salvos no seu Google Drive. Você acessa de qualquer máquina.</li>
         <li><strong>Potência:</strong> O Google fornece acesso gratuito a GPUs (Placas de Vídeo) poderosas para quando formos treinar modelos de Inteligência Artificial.</li>
       </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Prática guiada: painel de vendas</h2>
+      <p>Crie uma célula, execute o cálculo e depois explique o resultado em uma célula de texto.</p>
+      <div class="code-block">
+        vendas = <span class="code-string">320</span><br>
+        ticket_medio = <span class="code-string">189.90</span><br>
+        meta = <span class="code-string">60000</span><br><br>
+        faturamento = vendas * ticket_medio<br>
+        atingimento = faturamento / meta<br>
+        <span class="code-keyword">print</span>(faturamento, atingimento)
+      </div>
     </div>
 
     <!-- Conteúdo: Como acessar e configurar -->
@@ -99,6 +143,33 @@
         <li>Na janela inicial que se abrir, clique no botão azul <strong>"Novo notebook"</strong> no canto inferior esquerdo.</li>
         <li>Pronto! Você verá uma tela branca com uma barra cinza (célula de código). Clique no título superior esquerdo (provavelmente "Untitled0.ipynb") e renomeie para <strong>Aula_01_Introducao.ipynb</strong>.</li>
       </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio e entrega</h2>
+      <ul>
+        <li>Renomeie o notebook para <code>Aula_01_SeuNome.ipynb</code>.</li>
+        <li>Calcule faturamento, custo e margem de uma filial.</li>
+        <li>Inclua uma célula Markdown com uma recomendação de negócio.</li>
+        <li>Salve no Drive e compartilhe o link conforme orientação do professor.</li>
+      </ul>
+      <p><strong>Critério de pronto:</strong> todas as células executam em ordem e a recomendação cita pelo menos um indicador calculado.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>Fechamento: o que construímos</h2>
+      <ul>
+        <li>Um ambiente de análise acessível pelo navegador.</li>
+        <li>Um primeiro cálculo de negócio em Python.</li>
+        <li>Um documento que combina narrativa, código e resultado.</li>
+        <li>Um fluxo seguro de persistência no Google Drive.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="next-steps">
+      <h2>Próxima aula</h2>
+      <p>Vamos transformar valores isolados em <strong>dados estruturados</strong>: listas, dicionários, tabelas e DataFrames para organizar informações de gestão.</p>
+      <p>Chegue com o notebook de hoje salvo e acessível no Drive.</p>
     </div>
 
     <!-- Conteúdo: Python Básico -->
@@ -178,6 +249,7 @@
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-01/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia">⛶</button>
@@ -190,6 +262,7 @@
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnFs = document.getElementById('btn-fs');
+    const slideCounter = document.getElementById('slide-counter');
 
     function update() {
       slides.forEach((s, i) => {
@@ -198,13 +271,19 @@
       });
       btnPrev.disabled = current === 0;
       btnNext.disabled = current === slides.length - 1;
+      slideCounter.textContent = `${current + 1} / ${slides.length}`;
     }
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
     
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') { if (current < slides.length - 1) { current++; update(); } }
+      const interactiveTarget = e.target.closest('button, a');
+      if (e.key === ' ' && interactiveTarget) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        if (current < slides.length - 1) { current++; update(); }
+      }
       if (e.key === 'ArrowLeft') { if (current > 0) { current--; update(); } }
     });
 
