@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -78,25 +78,21 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Estudo de Caso: Previsão de demandas'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
-      </div>
-
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
-      </div>
+      <p class="desc">Demanda é uma série temporal influenciada por calendário, preço, promoção e disponibilidade. Ausência de venda pode significar falta de estoque, não falta de procura. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Reconhecer tendência, sazonalidade e eventos especiais</li><li>Validar previsões com janela temporal e baseline sazonal</li><li>Converter erro previsto em estoque e capacidade</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Demanda é uma série temporal influenciada por calendário, preço, promoção e disponibilidade. Ausência de venda pode significar falta de estoque, não falta de procura.</p><ul><li>Baseline sazonal estabelece o mínimo que o modelo deve superar</li><li>Validação em janelas sucessivas mede estabilidade ao longo do tempo</li><li>O custo de subestimar pode ser diferente do custo de superestimar</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import pandas as pd
+d = pd.read_csv("demanda.csv", parse_dates=["data"]).set_index("data")
+d["baseline_7d"] = d["quantidade"].shift(7)
+erro = (d["quantidade"]-d["baseline_7d"]).abs().mean()
+print("MAE sazonal", erro)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">d["media_4s"] = d["quantidade"].shift(1).rolling(28).mean()
+d["erro_modelo"] = (d["quantidade"]-d["media_4s"]).abs()
+print(d["erro_modelo"].mean())</div><p>Compare baseline semanal e média móvel, investigue semanas críticas e proponha estoque de segurança.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar avaliação temporal, previsão do próximo período e recomendação de capacidade com faixa de incerteza.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Marcar rupturas de estoque e promoções</li><li>Não usar informação futura nos atributos</li><li>Avaliar erro por produto e horizonte</li><li>Traduzir erro em custo operacional</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Prever demanda exige medir não só acurácia média, mas também o custo dos erros onde a operação é vulnerável.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>Na próxima aula, integraremos problema, dados, análise e recomendação em um projeto completo.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

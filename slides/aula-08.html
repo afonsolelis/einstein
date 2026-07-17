@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,21 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 8 · 30/09</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Fazendo previsões com IA: Vendas e Tendências</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 8</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 8 · 30/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Fazendo previsões com IA: Vendas e Tendências</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
+y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
+modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><ul><li>Respeitar a ordem temporal</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, mudaremos de previsão para inferência em experimentos A/B.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 8</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

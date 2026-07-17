@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,19 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 9 · 07/10</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 9</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 9 · 07/10</div><h1>Laboratório de Dados &amp; IA</h1><p>Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">from scipy.stats import ttest_ind
+resultado = ttest_ind(ticket_a, ticket_b, equal_var=False)
+print({"estatistica":resultado.statistic, "p_valor":resultado.pvalue})</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Analise um experimento com ticket e conversão, valide pressupostos e produza uma recomendação executiva.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar protocolo do experimento, análise dos dois desfechos e decisão condicionada ao efeito mínimo relevante.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Experimentos confiáveis começam no desenho; o teste estatístico apenas fecha um ciclo bem planejado.</p><ul><li>Definir métrica primária antes de olhar resultados</li><li>Evitar encerrar o teste antecipadamente por conveniência</li><li>Reportar efeito absoluto e relativo</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, integraremos desenho, análise e comunicação em um estudo de caso.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 9</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

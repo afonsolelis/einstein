@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,18 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 17 · 02/12</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Projeto Integrador: Resolvendo um problema de negócio real</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 17</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 17 · 02/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Projeto Integrador: Resolvendo um problema de negócio real</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Delimitar problema, usuário e decisão do projeto</li><li>Construir análise reproduzível com evidências</li><li>Planejar entrega com escopo, riscos e critérios de sucesso</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Um bom problema tem responsável, frequência e consequência</li><li>Escopo mínimo viável reduz risco de uma entrega ampla e superficial</li><li>Critérios de aceite tornam progresso e qualidade observáveis</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">projeto = {"decisao":"priorizar clientes","usuario":"gerência comercial","metrica":"receita incremental","prazo":"02/12"}
+for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Desenhe o canvas do projeto, produza um primeiro resultado verificável e faça revisão cruzada com outra equipe.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar repositório executável, fonte de dados documentada, análise, visual executivo e backlog final.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>O projeto vale pela qualidade da decisão que habilita e pela transparência de como chegou ao resultado.</p><ul><li>Problema e decisão claramente definidos</li><li>Dados e licenças documentados</li><li>Notebook executável do início ao fim</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, transformaremos o trabalho técnico em recomendação executiva convincente.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 17</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

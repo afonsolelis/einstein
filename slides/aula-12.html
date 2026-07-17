@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 12 · 28/10</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>IA aplicada à estratégia e tomada de decisão</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 12</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 12 · 28/10</div><h1>Laboratório de Dados &amp; IA</h1><p>IA aplicada à estratégia e tomada de decisão</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
+for nome,v in alternativas.items():
+    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
+print(alternativas)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, aprofundaremos rastreamento de evidências em uma investigação forense.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 12</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

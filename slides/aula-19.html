@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,19 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 19 · 16/12</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Apresentação final de projetos</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 19</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 19 · 16/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Apresentação final de projetos</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Defender escolhas metodológicas com clareza e honestidade</li><li>Avaliar projetos com critérios comuns e feedback acionável</li><li>Consolidar aprendizados e plano de evolução</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>A apresentação final é uma defesa profissional: problema, evidência, solução, impacto e limites precisam formar uma narrativa verificável.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Perguntas difíceis testam compreensão, não apenas o resultado</li><li>Feedback útil aponta evidência, impacto e próximo passo</li><li>Reprodutibilidade permite continuidade depois do encerramento</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">rubrica = {"problema":20,"dados":20,"metodo":20,"impacto":20,"comunicacao":20}
+nota = sum(rubrica.values())
+print("total possível", nota)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Apresente o projeto, responda à banca e registre feedback recebido em um plano de ação priorizado.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar versão final do repositório, apresentação, resumo executivo e retrospectiva individual.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Encerramos o semestre com uma competência central: transformar dados em decisões responsáveis, reproduzíveis e comunicáveis.</p><ul><li>Demonstração abre sem dependências ocultas</li><li>Resultados têm fonte e baseline</li><li>Limitações são declaradas espontaneamente</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>O próximo passo é aplicar o portfólio em um problema real, medir impacto e continuar aprendendo.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 19</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

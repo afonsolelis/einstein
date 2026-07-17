@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 11 · 21/10</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Auditoria automatizada: Detectando anomalias e riscos</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 11</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 11 · 21/10</div><h1>Laboratório de Dados &amp; IA</h1><p>Auditoria automatizada: Detectando anomalias e riscos</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir erro, evento raro e fraude</li><li>Aplicar regras e escores de anomalia com contexto</li><li>Priorizar alertas por impacto e explicabilidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Anomalia é observação incompatível com um padrão esperado; ela é um sinal para investigação, não uma sentença de irregularidade.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Regras de negócio capturam riscos conhecidos e são fáceis de explicar</li><li>Métodos estatísticos detectam desvios, mas exigem segmentação</li><li>Taxa de falsos positivos determina o custo operacional da fila</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+pag = pd.read_csv("pagamentos.csv")
+limite = pag.groupby("fornecedor")["valor"].transform(lambda s:s.quantile(.99))
+pag["alerta_regra"] = pag["valor"] &gt; limite</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Monte uma fila de auditoria combinando regra conhecida e escore, depois revise manualmente os dez primeiros casos.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar ranking de alertas com motivo, valor em risco, evidência e resultado da revisão.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Detecção eficiente combina sinais automáticos com investigação humana e aprendizado a partir dos desfechos.</p><ul><li>Não rotular fraude sem investigação</li><li>Segmentar limites por contexto comparável</li><li>Medir precisão da fila revisada</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, ampliaremos a análise para decisões estratégicas apoiadas por IA.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 11</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

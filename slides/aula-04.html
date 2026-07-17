@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 4 · 02/09</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Entendendo o cenário: Estatística para gestão de negócios</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 4</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 4 · 02/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Entendendo o cenário: Estatística para gestão de negócios</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Calcular medidas descritivas adequadas ao tipo de variável</li><li>Comparar grupos sem ocultar dispersão e tamanho da amostra</li><li>Traduzir resultados estatísticos em decisões gerenciais</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Estatística descritiva resume o que ocorreu; média, mediana, quantis e desvio-padrão respondem perguntas diferentes e precisam de contexto.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Média é sensível a extremos; mediana descreve melhor distribuições assimétricas</li><li>Dispersão revela risco que um valor central esconde</li><li>Segmentar por canal, região ou produto evita conclusões agregadas enganosas</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+vendas = pd.read_csv("vendas.csv")
+resumo = vendas.groupby("regiao")["margem"].agg(["count","mean","median","std"])
+print(resumo.round(2))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Calcule um painel descritivo por região, identifique dois padrões e teste se eles persistem ao trocar média por mediana.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar uma tabela descritiva e um memorando de três parágrafos com achado, risco de interpretação e decisão sugerida.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Nenhuma medida isolada conta a história: centro, dispersão, distribuição e contexto formam o diagnóstico.</p><ul><li>Conferir unidade e população de cada indicador</li><li>Mostrar tamanho da amostra junto ao resumo</li><li>Usar mediana quando extremos dominarem a média</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, converteremos diagnósticos em narrativas visuais e segmentos acionáveis.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 4</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

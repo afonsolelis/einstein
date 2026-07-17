@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -78,25 +78,21 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Análise forense de dados: Identificando fraudes'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
-      </div>
-
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
-      </div>
+      <p class="desc">Análise forense reconstrói eventos a partir de registros preservados. Reprodutibilidade e integridade são tão importantes quanto o algoritmo. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Preservar cadeia de custódia e trilha de auditoria</li><li>Relacionar transações, entidades e padrões suspeitos</li><li>Documentar achados sem ultrapassar a evidência</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Análise forense reconstrói eventos a partir de registros preservados. Reprodutibilidade e integridade são tão importantes quanto o algoritmo.</p><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import hashlib
+from pathlib import Path
+arquivo = Path("transacoes.csv")
+print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">import pandas as pd
+tx = pd.read_csv("transacoes.csv")
+rede = tx.groupby(["conta_origem","conta_destino"]).agg(valor=("valor","sum"),eventos=("valor","size")).reset_index()
+print(rede.sort_values("valor", ascending=False).head())</div><p>Reconstrua uma sequência de transações suspeitas, preserve o hash da fonte e produza uma linha do tempo.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar dossiê com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Trabalhar sobre cópia verificada</li><li>Registrar horário e autor de cada transformação</li><li>Usar linguagem de indício, não de culpa</li><li>Restringir acesso a dados sensíveis</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>Na próxima aula, aplicaremos análise de dados a decisões de recursos humanos.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

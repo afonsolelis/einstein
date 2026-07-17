@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 13 · 04/11</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Análise forense de dados: Identificando fraudes</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 13</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 13 · 04/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Análise forense de dados: Identificando fraudes</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Preservar cadeia de custódia e trilha de auditoria</li><li>Relacionar transações, entidades e padrões suspeitos</li><li>Documentar achados sem ultrapassar a evidência</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Análise forense reconstrói eventos a partir de registros preservados. Reprodutibilidade e integridade são tão importantes quanto o algoritmo.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import hashlib
+from pathlib import Path
+arquivo = Path("transacoes.csv")
+print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Reconstrua uma sequência de transações suspeitas, preserve o hash da fonte e produza uma linha do tempo.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dossiê com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><ul><li>Trabalhar sobre cópia verificada</li><li>Registrar horário e autor de cada transformação</li><li>Usar linguagem de indício, não de culpa</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, aplicaremos análise de dados a decisões de recursos humanos.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 13</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

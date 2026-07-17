@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,21 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 15 · 18/11</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Estudo de Caso: Programação para previsão de caixas</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 15</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 15 · 18/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Programação para previsão de caixas</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Organizar entradas e saídas em uma série temporal</li><li>Construir cenários de caixa e identificar rupturas</li><li>Automatizar atualização com premissas auditáveis</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Previsão de caixa transforma compromissos e recebimentos esperados em saldo futuro. O principal valor é antecipar decisões de liquidez.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Datas de competência e pagamento respondem perguntas diferentes</li><li>Inadimplência e atraso devem entrar como cenários</li><li>Saldo mínimo e necessidade de capital são saídas acionáveis</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+mov = pd.read_csv("fluxo.csv", parse_dates=["data"])
+diario = mov.groupby("data")["valor"].sum().asfreq("D", fill_value=0)
+saldo = 100000 + diario.cumsum()
+print(saldo.head())</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Projete 60 dias de caixa em três cenários e identifique data, duração e valor da maior necessidade.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar notebook e quadro executivo com premissas, menor saldo, necessidade de crédito e ação preventiva.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Previsão de caixa é um sistema de alerta baseado em premissas explícitas, não um número definitivo.</p><ul><li>Conciliar saldo inicial com fonte oficial</li><li>Separar realizado de projetado</li><li>Versionar premissas de atraso</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, usaremos séries temporais para planejar demanda e capacidade.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 15</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

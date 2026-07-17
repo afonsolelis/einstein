@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -78,25 +78,18 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Projeto Integrador: Resolvendo um problema de negócio real'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
-      </div>
-
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
-      </div>
+      <p class="desc">Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Delimitar problema, usuário e decisão do projeto</li><li>Construir análise reproduzível com evidências</li><li>Planejar entrega com escopo, riscos e critérios de sucesso</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável.</p><ul><li>Um bom problema tem responsável, frequência e consequência</li><li>Escopo mínimo viável reduz risco de uma entrega ampla e superficial</li><li>Critérios de aceite tornam progresso e qualidade observáveis</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">projeto = {"decisao":"priorizar clientes","usuario":"gerência comercial","metrica":"receita incremental","prazo":"02/12"}
+for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">riscos = [{"risco":"dados incompletos","prob":4,"impacto":5},{"risco":"escopo amplo","prob":3,"impacto":4}]
+for r in riscos: r["exposicao"] = r["prob"]*r["impacto"]
+print(sorted(riscos,key=lambda x:x["exposicao"],reverse=True))</div><p>Desenhe o canvas do projeto, produza um primeiro resultado verificável e faça revisão cruzada com outra equipe.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar repositório executável, fonte de dados documentada, análise, visual executivo e backlog final.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Problema e decisão claramente definidos</li><li>Dados e licenças documentados</li><li>Notebook executável do início ao fim</li><li>Limitações e próximos testes explícitos</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>O projeto vale pela qualidade da decisão que habilita e pela transparência de como chegou ao resultado.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>Na próxima aula, transformaremos o trabalho técnico em recomendação executiva convincente.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

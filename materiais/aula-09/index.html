@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -78,25 +78,20 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
-      </div>
-
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
-      </div>
+      <p class="desc">Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">from scipy.stats import ttest_ind
+resultado = ttest_ind(ticket_a, ticket_b, equal_var=False)
+print({"estatistica":resultado.statistic, "p_valor":resultado.pvalue})</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">from scipy.stats import chi2_contingency
+tabela = [[convertidos_a, nao_a],[convertidos_b, nao_b]]
+chi2, p, gl, esperado = chi2_contingency(tabela)
+print({"chi2":chi2, "p_valor":p})</div><p>Analise um experimento com ticket e conversão, valide pressupostos e produza uma recomendação executiva.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar protocolo do experimento, análise dos dois desfechos e decisão condicionada ao efeito mínimo relevante.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Definir métrica primária antes de olhar resultados</li><li>Evitar encerrar o teste antecipadamente por conveniência</li><li>Reportar efeito absoluto e relativo</li><li>Checar randomização e perdas por grupo</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Experimentos confiáveis começam no desenho; o teste estatístico apenas fecha um ciclo bem planejado.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>Na próxima aula, integraremos desenho, análise e comunicação em um estudo de caso.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

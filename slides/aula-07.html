@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 7 · 23/09</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Refinando dados para modelos de decisão</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 7</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 7 · 23/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Refinando dados para modelos de decisão</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Criar atributos derivados sem vazar informação futura</li><li>Codificar variáveis e escalar valores quando necessário</li><li>Organizar transformação reproduzível em pipeline</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Engenharia de atributos traduz conhecimento do negócio em sinais utilizáveis pelo modelo. Um atributo bom existe no momento real da decisão.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Razões e recências costumam ser mais comparáveis que totais brutos</li><li>Categorias precisam de tratamento consistente entre treino e uso</li><li>Vazamento ocorre quando o atributo conhece o resultado ou o futuro</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+base = pd.read_csv("clientes.csv")
+base["ticket_medio"] = base["receita_90d"] / base["pedidos_90d"].clip(lower=1)
+base["dias_cliente"] = (pd.Timestamp("2026-09-23") - pd.to_datetime(base["cadastro"])).dt.days</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Construa três atributos para prever recompra, explique disponibilidade temporal e compare suas distribuições.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dicionário de atributos com fórmula, fonte, momento de disponibilidade, risco e hipótese de valor.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Features são hipóteses codificadas; sua validade depende tanto da lógica temporal quanto do desempenho.</p><ul><li>Separar treino e teste antes de aprender transformações</li><li>Usar data de referência explícita</li><li>Tratar categorias novas no pipeline</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, usaremos atributos para prever vendas com regressão.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 7</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,21 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 16 · 25/11</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Estudo de Caso: Previsão de demandas</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 16</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 16 · 25/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Previsão de demandas</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Reconhecer tendência, sazonalidade e eventos especiais</li><li>Validar previsões com janela temporal e baseline sazonal</li><li>Converter erro previsto em estoque e capacidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Demanda é uma série temporal influenciada por calendário, preço, promoção e disponibilidade. Ausência de venda pode significar falta de estoque, não falta de procura.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Baseline sazonal estabelece o mínimo que o modelo deve superar</li><li>Validação em janelas sucessivas mede estabilidade ao longo do tempo</li><li>O custo de subestimar pode ser diferente do custo de superestimar</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+d = pd.read_csv("demanda.csv", parse_dates=["data"]).set_index("data")
+d["baseline_7d"] = d["quantidade"].shift(7)
+erro = (d["quantidade"]-d["baseline_7d"]).abs().mean()
+print("MAE sazonal", erro)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Compare baseline semanal e média móvel, investigue semanas críticas e proponha estoque de segurança.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar avaliação temporal, previsão do próximo período e recomendação de capacidade com faixa de incerteza.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Prever demanda exige medir não só acurácia média, mas também o custo dos erros onde a operação é vulnerável.</p><ul><li>Marcar rupturas de estoque e promoções</li><li>Não usar informação futura nos atributos</li><li>Avaliar erro por produto e horizonte</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, integraremos problema, dados, análise e recomendação em um projeto completo.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 16</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

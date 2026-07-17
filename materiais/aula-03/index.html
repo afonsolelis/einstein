@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -78,25 +78,24 @@
     </div>
     
     <div class="content">
-      <p class="desc">Nesta aula, aprofundaremos nossos conhecimentos sobre 'Limpeza de dados: Preparando a base para análises'. Este documento servirá como um guia definitivo, onde exploraremos a teoria, a história das ferramentas envolvidas e como elas resolvem problemas reais no mundo corporativo.</p>
-      
-      <h2>1. Teoria e Fundamentos</h2>
-      <p>Este é um espaço reservado para a explicação teórica aprofundada da aula. Aqui, descreveremos os conceitos principais usando analogias do mundo dos negócios, garantindo que a base conceitual seja sólida antes de irmos para a prática no Google Colab.</p>
-      
-      <div class="alert-box">
-        <h4>Atenção e Boas Práticas</h4>
-        <p>Espaço reservado para documentar os maiores erros comuns e armadilhas que profissionais enfrentam neste tema, com instruções claras de como evitá-los.</p>
-      </div>
+      <p class="desc">Bases corporativas acumulam erros de digitação, integrações incompletas e regras que mudam ao longo do tempo. A limpeza surgiu como disciplina para tornar essas imperfeições explícitas e controláveis. O objetivo não é “embelezar” números, mas construir confiança e rastreabilidade antes da análise.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Diagnosticar valores ausentes, duplicidades e tipos incorretos</li><li>Aplicar regras de limpeza com Pandas sem apagar evidências</li><li>Validar a base tratada com indicadores de qualidade</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos de qualidade</h2><p>Qualidade de dados é adequação ao uso: completude, validade, consistência, unicidade e atualidade devem ser medidas conforme a decisão de negócio.</p><ul><li>Ausentes: distinguir desconhecido, não aplicável e erro de captura</li><li>Duplicidades: definir a chave de negócio antes de remover</li><li>Tipos e categorias: padronizar datas, números, textos e unidades</li></ul><p>Em uma operação comercial, por exemplo, um pedido sem canal pode afetar a atribuição de marketing; um identificador duplicado infla receita; e uma data interpretada no formato errado desloca o resultado entre meses. Cada correção precisa nascer de uma hipótese verificável.</p></section>
+      <div class="alert-box"><h4>Preserve a evidência</h4><p>Nunca sobrescreva a fonte original. Salve uma camada bruta, registre transformações e mantenha contagens antes/depois. Excluir linhas sem explicar o impacto pode criar um viés maior que o erro inicial.</p></div>
+      <section data-lesson-section="guided-practice"><h2>3. Diagnóstico reproduzível</h2><p>Comece por perfil, chaves e tipos. O exemplo requer Python 3, Pandas e um arquivo <code>vendas.csv</code>.</p><div class="code-block">import pandas as pd
 
-      <h2>2. Hands-On: Exemplos em Python</h2>
-      <p>Nesta seção, teremos os snippets de código exatos que serão executados durante o laboratório. Eles estarão comentados linha por linha para facilitar a revisão posterior e a execução offline.</p>
-      <div class="code-block">
-        <span class="code-comment"># Exemplo de código altamente formatado</span><br>
-        <span class="code-keyword">import</span> biblioteca_exemplo<br>
-        <br>
-        variavel = <span class="code-string">"Hello Wiki"</span><br>
-        <span class="code-keyword">print</span>(variavel)
-      </div>
+vendas = pd.read_csv("vendas.csv")
+print(vendas.isna().mean().sort_values(ascending=False))
+print(vendas.duplicated(subset=["pedido_id"]).sum())</div><p>Depois aplique regras em uma cópia e use asserções como contratos simples de qualidade:</p><div class="code-block">base = vendas.copy()
+base["data"] = pd.to_datetime(base["data"], errors="coerce")
+base["receita"] = pd.to_numeric(base["receita"], errors="coerce")
+base["canal"] = base["canal"].str.strip().str.lower()
+base = base.drop_duplicates(subset=["pedido_id"], keep="last")
+assert base["pedido_id"].is_unique</div><p>Em duplas, audite uma base de vendas, registre cada problema, escolha uma regra de tratamento e compare os indicadores antes e depois.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar a base limpa e um relatório de auditoria com cinco problemas, regras aplicadas e impacto quantitativo.</p><p><strong>Critério de aceite:</strong> notebook executável do início ao fim, base tratada separada da bruta e tabela comparando completude, duplicidade e validade antes/depois.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Preservar a base bruta e trabalhar em uma cópia</li><li>Justificar imputações e exclusões com regra de negócio</li><li>Executar testes de unicidade, faixa e completude</li><li>Documentar limitações que permaneceram</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Dados limpos não são dados perfeitos: são dados rastreáveis, consistentes e adequados à decisão.</p><p>O fluxo profissional é: observar, formular a regra, transformar, validar e documentar. Assim, outra pessoa consegue repetir o processo e questionar escolhas.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>Na próxima aula, transformaremos a base confiável em indicadores descritivos para gestão.</p><ul><li>Documentação oficial do Pandas: dados ausentes, tipos e duplicidades.</li><li>Prática recomendada: criar um dicionário de dados e um log de transformações.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,19 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 5 · 09/09</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Storytelling, Dashboards e Segmentação de Clientes</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 5</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 5 · 09/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Storytelling, Dashboards e Segmentação de Clientes</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Escolher gráficos alinhados à pergunta executiva</li><li>Construir uma narrativa com contexto, tensão e recomendação</li><li>Segmentar clientes por comportamento e valor</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Um dashboard é uma interface de decisão, não uma coleção de gráficos. Cada visual deve reduzir incerteza sobre uma ação específica.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Comparação pede barras; evolução pede linhas; composição exige parcimônia</li><li>RFM organiza clientes por recência, frequência e valor monetário</li><li>Cor e destaque conduzem atenção, mas não substituem evidência</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
+ recencia=("dias_desde_compra","min"), frequencia=("pedido_id","nunique"), valor=("receita","sum"))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Crie um storyboard de três telas: situação atual, segmento prioritário e ação recomendada com indicador de acompanhamento.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dashboard de uma página e nota executiva com público, decisão, segmento-alvo e próxima ação.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Boa visualização torna a comparação honesta; bom storytelling conecta essa evidência a uma decisão.</p><ul><li>Definir a pergunta antes do gráfico</li><li>Evitar eixos truncados que distorçam diferenças</li><li>Exibir fonte, período e filtros</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, discutiremos como sistemas de IA apoiam rotinas administrativas e onde exigem supervisão.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 5</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

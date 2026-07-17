@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,24 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
     <div class="slide slide-start active">
       <div class="badge">AULA 3 · 26/08</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Limpeza de dados: Preparando a base para análises</p>
+      <h1>Laboratório de Dados &amp; IA</h1><p>Limpeza de dados: Preparando a base para análises</p>
     </div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Diagnosticar valores ausentes, duplicidades e tipos incorretos</li><li>Aplicar regras de limpeza com Pandas sem apagar evidências</li><li>Validar a base tratada com indicadores de qualidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Diagnóstico orientado ao negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>O que torna um dado confiável?</h2><p>Qualidade de dados é adequação ao uso: completude, validade, consistência, unicidade e atualidade devem ser medidas conforme a decisão de negócio.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Mapa de problemas</h2><ul><li>Ausentes: distinguir desconhecido, não aplicável e erro de captura</li><li>Duplicidades: definir a chave de negócio antes de remover</li><li>Tipos e categorias: padronizar datas, números, textos e unidades</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Diagnóstico com Pandas</h2><div class="code-block">import pandas as pd
 
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 3</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+vendas = pd.read_csv("vendas.csv")
+print(vendas.isna().mean().sort_values(ascending=False))
+print(vendas.duplicated(subset=["pedido_id"]).sum())</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Em duplas, audite uma base de vendas, registre cada problema, escolha uma regra de tratamento e compare os indicadores antes e depois.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar a base limpa e um relatório de auditoria com cinco problemas, regras aplicadas e impacto quantitativo.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Dados limpos não são dados perfeitos: são dados rastreáveis, consistentes e adequados à decisão.</p><ul><li>Preservar a base bruta e trabalhar em uma cópia</li><li>Justificar imputações e exclusões com regra de negócio</li><li>Executar testes de unicidade, faixa e completude</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, transformaremos a base confiável em indicadores descritivos para gestão.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 3</h2><p>Leve decisões melhores com dados verificáveis.</p></div>
   </div>
 
   <div id="controls">

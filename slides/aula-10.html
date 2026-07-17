@@ -168,6 +168,7 @@
     }
 
     .code-block {
+      white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
@@ -346,18 +347,20 @@
 </head>
 <body>
   <div id="slider">
-    <!-- Slide Início -->
-    <div class="slide slide-start active">
-      <div class="badge">AULA 10 · 14/10</div>
-      <h1>Laboratório de Dados &amp; IA</h1>
-      <p>Estudo de Caso: Aplicação prática de Testes Estatísticos</p>
-    </div>
-
-    <!-- Slide Finalização -->
-    <div class="slide slide-end">
-      <h2>Fim da Aula 10</h2>
-      <p>Obrigado pela atenção!</p>
-    </div>
+    <div class="slide slide-start active"><div class="badge">AULA 10 · 14/10</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Aplicação prática de Testes Estatísticos</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Traduzir uma dúvida gerencial em hipótese testável</li><li>Executar análise exploratória e teste coerente</li><li>Defender uma recomendação com limitações explícitas</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro da aula</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+base = pd.read_csv("campanha.csv")
+print(base.groupby("grupo")["receita"].agg(["count","mean","median","std"]))
+print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>O valor do teste aparece quando a evidência estatística é convertida em consequência econômica e risco.</p><ul><li>Reconstruir o desenho do estudo</li><li>Verificar equilíbrio e dados faltantes</li><li>Justificar o teste selecionado</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>Na próxima aula, aplicaremos detecção de padrões incomuns à auditoria automatizada.</p></div>
+    <div class="slide slide-end"><h2>Fim da Aula 10</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">
