@@ -76,6 +76,7 @@ einstein/
 ├── index.html                  # Página principal (cronograma em cards)
 ├── assets/                     # Identidade visual Albert Einstein
 │   ├── einstein-logo.png       #   Logo institucional (cabeçalho)
+│   ├── einstein-home-symbol.png #   Símbolo oficial usado somente na home
 │   ├── einstein-header.jpg     #   Banner original do plano de ensino
 │   ├── einstein-footer.jpg
 │   └── einstein-cover.png      #   Capa do plano de ensino

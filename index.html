@@ -52,11 +52,20 @@
       position: relative;
       z-index: 1;
     }
+    .hero-heading {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+    }
     .hero-logo {
-      height: 62px;
-      border-radius: 10px;
+      width: 92px;
+      height: 92px;
+      flex-shrink: 0;
+      border-radius: 18px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
-      margin-bottom: 1.6rem;
+    }
+    .hero-copy {
+      min-width: 0;
     }
     .hero h1 {
       font-size: clamp(1.6rem, 3.4vw, 2.5rem);
@@ -258,6 +267,10 @@
     footer strong { color: var(--navy); }
 
     @media (max-width: 768px) {
+      .hero-heading { gap: .9rem; align-items: flex-start; }
+      .hero-logo { width: 64px; height: 64px; border-radius: 13px; }
+      .hero h1 { font-size: clamp(1.35rem, 6vw, 1.8rem); }
+      .hero .subtitle { font-size: .95rem; }
       .card { flex-direction: column; }
       .card-top { padding: 1.2rem; flex-direction: row; min-width: auto; text-align: left; justify-content: flex-start; gap: 1rem; }
       .card-body { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.2rem; }
@@ -270,11 +283,15 @@
 <body>
   <header class="hero">
     <div class="hero-inner">
-      <img src="assets/einstein-logo.png" alt="Faculdade Israelita de Ciências da Saúde Albert Einstein" class="hero-logo">
-      <h1>Laboratório de Programação, Ciência de Dados &amp; IA</h1>
-      <p class="subtitle">
-        Python aplicado à análise de dados, aprendizado de máquina e análise forense numérica para gestão de negócios.
-      </p>
+      <div class="hero-heading">
+        <img src="assets/einstein-home-symbol.png" alt="Símbolo do Einstein" class="hero-logo">
+        <div class="hero-copy">
+          <h1>Laboratório de Programação, Ciência de Dados &amp; IA</h1>
+          <p class="subtitle">
+            Python aplicado à análise de dados, aprendizado de máquina e análise forense numérica para gestão de negócios.
+          </p>
+        </div>
+      </div>
       <div class="meta-row">
         <span class="chip">🎓 Graduação em Administração</span>
         <span class="chip">🧪 Trilha BI &amp; Data Science</span>
