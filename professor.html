@@ -43,9 +43,26 @@
       margin-bottom: clamp(2.5rem, 7vw, 5.5rem);
     }
 
+    .home-link {
+      display: inline-flex;
+      border-radius: 14px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .32);
+    }
+
+    .home-link:focus-visible {
+      outline: 3px solid var(--cyan-light);
+      outline-offset: 4px;
+    }
+
     .logo {
-      height: 54px;
-      border-radius: 10px;
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, .24);
     }
 
@@ -55,7 +72,6 @@
       gap: .7rem;
     }
 
-    .back,
     .linkedin {
       display: inline-flex;
       align-items: center;
@@ -76,7 +92,6 @@
       border-color: rgba(75, 196, 232, .35);
     }
 
-    .back:hover,
     .linkedin:hover {
       transform: translateY(-2px);
       border-color: rgba(75, 196, 232, .5);
@@ -87,7 +102,6 @@
       background: linear-gradient(135deg, #1478d4, #2882c8);
     }
 
-    .back:focus-visible,
     .linkedin:focus-visible {
       outline: 3px solid var(--cyan-light);
       outline-offset: 3px;
@@ -268,10 +282,9 @@
     @media (max-width: 720px) {
       .shell { padding-top: 1rem; }
       .topbar { margin-bottom: 2.5rem; }
-      .logo { height: 44px; }
+      .logo { width: 52px; height: 52px; }
       .nav-actions { gap: .4rem; }
-      .back, .linkedin { padding: .65rem .75rem; }
-      .back span { display: none; }
+      .linkedin { padding: .65rem .75rem; }
       .profile { grid-template-columns: 1fr; }
       .portrait { width: min(72vw, 280px); }
       .journey { grid-template-columns: 1fr; }
@@ -279,18 +292,19 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .back, .linkedin { transition: none; }
+      .home-link, .linkedin { transition: none; }
     }
   </style>
 </head>
 <body>
   <main class="shell">
     <nav class="topbar" aria-label="Navegação principal">
-      <img class="logo" src="assets/einstein-logo.png" alt="Faculdade Israelita de Ciências da Saúde Albert Einstein">
+      <a class="home-link" href="index.html" aria-label="Ir para a página inicial">
+        <img class="logo" src="assets/einstein-home-symbol.png" alt="Einstein">
+      </a>
       <div class="nav-actions">
         <a class="linkedin" href="https://www.linkedin.com/in/afonsolelis/" target="_blank" rel="noopener noreferrer"
           aria-label="LinkedIn de Afonso Brandão, abre em nova aba">in&nbsp; LinkedIn ↗</a>
-        <a class="back" href="index.html" aria-label="Voltar ao cronograma">← <span>Voltar ao cronograma</span></a>
       </div>
     </nav>
 
