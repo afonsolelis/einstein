@@ -101,7 +101,7 @@ Sempre utilize o código abaixo como estrutura base exata do Material:
 <body>
   <div class="container">
     <div class="header">
-      <div class="badge">AULA {{AULA_NUMERO}}</div>
+      <div class="badge">LABORATÓRIO {{AULA_NUMERO}}</div>
       <h1>{{TITULO_AULA}}</h1>
     </div>
     

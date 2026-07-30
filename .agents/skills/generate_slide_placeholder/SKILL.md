@@ -25,7 +25,7 @@ Sempre que você precisar criar, atualizar ou gerar um arquivo de slide (ex: `sl
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aula XX · Slides</title>
+  <title>Laboratório XX · Slides</title>
   <style>
     /* Cole aqui os estilos oficiais de slides (ver arquivos existentes como aula-01.html) */
     /* Garanta estilos para #slider, .slide, .slide-start, .slide-end e #controls */
@@ -35,16 +35,14 @@ Sempre que você precisar criar, atualizar ou gerar um arquivo de slide (ex: `sl
   <div id="slider">
     <!-- Slide Inicial -->
     <div class="slide slide-start active">
-      <div class="badge">AULA XX · DD/MM</div>
+      <div class="badge">LABORATÓRIO XX · DD/MM</div>
       <h1>Laboratório de Dados &amp; IA</h1>
       <p>[Tema da Aula]</p>
     </div>
     
-    <!-- Se for Aula 01, inclua o slide do professor aqui -->
-
     <!-- Slide Final -->
     <div class="slide slide-end">
-      <h2>Fim da Aula XX</h2>
+      <h2>Fim do Laboratório XX</h2>
       <p>Obrigado pela atenção!</p>
     </div>
   </div>

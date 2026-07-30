@@ -4,8 +4,8 @@ Site do **Laboratório de Programação, Ciência de Dados e Inteligência Artif
 **Faculdade Israelita de Ciências da Saúde Albert Einstein**, disciplina da
 **Graduação em Administração** (Trilha BI & Data Science).
 
-O site apresenta o cronograma completo das aulas em formato de cards, cada um
-reunindo os **slides** e os **materiais de apoio** da respectiva aula.
+O site apresenta o cronograma completo dos laboratórios em formato de cards, cada um
+reunindo os **slides** e os **materiais de apoio** do respectivo laboratório.
 
 🔗 **Site:** https://afonsolelis.github.io/einstein/ · **Repo:** https://github.com/afonsolelis/einstein
 
@@ -79,10 +79,10 @@ einstein/
 │   ├── einstein-header.jpg     #   Banner original do plano de ensino
 │   ├── einstein-footer.jpg
 │   └── einstein-cover.png      #   Capa do plano de ensino
-├── slides/                     # Slides por aula
+├── slides/                     # Slides por laboratório
 │   ├── aula-01.html
 │   └── … aula-19.html
-├── materiais/                  # Materiais de apoio por aula
+├── materiais/                  # Materiais de apoio por laboratório
 │   ├── aula-01/index.html
 │   └── … aula-19/index.html
 └── Plano de Ensino e Aprendizagem - LABS.zip   # Documento fonte (.docx)
@@ -121,8 +121,8 @@ python3 -m http.server 8000
 
 | Tarefa | O que editar |
 |---|---|
-| Alterar tema, data ou tag de uma aula | Array `aulas` dentro de `index.html` |
-| Adicionar slides de uma aula | `slides/aula-XX.html` |
+| Alterar tema, data ou tag de um laboratório | Array `aulas` dentro de `index.html` |
+| Adicionar slides de um laboratório | `slides/aula-XX.html` |
 | Adicionar materiais (notebooks, datasets, leituras) | `materiais/aula-XX/` |
 | Trocar cores / identidade visual | Variáveis CSS `:root` no `index.html` |
 

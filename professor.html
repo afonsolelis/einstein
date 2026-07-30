@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afonso Brandão · Consultor, Dados &amp; Tecnologia</title>
+  <link rel="icon" type="image/png" href="assets/einstein-logo.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+    :root {
+      --navy: #0b1120;
+      --blue: #1f6fb2;
+      --cyan: #00a3d9;
+      --cyan-light: #4bc4e8;
+      --text: #cbd5e1;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Outfit', system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(31, 111, 178, .22) 0%, transparent 48%),
+        var(--navy);
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: clamp(2.5rem, 7vw, 5.5rem);
+    }
+
+    .logo {
+      height: 54px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .24);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .back,
+    .linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .75rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, .4);
+      backdrop-filter: blur(20px);
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .linkedin {
+      background: linear-gradient(135deg, #0a66c2, var(--blue));
+      border-color: rgba(75, 196, 232, .35);
+    }
+
+    .back:hover,
+    .linkedin:hover {
+      transform: translateY(-2px);
+      border-color: rgba(75, 196, 232, .5);
+      background: rgba(31, 111, 178, .18);
+    }
+
+    .linkedin:hover {
+      background: linear-gradient(135deg, #1478d4, #2882c8);
+    }
+
+    .back:focus-visible,
+    .linkedin:focus-visible {
+      outline: 3px solid var(--cyan-light);
+      outline-offset: 3px;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: minmax(210px, .7fr) minmax(0, 1.7fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    .portrait {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      position: relative;
+      border-radius: 32px;
+      font-size: clamp(5rem, 13vw, 9rem);
+      background:
+        linear-gradient(145deg, rgba(75, 196, 232, .18), rgba(31, 111, 178, .08)),
+        rgba(15, 23, 42, .55);
+      border: 1px solid rgba(75, 196, 232, .25);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .08);
+      backdrop-filter: blur(20px);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(75, 196, 232, .12);
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgba(0, 163, 217, .12);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: .45rem .9rem;
+      color: var(--cyan-light);
+      border: 1px solid rgba(75, 196, 232, .3);
+      border-radius: 999px;
+      background: rgba(0, 163, 217, .1);
+      box-shadow: 0 0 20px rgba(0, 163, 217, .12);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 5.5rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+      font-weight: 800;
+      background: linear-gradient(to right, #fff, var(--cyan-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 1.5rem 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    .lead strong { color: #fff; font-weight: 600; }
+
+    .roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin: 2rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .roles li {
+      padding: .55rem .9rem;
+      border-radius: 10px;
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, .55);
+      border: 1px solid rgba(255, 255, 255, .07);
+      font-size: .92rem;
+      font-weight: 600;
+    }
+
+    .market {
+      margin-top: clamp(3rem, 8vw, 6rem);
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading .eyebrow { margin-bottom: .8rem; }
+
+    .section-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .experience {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-radius: 24px;
+      background: rgba(15, 23, 42, .4);
+      border: 1px solid rgba(255, 255, 255, .07);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
+      backdrop-filter: blur(20px);
+    }
+
+    .experience.primary {
+      grid-column: 1 / -1;
+      background:
+        linear-gradient(135deg, rgba(0, 163, 217, .13), rgba(31, 111, 178, .04)),
+        rgba(15, 23, 42, .5);
+      border-color: rgba(75, 196, 232, .22);
+    }
+
+    .period {
+      display: block;
+      margin-bottom: .75rem;
+      color: var(--cyan-light);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .experience h2 {
+      margin: 0 0 .75rem;
+      color: #fff;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+
+    .experience p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .teaching {
+      margin-top: 1rem;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-left: 4px solid var(--cyan);
+      border-radius: 4px 20px 20px 4px;
+      background: rgba(15, 23, 42, .32);
+    }
+
+    .teaching h2 {
+      margin: 0 0 .6rem;
+      color: #fff;
+      font-size: 1.35rem;
+    }
+
+    .teaching p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 720px) {
+      .shell { padding-top: 1rem; }
+      .topbar { margin-bottom: 2.5rem; }
+      .logo { height: 44px; }
+      .nav-actions { gap: .4rem; }
+      .back, .linkedin { padding: .65rem .75rem; }
+      .back span { display: none; }
+      .profile { grid-template-columns: 1fr; }
+      .portrait { width: min(72vw, 280px); }
+      .journey { grid-template-columns: 1fr; }
+      .experience.primary { grid-column: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .back, .linkedin { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topbar" aria-label="Navegação principal">
+      <img class="logo" src="assets/einstein-logo.png" alt="Faculdade Israelita de Ciências da Saúde Albert Einstein">
+      <div class="nav-actions">
+        <a class="linkedin" href="https://www.linkedin.com/in/afonsolelis/" target="_blank" rel="noopener noreferrer"
+          aria-label="LinkedIn de Afonso Brandão, abre em nova aba">in&nbsp; LinkedIn ↗</a>
+        <a class="back" href="index.html" aria-label="Voltar ao cronograma">← <span>Voltar ao cronograma</span></a>
+      </div>
+    </nav>
+
+    <section class="profile" aria-labelledby="professor-name">
+      <div class="portrait" aria-hidden="true">🧭</div>
+      <div>
+        <span class="eyebrow">Consultor · Tecnologia · Negócios</span>
+        <h1 id="professor-name">Afonso Cesar<br>Lelis Brandão</h1>
+        <p class="lead">
+          <strong>Consultor e cofundador da 1950colab — RSA Empreendimentos e Consultoria.</strong>
+          Engenheiro de software, dados e produção com trajetória prática em operações industriais,
+          gestão, arquitetura de sistemas e analytics para decisões de negócio.
+        </p>
+        <ul class="roles" aria-label="Áreas de atuação">
+          <li>Consultoria empresarial</li>
+          <li>Software &amp; dados</li>
+          <li>Operações industriais</li>
+          <li>Gestão &amp; estratégia</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="market" aria-labelledby="experience-title">
+      <div class="section-heading">
+        <span class="eyebrow">Experiência de mercado</span>
+        <h2 id="experience-title">Da operação industrial à engenharia de dados</h2>
+      </div>
+
+      <div class="journey">
+        <article class="experience primary">
+          <span class="period">2016 — presente</span>
+          <h2>1950colab · Consultoria e empreendedorismo</h2>
+          <p>
+            Cofundador e consultor na 1950colab, marca da RSA Empreendimentos e Consultoria.
+            Atua na interseção entre estratégia, processos, tecnologia e dados, transformando
+            desafios reais de organizações em soluções aplicáveis.
+          </p>
+        </article>
+
+        <article class="experience">
+          <span class="period">Engenharia de software &amp; dados</span>
+          <h2>Dasa e empresas de tecnologia</h2>
+          <p>
+            Desenvolveu back-ends, microsserviços, APIs e pipelines de dados em ambientes de nuvem.
+            Sua experiência inclui Java, Ruby on Rails, PostgreSQL, AWS, GCP, BigQuery,
+            Elasticsearch, Docker, Metabase e Grafana.
+          </p>
+        </article>
+
+        <article class="experience">
+          <span class="period">2010 — 2015</span>
+          <h2>Premazon · Gerência industrial</h2>
+          <p>
+            Liderou operações de uma fábrica de pré-moldados, incluindo planejamento e controle
+            da produção, manutenção, estoques, qualidade, demanda, projetos e otimização de
+            sistemas produtivos.
+          </p>
+        </article>
+
+        <article class="experience">
+          <span class="period">2019 — 2020</span>
+          <h2>UNAMA · Gestão de grande escala</h2>
+          <p>
+            Coordenou cinco cursos de engenharia, mais de 1.500 estudantes e 50 professores,
+            com responsabilidade por qualidade, auditoria, projetos e evolução dos cursos.
+          </p>
+        </article>
+
+        <article class="experience">
+          <span class="period">Projetos digitais</span>
+          <h2>Produtos, times e integrações</h2>
+          <p>
+            Trabalhou como desenvolvedor, engenheiro e gestor de projetos em produtos digitais,
+            conduzindo integrações corporativas, entregas ágeis e desenvolvimento de soluções
+            full-stack e back-end.
+          </p>
+        </article>
+      </div>
+
+      <aside class="teaching" aria-labelledby="teaching-title">
+        <h2 id="teaching-title">A experiência de mercado levada para a laboratório</h2>
+        <p>
+          Como professor no Inteli, Senac, Mackenzie e ESPM, conecta casos reais a temas como
+          arquitetura e governança de dados, ERP, Big Data, MLOps, engenharia de software,
+          estatística, visualização e previsão para tomada de decisão.
+        </p>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

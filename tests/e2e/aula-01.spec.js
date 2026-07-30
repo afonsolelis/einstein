@@ -23,6 +23,24 @@ test('cronograma aponta explicitamente para os arquivos da aula 1', async ({ pag
   await expect(firstCard).toContainText('Primeiros passos');
   await expect(firstCard.locator('.btn-slides')).toHaveAttribute('href', 'slides/aula-01.html');
   await expect(firstCard.locator('.btn-mat')).toHaveAttribute('href', 'materiais/aula-01/index.html');
+  await expect(page.getByRole('link', { name: 'Conheça o professor Afonso Brandão' }))
+    .toHaveAttribute('href', 'professor.html');
+  expect(errors).toEqual([]);
+});
+
+test('página do professor abre pelo portal e retorna ao cronograma', async ({ page }) => {
+  const errors = watchPage(page);
+  await page.goto('/index.html');
+  await page.getByRole('link', { name: 'Conheça o professor Afonso Brandão' }).click();
+  await expect(page).toHaveURL(/\/professor\.html$/);
+  await expect(page.getByRole('heading', { name: /Afonso Cesar/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Voltar ao cronograma/ }))
+    .toHaveAttribute('href', 'index.html');
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth
+  }));
+  expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
   expect(errors).toEqual([]);
 });
 
@@ -33,20 +51,20 @@ test('slides navegam por botões e teclado respeitando os limites', async ({ pag
   const slides = page.locator('.slide');
   const previous = page.locator('#btn-prev');
   const next = page.locator('#btn-next');
-  await expect(slides).toHaveCount(15);
-  await expect(page.locator('#slide-counter')).toHaveText('1 / 15');
+  await expect(slides).toHaveCount(14);
+  await expect(page.locator('#slide-counter')).toHaveText('1 / 14');
   await expect(previous).toBeDisabled();
   await expect(next).toBeEnabled();
 
   await next.click();
-  await expect(page.locator('#slide-counter')).toHaveText('2 / 15');
+  await expect(page.locator('#slide-counter')).toHaveText('2 / 14');
   await page.keyboard.press('ArrowLeft');
-  await expect(page.locator('#slide-counter')).toHaveText('1 / 15');
+  await expect(page.locator('#slide-counter')).toHaveText('1 / 14');
   await page.keyboard.press('Space');
-  await expect(page.locator('#slide-counter')).toHaveText('2 / 15');
+  await expect(page.locator('#slide-counter')).toHaveText('2 / 14');
 
-  for (let index = 2; index < 15; index += 1) await next.click();
-  await expect(page.locator('#slide-counter')).toHaveText('15 / 15');
+  for (let index = 2; index < 14; index += 1) await next.click();
+  await expect(page.locator('#slide-counter')).toHaveText('14 / 14');
   await expect(next).toBeDisabled();
   await expect(previous).toBeEnabled();
   expect(errors).toEqual([]);

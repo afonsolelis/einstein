@@ -88,6 +88,20 @@
       align-items: center;
       gap: .4rem;
     }
+    a.chip {
+      color: #fff;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    a.chip:hover {
+      background: rgba(255, 255, 255, .25);
+      box-shadow: 0 8px 24px rgba(11, 17, 32, .2);
+      transform: translateY(-2px);
+    }
+    a.chip:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
 
     /* ---------- Layout ---------- */
     main {
@@ -265,14 +279,14 @@
         <span class="chip">🎓 Graduação em Administração</span>
         <span class="chip">🧪 Trilha BI &amp; Data Science</span>
         <span class="chip">⏱️ 80 horas</span>
-        <span class="chip">👨‍🏫 Prof. Afonso Brandão</span>
+        <a class="chip" href="professor.html" aria-label="Conheça o professor Afonso Brandão">👨‍🏫 Conheça o professor</a>
       </div>
     </div>
   </header>
 
   <main>
-    <h2 class="section-title">Cronograma de Aulas</h2>
-    <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 16/12 · Cada aula reúne os slides e os materiais de apoio.</p>
+    <h2 class="section-title">Cronograma de Laboratórios</h2>
+    <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 16/12 · Cada laboratório reúne os slides e os materiais de apoio.</p>
     <div class="grid" id="grid"></div>
   </main>
 
@@ -314,7 +328,7 @@
         <div class="card-top">
           <div class="aula-num">${id}</div>
           <div>
-            <div class="aula-date">Aula ${a.n} · ${a.data}</div>
+            <div class="aula-date">Laboratório ${a.n} · ${a.data}</div>
           </div>
         </div>
         <div class="card-body">
