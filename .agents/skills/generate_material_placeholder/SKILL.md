@@ -11,7 +11,8 @@ Sempre que for solicitado criar ou atualizar uma página de "Material", você DE
 - **Contexto Histórico**: Explique o "porquê" das ferramentas, de onde vieram e que problema resolvem no mercado atual.
 - **Teoria Aprofundada**: Se a aula é sobre Pandas, explique o que é um DataFrame de forma análoga a algo de negócios.
 - **Blocos de Código (Hands-On)**: Sempre inclua múltiplos exemplos práticos de código resolvendo problemas de negócio reais.
-- **Avisos e Boas Práticas**: Adicione blocos de alerta (ex: `div.alert-box`) para atenção crítica (ex: salvamento no Drive).
+- **Avisos e Boas Práticas**: Adicione blocos de alerta (ex: `div.alert-box`) para atenção crítica (ex: commit e push do notebook antes de encerrar o Codespace).
+- **Ambiente Oficial**: Todo passo prático deve pressupor **GitHub Codespaces + Jupyter**, com bibliotecas já instaladas via `requirements.txt`. Não instruir uso de Google Colab, Google Drive ou instalação manual de Python; a persistência do trabalho é por `git commit` e `git push`.
 
 ## 2. Design System: Light Mode Premium & Print-Friendly
 Os materiais são focados em leitura longa e impressão, portanto devem usar **EXCLUSIVAMENTE Light Mode**:

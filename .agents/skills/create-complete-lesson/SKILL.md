@@ -15,10 +15,14 @@ description: Criar, completar, revisar e validar aulas deste curso, incluindo sl
 6. Executar `python3 -m unittest discover -s tests -v`.
 7. Executar `npm run test:e2e` para validar no Chromium as páginas inicial, slides e material em desktop e mobile. Percorrer os slides por botões e teclado, verificar links, overflow e erros de console.
 8. Ler e aplicar `../update-course-index/SKILL.md` para atualizar e validar `index.json` somente depois que a aula passar nas validações anteriores.
+9. Ler e aplicar `../trunk-based-git/SKILL.md`: commitar a aula direto em `main`, em commits pequenos e descritivos, e publicar com `git push origin main`. Não criar branch para a aula.
 
 ## Regras de autoria
 
 - Escrever em português do Brasil, com exemplos aplicados a Administração e decisões de negócio.
+- Assumir **GitHub Codespaces + Jupyter** como ambiente do estudante, com dependências já instaladas por `requirements.txt`. Não instruir Google Colab, Google Drive nem instalação manual de Python.
+- Tratar `git commit` e `git push` como a forma oficial de entregar e persistir o trabalho do estudante.
+- Preferir cases do domínio de saúde e gestão hospitalar quando o tema permitir, mantendo dados sintéticos e cuidado com privacidade.
 - Tratar slides como apoio visual: uma ideia principal por tela, texto escaneável e código legível.
 - Tratar o material como referência autônoma: aprofundar conceitos, explicar código e incluir boas práticas.
 - Manter os mesmos título, objetivos, conceitos e atividade nas duas superfícies.

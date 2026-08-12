@@ -14,6 +14,7 @@ description: Criar, atualizar e validar o index.json que cataloga o curso, suas 
 5. Usar `complete` somente quando slides e material passarem no validador completo da aula. Usar `placeholder` quando ambos ainda forem modelos e `partial` nos demais casos.
 6. Não inventar destaques. Resumir apenas conteúdo presente nos arquivos.
 7. Executar `python3 .agents/skills/update-course-index/scripts/validate_index.py` e corrigir todas as falhas.
+8. Commitar o catálogo atualizado direto em `main` e publicar, conforme `../trunk-based-git/SKILL.md`.
 
 ## Regras
 
@@ -22,6 +23,7 @@ description: Criar, atualizar e validar o index.json que cataloga o curso, suas 
 - Manter `slide_count` igual ao número real de elementos `.slide`.
 - Manter `material.section_count` igual ao número real de títulos `h2` dentro de `.content`.
 - Catalogar em `project_files` somente arquivos úteis à navegação, autoria, validação ou identidade do projeto; não incluir `.git`, caches ou dependências.
+- Manter o grupo `development_environment` refletindo a configuração do Codespaces (`.devcontainer/devcontainer.json`) e listar `requirements.txt` em `root`.
 - Preservar chaves desconhecidas compatíveis ao atualizar o catálogo.
 - Atualizar `generated_at` com a data ISO da alteração efetiva do catálogo.
 

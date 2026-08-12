@@ -74,6 +74,13 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 ```
 einstein/
 ├── index.html                  # Página principal (cronograma em cards)
+├── index.json                  # Catálogo do curso (aulas, arquivos, status)
+├── professor.html              # Perfil do docente
+├── .devcontainer/              # Ambiente do estudante no GitHub Codespaces
+│   └── devcontainer.json
+├── requirements.txt            # Bibliotecas Python instaladas no Codespace
+├── .agents/skills/             # Skills normativas de autoria e versionamento
+├── tests/                      # Testes Python e end-to-end (Playwright)
 ├── assets/                     # Identidade visual Albert Einstein
 │   ├── einstein-logo.png       #   Logo institucional (cabeçalho)
 │   ├── einstein-home-symbol.png #   Símbolo oficial usado somente na home
@@ -126,6 +133,33 @@ python3 -m http.server 8000
 
 `Settings → Pages → Branch: main / root`. O site ficará disponível em
 `https://afonsolelis.github.io/einstein/`.
+
+---
+
+## 🌳 Fluxo de versionamento (trunk-based)
+
+O repositório trabalha com **uma única branch: `main`**. Não há branches de feature
+nem fluxo de release; cada mudança validada vai direto para o trunk, com histórico
+linear e sem commits de merge.
+
+```bash
+git pull --rebase origin main
+# ... editar ...
+python3 .agents/skills/update-course-index/scripts/validate_index.py
+python3 -m unittest discover -s tests
+git commit -am "Mensagem no imperativo"
+git push origin main
+```
+
+Auditar o estado do repositório a qualquer momento:
+
+```bash
+python3 .agents/skills/trunk-based-git/scripts/check_trunk.py --fetch
+```
+
+Branches criadas por ferramentas ou agentes são temporárias: integrar com
+`git merge --ff-only` e apagar local e remotamente. As regras completas estão em
+`.agents/skills/trunk-based-git/SKILL.md`.
 
 ---
 

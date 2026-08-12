@@ -1,0 +1,4 @@
+interface:
+  display_name: "Versionamento trunk-based"
+  short_description: "Commits diretos em main, histórico linear e sem branches"
+  default_prompt: "Use $trunk-based-git para commitar, integrar e publicar mudanças em main."

@@ -17,7 +17,7 @@
     "assets": ["assets/einstein-cover.png", "assets/einstein-footer.jpg", "assets/einstein-header.jpg", "assets/einstein-home-symbol.png", "assets/einstein-logo.png"],
     "official_documents": ["documentos_oficiais/Modelo de PPT Ensino Einstein 2025.zip", "documentos_oficiais/Plano de Ensino e Aprendizagem - LABS.zip"],
     "tests": ["tests/e2e/aula-01.spec.js", "tests/e2e/aula-02.spec.js", "tests/test_lesson_standard.py"],
-    "authoring_skills": [".agents/skills/create-complete-lesson/SKILL.md", ".agents/skills/design_system/SKILL.md", ".agents/skills/generate_material_placeholder/SKILL.md", ".agents/skills/generate_slide_placeholder/SKILL.md", ".agents/skills/update-course-index/SKILL.md", ".agents/skills/update-course-index/agents/openai.yaml", ".agents/skills/update-course-index/references/schema.md", ".agents/skills/update-course-index/scripts/validate_index.py"]
+    "authoring_skills": [".agents/skills/create-complete-lesson/SKILL.md", ".agents/skills/create-complete-lesson/agents/openai.yaml", ".agents/skills/create-complete-lesson/references/lesson-standard.md", ".agents/skills/create-complete-lesson/scripts/validate_lesson.py", ".agents/skills/design_system/SKILL.md", ".agents/skills/generate_material_placeholder/SKILL.md", ".agents/skills/generate_slide_placeholder/SKILL.md", ".agents/skills/trunk-based-git/SKILL.md", ".agents/skills/trunk-based-git/agents/openai.yaml", ".agents/skills/trunk-based-git/scripts/check_trunk.py", ".agents/skills/update-course-index/SKILL.md", ".agents/skills/update-course-index/agents/openai.yaml", ".agents/skills/update-course-index/references/schema.md", ".agents/skills/update-course-index/scripts/validate_index.py"]
   },
   "lessons": [
     {
