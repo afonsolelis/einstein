@@ -94,6 +94,81 @@
       text-transform: uppercase;
       color: var(--blue);
     }
+    .hero-qr:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+
+    /* ---------- QR ampliado ---------- */
+    .qr-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(11, 17, 32, .72);
+      backdrop-filter: blur(6px);
+    }
+    .qr-modal[open] { display: flex; }
+    .qr-modal-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 2rem 2rem 1.6rem;
+      text-align: center;
+      max-width: 100%;
+      box-shadow: 0 30px 70px rgba(11, 17, 32, .45);
+      animation: qr-pop .22s ease-out;
+    }
+    @keyframes qr-pop {
+      from { opacity: 0; transform: scale(.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .qr-modal-card img {
+      display: block;
+      width: min(72vmin, 410px);
+      height: min(72vmin, 410px);
+      margin: 0 auto;
+    }
+    .qr-modal-card h2 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-top: 1.2rem;
+    }
+    .qr-modal-url {
+      display: inline-block;
+      margin-top: .5rem;
+      font-size: .85rem;
+      color: var(--blue);
+      word-break: break-all;
+    }
+    .qr-modal-actions {
+      display: flex;
+      gap: .7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.4rem;
+    }
+    .qr-modal-actions .btn {
+      padding: .6rem 1.3rem;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-weight: 700;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .qr-open { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .qr-close { background: #fff; color: var(--muted); }
+    .qr-close:hover { color: var(--navy); background: var(--bg); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .qr-modal-card { animation: none; }
+      .hero-qr, .hero-qr:hover { transition: none; transform: none; }
+    }
     .hero-logo {
       width: 92px;
       height: 92px;
@@ -347,10 +422,10 @@
             </p>
           </div>
         </div>
-        <a class="hero-qr" href="https://afonsolelis.github.io/einstein/index.html"
-           aria-label="Abrir a plataforma do laboratório em https://afonsolelis.github.io/einstein/index.html">
+        <a class="hero-qr" id="qr-trigger" href="https://afonsolelis.github.io/einstein/index.html"
+           aria-label="Ampliar o QR code de acesso à plataforma">
           <img src="assets/qrcode-site.svg" alt="QR code para acessar https://afonsolelis.github.io/einstein/index.html">
-          <span>Acesse pelo celular</span>
+          <span>Toque para ampliar</span>
         </a>
       </div>
       <div class="meta-row">
@@ -367,6 +442,18 @@
     <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 16/12 · Cada laboratório reúne os slides e os materiais de apoio.</p>
     <div class="grid" id="grid"></div>
   </main>
+
+  <div class="qr-modal" id="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+    <div class="qr-modal-card">
+      <img src="assets/qrcode-site.svg" alt="QR code ampliado para acessar https://afonsolelis.github.io/einstein/index.html">
+      <h2 id="qr-modal-title">Aponte a câmera do celular</h2>
+      <a class="qr-modal-url" href="https://afonsolelis.github.io/einstein/index.html">afonsolelis.github.io/einstein</a>
+      <div class="qr-modal-actions">
+        <a class="btn qr-open" href="https://afonsolelis.github.io/einstein/index.html">Abrir a plataforma</a>
+        <button class="btn qr-close" type="button" id="qr-close">Fechar</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <p>Material do <strong>Laboratório de Programação, Ciência de Dados &amp; IA</strong> · Faculdade Israelita de Ciências da Saúde <strong>Albert Einstein</strong>.</p>
@@ -421,6 +508,31 @@
         </div>
       </article>`;
     }).join("");
+
+    /* QR ampliado: o link continua válido sem JS; com JS, o clique abre a lupa. */
+    const qrTrigger = document.getElementById("qr-trigger");
+    const qrModal = document.getElementById("qr-modal");
+    const qrClose = document.getElementById("qr-close");
+
+    const abrirQr = event => {
+      event.preventDefault();
+      qrModal.setAttribute("open", "");
+      document.body.style.overflow = "hidden";
+      qrClose.focus();
+    };
+
+    const fecharQr = () => {
+      qrModal.removeAttribute("open");
+      document.body.style.overflow = "";
+      qrTrigger.focus();
+    };
+
+    qrTrigger.addEventListener("click", abrirQr);
+    qrClose.addEventListener("click", fecharQr);
+    qrModal.addEventListener("click", e => { if (e.target === qrModal) fecharQr(); });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && qrModal.hasAttribute("open")) fecharQr();
+    });
   </script>
 </body>
 
