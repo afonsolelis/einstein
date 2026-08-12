@@ -4,309 +4,89 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 02</title>
+  <title>Material · Laboratório 2</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
-    body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-    .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
-    .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
-    .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
-    .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
-    .content { padding: 4rem; }
-    .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; min-height: 100vh; }
+    .container { max-width: 1100px; width: 100%; background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,.05); overflow: hidden; border: 1px solid #e2ebf2; }
+    .header, .content { padding: 4rem; }
+    .header { border-bottom: 2px solid #f0f4f8; }
+    .badge { display: inline-block; background: rgba(0,163,217,.1); color: #1f6fb2; padding: .5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75,196,232,.3); }
+    h1 { margin: 0; font-size: clamp(2rem,4vw,3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; }
+    .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; }
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
-    h3 { font-size: 1.4rem; color: #00a3d9; }
-    
-    p { margin-bottom: 1.5rem; }
-    ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
-    li { padding: 0.4rem 0; }
-    strong { color: #1a2f5e; font-weight: 800; }
-    em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
-    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
-    .code-comment { color: #94a3b8; font-style: italic; }
-    .code-keyword { color: #d946ef; font-weight: 600; }
-    .code-string { color: #16a34a; }
-    
-    .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
-    .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
-    .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-
-    .toc { background: #f8fafc; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; border-radius: 12px; padding: 1.5rem 2rem; margin: 2rem 0 3rem; }
-    .toc h3 { margin-top: 0; }
-    .toc ol { columns: 2; column-gap: 3rem; margin-bottom: 0; }
-    .toc a { color: #1f6fb2; text-decoration: none; font-weight: 600; }
-    .toc a:hover { color: #00a3d9; text-decoration: underline; }
-    .concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
-    .concept-card { background: #f8fafc; border: 1px solid #e2ebf2; border-radius: 12px; padding: 1.25rem; }
-    .concept-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
-    .concept-card p { margin: 0; }
-    .table-wrap { overflow-x: auto; margin: 2rem 0; }
-    table { width: 100%; border-collapse: collapse; min-width: 640px; }
-    th, td { padding: 0.85rem 1rem; border: 1px solid #e2ebf2; text-align: left; vertical-align: top; }
-    th { background: #eef7fb; color: #1a2f5e; }
-    caption { text-align: left; color: #64748b; margin-bottom: 0.75rem; font-weight: 600; }
-    .tip-box { background: #ecfdf5; border: 1px solid #a7f3d0; border-left: 4px solid #16a34a; border-radius: 0 12px 12px 0; padding: 1.5rem; margin: 2rem 0; }
-    .tip-box h4 { color: #166534; margin: 0 0 0.5rem; }
-    .tip-box p { color: #14532d; margin: 0; }
-    
-    .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
-    .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
-    .btn:hover { transform: translateY(-2px); }
-    
-    .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
-    .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-    .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
-    .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
-    .btn-print { background: #1a2f5e; color: #ffffff; }
-    .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
-
-    @media (max-width: 768px) {
-      .header, .content { padding: 2.5rem; }
-      .actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .toc ol { columns: 1; }
-      .concept-grid { grid-template-columns: 1fr; }
-    }
-
-    @media print {
-      body { background: white; padding: 0; display: block; font-size: 12pt; }
-      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
-      .header, .content { padding: 1rem 0; }
-      .actions, .btn-print, .btn-home, .btn-slides { display: none !important; }
-      h1, h2, h3 { color: black !important; break-after: avoid; }
-      .badge { border: 1px solid #ccc; color: black; background: white; }
-      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
-      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
-      .toc, .concept-card, .tip-box { background: white; border-color: #ccc; break-inside: avoid; }
-      .toc a { color: black; }
-      p, li { color: black; }
-      @page { margin: 2cm; }
-    }
+    h3 { color: #00a3d9; } p { margin-bottom: 1.5rem; } li { padding: .4rem 0; }
+    strong { color: #1a2f5e; font-weight: 800; } em { color: #00a3d9; font-style: normal; font-weight: 600; }
+    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: .2rem .5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; overflow-wrap: anywhere; }
+    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; white-space: nowrap; }
+    .code-comment { color: #64748b; font-style: italic; }
+    .graph { font-family: 'Fira Code', monospace; background: #0b1120; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; overflow-x: auto; }
+    .alert-box { background: #fdf4ff; border: 1px solid #fae8ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; }
+    .alert-box h4 { margin: 0 0 .5rem; color: #a21caf; } .alert-box p { margin: 0; color: #701a75; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; } th, td { padding: .8rem; border: 1px solid #e2ebf2; text-align: left; } th { background: #f4f8fb; color: #1a2f5e; }
+    .actions { display: flex; gap: 1rem; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
+    .btn { padding: .8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; border: none; font: inherit; cursor: pointer; }
+    .btn-home { color: #64748b; border: 1px solid #e2ebf2; } .btn-slides { background: rgba(0,163,217,.1); color: #1f6fb2; } .btn-print { background: #1a2f5e; color: #fff; }
+    @media(max-width:768px) { .header,.content { padding: 2rem; } .actions { flex-direction: column; } .btn { justify-content: center; width: 100%; } }
+    @media print { body { background:#fff; padding:0; display:block; color:#000; } .container { box-shadow:none; border:0; max-width:100%; } .header,.content { padding:1rem 0; } .actions { display:none!important; } h1,h2,h3,p,li,strong { color:#000!important; } .code-block,.graph,.alert-box { background:#fff; color:#000; border:1px solid #999; break-inside:avoid; } @page { margin:2cm; } }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="badge">LABORATÓRIO 02</div>
-      <h1>Organizando informações: Dados estruturados para gestão</h1>
-    </div>
-    
-    <div class="content">
-      <p class="desc">Empresas não tomam decisões com números soltos: elas precisam saber a que cliente, filial, produto e período cada valor pertence. Neste laboratório, você aprenderá a evoluir de variáveis isoladas para registros e tabelas capazes de sustentar uma análise comercial reproduzível.</p>
+<body><main class="container">
+  <header class="header"><div class="badge">LABORATÓRIO 2 · 19/08</div><h1>Git, grafos e versionamento com Inteligência Artificial</h1></header>
+  <div class="content">
+    <p class="desc">Versionar é tornar uma mudança explicável, comparável e reversível. No case fictício desta aula, Operações, Suprimentos, Controladoria e Dados colaboram em um código de previsão de demanda hospitalar. Você verá o Git como um grafo de versões e usará o GitHub Copilot mantendo decisão, revisão e teste sob responsabilidade humana.</p>
 
-      <div class="toc" aria-label="Sumário do material">
-        <h3>Como navegar por este material</h3>
-        <p>Leia os fundamentos na ordem e execute cada bloco no Google Colab. Depois, use a resolução comentada apenas para conferir seu raciocínio.</p>
-        <ol>
-          <li><a href="#objetivos">Objetivos e preparação</a></li>
-          <li><a href="#historia">Por que dados tabulares?</a></li>
-          <li><a href="#estrutura">Granularidade e esquema</a></li>
-          <li><a href="#colecoes">Listas e dicionários</a></li>
-          <li><a href="#dataframe">DataFrames e tipos</a></li>
-          <li><a href="#selecao">Seleção e indexação</a></li>
-          <li><a href="#pratica">Prática guiada</a></li>
-          <li><a href="#desafio">Desafio e entrega</a></li>
-          <li><a href="#resolucao">Resolução comentada</a></li>
-          <li><a href="#erros">Erros frequentes</a></li>
-        </ol>
-      </div>
+    <h2 data-lesson-section="objectives">Objetivos de aprendizagem</h2>
+    <ul><li><strong>Explicar</strong> commit, branch e merge usando um grafo.</li><li><strong>Criar</strong> uma branch e registrar commits pequenos e verificáveis.</li><li><strong>Comparar</strong> versões com <code>status</code>, <code>diff</code> e <code>log</code>.</li><li><strong>Avaliar</strong> uma mudança sugerida por IA antes de aceitá-la.</li><li><strong>Publicar</strong> uma branch e descrever uma proposta de mudança.</li></ul>
 
-      <h2 id="objetivos" data-lesson-section="objectives">Objetivos de aprendizagem</h2>
-      <ul>
-        <li>Distinguir listas, dicionários e DataFrames pela estrutura e pelo uso.</li>
-        <li>Construir uma tabela de gestão a partir de registros comerciais.</li>
-        <li>Selecionar colunas, filtrar linhas e ordenar resultados com Pandas.</li>
-        <li>Calcular indicadores e justificar uma decisão com evidências.</li>
-      </ul>
+    <h2 data-lesson-section="concepts">1. Case de mercado: previsão compartilhada entre áreas</h2>
+    <p>Um hospital precisa prever admissões por semana para planejar leitos, equipes e insumos. Operações conhece capacidade e calendário; Suprimentos traduz admissões em consumo; Controladoria avalia custos e premissas; a equipe de Dados mantém método e testes. Cópias como <code>previsao_final_v7_agora-vai.py</code> não mostram qual regra foi aprovada e por quem.</p>
+    <p>O Git permite propostas isoladas em branches, enquanto commits registram intenção e pull requests concentram comparação, discussão e evidências. Este case usa números sintéticos e não inclui prontuários, nomes ou identificadores de pacientes.</p>
 
-      <h3>Preparação do ambiente</h3>
-      <p>Você precisa de um notebook no Google Colab ou de um ambiente Python com Pandas instalado. No Colab, o Pandas já costuma estar disponível; em ambiente local, instale-o conforme a documentação oficial da sua distribuição. Crie uma célula por etapa e execute o notebook de cima para baixo.</p>
-      <div class="code-block"><span class="code-comment"># Verificação mínima do ambiente</span><br><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><span class="code-keyword">print</span>(<span class="code-string">"Pandas:"</span>, pd.__version__)</div>
-      <div class="tip-box">
-        <h4>Estratégia de estudo</h4>
-        <p>Antes de executar uma célula, tente prever o formato do resultado: será um valor, uma Series ou um DataFrame? Essa previsão desenvolve leitura de código e reduz tentativas aleatórias.</p>
-      </div>
+    <h2>2. O que é um grafo?</h2>
+    <p>Um grafo é formado por <strong>vértices</strong> e <strong>arestas</strong>. No modelo mental do Git, commits são vértices; relações de ancestralidade apontam para commits anteriores. Como as arestas seguem o tempo para trás e não formam ciclos, o histórico é um <em>grafo direcionado acíclico</em> (DAG).</p>
+    <div class="graph">A ── B ── C  ← main<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╲<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D ── E  ← experimento-ia</div>
+    <p><code>main</code> e <code>experimento-ia</code> são referências móveis para commits. Uma branch não copia o projeto inteiro: ela aponta para uma linha de evolução.</p>
 
-      <h2 id="historia">Por que o mundo dos negócios usa dados tabulares?</h2>
-      <p>Registros comerciais existem há séculos em livros-caixa, fichas e formulários. As planilhas eletrônicas tornaram o cálculo acessível, mas análises baseadas em cliques podem ser difíceis de repetir e auditar. O código acrescenta uma sequência explícita de transformações: outra pessoa pode executar as mesmas instruções sobre a mesma base e conferir o resultado.</p>
-      <p>O Pandas surgiu no ecossistema Python para facilitar a manipulação de dados rotulados e tabulares. Seu nome está associado a <em>panel data</em>, expressão usada para dados observados em múltiplas entidades e períodos. Hoje, seu DataFrame é uma ponte prática entre planilhas, bancos de dados e ferramentas analíticas.</p>
-      <p>A ferramenta, porém, não corrige uma estrutura conceitualmente errada. Antes de importar uma biblioteca, precisamos decidir <strong>o que será observado</strong>, <strong>com qual granularidade</strong> e <strong>quais atributos descrevem cada observação</strong>.</p>
+    <h2>3. Anatomia de um commit</h2>
+    <p>Um commit contém a fotografia lógica dos arquivos rastreados, metadados, uma mensagem e a referência ao(s) commit(s) pai(s). Seu identificador deriva do conteúdo. Alterar o passado produz outro identificador e outra história.</p>
+    <table><thead><tr><th>Conceito</th><th>Função</th></tr></thead><tbody><tr><td>Working tree</td><td>Arquivos que você está editando.</td></tr><tr><td>Staging area</td><td>Seleção que entrará no próximo commit.</td></tr><tr><td>Repository</td><td>Objetos e histórico registrados em <code>.git</code>.</td></tr><tr><td>Remote</td><td>Outro repositório, normalmente hospedado no GitHub.</td></tr></tbody></table>
 
-      <h2 id="estrutura" data-lesson-section="concepts">1. Do valor isolado ao dado estruturado</h2>
-      <p>Imagine receber por mensagem apenas o número <code>189.90</code>. Ele poderia ser um preço, uma distância ou uma taxa. Quando o associamos ao nome <code>ticket_medio</code>, à filial Paulista e ao mês de agosto, o número ganha <strong>contexto</strong>. Estruturar dados significa definir esse contexto de maneira consistente.</p>
-      <p>Em uma tabela de negócios, cada <strong>linha</strong> representa uma observação na mesma granularidade — por exemplo, uma filial em um mês. Cada <strong>coluna</strong> representa um atributo dessa observação, como região, vendas ou ticket médio. Essa regra parece simples, mas evita análises que misturam pedidos individuais, totais mensais e cadastros em uma mesma linha.</p>
+    <h2>4. O ciclo observar → selecionar → registrar</h2>
+    <div class="code-block"><span class="code-comment"># Observe antes de agir</span><br>git status<br>git diff<br><br><span class="code-comment"># Selecione e registre uma mudança coerente</span><br>git add caminho/do/arquivo<br>git diff --staged<br>git commit -m "Explica a decisão tomada"</div>
+    <p><code>git add</code> não significa “enviar”; ele prepara a próxima fotografia. <code>git commit</code> registra localmente. <code>git push</code> envia commits para um remoto.</p>
 
-      <div class="concept-grid">
-        <div class="concept-card"><h3>Observação</h3><p>A entidade medida em uma linha: uma filial, um pedido ou um cliente.</p></div>
-        <div class="concept-card"><h3>Variável</h3><p>Uma característica registrada em coluna: região, receita ou quantidade.</p></div>
-        <div class="concept-card"><h3>Granularidade</h3><p>O nível de detalhe: “uma linha por filial por mês”, por exemplo.</p></div>
-        <div class="concept-card"><h3>Esquema</h3><p>O contrato de nomes, significados e tipos esperados para as colunas.</p></div>
-      </div>
+    <h2>5. Branches, divergência e merge</h2>
+    <div class="code-block">git switch -c experimento-ia<br><span class="code-comment"># editar, revisar e testar</span><br>git add .<br>git commit -m "Adiciona análise sugerida e revisada com IA"<br>git log --oneline --graph --decorate --all<br>git push -u origin experimento-ia</div>
+    <p>Quando duas branches avançam, ocorre divergência. Um merge reúne histórias e pode gerar um commit com dois pais. Um conflito não é uma falha do Git: é uma decisão que a ferramenta não pode tomar sem contexto humano.</p>
 
-      <div class="table-wrap">
-        <table>
-          <caption>Exemplo de dicionário de dados para o painel comercial</caption>
-          <thead><tr><th>Coluna</th><th>Significado</th><th>Tipo esperado</th><th>Regra</th></tr></thead>
-          <tbody>
-            <tr><td><code>filial</code></td><td>Nome único da unidade</td><td>texto</td><td>Não vazio</td></tr>
-            <tr><td><code>regiao</code></td><td>Área comercial</td><td>texto/categoria</td><td>Centro, Oeste, Sul etc.</td></tr>
-            <tr><td><code>vendas</code></td><td>Número de transações</td><td>inteiro</td><td>Maior ou igual a zero</td></tr>
-            <tr><td><code>ticket</code></td><td>Valor médio por transação</td><td>decimal</td><td>Maior ou igual a zero</td></tr>
-            <tr><td><code>meta</code></td><td>Receita-alvo da filial</td><td>decimal</td><td>Maior que zero</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <h2>6. IA no fluxo: proposta não é evidência</h2>
+    <p>O GitHub Copilot pode explicar código, sugerir uma edição e ajudar a criar testes. Ele também pode produzir lógica incorreta, ignorar restrições ou sugerir dependências inexistentes. Por isso, a IA trabalha dentro de uma branch descartável e cada sugestão passa por inspeção do diff e validação.</p>
+    <div class="alert-box"><h4>Regra de governança</h4><p>Não envie dados pessoais, segredos, tokens ou conteúdo confidencial ao chat. Leia cada linha sugerida. Aceitar uma sugestão transfere o texto para o projeto, mas não transfere a responsabilidade.</p></div>
 
-      <h2 id="colecoes">2. Listas: sequências ordenadas</h2>
-      <p>A <strong>lista</strong> é uma coleção ordenada e mutável. Ela é útil quando a posição tem significado ou quando queremos percorrer uma sequência de valores. Em Python, os índices começam em zero e índices negativos contam a partir do fim.</p>
-      <div class="code-block"><span class="code-comment"># Vendas de segunda a sexta-feira</span><br>vendas_semana = [120, 145, 138, 172, 160]<br><br>primeiro_dia = vendas_semana[0]<br>ultimo_dia = vendas_semana[-1]<br>total = sum(vendas_semana)<br>media = total / len(vendas_semana)<br><br><span class="code-keyword">print</span>(<span class="code-string">f"Total: {total} | Média: {media:.1f}"</span>)</div>
-      <p>Uma lista preserva a ordem, mas não descreve sozinha o que cada valor representa. Guardar <code>["Paulista", 320, 189.90]</code> exige que todos memorizem o significado de cada posição — uma fonte comum de erros.</p>
+    <h2 data-lesson-section="guided-practice">7. Prática guiada: versionar uma previsão com IA</h2>
+    <ol><li>Confirme uma árvore limpa com <code>git status</code>.</li><li>Crie a branch <code>experimento-ia-seunome</code>.</li><li>Crie <code>previsao_demanda.py</code> com uma média móvel sobre admissões semanais sintéticas.</li><li>Faça um primeiro commit manual, simples e funcional.</li><li>Peça ao Copilot: <em>“Valide série vazia e valores negativos; crie três testes sem bibliotecas externas. Não use dados pessoais. Explique antes de editar.”</em></li><li>Revise o diff; aceite apenas o que compreender.</li><li>Execute <code>python previsao_demanda.py</code>, corrija se necessário e faça um segundo commit.</li></ol>
+    <div class="code-block"><span class="code-comment"># Visualize o experimento</span><br>git diff<br>python previsao_demanda.py<br>git add previsao_demanda.py<br>git diff --staged<br>git commit -m "Valida entradas da previsão e revisa sugestão da IA"<br>git log --oneline --graph --decorate --all</div>
 
-      <h2>3. Dicionários: registros com significado</h2>
-      <p>O <strong>dicionário</strong> associa chaves a valores. Ele funciona como uma ficha cadastral: em vez de pedir “a posição 1”, pedimos o valor da chave <code>vendas</code>. Isso aproxima o código da linguagem de negócio.</p>
-      <div class="code-block">filial = {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"nome"</span>: <span class="code-string">"Paulista"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"vendas"</span>: 320,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"ticket"</span>: 189.90<br>}<br><br>receita = filial[<span class="code-string">"vendas"</span>] * filial[<span class="code-string">"ticket"</span>]<br>filial[<span class="code-string">"receita"</span>] = receita<br><span class="code-keyword">print</span>(filial)</div>
+    <h2>8. Auditoria da sugestão da IA</h2>
+    <p>Registre no arquivo <code>REVISAO_IA.md</code>: prompt utilizado; sugestão recebida; partes aceitas e rejeitadas; teste executado; risco observado; decisão final. Compare o commit manual com o commit assistido. O objetivo não é premiar velocidade, mas demonstrar rastreabilidade.</p>
+    <table><thead><tr><th>Pergunta</th><th>Evidência</th></tr></thead><tbody><tr><td>A mudança resolve o pedido?</td><td>Teste funcional e saída esperada.</td></tr><tr><td>Introduziu algo fora do escopo?</td><td><code>git diff --staged</code>.</td></tr><tr><td>Consigo explicar cada linha?</td><td>Revisão oral em dupla.</td></tr><tr><td>É possível desfazer?</td><td>Commits pequenos e identificáveis.</td></tr></tbody></table>
 
-      <h2 id="dataframe">4. DataFrame: a tabela analítica</h2>
-      <p>Uma lista de dicionários representa várias fichas com o mesmo esquema. O Pandas converte cada dicionário em uma linha e cada chave em uma coluna de um <strong>DataFrame</strong>. Essa estrutura combina a familiaridade de uma planilha com operações reproduzíveis em código.</p>
-      <div class="code-block"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>registros = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Paulista"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>, <span class="code-string">"vendas"</span>: 320, <span class="code-string">"ticket"</span>: 189.90},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Pinheiros"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Oeste"</span>, <span class="code-string">"vendas"</span>: 280, <span class="code-string">"ticket"</span>: 214.50},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Moema"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Sul"</span>, <span class="code-string">"vendas"</span>: 410, <span class="code-string">"ticket"</span>: 176.00}<br>]<br><br>df = pd.DataFrame(registros)<br>df</div>
+    <h2 data-lesson-section="challenge">9. Desafio e entrega</h2>
+    <p>Em dupla, crie duas branches a partir do mesmo commit. A branch <code>operacoes</code> compara a previsão com a capacidade de leitos; a branch <code>suprimentos</code> estima kits consumidos por admissão. Integre as regras sem perder nenhuma área e publique a branch final para uma revisão simulada da Controladoria.</p>
+    <p><strong>Entrega verificável:</strong> branch remota com pelo menos três commits coerentes, saída de <code>git log --oneline --graph --decorate --all</code>, script executável, <code>REVISAO_IA.md</code> preenchido e uma proposta de pull request que explique mudança, teste e risco.</p>
 
-      <h2>5. Inspeção: conheça a base antes do cálculo</h2>
-      <p>Uma análise responsável começa pela inspeção. <code>head()</code> mostra uma amostra, <code>shape</code> informa dimensões, <code>columns</code> lista os nomes e <code>dtypes</code> revela como o Pandas interpretou cada coluna.</p>
-      <div class="code-block"><span class="code-keyword">print</span>(df.head())<br><span class="code-keyword">print</span>(<span class="code-string">"Dimensões:"</span>, df.shape)<br><span class="code-keyword">print</span>(<span class="code-string">"Colunas:"</span>, df.columns.tolist())<br><span class="code-keyword">print</span>(df.dtypes)</div>
-      <div class="alert-box">
-        <h4>Granularidade antes da ferramenta</h4>
-        <p>Defina o que uma linha representa antes de montar a tabela. Não misture, por exemplo, uma linha por pedido com outra linha que já seja o total do mês. Verifique também se valores monetários são números: <code>"R$ 1.000"</code> é texto e não pode ser somado corretamente.</p>
-      </div>
+    <h2 data-lesson-section="checklist">10. Checklist</h2>
+    <ul><li>A branch tem nome descritivo e não houve trabalho direto em <code>main</code>.</li><li>Os commits são pequenos, legíveis e separados por intenção e área.</li><li>O diff foi revisado antes de cada commit.</li><li>Os casos normal, série vazia e valor negativo foram testados.</li><li>A contribuição da IA foi documentada, incluindo rejeições.</li><li>A base é sintética e nenhum segredo ou dado pessoal aparece no histórico.</li></ul>
 
-      <h2>Tipos de dados e validação do esquema</h2>
-      <p>O tipo determina quais operações são válidas. Números podem ser somados; textos podem ser concatenados; booleanos representam condições verdadeiras ou falsas. No Pandas, os tipos mais comuns neste exercício são <code>object</code> ou <code>string</code> para texto, <code>int64</code> para inteiros, <code>float64</code> para decimais e <code>bool</code> para indicadores lógicos.</p>
-      <div class="code-block"><span class="code-comment"># Conferências simples antes da análise</span><br><span class="code-keyword">print</span>(df.dtypes)<br><span class="code-keyword">print</span>(<span class="code-string">"Nulos por coluna:"</span>)<br><span class="code-keyword">print</span>(df.isna().sum())<br><br><span class="code-comment"># Regras mínimas para este conjunto</span><br><span class="code-keyword">assert</span> df[<span class="code-string">"filial"</span>].notna().all(), <span class="code-string">"Há filial sem nome"</span><br><span class="code-keyword">assert</span> (df[<span class="code-string">"vendas"</span>] &gt;= 0).all(), <span class="code-string">"Vendas não podem ser negativas"</span><br><span class="code-keyword">assert</span> (df[<span class="code-string">"ticket"</span>] &gt;= 0).all(), <span class="code-string">"Ticket não pode ser negativo"</span></div>
-      <p>As instruções <code>assert</code> funcionam como alarmes: se uma regra for falsa, a execução para com uma mensagem clara. Elas não substituem uma política completa de qualidade, mas tornam premissas importantes visíveis no notebook.</p>
+    <h2 data-lesson-section="summary">11. Síntese</h2>
+    <p>Você modelou o histórico como um grafo, percorreu working tree, staging area e repositório, criou uma linha de trabalho isolada e auditou uma mudança assistida por IA. Git torna a mudança rastreável; testes produzem evidência; revisão humana decide se ela merece integrar o projeto.</p>
 
-      <h2 id="selecao">Seleção e indexação: coluna, linha e célula</h2>
-      <p>Um DataFrame tem rótulos de coluna e um índice para as linhas. O índice padrão começa em zero, mas não deve ser confundido com uma identificação de negócio. Para uma operação legível, prefira selecionar explicitamente linhas e colunas.</p>
-      <div class="table-wrap">
-        <table>
-          <caption>Formas frequentes de selecionar dados</caption>
-          <thead><tr><th>Expressão</th><th>Resultado</th><th>Quando usar</th></tr></thead>
-          <tbody>
-            <tr><td><code>df["vendas"]</code></td><td>Series</td><td>Uma coluna</td></tr>
-            <tr><td><code>df[["filial", "vendas"]]</code></td><td>DataFrame</td><td>Várias colunas</td></tr>
-            <tr><td><code>df.loc[condicao, colunas]</code></td><td>Series ou DataFrame</td><td>Rótulos e filtros booleanos</td></tr>
-            <tr><td><code>df.iloc[0:2, 0:3]</code></td><td>DataFrame</td><td>Posições numéricas</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="code-block"><span class="code-comment"># Linhas com pelo menos 300 vendas; somente duas colunas</span><br>alto_volume = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"vendas"</span>] &gt;= 300,<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"vendas"</span>]<br>]<br><br><span class="code-comment"># Duas primeiras linhas e três primeiras colunas, por posição</span><br>amostra = df.iloc[0:2, 0:3]</div>
-      <div class="alert-box">
-        <h4><code>loc</code> e <code>iloc</code> não são sinônimos</h4>
-        <p><code>loc</code> trabalha com rótulos e inclui o limite final de um intervalo rotulado. <code>iloc</code> trabalha com posições e exclui o limite final, seguindo o padrão de fatias do Python.</p>
-      </div>
-
-      <h2 id="pratica" data-lesson-section="guided-practice">6. Prática guiada: painel de filiais</h2>
-      <p>Vamos criar um indicador por linha, selecionar uma visão executiva e ordenar o resultado. A atribuição abaixo é vetorizada: a multiplicação acontece para todas as linhas sem copiar fórmulas.</p>
-      <div class="code-block"><span class="code-comment"># Receita de cada filial</span><br>df[<span class="code-string">"receita"</span>] = df[<span class="code-string">"vendas"</span>] * df[<span class="code-string">"ticket"</span>]<br><br><span class="code-comment"># Seleção de colunas e ordenação decrescente</span><br>painel = df[[<span class="code-string">"filial"</span>, <span class="code-string">"regiao"</span>, <span class="code-string">"receita"</span>]]<br>ranking = painel.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>)<br><span class="code-keyword">print</span>(ranking)</div>
-      <p>Em seguida, traduza uma meta gerencial em uma condição booleana. O Pandas avalia a condição em cada linha e mantém apenas as linhas verdadeiras.</p>
-      <div class="code-block">meta_receita = 60000<br>df[<span class="code-string">"atingiu_meta"</span>] = df[<span class="code-string">"receita"</span>] &gt;= meta_receita<br><br>filiais_na_meta = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"atingiu_meta"</span>],<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>]<br>]<br><span class="code-keyword">print</span>(filiais_na_meta)</div>
-
-      <h2>7. Seleção, filtro e ordenação sem confusão</h2>
-      <ul>
-        <li><code>df["receita"]</code> seleciona uma coluna e retorna uma Series.</li>
-        <li><code>df[["filial", "receita"]]</code> seleciona várias colunas e retorna um DataFrame.</li>
-        <li><code>df.loc[condicao, colunas]</code> escolhe linhas e colunas por rótulo.</li>
-        <li><code>sort_values()</code> muda a ordem da visualização, não o significado das linhas.</li>
-      </ul>
-      <p>Evite encadear operações longas enquanto aprende. Nomear resultados intermediários, como <code>painel</code> e <code>ranking</code>, facilita a conferência e a explicação do raciocínio.</p>
-
-      <h2>Análise consolidada: do cálculo à recomendação</h2>
-      <p>Um indicador isolado raramente conta toda a história. Receita combina volume e ticket; por isso, uma filial pode liderar vendendo muitas unidades com ticket menor, enquanto outra pode compensar menor volume com ticket maior. Compare os componentes antes de recomendar uma ação.</p>
-      <div class="code-block"><span class="code-comment"># Indicadores gerais do pequeno painel</span><br>receita_total = df[<span class="code-string">"receita"</span>].sum()<br>ticket_medio_simples = df[<span class="code-string">"ticket"</span>].mean()<br>lider = df.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>).iloc[0]<br><br><span class="code-keyword">print</span>(<span class="code-string">f"Receita total: R$ {receita_total:,.2f}"</span>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Ticket médio entre filiais: R$ {ticket_medio_simples:,.2f}"</span>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Líder: {lider['filial']} — R$ {lider['receita']:,.2f}"</span>)</div>
-      <p>Observe a precisão da linguagem: <code>df["ticket"].mean()</code> é a média simples dos tickets das filiais, não necessariamente o ticket médio de todas as transações. Para este último, seria necessário calcular uma média ponderada:</p>
-      <div class="code-block">ticket_ponderado = (<br>&nbsp;&nbsp;&nbsp;&nbsp;(df[<span class="code-string">"ticket"</span>] * df[<span class="code-string">"vendas"</span>]).sum()<br>&nbsp;&nbsp;&nbsp;&nbsp;/ df[<span class="code-string">"vendas"</span>].sum()<br>)<br><span class="code-keyword">print</span>(<span class="code-string">f"Ticket ponderado: R$ {ticket_ponderado:.2f}"</span>)</div>
-      <div class="tip-box">
-        <h4>Boa recomendação gerencial</h4>
-        <p>Use a estrutura “evidência → interpretação → ação”. Exemplo: “Moema lidera a receita por combinar o maior volume com ticket competitivo; vale investigar suas práticas comerciais antes de replicá-las nas demais filiais.”</p>
-      </div>
-
-      <h2 id="desafio" data-lesson-section="challenge">8. Desafio: diagnóstico comercial</h2>
-      <p>Crie um notebook chamado <code>Aula_02_SeuNome.ipynb</code>. Monte um DataFrame com cinco filiais e as colunas <code>filial</code>, <code>regiao</code>, <code>vendas</code>, <code>ticket</code> e <code>meta</code>. Você pode usar valores fictícios coerentes.</p>
-      <ol>
-        <li>Calcule <code>receita = vendas * ticket</code>.</li>
-        <li>Crie <code>atingiu_meta</code> comparando receita e meta de cada linha.</li>
-        <li>Ordene as filiais da maior para a menor receita.</li>
-        <li>Filtre as filiais que atingiram a meta.</li>
-        <li>Escreva uma recomendação de duas a três frases citando pelo menos dois indicadores calculados.</li>
-      </ol>
-      <p><strong>Critério de entrega:</strong> todas as células devem executar de cima para baixo sem erro; o DataFrame final deve conter sete colunas; o ranking, o filtro e a recomendação devem estar visíveis.</p>
-
-      <h2 data-lesson-section="checklist">9. Checklist antes de entregar</h2>
-      <ul>
-        <li>O arquivo segue o padrão <code>Aula_02_SeuNome.ipynb</code>.</li>
-        <li>Uma linha representa uma única filial e todas as linhas têm a mesma granularidade.</li>
-        <li><code>vendas</code>, <code>ticket</code>, <code>meta</code> e <code>receita</code> são numéricos.</li>
-        <li>O ranking está em ordem decrescente e o filtro usa uma condição booleana.</li>
-        <li>A recomendação menciona evidências presentes no resultado.</li>
-      </ul>
-
-      <h2 id="resolucao">Resolução comentada do desafio</h2>
-      <p>Tente concluir o desafio antes de abrir esta seção. A solução abaixo é uma referência possível, não a única. Os dados são fictícios e foram escolhidos para produzir casos acima e abaixo da meta.</p>
-      <div class="code-block"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>dados = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Paulista"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Centro"</span>, <span class="code-string">"vendas"</span>: 320, <span class="code-string">"ticket"</span>: 189.90, <span class="code-string">"meta"</span>: 60000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Pinheiros"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Oeste"</span>, <span class="code-string">"vendas"</span>: 280, <span class="code-string">"ticket"</span>: 214.50, <span class="code-string">"meta"</span>: 62000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Moema"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Sul"</span>, <span class="code-string">"vendas"</span>: 410, <span class="code-string">"ticket"</span>: 176.00, <span class="code-string">"meta"</span>: 70000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Santana"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Norte"</span>, <span class="code-string">"vendas"</span>: 250, <span class="code-string">"ticket"</span>: 198.00, <span class="code-string">"meta"</span>: 52000},<br>&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"filial"</span>: <span class="code-string">"Tatuapé"</span>, <span class="code-string">"regiao"</span>: <span class="code-string">"Leste"</span>, <span class="code-string">"vendas"</span>: 360, <span class="code-string">"ticket"</span>: 181.50, <span class="code-string">"meta"</span>: 64000}<br>]<br><br>df = pd.DataFrame(dados)<br>df[<span class="code-string">"receita"</span>] = df[<span class="code-string">"vendas"</span>] * df[<span class="code-string">"ticket"</span>]<br>df[<span class="code-string">"atingiu_meta"</span>] = df[<span class="code-string">"receita"</span>] &gt;= df[<span class="code-string">"meta"</span>]</div>
-      <p>A comparação usa <code>df["meta"]</code>, e não uma constante, porque cada filial tem sua própria meta. O resultado contém exatamente as sete colunas exigidas.</p>
-      <div class="code-block">ranking = df.sort_values(<span class="code-string">"receita"</span>, ascending=<span class="code-keyword">False</span>)<br>na_meta = df.loc[<br>&nbsp;&nbsp;&nbsp;&nbsp;df[<span class="code-string">"atingiu_meta"</span>],<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="code-string">"filial"</span>, <span class="code-string">"receita"</span>, <span class="code-string">"meta"</span>]<br>]<br><br><span class="code-keyword">print</span>(ranking[[<span class="code-string">"filial"</span>, <span class="code-string">"vendas"</span>, <span class="code-string">"ticket"</span>, <span class="code-string">"receita"</span>]])<br><span class="code-keyword">print</span>(na_meta)</div>
-      <p><strong>Leitura possível:</strong> Moema lidera com receita de R$ 72.160,00, apoiada pelo maior volume de vendas, e supera sua meta de R$ 70.000,00. Paulista e Tatuapé também superam suas metas; uma ação coerente seria comparar as práticas das três filiais e investigar por que Pinheiros, apesar do maior ticket, não alcança a meta devido ao volume menor.</p>
-
-      <h2 id="erros">Erros frequentes e como diagnosticá-los</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Como corrigir</th></tr></thead>
-          <tbody>
-            <tr><td><code>KeyError: 'receita'</code></td><td>A coluna não existe ou o nome tem espaço/maiúscula diferente.</td><td>Confira <code>df.columns.tolist()</code> e a ordem de execução.</td></tr>
-            <tr><td>Valores repetidos como texto</td><td>Multiplicação aplicada a uma coluna textual.</td><td>Confira <code>dtypes</code> e converta somente após validar a origem.</td></tr>
-            <tr><td><code>ValueError</code> em filtro</td><td>Uso de <code>and</code>/<code>or</code> com Series.</td><td>Use <code>&amp;</code>/<code>|</code> e parênteses em cada condição.</td></tr>
-            <tr><td>Ranking parece não mudar</td><td>Resultado de <code>sort_values</code> não foi armazenado.</td><td>Atribua a <code>ranking</code> ou use o retorno diretamente.</td></tr>
-            <tr><td>Filtro retorna zero linhas</td><td>Condição ou unidade da meta está incorreta.</td><td>Exiba receita e meta lado a lado antes de filtrar.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="code-block"><span class="code-comment"># Diagnóstico rápido, sem alterar o DataFrame</span><br><span class="code-keyword">print</span>(df.columns.tolist())<br><span class="code-keyword">print</span>(df.dtypes)<br><span class="code-keyword">print</span>(df[[<span class="code-string">"receita"</span>, <span class="code-string">"meta"</span>]])<br><span class="code-keyword">print</span>(df.isna().sum())</div>
-
-      <h2>Glossário essencial</h2>
-      <dl>
-        <dt><strong>DataFrame</strong></dt><dd>Estrutura tabular bidimensional com linhas e colunas rotuladas.</dd>
-        <dt><strong>Series</strong></dt><dd>Estrutura unidimensional; normalmente representa uma coluna.</dd>
-        <dt><strong>Índice</strong></dt><dd>Rótulo usado pelo Pandas para identificar linhas; não é automaticamente uma chave de negócio.</dd>
-        <dt><strong>Máscara booleana</strong></dt><dd>Sequência de valores verdadeiros e falsos usada para filtrar linhas.</dd>
-        <dt><strong>Vetorização</strong></dt><dd>Operação aplicada a uma coluna inteira sem escrever um laço explícito linha a linha.</dd>
-        <dt><strong>Granularidade</strong></dt><dd>Nível de detalhe representado por cada linha.</dd>
-      </dl>
-
-      <h2 data-lesson-section="summary">10. Síntese</h2>
-      <p>Listas organizam sequências; dicionários dão nomes aos atributos de um registro; DataFrames combinam vários registros em uma tabela analítica. Com seleção, cálculo, ordenação e filtro, você transformou uma estrutura de dados em uma resposta gerencial reproduzível.</p>
-
-      <h2 data-lesson-section="next-steps">11. Continuidade e referências</h2>
-      <p>No próximo laboratório, essa tabela chegará com problemas comuns do mundo real: valores ausentes, duplicidades, textos inconsistentes e tipos incorretos. Guarde o notebook, pois ele servirá como base para o laboratório de limpeza de dados.</p>
-      <p>Para aprofundar, consulte a documentação instalada do Pandas diretamente no Colab com <code>help(pd.DataFrame)</code>, <code>help(df.loc)</code> e <code>help(df.sort_values)</code>. Esses comandos funcionam como referência associada à versão efetivamente usada no ambiente.</p>
-      <ul>
-        <li><a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/" target="_blank" rel="noopener noreferrer">Tutoriais introdutórios oficiais do Pandas</a>: DataFrames, seleção, novas colunas e estatísticas.</li>
-        <li><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html" target="_blank" rel="noopener noreferrer">Guia oficial de indexação e seleção</a>: diferenças e usos de <code>loc</code>, <code>iloc</code> e máscaras booleanas.</li>
-        <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html" target="_blank" rel="noopener noreferrer">Referência da API de DataFrame</a>: catálogo detalhado de atributos e métodos.</li>
-      </ul>
-      <p><small>Referências oficiais consultadas em 17/07/2026. Links externos exigem conexão; o conteúdo restante continua utilizável via <code>file://</code>.</small></p>
-
-      <div class="actions">
-        <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
-        <a href="../../slides/aula-02.html" class="btn btn-slides">📊 Ver Slides</a>
-        <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
-      </div>
-    </div>
+    <h2 data-lesson-section="next-steps">12. Continuidade e referências</h2>
+    <p>Na próxima aula, aplicaremos o mesmo fluxo versionado à limpeza de dados com Pandas. Consulte a documentação oficial do Git, do controle de versão em Codespaces e do uso responsável do GitHub Copilot. Recursos e nomes de modos do Copilot podem variar conforme plano e política institucional.</p>
+    <div class="actions"><a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a><a href="../../slides/aula-02.html" class="btn btn-slides">📊 Ver Slides</a><button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button></div>
   </div>
-</body>
+</main></body>
 </html>

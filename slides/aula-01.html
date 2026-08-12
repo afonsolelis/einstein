@@ -596,10 +596,10 @@
     <div class="slide slide-content" data-lesson-section="objectives">
       <h2>Ao final deste laboratório, você será capaz de…</h2>
       <ul>
-        <li><strong>Criar e organizar</strong> um notebook no Google Colab.</li>
+        <li><strong>Criar e organizar</strong> um notebook no GitHub Codespaces.</li>
         <li><strong>Executar e explicar</strong> um cálculo simples em Python.</li>
         <li><strong>Distinguir</strong> células de código e de texto.</li>
-        <li><strong>Persistir dados</strong> com segurança no Google Drive.</li>
+        <li><strong>Versionar e persistir</strong> o notebook com Git e GitHub.</li>
       </ul>
     </div>
 
@@ -607,21 +607,21 @@
       <h2>Nosso roteiro de 3 horas</h2>
       <ul>
         <li><strong>Contexto:</strong> do Excel ao notebook analítico.</li>
-        <li><strong>Demonstração:</strong> Colab, células e primeiros comandos.</li>
+        <li><strong>Demonstração:</strong> Codespaces, Jupyter e primeiros comandos.</li>
         <li><strong>Prática guiada:</strong> indicadores de uma operação comercial.</li>
         <li><strong>Desafio:</strong> entregar um notebook executivo reproduzível.</li>
       </ul>
     </div>
 
-    <!-- Conteúdo: O que é o Colab -->
+    <!-- Conteúdo: O que é o Codespaces -->
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>O seu novo escritório: Google Colab</h2>
-      <p>Esqueça instalações complexas. Em Ciência de Dados, o foco é resolver problemas, não brigar com o sistema operacional do seu computador.</p>
-      <p>O <strong>Google Colab</strong> é um ambiente Jupyter Notebook hospedado na nuvem. Ele permite que você escreva e execute código Python diretamente no seu navegador, sem precisar configurar nada.</p>
+      <h2>O seu novo escritório: GitHub Codespaces</h2>
+      <p>O ambiente da turma nasce do próprio repositório: mesma versão do Python, mesmas bibliotecas e as extensões certas para todos.</p>
+      <p>O <strong>GitHub Codespaces</strong> oferece VS Code e terminal no navegador. Nele, a extensão Jupyter abre arquivos <code>.ipynb</code> e executa Python em células.</p>
       <ul>
-        <li><strong>Custo zero:</strong> O processamento ocorre nos servidores do Google, poupando a memória e a bateria do seu computador.</li>
-        <li><strong>Acesso universal:</strong> Seus códigos e análises ficam salvos no seu Google Drive. Você acessa de qualquer máquina.</li>
-        <li><strong>Potência:</strong> O Google fornece acesso gratuito a GPUs (Placas de Vídeo) poderosas para quando formos treinar modelos de Inteligência Artificial.</li>
+        <li><strong>Reprodutibilidade:</strong> <code>.devcontainer/devcontainer.json</code> descreve o ambiente.</li>
+        <li><strong>Colaboração:</strong> notebook, dados e documentação vivem no mesmo projeto versionado.</li>
+        <li><strong>Continuidade:</strong> commits enviados ao GitHub sobrevivem ao descarte da máquina virtual.</li>
       </ul>
     </div>
 
@@ -641,12 +641,12 @@
     <!-- Conteúdo: Como acessar e configurar -->
     <div class="slide slide-content">
       <h2>Criando o seu primeiro Notebook</h2>
-      <p>A configuração inicial leva menos de 2 minutos e exige apenas uma conta Google.</p>
+      <p>O repositório já instala Python, Jupyter, Pandas e as extensões necessárias automaticamente.</p>
       <ul>
-        <li>Acesse o endereço: <code>colab.research.google.com</code></li>
-        <li>Faça login com a sua conta Google (Gmail ou corporativo).</li>
-        <li>Na janela inicial que se abrir, clique no botão azul <strong>"Novo notebook"</strong> no canto inferior esquerdo.</li>
-        <li>Pronto! Você verá uma tela branca com uma barra cinza (célula de código). Clique no título superior esquerdo (provavelmente "Untitled0.ipynb") e renomeie para <strong>Aula_01_Introducao.ipynb</strong>.</li>
+        <li>No GitHub, abra o repositório e escolha <strong>Code → Codespaces → Create codespace</strong>.</li>
+        <li>Aguarde o comando de configuração terminar no terminal.</li>
+        <li>Crie <code>Aula_01_SeuNome.ipynb</code> pelo Explorer e abra o arquivo.</li>
+        <li>Em <strong>Select Kernel</strong>, escolha o ambiente Python sugerido pelo Codespace.</li>
       </ul>
     </div>
 
@@ -656,7 +656,7 @@
         <li>Renomeie o notebook para <code>Aula_01_SeuNome.ipynb</code>.</li>
         <li>Calcule faturamento, custo e margem de uma filial.</li>
         <li>Inclua uma célula Markdown com uma recomendação de negócio.</li>
-        <li>Salve no Drive e compartilhe o link conforme orientação do professor.</li>
+        <li>Salve, faça commit e envie a alteração ao GitHub.</li>
       </ul>
       <p><strong>Critério de pronto:</strong> todas as células executam em ordem e a recomendação cita pelo menos um indicador calculado.</p>
     </div>
@@ -667,21 +667,21 @@
         <li>Um ambiente de análise acessível pelo navegador.</li>
         <li>Um primeiro cálculo de negócio em Python.</li>
         <li>Um documento que combina narrativa, código e resultado.</li>
-        <li>Um fluxo seguro de persistência no Google Drive.</li>
+        <li>Um fluxo seguro de persistência com commit e push.</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="next-steps">
       <h2>Próximo laboratório</h2>
-      <p>Vamos transformar valores isolados em <strong>dados estruturados</strong>: listas, dicionários, tabelas e DataFrames para organizar informações de gestão.</p>
-      <p>Chegue com o notebook de hoje salvo e acessível no Drive.</p>
+      <p>Vamos entender <strong>Git como um grafo</strong>: commits, branches, diferenças e integração de mudanças.</p>
+      <p>Chegue com o notebook salvo no repositório e o Codespace interrompido; ele será nosso primeiro artefato versionado.</p>
     </div>
 
     <!-- Conteúdo: Python Básico -->
     <div class="slide slide-content">
       <h2>Por que Python? E como executar?</h2>
       <p>O Python é a língua franca dos negócios modernos porque sua leitura é quase como inglês básico. Diferente de linguagens antigas, não há dezenas de caracteres complexos.</p>
-      <p>No Colab, digite o código abaixo na célula e pressione <code>Shift + Enter</code> (ou clique no botão de "Play" ao lado da célula) para executar e ver o resultado instantaneamente logo abaixo.</p>
+      <p>No Jupyter do Codespaces, digite o código abaixo e pressione <code>Shift + Enter</code> (ou clique em ▶) para executar a célula.</p>
       <div class="code-block">
         <span class="code-comment"># Isso é um comentário. O Python ignora o que vem depois da hashtag.</span><br>
         <span class="code-comment"># Vamos criar variáveis e calcular um faturamento simples</span><br>
@@ -697,7 +697,7 @@
     <!-- Conteúdo: Células de Texto -->
     <div class="slide slide-content">
       <h2>Células de Código vs Células de Texto</h2>
-      <p>Um grande diferencial dos Notebooks (como o Colab) é que eles são documentos vivos. Você não entrega um arquivo cheio de códigos feios para o seu diretor. Você intercala texto e matemática.</p>
+      <p>Notebooks Jupyter são documentos vivos: intercalam narrativa, código executável e resultados em um único arquivo versionável.</p>
       <ul>
         <li><strong>Célula de Código:</strong> Onde escrevemos Python (cálculos, inteligência artificial, importação de bases).</li>
         <li><strong>Célula de Texto:</strong> Onde escrevemos textos explicativos, títulos e relatórios utilizando a linguagem <em>Markdown</em>.</li>
@@ -705,37 +705,35 @@
       <p><strong>Atalhos valiosos no teclado:</strong></p>
       <ul>
         <li><code>Shift + Enter</code>: Executa a célula atual e pula para a próxima.</li>
-        <li><code>Ctrl + M + B</code>: Cria uma nova célula de <strong>Código</strong> abaixo.</li>
-        <li><code>Ctrl + M + M</code>: Transforma a célula atual em uma célula de <strong>Texto</strong>.</li>
+        <li><strong>+ Code:</strong> cria uma célula de código.</li>
+        <li><strong>+ Markdown:</strong> cria uma célula de texto formatado.</li>
       </ul>
     </div>
 
-    <!-- Conteúdo: Integrando com Google Drive -->
+    <!-- Conteúdo: Persistência no GitHub -->
     <div class="slide slide-content">
-      <h2>Aviso Crítico: Onde estão meus arquivos?</h2>
-      <p>Como o Google Colab é uma máquina emprestada do Google, toda vez que você fecha a aba, a máquina é "destruída". <strong>Quaisquer arquivos de dados (como planilhas) que você fez upload temporário serão apagados.</strong></p>
-      <p>Para resolver isso, nós "montamos" o seu Google Drive dentro do Colab. Assim, o Colab consegue ler as planilhas da sua conta de forma segura e permanente.</p>
+      <h2>Aviso crítico: salvar não é versionar</h2>
+      <p>Salvar preserva o arquivo no Codespace; <strong>commit + push</strong> registra e envia seu trabalho ao GitHub. Um Codespace apagado leva consigo alterações não enviadas.</p>
+      <p>Use o terminal ao concluir cada etapa relevante:</p>
       <div class="code-block">
-        <span class="code-comment"># Conectando o Colab ao seu Google Drive</span><br>
-        <span class="code-keyword">from</span> google.colab <span class="code-keyword">import</span> drive<br>
-        drive.mount(<span class="code-string">'/content/drive'</span>)<br>
-        <br>
-        <span class="code-comment"># Ao rodar (Shift+Enter), uma janela pedirá autorização.</span><br>
-        <span class="code-comment"># Aceite para dar permissão de leitura ao Colab.</span>
+        git status<br>
+        git add Aula_01_SeuNome.ipynb<br>
+        git commit -m <span class="code-string">"Entrega notebook da aula 1"</span><br>
+        git push
       </div>
     </div>
 
     <!-- Conteúdo: Lendo Dados -->
     <div class="slide slide-content">
       <h2>Carregando sua primeira base de dados</h2>
-      <p>Após conectar o Google Drive, podemos usar a biblioteca <strong>Pandas</strong> para ler planilhas que estão salvas em alguma pasta do seu Drive.</p>
+      <p>Arquivos do repositório usam caminhos relativos. Coloque a base na mesma pasta do notebook ou em uma pasta <code>dados/</code>.</p>
       <div class="code-block">
         <span class="code-comment"># Importamos a biblioteca Pandas (a mais usada no mundo para dados tabulares)</span><br>
         <span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br>
         <br>
         <span class="code-comment"># Lemos um arquivo CSV (nossa base de clientes, por exemplo)</span><br>
-        <span class="code-comment"># Lembre-se de ajustar o caminho da pasta onde você salvou no Drive!</span><br>
-        tabela = pd.read_csv(<span class="code-string">'/content/drive/MyDrive/Aulas_Einstein/clientes.csv'</span>)<br>
+        <span class="code-comment"># Caminho relativo ao diretório de trabalho do notebook</span><br>
+        tabela = pd.read_csv(<span class="code-string">'dados/clientes.csv'</span>)<br>
         <br>
         <span class="code-comment"># Mostra as 5 primeiras linhas da tabela</span><br>
         tabela.head()

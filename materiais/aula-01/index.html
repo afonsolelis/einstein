@@ -77,19 +77,19 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 1</div>
-      <h1>Seu primeiro ambiente de Dados: Google Colab</h1>
+      <h1>Seu primeiro ambiente de Dados: GitHub Codespaces + Jupyter</h1>
     </div>
     
     <div class="content">
-      <p class="desc">Bem-vindo(a) ao seu primeiro laboratório teórico e prático. Este material foi desenhado como um guia definitivo (Wiki) que não apenas explica <em>como</em> apertar botões, mas revela o <em>porquê</em> das escolhas tecnológicas do mercado financeiro e de tecnologia atual. Estudaremos desde a evolução da análise de dados até os primeiros scripts que você rodará na nuvem.</p>
+      <p class="desc">Neste laboratório, você transformará um repositório GitHub em um ambiente de análise reproduzível. O Codespaces fornece o computador na nuvem, o VS Code organiza o projeto e o Jupyter combina explicação, código e resultados no mesmo arquivo.</p>
 
       <h2 data-lesson-section="objectives">Objetivos de aprendizagem</h2>
-      <p>Ao concluir o laboratório, você deverá conseguir criar e organizar um notebook no Google Colab, executar e explicar cálculos simples em Python, diferenciar células de código e texto e manter arquivos persistentes no Google Drive.</p>
+      <p>Ao concluir o laboratório, você deverá conseguir iniciar o ambiente configurado pelo repositório, criar e executar um notebook Jupyter, explicar cálculos simples em Python e persistir o trabalho com Git e GitHub.</p>
       <ul>
         <li><strong>Criar</strong> um notebook com nome e estrutura padronizados.</li>
         <li><strong>Calcular</strong> indicadores básicos de uma operação comercial.</li>
         <li><strong>Documentar</strong> a análise com uma recomendação executiva.</li>
-        <li><strong>Salvar e compartilhar</strong> o artefato sem expor dados indevidos.</li>
+        <li><strong>Versionar e enviar</strong> o artefato sem expor dados, senhas ou tokens.</li>
       </ul>
       
       <h2 data-lesson-section="concepts">1. Uma Breve História da Análise de Dados</h2>
@@ -108,32 +108,40 @@
       <p>Em 1991, o matemático holandês <strong>Guido van Rossum</strong> criou uma linguagem de programação durante as festas de fim de ano para manter-se ocupado. Seu objetivo era criar uma linguagem que fosse legível como o inglês, focada no ser humano e não na máquina. Ele a batizou de <strong>Python</strong> (em homenagem ao grupo de comédia britânico Monty Python).</p>
       <p>Por quase 20 anos, o Python foi apenas mais uma linguagem no mercado. Porém, com a explosão do Big Data, pesquisadores começaram a adotar o Python devido à sua sintaxe limpa para criar bibliotecas estatísticas. Hoje, o Python "venceu" a guerra contra linguagens antigas (como R e SAS) por ser uma <em>linguagem de propósito geral</em>: com Python você pode treinar uma IA, construir um site ou hackear um servidor.</p>
 
-      <h2>4. O Ecossistema: Jupyter e Colab</h2>
-      <p>O maior desafio de programar Python era que os scripts ficavam em telas pretas assustadoras (terminais). Para popularizar a Ciência de Dados, cientistas criaram o <strong>Projeto Jupyter</strong>, que inventou o conceito de <strong>Notebook</strong>: um documento vivo onde se intercala texto explicativo, código executável e gráficos visuais.</p>
-      <p>Evoluindo isso, o <strong>Google Colab</strong> é a versão definitiva desse ecossistema. É um Jupyter Notebook hospedado diretamente nos potentes servidores do Google.</p>
+      <h2>4. O ecossistema: GitHub, Codespaces e Jupyter</h2>
+      <p>O <strong>Projeto Jupyter</strong> popularizou o notebook: um documento que intercala texto explicativo, código executável e resultados. O <strong>GitHub Codespaces</strong> complementa esse formato com um VS Code hospedado na nuvem, terminal, Git e configuração reproduzível definida no próprio repositório.</p>
+      <p>Neste curso, o arquivo <code>.devcontainer/devcontainer.json</code> descreve a imagem Python, as extensões do VS Code e o comando que instala <code>requirements.txt</code>. Quando cada estudante cria um Codespace, essa receita prepara Jupyter, Pandas, NumPy, Matplotlib, Seaborn, scikit-learn e OpenPyXL automaticamente.</p>
       
-      <h3>Vantagens Incontestáveis do Colab</h3>
+      <h3>Por que usar este ambiente</h3>
       <ul>
-        <li><strong>Custo Zero de Hardware:</strong> Seu código roda em computadores no Vale do Silício. Seu notebook velho pode treinar uma IA bilionária sem sequer acionar a ventoinha local.</li>
-        <li><strong>Acesso Universal:</strong> Como tudo roda no navegador e salva no Google Drive, você pode codar do PC do escritório, do laptop de casa ou até do iPad.</li>
-        <li><strong>GPUs Gratuitas:</strong> O Google fornece Placas de Vídeo (GPUs e TPUs) de altíssimo custo gratuitamente para pesquisas e estudos.</li>
+        <li><strong>Mesma base para a turma:</strong> reduz diferenças entre Windows, macOS e Linux.</li>
+        <li><strong>Projeto completo:</strong> código, notebooks, dados e documentação ficam juntos.</li>
+        <li><strong>Histórico verificável:</strong> commits mostram o que mudou, quando e por quê.</li>
+        <li><strong>Transição profissional:</strong> o fluxo já introduz editor, terminal, dependências e versionamento.</li>
       </ul>
 
       <div class="alert-box">
-        <h4>Atenção Crítica: A Efemeridade da Máquina</h4>
-        <p>A máquina que o Google lhe empresta é descartável. Se você fizer o upload direto de uma planilha pela barra lateral e fechar a aba do navegador, a máquina é apagada e <strong>você perde seus arquivos</strong>. A única forma segura de ler dados no Colab é integrando-o permanentemente ao seu <strong>Google Drive</strong>.</p>
+        <h4>Atenção: uso, persistência e custo</h4>
+        <p>Fechar a aba não interrompe imediatamente o Codespace. Pare-o ao terminar para não consumir processamento. Arquivos salvos permanecem no Codespace enquanto ele existir, mas somente <strong>commit + push</strong> garante que o trabalho esteja no repositório remoto. Contas e políticas institucionais podem ter cotas diferentes.</p>
       </div>
 
-      <h2 data-lesson-section="guided-practice">5. Hands-On: A Primeira Conexão</h2>
-      <p>Sempre que iniciar um projeto sério no Colab, o seu primeiro passo absoluto deve ser conectar a máquina virtual à sua conta do Google Drive real. Insira o código abaixo em uma <strong>célula de código</strong> no topo do seu projeto e execute-a.</p>
+      <h2 data-lesson-section="guided-practice">5. Hands-On: criar o Codespace e validar o ambiente</h2>
+      <ol>
+        <li>Entre no GitHub e abra o repositório indicado pelo professor.</li>
+        <li>Escolha <strong>Code → Codespaces → Create codespace</strong>.</li>
+        <li>Aguarde o terminal concluir o <code>postCreateCommand</code>.</li>
+        <li>Crie <code>Aula_01_SeuNome.ipynb</code> no Explorer.</li>
+        <li>Abra o notebook e, em <strong>Select Kernel</strong>, escolha o Python do Codespace.</li>
+      </ol>
+      <p>Na primeira célula de código, valide as versões carregadas:</p>
       
       <div class="code-block">
-        <span class="code-comment"># 'from' e 'import' puxam ferramentas prontas da nuvem do Google</span><br>
-        <span class="code-keyword">from</span> google.colab <span class="code-keyword">import</span> drive<br><br>
-        <span class="code-comment"># Monta a sua pasta virtual do Drive para leitura</span><br>
-        drive.mount(<span class="code-string">'/content/drive'</span>)
+        <span class="code-keyword">import</span> sys<br>
+        <span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>
+        <span class="code-keyword">print</span>(<span class="code-string">"Python:"</span>, sys.version.split()[0])<br>
+        <span class="code-keyword">print</span>(<span class="code-string">"Pandas:"</span>, pd.__version__)
       </div>
-      <p><em>Nota: Uma janela aparecerá pedindo autorização (OAuth). Você deve aceitar para permitir que o Python acesse seus arquivos.</em></p>
+      <p>Se o kernel não aparecer, abra a paleta com <code>Ctrl + Shift + P</code>, execute <strong>Notebook: Select Notebook Kernel</strong> e escolha um ambiente Python. Se a configuração do repositório mudou, use <strong>Codespaces: Rebuild Container</strong>.</p>
 
       <h2>6. Hands-On: Mergulhando no Python de Negócios</h2>
       <p>Agora que você tem um ambiente de trabalho configurado, veja a elegância e a simplicidade da sintaxe do Python aplicada a cenários corporativos.</p>
@@ -177,8 +185,8 @@
         <span class="code-comment"># 'pd' é o apelido universal (alias) do Pandas</span><br>
         <span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd<br><br>
         
-        <span class="code-comment"># 1. Carregando os dados de um CSV salvo no seu Drive</span><br>
-        df_clientes = pd.read_csv(<span class="code-string">'/content/drive/MyDrive/Aulas/clientes.csv'</span>)<br><br>
+        <span class="code-comment"># 1. Carregando um CSV versionado no projeto</span><br>
+        df_clientes = pd.read_csv(<span class="code-string">'dados/clientes.csv'</span>)<br><br>
         
         <span class="code-comment"># 2. Exibe as 5 primeiras linhas para inspeção</span><br>
         <span class="code-keyword">print</span>(<span class="code-string">"Visualizando os primeiros dados:"</span>)<br>
@@ -190,14 +198,19 @@
         df_clientes.describe()
       </div>
 
-      <h2>8. Atalhos Produtivos para o Dia a Dia</h2>
-      <p>Quem domina as ferramentas ganha velocidade impressionante na análise. No teclado do Colab, decore estes atalhos fundamentais:</p>
+      <h2>8. Jupyter no VS Code e persistência com Git</h2>
+      <p>No editor de notebooks, use os botões <strong>+ Code</strong> e <strong>+ Markdown</strong>. <code>Shift + Enter</code> executa a célula atual e avança. Antes de entregar, salve o arquivo e registre a versão no terminal:</p>
+      <div class="code-block">
+        git status<br>
+        git add Aula_01_SeuNome.ipynb<br>
+        git commit -m <span class="code-string">"Entrega notebook da aula 1"</span><br>
+        git push
+      </div>
       <ul>
-        <li><code>Shift + Enter</code>: Executa a célula em foco e imediatamente pula para a linha abaixo.</li>
-        <li><code>Ctrl + M + B</code>: Insere uma nova <strong>célula de código</strong> abaixo do seu cursor (<em>Below</em>).</li>
-        <li><code>Ctrl + M + M</code>: Converte a célula em foco para formato de <strong>Texto formatado (Markdown)</strong>.</li>
-        <li><code>Ctrl + M + Y</code>: Converte a célula de volta para formato de <strong>Código Python</strong>.</li>
-        <li><code>Ctrl + M + D</code>: Deleta a célula atual instantaneamente.</li>
+        <li><strong>Salvar</strong> atualiza o arquivo dentro do Codespace.</li>
+        <li><strong>Commit</strong> cria um marco local com mensagem.</li>
+        <li><strong>Push</strong> envia os commits para o GitHub.</li>
+        <li><strong>Stop codespace</strong> interrompe o processamento; fechar a aba não equivale a parar.</li>
       </ul>
 
       <h2 data-lesson-section="challenge">9. Desafio: Notebook Executivo</h2>
@@ -212,7 +225,7 @@
         <span class="code-keyword">print</span>(<span class="code-string">f"Faturamento: R$ {faturamento:,.2f}"</span>)<br>
         <span class="code-keyword">print</span>(<span class="code-string">f"Margem: {margem:.1%}"</span>)
       </div>
-      <p><strong>Entrega:</strong> compartilhe o link conforme a orientação do professor. O notebook está pronto quando todas as células executam de cima para baixo sem erro e a recomendação cita pelo menos um indicador calculado.</p>
+      <p><strong>Entrega:</strong> faça commit e push conforme a orientação do professor. O notebook está pronto quando todas as células executam de cima para baixo sem erro e a recomendação cita pelo menos um indicador calculado.</p>
 
       <h2 data-lesson-section="checklist">10. Checklist antes de entregar</h2>
       <ul>
@@ -221,14 +234,16 @@
         <li>Os cálculos executam em ordem, sem depender de uma célula oculta.</li>
         <li>Valores monetários e percentuais estão formatados.</li>
         <li>O notebook não contém senhas, tokens nem dados pessoais.</li>
+        <li><code>git status</code> confirma que a entrega foi registrada e o commit foi enviado.</li>
+        <li>O Codespace foi interrompido após a aula.</li>
       </ul>
 
       <h2 data-lesson-section="summary">11. Síntese</h2>
-      <p>Você configurou um ambiente analítico na nuvem, representou informações com variáveis, aplicou regras de negócio e combinou narrativa e código em um notebook reproduzível. Esse fluxo — pergunta, dados, cálculo e recomendação — será repetido e ampliado durante toda a disciplina.</p>
+      <p>Você iniciou um ambiente analítico reproduzível, selecionou um kernel Jupyter, representou informações com variáveis, aplicou regras de negócio e versionou um notebook. Esse fluxo — ambiente, pergunta, dados, cálculo, recomendação e commit — será repetido durante a disciplina.</p>
 
       <h2 data-lesson-section="next-steps">12. Continuidade</h2>
-      <p>No próximo laboratório, valores isolados serão organizados em listas, dicionários e DataFrames. Guarde o notebook deste laboratório no Drive: ele servirá como ponto de partida para estruturar uma pequena base de gestão.</p>
-      <p>Para aprofundar, consulte a documentação oficial do Colab pelo menu <strong>Ajuda</strong> do próprio ambiente e experimente alterar os valores do desafio, observando como os indicadores respondem.</p>
+      <p>No próximo laboratório, o notebook será usado para compreender Git como um grafo de versões. Você criará branches, comparará commits e testará uma mudança assistida por IA com revisão humana.</p>
+      <p>Para aprofundar, consulte a documentação oficial do <strong>GitHub Codespaces</strong> e de <strong>Jupyter no VS Code</strong>. Como contingência para indisponibilidade de conta ou internet instável, o mesmo <code>devcontainer.json</code> pode ser usado localmente com VS Code e Dev Containers.</p>
       
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

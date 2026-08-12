@@ -19,7 +19,7 @@ test('cronograma e navegação cruzada apontam para a aula 2', async ({ page }) 
   const errors = watchPage(page);
   await page.goto('/index.html');
   const card = page.locator('.card').nth(1);
-  await expect(card).toContainText('Organizando informações');
+  await expect(card).toContainText('Git, grafos e versionamento');
   await expect(card.locator('.btn-slides')).toHaveAttribute('href', 'slides/aula-02.html');
   await card.locator('.btn-slides').click();
   await expect(page).toHaveURL(/\/slides\/aula-02\.html$/);

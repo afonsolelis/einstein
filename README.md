@@ -48,7 +48,7 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 | # | Data | Tema |
 |---|------|------|
 | 1 | 12/08 | Primeiros passos: Configurando sua ferramenta de análise |
-| 2 | 19/08 | Organizando informações: Dados estruturados para gestão |
+| 2 | 19/08 | Git, grafos e versionamento com Inteligência Artificial |
 | 3 | 26/08 | Limpeza de dados: Preparando a base para análises |
 | 4 | 02/09 | Entendendo o cenário: Estatística para gestão de negócios |
 | 5 | 09/09 | Storytelling, Dashboards e Segmentação de Clientes |
@@ -96,6 +96,17 @@ declarado no próprio arquivo.
 ---
 
 ## 🚀 Como usar
+
+### Ambiente de dados no GitHub Codespaces
+
+O repositório contém uma configuração em `.devcontainer/devcontainer.json`. Ao criar
+um Codespace, o ambiente instala automaticamente Python, Jupyter e as bibliotecas de
+`requirements.txt`, além das extensões Python e Jupyter do VS Code.
+
+1. No GitHub, selecione `Code → Codespaces → Create codespace`.
+2. Aguarde a instalação das dependências terminar.
+3. Abra ou crie um arquivo `.ipynb` e selecione o kernel Python sugerido.
+4. Ao terminar, faça commit e push das mudanças e interrompa o Codespace.
 
 ### Visualizar localmente
 
