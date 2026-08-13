@@ -19,7 +19,8 @@ Os materiais são focados em leitura longa e impressão, portanto devem usar **E
 - **Tipografia**: `Outfit` para textos e `Fira Code` para blocos de código.
 - **Cores**: Fundo principal `#f4f8fb`, container `#ffffff`, textos principais escuros `#334155` e `#1a2f5e`.
 - **Botão de Impressão**: O rodapé DEVE conter `<button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>`.
-- **Media Query (`@media print`)**: O CSS DEVE conter regras para impressão (remover fundos, sombras, esconder a div `.actions`, usar fontes pretas em fundo branco).
+- **Controles Flutuantes**: O `<body>` DEVE começar com a `<nav class="floating-nav">` fixa no topo, com atalhos para o cronograma, para os slides da aula e para impressão. Ela acompanha a rolagem e some na impressão.
+- **Media Query (`@media print`)**: O CSS DEVE conter regras para impressão (remover fundos, sombras, esconder a div `.actions` e a `.floating-nav`, usar fontes pretas em fundo branco).
 - **Favicon**: Incluir sempre `<link rel="icon" type="image/png" href="../../assets/einstein-logo.png">` no `<head>`.
 
 ## 3. Template Base HTML/CSS
@@ -79,17 +80,38 @@ Sempre utilize o código abaixo como estrutura base exata do Material:
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
 
+    /* Controles flutuantes de navegacao */
+    .floating-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid #e2ebf2; border-radius: 999px; box-shadow: 0 10px 30px rgba(26,47,94,0.14); max-width: calc(100% - 1.5rem); }
+    .floating-nav a, .floating-nav button { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1.15rem; border-radius: 999px; border: 1px solid transparent; font-family: 'Outfit', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; cursor: pointer; transition: all 0.25s; }
+    .floating-nav .nav-home { background: #ffffff; color: #64748b; border-color: #e2ebf2; }
+    .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
+    .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
+    .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
+    .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
+    body { padding-top: 6rem; }
+
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
       .actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
+      .floating-nav { top: 0.6rem; gap: 0.35rem; padding: 0.35rem; }
+      .floating-nav a, .floating-nav button { width: auto; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
+      body { padding-top: 4.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .floating-nav .nav-label { display: none; }
+      .floating-nav a, .floating-nav button { padding: 0.55rem 0.85rem; font-size: 1rem; }
     }
 
     @media print {
       body { background: white; padding: 0; display: block; font-size: 12pt; }
       .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
       .header, .content { padding: 1rem 0; }
-      .actions, .btn-print, .btn-home, .btn-slides { display: none !important; }
+      .actions, .btn-print, .btn-home, .btn-slides, .floating-nav { display: none !important; }
+      body { padding-top: 0 !important; }
       h1, h2, h3 { color: black !important; break-after: avoid; }
       .badge { border: 1px solid #ccc; color: black; background: white; }
       .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
@@ -100,6 +122,11 @@ Sempre utilize o código abaixo como estrutura base exata do Material:
   </style>
 </head>
 <body>
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
+    <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
+    <a href="../../slides/aula-{{AULA_NUMERO}}.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
+  </nav>
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO {{AULA_NUMERO}}</div>
@@ -139,4 +166,4 @@ Sempre utilize o código abaixo como estrutura base exata do Material:
 ```
 
 ## 4. Navegação Offline
-A div `actions` **DEVE SEMPRE** conter os arquivos nomeados de forma exata terminando em `.html` (`../../index.html` e `../../slides/aula-XX.html`) para habilitar navegação offline com `file://`.
+A div `actions` e a `nav.floating-nav` **DEVEM SEMPRE** conter os arquivos nomeados de forma exata terminando em `.html` (`../../index.html` e `../../slides/aula-XX.html`) para habilitar navegação offline com `file://`.
