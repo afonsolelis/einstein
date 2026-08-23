@@ -388,6 +388,8 @@
       text-transform: uppercase;
       letter-spacing: .4px;
     }
+    .tag + .tag { margin-left: .35rem; }
+    .tag-ai { color: #087466; background: #e3f8f3; }
     .actions {
       display: flex;
       gap: .8rem;
@@ -419,6 +421,12 @@
       border: 1px solid var(--border);
     }
     .btn-mat:hover { background: #e2ebf3; }
+    .btn-data {
+      color: #075b53;
+      border: 1px solid rgba(0, 163, 137, .25);
+      background: linear-gradient(135deg, #dff8f2, #ecfbf8);
+    }
+    .btn-data:hover { background: #d2f2eb; }
 
     /* ---------- Footer ---------- */
     footer {
@@ -541,11 +549,19 @@
       { n: 19, data: "16/12", tema: "Apresentação final de projetos", tag: "Apresentação" },
     ];
 
+    const recursosAulas = {
+      3: {
+        destaque: "Antigravity",
+        dados: "materiais/aula-03/dados/hospital_patients_real_world.csv"
+      }
+    };
+
     const pad = n => String(n).padStart(2, "0");
     const grid = document.getElementById("grid");
 
     grid.innerHTML = aulas.map(a => {
       const id = pad(a.n);
+      const recursos = recursosAulas[a.n] || {};
       return `
       <article class="card">
         <div class="card-top">
@@ -558,10 +574,12 @@
           <div class="card-info">
             <h3>${a.tema}</h3>
             <span class="tag">${a.tag}</span>
+            ${recursos.destaque ? `<span class="tag tag-ai">${recursos.destaque}</span>` : ''}
           </div>
           <div class="actions">
             <a class="btn btn-slides" href="slides/aula-${id}.html">📊 Slides</a>
             <a class="btn btn-mat" href="materiais/aula-${id}/index.html">📎 Materiais</a>
+            ${recursos.dados ? `<a class="btn btn-data" href="${recursos.dados}" download="hospital_patients_real_world.csv">⬇️ Baixar base</a>` : ''}
           </div>
         </div>
       </article>`;
