@@ -18,7 +18,7 @@ class LessonStandardTests(unittest.TestCase):
                 self.assertEqual([], MODULE.validate(ROOT, lesson))
 
     def test_completed_lessons_are_complete(self):
-        for lesson in (1, 2, 3):
+        for lesson in (1, 2, 3, 4):
             with self.subTest(lesson=lesson):
                 self.assertEqual([], MODULE.validate(ROOT, lesson, complete=True))
 
