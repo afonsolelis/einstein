@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,24 +411,155 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+    .group-note { position: relative; z-index: 1; margin-top: 0.2rem; color: var(--muted); font-size: clamp(0.8rem, 1.1vw, 0.95rem); }
+    .link-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0.6rem; width: min(100%, 1120px); margin-top: 0.5rem; }
+    .link-row .download-link { margin-top: 0; font-size: clamp(0.78rem, 1.05vw, 0.95rem); padding: 0.65rem 0.9rem; }
+
   </style>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 4 · 02/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Entendendo o cenário: Estatística para gestão de negócios</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Calcular medidas descritivas adequadas ao tipo de variável</li><li>Comparar grupos sem ocultar dispersão e tamanho da amostra</li><li>Traduzir resultados estatísticos em decisões gerenciais</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Estatística descritiva resume o que ocorreu; média, mediana, quantis e desvio-padrão respondem perguntas diferentes e precisam de contexto.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Média é sensível a extremos; mediana descreve melhor distribuições assimétricas</li><li>Dispersão revela risco que um valor central esconde</li><li>Segmentar por canal, região ou produto evita conclusões agregadas enganosas</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
-vendas = pd.read_csv("vendas.csv")
-resumo = vendas.groupby("regiao")["margem"].agg(["count","mean","median","std"])
-print(resumo.round(2))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Calcule um painel descritivo por região, identifique dois padrões e teste se eles persistem ao trocar média por mediana.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar uma tabela descritiva e um memorando de três parágrafos com achado, risco de interpretação e decisão sugerida.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Nenhuma medida isolada conta a história: centro, dispersão, distribuição e contexto formam o diagnóstico.</p><ul><li>Conferir unidade e população de cada indicador</li><li>Mostrar tamanho da amostra junto ao resumo</li><li>Usar mediana quando extremos dominarem a média</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, converteremos diagnósticos em narrativas visuais e segmentos acionáveis.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 4</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 4 · 02/09</div>
+      <h1>Estatística descritiva para decisão gerencial</h1>
+      <p>Auditoria de um parecer executivo produzido por inteligência artificial</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Ao final, você será capaz de…</h2>
+      <ul><li><strong>Calcular</strong> medidas de posição, dispersão e forma adequadas ao caso.</li><li><strong>Distinguir</strong> média ponderada de média de médias e demonstrar o efeito.</li><li><strong>Estratificar</strong> comparações e aplicar padronização direta.</li><li><strong>Avaliar</strong> a estabilidade de um indicador diante do tamanho da amostra.</li><li><strong>Redigir</strong> um memorando em que cada recomendação remete a uma evidência.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Roteiro de 3 horas</h2>
+      <ul><li>O parecer sob auditoria e o contrato de trabalho.</li><li>Rodada 1: três comitês, três recortes, três pareceres.</li><li>Confronto das conclusões divergentes.</li><li>Rodada 2: base completa, ponderação, estratificação, forma e desfecho.</li><li>Tabela executiva, memorando e veredito da turma.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Case: a Diretoria recebeu uma recomendação</h2>
+      <p>A Rede Vita registrou 5.838 internações em quatro unidades. Um assistente de IA analisou o painel de operações e recomendou replicar o protocolo de uma unidade, ampliar outra e condicionar o orçamento de uma terceira.</p>
+      <ul><li><strong>Decisão em jogo:</strong> realocação orçamentária e meta de permanência.</li><li><strong>Papel da turma:</strong> comitê de auditoria estatística.</li><li><strong>Regra:</strong> reproduzir o número antes de contestá-lo.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>O ranking sob auditoria</h2>
+      <div class="metric-row"><div class="metric"><strong>3,35</strong><span>Oeste · 1º</span></div><div class="metric"><strong>4,50</strong><span>Norte · 2º</span></div><div class="metric"><strong>6,86</strong><span>Sul · 3º</span></div><div class="metric"><strong>7,28</strong><span>Leste · 4º</span></div></div>
+      <p>Permanência média em dias, conforme o parecer. Nenhum desses números foi inventado: todos podem ser reproduzidos a partir do painel entregue ao assistente.</p>
+      <a class="download-link" href="../materiais/aula-04/dados/relatorio_executivo_ia.md" download="relatorio_executivo_ia.md">⬇️ Baixar o parecer auditado</a>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>A base desta aula</h2>
+      <div class="metric-row"><div class="metric"><strong>5.838</strong><span>internações sintéticas</span></div><div class="metric"><strong>4</strong><span>unidades</span></div><div class="metric"><strong>9</strong><span>colunas</span></div><div class="metric"><strong>14</strong><span>meses de altas</span></div></div>
+      <p>Base gerada com semente fixa e biblioteca padrão do Python. Nenhum registro corresponde a paciente, unidade ou operação real.</p>
+      <a class="download-link" href="../materiais/aula-04/dados/rede_vita_internacoes.csv" download="rede_vita_internacoes.csv">⬇️ Baixar rede_vita_internacoes.csv</a>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Rodada 1: três comitês, três recortes</h2>
+      <ul><li><strong>Grupo A · Operações:</strong> painel agregado por unidade e mês.</li><li><strong>Grupo B · Clínico:</strong> registros de Norte e Sul, com gravidade.</li><li><strong>Grupo C · Riscos:</strong> registros de Norte, Leste e Oeste, com reinternação.</li></ul>
+      <p class="group-note">Mesma operação, mesma pergunta: qual unidade deve ser a referência de eficiência da rede?</p>
+      <div class="link-row"><a class="download-link" href="../materiais/aula-04/dados/grupo_a_painel_operacoes.csv" download="grupo_a_painel_operacoes.csv">⬇️ Grupo A</a><a class="download-link" href="../materiais/aula-04/dados/grupo_b_registros_clinicos.csv" download="grupo_b_registros_clinicos.csv">⬇️ Grupo B</a><a class="download-link" href="../materiais/aula-04/dados/grupo_c_registros_risco.csv" download="grupo_c_registros_risco.csv">⬇️ Grupo C</a></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Contrato da auditoria</h2>
+      <ul><li>Reproduzir o número auditado com o método declarado pelo autor.</li><li>Não descartar registro sem critério explícito e registrado.</li><li>Separar o que é cálculo do que é recomendação.</li><li>Não apresentar associação observada como relação causal.</li><li>Toda afirmação do memorando remete a uma linha de tabela.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Quatro medidas, quatro perguntas</h2>
+      <ul><li><strong>Posição:</strong> qual é o caso típico? Média e mediana.</li><li><strong>Dispersão:</strong> quanto os casos variam? Desvio-padrão e quantis.</li><li><strong>Forma:</strong> a distribuição tem um centro só? Histograma.</li><li><strong>Peso:</strong> cada grupo entra na conta pelo seu tamanho? Ponderação.</li></ul>
+      <p>Média de médias só coincide com a média geral quando todos os grupos têm o mesmo tamanho.</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 0 · Contrato</div><h2>Planeje antes de calcular</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como analista de apoio de um comitê de auditoria estatística. Leia @relatorio_executivo_ia.md e o arquivo do meu comitê, mas ainda não edite nem crie arquivos. Apresente um plano curto e aguarde aprovação.
+
+Não altere os arquivos recebidos; não descarte registros sem critério registrado; nunca substitua um número do parecer sem antes reproduzi-lo com o método declarado nele; separe cálculo de recomendação; não afirme causalidade.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Reprodução</div><h2>Chegue ao mesmo número do parecer</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie Aula_04_SeuNome.ipynb. Carregue o arquivo do meu comitê em um DataFrame chamado recorte e mostre shape, dtypes, ausências e as cinco primeiras linhas.
+
+Em seguida, reproduza exatamente o número que o parecer atribui a cada unidade presente no meu recorte, usando o método da seção Metodologia. Não corrija nada nesta etapa.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Grupo A</div><h2>Comitê de Operações</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com o painel mensal, calcule para cada unidade a média não ponderada das médias mensais e a média ponderada pelo número de altas. Apresente as duas na mesma tabela, com a diferença em dias e em percentual, e ordene as unidades pelos dois critérios.
+
+Informe quantas linhas mensais cada unidade possui e quantas têm menos de 20 altas. Não descarte linhas: descreva o efeito delas.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Grupo B</div><h2>Comitê Clínico</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Calcule permanência média, mediana, desvio-padrão e contagem por unidade e, depois, por unidade e gravidade. Apresente a distribuição percentual dos estratos em cada unidade.
+
+Compare as duas unidades dentro de cada estrato e diga explicitamente se a ordenação por estrato coincide com a ordenação agregada.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Grupo C</div><h2>Comitê de Riscos</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Para cada unidade, calcule contagem, média, mediana, desvio-padrão, mínimo, máximo e os quantis 25, 50, 75 e 90 da permanência.
+
+Acrescente o percentual de internações com até dois dias, o percentual com dez dias ou mais e a taxa de reinternação em 30 dias. Apresente tudo em uma tabela ordenada pela média.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Confronto: três respostas incompatíveis</h2>
+      <ul><li><strong>Operações:</strong> a ordenação muda conforme o método de consolidação.</li><li><strong>Clínico:</strong> a Sul é mais rápida que a Norte em todos os estratos.</li><li><strong>Riscos:</strong> Norte e Leste têm a mesma média e distribuições incompatíveis.</li></ul>
+      <p>Nenhum comitê errou o cálculo. A conclusão gerencial foi determinada pelo recorte e pela estatística escolhida, não pela operação.</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Ponderação</div><h2>Cada mês pesa o que vale</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Calcule a permanência média de cada unidade a partir dos registros individuais e compare com os valores do parecer. Monte uma tabela com unidade, valor do parecer, média ponderada, diferença e ordenação em cada critério.
+
+Explique em duas frases por que a média das médias mensais difere da média dos registros e em que condição as duas coincidem.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Checkpoint: a ponderação inverte o ranking</h2>
+      <div class="metric-row"><div class="metric"><strong>7,28 → 4,21</strong><span>Leste: de 4º para 2º</span></div><div class="metric"><strong>4,50 → 4,32</strong><span>Norte</span></div><div class="metric"><strong>6,86 → 6,70</strong><span>Sul</span></div><div class="metric"><strong>3,35 → 3,45</strong><span>Oeste</span></div></div>
+      <ul><li>A unidade apontada como a pior é a segunda melhor sob ponderação correta.</li><li>Uma linha mensal com uma única alta de 43 dias pesava como um mês inteiro.</li><li>Meses incompletos no fim da série produzem médias instáveis.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Composição</div><h2>Compare casos comparáveis</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Compare Norte e Sul dentro de cada estrato de gravidade e apresente a composição percentual dos estratos em cada unidade.
+
+Em seguida, faça a padronização direta: recalcule a permanência média de cada unidade aplicando a composição da outra. Mostre os quatro valores e indique se a ordenação se mantém.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Checkpoint: a ordenação se inverte</h2>
+      <div class="metric-row"><div class="metric"><strong>4,32 → 7,23</strong><span>Norte com a composição da Sul</span></div><div class="metric"><strong>6,70 → 3,86</strong><span>Sul com a composição da Norte</span></div><div class="metric"><strong>8% / 40%</strong><span>casos de gravidade Alta</span></div></div>
+      <ul><li>A Sul é mais rápida em Baixa, Média e Alta, e mais lenta no agregado.</li><li>A diferença agregada mede composição de casos, não protocolo assistencial.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Mesma média, decisões distintas</h2>
+      <div class="metric-row"><div class="metric"><strong>4,32 / 4,21</strong><span>média Norte / Leste</span></div><div class="metric"><strong>3,0 / 1,0</strong><span>mediana</span></div><div class="metric"><strong>8 / 13</strong><span>quantil 90</span></div><div class="metric"><strong>6,6% / 19,5%</strong><span>internações ≥ 10 dias</span></div></div>
+      <p>A Leste opera dois processos sob o mesmo indicador: 73,0% das internações duram até dois dias e um quinto passa de dez. A média não descreve nenhum dos dois.</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Rodada 2 · Amostra</div><h2>Quantos casos sustentam o número?</h2>
+      <div class="metric-row"><div class="metric"><strong>38</strong><span>internações na Oeste</span></div><div class="metric"><strong>3,45 → 2,75</strong><span>média sem os 2 maiores casos</span></div><div class="metric"><strong>1</strong><span>evento sustenta a reinternação de 2,6%</span></div></div>
+      <ul><li>Um indicador que depende de dois registros não ordena unidades.</li><li>A descrição correta é: o volume observado não permite comparar a Oeste.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Um indicador de processo não mede desempenho</h2>
+      <div class="metric-row"><div class="metric"><strong>17,0%</strong><span>reinternação · Norte</span></div><div class="metric"><strong>10,0%</strong><span>reinternação · Sul</span></div><div class="metric"><strong>13,2%</strong><span>reinternação · Leste</span></div></div>
+      <ul><li>A menor permanência da rede convive com a maior taxa de retorno em 30 dias.</li><li>A vantagem da Sul se mantém dentro de cada estrato de gravidade.</li><li>Há associação observada; causalidade exigiria outro delineamento.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 10 · Entrega</div><h2>Uma tabela, um memorando</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Monte a tabela final de decisão com uma linha por unidade e as colunas: internações, permanência média ponderada, mediana, quantil 90, permanência padronizada, reinternação em 30 dias e custo médio. Salve em saidas/tabela_executiva.csv.
+
+Redija MEMORANDO.md com no máximo uma página: achado, evidência, risco de decidir pelo parecer original e recomendação. Toda afirmação remete a uma linha da tabela.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio: as quatro recomendações</h2>
+      <p>Responda à Diretoria sobre cada recomendação do parecer, isoladamente: executar, revisar ou suspender?</p>
+      <ul><li>Replicar o protocolo da Norte nas demais unidades.</li><li>Ampliar a capacidade da Oeste.</li><li>Condicionar o orçamento da Sul à meta de permanência.</li><li>Adotar a permanência média como indicador principal da rede.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Entrega verificável</h2>
+      <ul><li><code>Aula_04_SeuNome.ipynb</code> executado do início ao fim.</li><li><code>saidas/tabela_executiva.csv</code> e o histograma comparativo.</li><li><code>MEMORANDO.md</code> com achado, evidência, risco e recomendação.</li><li><code>REVISAO_IA.md</code> com erros identificados e sugestões rejeitadas.</li><li>Commit e push no repositório do estudante.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>O erro não estava na conta</h2>
+      <ul><li>Consolidar médias sem ponderar pelo volume.</li><li>Comparar unidades com composições de casos distintas.</li><li>Resumir distribuições heterogêneas por um único valor central.</li><li>Ordenar uma unidade de 38 registros ao lado de milhares.</li><li>Julgar desempenho por um indicador de processo isolado.</li></ul>
+    </div>
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Storytelling, dashboards e segmentação: os achados desta auditoria passam a ser comunicados a quem decide.</p>
+      <p>Antes de sair: <strong>execute tudo, revise o memorando, commit e push</strong>.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -368,6 +567,7 @@ print(resumo.round(2))</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-04/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-04/dados/rede_vita_internacoes.csv" download="rede_vita_internacoes.csv" class="ctrl-btn" title="Baixar a base completa"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -395,7 +595,7 @@ print(resumo.round(2))</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -412,6 +612,36 @@ print(resumo.round(2))</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

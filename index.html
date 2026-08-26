@@ -552,7 +552,13 @@
     const recursosAulas = {
       3: {
         destaque: "Antigravity",
-        dados: "materiais/aula-03/dados/hospital_patients_real_world.csv"
+        dados: "materiais/aula-03/dados/hospital_patients_real_world.csv",
+        dadosNome: "hospital_patients_real_world.csv"
+      },
+      4: {
+        destaque: "Auditoria",
+        dados: "materiais/aula-04/dados/rede_vita_internacoes.csv",
+        dadosNome: "rede_vita_internacoes.csv"
       }
     };
 
@@ -579,7 +585,7 @@
           <div class="actions">
             <a class="btn btn-slides" href="slides/aula-${id}.html">📊 Slides</a>
             <a class="btn btn-mat" href="materiais/aula-${id}/index.html">📎 Materiais</a>
-            ${recursos.dados ? `<a class="btn btn-data" href="${recursos.dados}" download="hospital_patients_real_world.csv">⬇️ Baixar base</a>` : ''}
+            ${recursos.dados ? `<a class="btn btn-data" href="${recursos.dados}" download="${recursos.dadosNome}">⬇️ Baixar base</a>` : ''}
           </div>
         </div>
       </article>`;
