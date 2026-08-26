@@ -305,6 +305,86 @@
     }
     .welcome p strong { color: var(--ink); }
 
+    /* ---------- Banco PostgreSQL educacional ---------- */
+    .database-access {
+      margin-bottom: 2.6rem;
+      padding: 1.6rem 1.8rem;
+      color: #e2ebf2;
+      background: radial-gradient(circle at 100% 0%, rgba(31, 111, 178, .24), #0b1120 58%);
+      border: 1px solid rgba(75, 196, 232, .24);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(11, 17, 32, .2), inset 0 1px 0 rgba(255, 255, 255, .06);
+    }
+    .database-access-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .database-access h2 { color: #fff; font-size: 1.25rem; }
+    .database-access p { color: #94a3b8; margin-top: .35rem; font-size: .92rem; }
+    .database-badge {
+      flex-shrink: 0;
+      padding: .4rem .75rem;
+      color: #4bc4e8;
+      background: rgba(0, 163, 217, .1);
+      border: 1px solid rgba(75, 196, 232, .3);
+      border-radius: 999px;
+      box-shadow: 0 0 20px rgba(0, 163, 217, .15);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .database-fields {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .75rem;
+    }
+    .database-field, .database-uri {
+      min-width: 0;
+      padding: .85rem 1rem;
+      background: rgba(15, 23, 42, .6);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-left: 3px solid #00a3d9;
+      border-radius: 12px;
+    }
+    .database-field span, .database-uri span {
+      display: block;
+      margin-bottom: .3rem;
+      color: #64748b;
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .database-field code, .database-uri code {
+      color: #e2ebf2;
+      font: 600 .82rem 'Fira Code', 'Courier New', monospace;
+      overflow-wrap: anywhere;
+    }
+    .database-uri {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: .75rem;
+    }
+    .database-uri-copy { min-width: 0; }
+    .copy-connection {
+      flex-shrink: 0;
+      padding: .55rem .8rem;
+      color: #e2ebf2;
+      background: rgba(0, 163, 217, .16);
+      border: 1px solid rgba(75, 196, 232, .3);
+      border-radius: 9px;
+      font: 700 .78rem inherit;
+      cursor: pointer;
+    }
+    .copy-connection:hover { background: rgba(0, 163, 217, .28); }
+    .copy-connection:focus-visible { outline: 3px solid #4bc4e8; outline-offset: 2px; }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -450,6 +530,10 @@
       .hero .subtitle { font-size: .95rem; }
       .welcome { padding: 1.2rem 1.2rem 1.2rem 1.4rem; gap: .9rem; margin-bottom: 2rem; }
       .welcome h2 { font-size: 1.15rem; }
+      .database-access { padding: 1.2rem; }
+      .database-access-head, .database-uri { align-items: stretch; flex-direction: column; }
+      .database-fields { grid-template-columns: 1fr 1fr; }
+      .copy-connection { width: 100%; }
       .card { flex-direction: column; }
       .card-top { padding: 1.2rem; flex-direction: row; min-width: auto; text-align: left; justify-content: flex-start; gap: 1rem; }
       .card-body { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.2rem; }
@@ -501,6 +585,27 @@
           Cada laboratório abaixo reúne os <strong>slides</strong> e os <strong>materiais de apoio</strong> do dia.
           Explorem, errem, perguntem e commitem: aprender a programar é, acima de tudo, praticar. Bons estudos! 🚀
         </p>
+      </div>
+    </section>
+
+    <section class="database-access" aria-labelledby="database-access-title">
+      <div class="database-access-head">
+        <div>
+          <h2 id="database-access-title">🐘 PostgreSQL educacional · DBeaver</h2>
+          <p>Use estes dados na criação de uma conexão PostgreSQL. Ambiente compartilhado exclusivamente para as práticas da disciplina.</p>
+        </div>
+        <span class="database-badge">Banco da turma</span>
+      </div>
+      <div class="database-fields">
+        <div class="database-field"><span>Host</span><code>altaria.proxy.rlwy.net</code></div>
+        <div class="database-field"><span>Porta</span><code>30763</code></div>
+        <div class="database-field"><span>Banco</span><code>railway</code></div>
+        <div class="database-field"><span>Usuário</span><code>postgres</code></div>
+        <div class="database-field"><span>Senha</span><code>HyayjtDaqFNSrXoguPDLSkqGzIIwzXAw</code></div>
+      </div>
+      <div class="database-uri">
+        <div class="database-uri-copy"><span>URL de conexão</span><code id="database-uri">postgresql://postgres:HyayjtDaqFNSrXoguPDLSkqGzIIwzXAw@altaria.proxy.rlwy.net:30763/railway</code></div>
+        <button class="copy-connection" id="copy-database-uri" type="button">📋 Copiar URL</button>
       </div>
     </section>
 
@@ -585,6 +690,23 @@
         </div>
       </article>`;
     }).join("");
+
+    const databaseUri = document.getElementById("database-uri");
+    const copyDatabaseUri = document.getElementById("copy-database-uri");
+    copyDatabaseUri.addEventListener("click", async () => {
+      const original = copyDatabaseUri.textContent;
+      try {
+        await navigator.clipboard.writeText(databaseUri.textContent);
+        copyDatabaseUri.textContent = "Copiado ✓";
+      } catch (error) {
+        const range = document.createRange();
+        range.selectNodeContents(databaseUri);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        copyDatabaseUri.textContent = "URL selecionada";
+      }
+      window.setTimeout(() => { copyDatabaseUri.textContent = original; }, 1800);
+    });
 
     /* QR ampliado: o link continua válido sem JS; com JS, o clique abre a lupa. */
     const qrTrigger = document.getElementById("qr-trigger");

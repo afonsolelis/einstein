@@ -18,6 +18,17 @@ test('cronograma apresenta a nova aula 3 e move limpeza para a aula 4', async ({
   await expect(page.locator('.card').nth(3).locator('.btn-data')).toHaveAttribute('href', 'materiais/aula-04/dados/hospital_patients_real_world.csv');
 });
 
+test('home apresenta a conexão PostgreSQL separada para o DBeaver', async ({ page }) => {
+  await page.goto('/index.html');
+  const connection = page.locator('.database-access');
+  await expect(connection).toContainText('altaria.proxy.rlwy.net');
+  await expect(connection).toContainText('30763');
+  await expect(connection).toContainText('railway');
+  await expect(connection).toContainText('postgres');
+  await expect(connection.locator('#database-uri')).toHaveText(/^postgresql:\/\//);
+  await expect(connection.locator('#copy-database-uri')).toBeVisible();
+});
+
 test('slides percorrem a aula e oferecem laboratório e desafio final', async ({ page }) => {
   const errors = watchPage(page);
   await page.goto('/slides/aula-03.html');
