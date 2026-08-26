@@ -4,45 +4,45 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 04</title>
+  <title>Material · 03</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
@@ -113,25 +113,13 @@
       .floating-nav { display: none !important; }
       body { padding-top: 0 !important; }
     }
-    /* Painel dos comites da rodada 1 */
-    .group-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 2rem 0; }
-    .group-card { padding: 1.5rem; border: 1px solid #dfe8f0; border-radius: 14px; background: #fbfdff; }
-    .group-card h4 { margin: 0 0 0.4rem 0; color: #1a2f5e; font-size: 1.1rem; font-weight: 800; }
-    .group-card .group-tag { display: inline-block; margin-bottom: 0.8rem; padding: 0.25rem 0.7rem; border-radius: 999px; background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
-    .group-card p { font-size: 0.95rem; margin-bottom: 1rem; }
-    .group-card .btn { width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.9rem; }
-
-    @media print {
-      .group-card { break-inside: avoid; }
-    }
-
   </style>
 </head>
 <body>
   <nav class="floating-nav" aria-label="Navegacao rapida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-04.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
-    <a href="dados/rede_vita_internacoes.csv" download="rede_vita_internacoes.csv" class="nav-data" title="Baixar a base completa">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
     <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
@@ -139,419 +127,302 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 04</div>
-      <h1>Entendendo o cenário: Estatística para gestão de negócios</h1>
+      <h1>Limpeza de dados: Preparando a base para análises</h1>
     </div>
 
     <div class="content">
-      <p class="desc">A Diretoria Executiva da Rede Vita recebeu um parecer produzido por um assistente de inteligência artificial recomendando replicar o protocolo de uma unidade, ampliar outra e condicionar o orçamento de uma terceira. Os números do documento estão corretos. As conclusões não se sustentam. Neste laboratório, a turma assume o papel de comitê de auditoria: cada grupo recebe um recorte diferente da mesma operação, produz um parecer preliminar e, na segunda rodada, reanalisa a base completa para decidir o que a rede deve efetivamente fazer.</p>
+      <p class="desc">A Diretoria de Operações recebeu uma base com 5.000 internações sintéticas e quer calcular permanência hospitalar. Antes de transformar linhas em uma decisão sobre capacidade, a equipe deverá provar que a base é coerente. Nesta prática, o Antigravity ajuda a planejar, escrever e revisar o código; Pandas executa a limpeza no workspace; o estudante continua responsável por cada regra aceita.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
-        <ul>
-          <li><strong>Calcular</strong> medidas de posição, dispersão e forma adequadas ao tipo de variável e ao tamanho do grupo analisado.</li>
-          <li><strong>Distinguir</strong> média ponderada de média de médias e demonstrar numericamente o efeito da escolha.</li>
-          <li><strong>Estratificar</strong> uma comparação entre unidades e aplicar padronização direta para controlar composição de casos.</li>
-          <li><strong>Avaliar</strong> a estabilidade de um indicador diante do tamanho da amostra e de valores extremos.</li>
-          <li><strong>Redigir</strong> um memorando executivo em que cada recomendação remete a uma evidência tabulada.</li>
-        </ul>
+        <ul><li><strong>Diagnosticar</strong> completude, unicidade, padronização e consistência temporal.</li><li><strong>Orientar</strong> um agente de IA com escopo, restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> transformações reproduzíveis sem sobrescrever a camada bruta.</li><li><strong>Validar</strong> produtos da limpeza com contagens, flags e testes.</li><li><strong>Defender</strong> quais análises gerenciais a base pode ou não sustentar.</li></ul>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>2. O caso: o parecer da Rede Vita</h2>
-        <p>A Rede Vita é uma rede hospitalar sintética com quatro unidades — Norte, Sul, Leste e Oeste — e 5.838 internações registradas com alta entre janeiro de 2025 e fevereiro de 2026. O indicador em disputa é a <em>permanência média</em>, medida em dias de internação, tradicionalmente usada como proxy de eficiência operacional porque se relaciona a giro de leito e custo por caso.</p>
-        <p>O parecer submetido à auditoria classifica as unidades nesta ordem:</p>
-        <table>
-          <thead><tr><th>Unidade</th><th>Permanência média segundo o parecer</th><th>Posição atribuída</th><th>Recomendação derivada</th></tr></thead>
-          <tbody>
-            <tr><td>Oeste</td><td>3,35 dias</td><td>1º</td><td>Ampliar capacidade; tratar como benchmark da rede</td></tr>
-            <tr><td>Norte</td><td>4,50 dias</td><td>2º</td><td>Replicar o protocolo assistencial nas demais unidades</td></tr>
-            <tr><td>Sul</td><td>6,86 dias</td><td>3º</td><td>Revisar a gestão e condicionar o orçamento</td></tr>
-            <tr><td>Leste</td><td>7,28 dias</td><td>4º</td><td>Convergir para a meta de 4,5 dias em doze meses</td></tr>
-          </tbody>
-        </table>
-        <p>Nenhum desses quatro números foi inventado: todos podem ser reproduzidos a partir do painel mensal que o assistente recebeu. A auditoria não procura erro aritmético. Ela examina se a estatística escolhida responde à pergunta que a Diretoria fez.</p>
-        <div class="download-panel">
-          <a href="dados/relatorio_executivo_ia.md" download="relatorio_executivo_ia.md" class="btn btn-slides">📄 Baixar o parecer auditado</a>
-          <a href="dados/rede_vita_internacoes.csv" download="rede_vita_internacoes.csv" class="btn btn-data">⬇️ Baixar a base completa</a>
-          <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-data">✨ Baixar o roteiro de prompts</a>
-        </div>
-        <div class="alert-box">
-          <h4>A base é sintética e reprodutível</h4>
-          <p>Os dados foram gerados por <code>dados/gerar_base.py</code>, com semente fixa e apenas biblioteca padrão do Python. Nenhum registro corresponde a paciente, unidade ou operação real. O arquivo <code>dados/README.md</code> traz o dicionário de colunas, o inventário verificável e as assinaturas SHA-256 de cada recorte.</p>
-        </div>
+        <h2>2. O case e a base do Kaggle</h2>
+        <p>O arquivo <code>hospital_patients_real_world.csv</code> vem do dataset <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas no Kaggle sob licença CC0. Os registros são sintéticos e foram criados para exercícios de limpeza.</p>
+        <div class="download-panel"><a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table><thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead><tbody><tr><td><code>PatientID</code></td><td>Identificador sintético do registro</td><td>string</td></tr><tr><td><code>Age</code></td><td>Idade informada</td><td>número anulável</td></tr><tr><td><code>Gender</code></td><td>Categoria de gênero cadastrada</td><td>string</td></tr><tr><td><code>Diagnosis</code></td><td>Diagnóstico sintético</td><td>string</td></tr><tr><td><code>AdmissionDate</code></td><td>Data de admissão</td><td>data</td></tr><tr><td><code>DischargeDate</code></td><td>Data de alta</td><td>data</td></tr><tr><td><code>HospitalID</code></td><td>Identificador sintético do hospital</td><td>string</td></tr></tbody></table>
+        <div class="evidence"><strong>Assinatura da cópia usada na aula</strong><code>SHA-256 af6c3023e87c1950cb021579521534c3d44fc940953216ca560ca1d7e3eabc8a</code></div>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>3. Os três comitês e seus recortes</h2>
-        <p>Na primeira rodada, a turma se divide em três comitês. Cada um recebe um recorte distinto da mesma operação e responde, isoladamente, à mesma pergunta: <strong>qual unidade deve ser tomada como referência de eficiência pela rede?</strong> Os recortes são subconjuntos fiéis da base completa; nenhum valor foi alterado. As divergências que surgirem decorrem exclusivamente do escopo de cada recorte e da estatística escolhida.</p>
-        <div class="group-grid">
-          <div class="group-card">
-            <span class="group-tag">Grupo A</span>
-            <h4>Comitê de Operações</h4>
-            <p>Painel agregado por unidade e mês de alta, com número de altas, permanência média e custo médio. É exatamente a fonte utilizada pelo assistente de IA. Cabe ao comitê reproduzir os números do parecer e verificar como foram consolidados.</p>
-            <a href="dados/grupo_a_painel_operacoes.csv" download="grupo_a_painel_operacoes.csv" class="btn btn-data">⬇️ grupo_a_painel_operacoes.csv</a>
-          </div>
-          <div class="group-card">
-            <span class="group-tag">Grupo B</span>
-            <h4>Comitê Clínico</h4>
-            <p>Registros individuais das unidades Norte e Sul, com linha de cuidado e estrato de gravidade. Permite comparar as duas unidades dentro de cada estrato e descrever a composição de casos de cada uma.</p>
-            <a href="dados/grupo_b_registros_clinicos.csv" download="grupo_b_registros_clinicos.csv" class="btn btn-data">⬇️ grupo_b_registros_clinicos.csv</a>
-          </div>
-          <div class="group-card">
-            <span class="group-tag">Grupo C</span>
-            <h4>Comitê de Riscos</h4>
-            <p>Registros individuais das unidades Norte, Leste e Oeste, com permanência, custo e reinternação em 30 dias. Permite examinar a forma das distribuições, o volume de cada unidade e um segundo indicador de desfecho.</p>
-            <a href="dados/grupo_c_registros_risco.csv" download="grupo_c_registros_risco.csv" class="btn btn-data">⬇️ grupo_c_registros_risco.csv</a>
-          </div>
-        </div>
-        <p>Na segunda rodada, todos os comitês passam a trabalhar com <code>rede_vita_internacoes.csv</code>, a base completa, e consolidam um único parecer para a Diretoria.</p>
+        <h2>3. O que sabemos antes da aula</h2>
+        <p>O professor já conferiu o arquivo original. Essas contagens funcionam como <em>checkpoints</em>: se o notebook produzir números diferentes, investigue leitura, caminho e regra antes de continuar.</p>
+        <table><thead><tr><th>Problema observado</th><th>Quantidade</th><th>Conduta esperada</th></tr></thead><tbody><tr><td>Idade ausente</td><td>350</td><td>Manter ausente e criar flag; não imputar.</td></tr><tr><td>Gênero vazio</td><td>350</td><td>Padronizar como “Não informado” e preservar flag.</td></tr><tr><td>Gênero <code>Unknown</code></td><td>1.163</td><td>Unificar com “Não informado”.</td></tr><tr><td>Diagnóstico ausente</td><td>350</td><td>Não inferir diagnóstico clínico.</td></tr><tr><td>Diagnóstico em maiúsculas</td><td>321</td><td>Unir apenas variações de capitalização.</td></tr><tr><td>Alta anterior à admissão</td><td>150</td><td>Sinalizar e retirar do cálculo de permanência.</td></tr><tr><td>Linha ou chave duplicada</td><td>0</td><td>Registrar a verificação; não apagar nada.</td></tr></tbody></table>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>4. Fundamentos: posição, dispersão, forma e peso</h2>
-        <p>A estatística descritiva não é uma etapa preliminar da análise: ela é o instrumento com que se decide qual comparação é legítima. Quatro conceitos sustentam a auditoria desta aula.</p>
-        <h3>Posição</h3>
-        <p>A <strong>média</strong> distribui igualmente o total observado entre os casos e é sensível a valores extremos. A <strong>mediana</strong> divide a distribuição ordenada em duas metades e resiste a extremos. Quando média e mediana se afastam de forma expressiva, a distribuição é assimétrica e a média deixa de representar o caso típico.</p>
-        <h3>Dispersão</h3>
-        <p>O <strong>desvio-padrão</strong> resume a distância média dos valores em relação à média. Os <strong>quantis</strong> descrevem a distribuição sem supor simetria: o quantil 90 informa o valor abaixo do qual estão 90% das observações e é frequentemente mais relevante para planejamento de capacidade do que a média.</p>
-        <h3>Peso</h3>
-        <p>A média de um conjunto de grupos só coincide com a média das médias de cada grupo quando todos os grupos têm o mesmo tamanho. Fora dessa condição, é necessária a <strong>média ponderada</strong>, em que cada grupo contribui proporcionalmente ao seu número de observações.</p>
-        <div class="code-block">media_simples = painel["media_dias_internacao"].mean()
-
-media_ponderada = (
-    (painel["media_dias_internacao"] * painel["altas"]).sum()
-    / painel["altas"].sum()
-)</div>
-        <h3>Composição</h3>
-        <p>Comparar dois grupos com composições internas diferentes pode inverter a conclusão obtida no agregado. Esse fenômeno é conhecido como <em>efeito de composição</em> ou <em>paradoxo de Simpson</em>. O tratamento descritivo padrão é a <strong>padronização direta</strong>: recalcular o indicador de um grupo aplicando a composição do outro, de modo que a comparação seja feita sobre uma mesma estrutura de casos.</p>
-        <div class="alert-box">
-          <h4>Um indicador agregado não é uma medida de desempenho</h4>
-          <p>Permanência média é uma medida de processo, não de resultado. Uma unidade pode reduzir a permanência antecipando altas e transferindo o custo para o período seguinte na forma de reinternação. Toda auditoria de eficiência exige pelo menos um indicador de desfecho ao lado do indicador de processo.</p>
-        </div>
+        <h2>4. Antigravity: agente, execução local e revisão</h2>
+        <p>O <a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">codelab oficial do Antigravity IDE</a> orienta abrir uma pasta local, conversar pelo painel do agente e usar desenvolvimento orientado por revisão. O agente pode propor um plano, editar arquivos e solicitar execução no terminal; o estudante revisa essas ações e pode aceitar, comentar ou rejeitar.</p>
+        <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-04-seunome</code>.</li><li>Abra a pasta no Antigravity IDE e selecione o modo orientado por revisão.</li><li>Deixe a execução de terminal dependente de aprovação.</li><li>Use <code>@hospital_patients_real_world.csv</code> para mencionar a base no prompt.</li><li>Quando o Python local não estiver pronto, execute o notebook no GitHub Codespaces já configurado pela disciplina; não perca a aula instalando bibliotecas manualmente.</li></ol>
+        <div class="alert-box"><h4>“Local” não significa que o modelo está offline</h4><p>O CSV, o notebook e o Pandas ficam no workspace do estudante, mas prompts e arquivos mencionados podem ser processados pelo serviço de IA conforme a conta utilizada. Esta aula usa somente dados sintéticos CC0. Nunca envie prontuários, credenciais, tokens ou dados pessoais ao agente.</p></div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 0 e 1 · reprodução</span>
-        <h2>5. Rodada 1: reproduzir antes de contestar</h2>
-        <p>A primeira obrigação de uma auditoria é reproduzir o número auditado com o método declarado pelo autor. Contestar sem reproduzir transforma a revisão em opinião.</p>
-        <p>Antes de iniciar, crie no Codespace da disciplina uma pasta <code>aula-04-seunome</code> e coloque nela o parecer, o recorte do seu comitê e, na segunda rodada, a base completa. O notebook e as saídas ficam na mesma pasta; as bibliotecas necessárias já estão instaladas pelo <code>requirements.txt</code>.</p>
-        <div class="prompt-block">Atue como analista de apoio de um comitê de auditoria estatística. Leia
-@relatorio_executivo_ia.md e o arquivo de dados do meu comitê, mas ainda não
-edite nem crie arquivos. Apresente um plano curto e aguarde aprovação.
+        <span class="step-tag">Prompt 0 · contrato</span>
+        <h2>5. Comece pelo plano, não pela edição</h2>
+        <p>O primeiro prompt reduz autonomia e declara o que não pode ser feito. Só aprove o plano se ele preservar o arquivo original e separar diagnóstico, transformação e validação.</p>
+        <div class="prompt-block">Atue como meu assistente de qualidade de dados neste laboratório. Leia
+@hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos.
+Primeiro apresente um plano curto e aguarde minha aprovação.
 
-Regras obrigatórias: não alterar os arquivos recebidos; não descartar registros
-sem que eu autorize e sem registrar o critério; nunca substituir um número do
-parecer sem antes reproduzi-lo com o método declarado nele; separar o que é
-cálculo do que é recomendação; não afirmar causalidade.</div>
+Regras obrigatórias: preservar o CSV bruto; não inventar valores ausentes;
+não trocar datas por suposição; não excluir linhas silenciosamente; explicar
+cada regra de negócio; trabalhar apenas dentro desta pasta; não instalar
+pacotes nem executar comandos sem minha aprovação. A entrega terá notebook,
+base tratada, fila de revisão, relatório de qualidade e revisão da IA.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · perfil</span>
+        <h2>6. Diagnostique sem limpar</h2>
+        <div class="prompt-block">Crie Aula_04_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
+carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
+mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
+linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
+Não faça nenhuma limpeza nesta etapa. Execute as células e resuma os achados.
+Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div>
+        <p>Uma implementação mínima e legível deve produzir evidência semelhante a:</p>
         <div class="code-block">from pathlib import Path
 import pandas as pd
 
-recorte = pd.read_csv(Path("grupo_a_painel_operacoes.csv"))
-display(recorte.head())
-print("shape:", recorte.shape)
-display(recorte.isna().sum().rename("ausentes").to_frame())</div>
-        <div class="evidence"><strong>Checkpoint</strong>O painel do Grupo A tem 52 linhas e 5 colunas. Os recortes clínico e de risco têm, respectivamente, 4.500 e 3.438 registros individuais. A base completa tem 5.838 registros e 9 colunas, sem ausências e sem identificadores duplicados.</div>
+caminho = Path("hospital_patients_real_world.csv")
+bruta = pd.read_csv(caminho)
+
+display(bruta.head())
+print("shape:", bruta.shape)
+display(bruta.isna().sum().rename("ausentes").to_frame())
+print("linhas duplicadas:", bruta.duplicated().sum())
+print("PatientID duplicado:", bruta.duplicated("PatientID").sum())</div>
+        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(5000, 7)</code>, com zero linhas e zero chaves duplicadas. Contagem zero também é uma evidência que deve entrar no relatório.</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 2 · descrição</span>
-        <h2>6. Rodada 1: o que cada comitê consegue observar</h2>
-        <p>Os três prompts abaixo são executados em paralelo, um por comitê. Cada um produz uma tabela legítima e incompleta.</p>
-        <h3>Comitê de Operações</h3>
-        <div class="prompt-block">Com o painel mensal, calcule para cada unidade: a média não ponderada das médias
-mensais e a média ponderada pelo número de altas. Apresente as duas em uma única
-tabela, com a diferença em dias e em percentual, e ordene as unidades pelos dois
-critérios. Mostre também quantas linhas mensais cada unidade possui e quantas
-delas têm menos de 20 altas.</div>
-        <div class="code-block">resumo = recorte.groupby("unidade").apply(
-    lambda g: pd.Series({
-        "linhas_mensais": len(g),
-        "altas": g["altas"].sum(),
-        "media_das_medias": g["media_dias_internacao"].mean(),
-        "media_ponderada": (g["media_dias_internacao"] * g["altas"]).sum() / g["altas"].sum(),
-    })
-)
-resumo["diferenca_dias"] = resumo["media_das_medias"] - resumo["media_ponderada"]
-display(resumo.sort_values("media_ponderada"))</div>
-        <h3>Comitê Clínico</h3>
-        <div class="prompt-block">Calcule permanência média, mediana, desvio-padrão e contagem por unidade e, em
-seguida, por unidade e gravidade. Apresente a distribuição percentual dos
-estratos de gravidade em cada unidade. Compare as duas unidades dentro de cada
-estrato e diga explicitamente se a ordenação por estrato coincide com a
-ordenação agregada.</div>
-        <div class="code-block">por_unidade = recorte.groupby("unidade")["dias_internacao"].agg(["count", "mean", "median", "std"])
-por_estrato = recorte.groupby(["unidade", "gravidade"])["dias_internacao"].agg(["count", "mean"])
-composicao = (
-    recorte.groupby(["unidade", "gravidade"]).size()
-    / recorte.groupby("unidade").size() * 100
-)
-display(por_unidade, por_estrato.unstack(), composicao.unstack().round(1))</div>
-        <h3>Comitê de Riscos</h3>
-        <div class="prompt-block">Para cada unidade, calcule contagem, média, mediana, desvio-padrão, mínimo,
-máximo e os quantis 25, 50, 75 e 90 da permanência. Acrescente o percentual de
-internações com até dois dias, o percentual com dez dias ou mais e a taxa de
-reinternação em 30 dias.</div>
-        <div class="code-block">perfil = recorte.groupby("unidade").agg(
-    internacoes=("dias_internacao", "count"),
-    media=("dias_internacao", "mean"),
-    mediana=("dias_internacao", "median"),
-    desvio=("dias_internacao", "std"),
-    q90=("dias_internacao", lambda s: s.quantile(0.90)),
-    ate_2_dias=("dias_internacao", lambda s: (s &lt;= 2).mean() * 100),
-    dez_ou_mais=("dias_internacao", lambda s: (s &gt;= 10).mean() * 100),
-    reinternacao=("reinternacao_30d", "mean"),
-)
-display(perfil.round(2).sort_values("media"))</div>
+        <span class="step-tag">Prompt 2 · estrutura</span>
+        <h2>7. Crie uma cópia e explicite os tipos</h2>
+        <div class="prompt-block">No mesmo notebook, crie base = bruta.copy(deep=True) e nunca sobrescreva
+bruta nem o CSV. Renomeie as colunas para snake_case. Converta identificadores,
+gênero e diagnóstico para string; idade para Float64; datas para datetime com
+errors="coerce". Conte falhas de conversão antes de prosseguir. Mostre o código,
+a saída e explique por que cada tipo foi escolhido. Não faça imputação.</div>
+        <div class="code-block">base = bruta.copy(deep=True)
+base.columns = (base.columns
+    .str.replace(r"(?&lt;!^)(?=[A-Z])", "_", regex=True)
+    .str.lower())
+
+for coluna in ["patient_id", "gender", "diagnosis", "hospital_id"]:
+    base[coluna] = base[coluna].astype("string")
+
+base["age"] = pd.to_numeric(base["age"], errors="coerce").astype("Float64")
+base["admission_date"] = pd.to_datetime(base["admission_date"], errors="coerce")
+base["discharge_date"] = pd.to_datetime(base["discharge_date"], errors="coerce")</div>
+        <p>Identificadores são texto, mesmo quando contêm números. Datas convertidas permitem calcular intervalos. O parâmetro <code>errors="coerce"</code> não corrige valores: ele torna uma falha detectável como <code>NaT</code>.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>7. Confronto dos pareceres preliminares</h2>
-        <p>Cada comitê apresenta, em cinco linhas, sua resposta à pergunta da Diretoria. As três conclusões são registradas no quadro antes de qualquer discussão. O resultado esperado é a divergência:</p>
-        <table>
-          <thead><tr><th>Comitê</th><th>Conclusão sustentada pelo seu recorte</th><th>O que o recorte não permite ver</th></tr></thead>
-          <tbody>
-            <tr><td>Operações</td><td>A ordenação depende do método de consolidação: pela média das médias, Leste é a pior unidade da rede; pela média ponderada, é a segunda melhor.</td><td>Composição de casos, forma das distribuições e desfecho clínico.</td></tr>
-            <tr><td>Clínico</td><td>A unidade Sul apresenta permanência menor que a Norte em todos os estratos de gravidade, embora tenha permanência agregada maior.</td><td>Unidades Leste e Oeste, volume relativo e reinternação.</td></tr>
-            <tr><td>Riscos</td><td>Norte e Leste têm médias praticamente iguais e distribuições incompatíveis; a Oeste lidera o indicador com 38 internações e a Norte tem a maior reinternação.</td><td>Estratos de gravidade e a unidade Sul, alvo central da recomendação.</td></tr>
-          </tbody>
-        </table>
-        <p>Nenhum comitê está errado. Cada um respondeu com a evidência disponível. A divergência é o objeto de estudo: <strong>a conclusão gerencial foi determinada pelo recorte e pela estatística, não pela operação</strong>.</p>
+        <span class="step-tag">Prompt 3 · ausências</span>
+        <h2>8. Trate ausência sem adivinhar</h2>
+        <div class="prompt-block">Adicione uma seção sobre dados ausentes. Crie flags booleanas que preservem a
+origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente
+como pd.NA. Padronize gênero vazio ou Unknown como "Não informado" e diagnóstico
+vazio como "Não informado". Gere uma tabela antes/depois com quantidade e
+percentual. Não use média, moda ou qualquer valor clínico inventado.</div>
+        <div class="code-block">base["idade_ausente"] = base["age"].isna()
+base["genero_ausente"] = base["gender"].isna() | base["gender"].str.strip().eq("") | base["gender"].eq("Unknown")
+base["diagnostico_ausente"] = base["diagnosis"].isna() | base["diagnosis"].str.strip().eq("")
+
+base.loc[base["genero_ausente"], "gender"] = "Não informado"
+base.loc[base["diagnostico_ausente"], "diagnosis"] = "Não informado"</div>
+        <p>Preencher idade com média poderia produzir uma tabela completa, mas criaria 350 idades fictícias. Para decisões responsáveis, uma ausência conhecida é melhor que uma precisão inventada.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 4 e 5 · ponderação</span>
-        <h2>8. Rodada 2: o efeito da ponderação</h2>
-        <p>Com a base completa, o primeiro achado é aritmético e decisivo. O parecer calculou a permanência de cada unidade como média simples das médias mensais, atribuindo o mesmo peso a um mês com 123 altas e a um mês com uma única alta.</p>
-        <div class="prompt-block">Calcule a permanência média de cada unidade a partir dos registros individuais
-e compare com os valores publicados no parecer. Monte uma tabela com: unidade,
-valor do parecer, média ponderada correta, diferença e ordenação em cada
-critério. Explique em duas frases por que a média das médias mensais difere da
-média dos registros e em que condição as duas coincidem.</div>
-        <div class="code-block">base = pd.read_csv("rede_vita_internacoes.csv", parse_dates=["data_admissao", "data_alta"])
+        <span class="step-tag">Prompt 4 · categorias</span>
+        <h2>9. Padronize sem alterar o significado</h2>
+        <div class="prompt-block">Normalize espaços e capitalização de gender e diagnosis. Para gender, aplique
+um dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e
+Unknown/vazio→Não informado. Em diagnosis, una apenas variantes que diferem por
+espaços ou capitalização; não faça aproximação clínica por significado.
+Mostre value_counts antes/depois e registre o mapeamento aplicado.</div>
+        <div class="code-block">mapa_genero = {
+    "Female": "Feminino",
+    "Male": "Masculino",
+    "Other": "Outro",
+    "Unknown": "Não informado",
+}
+base["gender"] = base["gender"].str.strip().replace(mapa_genero)
+base["diagnosis"] = (base["diagnosis"].str.strip().str.title()
+                     .replace({"Não Informado": "Não informado"}))
 
-comparacao = pd.DataFrame({
-    "parecer": {"Oeste": 3.35, "Norte": 4.50, "Sul": 6.86, "Leste": 7.28},
-    "ponderada": base.groupby("unidade")["dias_internacao"].mean().round(2),
-    "internacoes": base.groupby("unidade")["dias_internacao"].count(),
-})
-comparacao["diferenca"] = (comparacao["parecer"] - comparacao["ponderada"]).round(2)
-display(comparacao.sort_values("ponderada"))</div>
-        <table>
-          <thead><tr><th>Unidade</th><th>Internações</th><th>Valor do parecer</th><th>Média ponderada</th><th>Diferença</th></tr></thead>
-          <tbody>
-            <tr><td>Oeste</td><td>38</td><td>3,35</td><td>3,45</td><td>−0,10</td></tr>
-            <tr><td>Leste</td><td>1.300</td><td>7,28</td><td>4,21</td><td>+3,07</td></tr>
-            <tr><td>Norte</td><td>2.100</td><td>4,50</td><td>4,32</td><td>+0,18</td></tr>
-            <tr><td>Sul</td><td>2.400</td><td>6,86</td><td>6,70</td><td>+0,16</td></tr>
-          </tbody>
-        </table>
-        <p>A unidade classificada como a pior da rede é, sob ponderação correta, a segunda melhor. O erro se concentra na Leste porque suas altas de janeiro e fevereiro de 2026 formam meses incompletos, com poucos casos e permanência elevada — inclusive uma linha mensal com uma única internação de 43 dias.</p>
-        <div class="alert-box">
-          <h4>Janela de observação</h4>
-          <p>Meses parcialmente observados no fim da série produzem médias instáveis. Antes de comparar períodos, verifique se todos estão completos; se não estiverem, declare a exclusão em vez de deixá-la implícita no cálculo.</p>
-        </div>
+display(base["gender"].value_counts(dropna=False))
+display(base["diagnosis"].value_counts(dropna=False))</div>
+        <p>A IA não deve aproximar diagnósticos pelo significado. Nesta aula, <code>ASTHMA</code> e <code>Asthma</code> podem ser unidos porque diferem somente na capitalização; categorias clinicamente diferentes não podem ser fundidas por “parecerem semelhantes”.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 6 · composição</span>
-        <h2>9. Composição de casos e padronização direta</h2>
-        <p>Corrigida a ponderação, a comparação central do parecer permanece: a unidade Norte apresenta 4,32 dias contra 6,70 da Sul. A comparação só é legítima se as duas unidades atenderem casos comparáveis.</p>
-        <div class="prompt-block">Compare Norte e Sul dentro de cada estrato de gravidade e apresente a
-composição percentual dos estratos em cada unidade. Em seguida, faça a
-padronização direta: recalcule a permanência média de cada unidade aplicando a
-composição de gravidade da outra. Mostre os quatro valores em uma tabela e
-indique se a ordenação entre as unidades se mantém.</div>
-        <table>
-          <thead><tr><th>Estrato</th><th>Norte — participação</th><th>Norte — permanência</th><th>Sul — participação</th><th>Sul — permanência</th></tr></thead>
-          <tbody>
-            <tr><td>Baixa</td><td>70,0%</td><td>3,02</td><td>25,0%</td><td>2,60</td></tr>
-            <tr><td>Média</td><td>22,0%</td><td>6,06</td><td>35,0%</td><td>5,56</td></tr>
-            <tr><td>Alta</td><td>8,0%</td><td>10,89</td><td>40,0%</td><td>10,27</td></tr>
-            <tr><td><strong>Agregado</strong></td><td>100%</td><td><strong>4,32</strong></td><td>100%</td><td><strong>6,70</strong></td></tr>
-          </tbody>
-        </table>
-        <p>A unidade Sul é mais rápida que a Norte em todos os estratos e mais lenta no agregado. A diferença agregada não mede protocolo assistencial: mede composição de casos. A Sul concentra 40% de casos de gravidade Alta contra 8% da Norte.</p>
-        <div class="code-block">estratos = base[base["unidade"].isin(["Norte", "Sul"])]
-media_estrato = estratos.pivot_table(
-    index="gravidade", columns="unidade", values="dias_internacao", aggfunc="mean"
+        <span class="step-tag">Prompt 5 · chaves</span>
+        <h2>10. Verifique duplicidades, mesmo quando não há nenhuma</h2>
+        <div class="prompt-block">Audite duplicidade de linha completa e de patient_id. Não use drop_duplicates
+automaticamente. Se houver linhas idênticas, apresente a evidência antes de
+propor remoção. Se a mesma chave tiver conteúdos diferentes, crie a flag
+chave_duplicada e envie esses registros para revisão. Registre também o caso
+em que a contagem for zero. Explique a diferença entre linha duplicada e chave
+de negócio duplicada.</div>
+        <div class="code-block">duplicada_exata = base.duplicated(keep=False)
+base["chave_duplicada"] = base.duplicated("patient_id", keep=False)
+
+print("linhas em grupos idênticos:", int(duplicada_exata.sum()))
+print("linhas com chave repetida:", int(base["chave_duplicada"].sum()))</div>
+        <p><code>drop_duplicates()</code> não é um ritual obrigatório. A base desta aula tem zero duplicidades, então remover linhas seria uma transformação sem justificativa.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · regras</span>
+        <h2>11. Aplique regras hospitalares como flags</h2>
+        <div class="prompt-block">Implemente, sem apagar registros, as flags idade_fora_faixa para idade menor
+que 0 ou maior que 110, hospital_id_invalido para valores fora do padrão
+HOSP-[número] e cronologia_invalida quando discharge_date for anterior a
+admission_date. Mostre contagens e amostras. Não inverta datas automaticamente.
+Nesta versão espero 0 idades fora da faixa, 0 hospitais inválidos e 150
+cronologias inválidas; se divergir, investigue antes de alterar a regra.</div>
+        <div class="code-block">base["idade_fora_faixa"] = base["age"].notna() &amp; ~base["age"].between(0, 110)
+base["hospital_id_invalido"] = ~base["hospital_id"].str.fullmatch(r"HOSP-\d+", na=False)
+base["cronologia_invalida"] = (
+    base["admission_date"].notna()
+    &amp; base["discharge_date"].notna()
+    &amp; (base["discharge_date"] &lt; base["admission_date"])
 )
-peso = estratos.pivot_table(
-    index="gravidade", columns="unidade", values="dias_internacao", aggfunc="count"
-)
-peso = peso / peso.sum()
 
-norte_no_mix_sul = (media_estrato["Norte"] * peso["Sul"]).sum()
-sul_no_mix_norte = (media_estrato["Sul"] * peso["Norte"]).sum()
-print(f"Norte padronizada pela composição da Sul: {norte_no_mix_sul:.2f} dias")
-print(f"Sul padronizada pela composição da Norte: {sul_no_mix_norte:.2f} dias")</div>
-        <div class="evidence"><strong>Resultado da padronização direta</strong>Aplicada a composição da Sul à unidade Norte, a permanência esperada é de <strong>7,23 dias</strong> — superior aos 6,70 observados na Sul. Aplicada a composição da Norte à unidade Sul, a permanência esperada é de <strong>3,86 dias</strong> — inferior aos 4,32 observados na Norte. A ordenação do parecer se inverte nas duas direções.</div>
+display(base[["idade_fora_faixa", "hospital_id_invalido", "cronologia_invalida"]].sum())</div>
+        <div class="alert-box"><h4>Por que não inverter as datas?</h4><p>Alta anterior à admissão prova que há uma inconsistência, mas não revela qual campo está errado. Trocar automaticamente as duas datas pode gerar uma permanência plausível e falsa. Os 150 casos seguem na base, marcados para revisão e excluídos apenas do indicador derivado.</p></div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 7 · forma</span>
-        <h2>10. Mesma média, decisões distintas</h2>
-        <p>As unidades Norte e Leste têm permanência média praticamente idêntica: 4,32 e 4,21 dias. Sob o indicador do parecer, são equivalentes. Sob qualquer critério de planejamento, não são.</p>
-        <table>
-          <thead><tr><th>Medida</th><th>Norte</th><th>Leste</th></tr></thead>
-          <tbody>
-            <tr><td>Internações</td><td>2.100</td><td>1.300</td></tr>
-            <tr><td>Permanência média</td><td>4,32</td><td>4,21</td></tr>
-            <tr><td>Mediana</td><td>3,0</td><td>1,0</td></tr>
-            <tr><td>Desvio-padrão</td><td>3,12</td><td>5,43</td></tr>
-            <tr><td>Quantil 75</td><td>5,0</td><td>6,0</td></tr>
-            <tr><td>Quantil 90</td><td>8,0</td><td>13,0</td></tr>
-            <tr><td>Internações de até 2 dias</td><td>28,3%</td><td>73,0%</td></tr>
-            <tr><td>Internações de 10 dias ou mais</td><td>6,6%</td><td>19,5%</td></tr>
-          </tbody>
-        </table>
-        <p>A unidade Leste opera dois processos distintos sob o mesmo indicador: um fluxo de alta rotatividade, que responde por quase três quartos das internações, e um fluxo de longa permanência, que responde por cerca de um quinto. A média de 4,21 dias não descreve nenhum dos dois. Uma capacidade dimensionada pela média cobre menos de um terço do que o quantil 90 da unidade exige.</p>
-        <div class="code-block">import matplotlib.pyplot as plt
+        <span class="step-tag">Prompt 7 · indicador</span>
+        <h2>12. Calcule permanência somente quando for seguro</h2>
+        <div class="prompt-block">Crie dias_internacao somente para registros com datas válidas e cronologia
+coerente. Nos demais casos use pd.NA e mantenha a flag de revisão. Converta o
+resultado para Int64 anulável. Mostre describe(), mínimo, máximo e confirme que
+nenhum valor negativo foi aceito. Explique por que corrigir para valor absoluto
+seria uma decisão perigosa.</div>
+        <div class="code-block">duracao = (base["discharge_date"] - base["admission_date"]).dt.days
+datas_ausentes = base[["admission_date", "discharge_date"]].isna().any(axis=1)
+base["dias_internacao"] = (duracao
+    .mask(base["cronologia_invalida"] | datas_ausentes)
+    .astype("Int64"))
+
+assert not (base["dias_internacao"].dropna() &lt; 0).any()</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 8 · relatório</span>
+        <h2>13. Construa a tabela antes/depois</h2>
+        <div class="prompt-block">Crie um DataFrame relatorio_qualidade com as colunas metrica, antes, depois,
+regra_aplicada e pendencia_humana. Inclua: linhas, duplicidades, chaves
+duplicadas, ausências, gêneros não informados, categorias de diagnóstico,
+capitalização inconsistente, idade fora da faixa, hospital inválido e cronologia
+inválida. Salve como saidas/relatorio_qualidade.csv e exiba a tabela completa.
+Não trate uma flag pendente como erro resolvido.</div>
+        <div class="code-block">from pathlib import Path
 
 saida = Path("saidas")
 saida.mkdir(exist_ok=True)
 
-figura, eixos = plt.subplots(1, 2, figsize=(11, 4), sharex=True, sharey=True)
-for eixo, unidade in zip(eixos, ["Norte", "Leste"]):
-    dados = base.loc[base["unidade"] == unidade, "dias_internacao"]
-    eixo.hist(dados, bins=range(0, 31), color="#1f6fb2", edgecolor="white")
-    eixo.axvline(dados.mean(), color="#d946ef", linewidth=2, label=f"média {dados.mean():.2f}")
-    eixo.set_title(f"Unidade {unidade}")
-    eixo.set_xlabel("dias de internação")
-    eixo.legend()
-
-figura.tight_layout()
-figura.savefig(saida / "distribuicao_norte_leste.png", dpi=150)</div>
-        <div class="alert-box">
-          <h4>Quando média e mediana divergem</h4>
-          <p>Na unidade Leste, a média é mais de quatro vezes a mediana. Essa distância é o sinal descritivo de que a distribuição não é unimodal e de que qualquer meta definida sobre a média será cumprida ou descumprida por razões que a média não registra.</p>
-        </div>
+metricas = [
+    {"metrica": "linhas", "antes": len(bruta), "depois": len(base),
+     "regra_aplicada": "preservar registros", "pendencia_humana": False},
+    {"metrica": "cronologia inválida", "antes": 150,
+     "depois": int(base["cronologia_invalida"].sum()),
+     "regra_aplicada": "sinalizar sem inverter", "pendencia_humana": True},
+]
+relatorio_qualidade = pd.DataFrame(metricas)</div>
+        <p>Complete a lista com as demais métricas. Em uma auditoria honesta, “depois = 150” pode ser o resultado correto: a inconsistência permanece, mas agora está detectada, separada e impedida de contaminar o indicador.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 8 · amostra</span>
-        <h2>11. Tamanho amostral e estabilidade do indicador</h2>
-        <p>A unidade Oeste lidera o ranking do parecer e é apontada como modelo a ser ampliado. Ela registra 38 internações no período — 0,7% do volume da rede.</p>
-        <div class="code-block">oeste = base.loc[base["unidade"] == "Oeste", "dias_internacao"].sort_values()
-print("internações:", oeste.size)
-print("permanência ordenada:", oeste.tolist())
-print(f"média completa: {oeste.mean():.2f}")
-print(f"média sem os dois casos mais longos: {oeste.iloc[:-2].mean():.2f}")
-print("eventos de reinternação:", int(base.loc[base["unidade"] == "Oeste", "reinternacao_30d"].sum()))</div>
-        <div class="evidence"><strong>Sensibilidade</strong>A permanência varia de 1 a 17 dias. Removidos os dois casos mais longos, a média cai de <strong>3,45 para 2,75 dias</strong>. A taxa de reinternação de 2,6% corresponde a <strong>um único evento</strong> em 38 internações: um segundo caso levaria o indicador a 5,3%.</div>
-        <p>Um indicador cuja posição no ranking depende de dois registros não sustenta uma decisão de expansão de capacidade. A descrição correta não é “a Oeste é a mais eficiente”, e sim “o volume observado na Oeste não permite ordená-la em relação às demais unidades”.</p>
+        <span class="step-tag">Prompt 9 · produtos</span>
+        <h2>14. Exporte tratado, revisão e dicionário</h2>
+        <div class="prompt-block">Exporte saidas/base_hospitalar_tratada.csv com todas as 5.000 linhas, campos
+padronizados e flags. Exporte saidas/registros_para_revisao.csv com qualquer
+regra crítica violada. Crie saidas/dicionario_de_dados.md explicando coluna,
+tipo, significado, regra e possibilidade de ausência. Não inclua o índice do
+DataFrame nos CSVs e não modifique o arquivo bruto.</div>
+        <div class="code-block">flags_criticas = [
+    "chave_duplicada", "idade_fora_faixa",
+    "hospital_id_invalido", "cronologia_invalida",
+]
+para_revisao = base[base[flags_criticas].any(axis=1)].copy()
+
+base.to_csv(saida / "base_hospitalar_tratada.csv", index=False)
+para_revisao.to_csv(saida / "registros_para_revisao.csv", index=False)
+relatorio_qualidade.to_csv(saida / "relatorio_qualidade.csv", index=False)</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 9 · desfecho</span>
-        <h2>12. Um indicador de processo não descreve desempenho</h2>
-        <p>A recomendação central do parecer é replicar o protocolo da unidade Norte. Um segundo indicador reverte a leitura.</p>
-        <div class="code-block">indicadores = base.groupby("unidade").agg(
-    internacoes=("dias_internacao", "count"),
-    permanencia_media=("dias_internacao", "mean"),
-    reinternacao_30d=("reinternacao_30d", "mean"),
-    custo_medio=("custo_total", "mean"),
-).round({"permanencia_media": 2, "reinternacao_30d": 3, "custo_medio": 2})
-
-por_estrato = base.pivot_table(
-    index="gravidade", columns="unidade", values="reinternacao_30d", aggfunc="mean"
-).round(3)
-display(indicadores, por_estrato)</div>
-        <table>
-          <thead><tr><th>Unidade</th><th>Internações</th><th>Permanência média</th><th>Reinternação em 30 dias</th><th>Custo médio</th></tr></thead>
-          <tbody>
-            <tr><td>Norte</td><td>2.100</td><td>4,32</td><td>17,0% (358 casos)</td><td>R$ 14.232,64</td></tr>
-            <tr><td>Sul</td><td>2.400</td><td>6,70</td><td>10,0% (240 casos)</td><td>R$ 23.899,10</td></tr>
-            <tr><td>Leste</td><td>1.300</td><td>4,21</td><td>13,2% (172 casos)</td><td>R$ 15.517,47</td></tr>
-            <tr><td>Oeste</td><td>38</td><td>3,45</td><td>2,6% (1 caso)</td><td>R$ 12.630,70</td></tr>
-          </tbody>
-        </table>
-        <p>A unidade Norte combina a menor permanência entre as unidades de volume comparável com a maior taxa de reinternação da rede. A vantagem se mantém contra a Sul em todos os estratos de gravidade — Baixa 15,3% contra 7,5%, Média 20,3% contra 8,3% e Alta 23,2% contra 13,0% — o que afasta a hipótese de que a diferença decorra apenas da composição de casos. Os dados descrevem uma associação entre alta precoce e retorno em 30 dias; não a estabelecem como relação causal, o que exigiria delineamento fora do escopo desta aula.</p>
+        <span class="step-tag">Prompt 10 · testes</span>
+        <h2>15. Reinicie e execute tudo</h2>
+        <div class="prompt-block">Adicione ao final do notebook asserts legíveis para: 5.000 linhas preservadas;
+patient_id único; gêneros dentro do dicionário; nenhum dias_internacao negativo;
+150 cronologias inválidas devidamente sinalizadas; arquivos de saída existentes.
+Reinicie o kernel e execute todas as células em ordem. Se um teste falhar,
+diagnostique a causa; não remova nem enfraqueça o teste para fazê-lo passar.
+Mostre um resumo final das evidências.</div>
+        <div class="code-block">assert len(base) == 5_000
+assert base["patient_id"].is_unique
+assert set(base["gender"].dropna()) &lt;= {"Feminino", "Masculino", "Outro", "Não informado"}
+assert int(base["cronologia_invalida"].sum()) == 150
+assert not (base["dias_internacao"].dropna() &lt; 0).any()
+assert (saida / "base_hospitalar_tratada.csv").exists()
+assert (saida / "registros_para_revisao.csv").exists()
+assert (saida / "relatorio_qualidade.csv").exists()</div>
+        <p>Um teste não serve para confirmar que a IA “acertou”; ele serve para tentar revelar quando a transformação violou o contrato.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 10 e 11 · entrega</span>
-        <h2>13. Tabela executiva, memorando e evidência</h2>
-        <p>A auditoria termina em um único artefato de decisão. Cada linha do memorando deve remeter a uma linha da tabela.</p>
-        <div class="code-block">tabela_executiva = base.groupby("unidade").agg(
-    internacoes=("dias_internacao", "count"),
-    permanencia_media=("dias_internacao", "mean"),
-    mediana=("dias_internacao", "median"),
-    q90=("dias_internacao", lambda s: s.quantile(0.90)),
-    reinternacao_30d=("reinternacao_30d", "mean"),
-    custo_medio=("custo_total", "mean"),
-).round(2)
-
-tabela_executiva.to_csv(saida / "tabela_executiva.csv")
-display(tabela_executiva.sort_values("permanencia_media"))</div>
-        <p>Os testes finais protegem a conclusão contra alterações silenciosas durante a reexecução do notebook:</p>
-        <div class="code-block">assert len(base) == 5_838
-assert base["atendimento_id"].is_unique
-
-media = base.groupby("unidade")["dias_internacao"].mean()
-assert 4.3 &lt; media["Norte"] &lt; 4.4
-assert media["Sul"] &gt; media["Norte"]
-
-estrato = base.pivot_table(index="gravidade", columns="unidade", values="dias_internacao", aggfunc="mean")
-assert (estrato["Sul"] &lt; estrato["Norte"]).all()
-
-reinternacao = base.groupby("unidade")["reinternacao_30d"].mean()
-assert reinternacao["Norte"] &gt; reinternacao["Sul"]
-assert (base["unidade"] == "Oeste").sum() &lt; 50</div>
-        <p>A persistência oficial da entrega continua sendo o versionamento no repositório do estudante:</p>
+        <span class="step-tag">Prompt 11 · auditoria</span>
+        <h2>16. Documente a participação da IA e versione</h2>
+        <div class="prompt-block">Crie REVISAO_IA.md com: objetivo, prompts usados, sugestões aceitas, sugestões
+rejeitadas, regras humanas, testes executados, limitações e decisão sobre uso da
+base. Depois mostre git status e proponha comandos git add, commit e push apenas
+para os arquivos desta entrega. Não execute commit ou push sem minha aprovação,
+não crie remoto e nunca use force. Sugira a mensagem: "Documenta limpeza
+auditável da base hospitalar".</div>
+        <p>Leia <code>REVISAO_IA.md</code> e o diff antes de autorizar o versionamento. No repositório do estudante, a persistência oficial continua sendo commit e push:</p>
         <div class="code-block">git status
-git add Aula_04_SeuNome.ipynb saidas MEMORANDO.md REVISAO_IA.md
+git add Aula_04_SeuNome.ipynb saidas REVISAO_IA.md
 git diff --staged
-git commit -m "Audita parecer de eficiência com estatística descritiva"
+git commit -m "Documenta limpeza auditável da base hospitalar"
 git push</div>
       </section>
 
       <section data-lesson-section="challenge">
-        <h2>14. Desafio e entrega</h2>
-        <p>Cada comitê responde formalmente à Diretoria Executiva: <strong>as quatro recomendações do parecer devem ser executadas, revistas ou suspensas?</strong> A resposta deve tratar as quatro isoladamente e indicar, para cada uma, a evidência que a sustenta ou a derruba.</p>
-        <p>O memorando tem no máximo uma página e quatro elementos: achado, evidência, risco de decidir pelo parecer original e recomendação. É vedado usar a expressão “os dados mostram” sem referência à linha correspondente da tabela executiva.</p>
-        <p><strong>Entrega verificável:</strong> <code>Aula_04_SeuNome.ipynb</code> executado do início ao fim; <code>saidas/tabela_executiva.csv</code>; <code>saidas/distribuicao_norte_leste.png</code>; <code>MEMORANDO.md</code>; <code>REVISAO_IA.md</code> com os erros identificados no parecer e as sugestões da IA aceitas e rejeitadas; commit e push.</p>
+        <h2>17. Desafio e entrega</h2>
+        <p>Em dupla, responda à Diretoria de Operações: <strong>a base está apta para calcular permanência hospitalar?</strong> A resposta deve separar registros utilizáveis de registros que exigem revisão, apontar o principal risco cadastral e mencionar pelo menos uma sugestão do Antigravity que foi rejeitada ou alterada.</p>
+        <p><strong>Entrega verificável:</strong> <code>Aula_04_SeuNome.ipynb</code> executado do início ao fim; <code>base_hospitalar_tratada.csv</code> com 5.000 linhas; fila contendo as 150 cronologias incoerentes; relatório antes/depois; dicionário de dados; <code>REVISAO_IA.md</code>; commit e push.</p>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>15. Checklist de qualidade</h2>
-        <ul>
-          <li>Os números do parecer foram reproduzidos com o método declarado antes de serem contestados.</li>
-          <li>A média ponderada foi calculada a partir dos registros individuais e comparada com a média das médias mensais.</li>
-          <li>Os meses incompletos da janela de observação foram identificados e o seu efeito foi declarado.</li>
-          <li>A comparação entre Norte e Sul foi feita dentro de cada estrato de gravidade, com a composição percentual explicitada.</li>
-          <li>A padronização direta foi executada nas duas direções e os quatro valores constam do relatório.</li>
-          <li>Norte e Leste foram descritas por mediana, dispersão e quantis, não apenas pela média.</li>
-          <li>O histograma usa a mesma escala e o mesmo número de faixas nas duas unidades.</li>
-          <li>A unidade Oeste foi tratada como amostra insuficiente, com a análise de sensibilidade registrada.</li>
-          <li>A reinternação em 30 dias consta da tabela executiva ao lado da permanência.</li>
-          <li>Nenhuma associação observada foi apresentada como relação causal.</li>
-          <li>Cada recomendação do memorando remete a uma linha da tabela executiva.</li>
-          <li>O notebook reinicia e executa todas as células em ordem, com os asserts aprovados.</li>
-        </ul>
+        <h2>18. Checklist de qualidade</h2>
+        <ul><li>O SHA-256 ou o shape confirma que a turma trabalhou com a base correta.</li><li>O CSV bruto permanece intacto e separado dos produtos da limpeza.</li><li>Cada ausência tem uma política explícita; nenhuma idade ou condição clínica foi inventada.</li><li>Diagnósticos foram unidos somente por espaços e capitalização.</li><li>Duplicidades foram verificadas e a contagem zero foi registrada.</li><li>As 150 cronologias inválidas permanecem sinalizadas e fora de <code>dias_internacao</code>.</li><li>O notebook reinicia e executa todas as células sem depender da ordem manual.</li><li>O relatório não apresenta pendência humana como problema “resolvido”.</li><li>A revisão da IA registra aceitações, rejeições, testes e limitações.</li><li>Commit e push preservam a entrega no repositório do estudante.</li></ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>16. Síntese</h2>
-        <p>O parecer auditado não continha erro de cálculo. Continha quatro decisões metodológicas não declaradas: consolidou médias sem ponderar pelo volume, comparou unidades com composições de casos distintas, resumiu distribuições heterogêneas por um único valor central e ordenou uma unidade de 38 registros ao lado de unidades com milhares. Cada uma dessas decisões é invisível na tabela final e determinante na recomendação.</p>
-        <p>Estatística descritiva, em gestão, é o procedimento que torna essas decisões visíveis. Média, mediana, quantis, dispersão, ponderação e padronização não descrevem apenas os dados: delimitam quais comparações a base sustenta e, por consequência, quais decisões podem ser defendidas diante de um conselho.</p>
+        <h2>19. Síntese</h2>
+        <p>Limpeza de dados não é fabricar uma tabela sem células vazias. É preservar a fonte, medir os problemas, aplicar somente regras justificáveis, impedir que inconsistências contaminem indicadores e encaminhar o restante para decisão humana.</p>
+        <p>O Antigravity acelerou planejamento, código e testes, mas as evidências permaneceram visíveis: contagens antes/depois, flags, produtos separados, execução completa e histórico Git. A responsabilidade pela regra continuou com o estudante.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>17. Referências e continuidade</h2>
-        <p>No próximo laboratório, os achados desta auditoria se tornam objeto de comunicação: storytelling, dashboards e segmentação. A tabela executiva produzida hoje é o insumo de entrada. Guarde-a versionada.</p>
-        <ul>
-          <li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html">Pandas — agregação e agrupamento com <code>groupby</code></a>.</li>
-          <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html">Pandas — <code>describe</code> e estatísticas de resumo</a>.</li>
-          <li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.hist.html">Matplotlib — histogramas comparáveis</a>.</li>
-          <li><a href="https://plato.stanford.edu/entries/paradox-simpson/">Stanford Encyclopedia of Philosophy — Simpson's Paradox</a>.</li>
-          <li><a href="dados/README.md">Dicionário de dados, inventário e assinaturas da base da Rede Vita</a>.</li>
-        </ul>
+        <h2>20. Referências e continuidade</h2>
+        <p>No próximo laboratório, a base tratada será usada em estatística descritiva para gestão. Guarde o relatório de qualidade: médias e distribuições só fazem sentido quando a população analisada e as exclusões estão documentadas.</p>
+        <ul><li><a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Fonte e licença do dataset no Kaggle</a>.</li><li><a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">Codelab oficial do Antigravity IDE</a>.</li><li><a href="https://antigravity.google/docs/agent-settings">Configurações de revisão e execução do agente</a>.</li><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Documentação do Pandas sobre dados ausentes</a>.</li></ul>
       </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-04.html" class="btn btn-slides">📊 Ver Slides</a>
-        <a href="dados/rede_vita_internacoes.csv" download="rede_vita_internacoes.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar Base</a>
         <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>

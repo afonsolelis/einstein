@@ -1,188 +1,145 @@
-# Aula 04 — Roteiro de prompts para a auditoria estatística
+# Aula 03 — Prompts para o Antigravity
 
-Use estes prompts na ordem, em modo orientado por revisão: leia o plano, autorize
-cada execução conscientemente e só avance quando a evidência solicitada aparecer
-na saída da célula. O ambiente oficial de execução é o GitHub Codespaces da
-disciplina, com Pandas e Matplotlib já instalados.
+Use estes prompts na ordem. Trabalhe em **modo orientado por revisão**: leia o plano e o diff, autorize comandos conscientemente e só avance quando a evidência pedida aparecer.
 
-Todos os arquivos desta aula são sintéticos e de uso educacional. O processamento
-dos dados ocorre no workspace, mas prompts e arquivos mencionados podem ser
-processados pelo serviço de IA conforme a política da conta. Não reutilize este
-roteiro com dados reais, pessoais ou sigilosos.
+O arquivo `hospital_patients_real_world.csv` contém dados sintéticos e CC0. O processamento do CSV e do notebook ocorre no workspace, mas o serviço de IA pode processar prompts e arquivos mencionados conforme a política da conta. Nunca reutilize este roteiro com dados reais, pessoais, sigilosos ou credenciais.
 
-A regra da aula: **a IA calcula; o comitê decide**. Nenhuma recomendação
-gerencial pode entrar no memorando sem uma tabela que a sustente.
-
----
-
-## Rodada 1 — auditoria do parecer com o recorte do seu comitê
-
-### Prompt 0 — Contrato de auditoria
+## Prompt 0 — Contrato de trabalho
 
 ```text
-Atue como analista de apoio de um comitê de auditoria estatística. Leia
-@relatorio_executivo_ia.md e o arquivo de dados do meu comitê, mas ainda não
-edite nem crie arquivos. Apresente um plano curto e aguarde aprovação.
+Atue como meu assistente de qualidade de dados neste laboratório. Leia
+@hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos.
+Primeiro apresente um plano curto e aguarde minha aprovação.
 
-Regras obrigatórias: não alterar os arquivos recebidos; não descartar registros
-sem que eu autorize e sem registrar o critério; nunca substituir um número do
-parecer sem antes reproduzi-lo com o método declarado nele; separar o que é
-cálculo do que é recomendação; não afirmar causalidade. A entrega terá notebook
-executado, tabela de auditoria, gráfico de distribuição e memorando executivo.
+Regras obrigatórias: preservar o CSV bruto; não inventar valores ausentes;
+não trocar datas por suposição; não excluir linhas silenciosamente; explicar
+cada regra de negócio; trabalhar apenas dentro desta pasta; não instalar
+pacotes nem executar comandos sem minha aprovação. A entrega terá notebook,
+base tratada, fila de revisão, relatório de qualidade e revisão da IA.
 ```
 
-### Prompt 1 — Reprodução do número auditado
+## Prompt 1 — Perfil da base, sem limpar
 
 ```text
-Crie Aula_04_SeuNome.ipynb. Carregue o arquivo do meu comitê em um DataFrame
-chamado recorte e mostre shape, dtypes, ausências por coluna e as cinco
-primeiras linhas. Em seguida, reproduza exatamente o número que o parecer
-atribui a cada unidade presente no meu recorte, usando o método descrito na
-seção Metodologia do parecer. Não corrija nada ainda: o objetivo desta etapa é
-demonstrar que consigo chegar ao mesmo resultado do documento auditado.
+Crie Aula_04_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
+carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
+mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
+linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
+Não faça nenhuma limpeza nesta etapa. Execute as células e resuma os achados.
+Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.
 ```
 
-### Prompt 2 — Estatística descritiva do recorte
-
-Comitê de Operações (Grupo A), painel agregado:
+## Prompt 2 — Cópia de trabalho e tipos
 
 ```text
-Com o painel mensal, calcule para cada unidade: a média não ponderada das médias
-mensais e a média ponderada pelo número de altas. Apresente as duas em uma única
-tabela, com a diferença em dias e em percentual, e ordene as unidades pelos dois
-critérios. Mostre também quantas linhas mensais cada unidade possui e quantas
-delas têm menos de 20 altas. Não descarte linhas: descreva o efeito delas.
+No mesmo notebook, crie base = bruta.copy(deep=True) e nunca sobrescreva
+bruta nem o CSV. Renomeie as colunas para snake_case. Converta identificadores,
+gênero e diagnóstico para string; idade para Float64; datas para datetime com
+errors="coerce". Conte falhas de conversão antes de prosseguir. Mostre o código,
+a saída e explique por que cada tipo foi escolhido. Não faça imputação.
 ```
 
-Comitê Clínico (Grupo B), registros de Norte e Sul:
+## Prompt 3 — Ausências sem adivinhação
 
 ```text
-Calcule permanência média, mediana, desvio-padrão e contagem por unidade e, em
-seguida, por unidade e gravidade. Apresente a distribuição percentual dos
-estratos de gravidade em cada unidade. Compare as duas unidades dentro de cada
-estrato e diga explicitamente se a ordenação por estrato coincide com a
-ordenação agregada. Não interprete ainda: apenas apresente as tabelas.
+Adicione uma seção sobre dados ausentes. Crie flags booleanas que preservem a
+origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente
+como pd.NA. Padronize gênero vazio ou Unknown como "Não informado" e diagnóstico
+vazio como "Não informado". Gere uma tabela antes/depois com quantidade e
+percentual. Não use média, moda ou qualquer valor clínico inventado.
 ```
 
-Comitê de Riscos (Grupo C), registros de Norte, Leste e Oeste:
+## Prompt 4 — Categorias consistentes
 
 ```text
-Para cada unidade, calcule contagem, média, mediana, desvio-padrão, mínimo,
-máximo e os quantis 25, 50, 75 e 90 da permanência. Acrescente o percentual de
-internações com até dois dias, o percentual com dez dias ou mais e a taxa de
-reinternação em 30 dias. Apresente tudo em uma única tabela ordenada pela média.
+Normalize espaços e capitalização de gender e diagnosis. Para gender, aplique
+um dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e
+Unknown/vazio→Não informado. Em diagnosis, una apenas variantes que diferem por
+espaços ou capitalização; não faça aproximação clínica por significado.
+Mostre value_counts antes/depois e registre o mapeamento aplicado.
 ```
 
-### Prompt 3 — Parecer preliminar do comitê
+## Prompt 5 — Chaves e duplicidades
 
 ```text
-Com base apenas nas tabelas já calculadas, redija em cinco linhas o parecer
-preliminar do meu comitê sobre a pergunta: qual unidade deve ser tomada como
-referência de eficiência pela rede? Separe explicitamente o que a evidência
-sustenta do que ela não permite afirmar. Liste as informações ausentes no meu
-recorte que poderiam alterar a conclusão. Não consulte outros arquivos.
+Audite duplicidade de linha completa e de patient_id. Não use drop_duplicates
+automaticamente. Se houver linhas idênticas, apresente a evidência antes de
+propor remoção. Se a mesma chave tiver conteúdos diferentes, crie a flag
+chave_duplicada e envie esses registros para revisão. Registre também o caso
+em que a contagem for zero. Explique a diferença entre linha duplicada e chave
+de negócio duplicada.
 ```
 
----
-
-## Rodada 2 — reanálise com a base completa
-
-### Prompt 4 — Perfil da base completa
+## Prompt 6 — Regras hospitalares
 
 ```text
-Carregue @rede_vita_internacoes.csv em um DataFrame chamado base. Mostre shape,
-dtypes, ausências, duplicidade de atendimento_id, período coberto por data_alta
-e a contagem de internações por unidade. Confirme 5.838 registros e 9 colunas;
-se divergir, pare e me avise antes de qualquer análise.
+Implemente, sem apagar registros, as flags idade_fora_faixa para idade menor
+que 0 ou maior que 110, hospital_id_invalido para valores fora do padrão
+HOSP-[número] e cronologia_invalida quando discharge_date for anterior a
+admission_date. Mostre contagens e amostras. Não inverta datas automaticamente.
+Nesta versão espero 0 idades fora da faixa, 0 hospitais inválidos e 150
+cronologias inválidas; se divergir, investigue antes de alterar a regra.
 ```
 
-### Prompt 5 — O efeito da ponderação
+## Prompt 7 — Indicador derivado com segurança
 
 ```text
-Calcule a permanência média de cada unidade a partir dos registros individuais
-e compare com os valores publicados no parecer. Monte uma tabela com: unidade,
-valor do parecer, média ponderada correta, diferença e ordenação em cada
-critério. Explique em duas frases por que a média das médias mensais difere da
-média dos registros e em que condição as duas coincidem.
+Crie dias_internacao somente para registros com datas válidas e cronologia
+coerente. Nos demais casos use pd.NA e mantenha a flag de revisão. Converta o
+resultado para Int64 anulável. Mostre describe(), mínimo, máximo e confirme que
+nenhum valor negativo foi aceito. Explique por que corrigir para valor absoluto
+seria uma decisão perigosa.
 ```
 
-### Prompt 6 — Estratificação e padronização direta
+## Prompt 8 — Relatório antes/depois
 
 ```text
-Compare Norte e Sul dentro de cada estrato de gravidade e apresente a
-composição percentual dos estratos em cada unidade. Em seguida, faça a
-padronização direta: recalcule a permanência média de cada unidade aplicando a
-composição de gravidade da outra. Mostre os quatro valores em uma tabela e
-indique se a ordenação entre as unidades se mantém. Não altere os dados de
-origem e não afirme causalidade a partir dessa comparação.
+Crie um DataFrame relatorio_qualidade com as colunas metrica, antes, depois,
+regra_aplicada e pendencia_humana. Inclua: linhas, duplicidades, chaves
+duplicadas, ausências, gêneros não informados, categorias de diagnóstico,
+capitalização inconsistente, idade fora da faixa, hospital inválido e cronologia
+inválida. Salve como saidas/relatorio_qualidade.csv e exiba a tabela completa.
+Não trate uma flag pendente como erro resolvido.
 ```
 
-### Prompt 7 — Forma da distribuição
+## Prompt 9 — Produtos da limpeza
 
 ```text
-Para Norte e Leste, gere um histograma da permanência com a mesma escala e o
-mesmo número de faixas, e uma tabela com média, mediana, desvio-padrão,
-quantis 25, 75 e 90, percentual de internações com até dois dias e percentual
-com dez dias ou mais. Salve a figura em saidas/distribuicao_norte_leste.png.
-Descreva o que a média isolada não revela sobre essas duas unidades.
+Exporte saidas/base_hospitalar_tratada.csv com todas as 5.000 linhas, campos
+padronizados e flags. Exporte saidas/registros_para_revisao.csv com qualquer
+regra crítica violada. Crie saidas/dicionario_de_dados.md explicando coluna,
+tipo, significado, regra e possibilidade de ausência. Não inclua o índice do
+DataFrame nos CSVs e não modifique o arquivo bruto.
 ```
 
-### Prompt 8 — Tamanho amostral e sensibilidade
+## Prompt 10 — Testes e execução completa
 
 ```text
-Isole a unidade Oeste e mostre a contagem, a permanência de todos os registros
-ordenada, a média, a mediana e a amplitude. Recalcule a média sem os dois casos
-mais longos e informe a variação. Calcule também quantos eventos sustentam a
-taxa de reinternação dessa unidade. Conclua se o volume observado permite tratar
-a unidade como referência da rede e justifique com os números.
+Adicione ao final do notebook asserts legíveis para: 5.000 linhas preservadas;
+patient_id único; gêneros dentro do dicionário; nenhum dias_internacao negativo;
+150 cronologias inválidas devidamente sinalizadas; arquivos de saída existentes.
+Reinicie o kernel e execute todas as células em ordem. Se um teste falhar,
+diagnostique a causa; não remova nem enfraqueça o teste para fazê-lo passar.
+Mostre um resumo final das evidências.
 ```
 
-### Prompt 9 — Segundo indicador
+## Prompt 11 — Auditoria da IA e versionamento
 
 ```text
-Calcule a taxa de reinternação em 30 dias e o custo médio por internação, por
-unidade e por unidade e gravidade. Apresente uma tabela conjunta com permanência
-média, reinternação e custo médio. Verifique se a unidade com menor permanência
-também apresenta melhor resultado nos demais indicadores e registre o resultado
-dessa verificação sem suavizar a divergência.
+Crie REVISAO_IA.md com: objetivo, prompts usados, sugestões aceitas, sugestões
+rejeitadas, regras humanas, testes executados, limitações e decisão sobre uso da
+base. Depois mostre git status e proponha comandos git add, commit e push apenas
+para os arquivos desta entrega. Não execute commit ou push sem minha aprovação,
+não crie remoto e nunca use force. Sugira a mensagem: "Documenta limpeza
+auditável da base hospitalar".
 ```
-
-### Prompt 10 — Tabela executiva e memorando
-
-```text
-Monte a tabela final de decisão com uma linha por unidade e as colunas:
-internações, permanência média ponderada, mediana, quantil 90, permanência
-padronizada pela composição da rede, reinternação em 30 dias e custo médio.
-Salve em saidas/tabela_executiva.csv. Em seguida, redija MEMORANDO.md com, no
-máximo, uma página: achado, evidência, risco de decidir pelo parecer original e
-recomendação. Toda afirmação do memorando deve remeter a uma linha da tabela.
-```
-
-### Prompt 11 — Testes, auditoria da IA e versionamento
-
-```text
-Adicione asserts legíveis para: 5.838 registros carregados; média ponderada da
-unidade Norte entre 4,3 e 4,4; média da unidade Sul acima da média da Norte no
-agregado; média da Sul abaixo da média da Norte em cada estrato de gravidade;
-unidade Oeste com menos de 50 registros; taxa de reinternação da Norte superior
-à da Sul. Reinicie o kernel, execute todas as células em ordem e, se um teste
-falhar, diagnostique a causa sem enfraquecer o teste.
-
-Depois crie REVISAO_IA.md registrando: erros identificados no parecer original,
-prompts utilizados, sugestões aceitas, sugestões rejeitadas, limitações da
-análise e decisão final do comitê. Mostre git status e proponha add, commit e
-push apenas dos arquivos desta entrega, sem executar sem minha aprovação.
-Mensagem sugerida: "Audita parecer de eficiência com estatística descritiva".
-```
-
----
 
 ## Conferência oral antes da entrega
 
-O estudante deve conseguir sustentar, sem consultar o notebook:
+O estudante deve conseguir explicar:
 
-1. Por que a média das médias mensais não é a média da unidade.
-2. Por que a comparação entre Norte e Sul se inverte ao controlar a gravidade.
-3. Por que duas unidades com médias praticamente iguais exigem decisões distintas.
-4. Que incerteza acompanha um indicador calculado sobre 38 internações.
-5. Por que a permanência isolada não é suficiente para declarar eficiência.
+1. Por que o arquivo bruto nunca foi sobrescrito.
+2. Por que ausência não é sinônimo de zero.
+3. Por que a IA pode sugerir código, mas não definir uma regra clínica.
+4. Por que as 150 datas incoerentes foram sinalizadas em vez de “consertadas”.
+5. Quais evidências permitem reproduzir a limpeza.

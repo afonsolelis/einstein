@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório SQL · Aula 03</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap');
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(circle at 100% 0,rgba(31,111,178,.2),#0b1120 48%);color:#cbd5e1;font-family:Outfit,system-ui,sans-serif;padding:1.2rem} a{color:#4bc4e8}.shell{max-width:1400px;margin:auto}.topbar,.panel{background:rgba(15,23,42,.72);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 45px rgba(0,0,0,.25);border-radius:18px;backdrop-filter:blur(16px)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;margin-bottom:1rem}.topbar h1{font-size:clamp(1.2rem,3vw,2rem);margin:0;color:#fff}.nav{display:flex;gap:.5rem;flex-wrap:wrap}.btn{border:1px solid rgba(75,196,232,.3);border-radius:10px;background:rgba(0,163,217,.12);color:#dff7ff;padding:.65rem .9rem;font:600 .88rem Outfit;cursor:pointer;text-decoration:none}.btn:hover,.btn:focus-visible{background:rgba(0,163,217,.25);outline:2px solid #4bc4e8;outline-offset:2px}.btn.danger{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.12)}.status{margin:.75rem 0;color:#7ee7d4;font:600 .85rem 'Fira Code'}.layout{display:grid;grid-template-columns:minmax(250px,320px) 1fr;gap:1rem}.panel{padding:1.15rem;min-width:0}.panel h2{margin:.1rem 0 1rem;color:#fff;font-size:1.15rem}.schema{font:400 .8rem 'Fira Code';white-space:pre-wrap;line-height:1.55;color:#a7c9dc}.hint{color:#94a3b8;font-size:.9rem;line-height:1.5}.editor{width:100%;min-height:240px;resize:vertical;border:1px solid rgba(75,196,232,.25);border-left:4px solid #00a3d9;border-radius:12px;background:#08121f;color:#e2ebf2;padding:1rem;font:400 .95rem/1.55 'Fira Code';tab-size:2}.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}.results{overflow:auto;max-height:420px;border-radius:12px;border:1px solid rgba(255,255,255,.08)}table{width:100%;border-collapse:collapse;font:400 .84rem 'Fira Code';background:#08121f}th,td{text-align:left;padding:.68rem;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}th{position:sticky;top:0;background:#11243a;color:#4bc4e8}#message{padding:.8rem;color:#94a3b8;font-family:'Fira Code'}select{background:#08121f;color:#dbeafe;border:1px solid rgba(75,196,232,.3);border-radius:10px;padding:.65rem;max-width:100%}.challenge{margin-top:1rem;padding:1rem;border-left:4px solid #00d7b0;background:rgba(0,215,176,.08);border-radius:0 12px 12px 0}.challenge strong{color:#7ee7d4}@media(max-width:800px){body{padding:.6rem}.layout{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.editor{min-height:210px}}
+  </style>
+</head>
+<body><main class="shell">
+  <header class="topbar"><div><h1>SQLite no navegador · Rede Cuidar</h1><div class="status" id="status">Carregando SQLite…</div></div><nav class="nav"><a class="btn" href="index.html">📚 Material</a><a class="btn" href="../../slides/aula-03.html">📊 Slides</a><a class="btn" href="../../index.html">🏠 Cronograma</a></nav></header>
+  <div class="layout">
+    <aside class="panel"><h2>Modelo físico</h2><div class="schema">PACIENTE
+• paciente_id INTEGER PK
+• nome TEXT NOT NULL
+• cidade TEXT
+
+MEDICO
+• medico_id INTEGER PK
+• nome TEXT NOT NULL
+• especialidade TEXT
+
+ATENDIMENTO
+• atendimento_id INTEGER PK
+• paciente_id INTEGER FK
+• medico_id INTEGER FK
+• data_atendimento TEXT
+• tipo TEXT
+• valor NUMERIC
+• status TEXT</div>
+      <p class="hint">O banco é executado integralmente neste navegador. Cada alteração é exportada e salva em <code>localStorage</code>. Dados sintéticos: não use informações pessoais reais.</p>
+      <label for="examples"><strong>Consultas de exemplo</strong></label><br><select id="examples"><option value="">Selecione…</option><option value="SELECT * FROM paciente;">DQL · listar pacientes</option><option value="SELECT p.nome, COUNT(*) AS atendimentos, ROUND(SUM(a.valor),2) AS receita FROM paciente p JOIN atendimento a ON a.paciente_id=p.paciente_id GROUP BY p.paciente_id ORDER BY receita DESC;">DQL · JOIN e agregação</option><option value="INSERT INTO paciente(nome,cidade) VALUES ('Paciente Teste','São Paulo'); SELECT * FROM paciente;">DML · inserir paciente</option><option value="UPDATE atendimento SET status='Faturado' WHERE atendimento_id=4; SELECT * FROM atendimento;">DML · atualizar atendimento</option><option value="CREATE TABLE convenio(convenio_id INTEGER PRIMARY KEY,nome TEXT NOT NULL); SELECT name, sql FROM sqlite_master WHERE type='table';">DDL · criar tabela</option><option value="BEGIN; UPDATE atendimento SET valor=valor*1.05; SELECT * FROM atendimento; ROLLBACK;">TCL · transação e rollback</option></select>
+      <div class="challenge"><strong>Missão guiada</strong><br>Liste receita e quantidade de atendimentos por especialidade, apenas para registros com status “Faturado”. Ordene pela maior receita.</div>
+    </aside>
+    <section class="panel"><h2>Editor SQL</h2><textarea id="sql" class="editor" spellcheck="false">SELECT
+  m.especialidade,
+  COUNT(*) AS total_atendimentos,
+  ROUND(SUM(a.valor), 2) AS receita
+FROM atendimento AS a
+JOIN medico AS m ON m.medico_id = a.medico_id
+WHERE a.status = 'Faturado'
+GROUP BY m.especialidade
+ORDER BY receita DESC;</textarea><div class="actions"><button id="run" class="btn">▶ Executar (Ctrl+Enter)</button><button id="save" class="btn">💾 Salvar banco</button><button id="reset" class="btn danger">↺ Restaurar base</button></div><div class="results" id="results"><div id="message">Execute uma consulta para ver o resultado.</div></div></section>
+  </div>
+</main><script src="../../assets/vendor/sql.js/sql-asm.js"></script><script>
+const STORAGE_KEY='einstein-aula03-sqlite-v1'; let SQL,db;
+const seed=`PRAGMA foreign_keys=ON;
+CREATE TABLE paciente(paciente_id INTEGER PRIMARY KEY,nome TEXT NOT NULL,cidade TEXT);
+CREATE TABLE medico(medico_id INTEGER PRIMARY KEY,nome TEXT NOT NULL,especialidade TEXT NOT NULL);
+CREATE TABLE atendimento(atendimento_id INTEGER PRIMARY KEY,paciente_id INTEGER NOT NULL REFERENCES paciente(paciente_id),medico_id INTEGER NOT NULL REFERENCES medico(medico_id),data_atendimento TEXT NOT NULL,tipo TEXT NOT NULL,valor NUMERIC NOT NULL CHECK(valor>=0),status TEXT NOT NULL CHECK(status IN ('Agendado','Realizado','Faturado')));
+INSERT INTO paciente VALUES (1,'Ana Lima','São Paulo'),(2,'Bruno Souza','Osasco'),(3,'Carla Mendes','São Paulo'),(4,'Diego Alves','Barueri'),(5,'Elisa Rocha','Santo André');
+INSERT INTO medico VALUES (1,'Dra. Helena','Cardiologia'),(2,'Dr. Marcos','Ortopedia'),(3,'Dra. Joana','Clínica Médica');
+INSERT INTO atendimento VALUES (1,1,1,'2026-08-01','Consulta',420,'Faturado'),(2,2,3,'2026-08-03','Consulta',260,'Faturado'),(3,1,1,'2026-08-10','Retorno',280,'Realizado'),(4,3,2,'2026-08-12','Procedimento',1250,'Realizado'),(5,4,3,'2026-08-15','Consulta',260,'Faturado'),(6,5,2,'2026-08-18','Consulta',350,'Agendado'),(7,3,1,'2026-08-20','Exame',680,'Faturado');`;
+function bytesToBase64(bytes){let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s)}
+function base64ToBytes(s){const b=atob(s),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
+function persist(){localStorage.setItem(STORAGE_KEY,bytesToBase64(db.export()));document.querySelector('#status').textContent='Banco salvo neste navegador ✓'}
+function fresh(){db=new SQL.Database();db.run(seed);persist()}
+function render(result){const host=document.querySelector('#results');host.innerHTML='';if(!result.length){host.innerHTML='<div id="message">Comando executado. Nenhuma tabela de resultado.</div>';return}const last=result[result.length-1],table=document.createElement('table'),head=document.createElement('thead'),tr=document.createElement('tr');last.columns.forEach(c=>{const th=document.createElement('th');th.textContent=c;tr.appendChild(th)});head.appendChild(tr);table.appendChild(head);const body=document.createElement('tbody');last.values.forEach(row=>{const r=document.createElement('tr');row.forEach(v=>{const td=document.createElement('td');td.textContent=v===null?'NULL':v;r.appendChild(td)});body.appendChild(r)});table.appendChild(body);host.appendChild(table)}
+function execute(){try{const result=db.exec(document.querySelector('#sql').value);persist();render(result)}catch(error){document.querySelector('#results').innerHTML='<div id="message"></div>';document.querySelector('#message').textContent='Erro SQLite: '+error.message}}
+initSqlJs().then(module=>{SQL=module;const saved=localStorage.getItem(STORAGE_KEY);if(saved){try{db=new SQL.Database(base64ToBytes(saved));document.querySelector('#status').textContent='Banco restaurado do localStorage ✓'}catch(e){fresh()}}else fresh();document.querySelector('#run').disabled=false}).catch(error=>{document.querySelector('#status').textContent='Falha ao carregar SQLite: '+error.message});
+document.querySelector('#run').disabled=true;document.querySelector('#run').addEventListener('click',execute);document.querySelector('#save').addEventListener('click',persist);document.querySelector('#reset').addEventListener('click',()=>{if(confirm('Restaurar as tabelas e apagar suas alterações locais?'))fresh()});document.querySelector('#examples').addEventListener('change',e=>{if(e.target.value)document.querySelector('#sql').value=e.target.value});document.querySelector('#sql').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();execute()}});
+</script></body></html>
