@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama Entidade-Relacionamento lógico do ecossistema de cursos</title>
+  <desc id="desc">Tabelas coordenador, curso, aula, docente e aula_docente com chaves primárias, estrangeiras e cardinalidades.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbfe"/><stop offset="1" stop-color="#e8f5fb"/></linearGradient>
+    <linearGradient id="head" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1a2f5e"/><stop offset="1" stop-color="#1f6fb2"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1a2f5e" flood-opacity=".16"/></filter>
+    <style>
+      .title{font:800 34px Outfit,Arial,sans-serif;fill:#1a2f5e}.subtitle{font:400 18px Outfit,Arial,sans-serif;fill:#64748b}
+      .table{fill:#fff;stroke:#bed9e9;stroke-width:2}.header{fill:url(#head)}.tname{font:800 20px Outfit,Arial,sans-serif;fill:#fff;letter-spacing:1px}
+      .field{font:500 15px 'Fira Code',monospace;fill:#334155}.key{font:800 13px Outfit,Arial,sans-serif}.pk{fill:#087466}.fk{fill:#1f6fb2}.rule{stroke:#1f6fb2;stroke-width:3;fill:none}.label{font:700 15px Outfit,Arial,sans-serif;fill:#1f6fb2}
+      .crow{stroke:#1f6fb2;stroke-width:3;fill:none}.legend{font:600 14px Outfit,Arial,sans-serif;fill:#64748b}
+    </style>
+  </defs>
+  <rect width="1500" height="900" rx="34" fill="url(#bg)"/>
+  <circle cx="1380" cy="100" r="240" fill="#00a3d9" opacity=".08"/><circle cx="80" cy="850" r="230" fill="#00d7b0" opacity=".07"/>
+  <text x="65" y="62" class="title">DER · visão lógica-relacional</text><text x="65" y="94" class="subtitle">Entidades viram tabelas; relacionamentos viram chaves estrangeiras</text>
+
+  <g filter="url(#shadow)" transform="translate(65 155)"><rect class="table" width="330" height="210" rx="18"/><path class="header" d="M18 0h294a18 18 0 0118 18v45H0V18A18 18 0 0118 0z"/><text x="24" y="40" class="tname">COORDENADOR</text>
+    <text x="24" y="94" class="key pk">PK</text><text x="66" y="94" class="field">coordenador_id  UUID</text><text x="66" y="129" class="field">nome            VARCHAR</text><text x="66" y="164" class="field">email           VARCHAR</text><text x="66" y="199" class="field">data_cadastro   DATE</text></g>
+  <g filter="url(#shadow)" transform="translate(585 155)"><rect class="table" width="330" height="245" rx="18"/><path class="header" d="M18 0h294a18 18 0 0118 18v45H0V18A18 18 0 0118 0z"/><text x="24" y="40" class="tname">CURSO</text>
+    <text x="24" y="94" class="key pk">PK</text><text x="66" y="94" class="field">curso_id        UUID</text><text x="66" y="129" class="field">nome            VARCHAR</text><text x="66" y="164" class="field">carga_horaria   INT</text><text x="24" y="199" class="key fk">FK</text><text x="66" y="199" class="field">coordenador_id  UUID</text><text x="66" y="234" class="field">data_inicio     DATE</text></g>
+  <g filter="url(#shadow)" transform="translate(1105 155)"><rect class="table" width="330" height="245" rx="18"/><path class="header" d="M18 0h294a18 18 0 0118 18v45H0V18A18 18 0 0118 0z"/><text x="24" y="40" class="tname">AULA</text>
+    <text x="24" y="94" class="key pk">PK</text><text x="66" y="94" class="field">aula_id         UUID</text><text x="66" y="129" class="field">nome            VARCHAR</text><text x="66" y="164" class="field">duracao_min     INT</text><text x="24" y="199" class="key fk">FK</text><text x="66" y="199" class="field">curso_id        UUID</text><text x="66" y="234" class="field">ordem           INT</text></g>
+  <g filter="url(#shadow)" transform="translate(325 600)"><rect class="table" width="330" height="175" rx="18"/><path class="header" d="M18 0h294a18 18 0 0118 18v45H0V18A18 18 0 0118 0z"/><text x="24" y="40" class="tname">DOCENTE</text>
+    <text x="24" y="94" class="key pk">PK</text><text x="66" y="94" class="field">docente_id      UUID</text><text x="66" y="129" class="field">nome            VARCHAR</text><text x="66" y="164" class="field">email           VARCHAR</text></g>
+  <g filter="url(#shadow)" transform="translate(845 600)"><rect class="table" width="330" height="175" rx="18"/><path class="header" d="M18 0h294a18 18 0 0118 18v45H0V18A18 18 0 0118 0z"/><text x="24" y="40" class="tname">AULA_DOCENTE</text>
+    <text x="24" y="94" class="key pk">PK/FK</text><text x="82" y="94" class="field">aula_id       UUID</text><text x="24" y="129" class="key pk">PK/FK</text><text x="82" y="129" class="field">docente_id    UUID</text><text x="82" y="164" class="field">papel         VARCHAR</text></g>
+
+  <path class="rule" d="M395 260H585"/><path class="crow" d="M568 246l17 14-17 14M552 246l17 14-17 14"/><text x="445" y="245" class="label">1 : N</text>
+  <path class="rule" d="M915 260H1105"/><path class="crow" d="M1088 246l17 14-17 14M1072 246l17 14-17 14"/><text x="965" y="245" class="label">1 : N</text>
+  <path class="rule" d="M1270 400V515H1010V600"/><path class="crow" d="M996 583l14 17 14-17M996 567l14 17 14-17"/><text x="1286" y="475" class="label">1 : N</text>
+  <path class="rule" d="M655 687H845"/><path class="crow" d="M828 673l17 14-17 14M812 673l17 14-17 14"/><text x="705" y="672" class="label">1 : N</text>
+  <text x="65" y="844" class="legend">PK = chave primária · FK = chave estrangeira · AULA_DOCENTE resolve o relacionamento N:N sem listas dentro de uma célula.</text>
+</svg>

@@ -252,6 +252,20 @@
     }
     .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
     .metric span { color: var(--muted); font-size: 0.86rem; }
+    .diagram-slide { padding-top: 4.2rem; }
+    .diagram-slide h2 { margin-bottom: .65rem; font-size: clamp(2rem, 3.5vw, 3.2rem); }
+    .diagram-frame {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: min(100%, 1180px);
+      max-height: 65vh;
+      object-fit: contain;
+      border: 1px solid rgba(75, 196, 232, .24);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 24px 60px rgba(0,0,0,.28);
+    }
 
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
@@ -387,6 +401,9 @@
       .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
       .metric strong { font-size: 1.2rem; }
       .metric span { font-size: 0.68rem; }
+      .diagram-slide { padding-top: 3.5rem; }
+      .diagram-slide h2 { font-size: clamp(1.45rem, 6vw, 2rem); }
+      .diagram-frame { max-height: 58vh; border-radius: 12px; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -418,18 +435,24 @@
     <div class="slide slide-start active"><div class="badge">LABORATÓRIO 3 · 26/08</div><h1>Modelagem de dados e SQL I</h1><p>Do processo de negócio ao modelo físico: entidades, relacionamentos, atributos e a linguagem SQL</p></div>
     <div class="slide slide-content" data-lesson-section="objectives"><h2>Ao final, você será capaz de…</h2><ul><li><strong>Identificar</strong> entidades, atributos e relacionamentos.</li><li><strong>Converter</strong> um modelo conceitual em esquema relacional.</li><li><strong>Definir</strong> chaves, tipos e restrições no modelo físico.</li><li><strong>Distinguir</strong> DDL, DML, DQL, DCL e TCL.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro de 3 horas</h2><ul><li>Problema de negócio e dados necessários.</li><li>Modelo conceitual: entidades e relacionamentos.</li><li>Modelo lógico: tabelas, chaves e cardinalidades.</li><li>Modelo físico: atributos, tipos e restrições.</li><li>Panorama das cinco sublinguagens SQL.</li><li>Síntese e preparação para o laboratório prático.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Case: Rede Cuidar</h2><p>Uma rede de clínicas precisa responder: quem foi atendido, por qual médico, quando, por qual serviço, quanto foi faturado e em que situação?</p><ul><li><strong>Entidades:</strong> objetos relevantes do negócio.</li><li><strong>Atributos:</strong> características que descrevem cada objeto.</li><li><strong>Relacionamentos:</strong> regras que conectam os objetos.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Case: ecossistema de cursos</h2><p>Uma instituição precisa organizar cursos, suas aulas, a coordenação responsável e os docentes que ministram cada encontro.</p><ul><li><strong>Entidades:</strong> COORDENADOR, CURSO, AULA e DOCENTE.</li><li><strong>Atributos:</strong> identificadores, nomes, duração e carga horária.</li><li><strong>Relacionamentos:</strong> coordena, contém e ministra.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Três níveis, três perguntas</h2><ul><li><strong>Conceitual:</strong> quais conceitos existem no domínio?</li><li><strong>Lógico:</strong> como os dados se organizam em relações?</li><li><strong>Físico:</strong> como cada atributo será implementado no SGBD?</li></ul><p>O caminho reduz a distância entre linguagem do negócio e código executável.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Entidade–Relacionamento</h2><div class="code-block">PACIENTE 1 ──── N ATENDIMENTO N ──── 1 MÉDICO</div><ul><li>Um paciente pode ter muitos atendimentos.</li><li>Um médico pode realizar muitos atendimentos.</li><li>Cada atendimento pertence a um paciente e a um médico.</li><li><strong>ATENDIMENTO</strong> registra o evento.</li></ul></div>
+    <div class="slide slide-content diagram-slide" data-lesson-section="concepts"><h2>MER: as regras do negócio</h2><img class="diagram-frame" src="../assets/aula-03-mer.svg" alt="Modelo conceitual com Coordenador, Curso, Aula e Docente e suas cardinalidades"></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Leia o MER como frases</h2><ul><li>Um <strong>coordenador</strong> pode coordenar vários cursos; cada curso possui um coordenador.</li><li>Um <strong>curso</strong> contém várias aulas; cada aula pertence a um curso.</li><li>Uma <strong>aula</strong> pode ter vários docentes.</li><li>Um <strong>docente</strong> pode ministrar várias aulas.</li></ul><p>O último relacionamento é <em>N:N</em> e exigirá uma entidade associativa.</p></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Atributos e chaves</h2><ul><li><strong>Simples:</strong> cidade; <strong>composto:</strong> endereço.</li><li><strong>Obrigatório:</strong> nome; <strong>opcional:</strong> telefone.</li><li><strong>Derivado:</strong> idade calculada da data de nascimento.</li><li><strong>PK:</strong> identifica a linha; <strong>FK:</strong> referencia outra entidade.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Modelo físico: decisões explícitas</h2><div class="code-block">atendimento_id INTEGER PRIMARY KEY
-paciente_id INTEGER NOT NULL REFERENCES paciente
-data_atendimento TEXT NOT NULL
-valor NUMERIC NOT NULL CHECK(valor &gt;= 0)</div><p>Tipo, nulabilidade, unicidade e restrições transformam regras do negócio em controles.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Normalização em uma frase</h2><p>Guarde cada fato no lugar onde ele nasce e referencie-o por chave.</p><ul><li>Evite repetir dados do médico em cada atendimento.</li><li>Evite listas dentro de uma célula.</li><li>Faça cada coluna depender da chave.</li><li>Desnormalize apenas com justificativa e medição.</li></ul></div>
+    <div class="slide slide-content diagram-slide" data-lesson-section="concepts"><h2>DER: o desenho vira tabelas</h2><img class="diagram-frame" src="../assets/aula-03-der.svg" alt="Diagrama lógico das tabelas Coordenador, Curso, Aula, Docente e Aula Docente"></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Por que existe AULA_DOCENTE?</h2><p>Um relacionamento N:N não cabe como uma lista em uma coluna relacional.</p><ul><li><strong>AULA_DOCENTE</strong> registra cada participação docente.</li><li>A chave primária composta evita duplicidade do mesmo par.</li><li><code>aula_id</code> e <code>docente_id</code> também são FKs.</li><li>O atributo <code>papel</code> descreve a participação: titular, convidado ou tutor.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Modelo físico: decisões explícitas</h2><div class="code-block">curso_id UUID PRIMARY KEY
+coordenador_id UUID NOT NULL REFERENCES coordenador
+
+aula_id UUID PRIMARY KEY
+curso_id UUID NOT NULL REFERENCES curso
+
+PRIMARY KEY (aula_id, docente_id)</div><p>Tipo, nulabilidade, unicidade e restrições transformam regras do negócio em controles.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Normalização em uma frase</h2><p>Guarde cada fato no lugar onde ele nasce e referencie-o por chave.</p><ul><li>Evite repetir dados do coordenador em cada curso.</li><li>Evite uma lista de docentes dentro de AULA.</li><li>Faça cada coluna depender da chave.</li><li>Desnormalize apenas com justificativa e medição.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>As cinco sublinguagens SQL</h2><ul><li><strong>DDL</strong> — estrutura: CREATE, ALTER, DROP.</li><li><strong>DML</strong> — linhas: INSERT, UPDATE, DELETE.</li><li><strong>DQL</strong> — consultas: SELECT.</li><li><strong>DCL</strong> — privilégios: GRANT, REVOKE.</li><li><strong>TCL</strong> — transações: COMMIT, ROLLBACK, SAVEPOINT.</li></ul><p>Algumas referências incluem DQL em DML; aqui ela é separada didaticamente.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checagem de compreensão</h2><p>Sem abrir o editor, explique o caminho completo:</p><ul><li>Qual fato de negócio cada tabela representa?</li><li>Onde ficam as chaves estrangeiras?</li><li>Que restrições protegem as regras?</li><li>Que categoria SQL seria usada para criar, alterar e consultar?</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Preparação para a aula 4</h2><p>Leve o modelo da Rede Cuidar como mapa para o laboratório.</p><ul><li>Revise PK, FK e cardinalidade 1:N.</li><li>Diferencie estrutura, estado e consulta.</li><li>Não é necessário entregar código nesta aula.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checagem de compreensão</h2><p>Compare MER e DER e explique o caminho completo:</p><ul><li>Qual conceito de negócio cada entidade representa?</li><li>Onde ficam as três chaves estrangeiras?</li><li>Por que AULA_DOCENTE tem uma chave composta?</li><li>Que categoria SQL seria usada para criar, alterar e consultar?</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Preparação para a aula 4</h2><p>Leve o modelo de cursos como mapa para o laboratório.</p><ul><li>Redesenhe o MER sem consultar o slide.</li><li>Converta-o no DER com PKs, FKs e tipos.</li><li>Valide as cardinalidades narrando as regras em voz alta.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="summary"><h2>Do negócio à consulta confiável</h2><ul><li>Entidades representam conceitos; atributos descrevem fatos.</li><li>Cardinalidades conectam as tabelas.</li><li>Chaves e restrições preservam integridade.</li><li>DDL, DML, DQL, DCL e TCL têm responsabilidades distintas.</li></ul></div>
     <div class="slide slide-end" data-lesson-section="next-steps"><h2>Próximo laboratório</h2><p>Na aula 4, o modelo vira código: três horas de prática com DDL, DML e DQL.</p></div>
   </div>

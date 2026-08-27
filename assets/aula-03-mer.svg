@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">Modelo Entidade-Relacionamento do ecossistema de cursos</title>
+  <desc id="desc">Coordenador coordena cursos, curso contém aulas e docentes ministram aulas em uma relação muitos para muitos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071827"/><stop offset="1" stop-color="#0b496b"/></linearGradient>
+    <linearGradient id="entity" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123b5b"/><stop offset="1" stop-color="#0b2941"/></linearGradient>
+    <linearGradient id="relation" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00a3d9"/><stop offset="1" stop-color="#00d7b0"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#020b12" flood-opacity=".5"/></filter>
+    <style>
+      .title{font:800 34px Outfit,Arial,sans-serif;fill:#f8fafc}.subtitle{font:400 18px Outfit,Arial,sans-serif;fill:#8faabd}
+      .entity{fill:url(#entity);stroke:#4bc4e8;stroke-width:2}.ename{font:800 23px Outfit,Arial,sans-serif;fill:#fff;letter-spacing:1px}
+      .attr{font:400 16px 'Fira Code',monospace;fill:#bcd1df}.pk{fill:#7ee7d4;font-weight:700}.line{stroke:#4bc4e8;stroke-width:3;fill:none}
+      .diamond{fill:url(#relation);stroke:#7ee7d4;stroke-width:2}.rname{font:800 17px Outfit,Arial,sans-serif;fill:#062034;text-anchor:middle}
+      .card{font:800 23px 'Fira Code',monospace;fill:#7ee7d4}.note{font:600 15px Outfit,Arial,sans-serif;fill:#bcd1df}
+    </style>
+  </defs>
+  <rect width="1400" height="760" rx="34" fill="url(#bg)"/>
+  <circle cx="1260" cy="80" r="220" fill="#00a3d9" opacity=".08"/><circle cx="90" cy="700" r="250" fill="#00d7b0" opacity=".06"/>
+  <text x="70" y="66" class="title">MER · visão conceitual</text>
+  <text x="70" y="98" class="subtitle">As regras do negócio antes de pensar em tabelas</text>
+
+  <g filter="url(#shadow)"><rect class="entity" x="70" y="185" width="280" height="170" rx="22"/>
+    <text x="100" y="228" class="ename">COORDENADOR</text><line x1="100" y1="246" x2="320" y2="246" stroke="#4bc4e8" opacity=".25"/>
+    <text x="100" y="281" class="attr pk">• identificador</text><text x="100" y="314" class="attr">• nome · e-mail</text></g>
+  <g filter="url(#shadow)"><rect class="entity" x="560" y="185" width="280" height="170" rx="22"/>
+    <text x="590" y="228" class="ename">CURSO</text><line x1="590" y1="246" x2="810" y2="246" stroke="#4bc4e8" opacity=".25"/>
+    <text x="590" y="281" class="attr pk">• identificador</text><text x="590" y="314" class="attr">• nome · carga horária</text></g>
+  <g filter="url(#shadow)"><rect class="entity" x="1050" y="185" width="280" height="170" rx="22"/>
+    <text x="1080" y="228" class="ename">AULA</text><line x1="1080" y1="246" x2="1300" y2="246" stroke="#4bc4e8" opacity=".25"/>
+    <text x="1080" y="281" class="attr pk">• identificador</text><text x="1080" y="314" class="attr">• nome · duração</text></g>
+  <g filter="url(#shadow)"><rect class="entity" x="560" y="525" width="280" height="150" rx="22"/>
+    <text x="590" y="568" class="ename">DOCENTE</text><line x1="590" y1="586" x2="810" y2="586" stroke="#4bc4e8" opacity=".25"/>
+    <text x="590" y="621" class="attr pk">• identificador</text><text x="590" y="650" class="attr">• nome</text></g>
+
+  <path class="line" d="M350 270H438M472 270H560"/><path class="diamond" d="M455 232l38 38-38 38-38-38z" filter="url(#glow)"/>
+  <text x="455" y="275" class="rname">coordena</text><text x="370" y="250" class="card">1</text><text x="520" y="250" class="card">N</text>
+  <path class="line" d="M840 270H928M962 270H1050"/><path class="diamond" d="M945 232l38 38-38 38-38-38z" filter="url(#glow)"/>
+  <text x="945" y="275" class="rname">contém</text><text x="860" y="250" class="card">1</text><text x="1010" y="250" class="card">N</text>
+  <path class="line" d="M1190 355V448H760V525"/><path class="diamond" d="M975 410l38 38-38 38-38-38z" filter="url(#glow)"/>
+  <text x="975" y="453" class="rname">ministra</text><text x="1206" y="398" class="card">N</text><text x="778" y="505" class="card">N</text>
+  <text x="70" y="724" class="note">Leitura: cada aula pertence a um curso; uma aula pode ter vários docentes e um docente pode ministrar várias aulas.</text>
+</svg>

@@ -27,6 +27,8 @@
       ".devcontainer/devcontainer.json"
     ],
     "assets": [
+      "assets/aula-03-der.svg",
+      "assets/aula-03-mer.svg",
       "assets/einstein-cover.png",
       "assets/einstein-footer.jpg",
       "assets/einstein-header.jpg",
@@ -187,6 +189,8 @@
         "modelo físico",
         "entidades",
         "relacionamentos",
+        "cardinalidades 1:N e N:N",
+        "tabela associativa",
         "atributos",
         "chaves primárias e estrangeiras",
         "normalização",
@@ -204,7 +208,7 @@
       ],
       "slides": {
         "path": "slides/aula-03.html",
-        "slide_count": 14,
+        "slide_count": 17,
         "sections": [
           "agenda",
           "challenge",
@@ -219,13 +223,13 @@
         "path": "materiais/aula-03/index.html",
         "section_count": 13,
         "highlights": [
-          "Case hospitalar Rede Cuidar do requisito ao modelo físico",
-          "Entidades, relacionamentos, cardinalidades, atributos, PKs e FKs",
+          "Case de cursos, aulas, coordenação e docentes do requisito ao modelo físico",
+          "Diagramas MER e DER em SVG com cardinalidades, atributos, PKs e FKs",
           "Cinco sublinguagens SQL: DDL, DML, DQL, DCL e TCL",
           "Preparação conceitual para o laboratório SQL II"
         ],
-        "activity": "Explicar o modelo da Rede Cuidar, localizar PKs e FKs e classificar necessidades pelas sublinguagens SQL",
-        "deliverable": "Checagem conceitual sem entrega de código: diagrama ER e distinção entre DDL, DML e DQL"
+        "activity": "Comparar MER e DER, narrar as cardinalidades e converter o relacionamento N:N na tabela associativa AULA_DOCENTE",
+        "deliverable": "MER com quatro entidades e DER com cinco tabelas, três relações por FKs, PK composta e distinção entre DDL, DML e DQL"
       }
     },
     {
