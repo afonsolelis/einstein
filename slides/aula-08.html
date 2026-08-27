@@ -348,10 +348,11 @@
 <body>
   <div id="slider">
     <div class="slide slide-start active"><div class="badge">LABORATÓRIO 8 · 30/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Fazendo previsões com IA: Vendas e Tendências</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Criar atributos sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></div>
     <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Atributos são hipóteses</h2><ul><li>Use somente informação disponível no momento da previsão.</li><li>Aprenda codificação e escala apenas no conjunto de treino.</li><li>Documente fonte, fórmula e risco de vazamento.</li><li>Encapsule transformações no mesmo pipeline do modelo.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]

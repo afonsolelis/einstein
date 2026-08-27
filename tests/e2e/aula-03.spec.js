@@ -11,11 +11,12 @@ function watchPage(page) {
   return errors;
 }
 
-test('cronograma apresenta a nova aula 3 e move limpeza para a aula 4', async ({ page }) => {
+test('cronograma separa fundamentos e prática de SQL', async ({ page }) => {
   await page.goto('/index.html');
-  await expect(page.locator('.card').nth(2)).toContainText('Modelagem de dados e SQL');
-  await expect(page.locator('.card').nth(3)).toContainText('Limpeza de dados');
-  await expect(page.locator('.card').nth(3).locator('.btn-data')).toHaveAttribute('href', 'materiais/aula-04/dados/hospital_patients_real_world.csv');
+  await expect(page.locator('.card').nth(2)).toContainText('Modelagem de dados e SQL I');
+  await expect(page.locator('.card').nth(3)).toContainText('SQL II');
+  await expect(page.locator('.card').nth(4)).toContainText('Limpeza de dados');
+  await expect(page.locator('.card').nth(4).locator('.btn-data')).toHaveAttribute('href', 'materiais/aula-05/dados/hospital_patients_real_world.csv');
 });
 
 test('home apresenta a conexão PostgreSQL separada para o DBeaver', async ({ page }) => {
@@ -29,13 +30,13 @@ test('home apresenta a conexão PostgreSQL separada para o DBeaver', async ({ pa
   await expect(connection.locator('#copy-database-uri')).toBeVisible();
 });
 
-test('slides percorrem a aula e oferecem laboratório e desafio final', async ({ page }) => {
+test('slides percorrem os fundamentos e encaminham para a prática da aula 4', async ({ page }) => {
   const errors = watchPage(page);
   await page.goto('/slides/aula-03.html');
   const count = await page.locator('.slide').count();
   expect(count).toBeGreaterThanOrEqual(10);
   await expect(page.locator('h2', { hasText: 'As cinco sublinguagens SQL' })).toBeAttached();
-  await expect(page.locator('h2', { hasText: 'SQL Murder Mystery' })).toBeAttached();
+  await expect(page.locator('h2', { hasText: 'Preparação para a aula 4' })).toBeAttached();
   for (let index = 1; index < count; index += 1) await page.locator('#btn-next').click();
   await expect(page.locator('#btn-next')).toBeDisabled();
   await page.getByRole('link', { name: /Material/ }).click();
@@ -44,23 +45,8 @@ test('slides percorrem a aula e oferecem laboratório e desafio final', async ({
   expect(errors).toEqual([]);
 });
 
-test('laboratório executa SQLite e persiste alterações no localStorage', async ({ page }) => {
-  const errors = watchPage(page);
-  await page.goto('/materiais/aula-03/laboratorio-sql.html');
-  await expect(page.locator('#status')).toContainText(/Banco/);
-  await page.locator('#sql').fill("INSERT INTO paciente(nome,cidade) VALUES ('Teste Persistente','Santos'); SELECT * FROM paciente WHERE nome='Teste Persistente';");
-  await page.locator('#run').click();
-  await expect(page.locator('#results')).toContainText('Teste Persistente');
-  await page.reload();
-  await expect(page.locator('#status')).toContainText('localStorage');
-  await page.locator('#sql').fill("SELECT * FROM paciente WHERE nome='Teste Persistente';");
-  await page.locator('#run').click();
-  await expect(page.locator('#results')).toContainText('Santos');
-  expect(errors).toEqual([]);
-});
-
-test('slides, material e laboratório não geram overflow horizontal', async ({ page }) => {
-  for (const path of ['/slides/aula-03.html', '/materiais/aula-03/index.html', '/materiais/aula-03/laboratorio-sql.html']) {
+test('slides e material não geram overflow horizontal', async ({ page }) => {
+  for (const path of ['/slides/aula-03.html', '/materiais/aula-03/index.html']) {
     await page.goto(path);
     const size = await page.evaluate(() => ({ viewport: document.documentElement.clientWidth, content: document.documentElement.scrollWidth }));
     expect(size.content, path).toBeLessThanOrEqual(size.viewport);

@@ -3,14 +3,14 @@
 <head>
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório SQL · Aula 03</title>
+  <title>Laboratório SQL · Aula 04</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap');
     *{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(circle at 100% 0,rgba(31,111,178,.2),#0b1120 48%);color:#cbd5e1;font-family:Outfit,system-ui,sans-serif;padding:1.2rem} a{color:#4bc4e8}.shell{max-width:1400px;margin:auto}.topbar,.panel{background:rgba(15,23,42,.72);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 45px rgba(0,0,0,.25);border-radius:18px;backdrop-filter:blur(16px)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;margin-bottom:1rem}.topbar h1{font-size:clamp(1.2rem,3vw,2rem);margin:0;color:#fff}.nav{display:flex;gap:.5rem;flex-wrap:wrap}.btn{border:1px solid rgba(75,196,232,.3);border-radius:10px;background:rgba(0,163,217,.12);color:#dff7ff;padding:.65rem .9rem;font:600 .88rem Outfit;cursor:pointer;text-decoration:none}.btn:hover,.btn:focus-visible{background:rgba(0,163,217,.25);outline:2px solid #4bc4e8;outline-offset:2px}.btn.danger{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.12)}.status{margin:.75rem 0;color:#7ee7d4;font:600 .85rem 'Fira Code'}.layout{display:grid;grid-template-columns:minmax(250px,320px) 1fr;gap:1rem}.panel{padding:1.15rem;min-width:0}.panel h2{margin:.1rem 0 1rem;color:#fff;font-size:1.15rem}.schema{font:400 .8rem 'Fira Code';white-space:pre-wrap;line-height:1.55;color:#a7c9dc}.hint{color:#94a3b8;font-size:.9rem;line-height:1.5}.editor{width:100%;min-height:240px;resize:vertical;border:1px solid rgba(75,196,232,.25);border-left:4px solid #00a3d9;border-radius:12px;background:#08121f;color:#e2ebf2;padding:1rem;font:400 .95rem/1.55 'Fira Code';tab-size:2}.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}.results{overflow:auto;max-height:420px;border-radius:12px;border:1px solid rgba(255,255,255,.08)}table{width:100%;border-collapse:collapse;font:400 .84rem 'Fira Code';background:#08121f}th,td{text-align:left;padding:.68rem;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}th{position:sticky;top:0;background:#11243a;color:#4bc4e8}#message{padding:.8rem;color:#94a3b8;font-family:'Fira Code'}select{background:#08121f;color:#dbeafe;border:1px solid rgba(75,196,232,.3);border-radius:10px;padding:.65rem;max-width:100%}.challenge{margin-top:1rem;padding:1rem;border-left:4px solid #00d7b0;background:rgba(0,215,176,.08);border-radius:0 12px 12px 0}.challenge strong{color:#7ee7d4}@media(max-width:800px){body{padding:.6rem}.layout{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.editor{min-height:210px}}
   </style>
 </head>
 <body><main class="shell">
-  <header class="topbar"><div><h1>SQLite no navegador · Rede Cuidar</h1><div class="status" id="status">Carregando SQLite…</div></div><nav class="nav"><a class="btn" href="index.html">📚 Material</a><a class="btn" href="../../slides/aula-03.html">📊 Slides</a><a class="btn" href="../../index.html">🏠 Cronograma</a></nav></header>
+  <header class="topbar"><div><h1>SQLite no navegador · Rede Cuidar</h1><div class="status" id="status">Carregando SQLite…</div></div><nav class="nav"><a class="btn" href="index.html">📚 Material</a><a class="btn" href="../../slides/aula-04.html">📊 Slides</a><a class="btn" href="../../index.html">🏠 Cronograma</a></nav></header>
   <div class="layout">
     <aside class="panel"><h2>Modelo físico</h2><div class="schema">PACIENTE
 • paciente_id INTEGER PK
@@ -45,7 +45,7 @@ GROUP BY m.especialidade
 ORDER BY receita DESC;</textarea><div class="actions"><button id="run" class="btn">▶ Executar (Ctrl+Enter)</button><button id="save" class="btn">💾 Salvar banco</button><button id="reset" class="btn danger">↺ Restaurar base</button></div><div class="results" id="results"><div id="message">Execute uma consulta para ver o resultado.</div></div></section>
   </div>
 </main><script src="../../assets/vendor/sql.js/sql-asm.js"></script><script>
-const STORAGE_KEY='einstein-aula03-sqlite-v1'; let SQL,db;
+const STORAGE_KEY='einstein-aula04-sqlite-v1'; let SQL,db;
 const seed=`PRAGMA foreign_keys=ON;
 CREATE TABLE paciente(paciente_id INTEGER PRIMARY KEY,nome TEXT NOT NULL,cidade TEXT);
 CREATE TABLE medico(medico_id INTEGER PRIMARY KEY,nome TEXT NOT NULL,especialidade TEXT NOT NULL);

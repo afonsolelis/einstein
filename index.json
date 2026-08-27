@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-26",
+  "generated_at": "2026-08-27",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -37,10 +37,10 @@
       "assets/vendor/sql.js/sql-asm.js"
     ],
     "lesson_assets": [
-      "materiais/aula-03/laboratorio-sql.html",
-      "materiais/aula-04/dados/README.md",
-      "materiais/aula-04/dados/hospital_patients_real_world.csv",
-      "materiais/aula-04/prompts-antigravity.md"
+      "materiais/aula-04/laboratorio-sql.html",
+      "materiais/aula-05/dados/README.md",
+      "materiais/aula-05/dados/hospital_patients_real_world.csv",
+      "materiais/aula-05/prompts-antigravity.md"
     ],
     "official_documents": [
       "documentos_oficiais/Modelo de PPT Ensino Einstein 2025.zip",
@@ -51,7 +51,8 @@
       "tests/e2e/aula-02.spec.js",
       "tests/e2e/aula-03.spec.js",
       "tests/e2e/aula-04.spec.js",
-      "tests/test_aula_04_dataset.py",
+      "tests/e2e/aula-05.spec.js",
+      "tests/test_aula_05_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -175,7 +176,7 @@
     {
       "number": 3,
       "date": "26/08",
-      "theme": "Modelagem de dados e SQL: Do negócio ao banco relacional",
+      "theme": "Modelagem de dados e SQL I: Do negócio ao banco relacional",
       "tag": "Dados · SQL",
       "status": "complete",
       "topics": [
@@ -193,20 +194,17 @@
         "DML",
         "DQL",
         "DCL",
-        "TCL",
-        "SQLite",
-        "WebAssembly"
+        "TCL"
       ],
       "objectives": [
         "Identificar entidades, atributos e relacionamentos em um processo de negócio",
         "Converter um modelo conceitual em esquema relacional",
         "Definir chaves, tipos e restrições no modelo físico",
-        "Distinguir e aplicar DDL, DML, DQL, DCL e TCL",
-        "Consultar e modificar um banco SQLite persistente no navegador"
+        "Distinguir DDL, DML, DQL, DCL e TCL pela responsabilidade de cada grupo"
       ],
       "slides": {
         "path": "slides/aula-03.html",
-        "slide_count": 20,
+        "slide_count": 14,
         "sections": [
           "agenda",
           "challenge",
@@ -219,21 +217,69 @@
       },
       "material": {
         "path": "materiais/aula-03/index.html",
-        "section_count": 19,
+        "section_count": 13,
         "highlights": [
           "Case hospitalar Rede Cuidar do requisito ao modelo físico",
           "Entidades, relacionamentos, cardinalidades, atributos, PKs e FKs",
           "Cinco sublinguagens SQL: DDL, DML, DQL, DCL e TCL",
-          "Laboratório SQLite em WebAssembly com persistência no localStorage",
-          "Desafio final SQL Murder Mystery com consultas como evidência"
+          "Preparação conceitual para o laboratório SQL II"
         ],
-        "activity": "Ampliar o modelo da Rede Cuidar com convênios, implementar o esquema e responder perguntas de negócio no laboratório SQLite",
-        "deliverable": "Diagrama ER, modelo-rede-cuidar.sql, três consultas comentadas, transação demonstrada, README sobre DCL no SQLite, investigacao.sql do SQL Murder Mystery, commit e push"
+        "activity": "Explicar o modelo da Rede Cuidar, localizar PKs e FKs e classificar necessidades pelas sublinguagens SQL",
+        "deliverable": "Checagem conceitual sem entrega de código: diagrama ER e distinção entre DDL, DML e DQL"
       }
     },
     {
       "number": 4,
       "date": "02/09",
+      "theme": "SQL II: Laboratório de DDL, DML e DQL",
+      "tag": "SQL · Prática",
+      "status": "complete",
+      "topics": [
+        "SQLite",
+        "DDL",
+        "DML",
+        "DQL",
+        "CREATE TABLE",
+        "INSERT, UPDATE e DELETE",
+        "SELECT, filtros e agregações",
+        "JOIN",
+        "validação de consultas"
+      ],
+      "objectives": [
+        "Criar tabelas e restrições com DDL",
+        "Inserir, atualizar e excluir registros com DML e critérios explícitos",
+        "Consultar dados com filtros, ordenação, agregação e JOIN",
+        "Validar granularidade, quantidade de linhas e totais"
+      ],
+      "slides": {
+        "path": "slides/aula-04.html",
+        "slide_count": 20,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-04/index.html",
+        "section_count": 12,
+        "highlights": [
+          "Três rodadas práticas com checkpoints de DDL, DML e DQL",
+          "Laboratório SQLite no navegador com persistência local",
+          "Ampliação do modelo da Rede Cuidar com convênios",
+          "Consultas gerenciais com filtros, agregações e JOIN"
+        ],
+        "activity": "Criar a entidade convênio, povoar e relacionar registros e responder três perguntas gerenciais no SQLite",
+        "deliverable": "aula-04-sql-seunome.sql reproduzível com DDL, DML, três consultas DQL comentadas, commit e push"
+      }
+    },
+    {
+      "number": 5,
+      "date": "09/09",
       "theme": "Limpeza de dados: Preparando a base para análises",
       "tag": "Pandas",
       "status": "complete",
@@ -241,7 +287,6 @@
         "limpeza de dados",
         "Pandas",
         "Antigravity",
-        "engenharia de prompts",
         "dados hospitalares sintéticos",
         "dados ausentes",
         "padronização categórica",
@@ -257,7 +302,7 @@
         "Defender quais análises gerenciais a base pode sustentar"
       ],
       "slides": {
-        "path": "slides/aula-04.html",
+        "path": "slides/aula-05.html",
         "slide_count": 24,
         "sections": [
           "agenda",
@@ -270,7 +315,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-04/index.html",
+        "path": "materiais/aula-05/index.html",
         "section_count": 20,
         "highlights": [
           "Base hospitalar sintética CC0 com 5.000 registros disponível para download",
@@ -284,8 +329,8 @@
       }
     },
     {
-      "number": 5,
-      "date": "09/09",
+      "number": 6,
+      "date": "16/09",
       "theme": "Storytelling, Dashboards e Segmentação de Clientes",
       "tag": "Visualização",
       "status": "complete",
@@ -296,47 +341,8 @@
       ],
       "objectives": [
         "Escolher gráficos alinhados à pergunta executiva",
-        "Construir uma narrativa com contexto,  tensão e recomendação",
+        "Construir uma narrativa com contexto, tensão e recomendação",
         "Segmentar clientes por comportamento e valor"
-      ],
-      "slides": {
-        "path": "slides/aula-05.html",
-        "slide_count": 11,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-05/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Escolha honesta de gráficos e storyboard executivo",
-          "Segmentação comportamental e RFM"
-        ],
-        "activity": "Criar storyboard de três telas para um segmento prioritário",
-        "deliverable": "Dashboard de uma página e nota executiva acionável"
-      }
-    },
-    {
-      "number": 6,
-      "date": "16/09",
-      "theme": "Inteligência Artificial no dia a dia da administração",
-      "tag": "IA",
-      "status": "complete",
-      "topics": [
-        "inteligência artificial",
-        "administração"
-      ],
-      "objectives": [
-        "Distinguir automação,  aprendizado de máquina e IA generativa",
-        "Mapear tarefas administrativas adequadas à assistência por IA",
-        "Avaliar risco,  privacidade e necessidade de revisão humana"
       ],
       "slides": {
         "path": "slides/aula-06.html",
@@ -355,27 +361,27 @@
         "path": "materiais/aula-06/index.html",
         "section_count": 7,
         "highlights": [
-          "Mapa de casos de uso e priorização por impacto e risco",
-          "Governança,  verificação e revisão humana"
+          "Escolha honesta de gráficos e storyboard executivo",
+          "Segmentação comportamental e RFM"
         ],
-        "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
-        "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência"
+        "activity": "Criar storyboard de três telas para um segmento prioritário",
+        "deliverable": "Dashboard de uma página e nota executiva acionável"
       }
     },
     {
       "number": 7,
       "date": "23/09",
-      "theme": "Refinando dados para modelos de decisão",
-      "tag": "Feature Eng.",
+      "theme": "Inteligência Artificial no dia a dia da administração",
+      "tag": "IA",
       "status": "complete",
       "topics": [
-        "engenharia de atributos",
-        "modelos de decisão"
+        "inteligência artificial",
+        "administração"
       ],
       "objectives": [
-        "Criar atributos derivados sem vazar informação futura",
-        "Codificar variáveis e escalar valores quando necessário",
-        "Organizar transformação reproduzível em pipeline"
+        "Distinguir automação, aprendizado de máquina e IA generativa",
+        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Avaliar risco, privacidade e necessidade de revisão humana"
       ],
       "slides": {
         "path": "slides/aula-07.html",
@@ -394,11 +400,11 @@
         "path": "materiais/aula-07/index.html",
         "section_count": 7,
         "highlights": [
-          "Atributos derivados,  codificação e escala",
-          "Disponibilidade temporal,  vazamento e pipelines"
+          "Mapa de casos de uso e priorização por impacto e risco",
+          "Governança, verificação e revisão humana"
         ],
-        "activity": "Construir três atributos para prever recompra e revisar sua lógica temporal",
-        "deliverable": "Dicionário de atributos com fórmula, fonte, disponibilidade e risco"
+        "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
+        "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência"
       }
     },
     {
@@ -408,18 +414,23 @@
       "tag": "ML · Regressão",
       "status": "complete",
       "topics": [
+        "engenharia de atributos",
+        "pipelines",
+        "vazamento temporal",
         "regressão",
         "previsão de vendas",
         "tendências"
       ],
       "objectives": [
+        "Criar atributos derivados sem vazar informação futura",
+        "Organizar transformações em um pipeline reproduzível",
         "Treinar uma regressão com separação temporal adequada",
         "Interpretar MAE e comparar com um baseline",
         "Comunicar previsão como faixa e hipótese,  não certeza"
       ],
       "slides": {
         "path": "slides/aula-08.html",
-        "slide_count": 11,
+        "slide_count": 12,
         "sections": [
           "agenda",
           "challenge",
@@ -434,8 +445,9 @@
         "path": "materiais/aula-08/index.html",
         "section_count": 7,
         "highlights": [
-          "Regressão,  baseline e validação temporal",
-          "MAE,  resíduos e limites de uso"
+          "Atributos, pipelines e prevenção de vazamento temporal",
+          "Regressão, baseline e validação temporal",
+          "MAE, resíduos e limites de uso"
         ],
         "activity": "Comparar baseline e regressão para vendas mensais",
         "deliverable": "Notebook, tabela real versus previsto e recomendação de uso"

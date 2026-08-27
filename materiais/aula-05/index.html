@@ -7,48 +7,61 @@
   <title>Material · 05</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +89,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -102,32 +119,311 @@
   <nav class="floating-nav" aria-label="Navegacao rapida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-05.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 05</div>
-      <h1>Storytelling, Dashboards e Segmentação de Clientes</h1>
+      <h1>Limpeza de dados: Preparando a base para análises</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Um dashboard é uma interface de decisão, não uma coleção de gráficos. Cada visual deve reduzir incerteza sobre uma ação específica. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Escolher gráficos alinhados à pergunta executiva</li><li>Construir uma narrativa com contexto, tensão e recomendação</li><li>Segmentar clientes por comportamento e valor</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Um dashboard é uma interface de decisão, não uma coleção de gráficos. Cada visual deve reduzir incerteza sobre uma ação específica.</p><ul><li>Comparação pede barras; evolução pede linhas; composição exige parcimônia</li><li>RFM organiza clientes por recência, frequência e valor monetário</li><li>Cor e destaque conduzem atenção, mas não substituem evidência</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import pandas as pd
-clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
- recencia=("dias_desde_compra","min"), frequencia=("pedido_id","nunique"), valor=("receita","sum"))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">clientes["segmento"] = pd.qcut(clientes["valor"], 4, labels=["baixo","médio","alto","premium"])
-print(clientes.groupby("segmento", observed=True)["valor"].agg(["count","mean"]))</div><p>Crie um storyboard de três telas: situação atual, segmento prioritário e ação recomendada com indicador de acompanhamento.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar dashboard de uma página e nota executiva com público, decisão, segmento-alvo e próxima ação.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Definir a pergunta antes do gráfico</li><li>Evitar eixos truncados que distorçam diferenças</li><li>Exibir fonte, período e filtros</li><li>Terminar com recomendação mensurável</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Boa visualização torna a comparação honesta; bom storytelling conecta essa evidência a uma decisão.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, discutiremos como sistemas de IA apoiam rotinas administrativas e onde exigem supervisão.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">A Diretoria de Operações recebeu uma base com 5.000 internações sintéticas e quer calcular permanência hospitalar. Antes de transformar linhas em uma decisão sobre capacidade, a equipe deverá provar que a base é coerente. Nesta prática, o Antigravity ajuda a planejar, escrever e revisar o código; Pandas executa a limpeza no workspace; o estudante continua responsável por cada regra aceita.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul><li><strong>Diagnosticar</strong> completude, unicidade, padronização e consistência temporal.</li><li><strong>Orientar</strong> um agente de IA com escopo, restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> transformações reproduzíveis sem sobrescrever a camada bruta.</li><li><strong>Validar</strong> produtos da limpeza com contagens, flags e testes.</li><li><strong>Defender</strong> quais análises gerenciais a base pode ou não sustentar.</li></ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O case e a base do Kaggle</h2>
+        <p>O arquivo <code>hospital_patients_real_world.csv</code> vem do dataset <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas no Kaggle sob licença CC0. Os registros são sintéticos e foram criados para exercícios de limpeza.</p>
+        <div class="download-panel"><a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table><thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead><tbody><tr><td><code>PatientID</code></td><td>Identificador sintético do registro</td><td>string</td></tr><tr><td><code>Age</code></td><td>Idade informada</td><td>número anulável</td></tr><tr><td><code>Gender</code></td><td>Categoria de gênero cadastrada</td><td>string</td></tr><tr><td><code>Diagnosis</code></td><td>Diagnóstico sintético</td><td>string</td></tr><tr><td><code>AdmissionDate</code></td><td>Data de admissão</td><td>data</td></tr><tr><td><code>DischargeDate</code></td><td>Data de alta</td><td>data</td></tr><tr><td><code>HospitalID</code></td><td>Identificador sintético do hospital</td><td>string</td></tr></tbody></table>
+        <div class="evidence"><strong>Assinatura da cópia usada na aula</strong><code>SHA-256 af6c3023e87c1950cb021579521534c3d44fc940953216ca560ca1d7e3eabc8a</code></div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. O que sabemos antes da aula</h2>
+        <p>O professor já conferiu o arquivo original. Essas contagens funcionam como <em>checkpoints</em>: se o notebook produzir números diferentes, investigue leitura, caminho e regra antes de continuar.</p>
+        <table><thead><tr><th>Problema observado</th><th>Quantidade</th><th>Conduta esperada</th></tr></thead><tbody><tr><td>Idade ausente</td><td>350</td><td>Manter ausente e criar flag; não imputar.</td></tr><tr><td>Gênero vazio</td><td>350</td><td>Padronizar como “Não informado” e preservar flag.</td></tr><tr><td>Gênero <code>Unknown</code></td><td>1.163</td><td>Unificar com “Não informado”.</td></tr><tr><td>Diagnóstico ausente</td><td>350</td><td>Não inferir diagnóstico clínico.</td></tr><tr><td>Diagnóstico em maiúsculas</td><td>321</td><td>Unir apenas variações de capitalização.</td></tr><tr><td>Alta anterior à admissão</td><td>150</td><td>Sinalizar e retirar do cálculo de permanência.</td></tr><tr><td>Linha ou chave duplicada</td><td>0</td><td>Registrar a verificação; não apagar nada.</td></tr></tbody></table>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Antigravity: agente, execução local e revisão</h2>
+        <p>O <a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">codelab oficial do Antigravity IDE</a> orienta abrir uma pasta local, conversar pelo painel do agente e usar desenvolvimento orientado por revisão. O agente pode propor um plano, editar arquivos e solicitar execução no terminal; o estudante revisa essas ações e pode aceitar, comentar ou rejeitar.</p>
+        <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-05-seunome</code>.</li><li>Abra a pasta no Antigravity IDE e selecione o modo orientado por revisão.</li><li>Deixe a execução de terminal dependente de aprovação.</li><li>Use <code>@hospital_patients_real_world.csv</code> para mencionar a base no prompt.</li><li>Quando o Python local não estiver pronto, execute o notebook no GitHub Codespaces já configurado pela disciplina; não perca a aula instalando bibliotecas manualmente.</li></ol>
+        <div class="alert-box"><h4>“Local” não significa que o modelo está offline</h4><p>O CSV, o notebook e o Pandas ficam no workspace do estudante, mas prompts e arquivos mencionados podem ser processados pelo serviço de IA conforme a conta utilizada. Esta aula usa somente dados sintéticos CC0. Nunca envie prontuários, credenciais, tokens ou dados pessoais ao agente.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 0 · contrato</span>
+        <h2>5. Comece pelo plano, não pela edição</h2>
+        <p>O primeiro prompt reduz autonomia e declara o que não pode ser feito. Só aprove o plano se ele preservar o arquivo original e separar diagnóstico, transformação e validação.</p>
+        <div class="prompt-block">Atue como meu assistente de qualidade de dados neste laboratório. Leia
+@hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos.
+Primeiro apresente um plano curto e aguarde minha aprovação.
+
+Regras obrigatórias: preservar o CSV bruto; não inventar valores ausentes;
+não trocar datas por suposição; não excluir linhas silenciosamente; explicar
+cada regra de negócio; trabalhar apenas dentro desta pasta; não instalar
+pacotes nem executar comandos sem minha aprovação. A entrega terá notebook,
+base tratada, fila de revisão, relatório de qualidade e revisão da IA.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · perfil</span>
+        <h2>6. Diagnostique sem limpar</h2>
+        <div class="prompt-block">Crie Aula_04_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
+carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
+mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
+linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
+Não faça nenhuma limpeza nesta etapa. Execute as células e resuma os achados.
+Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div>
+        <p>Uma implementação mínima e legível deve produzir evidência semelhante a:</p>
+        <div class="code-block">from pathlib import Path
+import pandas as pd
+
+caminho = Path("hospital_patients_real_world.csv")
+bruta = pd.read_csv(caminho)
+
+display(bruta.head())
+print("shape:", bruta.shape)
+display(bruta.isna().sum().rename("ausentes").to_frame())
+print("linhas duplicadas:", bruta.duplicated().sum())
+print("PatientID duplicado:", bruta.duplicated("PatientID").sum())</div>
+        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(5000, 7)</code>, com zero linhas e zero chaves duplicadas. Contagem zero também é uma evidência que deve entrar no relatório.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · estrutura</span>
+        <h2>7. Crie uma cópia e explicite os tipos</h2>
+        <div class="prompt-block">No mesmo notebook, crie base = bruta.copy(deep=True) e nunca sobrescreva
+bruta nem o CSV. Renomeie as colunas para snake_case. Converta identificadores,
+gênero e diagnóstico para string; idade para Float64; datas para datetime com
+errors="coerce". Conte falhas de conversão antes de prosseguir. Mostre o código,
+a saída e explique por que cada tipo foi escolhido. Não faça imputação.</div>
+        <div class="code-block">base = bruta.copy(deep=True)
+base.columns = (base.columns
+    .str.replace(r"(?&lt;!^)(?=[A-Z])", "_", regex=True)
+    .str.lower())
+
+for coluna in ["patient_id", "gender", "diagnosis", "hospital_id"]:
+    base[coluna] = base[coluna].astype("string")
+
+base["age"] = pd.to_numeric(base["age"], errors="coerce").astype("Float64")
+base["admission_date"] = pd.to_datetime(base["admission_date"], errors="coerce")
+base["discharge_date"] = pd.to_datetime(base["discharge_date"], errors="coerce")</div>
+        <p>Identificadores são texto, mesmo quando contêm números. Datas convertidas permitem calcular intervalos. O parâmetro <code>errors="coerce"</code> não corrige valores: ele torna uma falha detectável como <code>NaT</code>.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · ausências</span>
+        <h2>8. Trate ausência sem adivinhar</h2>
+        <div class="prompt-block">Adicione uma seção sobre dados ausentes. Crie flags booleanas que preservem a
+origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente
+como pd.NA. Padronize gênero vazio ou Unknown como "Não informado" e diagnóstico
+vazio como "Não informado". Gere uma tabela antes/depois com quantidade e
+percentual. Não use média, moda ou qualquer valor clínico inventado.</div>
+        <div class="code-block">base["idade_ausente"] = base["age"].isna()
+base["genero_ausente"] = base["gender"].isna() | base["gender"].str.strip().eq("") | base["gender"].eq("Unknown")
+base["diagnostico_ausente"] = base["diagnosis"].isna() | base["diagnosis"].str.strip().eq("")
+
+base.loc[base["genero_ausente"], "gender"] = "Não informado"
+base.loc[base["diagnostico_ausente"], "diagnosis"] = "Não informado"</div>
+        <p>Preencher idade com média poderia produzir uma tabela completa, mas criaria 350 idades fictícias. Para decisões responsáveis, uma ausência conhecida é melhor que uma precisão inventada.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · categorias</span>
+        <h2>9. Padronize sem alterar o significado</h2>
+        <div class="prompt-block">Normalize espaços e capitalização de gender e diagnosis. Para gender, aplique
+um dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e
+Unknown/vazio→Não informado. Em diagnosis, una apenas variantes que diferem por
+espaços ou capitalização; não faça aproximação clínica por significado.
+Mostre value_counts antes/depois e registre o mapeamento aplicado.</div>
+        <div class="code-block">mapa_genero = {
+    "Female": "Feminino",
+    "Male": "Masculino",
+    "Other": "Outro",
+    "Unknown": "Não informado",
+}
+base["gender"] = base["gender"].str.strip().replace(mapa_genero)
+base["diagnosis"] = (base["diagnosis"].str.strip().str.title()
+                     .replace({"Não Informado": "Não informado"}))
+
+display(base["gender"].value_counts(dropna=False))
+display(base["diagnosis"].value_counts(dropna=False))</div>
+        <p>A IA não deve aproximar diagnósticos pelo significado. Nesta aula, <code>ASTHMA</code> e <code>Asthma</code> podem ser unidos porque diferem somente na capitalização; categorias clinicamente diferentes não podem ser fundidas por “parecerem semelhantes”.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · chaves</span>
+        <h2>10. Verifique duplicidades, mesmo quando não há nenhuma</h2>
+        <div class="prompt-block">Audite duplicidade de linha completa e de patient_id. Não use drop_duplicates
+automaticamente. Se houver linhas idênticas, apresente a evidência antes de
+propor remoção. Se a mesma chave tiver conteúdos diferentes, crie a flag
+chave_duplicada e envie esses registros para revisão. Registre também o caso
+em que a contagem for zero. Explique a diferença entre linha duplicada e chave
+de negócio duplicada.</div>
+        <div class="code-block">duplicada_exata = base.duplicated(keep=False)
+base["chave_duplicada"] = base.duplicated("patient_id", keep=False)
+
+print("linhas em grupos idênticos:", int(duplicada_exata.sum()))
+print("linhas com chave repetida:", int(base["chave_duplicada"].sum()))</div>
+        <p><code>drop_duplicates()</code> não é um ritual obrigatório. A base desta aula tem zero duplicidades, então remover linhas seria uma transformação sem justificativa.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · regras</span>
+        <h2>11. Aplique regras hospitalares como flags</h2>
+        <div class="prompt-block">Implemente, sem apagar registros, as flags idade_fora_faixa para idade menor
+que 0 ou maior que 110, hospital_id_invalido para valores fora do padrão
+HOSP-[número] e cronologia_invalida quando discharge_date for anterior a
+admission_date. Mostre contagens e amostras. Não inverta datas automaticamente.
+Nesta versão espero 0 idades fora da faixa, 0 hospitais inválidos e 150
+cronologias inválidas; se divergir, investigue antes de alterar a regra.</div>
+        <div class="code-block">base["idade_fora_faixa"] = base["age"].notna() &amp; ~base["age"].between(0, 110)
+base["hospital_id_invalido"] = ~base["hospital_id"].str.fullmatch(r"HOSP-\d+", na=False)
+base["cronologia_invalida"] = (
+    base["admission_date"].notna()
+    &amp; base["discharge_date"].notna()
+    &amp; (base["discharge_date"] &lt; base["admission_date"])
+)
+
+display(base[["idade_fora_faixa", "hospital_id_invalido", "cronologia_invalida"]].sum())</div>
+        <div class="alert-box"><h4>Por que não inverter as datas?</h4><p>Alta anterior à admissão prova que há uma inconsistência, mas não revela qual campo está errado. Trocar automaticamente as duas datas pode gerar uma permanência plausível e falsa. Os 150 casos seguem na base, marcados para revisão e excluídos apenas do indicador derivado.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · indicador</span>
+        <h2>12. Calcule permanência somente quando for seguro</h2>
+        <div class="prompt-block">Crie dias_internacao somente para registros com datas válidas e cronologia
+coerente. Nos demais casos use pd.NA e mantenha a flag de revisão. Converta o
+resultado para Int64 anulável. Mostre describe(), mínimo, máximo e confirme que
+nenhum valor negativo foi aceito. Explique por que corrigir para valor absoluto
+seria uma decisão perigosa.</div>
+        <div class="code-block">duracao = (base["discharge_date"] - base["admission_date"]).dt.days
+datas_ausentes = base[["admission_date", "discharge_date"]].isna().any(axis=1)
+base["dias_internacao"] = (duracao
+    .mask(base["cronologia_invalida"] | datas_ausentes)
+    .astype("Int64"))
+
+assert not (base["dias_internacao"].dropna() &lt; 0).any()</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 8 · relatório</span>
+        <h2>13. Construa a tabela antes/depois</h2>
+        <div class="prompt-block">Crie um DataFrame relatorio_qualidade com as colunas metrica, antes, depois,
+regra_aplicada e pendencia_humana. Inclua: linhas, duplicidades, chaves
+duplicadas, ausências, gêneros não informados, categorias de diagnóstico,
+capitalização inconsistente, idade fora da faixa, hospital inválido e cronologia
+inválida. Salve como saidas/relatorio_qualidade.csv e exiba a tabela completa.
+Não trate uma flag pendente como erro resolvido.</div>
+        <div class="code-block">from pathlib import Path
+
+saida = Path("saidas")
+saida.mkdir(exist_ok=True)
+
+metricas = [
+    {"metrica": "linhas", "antes": len(bruta), "depois": len(base),
+     "regra_aplicada": "preservar registros", "pendencia_humana": False},
+    {"metrica": "cronologia inválida", "antes": 150,
+     "depois": int(base["cronologia_invalida"].sum()),
+     "regra_aplicada": "sinalizar sem inverter", "pendencia_humana": True},
+]
+relatorio_qualidade = pd.DataFrame(metricas)</div>
+        <p>Complete a lista com as demais métricas. Em uma auditoria honesta, “depois = 150” pode ser o resultado correto: a inconsistência permanece, mas agora está detectada, separada e impedida de contaminar o indicador.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 9 · produtos</span>
+        <h2>14. Exporte tratado, revisão e dicionário</h2>
+        <div class="prompt-block">Exporte saidas/base_hospitalar_tratada.csv com todas as 5.000 linhas, campos
+padronizados e flags. Exporte saidas/registros_para_revisao.csv com qualquer
+regra crítica violada. Crie saidas/dicionario_de_dados.md explicando coluna,
+tipo, significado, regra e possibilidade de ausência. Não inclua o índice do
+DataFrame nos CSVs e não modifique o arquivo bruto.</div>
+        <div class="code-block">flags_criticas = [
+    "chave_duplicada", "idade_fora_faixa",
+    "hospital_id_invalido", "cronologia_invalida",
+]
+para_revisao = base[base[flags_criticas].any(axis=1)].copy()
+
+base.to_csv(saida / "base_hospitalar_tratada.csv", index=False)
+para_revisao.to_csv(saida / "registros_para_revisao.csv", index=False)
+relatorio_qualidade.to_csv(saida / "relatorio_qualidade.csv", index=False)</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 10 · testes</span>
+        <h2>15. Reinicie e execute tudo</h2>
+        <div class="prompt-block">Adicione ao final do notebook asserts legíveis para: 5.000 linhas preservadas;
+patient_id único; gêneros dentro do dicionário; nenhum dias_internacao negativo;
+150 cronologias inválidas devidamente sinalizadas; arquivos de saída existentes.
+Reinicie o kernel e execute todas as células em ordem. Se um teste falhar,
+diagnostique a causa; não remova nem enfraqueça o teste para fazê-lo passar.
+Mostre um resumo final das evidências.</div>
+        <div class="code-block">assert len(base) == 5_000
+assert base["patient_id"].is_unique
+assert set(base["gender"].dropna()) &lt;= {"Feminino", "Masculino", "Outro", "Não informado"}
+assert int(base["cronologia_invalida"].sum()) == 150
+assert not (base["dias_internacao"].dropna() &lt; 0).any()
+assert (saida / "base_hospitalar_tratada.csv").exists()
+assert (saida / "registros_para_revisao.csv").exists()
+assert (saida / "relatorio_qualidade.csv").exists()</div>
+        <p>Um teste não serve para confirmar que a IA “acertou”; ele serve para tentar revelar quando a transformação violou o contrato.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 11 · auditoria</span>
+        <h2>16. Documente a participação da IA e versione</h2>
+        <div class="prompt-block">Crie REVISAO_IA.md com: objetivo, prompts usados, sugestões aceitas, sugestões
+rejeitadas, regras humanas, testes executados, limitações e decisão sobre uso da
+base. Depois mostre git status e proponha comandos git add, commit e push apenas
+para os arquivos desta entrega. Não execute commit ou push sem minha aprovação,
+não crie remoto e nunca use force. Sugira a mensagem: "Documenta limpeza
+auditável da base hospitalar".</div>
+        <p>Leia <code>REVISAO_IA.md</code> e o diff antes de autorizar o versionamento. No repositório do estudante, a persistência oficial continua sendo commit e push:</p>
+        <div class="code-block">git status
+git add Aula_04_SeuNome.ipynb saidas REVISAO_IA.md
+git diff --staged
+git commit -m "Documenta limpeza auditável da base hospitalar"
+git push</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>17. Desafio e entrega</h2>
+        <p>Em dupla, responda à Diretoria de Operações: <strong>a base está apta para calcular permanência hospitalar?</strong> A resposta deve separar registros utilizáveis de registros que exigem revisão, apontar o principal risco cadastral e mencionar pelo menos uma sugestão do Antigravity que foi rejeitada ou alterada.</p>
+        <p><strong>Entrega verificável:</strong> <code>Aula_04_SeuNome.ipynb</code> executado do início ao fim; <code>base_hospitalar_tratada.csv</code> com 5.000 linhas; fila contendo as 150 cronologias incoerentes; relatório antes/depois; dicionário de dados; <code>REVISAO_IA.md</code>; commit e push.</p>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>18. Checklist de qualidade</h2>
+        <ul><li>O SHA-256 ou o shape confirma que a turma trabalhou com a base correta.</li><li>O CSV bruto permanece intacto e separado dos produtos da limpeza.</li><li>Cada ausência tem uma política explícita; nenhuma idade ou condição clínica foi inventada.</li><li>Diagnósticos foram unidos somente por espaços e capitalização.</li><li>Duplicidades foram verificadas e a contagem zero foi registrada.</li><li>As 150 cronologias inválidas permanecem sinalizadas e fora de <code>dias_internacao</code>.</li><li>O notebook reinicia e executa todas as células sem depender da ordem manual.</li><li>O relatório não apresenta pendência humana como problema “resolvido”.</li><li>A revisão da IA registra aceitações, rejeições, testes e limitações.</li><li>Commit e push preservam a entrega no repositório do estudante.</li></ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>19. Síntese</h2>
+        <p>Limpeza de dados não é fabricar uma tabela sem células vazias. É preservar a fonte, medir os problemas, aplicar somente regras justificáveis, impedir que inconsistências contaminem indicadores e encaminhar o restante para decisão humana.</p>
+        <p>O Antigravity acelerou planejamento, código e testes, mas as evidências permaneceram visíveis: contagens antes/depois, flags, produtos separados, execução completa e histórico Git. A responsabilidade pela regra continuou com o estudante.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>20. Referências e continuidade</h2>
+        <p>No próximo laboratório, a base tratada será usada em estatística descritiva para gestão. Guarde o relatório de qualidade: médias e distribuições só fazem sentido quando a população analisada e as exclusões estão documentadas.</p>
+        <ul><li><a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Fonte e licença do dataset no Kaggle</a>.</li><li><a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">Codelab oficial do Antigravity IDE</a>.</li><li><a href="https://antigravity.google/docs/agent-settings">Configurações de revisão e execução do agente</a>.</li><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Documentação do Pandas sobre dados ausentes</a>.</li></ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-05.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>

@@ -6,10 +6,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATASET = ROOT / "materiais/aula-04/dados/hospital_patients_real_world.csv"
+DATASET = ROOT / "materiais/aula-05/dados/hospital_patients_real_world.csv"
 
 
-class Aula04DatasetTests(unittest.TestCase):
+class Aula05DatasetTests(unittest.TestCase):
     def setUp(self):
         with DATASET.open(newline="", encoding="utf-8-sig") as stream:
             self.rows = list(csv.DictReader(stream))
