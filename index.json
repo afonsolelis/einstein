@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-27",
+  "generated_at": "2026-08-29",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -40,6 +40,7 @@
     ],
     "lesson_assets": [
       "materiais/aula-04/laboratorio-sql.html",
+      "materiais/aula-04/rede-cuidar.sqlite",
       "materiais/aula-05/dados/README.md",
       "materiais/aula-05/dados/hospital_patients_real_world.csv",
       "materiais/aula-05/prompts-antigravity.md"
@@ -274,11 +275,12 @@
         "highlights": [
           "Três rodadas práticas com checkpoints de DDL, DML e DQL",
           "Laboratório SQLite no navegador com persistência local",
+          "Banco SQLite sintético disponível para download e prática local",
           "Ampliação do modelo da Rede Cuidar com convênios",
           "Consultas gerenciais com filtros, agregações e JOIN"
         ],
-        "activity": "Criar a entidade convênio, povoar e relacionar registros e responder três perguntas gerenciais no SQLite",
-        "deliverable": "aula-04-sql-seunome.sql reproduzível com DDL, DML, três consultas DQL comentadas, commit e push"
+        "activity": "Treino livre: criar a entidade convênio, povoar e relacionar registros e responder três perguntas gerenciais no SQLite",
+        "deliverable": null
       }
     },
     {

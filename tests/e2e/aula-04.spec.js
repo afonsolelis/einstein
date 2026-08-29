@@ -1,5 +1,19 @@
 const { test, expect } = require('@playwright/test');
 
+test('cronograma oferece download direto do banco SQLite da aula 4', async ({ page }) => {
+  await page.goto('/index.html');
+  const card = page.locator('.card').nth(3);
+  await expect(card).toContainText('SQL II');
+  const link = card.locator('.btn-data');
+  await expect(link).toHaveAttribute('href', 'materiais/aula-04/rede-cuidar.sqlite');
+  await expect(link).toHaveAttribute('download', 'rede-cuidar.sqlite');
+
+  const downloadPromise = page.waitForEvent('download');
+  await link.click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('rede-cuidar.sqlite');
+});
+
 function watchPage(page) {
   const errors = [];
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
