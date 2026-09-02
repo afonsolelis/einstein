@@ -248,17 +248,19 @@
         "SELECT, filtros e ordenação",
         "GROUP BY e séries temporais",
         "JOIN",
-        "grão e validação de consultas"
+        "grão e validação de consultas",
+        "dashboards"
       ],
       "objectives": [
         "Reconhecer um banco desconhecido: tabelas, colunas, período e volume",
         "Perfilar colunas quanto a completude, cardinalidade e distribuição",
         "Consultar dados com filtros, ordenação, agregação e JOIN em SQL",
-        "Validar granularidade, quantidade de linhas e totais antes de interpretar resultados"
+        "Validar granularidade, quantidade de linhas e totais antes de interpretar resultados",
+        "Representar cada resposta no gráfico adequado e reuni-las em um dashboard"
       ],
       "slides": {
         "path": "slides/aula-04.html",
-        "slide_count": 23,
+        "slide_count": 28,
         "sections": [
           "agenda",
           "challenge",
@@ -278,9 +280,10 @@
           "Perfilamento de completude, cardinalidade e distribuição sobre dados reais",
           "Consultas de agregação, série temporal e JOIN em PostgreSQL",
           "Checagem de grão após junção com COUNT(DISTINCT)",
-          "Laboratório SQLite da Rede Cuidar mantido como treino opcional de DDL e DML"
+          "Laboratório SQLite da Rede Cuidar mantido como treino opcional de DDL e DML",
+          "Fechamento com três perguntas, três gráficos e um dashboard montado no Metabase"
         ],
-        "activity": "Treino livre: reconhecer o Olist, perfilar colunas e responder três perguntas de negócio no Metabase, salvando cada consulta na coleção pessoal",
+        "activity": "Treino livre: reconhecer o Olist, perfilar colunas e fechar a aula respondendo três perguntas com gráficos (linha, barras e mapa) reunidos em um dashboard na coleção pessoal do Metabase",
         "deliverable": null
       }
     },

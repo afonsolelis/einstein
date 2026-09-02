@@ -416,8 +416,8 @@
 <body>
   <div id="slider">
     <div class="slide slide-start active"><div class="badge">LABORATÓRIO 4 · 02/09</div><h1>SQL II</h1><p>Exploração de dados reais com Metabase e o dataset Olist</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Hoje é dia de explorar dados reais</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas e grão.</li><li><strong>Perfilar</strong> colunas: completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, agregações e JOINs em SQL.</li><li><strong>Validar</strong> o resultado antes de transformá-lo em conclusão.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro de 3 horas</h2><ul><li>20 min · acesso ao Metabase e reconhecimento do Olist.</li><li>40 min · rodada 1: perfilamento e filtros.</li><li>45 min · rodada 2: agregações e séries temporais.</li><li>45 min · rodada 3: JOIN e controle de grão.</li><li>30 min · exploração livre e comparação de achados.</li></ul><p><strong>Regra:</strong> explicação curta, execução longa — sem entrega.</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Hoje é dia de explorar dados reais</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas e grão.</li><li><strong>Perfilar</strong> colunas: completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, agregações e JOINs em SQL.</li><li><strong>Validar</strong> o resultado antes de transformá-lo em conclusão.</li><li><strong>Representar</strong> cada resposta no gráfico adequado e reuni-las em um dashboard.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro de 3 horas</h2><ul><li>20 min · acesso ao Metabase e reconhecimento do Olist.</li><li>40 min · rodada 1: perfilamento e filtros.</li><li>40 min · rodada 2: agregações e séries temporais.</li><li>40 min · rodada 3: JOIN e controle de grão.</li><li>40 min · fechamento: três gráficos e um dashboard.</li></ul><p><strong>Regra:</strong> explicação curta, execução longa — sem entrega.</p></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Do banco de treino ao banco real</h2><p>Até aqui praticamos em uma base sintética com dezenas de linhas. Hoje a base é a <strong>Olist</strong>: um marketplace brasileiro, ~100 mil pedidos entre 2016 e 2018, com preço, frete, prazo prometido e realizado, pagamento, avaliação e geografia.</p><p>Dado real chega sujo, incompleto e ambíguo. Aprender a perguntar a ele é o objetivo da aula.</p></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Acesso ao Metabase</h2><div class="code-block">Endereço · metabase-production-76b0.up.railway.app
 Login    · alunos@aula.local
@@ -481,7 +481,44 @@ LIMIT 15;</div></div>
 FROM olist_orders AS o
 JOIN olist_order_items AS i ON i.order_id = o.order_id;</div><p>Se <code>linhas</code> &gt; <code>pedidos</code>, o grão mudou. Conte com <code>COUNT(DISTINCT …)</code> ou agregue antes de juntar.</p></div>
     <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint · JOIN</h2><ul><li>O que uma linha representa <em>agora</em>?</li><li>O JOIN multiplicou registros?</li><li>Os filtros foram aplicados antes da agregação?</li><li>Você consegue explicar o número em uma frase?</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Exploração livre · três perguntas</h2><p>Escolha três e responda no Metabase:</p><ul><li>Qual o percentual de pedidos entregues após a data prometida, por estado?</li><li>Quais categorias concentram as piores avaliações?</li><li>Como o frete se comporta em relação à distância entre vendedor e cliente?</li><li>Qual meio de pagamento domina cada faixa de valor?</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Fechamento · três perguntas, três gráficos</h2><p>Cada pergunta vira uma consulta salva, com o gráfico adequado à sua forma:</p><ul><li><strong>1 ·</strong> Como evoluiu o volume de pedidos entregues ao longo do tempo? → <em>linha</em></li><li><strong>2 ·</strong> Quais categorias concentram as piores avaliações? → <em>barras</em></li><li><strong>3 ·</strong> Onde a entrega atrasa mais em relação ao prazo prometido? → <em>mapa ou barras</em></li></ul><p>No fim, as três entram em um <strong>dashboard</strong>.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Pergunta 1 · pedidos entregues por mês</h2><div class="code-block">SELECT date_trunc('month', order_purchase_timestamp) AS mes,
+       COUNT(*) AS pedidos
+FROM olist_orders
+WHERE order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</div><p><strong>Visualization → Line.</strong> Série temporal pede linha. Nomeie a pergunta “Pedidos entregues por mês” e salve na sua coleção.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Pergunta 2 · piores avaliações por categoria</h2><div class="code-block">WITH pedido_categoria AS (
+  SELECT DISTINCT i.order_id, p.product_category_name
+  FROM olist_order_items AS i
+  JOIN olist_products AS p ON p.product_id = i.product_id
+)
+SELECT COALESCE(t.product_category_name_english,
+                pc.product_category_name) AS categoria,
+       COUNT(*) AS pedidos,
+       ROUND(AVG(r.review_score)::numeric, 2) AS nota_media
+FROM pedido_categoria AS pc
+JOIN olist_order_reviews AS r ON r.order_id = pc.order_id
+LEFT JOIN product_category_name_translation AS t
+       ON t.product_category_name = pc.product_category_name
+GROUP BY 1
+HAVING COUNT(*) &gt;= 500
+ORDER BY nota_media
+LIMIT 10;</div><p><strong>Visualization → Bar.</strong> O <code>DISTINCT</code> na CTE evita que o JOIN com itens conte a mesma avaliação várias vezes.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Pergunta 3 · atraso por estado</h2><div class="code-block">SELECT c.customer_state,
+       COUNT(*) AS pedidos,
+       ROUND(100.0 * COUNT(*) FILTER (
+         WHERE o.order_delivered_customer_date
+             &gt; o.order_estimated_delivery_date
+       ) / COUNT(*), 1) AS pct_atrasado
+FROM olist_orders AS o
+JOIN olist_customers AS c ON c.customer_id = o.customer_id
+WHERE o.order_status = 'delivered'
+  AND o.order_delivered_customer_date IS NOT NULL
+GROUP BY c.customer_state
+ORDER BY pct_atrasado DESC;</div><p><strong>Visualization → Map</strong> (region map por estado) <strong>ou Bar.</strong> Percentual comparável entre estados; o volume evita ler um estado com poucos pedidos como tendência.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Monte o dashboard</h2><ol><li><strong>New → Dashboard</strong>, nome “Painel Olist · seu nome”, dentro da sua coleção.</li><li>Adicione as três perguntas salvas e ajuste o tamanho dos cards.</li><li>Inclua um <strong>text card</strong> no topo com a leitura que o painel sustenta.</li><li>Adicione um <strong>filtro</strong> de estado ou de período e conecte-o aos cards que aceitarem.</li></ol></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>O que faz um painel valer a pena</h2><ul><li>Cada gráfico responde a <strong>uma</strong> pergunta enunciável em uma frase.</li><li>O título diz o achado, não a tabela de origem.</li><li>O eixo tem unidade explícita: pedidos, reais, percentual.</li><li>Se nenhuma decisão muda com o painel, ele é curiosidade — não painel.</li></ul></div>
     <div class="slide slide-content" data-lesson-section="challenge"><h2>Como organizar o trabalho</h2><ul><li>Crie uma <strong>coleção com o seu nome completo</strong> e salve tudo dentro dela.</li><li>Salve antes de mudar de tela — não há rascunho automático.</li><li>Nomeie a pergunta pelo conteúdo, não por “Pergunta 1”.</li><li>Não edite a coleção de um colega: use <em>Duplicate</em>.</li></ul><p><strong>Hoje é treino: não há entrega.</strong></p></div>
     <div class="slide slide-content" data-lesson-section="summary"><h2>Estrutura, pergunta e grão</h2><ul><li><strong>Reconhecer</strong> vem antes de consultar.</li><li><strong>DQL</strong> transforma dados em respostas.</li><li><strong>Grão</strong> é o que separa um número certo de um número inflado.</li><li><strong>Validação</strong> separa uma consulta executada de uma consulta confiável.</li></ul></div>
     <div class="slide slide-end" data-lesson-section="next-steps"><h2>Próximo laboratório</h2><p>Na aula 5, vamos limpar dados imperfeitos com Pandas e revisão apoiada por IA.</p><p><strong>Hoje é treino: não há entrega.</strong></p></div>

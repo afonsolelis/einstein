@@ -113,7 +113,7 @@
 
     <div class="content">
       <p class="desc">Na aula anterior, construímos o vocabulário da modelagem relacional em uma base sintética. Hoje a base é real: o dataset <strong>Olist</strong>, com cerca de cem mil pedidos de um marketplace brasileiro entre 2016 e 2018, consultado pelo <strong>Metabase</strong>. A maior parte das três horas deve ser usada escrevendo consultas e conferindo resultados.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas, período e volume.</li><li><strong>Perfilar</strong> colunas quanto a completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, ordenação, agregação e JOIN em SQL.</li><li><strong>Validar</strong> granularidade, quantidade de linhas e totais antes de interpretar resultados.</li></ul></section>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas, período e volume.</li><li><strong>Perfilar</strong> colunas quanto a completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, ordenação, agregação e JOIN em SQL.</li><li><strong>Validar</strong> granularidade, quantidade de linhas e totais antes de interpretar resultados.</li><li><strong>Representar</strong> cada resposta no gráfico adequado e reuni-las em um dashboard.</li></ul></section>
       <section data-lesson-section="concepts"><h2>2. Acesso ao Metabase</h2><p>A instância já está no ar e é a mesma para toda a turma. Funciona em qualquer navegador, sem instalar nada.</p><div class="code-block">Endereço · <a href="https://metabase-production-76b0.up.railway.app" target="_blank" rel="noopener noreferrer">metabase-production-76b0.up.railway.app</a>
 Login    · alunos@aula.local
 Senha    · OlistAula2026!</div><p>Na primeira entrada, crie uma <strong>coleção com o seu nome completo</strong> e salve tudo dentro dela. Como a conta é compartilhada, você enxerga e pode editar o trabalho dos colegas — o que protege cada um é a convenção, não a permissão. Para partir da pergunta de outra pessoa, use <em>Duplicate</em> e trabalhe sobre a cópia.</p></section>
@@ -171,8 +171,52 @@ LIMIT 15;</div><p>Use <code>LEFT JOIN</code> quando registros sem correspondênc
        COUNT(DISTINCT o.order_id) AS pedidos
 FROM olist_orders AS o
 JOIN olist_order_items AS i ON i.order_id = o.order_id;</div><p>Se <code>linhas</code> for maior que <code>pedidos</code>, o grão mudou. Conte com <code>COUNT(DISTINCT …)</code> ou agregue antes de juntar.</p></section>
-      <section data-lesson-section="challenge"><h2>10. Exploração livre</h2><p>Sem entrega: escolha três perguntas, responda no Metabase e salve cada uma na sua coleção com um nome que descreva o conteúdo.</p><ol><li>Qual o percentual de pedidos entregues após a data prometida, por estado?</li><li>Quais categorias concentram as piores avaliações em <code>olist_order_reviews</code>?</li><li>Qual meio de pagamento domina cada faixa de valor?</li><li>Como o frete varia entre o estado do vendedor e o do cliente?</li></ol><p><strong>Meta de aprendizagem:</strong> para cada consulta, saber dizer em uma frase o que uma linha representa e qual decisão mudaria conforme a resposta. Se nenhuma decisão muda, a pergunta é curiosidade — legítima na exploração, mas não em um painel.</p></section>
-      <section data-lesson-section="checklist"><h2>11. Checklist de qualidade</h2><ul><li>A consulta executa e você consegue explicar cada cláusula?</li><li>Você sabe o que uma linha do resultado representa?</li><li>O JOIN preservou a quantidade esperada de fatos?</li><li>Os filtros foram aplicados antes da agregação?</li><li>Média e mediana contam a mesma história?</li><li>A pergunta salva tem nome descritivo e está na sua coleção?</li></ul></section>
+      <section data-lesson-section="challenge"><h2>10. Fechamento: três perguntas, três gráficos e um dashboard</h2><p>A última parte da aula fecha o ciclo: cada pergunta vira uma consulta salva com o gráfico adequado à forma do dado, e as três se reúnem em um painel. Não há entrega — o objetivo é sair da aula com um painel que você consiga explicar.</p>
+
+      <h3>Pergunta 1 · como evoluiu o volume de pedidos entregues?</h3><div class="code-block">SELECT date_trunc('month', order_purchase_timestamp) AS mes,
+       COUNT(*) AS pedidos
+FROM olist_orders
+WHERE order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</div><p>Em <strong>Visualization</strong>, escolha <strong>Line</strong>: série temporal pede linha, porque a continuidade do eixo carrega a informação. Lembre que as pontas são meses incompletos — diga isso no título ou recorte o período.</p>
+
+      <h3>Pergunta 2 · quais categorias concentram as piores avaliações?</h3><div class="code-block">WITH pedido_categoria AS (
+  SELECT DISTINCT i.order_id, p.product_category_name
+  FROM olist_order_items AS i
+  JOIN olist_products AS p ON p.product_id = i.product_id
+)
+SELECT COALESCE(t.product_category_name_english,
+                pc.product_category_name) AS categoria,
+       COUNT(*) AS pedidos,
+       ROUND(AVG(r.review_score)::numeric, 2) AS nota_media
+FROM pedido_categoria AS pc
+JOIN olist_order_reviews AS r ON r.order_id = pc.order_id
+LEFT JOIN product_category_name_translation AS t
+       ON t.product_category_name = pc.product_category_name
+GROUP BY 1
+HAVING COUNT(*) &gt;= 500
+ORDER BY nota_media
+LIMIT 10;</div><p>Escolha <strong>Bar</strong>, com as categorias no eixo de categorias e a nota média na medida. A CTE com <code>DISTINCT</code> existe por causa do grão: sem ela, um pedido com cinco itens contaria a mesma avaliação cinco vezes. O <code>HAVING</code> descarta categorias com volume baixo demais para sustentar uma média.</p>
+
+      <h3>Pergunta 3 · onde a entrega atrasa mais em relação ao prazo prometido?</h3><div class="code-block">SELECT c.customer_state,
+       COUNT(*) AS pedidos,
+       ROUND(100.0 * COUNT(*) FILTER (
+         WHERE o.order_delivered_customer_date
+             &gt; o.order_estimated_delivery_date
+       ) / COUNT(*), 1) AS pct_atrasado
+FROM olist_orders AS o
+JOIN olist_customers AS c ON c.customer_id = o.customer_id
+WHERE o.order_status = 'delivered'
+  AND o.order_delivered_customer_date IS NOT NULL
+GROUP BY c.customer_state
+ORDER BY pct_atrasado DESC;</div><p>Escolha <strong>Map</strong> (mapa de regiões por estado) ou <strong>Bar</strong>. O percentual é o que permite comparar estados de tamanhos diferentes; mantenha a coluna de volume ao lado para não ler um estado com poucos pedidos como tendência. Se o mapa não aparecer como opção, é porque <code>customer_state</code> ainda está tipado como texto genérico — o tipo semântico é configurado na área administrativa.</p>
+
+      <h3>O dashboard</h3><ol><li>Vá em <strong>New → Dashboard</strong> e nomeie “Painel Olist · seu nome”, dentro da sua coleção.</li><li>Adicione as três perguntas salvas e ajuste o tamanho e a posição dos cards.</li><li>Inclua um <strong>text card</strong> no topo com a leitura que o painel sustenta, em uma ou duas frases.</li><li>Adicione um <strong>filtro</strong> de estado ou de período e conecte-o aos cards que o aceitarem.</li></ol>
+
+      <div class="alert-box"><h4>O título do gráfico é a conclusão, não a fonte</h4><p>“Pedidos entregues por mês” descreve a tabela. “Volume de entregas cresce até o fim de 2017 e estabiliza em 2018” descreve o achado. A segunda forma obriga você a verificar se o dado realmente sustenta a frase — e é essa verificação que separa um painel útil de um painel decorativo.</p></div>
+
+      <p><strong>Meta de aprendizagem:</strong> para cada card, saber dizer em uma frase o que uma linha representa, qual unidade está no eixo e qual decisão mudaria conforme a resposta. Se nenhuma decisão muda, a pergunta é curiosidade — legítima na exploração, mas não em um painel.</p></section>
+      <section data-lesson-section="checklist"><h2>11. Checklist de qualidade</h2><ul><li>A consulta executa e você consegue explicar cada cláusula?</li><li>Você sabe o que uma linha do resultado representa?</li><li>O JOIN preservou a quantidade esperada de fatos?</li><li>Os filtros foram aplicados antes da agregação?</li><li>Média e mediana contam a mesma história?</li><li>A pergunta salva tem nome descritivo e está na sua coleção?</li><li>Cada gráfico do painel tem título que enuncia o achado e eixo com unidade explícita?</li></ul></section>
       <section data-lesson-section="summary"><h2>12. Síntese</h2><p>Reconhecer vem antes de consultar; consultar vem antes de concluir. DQL converte o banco em respostas, mas SQL confiável não é apenas SQL que executa: é aquele cujo resultado pode ser explicado e verificado. O grão é o que separa um número correto de um número inflado que parece plausível.</p></section>
       <section data-lesson-section="next-steps"><h2>13. Continuidade</h2><p>Na aula 5, trabalharemos com Pandas para diagnosticar e limpar uma base imperfeita. Nesta aula não há arquivo para entregar.</p><p><strong>Treino opcional de DDL e DML:</strong> a conexão do Olist é somente leitura, então <code>CREATE</code>, <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code> continuam disponíveis no laboratório SQLite da Rede Cuidar, que roda no navegador e pode ser usado fora da aula.</p><p><a href="laboratorio-sql.html" class="btn btn-slides">🧪 Abrir laboratório SQL</a> <a href="rede-cuidar.sqlite" download class="btn btn-slides">⬇️ Baixar banco SQLite</a></p><ul><li><a href="https://www.metabase.com/docs/latest/questions/native-editor/writing-sql" target="_blank" rel="noopener noreferrer">Escrever SQL no Metabase</a>.</li><li><a href="https://www.postgresql.org/docs/current/sql-select.html" target="_blank" rel="noopener noreferrer">Documentação do SELECT no PostgreSQL</a>.</li></ul></section>
 

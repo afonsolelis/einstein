@@ -29,15 +29,17 @@ function watchPage(page) {
 test('aula 4 explora o Olist no Metabase', async ({ page }) => {
   const errors = watchPage(page);
   await page.goto('/slides/aula-04.html');
-  await expect(page.locator('.slide')).toHaveCount(23);
+  await expect(page.locator('.slide')).toHaveCount(28);
   await expect(page.locator('h2', { hasText: 'Acesso ao Metabase' })).toBeAttached();
   await expect(page.locator('h2', { hasText: 'Grão: o conceito da aula' })).toBeAttached();
   await expect(page.locator('h2', { hasText: 'Rodada 3 · JOIN com tradução' })).toBeAttached();
+  await expect(page.locator('h2', { hasText: 'Monte o dashboard' })).toBeAttached();
   const metabase = page.getByRole('link', { name: /Metabase/ }).first();
   await expect(metabase).toHaveAttribute('href', 'https://metabase-production-76b0.up.railway.app');
   await page.getByRole('link', { name: /Material/ }).click();
   await expect(page).toHaveURL(/materiais\/aula-04\/index\.html$/);
   await expect(page.getByRole('heading', { name: /Rodada 0: reconhecer/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /três perguntas, três gráficos e um dashboard/ })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
