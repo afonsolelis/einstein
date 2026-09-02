@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório 4 · SQL II: prática de DDL, DML e DQL</title>
+  <title>Laboratório 4 · SQL II: exploração do Olist no Metabase</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -415,60 +415,78 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 4 · 02/09</div><h1>SQL II</h1><p>Laboratório prático de DDL, DML e DQL com o banco da Rede Cuidar</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Hoje é dia de escrever SQL</h2><ul><li><strong>Criar</strong> tabelas com chaves e restrições.</li><li><strong>Inserir, atualizar e excluir</strong> registros com segurança.</li><li><strong>Consultar</strong> dados com filtros, agregações e JOINs.</li><li><strong>Validar</strong> resultados antes de tomar uma decisão.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro de 3 horas</h2><ul><li>15 min · retomada e abertura do laboratório.</li><li>45 min · rodada 1: DDL.</li><li>45 min · rodada 2: DML.</li><li>60 min · rodada 3: DQL.</li><li>15 min · desafio livre para treino.</li></ul><p><strong>Regra:</strong> explicação curta, execução longa — sem entrega.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>O mapa que já conhecemos</h2><div class="code-block">PACIENTE 1 ─── N ATENDIMENTO N ─── 1 MÉDICO</div><p>Hoje o modelo deixa de ser desenho e passa a responder perguntas executivas.</p><a class="download-link" href="../materiais/aula-04/laboratorio-sql.html">🧪 Abrir laboratório SQL</a> <a class="download-link" href="../materiais/aula-04/rede-cuidar.sqlite" download>⬇️ Baixar banco SQLite</a></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 1 · reconhecer a estrutura</h2><div class="code-block">SELECT name, sql
-FROM sqlite_master
-WHERE type = 'table';</div><p>Antes de alterar um banco, descubra o que já existe.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DDL · criar CONVÊNIO</h2><div class="code-block">CREATE TABLE convenio (
-  convenio_id INTEGER PRIMARY KEY,
-  nome TEXT NOT NULL UNIQUE
-);</div><p>Execute e confirme a nova tabela em <code>sqlite_master</code>.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DDL · relacionar com PACIENTE</h2><div class="code-block">ALTER TABLE paciente
-ADD COLUMN convenio_id INTEGER
-REFERENCES convenio(convenio_id);</div><p>Uma chave estrangeira materializa a regra de relacionamento.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint DDL</h2><ul><li>A tabela <code>convenio</code> existe?</li><li>A chave primária identifica cada convênio?</li><li>O nome rejeita repetição?</li><li><code>paciente.convenio_id</code> representa a cardinalidade escolhida?</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 2 · INSERT</h2><div class="code-block">INSERT INTO convenio (convenio_id, nome) VALUES
-  (1, 'Saúde Mais'),
-  (2, 'Vida Plena'),
-  (3, 'Particular');</div><p>DML muda o estado do banco; confira o resultado após executar.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DML · UPDATE com critério</h2><div class="code-block">UPDATE paciente SET convenio_id = 1
-WHERE paciente_id IN (1, 3);
-
-UPDATE paciente SET convenio_id = 2
-WHERE paciente_id IN (2, 5);</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DML · DELETE sem acidente</h2><div class="code-block">SELECT * FROM convenio WHERE convenio_id = 3;
-
-DELETE FROM convenio WHERE convenio_id = 3;</div><p>Primeiro faça um <code>SELECT</code> com o mesmo <code>WHERE</code>. Só depois remova.</p></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint DML</h2><ul><li>Quantas linhas cada comando afetou?</li><li>O <code>WHERE</code> selecionou somente o alvo?</li><li>Algum paciente ficou sem convênio?</li><li>O estado final corresponde à regra de negócio?</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 3 · SELECT e WHERE</h2><div class="code-block">SELECT atendimento_id, tipo, valor, status
-FROM atendimento
-WHERE status = 'Faturado' AND valor &gt;= 300
-ORDER BY valor DESC;</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DQL · GROUP BY</h2><div class="code-block">SELECT status,
-       COUNT(*) AS quantidade,
-       ROUND(SUM(valor), 2) AS valor_total
-FROM atendimento
-GROUP BY status
-ORDER BY valor_total DESC;</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DQL · JOIN</h2><div class="code-block">SELECT p.nome AS paciente,
-       c.nome AS convenio,
-       ROUND(SUM(a.valor), 2) AS receita
-FROM atendimento a
-JOIN paciente p ON p.paciente_id = a.paciente_id
-LEFT JOIN convenio c ON c.convenio_id = p.convenio_id
-WHERE a.status = 'Faturado'
-GROUP BY p.paciente_id, c.convenio_id
-ORDER BY receita DESC;</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint DQL</h2><ul><li>Qual é a granularidade de cada linha?</li><li>O JOIN multiplicou registros?</li><li>Filtros foram aplicados antes da agregação?</li><li>Contagem e soma respondem à pergunta?</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio · painel do faturamento</h2><p>Escreva três consultas para a gerência:</p><ul><li>Receita faturada por especialidade.</li><li>Pacientes com mais atendimentos.</li><li>Receita por convênio, incluindo “Sem convênio”.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Treino livre · sem entrega</h2><ul><li>Teste diferentes filtros e ordenações.</li><li>Comente a pergunta respondida por cada consulta.</li><li>Confira os resultados e compare estratégias com os colegas.</li><li>Restaure a base quando quiser tentar novamente.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Estrutura, estado e pergunta</h2><ul><li><strong>DDL</strong> define o contrato.</li><li><strong>DML</strong> altera o estado.</li><li><strong>DQL</strong> transforma dados em respostas.</li><li><strong>Validação</strong> separa uma consulta executada de uma consulta confiável.</li></ul></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 4 · 02/09</div><h1>SQL II</h1><p>Exploração de dados reais com Metabase e o dataset Olist</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Hoje é dia de explorar dados reais</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas e grão.</li><li><strong>Perfilar</strong> colunas: completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, agregações e JOINs em SQL.</li><li><strong>Validar</strong> o resultado antes de transformá-lo em conclusão.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro de 3 horas</h2><ul><li>20 min · acesso ao Metabase e reconhecimento do Olist.</li><li>40 min · rodada 1: perfilamento e filtros.</li><li>45 min · rodada 2: agregações e séries temporais.</li><li>45 min · rodada 3: JOIN e controle de grão.</li><li>30 min · exploração livre e comparação de achados.</li></ul><p><strong>Regra:</strong> explicação curta, execução longa — sem entrega.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Do banco de treino ao banco real</h2><p>Até aqui praticamos em uma base sintética com dezenas de linhas. Hoje a base é a <strong>Olist</strong>: um marketplace brasileiro, ~100 mil pedidos entre 2016 e 2018, com preço, frete, prazo prometido e realizado, pagamento, avaliação e geografia.</p><p>Dado real chega sujo, incompleto e ambíguo. Aprender a perguntar a ele é o objetivo da aula.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Acesso ao Metabase</h2><div class="code-block">Endereço · metabase-production-76b0.up.railway.app
+Login    · alunos@aula.local
+Senha    · OlistAula2026!</div><p>Roda no navegador, sem instalar nada. <strong>A conta é compartilhada pela turma</strong>: não troque a senha — isso derruba a turma inteira no meio da aula.</p><a class="download-link" href="https://metabase-production-76b0.up.railway.app" target="_blank" rel="noopener noreferrer">🔗 Abrir o Metabase</a></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>A conexão é somente leitura</h2><ul><li>Nenhuma consulta sua altera ou apaga dado — nem no construtor, nem no SQL.</li><li>Consulta errada apenas <strong>falha</strong>. Experimente sem medo.</li><li><code>CREATE</code>, <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code> ficam para o laboratório SQLite, que segue disponível no material.</li><li>Hoje o foco é <strong>DQL</strong>: transformar dado em resposta.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>O mapa do Olist</h2><div class="code-block">olist_customers
+     │
+     ▼
+olist_orders ─────────────► olist_order_reviews
+     │
+     ├──► olist_order_payments   (1 pedido : N parcelas)
+     │
+     └──► olist_order_items      (1 pedido : N itens)
+              │                        │
+              ▼                        ▼
+        olist_products          olist_sellers</div><p>O <strong>pedido</strong> é o centro do modelo: quase toda pergunta passa por <code>olist_orders</code>.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Grão: o conceito da aula</h2><ul><li><code>olist_orders</code> · uma linha é <strong>um pedido</strong>.</li><li><code>olist_order_items</code> · uma linha é <strong>um item</strong>.</li><li><code>olist_order_payments</code> · uma linha é <strong>uma parcela</strong>.</li></ul><p>Ao juntar tabelas, o resultado assume o grão mais fino. Contar linhas depois de um JOIN e chamar isso de “total de pedidos” infla o número sem parecer errado.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 0 · reconhecer sem escrever SQL</h2><ul><li><strong>Browse data</strong> → navegue pelas nove tabelas e leia as colunas.</li><li><strong>X-ray</strong> → gere uma exploração automática de <code>olist_orders</code>.</li><li>Anote: quantas linhas, que período cobre, quais colunas têm nulo.</li></ul><p>Trate o X-ray como bússola, não como resposta: ele mostra o que é fácil, não o que importa.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 1 · o primeiro SELECT</h2><div class="code-block">SELECT order_id, order_status, order_purchase_timestamp
+FROM olist_orders
+LIMIT 10;</div><p>Abra <strong>New → SQL query</strong>, escolha o banco Olist e execute. Leia na ordem lógica: origem, filtro, projeção, limite.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DQL · filtrar e ordenar</h2><div class="code-block">SELECT order_id, price, freight_value
+FROM olist_order_items
+WHERE price &gt;= 500
+ORDER BY price DESC
+LIMIT 20;</div><p>Confira: todas as linhas satisfazem o critério? O que ficou deliberadamente de fora?</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Perfilar completude</h2><div class="code-block">SELECT order_status,
+       COUNT(*) AS pedidos,
+       COUNT(order_delivered_customer_date) AS com_entrega
+FROM olist_orders
+GROUP BY order_status
+ORDER BY pedidos DESC;</div><p>O nulo nunca é aleatório. Onde ele se concentra, existe uma regra de negócio.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint · perfilamento</h2><ul><li>Quantos pedidos existem e em que período?</li><li>Quais status aparecem e com que peso?</li><li>Onde os nulos se concentram — e por quê?</li><li>Qual coluna é categoria e qual é identificador?</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 2 · GROUP BY</h2><div class="code-block">SELECT c.customer_state,
+       COUNT(*) AS pedidos,
+       ROUND(AVG(i.price)::numeric, 2) AS ticket_medio
+FROM olist_orders AS o
+JOIN olist_customers AS c ON c.customer_id = o.customer_id
+JOIN olist_order_items AS i ON i.order_id = o.order_id
+GROUP BY c.customer_state
+ORDER BY pedidos DESC;</div><p><code>GROUP BY</code> muda a granularidade: cada linha passa a representar um estado.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>DQL · série temporal</h2><div class="code-block">SELECT date_trunc('month', order_purchase_timestamp) AS mes,
+       COUNT(*) AS pedidos
+FROM olist_orders
+WHERE order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</div><p>As pontas da série quase sempre são meses incompletos. Um crescimento que “despenca” no fim costuma ser recorte, não queda.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Média ou mediana?</h2><ul><li>Preço e frete têm <strong>cauda longa</strong>: poucos valores altos puxam a média.</li><li>Use <strong>média</strong> quando a soma precisa ser preservada.</li><li>Use <strong>mediana</strong> para descrever o caso típico.</li><li>Média e mediana muito distantes não é problema a esconder: é achado a reportar.</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Rodada 3 · JOIN com tradução</h2><div class="code-block">SELECT t.product_category_name_english AS categoria,
+       COUNT(*) AS itens,
+       ROUND(SUM(i.price)::numeric, 2) AS receita
+FROM olist_order_items AS i
+JOIN olist_products AS p ON p.product_id = i.product_id
+LEFT JOIN product_category_name_translation AS t
+       ON t.product_category_name = p.product_category_name
+GROUP BY 1
+ORDER BY receita DESC
+LIMIT 15;</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>O JOIN multiplicou linhas?</h2><div class="code-block">SELECT COUNT(*) AS linhas,
+       COUNT(DISTINCT o.order_id) AS pedidos
+FROM olist_orders AS o
+JOIN olist_order_items AS i ON i.order_id = o.order_id;</div><p>Se <code>linhas</code> &gt; <code>pedidos</code>, o grão mudou. Conte com <code>COUNT(DISTINCT …)</code> ou agregue antes de juntar.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Checkpoint · JOIN</h2><ul><li>O que uma linha representa <em>agora</em>?</li><li>O JOIN multiplicou registros?</li><li>Os filtros foram aplicados antes da agregação?</li><li>Você consegue explicar o número em uma frase?</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Exploração livre · três perguntas</h2><p>Escolha três e responda no Metabase:</p><ul><li>Qual o percentual de pedidos entregues após a data prometida, por estado?</li><li>Quais categorias concentram as piores avaliações?</li><li>Como o frete se comporta em relação à distância entre vendedor e cliente?</li><li>Qual meio de pagamento domina cada faixa de valor?</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Como organizar o trabalho</h2><ul><li>Crie uma <strong>coleção com o seu nome completo</strong> e salve tudo dentro dela.</li><li>Salve antes de mudar de tela — não há rascunho automático.</li><li>Nomeie a pergunta pelo conteúdo, não por “Pergunta 1”.</li><li>Não edite a coleção de um colega: use <em>Duplicate</em>.</li></ul><p><strong>Hoje é treino: não há entrega.</strong></p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Estrutura, pergunta e grão</h2><ul><li><strong>Reconhecer</strong> vem antes de consultar.</li><li><strong>DQL</strong> transforma dados em respostas.</li><li><strong>Grão</strong> é o que separa um número certo de um número inflado.</li><li><strong>Validação</strong> separa uma consulta executada de uma consulta confiável.</li></ul></div>
     <div class="slide slide-end" data-lesson-section="next-steps"><h2>Próximo laboratório</h2><p>Na aula 5, vamos limpar dados imperfeitos com Pandas e revisão apoiada por IA.</p><p><strong>Hoje é treino: não há entrega.</strong></p></div>
   </div>
-  <div id="controls"><div class="footer-text">Laboratório de Programação, Ciência de Dados &amp; IA</div><div class="btn-group"><a href="../index.html" class="ctrl-btn"><span class="ctrl-icon">🏠</span> Home</a><a href="../materiais/aula-04/index.html" class="ctrl-btn"><span class="ctrl-icon">📎</span> Material</a><a href="../materiais/aula-04/laboratorio-sql.html" class="ctrl-btn"><span class="ctrl-icon">🧪</span> SQL</a><span class="slide-counter" id="slide-counter"></span><button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev">◄</button><button class="ctrl-btn ctrl-btn-only-icon" id="btn-next">►</button><button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs">⛶</button></div></div>
+  <div id="controls"><div class="footer-text">Laboratório de Programação, Ciência de Dados &amp; IA</div><div class="btn-group"><a href="../index.html" class="ctrl-btn"><span class="ctrl-icon">🏠</span> Home</a><a href="../materiais/aula-04/index.html" class="ctrl-btn"><span class="ctrl-icon">📎</span> Material</a><a href="https://metabase-production-76b0.up.railway.app" target="_blank" rel="noopener noreferrer" class="ctrl-btn"><span class="ctrl-icon">📊</span> Metabase</a><a href="../materiais/aula-04/laboratorio-sql.html" class="ctrl-btn"><span class="ctrl-icon">🧪</span> SQL</a><span class="slide-counter" id="slide-counter"></span><button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev">◄</button><button class="ctrl-btn ctrl-btn-only-icon" id="btn-next">►</button><button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs">⛶</button></div></div>
   <script>const slides=document.querySelectorAll('.slide');let current=0;const btnPrev=document.querySelector('#btn-prev'),btnNext=document.querySelector('#btn-next'),btnFs=document.querySelector('#btn-fs'),counter=document.querySelector('#slide-counter');function update(){slides.forEach((s,i)=>s.classList.toggle('active',i===current));btnPrev.disabled=current===0;btnNext.disabled=current===slides.length-1;counter.textContent=(current+1)+' / '+slides.length}btnPrev.onclick=()=>{if(current>0){current--;update()}};btnNext.onclick=()=>{if(current<slides.length-1){current++;update()}};document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||(e.key===' '&&!e.target.closest('button,a'))){e.preventDefault();if(current<slides.length-1){current++;update()}}if(e.key==='ArrowLeft'){e.preventDefault();if(current>0){current--;update()}}});btnFs.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();update();</script>
 </body>
 </html>

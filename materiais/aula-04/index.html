@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · Laboratório 04 · SQL II</title>
+  <title>Material · Laboratório 04 · SQL II no Metabase</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -108,69 +108,78 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 04 · 02/09</div>
-      <h1>SQL II: laboratório de DDL, DML e DQL</h1>
+      <h1>SQL II: exploração do Olist no Metabase</h1>
     </div>
 
     <div class="content">
-      <p class="desc">Na aula anterior, construímos o vocabulário da modelagem relacional. Agora o objetivo é ganhar fluência: criar estrutura, registrar mudanças e responder perguntas gerenciais no banco sintético da Rede Cuidar. A maior parte das três horas deve ser usada no editor SQL.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li><strong>Criar</strong> tabelas e restrições com DDL.</li><li><strong>Inserir, atualizar e excluir</strong> registros com DML e critérios explícitos.</li><li><strong>Consultar</strong> dados com filtros, ordenação, agregação e JOIN.</li><li><strong>Validar</strong> granularidade, quantidade de linhas e totais antes de interpretar resultados.</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. O ciclo do laboratório</h2><p>Cada rodada segue o mesmo ciclo: ler a missão, prever o resultado, escrever o SQL, executar, conferir e registrar a evidência. DDL define o contrato do banco; DML altera seu estado; DQL faz perguntas ao estado atual.</p><div class="code-block">DDL → estrutura: CREATE TABLE, ALTER TABLE
-DML → estado:    INSERT, UPDATE, DELETE
-DQL → pergunta:  SELECT, WHERE, GROUP BY, JOIN</div></section>
-      <div class="alert-box"><h4>Banco de treinamento · sem entrega</h4><p>Use somente os dados sintéticos fornecidos. O laboratório salva uma cópia no navegador. Se um exercício deixar a base inconsistente, use “Restaurar base” e recomece a rodada. As atividades desta aula servem apenas para praticar.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Abra e reconheça o banco</h2><p><a href="laboratorio-sql.html" class="btn btn-slides">🧪 Abrir laboratório SQL</a> <a href="rede-cuidar.sqlite" download class="btn btn-slides">⬇️ Baixar banco SQLite</a></p><p>Você pode praticar no navegador ou baixar <code>rede-cuidar.sqlite</code> para abrir localmente no SQLite, no DBeaver ou em outra ferramenta compatível.</p><ol><li>Liste as tabelas existentes.</li><li>Consulte cinco linhas de <code>paciente</code>, <code>medico</code> e <code>atendimento</code>.</li><li>Identifique PKs, FKs e a granularidade de cada tabela.</li></ol><div class="code-block">SELECT name, sql
-FROM sqlite_master
-WHERE type = 'table';
-
-SELECT * FROM paciente LIMIT 5;</div></section>
-      <section data-lesson-section="guided-practice"><h2>4. Rodada DDL: ampliar o modelo</h2><p>Crie a entidade convênio e relacione-a ao paciente. Execute um comando por vez e inspecione o esquema após cada mudança.</p><div class="code-block">CREATE TABLE convenio (
-  convenio_id INTEGER PRIMARY KEY,
-  nome TEXT NOT NULL UNIQUE
-);
-
-ALTER TABLE paciente
-ADD COLUMN convenio_id INTEGER
-REFERENCES convenio(convenio_id);</div><p><strong>Checkpoint:</strong> tente inserir dois convênios com o mesmo nome e explique por que o segundo comando deve falhar.</p></section>
-      <section data-lesson-section="guided-practice"><h2>5. Rodada DML: alterar com intenção</h2><div class="code-block">INSERT INTO convenio (convenio_id, nome) VALUES
-  (1, 'Saúde Mais'),
-  (2, 'Vida Plena'),
-  (3, 'Particular');
-
-UPDATE paciente SET convenio_id = 1
-WHERE paciente_id IN (1, 3);
-
-UPDATE paciente SET convenio_id = 2
-WHERE paciente_id IN (2, 5);</div><p>Antes de qualquer <code>UPDATE</code> ou <code>DELETE</code>, execute um <code>SELECT</code> com o mesmo <code>WHERE</code>. A ausência do filtro pode alterar todas as linhas.</p><div class="code-block">SELECT * FROM convenio WHERE convenio_id = 3;
-DELETE FROM convenio WHERE convenio_id = 3;</div></section>
-      <section data-lesson-section="guided-practice"><h2>6. Rodada DQL: filtrar e ordenar</h2><div class="code-block">SELECT atendimento_id, tipo, valor, status
-FROM atendimento
-WHERE status = 'Faturado' AND valor &gt;= 300
-ORDER BY valor DESC;</div><p>Leia a consulta na ordem lógica: origem, filtro, projeção e ordenação. Confira manualmente se todas as linhas satisfazem o critério.</p></section>
-      <section data-lesson-section="guided-practice"><h2>7. Rodada DQL: resumir</h2><div class="code-block">SELECT status,
-       COUNT(*) AS quantidade,
-       ROUND(SUM(valor), 2) AS valor_total,
-       ROUND(AVG(valor), 2) AS ticket_medio
-FROM atendimento
-GROUP BY status
-ORDER BY valor_total DESC;</div><p><code>GROUP BY</code> muda a granularidade: cada linha deixa de ser um atendimento e passa a representar um status.</p></section>
-      <section data-lesson-section="guided-practice"><h2>8. Rodada DQL: combinar tabelas</h2><div class="code-block">SELECT p.nome AS paciente,
-       COALESCE(c.nome, 'Sem convênio') AS convenio,
-       COUNT(*) AS atendimentos,
-       ROUND(SUM(a.valor), 2) AS receita
-FROM atendimento AS a
-JOIN paciente AS p ON p.paciente_id = a.paciente_id
-LEFT JOIN convenio AS c ON c.convenio_id = p.convenio_id
-WHERE a.status = 'Faturado'
-GROUP BY p.paciente_id, c.convenio_id
-ORDER BY receita DESC;</div><p>Use <code>LEFT JOIN</code> quando registros sem correspondência também precisam aparecer. Compare a contagem antes e depois do JOIN para detectar multiplicação indevida.</p></section>
-      <section data-lesson-section="challenge"><h2>9. Desafio de treino</h2><p>Sem entrega: use o tempo para experimentar e comparar soluções para três consultas de negócio:</p><ol><li>Receita faturada por especialidade.</li><li>Pacientes com mais atendimentos.</li><li>Receita por convênio, incluindo pacientes sem convênio.</li></ol><p><strong>Meta de aprendizagem:</strong> faça cada consulta executar após restaurar a base, escreva nomes de colunas legíveis e confira filtros, JOINs e totais. Você pode apagar tudo e recomeçar quantas vezes quiser.</p></section>
-      <section data-lesson-section="checklist"><h2>10. Checklist de qualidade</h2><ul><li>O SQL executa na ordem correta?</li><li>Chaves e restrições representam a regra de negócio?</li><li>Cada UPDATE e DELETE possui WHERE conferido?</li><li>A granularidade da consulta está explícita?</li><li>O JOIN preserva a quantidade esperada de fatos?</li><li>Você consegue explicar o resultado encontrado?</li></ul></section>
-      <section data-lesson-section="summary"><h2>11. Síntese</h2><p>DDL transforma o modelo em contrato; DML registra mudanças; DQL converte o banco em respostas. SQL confiável não é apenas SQL que executa: é aquele cujo resultado pode ser explicado e verificado.</p></section>
-      <section data-lesson-section="next-steps"><h2>12. Continuidade</h2><p>Na aula 5, trabalharemos com Pandas para diagnosticar e limpar uma base imperfeita. Nesta aula não há arquivo para entregar: use o laboratório e o banco baixável para treinar no seu ritmo.</p><ul><li><a href="https://www.sqlite.org/lang.html" target="_blank" rel="noopener noreferrer">SQLite Language Reference</a>.</li><li><a href="https://www.sqlite.org/lang_select.html" target="_blank" rel="noopener noreferrer">Documentação do SELECT no SQLite</a>.</li></ul></section>
+      <p class="desc">Na aula anterior, construímos o vocabulário da modelagem relacional em uma base sintética. Hoje a base é real: o dataset <strong>Olist</strong>, com cerca de cem mil pedidos de um marketplace brasileiro entre 2016 e 2018, consultado pelo <strong>Metabase</strong>. A maior parte das três horas deve ser usada escrevendo consultas e conferindo resultados.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li><strong>Reconhecer</strong> um banco desconhecido: tabelas, colunas, período e volume.</li><li><strong>Perfilar</strong> colunas quanto a completude, cardinalidade e distribuição.</li><li><strong>Consultar</strong> com filtros, ordenação, agregação e JOIN em SQL.</li><li><strong>Validar</strong> granularidade, quantidade de linhas e totais antes de interpretar resultados.</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Acesso ao Metabase</h2><p>A instância já está no ar e é a mesma para toda a turma. Funciona em qualquer navegador, sem instalar nada.</p><div class="code-block">Endereço · <a href="https://metabase-production-76b0.up.railway.app" target="_blank" rel="noopener noreferrer">metabase-production-76b0.up.railway.app</a>
+Login    · alunos@aula.local
+Senha    · OlistAula2026!</div><p>Na primeira entrada, crie uma <strong>coleção com o seu nome completo</strong> e salve tudo dentro dela. Como a conta é compartilhada, você enxerga e pode editar o trabalho dos colegas — o que protege cada um é a convenção, não a permissão. Para partir da pergunta de outra pessoa, use <em>Duplicate</em> e trabalhe sobre a cópia.</p></section>
+      <div class="alert-box"><h4>Conta compartilhada e conexão somente leitura</h4><p>Não troque a senha: isso derruba a turma inteira no meio da aula. Em compensação, o banco está protegido — a conexão é somente leitura de verdade, e nenhuma consulta sua altera ou apaga dado. Consulta errada apenas falha. Experimente sem medo.</p></div>
+      <section data-lesson-section="concepts"><h2>3. O dataset Olist e o conceito de grão</h2><p>Olist é um marketplace que conecta pequenos vendedores a grandes plataformas de comércio eletrônico. O conjunto público cobre ~100 mil pedidos com preço, frete, prazo prometido e realizado, forma de pagamento, avaliação e localização.</p><div class="code-block">olist_customers
+     │
+     ▼
+olist_orders ─────────────► olist_order_reviews
+     │
+     ├──► olist_order_payments   (1 pedido : N parcelas)
+     │
+     └──► olist_order_items      (1 pedido : N itens)
+              │                        │
+              ▼                        ▼
+        olist_products          olist_sellers
+              │
+              ▼
+   product_category_name_translation</div><p><strong>Grão</strong> é o nível de detalhe representado por uma linha. Em <code>olist_orders</code> uma linha é um pedido; em <code>olist_order_items</code>, um item; em <code>olist_order_payments</code>, uma parcela. Quando você junta tabelas de grãos diferentes, o resultado assume o grão mais fino — e contar linhas nesse resultado produz um número inflado que continua parecendo plausível.</p></section>
+      <section data-lesson-section="guided-practice"><h2>4. Rodada 0: reconhecer sem escrever SQL</h2><p>Antes da primeira consulta, use os recursos de navegação do Metabase.</p><ol><li><strong>Browse data</strong> — percorra as nove tabelas e leia as colunas de cada uma.</li><li><strong>X-ray</strong> — gere a exploração automática de <code>olist_orders</code>.</li><li>Anote: quantas linhas, qual período coberto, quais colunas têm nulos.</li></ol><p>Trate o X-ray como bússola, não como resposta: ele mostra o que é fácil de mostrar, não o que importa para a sua pergunta.</p></section>
+      <section data-lesson-section="guided-practice"><h2>5. Rodada 1: filtrar e ordenar</h2><p>Abra <strong>New → SQL query</strong>, selecione o banco Olist e execute. Leia a consulta na ordem lógica: origem, filtro, projeção, ordenação.</p><div class="code-block">SELECT order_id, price, freight_value
+FROM olist_order_items
+WHERE price &gt;= 500
+ORDER BY price DESC
+LIMIT 20;</div><p><strong>Checkpoint:</strong> todas as linhas satisfazem o critério? O que o filtro deixou deliberadamente de fora?</p></section>
+      <section data-lesson-section="guided-practice"><h2>6. Rodada 1: perfilar completude</h2><p>A pergunta útil não é quantos nulos existem, mas por que <em>estes</em> registros estão nulos e aqueles não. Nulo distribuído indica falha de captura; nulo concentrado indica regra de negócio.</p><div class="code-block">SELECT order_status,
+       COUNT(*) AS pedidos,
+       COUNT(order_delivered_customer_date) AS com_entrega
+FROM olist_orders
+GROUP BY order_status
+ORDER BY pedidos DESC;</div><p>A data de entrega é nula em parte dos pedidos: são cancelados, extraviados ou ainda em trânsito. Calcular prazo médio ignorando isso produz um número bom justamente porque excluiu os casos ruins.</p></section>
+      <section data-lesson-section="guided-practice"><h2>7. Rodada 2: resumir</h2><div class="code-block">SELECT c.customer_state,
+       COUNT(*) AS pedidos,
+       ROUND(AVG(i.price)::numeric, 2) AS ticket_medio
+FROM olist_orders AS o
+JOIN olist_customers AS c ON c.customer_id = o.customer_id
+JOIN olist_order_items AS i ON i.order_id = o.order_id
+GROUP BY c.customer_state
+ORDER BY pedidos DESC;</div><p><code>GROUP BY</code> muda a granularidade: cada linha deixa de ser um item e passa a representar um estado. Preço e frete têm cauda longa, então compare média e mediana antes de concluir — quando as duas divergem muito, isso é um achado a reportar, não um problema a esconder.</p></section>
+      <section data-lesson-section="guided-practice"><h2>8. Rodada 2: série temporal</h2><div class="code-block">SELECT date_trunc('month', order_purchase_timestamp) AS mes,
+       COUNT(*) AS pedidos
+FROM olist_orders
+WHERE order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</div><p>As pontas da série quase sempre são meses incompletos. Uma queda abrupta no último ponto costuma ser efeito do recorte da extração, não do negócio.</p></section>
+      <section data-lesson-section="guided-practice"><h2>9. Rodada 3: combinar tabelas e conferir o grão</h2><div class="code-block">SELECT t.product_category_name_english AS categoria,
+       COUNT(*) AS itens,
+       ROUND(SUM(i.price)::numeric, 2) AS receita
+FROM olist_order_items AS i
+JOIN olist_products AS p ON p.product_id = i.product_id
+LEFT JOIN product_category_name_translation AS t
+       ON t.product_category_name = p.product_category_name
+GROUP BY 1
+ORDER BY receita DESC
+LIMIT 15;</div><p>Use <code>LEFT JOIN</code> quando registros sem correspondência também precisam aparecer — aqui, categorias sem tradução. Depois de qualquer junção, execute a checagem mais barata da aula:</p><div class="code-block">SELECT COUNT(*) AS linhas,
+       COUNT(DISTINCT o.order_id) AS pedidos
+FROM olist_orders AS o
+JOIN olist_order_items AS i ON i.order_id = o.order_id;</div><p>Se <code>linhas</code> for maior que <code>pedidos</code>, o grão mudou. Conte com <code>COUNT(DISTINCT …)</code> ou agregue antes de juntar.</p></section>
+      <section data-lesson-section="challenge"><h2>10. Exploração livre</h2><p>Sem entrega: escolha três perguntas, responda no Metabase e salve cada uma na sua coleção com um nome que descreva o conteúdo.</p><ol><li>Qual o percentual de pedidos entregues após a data prometida, por estado?</li><li>Quais categorias concentram as piores avaliações em <code>olist_order_reviews</code>?</li><li>Qual meio de pagamento domina cada faixa de valor?</li><li>Como o frete varia entre o estado do vendedor e o do cliente?</li></ol><p><strong>Meta de aprendizagem:</strong> para cada consulta, saber dizer em uma frase o que uma linha representa e qual decisão mudaria conforme a resposta. Se nenhuma decisão muda, a pergunta é curiosidade — legítima na exploração, mas não em um painel.</p></section>
+      <section data-lesson-section="checklist"><h2>11. Checklist de qualidade</h2><ul><li>A consulta executa e você consegue explicar cada cláusula?</li><li>Você sabe o que uma linha do resultado representa?</li><li>O JOIN preservou a quantidade esperada de fatos?</li><li>Os filtros foram aplicados antes da agregação?</li><li>Média e mediana contam a mesma história?</li><li>A pergunta salva tem nome descritivo e está na sua coleção?</li></ul></section>
+      <section data-lesson-section="summary"><h2>12. Síntese</h2><p>Reconhecer vem antes de consultar; consultar vem antes de concluir. DQL converte o banco em respostas, mas SQL confiável não é apenas SQL que executa: é aquele cujo resultado pode ser explicado e verificado. O grão é o que separa um número correto de um número inflado que parece plausível.</p></section>
+      <section data-lesson-section="next-steps"><h2>13. Continuidade</h2><p>Na aula 5, trabalharemos com Pandas para diagnosticar e limpar uma base imperfeita. Nesta aula não há arquivo para entregar.</p><p><strong>Treino opcional de DDL e DML:</strong> a conexão do Olist é somente leitura, então <code>CREATE</code>, <code>INSERT</code>, <code>UPDATE</code> e <code>DELETE</code> continuam disponíveis no laboratório SQLite da Rede Cuidar, que roda no navegador e pode ser usado fora da aula.</p><p><a href="laboratorio-sql.html" class="btn btn-slides">🧪 Abrir laboratório SQL</a> <a href="rede-cuidar.sqlite" download class="btn btn-slides">⬇️ Baixar banco SQLite</a></p><ul><li><a href="https://www.metabase.com/docs/latest/questions/native-editor/writing-sql" target="_blank" rel="noopener noreferrer">Escrever SQL no Metabase</a>.</li><li><a href="https://www.postgresql.org/docs/current/sql-select.html" target="_blank" rel="noopener noreferrer">Documentação do SELECT no PostgreSQL</a>.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-04.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="https://metabase-production-76b0.up.railway.app" target="_blank" rel="noopener noreferrer" class="btn btn-slides">📊 Abrir Metabase</a>
         <a href="laboratorio-sql.html" class="btn btn-slides">🧪 Abrir Laboratório SQL</a>
         <a href="rede-cuidar.sqlite" download class="btn btn-slides">⬇️ Baixar banco SQLite</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>

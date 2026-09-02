@@ -1,9 +1,10 @@
 const { test, expect } = require('@playwright/test');
 
-test('cronograma oferece download direto do banco SQLite da aula 4', async ({ page }) => {
+test('cronograma da aula 4 aponta para o Metabase e oferece o SQLite de apoio', async ({ page }) => {
   await page.goto('/index.html');
   const card = page.locator('.card').nth(3);
   await expect(card).toContainText('SQL II');
+  await expect(card).toContainText('Metabase');
   const link = card.locator('.btn-data');
   await expect(link).toHaveAttribute('href', 'materiais/aula-04/rede-cuidar.sqlite');
   await expect(link).toHaveAttribute('download', 'rede-cuidar.sqlite');
@@ -25,17 +26,26 @@ function watchPage(page) {
   return errors;
 }
 
-test('aula 4 é um laboratório de DDL, DML e DQL', async ({ page }) => {
+test('aula 4 explora o Olist no Metabase', async ({ page }) => {
   const errors = watchPage(page);
   await page.goto('/slides/aula-04.html');
-  await expect(page.locator('.slide')).toHaveCount(20);
-  await expect(page.locator('h2', { hasText: 'DDL · criar CONVÊNIO' })).toBeAttached();
-  await expect(page.locator('h2', { hasText: 'DML · UPDATE com critério' })).toBeAttached();
-  await expect(page.locator('h2', { hasText: 'DQL · JOIN' })).toBeAttached();
+  await expect(page.locator('.slide')).toHaveCount(23);
+  await expect(page.locator('h2', { hasText: 'Acesso ao Metabase' })).toBeAttached();
+  await expect(page.locator('h2', { hasText: 'Grão: o conceito da aula' })).toBeAttached();
+  await expect(page.locator('h2', { hasText: 'Rodada 3 · JOIN com tradução' })).toBeAttached();
+  const metabase = page.getByRole('link', { name: /Metabase/ }).first();
+  await expect(metabase).toHaveAttribute('href', 'https://metabase-production-76b0.up.railway.app');
   await page.getByRole('link', { name: /Material/ }).click();
   await expect(page).toHaveURL(/materiais\/aula-04\/index\.html$/);
-  await expect(page.getByRole('heading', { name: /Rodada DDL/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Rodada 0: reconhecer/ })).toBeVisible();
   expect(errors).toEqual([]);
+});
+
+test('material publica o acesso do Metabase e mantém o SQLite como treino opcional', async ({ page }) => {
+  await page.goto('/materiais/aula-04/index.html');
+  await expect(page.locator('.code-block').first()).toContainText('alunos@aula.local');
+  await expect(page.getByRole('link', { name: /metabase-production-76b0/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Abrir laboratório SQL/ })).toHaveAttribute('href', 'laboratorio-sql.html');
 });
 
 test('laboratório executa SQLite e persiste alterações no localStorage', async ({ page }) => {

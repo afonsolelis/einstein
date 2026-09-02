@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-29",
+  "generated_at": "2026-09-02",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -236,29 +236,29 @@
     {
       "number": 4,
       "date": "02/09",
-      "theme": "SQL II: Laboratório de DDL, DML e DQL",
-      "tag": "SQL · Prática",
+      "theme": "SQL II: Exploração do Olist no Metabase",
+      "tag": "SQL · Metabase",
       "status": "complete",
       "topics": [
-        "SQLite",
-        "DDL",
-        "DML",
+        "Metabase",
+        "PostgreSQL",
+        "dataset Olist",
         "DQL",
-        "CREATE TABLE",
-        "INSERT, UPDATE e DELETE",
-        "SELECT, filtros e agregações",
+        "perfilamento de dados",
+        "SELECT, filtros e ordenação",
+        "GROUP BY e séries temporais",
         "JOIN",
-        "validação de consultas"
+        "grão e validação de consultas"
       ],
       "objectives": [
-        "Criar tabelas e restrições com DDL",
-        "Inserir, atualizar e excluir registros com DML e critérios explícitos",
-        "Consultar dados com filtros, ordenação, agregação e JOIN",
-        "Validar granularidade, quantidade de linhas e totais"
+        "Reconhecer um banco desconhecido: tabelas, colunas, período e volume",
+        "Perfilar colunas quanto a completude, cardinalidade e distribuição",
+        "Consultar dados com filtros, ordenação, agregação e JOIN em SQL",
+        "Validar granularidade, quantidade de linhas e totais antes de interpretar resultados"
       ],
       "slides": {
         "path": "slides/aula-04.html",
-        "slide_count": 20,
+        "slide_count": 23,
         "sections": [
           "agenda",
           "challenge",
@@ -271,15 +271,16 @@
       },
       "material": {
         "path": "materiais/aula-04/index.html",
-        "section_count": 12,
+        "section_count": 13,
         "highlights": [
-          "Três rodadas práticas com checkpoints de DDL, DML e DQL",
-          "Laboratório SQLite no navegador com persistência local",
-          "Banco SQLite sintético disponível para download e prática local",
-          "Ampliação do modelo da Rede Cuidar com convênios",
-          "Consultas gerenciais com filtros, agregações e JOIN"
+          "Instância Metabase compartilhada com o dataset Olist em conexão somente leitura",
+          "Rodada 0 de reconhecimento com Browse data e X-ray, sem escrever SQL",
+          "Perfilamento de completude, cardinalidade e distribuição sobre dados reais",
+          "Consultas de agregação, série temporal e JOIN em PostgreSQL",
+          "Checagem de grão após junção com COUNT(DISTINCT)",
+          "Laboratório SQLite da Rede Cuidar mantido como treino opcional de DDL e DML"
         ],
-        "activity": "Treino livre: criar a entidade convênio, povoar e relacionar registros e responder três perguntas gerenciais no SQLite",
+        "activity": "Treino livre: reconhecer o Olist, perfilar colunas e responder três perguntas de negócio no Metabase, salvando cada consulta na coleção pessoal",
         "deliverable": null
       }
     },
