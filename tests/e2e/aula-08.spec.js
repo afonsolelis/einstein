@@ -16,10 +16,10 @@ function watchPage(page) {
   return errors;
 }
 
-test('cronograma oferece download direto da base da aula 6', async ({ page }) => {
+test('cronograma oferece download direto da base da aula 8', async ({ page }) => {
   const errors = watchPage(page);
   await page.goto('/index.html');
-  const card = page.locator('.card').nth(5);
+  const card = page.locator('.card').nth(7);
   await expect(card).toContainText('Limpeza de dados');
   const link = card.locator('.btn-data');
   await expect(link).toHaveAttribute('href', 'materiais/aula-05/dados/hospital_patients_real_world.csv');
@@ -42,9 +42,9 @@ test('base publicada mantém conteúdo e assinatura esperados', async ({ request
   );
 });
 
-test('aula 6 percorre prompts, controles e navegação cruzada', async ({ page }) => {
+test('aula 8 percorre prompts, controles e navegação cruzada', async ({ page }) => {
   const errors = watchPage(page);
-  await page.goto('/slides/aula-06.html');
+  await page.goto('/slides/aula-08.html');
   const previous = page.locator('#btn-prev');
   const next = page.locator('#btn-next');
   await expect(page.locator('.slide')).toHaveCount(24);
@@ -68,14 +68,14 @@ test('aula 6 percorre prompts, controles e navegação cruzada', async ({ page }
   await expect(next).toBeDisabled();
 
   await page.getByRole('link', { name: /Material/ }).click();
-  await expect(page).toHaveURL(/\/materiais\/aula-06\/index\.html$/);
+  await expect(page).toHaveURL(/\/materiais\/aula-08\/index\.html$/);
   await expect(page.getByRole('heading', { name: /O case e a base do Kaggle/ })).toBeVisible();
   await expect(page.locator('a[download="hospital_patients_real_world.csv"]')).toHaveCount(3);
   expect(errors).toEqual([]);
 });
 
-test('slides e material da aula 6 não geram overflow horizontal', async ({ page }) => {
-  for (const path of ['/slides/aula-06.html', '/materiais/aula-06/index.html']) {
+test('slides e material da aula 8 não geram overflow horizontal', async ({ page }) => {
+  for (const path of ['/slides/aula-08.html', '/materiais/aula-08/index.html']) {
     await page.goto(path);
     const dimensions = await page.evaluate(() => ({
       viewport: document.documentElement.clientWidth,

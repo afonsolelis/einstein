@@ -21,7 +21,7 @@ base tratada, fila de revisão, relatório de qualidade e revisão da IA.
 ## Prompt 1 — Perfil da base, sem limpar
 
 ```text
-Crie Aula_06_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
+Crie Aula_08_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
 carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
 mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
 linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.

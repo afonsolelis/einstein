@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório 6 · Slides</title>
+  <title>Laboratório 8 · Slides</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -347,20 +415,134 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 8 · 23/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Inteligência Artificial no dia a dia da administração</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear tarefas administrativas adequadas à assistência por IA</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA é um conjunto de técnicas que produz previsões, classificações ou conteúdo a partir de dados; valor surge quando a saída entra em um processo com dono e controle.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Casos úteis combinam volume, repetição e critério de qualidade claro</li><li>Prompts orientam modelos generativos, mas não garantem veracidade</li><li>Dados pessoais, decisões sensíveis e ações irreversíveis pedem governança</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">tarefas = [{"nome":"resumir atas","impacto":4,"risco":2},{"nome":"aprovar crédito","impacto":5,"risco":5}]
-for t in tarefas:
-    t["prioridade"] = t["impacto"] - t["risco"]
-print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Mapeie um processo administrativo, decomponha-o em tarefas e desenhe um fluxo com revisão humana, registro e critério de sucesso.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar canvas do caso de uso contendo entrada, saída, responsável, risco, métrica e plano de contingência.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Adotar IA é redesenhar trabalho com controles, não apenas acrescentar uma ferramenta.</p><ul><li>Não inserir dados sigilosos em ferramentas não aprovadas</li><li>Verificar fatos e cálculos em fonte independente</li><li>Definir quem responde pela decisão final</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, atributos e pipelines serão estudados dentro de um modelo de regressão para previsão.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 6</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 8 · 30/09</div>
+      <h1>Limpeza de dados com IA</h1>
+      <p>Uma auditoria hospitalar guiada pelo Antigravity e executada localmente com Pandas</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Ao final, você será capaz de…</h2>
+      <ul><li><strong>Diagnosticar</strong> problemas reais de qualidade em uma base hospitalar sintética.</li><li><strong>Orientar</strong> um agente de IA com restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> limpeza reproduzível com Pandas sem apagar a camada bruta.</li><li><strong>Validar</strong> a base tratada antes de apoiar uma decisão gerencial.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Roteiro de 3 horas</h2>
+      <ul><li>Case e contrato de segurança.</li><li>Download e abertura do workspace no Antigravity.</li><li>Doze prompts: contrato → diagnóstico → validação.</li><li>Revisão humana, produtos da limpeza e entrega.</li><li>Commit e push das evidências.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Case: podemos confiar nesta base?</h2>
+      <p>A Diretoria de Operações recebeu 5.000 registros de internação para analisar permanência e demanda hospitalar. Antes de calcular qualquer indicador, a equipe precisa provar que os dados são utilizáveis.</p>
+      <ul><li><strong>Decisão:</strong> planejar capacidade e priorizar correções cadastrais.</li><li><strong>Risco:</strong> transformar erro de cadastro em falsa evidência.</li><li><strong>Papel da IA:</strong> propor código e testes; nunca decidir uma correção clínica.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>A base desta aula</h2>
+      <div class="metric-row"><div class="metric"><strong>5.000</strong><span>registros sintéticos</span></div><div class="metric"><strong>7</strong><span>colunas</span></div><div class="metric"><strong>CC0</strong><span>uso educacional</span></div><div class="metric"><strong>CSV</strong><span>333 KB</span></div></div>
+      <p>Hospital Records for Data Cleaning (Medium), de Nudrat Abbas, distribuída pelo Kaggle.</p>
+      <a class="download-link" href="../materiais/aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv">⬇️ Baixar hospital_patients_real_world.csv</a>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Prepare o workspace local</h2>
+      <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-08-seunome</code>.</li><li>Abra essa pasta no Antigravity IDE.</li><li>Selecione o modo <strong>orientado por revisão</strong>.</li><li>Mantenha comandos do terminal sob aprovação.</li><li>Se o Python local não estiver pronto, use o Codespace da disciplina como ambiente de execução.</li></ol>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Nosso contrato com a IA</h2>
+      <ul><li>O CSV bruto é evidência: <strong>nunca sobrescrever</strong>.</li><li>Ausência não é zero e não autoriza adivinhação.</li><li>Datas incoerentes são sinalizadas, não invertidas.</li><li>Cada transformação precisa de contagem antes/depois.</li><li>O aluno lê o plano, o diff e a saída antes de aceitar.</li></ul>
+      <p><em>O processamento ocorre no workspace; prompts e arquivos mencionados podem ser processados pelo serviço de IA. Use apenas a base sintética.</em></p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 0 · Contrato de trabalho</div><h2>Primeiro planeje; não edite</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de qualidade de dados. Leia @hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos. Primeiro apresente um plano curto e aguarde minha aprovação.
+
+Preserve o CSV bruto; não invente ausentes; não troque datas por suposição; não exclua linhas silenciosamente; explique cada regra; trabalhe só nesta pasta; não instale pacotes nem execute comandos sem minha aprovação.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Diagnóstico</div><h2>Veja antes de limpar</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie Aula_08_SeuNome.ipynb. Importe pathlib e pandas, carregue @hospital_patients_real_world.csv em bruta e mostre: head, shape, colunas, dtypes, ausências, linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
+
+Não limpe nada. Execute e resuma. Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Checkpoint do diagnóstico</h2>
+      <div class="metric-row"><div class="metric"><strong>350</strong><span>idades ausentes</span></div><div class="metric"><strong>350</strong><span>gêneros ausentes</span></div><div class="metric"><strong>350</strong><span>diagnósticos ausentes</span></div><div class="metric"><strong>0</strong><span>chaves duplicadas</span></div></div>
+      <ul><li>Não “corrija” para alcançar essas contagens.</li><li>Se o resultado divergir, verifique arquivo, caminho e leitura.</li><li>O diagnóstico é a linha de base do relatório final.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Estrutura e tipos</div><h2>Trabalhe em uma cópia</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie base = bruta.copy(deep=True) e nunca sobrescreva bruta nem o CSV. Renomeie colunas para snake_case. Converta IDs, gênero e diagnóstico para string; idade para Float64; datas para datetime com errors="coerce".
+
+Conte falhas de conversão, mostre dtypes e explique cada escolha. Não faça imputação.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Ausências</div><h2>Não preencha o que você não sabe</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags que preservem a origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente como pd.NA. Padronize gênero vazio ou Unknown e diagnóstico vazio como "Não informado".
+
+Gere tabela antes/depois com quantidade e percentual. Não use média, moda ou valor clínico inventado.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Categorias</div><h2>Padronize sem mudar significado</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Normalize espaços e capitalização de gender e diagnosis. Em gender, use dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e Unknown/vazio→Não informado.
+
+Em diagnosis, una somente variantes de espaços ou capitalização. Mostre value_counts antes/depois e registre o mapeamento.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Chaves</div><h2>Duplicidade exige evidência</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Audite duplicidade de linha e de patient_id. Não use drop_duplicates automaticamente. Se houver linhas idênticas, mostre a evidência antes de propor remoção. Se a mesma chave tiver conteúdos diferentes, crie chave_duplicada e envie para revisão.
+
+Registre também quando a contagem for zero e explique linha duplicada versus chave duplicada.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Regras de negócio</div><h2>Sinalize; não “conserte”</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags: idade_fora_faixa para idade &lt; 0 ou &gt; 110; hospital_id_invalido fora de HOSP-[número]; cronologia_invalida quando discharge_date &lt; admission_date.
+
+Não apague nem inverta datas. Espero 0, 0 e 150 casos, respectivamente; se divergir, investigue antes de alterar a regra.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · Indicador</div><h2>Permanência só quando válida</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie dias_internacao somente para datas válidas e cronologia coerente. Nos demais casos use pd.NA e mantenha a flag. Converta para Int64 anulável.
+
+Mostre describe(), mínimo e máximo; confirme que nenhum negativo foi aceito. Explique por que usar valor absoluto seria perigoso.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 8 · Evidência</div><h2>Compare antes e depois</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie relatorio_qualidade com metrica, antes, depois, regra_aplicada e pendencia_humana. Inclua linhas, duplicidades, ausências, gêneros não informados, categorias de diagnóstico, capitalização, idade, hospital e cronologia.
+
+Salve em saidas/relatorio_qualidade.csv. Não trate uma flag pendente como erro resolvido.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 9 · Produtos</div><h2>Separe tratado de pendente</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Exporte saidas/base_hospitalar_tratada.csv com 5.000 linhas, campos padronizados e flags. Exporte saidas/registros_para_revisao.csv com violações críticas. Crie saidas/dicionario_de_dados.md com coluna, tipo, significado, regra e ausência.
+
+Não exporte o índice e não modifique o arquivo bruto.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 10 · Testes</div><h2>Execute do início ao fim</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Adicione asserts para: 5.000 linhas preservadas; patient_id único; gêneros válidos; nenhum dias_internacao negativo; 150 cronologias inválidas sinalizadas; saídas existentes.
+
+Reinicie o kernel e execute tudo em ordem. Se falhar, diagnostique; não remova nem enfraqueça o teste. Mostre as evidências finais.</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 11 · Auditoria e Git</div><h2>Registre também a participação da IA</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie REVISAO_IA.md com objetivo, prompts, sugestões aceitas e rejeitadas, regras humanas, testes, limitações e decisão de uso.
+
+Depois mostre git status e proponha add, commit e push apenas desta entrega. Não execute sem minha aprovação, não crie remoto e nunca use force. Mensagem: "Documenta limpeza auditável da base hospitalar".</div></div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio: a base está apta?</h2>
+      <p>Em dupla, defenda uma decisão para a Diretoria de Operações:</p>
+      <ul><li>Quais análises podem usar a base tratada agora?</li><li>Quais registros devem ficar fora do indicador de permanência?</li><li>Qual problema cadastral deve ser corrigido primeiro?</li><li>Que sugestão do Antigravity vocês rejeitaram — e por quê?</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Entrega verificável</h2>
+      <ul><li><code>Aula_08_SeuNome.ipynb</code> executado do início ao fim.</li><li>Base tratada com as 5.000 linhas e flags preservadas.</li><li>Fila de revisão com as 150 cronologias incoerentes.</li><li>Relatório antes/depois e dicionário de dados.</li><li><code>REVISAO_IA.md</code>, commit e push.</li></ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>Limpar é tornar a decisão auditável</h2>
+      <ul><li>Primeiro observar; depois formular regras.</li><li>IA acelera propostas, não transfere responsabilidade.</li><li>Ausência e incoerência carregam informação.</li><li>Flags preservam casos que exigem decisão humana.</li><li>Testes, relatório e Git transformam código em evidência.</li></ul>
+    </div>
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Com a base tratada em mãos, partimos para previsão: atributos derivados, pipeline reproduzível e regressão.</p>
+      <p>Antes de sair: <strong>execute tudo, revise, commit e push</strong>.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -368,6 +550,7 @@ print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-08/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -395,7 +578,7 @@ print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -412,6 +595,36 @@ print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

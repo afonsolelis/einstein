@@ -44,7 +44,7 @@
       "materiais/aula-05/docker-compose.yml",
       "materiais/aula-05/dados/README.md",
       "materiais/aula-05/dados/hospital_patients_real_world.csv",
-      "materiais/aula-06/prompts-antigravity.md"
+      "materiais/aula-08/prompts-antigravity.md"
     ],
     "official_documents": [
       "documentos_oficiais/Modelo de PPT Ensino Einstein 2025.zip",
@@ -56,8 +56,9 @@
       "tests/e2e/aula-03.spec.js",
       "tests/e2e/aula-04.spec.js",
       "tests/e2e/aula-05.spec.js",
-      "tests/e2e/aula-06.spec.js",
-      "tests/test_aula_06_dataset.py",
+      "tests/e2e/aula-07.spec.js",
+      "tests/e2e/aula-08.spec.js",
+      "tests/test_aula_08_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -344,6 +345,99 @@
     {
       "number": 6,
       "date": "16/09",
+      "theme": "Inteligência Artificial no dia a dia da administração",
+      "tag": "IA",
+      "status": "complete",
+      "topics": [
+        "inteligência artificial",
+        "administração"
+      ],
+      "objectives": [
+        "Distinguir automação, aprendizado de máquina e IA generativa",
+        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Avaliar risco, privacidade e necessidade de revisão humana"
+      ],
+      "slides": {
+        "path": "slides/aula-06.html",
+        "slide_count": 11,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-06/index.html",
+        "section_count": 7,
+        "highlights": [
+          "Mapa de casos de uso e priorização por impacto e risco",
+          "Governança, verificação e revisão humana"
+        ],
+        "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
+        "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência"
+      }
+    },
+    {
+      "number": 7,
+      "date": "23/09",
+      "tag": "Visualização",
+      "theme": "Storytelling, Dashboards e Segmentação de Clientes",
+      "status": "complete",
+      "topics": [
+        "escolha de gráfico",
+        "storytelling com dados",
+        "dashboards narrativos",
+        "segmentação RFV",
+        "recência, frequência e valor",
+        "Olist",
+        "Metabase",
+        "funções de janela",
+        "uso funcional da cor",
+        "vieses de visualização"
+      ],
+      "objectives": [
+        "Escolher o gráfico a partir da pergunta executiva, não do catálogo da ferramenta",
+        "Segmentar clientes por recência, frequência e valor usando SQL",
+        "Ordenar um dashboard como narrativa: contexto, tensão e recomendação",
+        "Reconhecer quando um gráfico mente porque a base está suja",
+        "Defender uma recomendação citando o número que a sustenta e o que a invalidaria"
+      ],
+      "slides": {
+        "path": "slides/aula-07.html",
+        "slide_count": 25,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-07/index.html",
+        "section_count": 10,
+        "highlights": [
+          "Tabela que liga cada tipo de pergunta à forma de gráfico correspondente",
+          "A regra dos dois eixos y e por que ela produz correlações inexistentes",
+          "Cor por função: identidade, magnitude e polaridade, nunca por ranking",
+          "A armadilha customer_id contra customer_unique_id na segmentação do Olist",
+          "Recência calculada a partir da data de corte da própria base",
+          "Agrupamento da cauda em Outros depois do ranqueamento, preservando o total",
+          "Figura com o top 7 de diagnósticos antes e depois de unificar a capitalização"
+        ],
+        "activity": "Segmentar os clientes do Olist por recência, frequência e valor no Metabase da disciplina e montar um dashboard em ordem narrativa, terminando na demonstração de como a base suja da aula 5 produz um gráfico que mente",
+        "deliverable": "Dashboard De onde vem a receita e quem a sustenta com cinco cartões em ordem narrativa e títulos que afirmam, critério de segmentação escrito no painel, RECOMENDACAO.md com a recomendação, o número que a sustenta e o que a invalidaria, print das 28 barras de diagnóstico, commit e push"
+      }
+    },
+    {
+      "number": 8,
+      "date": "30/09",
       "theme": "Limpeza de dados: Preparando a base para análises",
       "tag": "Pandas",
       "status": "complete",
@@ -366,7 +460,7 @@
         "Defender quais análises gerenciais a base pode sustentar"
       ],
       "slides": {
-        "path": "slides/aula-06.html",
+        "path": "slides/aula-08.html",
         "slide_count": 24,
         "sections": [
           "agenda",
@@ -379,7 +473,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-06/index.html",
+        "path": "materiais/aula-08/index.html",
         "section_count": 20,
         "highlights": [
           "Base hospitalar sintética CC0 com 5.000 registros disponível para download",
@@ -390,85 +484,6 @@
         ],
         "activity": "Conduzir no Antigravity uma limpeza auditável da base hospitalar, do diagnóstico à exportação, revisando cada plano e transformação",
         "deliverable": "Notebook executado, base tratada com 5.000 linhas, fila com 150 cronologias incoerentes, relatório de qualidade, dicionário de dados, revisão da IA, commit e push"
-      }
-    },
-    {
-      "number": 7,
-      "date": "23/09",
-      "theme": "Storytelling, Dashboards e Segmentação de Clientes",
-      "tag": "Visualização",
-      "status": "complete",
-      "topics": [
-        "storytelling",
-        "dashboards",
-        "segmentação"
-      ],
-      "objectives": [
-        "Escolher gráficos alinhados à pergunta executiva",
-        "Construir uma narrativa com contexto, tensão e recomendação",
-        "Segmentar clientes por comportamento e valor"
-      ],
-      "slides": {
-        "path": "slides/aula-07.html",
-        "slide_count": 11,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-07/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Escolha honesta de gráficos e storyboard executivo",
-          "Segmentação comportamental e RFM"
-        ],
-        "activity": "Criar storyboard de três telas para um segmento prioritário",
-        "deliverable": "Dashboard de uma página e nota executiva acionável"
-      }
-    },
-    {
-      "number": 8,
-      "date": "30/09",
-      "theme": "Inteligência Artificial no dia a dia da administração",
-      "tag": "IA",
-      "status": "complete",
-      "topics": [
-        "inteligência artificial",
-        "administração"
-      ],
-      "objectives": [
-        "Distinguir automação, aprendizado de máquina e IA generativa",
-        "Mapear tarefas administrativas adequadas à assistência por IA",
-        "Avaliar risco, privacidade e necessidade de revisão humana"
-      ],
-      "slides": {
-        "path": "slides/aula-08.html",
-        "slide_count": 11,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-08/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Mapa de casos de uso e priorização por impacto e risco",
-          "Governança, verificação e revisão humana"
-        ],
-        "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
-        "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência"
       }
     },
     {

@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório 5 · Slides</title>
+  <title>Laboratório 7 · Slides</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -347,19 +415,264 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 7 · 16/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Storytelling, Dashboards e Segmentação de Clientes</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Escolher gráficos alinhados à pergunta executiva</li><li>Construir uma narrativa com contexto, tensão e recomendação</li><li>Segmentar clientes por comportamento e valor</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Um dashboard é uma interface de decisão, não uma coleção de gráficos. Cada visual deve reduzir incerteza sobre uma ação específica.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Comparação pede barras; evolução pede linhas; composição exige parcimônia</li><li>RFM organiza clientes por recência, frequência e valor monetário</li><li>Cor e destaque conduzem atenção, mas não substituem evidência</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
-clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
- recencia=("dias_desde_compra","min"), frequencia=("pedido_id","nunique"), valor=("receita","sum"))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Crie um storyboard de três telas: situação atual, segmento prioritário e ação recomendada com indicador de acompanhamento.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dashboard de uma página e nota executiva com público, decisão, segmento-alvo e próxima ação.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Boa visualização torna a comparação honesta; bom storytelling conecta essa evidência a uma decisão.</p><ul><li>Definir a pergunta antes do gráfico</li><li>Evitar eixos truncados que distorçam diferenças</li><li>Exibir fonte, período e filtros</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, discutiremos como sistemas de IA apoiam rotinas administrativas e onde exigem supervisão.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 5</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 7 · 23/09</div>
+      <h1>Storytelling com dados</h1>
+      <p>Do gráfico certo ao dashboard que sustenta uma decisão — segmentando os clientes do Olist</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Escolher o gráfico a partir da pergunta, não do catálogo da ferramenta.</li>
+        <li>Segmentar clientes por recência, frequência e valor com SQL.</li>
+        <li>Ordenar um dashboard como narrativa: contexto, tensão e recomendação.</li>
+        <li>Reconhecer quando um gráfico mente porque a base está suja.</li>
+        <li>Defender uma recomendação citando o número que a sustenta.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Roteiro do laboratório</h2>
+      <ul>
+        <li>A pergunta vem antes do gráfico.</li>
+        <li>Quatro tarefas, quatro formas — e a regra que mais se quebra.</li>
+        <li>Segmentação RFV do Olist em SQL.</li>
+        <li>Montando o dashboard como narrativa.</li>
+        <li>Quando o gráfico mente: de volta à base hospitalar.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>A pergunta vem antes do gráfico</h2>
+      <p>Toda ferramenta oferece um catálogo de formas, e é tentador escolher pela aparência.</p>
+      <p>A ordem correta é a inversa: <strong>a pergunta define a tarefa, a tarefa define a forma</strong>. Sem pergunta, o gráfico é decoração cara.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Quatro tarefas, quatro formas</h2>
+      <ul>
+        <li><strong>Comparar magnitude</strong> entre categorias → barras, ordenadas pelo valor.</li>
+        <li><strong>Acompanhar mudança no tempo</strong> → linha, com o eixo do tempo contínuo.</li>
+        <li><strong>Revelar relação</strong> entre duas medidas → dispersão.</li>
+        <li><strong>Anunciar um número único</strong> → nenhum gráfico; um número grande com o contexto ao lado.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>A regra que mais se quebra</h2>
+      <p><strong>Nunca dois eixos y no mesmo gráfico.</strong> Receita e quantidade em escalas diferentes produzem cruzamentos que dependem só de onde você ancorou cada escala.</p>
+      <p>Duas medidas de grandeza diferente pedem dois gráficos empilhados, ou ambas indexadas a uma base comum.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Cor tem função</h2>
+      <ul>
+        <li><strong>Identidade</strong> (categorias): cores distintas, atribuídas em ordem fixa.</li>
+        <li><strong>Magnitude</strong>: um único tom, do claro ao escuro.</li>
+        <li><strong>Polaridade</strong> (acima/abaixo de uma meta): duas cores com cinza no meio.</li>
+      </ul>
+      <p>A cor acompanha a entidade, nunca a posição no ranking. Se um filtro muda a ordem e as cores trocam de dono, o leitor perde a referência.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Um dashboard não é uma galeria</h2>
+      <p>Seis gráficos bonitos e desconexos não sustentam decisão nenhuma. A ordem carrega o argumento:</p>
+      <ul>
+        <li><strong>Contexto:</strong> onde estamos e desde quando.</li>
+        <li><strong>Tensão:</strong> o que está fora do esperado.</li>
+        <li><strong>Recomendação:</strong> o que fazer, e o número que sustenta.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 0 · Confira o schema</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'olist_customers'
+ORDER BY ordinal_position;</div></div>
+      <p>Mesmo reflexo da aula 5. Repare que existem <code>customer_id</code> e <code>customer_unique_id</code> — e só um deles identifica a pessoa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 1 · Que período a base cobre?</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT MIN(order_purchase_timestamp)::date AS primeiro_pedido,
+       MAX(order_purchase_timestamp)::date AS ultimo_pedido,
+       COUNT(*) AS pedidos
+FROM olist_orders;</div></div>
+      <p>Sem esta resposta, "recência" não significa nada. O Olist terminou de ser coletado há anos: recência medida contra hoje daria o mesmo número para cada cliente.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 2 · Contexto: receita por mês</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT date_trunc('month', o.order_purchase_timestamp)::date AS mes,
+       ROUND(SUM(i.price)::numeric, 2) AS receita
+FROM olist_orders AS o
+JOIN olist_order_items AS i ON i.order_id = o.order_id
+WHERE o.order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</div></div>
+      <p>Gráfico de linha. Olhe o último mês antes de concluir qualquer coisa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>A queda final é real?</h2>
+      <p>O gráfico termina despencando. Compare a data do último pedido com o fim do último mês do eixo.</p>
+      <p><strong>Um mês incompleto desenha uma queda que não existe.</strong> Ou você corta o período parcial, ou avisa o leitor no título.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 3 · Magnitude sem parede de barras</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">WITH ranqueado AS (
+  SELECT c.customer_state AS estado,
+         SUM(i.price) AS receita,
+         ROW_NUMBER() OVER (ORDER BY SUM(i.price) DESC) AS posicao
+  FROM olist_orders AS o
+  JOIN olist_customers AS c ON c.customer_id = o.customer_id
+  JOIN olist_order_items AS i ON i.order_id = o.order_id
+  WHERE o.order_status = 'delivered'
+  GROUP BY 1
+)
+SELECT CASE WHEN posicao &lt;= 10 THEN estado ELSE 'Outros' END AS estado,
+       ROUND(SUM(receita)::numeric, 2) AS receita
+FROM ranqueado
+GROUP BY 1
+ORDER BY receita DESC;</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Por que 27 barras não servem</h2>
+      <p>Um estado por barra transforma o gráfico em parede: ninguém lê as vinte últimas.</p>
+      <p>Agrupar a cauda em <strong>Outros</strong> preserva o total — o leitor continua vendo 100% da receita — e devolve a atenção para o que decide.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 4 · A pergunta que decide a segmentação</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT pedidos_por_cliente, COUNT(*) AS clientes
+FROM (
+  SELECT c.customer_unique_id,
+         COUNT(DISTINCT o.order_id) AS pedidos_por_cliente
+  FROM olist_orders AS o
+  JOIN olist_customers AS c ON c.customer_id = o.customer_id
+  GROUP BY 1
+) AS por_cliente
+GROUP BY 1
+ORDER BY 1;</div></div>
+      <p>Anote o resultado. Ele decide se falar em "frequência" faz sentido nesta base.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 5 · Recência, frequência e valor</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">WITH corte AS (
+  SELECT MAX(order_purchase_timestamp)::date AS data_corte
+  FROM olist_orders
+),
+por_cliente AS (
+  SELECT c.customer_unique_id AS cliente,
+         MAX(o.order_purchase_timestamp)::date AS ultima_compra,
+         COUNT(DISTINCT o.order_id) AS frequencia,
+         SUM(i.price) AS valor
+  FROM olist_orders AS o
+  JOIN olist_customers AS c ON c.customer_id = o.customer_id
+  JOIN olist_order_items AS i ON i.order_id = o.order_id
+  WHERE o.order_status = 'delivered'
+  GROUP BY 1
+)
+SELECT cliente,
+       (SELECT data_corte FROM corte) - ultima_compra AS recencia_dias,
+       frequencia,
+       ROUND(valor::numeric, 2) AS valor
+FROM por_cliente
+ORDER BY valor DESC
+LIMIT 20;</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 6 · Dos números aos segmentos</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT CASE
+         WHEN frequencia &gt;= 2 AND recencia_dias &lt;= 180 THEN 'Campeões'
+         WHEN frequencia &gt;= 2                          THEN 'Recorrentes afastados'
+         WHEN recencia_dias &lt;= 180                     THEN 'Únicos recentes'
+         ELSE                                               'Únicos antigos'
+       END AS segmento,
+       COUNT(*) AS clientes,
+       ROUND(AVG(valor)::numeric, 2) AS ticket_medio
+FROM metricas
+GROUP BY 1
+ORDER BY clientes DESC;</div></div>
+      <p>O material traz a consulta inteira, com as CTEs. Aqui interessa o <code>CASE</code>.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>O corte de 180 dias é uma decisão sua</h2>
+      <p>Nada na estatística escolhe 180. O corte sai do ciclo de recompra do negócio — e muda quantos clientes caem em cada segmento.</p>
+      <p><strong>Registre o critério ao lado do gráfico.</strong> Um segmento sem regra explícita é um rótulo, não uma análise.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 7 · Títulos que afirmam</h2>
+      <ul>
+        <li>❌ "Receita por estado" — descreve o eixo, não diz nada.</li>
+        <li>✅ "Três estados respondem por mais da metade da receita" — afirma, e o gráfico prova.</li>
+      </ul>
+      <p>Se o título não sobrevive sozinho em um e-mail, ele ainda não é um título.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Quando o gráfico mente</h2>
+      <p>Volte ao seu Metabase local da aula 5 e desenhe as internações por diagnóstico.</p>
+      <p>Você vai ver <strong>28 barras onde existem 14 diagnósticos</strong>. O gráfico não acusa nada: ele parece perfeitamente saudável.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>O ranking muda de dono</h2>
+      <div class="code-block">Como sai hoje (28 categorias)   Depois de unificar (14)
+1º Urinary Tract Infection 342   1º Urinary Tract Infection 363
+2º Cholelithiasis          338   2º Cholelithiasis          363
+3º Osteoarthritis          330   3º Osteoarthritis          352
+4º Acute Bronchitis        322   4º Diverticulitis          345
+7º Diverticulitis          316   7º Acute Bronchitis        342</div>
+      <p>As 321 linhas em maiúsculas ficam no rodapé do gráfico, invisíveis — e roubam do topo. <strong>Diverticulitis sobe de 7º para 4º.</strong></p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio · O dashboard</h2>
+      <p>Monte <strong>De onde vem a receita e quem a sustenta</strong>, em ordem narrativa:</p>
+      <ul>
+        <li>Contexto: receita por mês, com o período parcial tratado.</li>
+        <li>Contexto: receita por estado, top 10 mais "Outros".</li>
+        <li>Tensão: distribuição de pedidos por cliente.</li>
+        <li>Tensão: clientes e ticket médio por segmento.</li>
+        <li>Recomendação: um número grande com a frase da decisão.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li>Cada gráfico com um título que <strong>afirma</strong> uma conclusão.</li>
+        <li>O critério dos segmentos escrito no dashboard, não só na sua cabeça.</li>
+        <li><code>RECOMENDACAO.md</code>: a recomendação, o número que a sustenta e <strong>o que a invalidaria</strong>.</li>
+        <li>Print do gráfico de diagnósticos com as 28 barras, como evidência para a aula 8.</li>
+        <li>Commit e push.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>Síntese</h2>
+      <p>Gráfico não é ilustração de relatório: é um argumento com forma.</p>
+      <ul>
+        <li>A pergunta escolhe a forma; a ferramenta só executa.</li>
+        <li>Um mês incompleto e uma categoria duplicada mentem sem emitir aviso.</li>
+        <li>Toda régua de segmento é uma decisão de negócio e precisa estar escrita.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Você viu o gráfico mentir. Na aula 8, corrigimos a base com Pandas e revisão apoiada por IA — preservando a camada bruta.</p>
+      <p>Antes de sair: <strong>salve o dashboard, commit e push</strong>.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -394,7 +707,7 @@ clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -411,6 +724,36 @@ clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();
