@@ -1,17 +1,19 @@
 # Em andamento
 
-## Aula 6 (16/09) · IA no dia a dia da administração — próxima a construir
-Hoje é esqueleto (11 slides, 7 seções). Passou a ocupar o slot de 16/09 na troca
-com a limpeza, e agora é a única aula sem conteúdo real antes da 9.
+## Nada em construção — decisão de 03/09/2026
+As aulas 6 e 9 a 19 **ficam como esqueleto de propósito**, porque os temas ainda
+estão mudando. Não vale escrever conteúdo definitivo sobre um cronograma que
+ainda se mexe: cada troca de tema até aqui custou renumeração, links, testes e
+badges. Retomar só quando os temas estiverem fixos.
 
-Gancho disponível: a aula 5 termina em um parecer escrito e a aula 7 em uma
-recomendação com "o que a invalidaria". Ambas são exatamente o tipo de julgamento
-que não se delega a um modelo — bom ponto de partida para discutir onde a IA
-ajuda e onde ela só produz confiança injustificada.
+Todas passam no validador estrutural e o site navega inteiro; o que falta é
+conteúdo, não conserto.
 
-## Aula 9 (07/10) · Regressão — esqueleto
-## Aula 10 (14/10) · Testes A/B fundida — esqueleto
-Ambas ainda com 11-13 slides genéricos.
+### Ganchos guardados para quando a aula 6 for escrita (IA no dia a dia)
+A aula 5 termina em um parecer escrito e a aula 7 em uma recomendação com "o que
+a invalidaria". Ambas são exatamente o tipo de julgamento que não se delega a um
+modelo — bom ponto de partida para discutir onde a IA ajuda e onde ela só produz
+confiança injustificada.
 
 # Concluído
 
