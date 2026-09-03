@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-02",
+  "generated_at": "2026-09-03",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -41,9 +41,10 @@
     "lesson_assets": [
       "materiais/aula-04/laboratorio-sql.html",
       "materiais/aula-04/rede-cuidar.sqlite",
+      "materiais/aula-05/docker-compose.yml",
       "materiais/aula-05/dados/README.md",
       "materiais/aula-05/dados/hospital_patients_real_world.csv",
-      "materiais/aula-05/prompts-antigravity.md"
+      "materiais/aula-06/prompts-antigravity.md"
     ],
     "official_documents": [
       "documentos_oficiais/Modelo de PPT Ensino Einstein 2025.zip",
@@ -55,7 +56,8 @@
       "tests/e2e/aula-03.spec.js",
       "tests/e2e/aula-04.spec.js",
       "tests/e2e/aula-05.spec.js",
-      "tests/test_aula_05_dataset.py",
+      "tests/e2e/aula-06.spec.js",
+      "tests/test_aula_06_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -290,6 +292,58 @@
     {
       "number": 5,
       "date": "09/09",
+      "theme": "Metabase local com Docker: subindo a sua própria base",
+      "tag": "Metabase · Docker",
+      "status": "complete",
+      "topics": [
+        "Metabase local",
+        "Docker Compose",
+        "PostgreSQL",
+        "banco da aplicação e banco analítico",
+        "upload de CSV",
+        "encoding e separador",
+        "SQL de diagnóstico",
+        "qualidade de dados",
+        "parecer de confiabilidade"
+      ],
+      "objectives": [
+        "Subir Metabase e PostgreSQL na própria máquina com um único arquivo Docker Compose",
+        "Configurar a conexão do banco analítico e o destino de uploads no Metabase",
+        "Carregar um CSV bruto reconhecendo encoding, separador e tipos inferidos",
+        "Escrever consultas que quantifiquem ausências, categorias duplicadas e cronologias impossíveis",
+        "Defender um parecer de confiabilidade sustentado por números verificáveis"
+      ],
+      "slides": {
+        "path": "slides/aula-05.html",
+        "slide_count": 26,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-05/index.html",
+        "section_count": 10,
+        "highlights": [
+          "docker-compose.yml pronto com Metabase e dois PostgreSQL, disponível para download",
+          "Separação explícita entre banco da aplicação e banco analítico",
+          "Por que o docker run com H2 não suporta upload de arquivos",
+          "Consulta ao information_schema antes de escrever qualquer SQL de análise",
+          "Sete diagnósticos com resultados de conferência: 5.000, 350, 321, 150 e 0",
+          "A média de permanência calculada com e sem os 150 registros incoerentes"
+        ],
+        "activity": "Subir Metabase e PostgreSQL com Docker Compose, configurar o destino de uploads, carregar a base hospitalar bruta e executar sete consultas de diagnóstico sobre a qualidade dela",
+        "deliverable": "docker-compose.yml versionado, dashboard Confiabilidade da base hospitalar com cinco cartões, PARECER_BASE.md de até dez linhas citando as contagens 5.000 · 350 · 350 · 350 · 321 · 150 · 0, commit e push"
+      }
+    },
+    {
+      "number": 6,
+      "date": "16/09",
       "theme": "Limpeza de dados: Preparando a base para análises",
       "tag": "Pandas",
       "status": "complete",
@@ -312,7 +366,7 @@
         "Defender quais análises gerenciais a base pode sustentar"
       ],
       "slides": {
-        "path": "slides/aula-05.html",
+        "path": "slides/aula-06.html",
         "slide_count": 24,
         "sections": [
           "agenda",
@@ -325,7 +379,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-05/index.html",
+        "path": "materiais/aula-06/index.html",
         "section_count": 20,
         "highlights": [
           "Base hospitalar sintética CC0 com 5.000 registros disponível para download",
@@ -339,8 +393,8 @@
       }
     },
     {
-      "number": 6,
-      "date": "16/09",
+      "number": 7,
+      "date": "23/09",
       "theme": "Storytelling, Dashboards e Segmentação de Clientes",
       "tag": "Visualização",
       "status": "complete",
@@ -353,45 +407,6 @@
         "Escolher gráficos alinhados à pergunta executiva",
         "Construir uma narrativa com contexto, tensão e recomendação",
         "Segmentar clientes por comportamento e valor"
-      ],
-      "slides": {
-        "path": "slides/aula-06.html",
-        "slide_count": 11,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-06/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Escolha honesta de gráficos e storyboard executivo",
-          "Segmentação comportamental e RFM"
-        ],
-        "activity": "Criar storyboard de três telas para um segmento prioritário",
-        "deliverable": "Dashboard de uma página e nota executiva acionável"
-      }
-    },
-    {
-      "number": 7,
-      "date": "23/09",
-      "theme": "Inteligência Artificial no dia a dia da administração",
-      "tag": "IA",
-      "status": "complete",
-      "topics": [
-        "inteligência artificial",
-        "administração"
-      ],
-      "objectives": [
-        "Distinguir automação, aprendizado de máquina e IA generativa",
-        "Mapear tarefas administrativas adequadas à assistência por IA",
-        "Avaliar risco, privacidade e necessidade de revisão humana"
       ],
       "slides": {
         "path": "slides/aula-07.html",
@@ -410,6 +425,45 @@
         "path": "materiais/aula-07/index.html",
         "section_count": 7,
         "highlights": [
+          "Escolha honesta de gráficos e storyboard executivo",
+          "Segmentação comportamental e RFM"
+        ],
+        "activity": "Criar storyboard de três telas para um segmento prioritário",
+        "deliverable": "Dashboard de uma página e nota executiva acionável"
+      }
+    },
+    {
+      "number": 8,
+      "date": "30/09",
+      "theme": "Inteligência Artificial no dia a dia da administração",
+      "tag": "IA",
+      "status": "complete",
+      "topics": [
+        "inteligência artificial",
+        "administração"
+      ],
+      "objectives": [
+        "Distinguir automação, aprendizado de máquina e IA generativa",
+        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Avaliar risco, privacidade e necessidade de revisão humana"
+      ],
+      "slides": {
+        "path": "slides/aula-08.html",
+        "slide_count": 11,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-08/index.html",
+        "section_count": 7,
+        "highlights": [
           "Mapa de casos de uso e priorização por impacto e risco",
           "Governança, verificação e revisão humana"
         ],
@@ -418,8 +472,8 @@
       }
     },
     {
-      "number": 8,
-      "date": "30/09",
+      "number": 9,
+      "date": "07/10",
       "theme": "Fazendo previsões com IA: Vendas e Tendências",
       "tag": "ML · Regressão",
       "status": "complete",
@@ -439,50 +493,8 @@
         "Comunicar previsão como faixa e hipótese,  não certeza"
       ],
       "slides": {
-        "path": "slides/aula-08.html",
-        "slide_count": 12,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-08/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Atributos, pipelines e prevenção de vazamento temporal",
-          "Regressão, baseline e validação temporal",
-          "MAE, resíduos e limites de uso"
-        ],
-        "activity": "Comparar baseline e regressão para vendas mensais",
-        "deliverable": "Notebook, tabela real versus previsto e recomendação de uso"
-      }
-    },
-    {
-      "number": 9,
-      "date": "07/10",
-      "theme": "Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral",
-      "tag": "Inferência",
-      "status": "complete",
-      "topics": [
-        "testes A/B",
-        "teste t",
-        "qui-quadrado",
-        "tamanho amostral"
-      ],
-      "objectives": [
-        "Formular hipótese,  métrica e unidade experimental antes do teste",
-        "Escolher teste t ou qui-quadrado conforme o desfecho",
-        "Interpretar efeito,  intervalo e tamanho amostral junto ao p-valor"
-      ],
-      "slides": {
         "path": "slides/aula-09.html",
-        "slide_count": 11,
+        "slide_count": 12,
         "sections": [
           "agenda",
           "challenge",
@@ -497,31 +509,37 @@
         "path": "materiais/aula-09/index.html",
         "section_count": 7,
         "highlights": [
-          "Desenho experimental,  hipótese e efeito mínimo",
-          "Testes t e qui-quadrado com interpretação de negócio"
+          "Atributos, pipelines e prevenção de vazamento temporal",
+          "Regressão, baseline e validação temporal",
+          "MAE, resíduos e limites de uso"
         ],
-        "activity": "Analisar ticket e conversão de um experimento A/B",
-        "deliverable": "Protocolo, análise dos desfechos e decisão condicionada ao efeito relevante"
+        "activity": "Comparar baseline e regressão para vendas mensais",
+        "deliverable": "Notebook, tabela real versus previsto e recomendação de uso"
       }
     },
     {
       "number": 10,
       "date": "14/10",
-      "theme": "Estudo de Caso: Aplicação prática de Testes Estatísticos",
-      "tag": "Estudo de Caso",
+      "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
+      "tag": "Inferência",
       "status": "complete",
       "topics": [
-        "testes estatísticos",
-        "estudo de caso"
+        "estudo de caso",
+        "qui-quadrado",
+        "tamanho amostral",
+        "teste t",
+        "testes A/B",
+        "testes estatísticos"
       ],
       "objectives": [
-        "Traduzir uma dúvida gerencial em hipótese testável",
-        "Executar análise exploratória e teste coerente",
-        "Defender uma recomendação com limitações explícitas"
+        "Formular hipótese, métrica e unidade experimental antes do teste",
+        "Escolher teste t ou qui-quadrado conforme o desfecho",
+        "Interpretar efeito, intervalo e tamanho amostral junto ao p-valor",
+        "Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas"
       ],
       "slides": {
         "path": "slides/aula-10.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -539,8 +557,8 @@
           "Cadeia entre contexto,  desenho,  teste e ação",
           "Efeito estatístico,  impacto econômico e sensibilidade"
         ],
-        "activity": "Conduzir o caso de uma campanha comercial da auditoria à decisão",
-        "deliverable": "Relatório com hipótese, método, efeito, incerteza, impacto e decisão"
+        "activity": "Analisar um experimento com ticket e conversão e conduzir o caso de uma campanha comercial da auditoria da base à recomendação ao comitê",
+        "deliverable": "Protocolo do experimento e relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante"
       }
     },
     {

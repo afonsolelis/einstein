@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 09</title>
+  <title>Material · 08</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
     
@@ -108,24 +108,26 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 09</div>
-      <h1>Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral</h1>
+      <h1>Fazendo previsões com IA: Vendas e Tendências</h1>
     </div>
     
     <div class="content">
-      <p class="desc">Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <p class="desc">Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Criar atributos derivados sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos, atributos e contexto</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p><ul><li>Atributos são hipóteses codificadas e só podem usar informação disponível no momento da previsão</li><li>Codificação e escala devem ser aprendidas apenas no treino e aplicadas pelo mesmo pipeline ao teste</li><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul><p>Documente fonte, fórmula, momento de disponibilidade e risco de vazamento de cada atributo. No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos.</p></section>
       <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">from scipy.stats import ttest_ind
-resultado = ttest_ind(ticket_a, ticket_b, equal_var=False)
-print({"estatistica":resultado.statistic, "p_valor":resultado.pvalue})</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">from scipy.stats import chi2_contingency
-tabela = [[convertidos_a, nao_a],[convertidos_b, nao_b]]
-chi2, p, gl, esperado = chi2_contingency(tabela)
-print({"chi2":chi2, "p_valor":p})</div><p>Analise um experimento com ticket e conversão, valide pressupostos e produza uma recomendação executiva.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar protocolo do experimento, análise dos dois desfechos e decisão condicionada ao efeito mínimo relevante.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Definir métrica primária antes de olhar resultados</li><li>Evitar encerrar o teste antecipadamente por conveniência</li><li>Reportar efeito absoluto e relativo</li><li>Checar randomização e perdas por grupo</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Experimentos confiáveis começam no desenho; o teste estatístico apenas fecha um ciclo bem planejado.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, integraremos desenho, análise e comunicação em um estudo de caso.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
+y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
+modelo = LinearRegression().fit(X_treino, y_treino)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">pred = modelo.predict(X_teste)
+baseline = [y_treino.iloc[-1]] * len(y_teste)
+print("MAE modelo", mean_absolute_error(y_teste,pred))
+print("MAE baseline", mean_absolute_error(y_teste,baseline))</div><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Registrar fonte e momento de disponibilidade dos atributos</li><li>Separar treino e teste antes de aprender transformações</li><li>Respeitar a ordem temporal e impedir vazamento</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li><li>Registrar variáveis e horizonte da previsão</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, mudaremos de previsão para inferência em experimentos A/B.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

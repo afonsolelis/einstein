@@ -1,41 +1,41 @@
 # Em andamento
 
-## Aula 5 (09/09) · migrar para Metabase local com Docker
+## Aula 7 (23/09) · Storytelling, Dashboards e Segmentação — próxima a construir
+Hoje é esqueleto (11 slides, 7 seções). É a primeira aula do cronograma que ainda
+não tem conteúdo real, agora que 5 e 6 estão fechadas.
 
-**Estado:** nada foi alterado ainda. Aula 5 continua sendo a de limpeza com Pandas
-e Antigravity, intacta e com os testes passando.
+Ponto de partida: a aula 6 entrega uma base tratada com flags e um relatório de
+qualidade; a aula 7 deveria consumir esses artefatos em vez de começar do zero.
 
-### Decisão tomada
-- A aula 5 passa a ser **rodar o Metabase localmente com Docker e subir um CSV/Excel
-  para análise**, mantendo o case ("podemos confiar nesta base?"), o CSV hospitalar
-  do Kaggle e uma entrega verificável.
-- **Pandas não sai do curso**: a aula de limpeza é empurrada para depois da aula 5.
+# Concluído
 
-### Pendência que trava o resto — decidir primeiro
-Empurrar a limpeza cria uma 20ª aula, e o cronograma tem 19 datas fixas
-(12/08 a 16/12, quartas). Como absorver:
-- (a) renumerar tudo +1 e aceitar uma aula em 23/12;
-- (b) fundir a limpeza com a aula 6 atual (Storytelling/Dashboards), que já
-  encosta no conteúdo de Metabase das aulas 4 e 5;
-- (c) cortar ou fundir uma das aulas 6–19 (todas ainda são esqueletos:
-  11 slides e 7 seções cada, contra 24 slides e 20 seções da aula 5).
+## Aula 5 (09/09) · Metabase local com Docker
+Substituiu a aula de limpeza no slot de 09/09. Sobe Metabase + dois PostgreSQL
+via Compose, carrega o CSV hospitalar bruto e responde "podemos confiar nesta
+base?" com sete consultas de diagnóstico. Passa no validador `--complete`.
 
-### Levantado e verificado
-- Upload nativo do Metabase aceita **CSV e TSV, não .xlsx** — Excel entra
-  convertendo para CSV (vira ponto de ensino sobre encoding e separador).
-- Upload exige banco com suporte a upload: o `docker run` simples usa H2 e não
-  serve. Precisa de **docker compose com Metabase + Postgres**, mais
-  Admin → Settings → Uploads apontando para um schema.
-- Artefato a criar: `materiais/aula-05/docker-compose.yml`.
-- Checkpoints do CSV já validados em `tests/test_aula_05_dataset.py` e reaproveitáveis
-  como consultas de diagnóstico no Metabase: 350 idades / 350 gêneros / 350
-  diagnósticos ausentes, 321 diagnósticos em maiúsculas, 150 altas anteriores à
-  admissão, 0 duplicidades, 5.000 linhas.
-- `tests/e2e/aula-05.spec.js` fixa 24 slides e 12 botões `.copy-prompt`; os botões
-  podem ser reaproveitados para copiar comandos Docker e SQL.
-- `materiais/aula-05/prompts-antigravity.md` é específico de Pandas — segue com a
-  aula de limpeza, para onde ela for.
+- `materiais/aula-05/docker-compose.yml` validado com `docker compose config`.
+- Checkpoints conferidos direto no CSV: 5.000 linhas; 350 idades, 350 gêneros e
+  350 diagnósticos ausentes; 321 diagnósticos em maiúsculas (28 categorias
+  aparentes contra 14 reais); 150 altas anteriores à admissão; 0 duplicidades.
+- O dataset mora agora em `materiais/aula-05/dados/`; a aula 6 aponta para lá.
+- `tests/e2e/aula-05.spec.js` cobre o card, o Compose publicado, os 26 slides sem
+  corte em desktop e mobile e os números de conferência no material.
 
-## Aula 4 (02/09) · concluída
-Metabase hospedado + Olist, com fechamento em três gráficos e um dashboard.
-Commits `a513d15` e `b44f5a2`. Testes: 50/50 Playwright, 4/4 Python.
+### Decisões de cronograma tomadas
+- A limpeza com Pandas foi empurrada para a aula 6 (16/09) intacta, e as aulas
+  6, 7 e 8 antigas viraram 7, 8 e 9.
+- O slot extra saiu da fusão das antigas aulas 9 e 10 — a 10 era declaradamente
+  o estudo de caso prático da 9. A nova aula 10 (14/10) cobre desenho do
+  experimento, os dois testes e o caso completo.
+- As 19 datas fixas (12/08 a 16/12) foram preservadas; nada caiu em 23/12.
+
+### Correções de arrasto encontradas na renumeração
+- `slides/aula-06.html` tinha `<title>Laboratório 4</title>` e prompts pedindo
+  `Aula_04_SeuNome.ipynb`; ambos corrigidos para 6.
+- `materiais/aula-05/dados/README.md` dizia "Base da Aula 03".
+- O validador de aulas rejeita a palavra solta "todo" como marcador pendente —
+  vale lembrar ao escrever as próximas aulas.
+
+## Aula 4 (02/09) · SQL II com Olist no Metabase hospedado
+Commits `a513d15` e `b44f5a2`.

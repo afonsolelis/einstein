@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 05</title>
+  <title>Laboratório 5 · Material</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -120,310 +120,270 @@
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-05.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
     <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
-    <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
+    <a href="docker-compose.yml" download="docker-compose.yml" class="nav-prompts" title="Baixar o docker-compose.yml">🐳 <span class="nav-label">Compose</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 05</div>
-      <h1>Limpeza de dados: Preparando a base para análises</h1>
+      <h1>Metabase local com Docker: subindo a sua própria base</h1>
     </div>
 
     <div class="content">
-      <p class="desc">A Diretoria de Operações recebeu uma base com 5.000 internações sintéticas e quer calcular permanência hospitalar. Antes de transformar linhas em uma decisão sobre capacidade, a equipe deverá provar que a base é coerente. Nesta prática, o Antigravity ajuda a planejar, escrever e revisar o código; Pandas executa a limpeza no workspace; o estudante continua responsável por cada regra aceita.</p>
+      <p class="desc">Na aula 4, o Metabase já estava de pé e o Olist já estava limpo. Aqui a situação se inverte: você sobe o servidor, decide onde os dados vão morar e carrega uma base hospitalar que ninguém preparou. A pergunta do dia é a de qualquer analista que recebe uma planilha por e-mail — <strong>podemos confiar nesta base?</strong> — e a resposta precisa vir em contagens, não em impressões.</p>
+
+      <div class="download-panel"><a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="docker-compose.yml" download="docker-compose.yml" class="btn btn-slides">🐳 Baixar docker-compose.yml</a></div>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
-        <ul><li><strong>Diagnosticar</strong> completude, unicidade, padronização e consistência temporal.</li><li><strong>Orientar</strong> um agente de IA com escopo, restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> transformações reproduzíveis sem sobrescrever a camada bruta.</li><li><strong>Validar</strong> produtos da limpeza com contagens, flags e testes.</li><li><strong>Defender</strong> quais análises gerenciais a base pode ou não sustentar.</li></ul>
+        <ul>
+          <li><strong>Subir</strong> Metabase e PostgreSQL na própria máquina com um único arquivo Docker Compose.</li>
+          <li><strong>Configurar</strong> a conexão do banco analítico e o destino de uploads no Metabase.</li>
+          <li><strong>Carregar</strong> um CSV bruto reconhecendo encoding, separador e tipos inferidos.</li>
+          <li><strong>Escrever</strong> consultas que quantifiquem ausências, categorias duplicadas e cronologias impossíveis.</li>
+          <li><strong>Defender</strong> um parecer de confiabilidade sustentado por números verificáveis.</li>
+        </ul>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>2. O case e a base do Kaggle</h2>
-        <p>O arquivo <code>hospital_patients_real_world.csv</code> vem do dataset <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas no Kaggle sob licença CC0. Os registros são sintéticos e foram criados para exercícios de limpeza.</p>
-        <div class="download-panel"><a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
-        <table><thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead><tbody><tr><td><code>PatientID</code></td><td>Identificador sintético do registro</td><td>string</td></tr><tr><td><code>Age</code></td><td>Idade informada</td><td>número anulável</td></tr><tr><td><code>Gender</code></td><td>Categoria de gênero cadastrada</td><td>string</td></tr><tr><td><code>Diagnosis</code></td><td>Diagnóstico sintético</td><td>string</td></tr><tr><td><code>AdmissionDate</code></td><td>Data de admissão</td><td>data</td></tr><tr><td><code>DischargeDate</code></td><td>Data de alta</td><td>data</td></tr><tr><td><code>HospitalID</code></td><td>Identificador sintético do hospital</td><td>string</td></tr></tbody></table>
+        <h2>2. Por que sair do Metabase compartilhado</h2>
+        <p>O Metabase hospedado da aula 4 resolveu um problema de ensino: a turma inteira entrou pelo navegador e escreveu SQL no mesmo Olist, sem instalar nada. Ele também escondeu três decisões que, no trabalho, são suas:</p>
+        <ul>
+          <li><strong>Onde o dado mora.</strong> Uma conta compartilhada em servidor de terceiros não é para dado de paciente, de folha ou de faturamento.</li>
+          <li><strong>Quem pode escrever.</strong> A conexão do Olist é somente leitura; carregar um arquivo era impossível por construção.</li>
+          <li><strong>O que acontece quando o dado é ruim.</strong> O Olist chegou limpo. Bases reais não chegam.</li>
+        </ul>
+        <p>Subir o Metabase localmente devolve as três decisões para você — e cobra o preço de entender a arquitetura por trás do botão.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. Dois bancos com papéis diferentes</h2>
+        <p>Toda instalação do Metabase envolve dois papéis que iniciantes costumam confundir:</p>
+        <table>
+          <thead><tr><th>Papel</th><th>O que guarda</th><th>No nosso Compose</th></tr></thead>
+          <tbody>
+            <tr><td>Banco da aplicação</td><td>Usuários, permissões, perguntas salvas, dashboards</td><td><code>postgres-app</code>, banco <code>metabase</code></td></tr>
+            <tr><td>Banco analítico</td><td>Os seus dados: tabelas carregadas e consultadas</td><td><code>postgres-dados</code>, banco <code>dados</code></td></tr>
+          </tbody>
+        </table>
+        <p>Separá-los não é preciosismo. Um backup do banco da aplicação preserva os seus dashboards e <strong>nenhum</strong> dos seus dados; restaurar o Metabase em outra máquina sem o banco analítico devolve perguntas que não conseguem responder nada.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Por que o <code>docker run</code> de uma linha não serve</h2>
+        <p>A documentação do Metabase abre com um comando único que sobe o servidor em segundos. Ele usa o H2, um banco embutido em arquivo, e é ótimo para dar uma olhada na ferramenta. Para esta aula, ele falha em dois pontos:</p>
+        <ul>
+          <li><strong>H2 não suporta upload.</strong> A tela de configuração de uploads simplesmente não oferece destino, porque o Metabase só lista bancos onde consegue criar tabelas.</li>
+          <li><strong>H2 vive dentro do contêiner.</strong> Sem volume nomeado, remover o contêiner apaga contas, perguntas e dashboards.</li>
+        </ul>
+        <p>Daí o Compose: dois PostgreSQL, um Metabase, volumes nomeados e uma rede interna criada automaticamente.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>5. Prática guiada</h2>
+
+        <h3>5.1 Conferir o ambiente</h3>
+        <p>Crie a pasta <code>aula-05-seunome</code> dentro do seu repositório da disciplina e confirme que o Docker responde:</p>
+        <div class="code-block">docker --version
+docker compose version</div>
+        <p>No GitHub Codespaces o Docker já vem instalado. Em máquina própria, instale o Docker Desktop antes da aula — a primeira instalação não cabe em três horas de laboratório.</p>
+
+        <h3>5.2 O arquivo <code>docker-compose.yml</code></h3>
+        <p>Salve o arquivo abaixo dentro da pasta que você acabou de criar. Ele descreve os três serviços e os dois volumes:</p>
+        <div class="code-block">services:
+  postgres-app:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: metabase
+    volumes:
+      - app-data:/var/lib/postgresql/data
+
+  postgres-dados:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: dados
+      POSTGRES_USER: aluno
+      POSTGRES_PASSWORD: aluno
+    volumes:
+      - dados-data:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: postgres-app
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: metabase
+      MB_DB_USER: metabase
+      MB_DB_PASS: metabase
+    depends_on:
+      - postgres-app
+      - postgres-dados
+
+volumes:
+  app-data:
+  dados-data:</div>
+        <p>Repare que apenas o Metabase publica porta para fora (<code>3000:3000</code>). Os bancos ficam acessíveis somente dentro da rede do Compose, que é exatamente o que se quer: ninguém alcança o PostgreSQL pela internet.</p>
+
+        <div class="alert-box">
+          <h4>Senhas neste arquivo são de laboratório</h4>
+          <p>Usuário e senha iguais ao nome do banco servem para uma aula em máquina local, sem porta exposta. Em qualquer ambiente compartilhado ou com acesso externo, credenciais saem do arquivo versionado e vão para variáveis de ambiente ou um gerenciador de segredos.</p>
+        </div>
+
+        <h3>5.3 Subir a pilha</h3>
+        <div class="code-block">docker compose up -d
+docker compose ps
+docker compose logs -f metabase</div>
+        <p>A primeira execução baixa cerca de 500 MB de imagens. Depois disso, o Metabase ainda leva de um a três minutos preparando o banco da aplicação: o log para de rolar quando ele estiver pronto. Abra <code>http://localhost:3000</code> e crie a conta de administrador — ela é local e não tem relação com a conta compartilhada da aula 4.</p>
+
+        <h3>5.4 Conectar o banco analítico</h3>
+        <p>Em <strong>Admin → Databases → Add database</strong>, escolha PostgreSQL e preencha:</p>
+        <div class="code-block">Host: postgres-dados
+Port: 5432
+Database name: dados
+Username: aluno
+Password: aluno</div>
+        <p>O erro mais comum da aula acontece aqui: escrever <code>localhost</code> no campo Host. Para o contêiner do Metabase, <code>localhost</code> é ele mesmo, não a sua máquina. Dentro de uma rede do Compose, cada serviço é alcançado pelo <strong>nome do serviço</strong>.</p>
+
+        <h3>5.5 Ligar o upload</h3>
+        <p>Em <strong>Admin → Settings → Uploads</strong>, defina <code>dados</code> como banco e <code>public</code> como schema, e salve. Só depois disso o botão de upload aparece nas coleções.</p>
+        <p>Se a lista de bancos vier vazia, o passo anterior não foi concluído — o Metabase só oferece como destino bancos em que consegue criar tabelas.</p>
+
+        <h3>5.6 Carregar a base hospitalar</h3>
+        <p>O arquivo é o mesmo dataset sintético do Kaggle usado na próxima aula: <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas sob licença CC0. São 5.000 internações fictícias em 7 colunas.</p>
+        <p>Crie uma coleção, use o botão de upload e selecione o CSV. Três detalhes que valem para qualquer arquivo:</p>
+        <ul>
+          <li><strong>Formato:</strong> o upload aceita CSV e TSV. Um <code>.xlsx</code> não sobe — no Excel, use <em>Salvar como → CSV UTF-8</em>.</li>
+          <li><strong>Separador:</strong> o Excel em português grava ponto e vírgula por padrão. Abra o arquivo em um editor de texto e confira antes de subir.</li>
+          <li><strong>Nomes e tipos:</strong> o carregador renomeia colunas e adivinha tipos por conta própria, além de acrescentar uma coluna de identificação interna.</li>
+        </ul>
+
         <div class="evidence"><strong>Assinatura da cópia usada na aula</strong><code>SHA-256 af6c3023e87c1950cb021579521534c3d44fc940953216ca560ca1d7e3eabc8a</code></div>
-      </section>
 
-      <section data-lesson-section="concepts">
-        <h2>3. O que sabemos antes da aula</h2>
-        <p>O professor já conferiu o arquivo original. Essas contagens funcionam como <em>checkpoints</em>: se o notebook produzir números diferentes, investigue leitura, caminho e regra antes de continuar.</p>
-        <table><thead><tr><th>Problema observado</th><th>Quantidade</th><th>Conduta esperada</th></tr></thead><tbody><tr><td>Idade ausente</td><td>350</td><td>Manter ausente e criar flag; não imputar.</td></tr><tr><td>Gênero vazio</td><td>350</td><td>Padronizar como “Não informado” e preservar flag.</td></tr><tr><td>Gênero <code>Unknown</code></td><td>1.163</td><td>Unificar com “Não informado”.</td></tr><tr><td>Diagnóstico ausente</td><td>350</td><td>Não inferir diagnóstico clínico.</td></tr><tr><td>Diagnóstico em maiúsculas</td><td>321</td><td>Unir apenas variações de capitalização.</td></tr><tr><td>Alta anterior à admissão</td><td>150</td><td>Sinalizar e retirar do cálculo de permanência.</td></tr><tr><td>Linha ou chave duplicada</td><td>0</td><td>Registrar a verificação; não apagar nada.</td></tr></tbody></table>
-      </section>
-
-      <section data-lesson-section="concepts">
-        <h2>4. Antigravity: agente, execução local e revisão</h2>
-        <p>O <a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">codelab oficial do Antigravity IDE</a> orienta abrir uma pasta local, conversar pelo painel do agente e usar desenvolvimento orientado por revisão. O agente pode propor um plano, editar arquivos e solicitar execução no terminal; o estudante revisa essas ações e pode aceitar, comentar ou rejeitar.</p>
-        <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-05-seunome</code>.</li><li>Abra a pasta no Antigravity IDE e selecione o modo orientado por revisão.</li><li>Deixe a execução de terminal dependente de aprovação.</li><li>Use <code>@hospital_patients_real_world.csv</code> para mencionar a base no prompt.</li><li>Quando o Python local não estiver pronto, execute o notebook no GitHub Codespaces já configurado pela disciplina; não perca a aula instalando bibliotecas manualmente.</li></ol>
-        <div class="alert-box"><h4>“Local” não significa que o modelo está offline</h4><p>O CSV, o notebook e o Pandas ficam no workspace do estudante, mas prompts e arquivos mencionados podem ser processados pelo serviço de IA conforme a conta utilizada. Esta aula usa somente dados sintéticos CC0. Nunca envie prontuários, credenciais, tokens ou dados pessoais ao agente.</p></div>
+        <h3>5.7 Antes do SQL, descubra o que subiu</h3>
+        <p>Abra o editor nativo apontando para o banco <code>dados</code> e rode:</p>
+        <div class="code-block">SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'hospital_patients_real_world'
+ORDER BY ordinal_position;</div>
+        <p>Esta é a consulta mais importante da aula. Ela devolve os nomes e tipos <em>reais</em> das colunas depois da normalização feita no upload. <strong>Adapte todas as consultas seguintes ao que ela retornar</strong>: se as datas subiram como texto, por exemplo, a subtração do diagnóstico 7 precisa de uma conversão explícita com <code>CAST(... AS date)</code>.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 0 · contrato</span>
-        <h2>5. Comece pelo plano, não pela edição</h2>
-        <p>O primeiro prompt reduz autonomia e declara o que não pode ser feito. Só aprove o plano se ele preservar o arquivo original e separar diagnóstico, transformação e validação.</p>
-        <div class="prompt-block">Atue como meu assistente de qualidade de dados neste laboratório. Leia
-@hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos.
-Primeiro apresente um plano curto e aguarde minha aprovação.
+        <h2>6. Os sete diagnósticos</h2>
+        <p>Cada consulta responde a uma pergunta de qualidade e tem um resultado esperado. Divergência não significa que você errou o SQL — significa que precisa investigar antes de seguir.</p>
 
-Regras obrigatórias: preservar o CSV bruto; não inventar valores ausentes;
-não trocar datas por suposição; não excluir linhas silenciosamente; explicar
-cada regra de negócio; trabalhar apenas dentro desta pasta; não instalar
-pacotes nem executar comandos sem minha aprovação. A entrega terá notebook,
-base tratada, fila de revisão, relatório de qualidade e revisão da IA.</div>
-      </section>
+        <h3>6.1 A base chegou inteira?</h3>
+        <div class="code-block">SELECT COUNT(*) AS linhas
+FROM hospital_patients_real_world;</div>
+        <p>Esperado: <strong>5.000</strong>. Um número menor costuma indicar arquivo truncado no download ou upload interrompido.</p>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 1 · perfil</span>
-        <h2>6. Diagnostique sem limpar</h2>
-        <div class="prompt-block">Crie Aula_04_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
-carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
-mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
-linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
-Não faça nenhuma limpeza nesta etapa. Execute as células e resuma os achados.
-Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div>
-        <p>Uma implementação mínima e legível deve produzir evidência semelhante a:</p>
-        <div class="code-block">from pathlib import Path
-import pandas as pd
+        <h3>6.2 O que está faltando</h3>
+        <div class="code-block">SELECT
+  COUNT(*) FILTER (WHERE age IS NULL)                         AS idade_ausente,
+  COUNT(*) FILTER (WHERE gender IS NULL OR gender = '')       AS genero_ausente,
+  COUNT(*) FILTER (WHERE diagnosis IS NULL OR diagnosis = '') AS diagnostico_ausente
+FROM hospital_patients_real_world;</div>
+        <p>Esperado: <strong>350, 350 e 350</strong>. O teste duplo existe porque carregadores nem sempre convertem campo vazio em nulo: contar só <code>IS NULL</code> pode devolver zero e dar a falsa impressão de base completa.</p>
 
-caminho = Path("hospital_patients_real_world.csv")
-bruta = pd.read_csv(caminho)
+        <h3>6.3 Gênero que não informa nada</h3>
+        <div class="code-block">SELECT COALESCE(NULLIF(gender, ''), 'AUSENTE') AS genero,
+       COUNT(*) AS registros
+FROM hospital_patients_real_world
+GROUP BY 1
+ORDER BY registros DESC;</div>
+        <p><code>Unknown</code> aparece 1.163 vezes e o campo vazio, 350. Somados, são <strong>1.513 registros</strong> — perto de 30% da base — sem gênero utilizável. Qualquer recorte por gênero nesta base descreve, na melhor das hipóteses, os 70% restantes.</p>
 
-display(bruta.head())
-print("shape:", bruta.shape)
-display(bruta.isna().sum().rename("ausentes").to_frame())
-print("linhas duplicadas:", bruta.duplicated().sum())
-print("PatientID duplicado:", bruta.duplicated("PatientID").sum())</div>
-        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(5000, 7)</code>, com zero linhas e zero chaves duplicadas. Contagem zero também é uma evidência que deve entrar no relatório.</div>
-      </section>
+        <h3>6.4 Categorias que se duplicam sozinhas</h3>
+        <div class="code-block">SELECT
+  COUNT(DISTINCT diagnosis)        AS categorias_aparentes,
+  COUNT(DISTINCT UPPER(diagnosis)) AS categorias_reais,
+  COUNT(*) FILTER (WHERE diagnosis = UPPER(diagnosis)) AS registros_em_maiusculas
+FROM hospital_patients_real_world
+WHERE diagnosis IS NOT NULL AND diagnosis &lt;&gt; '';</div>
+        <p>Esperado: <strong>28 categorias aparentes, 14 reais e 321 registros</strong> escritos em caixa alta. É o tipo de defeito que passa despercebido em uma tabela e explode em um gráfico: <code>Pneumonia</code> e <code>PNEUMONIA</code> viram duas barras, cada uma com metade do volume real.</p>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 2 · estrutura</span>
-        <h2>7. Crie uma cópia e explicite os tipos</h2>
-        <div class="prompt-block">No mesmo notebook, crie base = bruta.copy(deep=True) e nunca sobrescreva
-bruta nem o CSV. Renomeie as colunas para snake_case. Converta identificadores,
-gênero e diagnóstico para string; idade para Float64; datas para datetime com
-errors="coerce". Conte falhas de conversão antes de prosseguir. Mostre o código,
-a saída e explique por que cada tipo foi escolhido. Não faça imputação.</div>
-        <div class="code-block">base = bruta.copy(deep=True)
-base.columns = (base.columns
-    .str.replace(r"(?&lt;!^)(?=[A-Z])", "_", regex=True)
-    .str.lower())
+        <h3>6.5 Alta antes da admissão</h3>
+        <div class="code-block">SELECT COUNT(*) AS altas_antes_da_admissao
+FROM hospital_patients_real_world
+WHERE dischargedate &lt; admissiondate;</div>
+        <p>Esperado: <strong>150</strong> registros em que o paciente teria saído antes de entrar. Nenhum deles é apagável sem decisão humana: pode ser inversão de campos no cadastro, erro de digitação de ano ou reinternação mal registrada, e cada hipótese leva a uma correção diferente.</p>
 
-for coluna in ["patient_id", "gender", "diagnosis", "hospital_id"]:
-    base[coluna] = base[coluna].astype("string")
+        <h3>6.6 Duplicidade de paciente</h3>
+        <div class="code-block">SELECT COUNT(*) AS ids_repetidos
+FROM (
+  SELECT patientid
+  FROM hospital_patients_real_world
+  GROUP BY patientid
+  HAVING COUNT(*) &gt; 1
+) repetidos;</div>
+        <p>Esperado: <strong>0</strong>. Registrar o que está correto faz parte do parecer tanto quanto apontar defeitos — sem isso, o leitor não sabe se você verificou ou apenas não olhou.</p>
 
-base["age"] = pd.to_numeric(base["age"], errors="coerce").astype("Float64")
-base["admission_date"] = pd.to_datetime(base["admission_date"], errors="coerce")
-base["discharge_date"] = pd.to_datetime(base["discharge_date"], errors="coerce")</div>
-        <p>Identificadores são texto, mesmo quando contêm números. Datas convertidas permitem calcular intervalos. O parâmetro <code>errors="coerce"</code> não corrige valores: ele torna uma falha detectável como <code>NaT</code>.</p>
-      </section>
+        <h3>6.7 A média que engana</h3>
+        <div class="code-block">SELECT
+  ROUND(AVG(dischargedate - admissiondate), 2) AS permanencia_media,
+  ROUND(AVG(dischargedate - admissiondate)
+        FILTER (WHERE dischargedate &gt;= admissiondate), 2) AS permanencia_media_coerente
+FROM hospital_patients_real_world;</div>
+        <p>As duas colunas saem diferentes, e a diferença tem nome: as 150 permanências negativas do diagnóstico 6.5 puxam a primeira média para baixo. Nenhum alerta aparece na tela — o SQL calcula obedientemente a média de um número que não deveria existir. É esse silêncio que torna o parecer necessário.</p>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 3 · ausências</span>
-        <h2>8. Trate ausência sem adivinhar</h2>
-        <div class="prompt-block">Adicione uma seção sobre dados ausentes. Crie flags booleanas que preservem a
-origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente
-como pd.NA. Padronize gênero vazio ou Unknown como "Não informado" e diagnóstico
-vazio como "Não informado". Gere uma tabela antes/depois com quantidade e
-percentual. Não use média, moda ou qualquer valor clínico inventado.</div>
-        <div class="code-block">base["idade_ausente"] = base["age"].isna()
-base["genero_ausente"] = base["gender"].isna() | base["gender"].str.strip().eq("") | base["gender"].eq("Unknown")
-base["diagnostico_ausente"] = base["diagnosis"].isna() | base["diagnosis"].str.strip().eq("")
-
-base.loc[base["genero_ausente"], "gender"] = "Não informado"
-base.loc[base["diagnostico_ausente"], "diagnosis"] = "Não informado"</div>
-        <p>Preencher idade com média poderia produzir uma tabela completa, mas criaria 350 idades fictícias. Para decisões responsáveis, uma ausência conhecida é melhor que uma precisão inventada.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 4 · categorias</span>
-        <h2>9. Padronize sem alterar o significado</h2>
-        <div class="prompt-block">Normalize espaços e capitalização de gender e diagnosis. Para gender, aplique
-um dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e
-Unknown/vazio→Não informado. Em diagnosis, una apenas variantes que diferem por
-espaços ou capitalização; não faça aproximação clínica por significado.
-Mostre value_counts antes/depois e registre o mapeamento aplicado.</div>
-        <div class="code-block">mapa_genero = {
-    "Female": "Feminino",
-    "Male": "Masculino",
-    "Other": "Outro",
-    "Unknown": "Não informado",
-}
-base["gender"] = base["gender"].str.strip().replace(mapa_genero)
-base["diagnosis"] = (base["diagnosis"].str.strip().str.title()
-                     .replace({"Não Informado": "Não informado"}))
-
-display(base["gender"].value_counts(dropna=False))
-display(base["diagnosis"].value_counts(dropna=False))</div>
-        <p>A IA não deve aproximar diagnósticos pelo significado. Nesta aula, <code>ASTHMA</code> e <code>Asthma</code> podem ser unidos porque diferem somente na capitalização; categorias clinicamente diferentes não podem ser fundidas por “parecerem semelhantes”.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 5 · chaves</span>
-        <h2>10. Verifique duplicidades, mesmo quando não há nenhuma</h2>
-        <div class="prompt-block">Audite duplicidade de linha completa e de patient_id. Não use drop_duplicates
-automaticamente. Se houver linhas idênticas, apresente a evidência antes de
-propor remoção. Se a mesma chave tiver conteúdos diferentes, crie a flag
-chave_duplicada e envie esses registros para revisão. Registre também o caso
-em que a contagem for zero. Explique a diferença entre linha duplicada e chave
-de negócio duplicada.</div>
-        <div class="code-block">duplicada_exata = base.duplicated(keep=False)
-base["chave_duplicada"] = base.duplicated("patient_id", keep=False)
-
-print("linhas em grupos idênticos:", int(duplicada_exata.sum()))
-print("linhas com chave repetida:", int(base["chave_duplicada"].sum()))</div>
-        <p><code>drop_duplicates()</code> não é um ritual obrigatório. A base desta aula tem zero duplicidades, então remover linhas seria uma transformação sem justificativa.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 6 · regras</span>
-        <h2>11. Aplique regras hospitalares como flags</h2>
-        <div class="prompt-block">Implemente, sem apagar registros, as flags idade_fora_faixa para idade menor
-que 0 ou maior que 110, hospital_id_invalido para valores fora do padrão
-HOSP-[número] e cronologia_invalida quando discharge_date for anterior a
-admission_date. Mostre contagens e amostras. Não inverta datas automaticamente.
-Nesta versão espero 0 idades fora da faixa, 0 hospitais inválidos e 150
-cronologias inválidas; se divergir, investigue antes de alterar a regra.</div>
-        <div class="code-block">base["idade_fora_faixa"] = base["age"].notna() &amp; ~base["age"].between(0, 110)
-base["hospital_id_invalido"] = ~base["hospital_id"].str.fullmatch(r"HOSP-\d+", na=False)
-base["cronologia_invalida"] = (
-    base["admission_date"].notna()
-    &amp; base["discharge_date"].notna()
-    &amp; (base["discharge_date"] &lt; base["admission_date"])
-)
-
-display(base[["idade_fora_faixa", "hospital_id_invalido", "cronologia_invalida"]].sum())</div>
-        <div class="alert-box"><h4>Por que não inverter as datas?</h4><p>Alta anterior à admissão prova que há uma inconsistência, mas não revela qual campo está errado. Trocar automaticamente as duas datas pode gerar uma permanência plausível e falsa. Os 150 casos seguem na base, marcados para revisão e excluídos apenas do indicador derivado.</p></div>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 7 · indicador</span>
-        <h2>12. Calcule permanência somente quando for seguro</h2>
-        <div class="prompt-block">Crie dias_internacao somente para registros com datas válidas e cronologia
-coerente. Nos demais casos use pd.NA e mantenha a flag de revisão. Converta o
-resultado para Int64 anulável. Mostre describe(), mínimo, máximo e confirme que
-nenhum valor negativo foi aceito. Explique por que corrigir para valor absoluto
-seria uma decisão perigosa.</div>
-        <div class="code-block">duracao = (base["discharge_date"] - base["admission_date"]).dt.days
-datas_ausentes = base[["admission_date", "discharge_date"]].isna().any(axis=1)
-base["dias_internacao"] = (duracao
-    .mask(base["cronologia_invalida"] | datas_ausentes)
-    .astype("Int64"))
-
-assert not (base["dias_internacao"].dropna() &lt; 0).any()</div>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 8 · relatório</span>
-        <h2>13. Construa a tabela antes/depois</h2>
-        <div class="prompt-block">Crie um DataFrame relatorio_qualidade com as colunas metrica, antes, depois,
-regra_aplicada e pendencia_humana. Inclua: linhas, duplicidades, chaves
-duplicadas, ausências, gêneros não informados, categorias de diagnóstico,
-capitalização inconsistente, idade fora da faixa, hospital inválido e cronologia
-inválida. Salve como saidas/relatorio_qualidade.csv e exiba a tabela completa.
-Não trate uma flag pendente como erro resolvido.</div>
-        <div class="code-block">from pathlib import Path
-
-saida = Path("saidas")
-saida.mkdir(exist_ok=True)
-
-metricas = [
-    {"metrica": "linhas", "antes": len(bruta), "depois": len(base),
-     "regra_aplicada": "preservar registros", "pendencia_humana": False},
-    {"metrica": "cronologia inválida", "antes": 150,
-     "depois": int(base["cronologia_invalida"].sum()),
-     "regra_aplicada": "sinalizar sem inverter", "pendencia_humana": True},
-]
-relatorio_qualidade = pd.DataFrame(metricas)</div>
-        <p>Complete a lista com as demais métricas. Em uma auditoria honesta, “depois = 150” pode ser o resultado correto: a inconsistência permanece, mas agora está detectada, separada e impedida de contaminar o indicador.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 9 · produtos</span>
-        <h2>14. Exporte tratado, revisão e dicionário</h2>
-        <div class="prompt-block">Exporte saidas/base_hospitalar_tratada.csv com todas as 5.000 linhas, campos
-padronizados e flags. Exporte saidas/registros_para_revisao.csv com qualquer
-regra crítica violada. Crie saidas/dicionario_de_dados.md explicando coluna,
-tipo, significado, regra e possibilidade de ausência. Não inclua o índice do
-DataFrame nos CSVs e não modifique o arquivo bruto.</div>
-        <div class="code-block">flags_criticas = [
-    "chave_duplicada", "idade_fora_faixa",
-    "hospital_id_invalido", "cronologia_invalida",
-]
-para_revisao = base[base[flags_criticas].any(axis=1)].copy()
-
-base.to_csv(saida / "base_hospitalar_tratada.csv", index=False)
-para_revisao.to_csv(saida / "registros_para_revisao.csv", index=False)
-relatorio_qualidade.to_csv(saida / "relatorio_qualidade.csv", index=False)</div>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 10 · testes</span>
-        <h2>15. Reinicie e execute tudo</h2>
-        <div class="prompt-block">Adicione ao final do notebook asserts legíveis para: 5.000 linhas preservadas;
-patient_id único; gêneros dentro do dicionário; nenhum dias_internacao negativo;
-150 cronologias inválidas devidamente sinalizadas; arquivos de saída existentes.
-Reinicie o kernel e execute todas as células em ordem. Se um teste falhar,
-diagnostique a causa; não remova nem enfraqueça o teste para fazê-lo passar.
-Mostre um resumo final das evidências.</div>
-        <div class="code-block">assert len(base) == 5_000
-assert base["patient_id"].is_unique
-assert set(base["gender"].dropna()) &lt;= {"Feminino", "Masculino", "Outro", "Não informado"}
-assert int(base["cronologia_invalida"].sum()) == 150
-assert not (base["dias_internacao"].dropna() &lt; 0).any()
-assert (saida / "base_hospitalar_tratada.csv").exists()
-assert (saida / "registros_para_revisao.csv").exists()
-assert (saida / "relatorio_qualidade.csv").exists()</div>
-        <p>Um teste não serve para confirmar que a IA “acertou”; ele serve para tentar revelar quando a transformação violou o contrato.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 11 · auditoria</span>
-        <h2>16. Documente a participação da IA e versione</h2>
-        <div class="prompt-block">Crie REVISAO_IA.md com: objetivo, prompts usados, sugestões aceitas, sugestões
-rejeitadas, regras humanas, testes executados, limitações e decisão sobre uso da
-base. Depois mostre git status e proponha comandos git add, commit e push apenas
-para os arquivos desta entrega. Não execute commit ou push sem minha aprovação,
-não crie remoto e nunca use force. Sugira a mensagem: "Documenta limpeza
-auditável da base hospitalar".</div>
-        <p>Leia <code>REVISAO_IA.md</code> e o diff antes de autorizar o versionamento. No repositório do estudante, a persistência oficial continua sendo commit e push:</p>
-        <div class="code-block">git status
-git add Aula_04_SeuNome.ipynb saidas REVISAO_IA.md
-git diff --staged
-git commit -m "Documenta limpeza auditável da base hospitalar"
-git push</div>
+        <div class="alert-box">
+          <h4>Diagnóstico não é limpeza</h4>
+          <p>Nenhuma consulta desta aula altera a base. Contar problemas e corrigi-los são atos distintos: o primeiro é reversível e serve de evidência; o segundo exige critério documentado e é o assunto da aula 6. Não use <code>UPDATE</code> ou <code>DELETE</code> aqui, mesmo que a tentação seja grande.</p>
+        </div>
       </section>
 
       <section data-lesson-section="challenge">
-        <h2>17. Desafio e entrega</h2>
-        <p>Em dupla, responda à Diretoria de Operações: <strong>a base está apta para calcular permanência hospitalar?</strong> A resposta deve separar registros utilizáveis de registros que exigem revisão, apontar o principal risco cadastral e mencionar pelo menos uma sugestão do Antigravity que foi rejeitada ou alterada.</p>
-        <p><strong>Entrega verificável:</strong> <code>Aula_04_SeuNome.ipynb</code> executado do início ao fim; <code>base_hospitalar_tratada.csv</code> com 5.000 linhas; fila contendo as 150 cronologias incoerentes; relatório antes/depois; dicionário de dados; <code>REVISAO_IA.md</code>; commit e push.</p>
+        <h2>7. Desafio e entrega</h2>
+        <p>Monte um dashboard chamado <strong>Confiabilidade da base hospitalar</strong> com cinco perguntas salvas: total de linhas, ausências por coluna, categorias aparentes contra reais, registros com cronologia impossível e permanência média com e sem os incoerentes.</p>
+        <p>Em seguida escreva <code>PARECER_BASE.md</code>, com no máximo dez linhas, respondendo a duas perguntas de forma direta: <em>quais decisões esta base sustenta hoje</em> e <em>quais não sustenta</em>. Cada afirmação precisa citar um número do dashboard.</p>
+        <div class="code-block">git add aula-05-seunome/docker-compose.yml aula-05-seunome/PARECER_BASE.md
+git commit -m "Aula 05: Metabase local e parecer de confiabilidade da base"
+git push</div>
+        <p><strong>Critério de aceite:</strong> o <code>docker-compose.yml</code> versionado sobe a pilha em outra máquina sem edição; o dashboard tem os cinco cartões preenchidos; o parecer distingue o que a base suporta do que não suporta, citando as contagens <strong>5.000 · 350 · 350 · 350 · 321 · 150 · 0</strong>.</p>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>18. Checklist de qualidade</h2>
-        <ul><li>O SHA-256 ou o shape confirma que a turma trabalhou com a base correta.</li><li>O CSV bruto permanece intacto e separado dos produtos da limpeza.</li><li>Cada ausência tem uma política explícita; nenhuma idade ou condição clínica foi inventada.</li><li>Diagnósticos foram unidos somente por espaços e capitalização.</li><li>Duplicidades foram verificadas e a contagem zero foi registrada.</li><li>As 150 cronologias inválidas permanecem sinalizadas e fora de <code>dias_internacao</code>.</li><li>O notebook reinicia e executa todas as células sem depender da ordem manual.</li><li>O relatório não apresenta pendência humana como problema “resolvido”.</li><li>A revisão da IA registra aceitações, rejeições, testes e limitações.</li><li>Commit e push preservam a entrega no repositório do estudante.</li></ul>
+        <h2>8. Checklist de qualidade</h2>
+        <ul>
+          <li><code>docker compose ps</code> mostra os três serviços de pé.</li>
+          <li>O banco <code>dados</code> aparece conectado no Metabase e o upload tem destino configurado.</li>
+          <li>A tabela carregada devolve 5.000 linhas.</li>
+          <li>As consultas usam os nomes de coluna que o <code>information_schema</code> devolveu, não os do cabeçalho do CSV.</li>
+          <li>Os sete diagnósticos foram executados e os resultados anotados.</li>
+          <li>Nenhum <code>UPDATE</code> ou <code>DELETE</code> foi executado sobre a base.</li>
+          <li>O parecer separa evidência numérica de recomendação.</li>
+          <li>Ao encerrar, <code>docker compose down</code> preserva os volumes; <code>docker compose down -v</code> apaga tudo.</li>
+        </ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>19. Síntese</h2>
-        <p>Limpeza de dados não é fabricar uma tabela sem células vazias. É preservar a fonte, medir os problemas, aplicar somente regras justificáveis, impedir que inconsistências contaminem indicadores e encaminhar o restante para decisão humana.</p>
-        <p>O Antigravity acelerou planejamento, código e testes, mas as evidências permaneceram visíveis: contagens antes/depois, flags, produtos separados, execução completa e histórico Git. A responsabilidade pela regra continuou com o estudante.</p>
+        <h2>9. Síntese</h2>
+        <p>Subir a ferramenta é a parte fácil e ocupa vinte minutos da aula. O trabalho está em decidir se o dado merece confiança, e essa decisão só é defensável quando vem acompanhada de contagens que outra pessoa consegue reproduzir.</p>
+        <p>Três lições viajam para fora do Metabase: upload exige um banco que aceite escrita; carregador nenhum preserva os nomes e tipos que você espera, então confira antes de consultar; e uma média calculada sobre dados incoerentes não emite aviso algum — ela apenas erra em silêncio.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>20. Referências e continuidade</h2>
-        <p>No próximo laboratório, a base tratada será usada em estatística descritiva para gestão. Guarde o relatório de qualidade: médias e distribuições só fazem sentido quando a população analisada e as exclusões estão documentadas.</p>
-        <ul><li><a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Fonte e licença do dataset no Kaggle</a>.</li><li><a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">Codelab oficial do Antigravity IDE</a>.</li><li><a href="https://antigravity.google/docs/agent-settings">Configurações de revisão e execução do agente</a>.</li><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Documentação do Pandas sobre dados ausentes</a>.</li></ul>
+        <h2>10. Referências e continuidade</h2>
+        <p>Na aula 6, a mesma base volta — desta vez para ser corrigida com Pandas e revisão apoiada por IA, preservando a camada bruta. Guarde o <code>PARECER_BASE.md</code>: ele vira a lista de problemas a resolver, e o antes/depois da limpeza será medido contra os números que você anotou hoje.</p>
+        <ul>
+          <li><a href="https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker" target="_blank" rel="noopener noreferrer">Executar o Metabase com Docker</a>.</li>
+          <li><a href="https://www.metabase.com/docs/latest/databases/uploads" target="_blank" rel="noopener noreferrer">Configuração de uploads no Metabase</a>.</li>
+          <li><a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreferrer">Documentação do Docker Compose</a>.</li>
+          <li><a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium" target="_blank" rel="noopener noreferrer">Fonte e licença do dataset no Kaggle</a>.</li>
+        </ul>
       </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-05.html" class="btn btn-slides">📊 Ver Slides</a>
         <a href="dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar Base</a>
-        <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-data">✨ Baixar Prompts</a>
+        <a href="docker-compose.yml" download="docker-compose.yml" class="btn btn-data">🐳 Baixar Compose</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>

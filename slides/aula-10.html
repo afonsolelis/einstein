@@ -347,18 +347,23 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 10 · 14/10</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Aplicação prática de Testes Estatísticos</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Traduzir uma dúvida gerencial em hipótese testável</li><li>Executar análise exploratória e teste coerente</li><li>Defender uma recomendação com limitações explícitas</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 10 · 14/10</div><h1>Laboratório de Dados &amp; IA</h1><p>Testes A/B: do desenho do experimento à decisão de negócio</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li><li>Defender uma recomendação com limitações explícitas</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos: hipótese, teste e tamanho amostral</li><li>Estudo de caso completo, do dado bruto à recomendação</li><li>Desafio, síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Do teste ao caso</h2><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: os dois testes</h2><div class="code-block">from scipy.stats import ttest_ind, chi2_contingency
+
+t, p = ttest_ind(grupo_a["ticket"], grupo_b["ticket"], equal_var=False)
+chi2, p_prop, gl, esperado = chi2_contingency(tabela_conversao)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: auditar antes de testar</h2><div class="code-block">import pandas as pd
 base = pd.read_csv("campanha.csv")
 print(base.groupby("grupo")["receita"].agg(["count","mean","median","std"]))
 print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>O valor do teste aparece quando a evidência estatística é convertida em consequência econômica e risco.</p><ul><li>Reconstruir o desenho do estudo</li><li>Verificar equilíbrio e dados faltantes</li><li>Justificar o teste selecionado</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê, validando pressupostos e analisando ticket e conversão.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar o protocolo do experimento e um relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Experimentos confiáveis começam no desenho; o valor do teste aparece quando a evidência estatística vira consequência econômica e risco.</p><ul><li>Definir métrica primária antes de olhar resultados</li><li>Verificar equilíbrio entre grupos e dados faltantes</li><li>Reportar efeito absoluto e relativo</li></ul></div>
     <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos detecção de padrões incomuns à auditoria automatizada.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 10</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>

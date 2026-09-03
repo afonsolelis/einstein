@@ -1,0 +1,51 @@
+# Laboratório 5 · Metabase local com PostgreSQL
+#
+# Subir:     docker compose up -d
+# Conferir:  docker compose ps
+# Acessar:   http://localhost:3000
+# Encerrar:  docker compose down      (preserva os dados)
+#            docker compose down -v   (apaga os volumes)
+#
+# As credenciais abaixo são de laboratório: os bancos não expõem porta para fora
+# da rede do Compose. Em qualquer ambiente compartilhado, mova-as para variáveis
+# de ambiente ou um gerenciador de segredos.
+
+services:
+  # Banco da aplicação: guarda contas, perguntas salvas e dashboards do Metabase.
+  postgres-app:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: metabase
+    volumes:
+      - app-data:/var/lib/postgresql/data
+
+  # Banco analítico: destino dos uploads e dos seus dados.
+  postgres-dados:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: dados
+      POSTGRES_USER: aluno
+      POSTGRES_PASSWORD: aluno
+    volumes:
+      - dados-data:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: postgres-app
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: metabase
+      MB_DB_USER: metabase
+      MB_DB_PASS: metabase
+    depends_on:
+      - postgres-app
+      - postgres-dados
+
+volumes:
+  app-data:
+  dados-data:

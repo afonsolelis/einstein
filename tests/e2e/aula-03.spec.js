@@ -15,8 +15,9 @@ test('cronograma separa fundamentos e prática de SQL', async ({ page }) => {
   await page.goto('/index.html');
   await expect(page.locator('.card').nth(2)).toContainText('Modelagem de dados e SQL I');
   await expect(page.locator('.card').nth(3)).toContainText('SQL II');
-  await expect(page.locator('.card').nth(4)).toContainText('Limpeza de dados');
+  await expect(page.locator('.card').nth(4)).toContainText('Metabase local com Docker');
   await expect(page.locator('.card').nth(4).locator('.btn-data')).toHaveAttribute('href', 'materiais/aula-05/dados/hospital_patients_real_world.csv');
+  await expect(page.locator('.card').nth(5)).toContainText('Limpeza de dados');
 });
 
 test('home apresenta a conexão PostgreSQL separada para o DBeaver', async ({ page }) => {

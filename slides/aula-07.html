@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório 6 · Slides</title>
+  <title>Laboratório 5 · Slides</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -347,20 +347,19 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 7 · 23/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Inteligência Artificial no dia a dia da administração</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear tarefas administrativas adequadas à assistência por IA</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 7 · 16/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Storytelling, Dashboards e Segmentação de Clientes</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Escolher gráficos alinhados à pergunta executiva</li><li>Construir uma narrativa com contexto, tensão e recomendação</li><li>Segmentar clientes por comportamento e valor</li></ul></div>
     <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA é um conjunto de técnicas que produz previsões, classificações ou conteúdo a partir de dados; valor surge quando a saída entra em um processo com dono e controle.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Casos úteis combinam volume, repetição e critério de qualidade claro</li><li>Prompts orientam modelos generativos, mas não garantem veracidade</li><li>Dados pessoais, decisões sensíveis e ações irreversíveis pedem governança</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">tarefas = [{"nome":"resumir atas","impacto":4,"risco":2},{"nome":"aprovar crédito","impacto":5,"risco":5}]
-for t in tarefas:
-    t["prioridade"] = t["impacto"] - t["risco"]
-print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Mapeie um processo administrativo, decomponha-o em tarefas e desenhe um fluxo com revisão humana, registro e critério de sucesso.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar canvas do caso de uso contendo entrada, saída, responsável, risco, métrica e plano de contingência.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Adotar IA é redesenhar trabalho com controles, não apenas acrescentar uma ferramenta.</p><ul><li>Não inserir dados sigilosos em ferramentas não aprovadas</li><li>Verificar fatos e cálculos em fonte independente</li><li>Definir quem responde pela decisão final</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, atributos e pipelines serão estudados dentro de um modelo de regressão para previsão.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 6</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Um dashboard é uma interface de decisão, não uma coleção de gráficos. Cada visual deve reduzir incerteza sobre uma ação específica.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Comparação pede barras; evolução pede linhas; composição exige parcimônia</li><li>RFM organiza clientes por recência, frequência e valor monetário</li><li>Cor e destaque conduzem atenção, mas não substituem evidência</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+clientes = pd.read_csv("transacoes.csv").groupby("cliente_id").agg(
+ recencia=("dias_desde_compra","min"), frequencia=("pedido_id","nunique"), valor=("receita","sum"))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Crie um storyboard de três telas: situação atual, segmento prioritário e ação recomendada com indicador de acompanhamento.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dashboard de uma página e nota executiva com público, decisão, segmento-alvo e próxima ação.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Boa visualização torna a comparação honesta; bom storytelling conecta essa evidência a uma decisão.</p><ul><li>Definir a pergunta antes do gráfico</li><li>Evitar eixos truncados que distorçam diferenças</li><li>Exibir fonte, período e filtros</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, discutiremos como sistemas de IA apoiam rotinas administrativas e onde exigem supervisão.</p></div>
+    <div class="slide slide-end"><h2>Fim do Laboratório 5</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 
   <div id="controls">

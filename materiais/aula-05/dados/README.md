@@ -1,4 +1,4 @@
-# Base da Aula 03
+# Base das Aulas 05 e 06
 
 Arquivo: `hospital_patients_real_world.csv`
 

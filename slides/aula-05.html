@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório 4 · Slides</title>
+  <title>Laboratório 5 · Slides</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
 
@@ -417,131 +417,254 @@
   <div id="slider">
     <div class="slide slide-start active">
       <div class="badge">LABORATÓRIO 5 · 09/09</div>
-      <h1>Limpeza de dados com IA</h1>
-      <p>Uma auditoria hospitalar guiada pelo Antigravity e executada localmente com Pandas</p>
+      <h1>Metabase local com Docker</h1>
+      <p>Suba o seu próprio Metabase, carregue uma base bruta e responda: podemos confiar nesta base?</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="objectives">
-      <h2>Ao final, você será capaz de…</h2>
-      <ul><li><strong>Diagnosticar</strong> problemas reais de qualidade em uma base hospitalar sintética.</li><li><strong>Orientar</strong> um agente de IA com restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> limpeza reproduzível com Pandas sem apagar a camada bruta.</li><li><strong>Validar</strong> a base tratada antes de apoiar uma decisão gerencial.</li></ul>
+      <h2>Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Subir Metabase e PostgreSQL na sua máquina com um único arquivo Docker Compose.</li>
+        <li>Configurar o destino de uploads e conectar o banco de dados analítico.</li>
+        <li>Carregar um CSV bruto reconhecendo encoding, separador e tipos inferidos.</li>
+        <li>Escrever consultas que quantifiquem ausências, categorias duplicadas e inconsistências.</li>
+        <li>Emitir um parecer de confiabilidade sustentado por números verificáveis.</li>
+      </ul>
     </div>
+
     <div class="slide slide-content" data-lesson-section="agenda">
-      <h2>Roteiro de 3 horas</h2>
-      <ul><li>Case e contrato de segurança.</li><li>Download e abertura do workspace no Antigravity.</li><li>Doze prompts: contrato → diagnóstico → validação.</li><li>Revisão humana, produtos da limpeza e entrega.</li><li>Commit e push das evidências.</li></ul>
+      <h2>Roteiro do laboratório</h2>
+      <ul>
+        <li>Por que sair do Metabase compartilhado e subir o seu.</li>
+        <li>Docker Compose: dois bancos, um Metabase.</li>
+        <li>Conectar o banco analítico e ligar o upload.</li>
+        <li>Carregar o CSV hospitalar e conferir o que o carregador fez.</li>
+        <li>Sete consultas de diagnóstico e o parecer da base.</li>
+      </ul>
     </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Case: podemos confiar nesta base?</h2>
-      <p>A Diretoria de Operações recebeu 5.000 registros de internação para analisar permanência e demanda hospitalar. Antes de calcular qualquer indicador, a equipe precisa provar que os dados são utilizáveis.</p>
-      <ul><li><strong>Decisão:</strong> planejar capacidade e priorizar correções cadastrais.</li><li><strong>Risco:</strong> transformar erro de cadastro em falsa evidência.</li><li><strong>Papel da IA:</strong> propor código e testes; nunca decidir uma correção clínica.</li></ul>
+      <h2>Na aula 4 você era visitante</h2>
+      <p>O Metabase hospedado tinha o Olist já conectado, limpo e somente leitura. Você explorou dados que alguém preparou.</p>
+      <p>Hoje o dado é seu: você sobe o servidor, escolhe onde os dados moram e carrega uma base que <strong>ninguém preparou</strong>.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>A base desta aula</h2>
-      <div class="metric-row"><div class="metric"><strong>5.000</strong><span>registros sintéticos</span></div><div class="metric"><strong>7</strong><span>colunas</span></div><div class="metric"><strong>CC0</strong><span>uso educacional</span></div><div class="metric"><strong>CSV</strong><span>333 KB</span></div></div>
-      <p>Hospital Records for Data Cleaning (Medium), de Nudrat Abbas, distribuída pelo Kaggle.</p>
+      <h2>Dois bancos, papéis diferentes</h2>
+      <ul>
+        <li><strong>Banco da aplicação:</strong> onde o Metabase guarda usuários, perguntas e dashboards.</li>
+        <li><strong>Banco analítico:</strong> onde os <em>seus</em> dados moram e para onde vão os uploads.</li>
+        <li>Misturar os dois é o erro clássico: um backup do Metabase não é backup dos seus dados.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Por que não basta um <code>docker run</code></h2>
+      <p>O comando de uma linha que aparece na documentação sobe o Metabase com um banco H2 embutido.</p>
+      <ul>
+        <li>H2 <strong>não suporta upload de arquivos</strong>: o menu existe, mas não há destino válido.</li>
+        <li>H2 vive dentro do contêiner: <code>docker rm</code> apaga tudo o que você construiu.</li>
+        <li>Por isso o Compose, com PostgreSQL e volumes nomeados.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>O que o upload aceita</h2>
+      <ul>
+        <li>Apenas <strong>CSV e TSV</strong>. Arquivo <code>.xlsx</code> não sobe.</li>
+        <li>Excel exporta como <em>CSV UTF-8</em>; confira o separador, porque o Excel em português costuma gravar ponto e vírgula.</li>
+        <li>O carregador infere tipos e normaliza nomes de coluna — e nem sempre do jeito que você espera.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 1 · Conferir o Docker</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comando</button><div class="code-block prompt-text">docker --version
+docker compose version</div></div>
+      <p>Se algum dos dois falhar, instale o Docker Desktop antes de seguir. No Codespace, o Docker já vem pronto.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 2 · A forma do <code>docker-compose.yml</code></h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar esqueleto</button><div class="code-block prompt-text">services:
+  postgres-app:      # banco da aplicação: contas e dashboards
+  postgres-dados:    # banco analítico: destino dos uploads
+  metabase:          # publica a porta 3000
+
+volumes:
+  app-data:
+  dados-data:</div></div>
+      <a class="download-link" href="../materiais/aula-05/docker-compose.yml" download="docker-compose.yml">⬇️ Baixar docker-compose.yml completo</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 2 · O que cada serviço declara</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar trecho</button><div class="code-block prompt-text">  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: postgres-app
+      MB_DB_DBNAME: metabase</div></div>
+      <p>Só o Metabase publica porta. Os bancos ficam dentro da rede do Compose — ninguém os alcança pela internet.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 3 · Subir e acompanhar</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comando</button><div class="code-block prompt-text">docker compose up -d
+docker compose ps
+docker compose logs -f metabase</div></div>
+      <p>A primeira subida baixa cerca de 500 MB e o Metabase leva de 1 a 3 minutos para responder. Abra <code>http://localhost:3000</code> quando o log parar de rolar.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 4 · Conectar o banco analítico</h2>
+      <p>Admin → Databases → Add database → PostgreSQL:</p>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar dados</button><div class="code-block prompt-text">Host: postgres-dados
+Port: 5432
+Database name: dados
+Username: aluno
+Password: aluno</div></div>
+      <p><strong>Host não é <code>localhost</code>.</strong> Dentro da rede do Compose, cada contêiner é encontrado pelo nome do serviço.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 5 · Ligar o upload</h2>
+      <ul>
+        <li>Admin → Settings → Uploads.</li>
+        <li><strong>Database:</strong> <code>dados</code> · <strong>Schema:</strong> <code>public</code>.</li>
+        <li>Salve. Só agora o botão de upload aparece nas coleções.</li>
+      </ul>
+      <p>Se a lista de bancos vier vazia, é porque o passo 4 não foi concluído: o Metabase só oferece destinos que suportam escrita.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 6 · Carregar a base hospitalar</h2>
       <a class="download-link" href="../materiais/aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv">⬇️ Baixar hospital_patients_real_world.csv</a>
+      <ul>
+        <li>Nova coleção → botão de upload → selecione o CSV.</li>
+        <li>São 5.000 linhas e 7 colunas; o carregamento leva alguns segundos.</li>
+        <li>O Metabase cria a tabela com o nome do arquivo e acrescenta uma coluna própria de identificação.</li>
+      </ul>
     </div>
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Prepare o workspace local</h2>
-      <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-05-seunome</code>.</li><li>Abra essa pasta no Antigravity IDE.</li><li>Selecione o modo <strong>orientado por revisão</strong>.</li><li>Mantenha comandos do terminal sob aprovação.</li><li>Se o Python local não estiver pronto, use o Codespace da disciplina como ambiente de execução.</li></ol>
-    </div>
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Nosso contrato com a IA</h2>
-      <ul><li>O CSV bruto é evidência: <strong>nunca sobrescrever</strong>.</li><li>Ausência não é zero e não autoriza adivinhação.</li><li>Datas incoerentes são sinalizadas, não invertidas.</li><li>Cada transformação precisa de contagem antes/depois.</li><li>O aluno lê o plano, o diff e a saída antes de aceitar.</li></ul>
-      <p><em>O processamento ocorre no workspace; prompts e arquivos mencionados podem ser processados pelo serviço de IA. Use apenas a base sintética.</em></p>
-    </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 0 · Contrato de trabalho</div><h2>Primeiro planeje; não edite</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de qualidade de dados. Leia @hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos. Primeiro apresente um plano curto e aguarde minha aprovação.
 
-Preserve o CSV bruto; não invente ausentes; não troque datas por suposição; não exclua linhas silenciosamente; explique cada regra; trabalhe só nesta pasta; não instale pacotes nem execute comandos sem minha aprovação.</div></div>
-    </div>
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 1 · Diagnóstico</div><h2>Veja antes de limpar</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie Aula_04_SeuNome.ipynb. Importe pathlib e pandas, carregue @hospital_patients_real_world.csv em bruta e mostre: head, shape, colunas, dtypes, ausências, linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
+      <h2>Passo 7 · Antes do SQL, olhe o que subiu</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'hospital_patients_real_world'
+ORDER BY ordinal_position;</div></div>
+      <p>Esta consulta define os nomes reais das colunas. <strong>Ajuste todas as consultas seguintes ao que ela devolver</strong> — não confie na sua memória do cabeçalho do CSV.</p>
+    </div>
 
-Não limpe nada. Execute e resuma. Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div></div>
-    </div>
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Checkpoint do diagnóstico</h2>
-      <div class="metric-row"><div class="metric"><strong>350</strong><span>idades ausentes</span></div><div class="metric"><strong>350</strong><span>gêneros ausentes</span></div><div class="metric"><strong>350</strong><span>diagnósticos ausentes</span></div><div class="metric"><strong>0</strong><span>chaves duplicadas</span></div></div>
-      <ul><li>Não “corrija” para alcançar essas contagens.</li><li>Se o resultado divergir, verifique arquivo, caminho e leitura.</li><li>O diagnóstico é a linha de base do relatório final.</li></ul>
+      <h2>Diagnóstico 1 · A base chegou inteira?</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT COUNT(*) AS linhas
+FROM hospital_patients_real_world;</div></div>
+      <p>Esperado: <strong>5.000</strong>. Qualquer outro número significa que o arquivo foi cortado no caminho — pare e recarregue.</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 2 · Estrutura e tipos</div><h2>Trabalhe em uma cópia</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie base = bruta.copy(deep=True) e nunca sobrescreva bruta nem o CSV. Renomeie colunas para snake_case. Converta IDs, gênero e diagnóstico para string; idade para Float64; datas para datetime com errors="coerce".
 
-Conte falhas de conversão, mostre dtypes e explique cada escolha. Não faça imputação.</div></div>
-    </div>
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 3 · Ausências</div><h2>Não preencha o que você não sabe</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags que preservem a origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente como pd.NA. Padronize gênero vazio ou Unknown e diagnóstico vazio como "Não informado".
-
-Gere tabela antes/depois com quantidade e percentual. Não use média, moda ou valor clínico inventado.</div></div>
+      <h2>Diagnóstico 2 · O que está faltando</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT
+  COUNT(*) FILTER (WHERE age IS NULL)                         AS idade_ausente,
+  COUNT(*) FILTER (WHERE gender IS NULL OR gender = '')       AS genero_ausente,
+  COUNT(*) FILTER (WHERE diagnosis IS NULL OR diagnosis = '') AS diagnostico_ausente
+FROM hospital_patients_real_world;</div></div>
+      <p>Esperado: <strong>350, 350 e 350</strong>. O teste duplo (<code>IS NULL</code> e <code>= ''</code>) existe porque o carregador nem sempre converte campo vazio em nulo.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 4 · Categorias</div><h2>Padronize sem mudar significado</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Normalize espaços e capitalização de gender e diagnosis. Em gender, use dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e Unknown/vazio→Não informado.
-
-Em diagnosis, una somente variantes de espaços ou capitalização. Mostre value_counts antes/depois e registre o mapeamento.</div></div>
+      <h2>Diagnóstico 3 · Gênero que não informa nada</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT COALESCE(NULLIF(gender, ''), 'AUSENTE') AS genero,
+       COUNT(*) AS registros
+FROM hospital_patients_real_world
+GROUP BY 1
+ORDER BY registros DESC;</div></div>
+      <p><code>Unknown</code> aparece 1.163 vezes e o vazio, 350. São <strong>1.513 registros</strong>, cerca de 30% da base, sem gênero utilizável para qualquer recorte.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 5 · Chaves</div><h2>Duplicidade exige evidência</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Audite duplicidade de linha e de patient_id. Não use drop_duplicates automaticamente. Se houver linhas idênticas, mostre a evidência antes de propor remoção. Se a mesma chave tiver conteúdos diferentes, crie chave_duplicada e envie para revisão.
-
-Registre também quando a contagem for zero e explique linha duplicada versus chave duplicada.</div></div>
+      <h2>Diagnóstico 4 · Categorias que se duplicam sozinhas</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT
+  COUNT(DISTINCT diagnosis)        AS categorias_aparentes,
+  COUNT(DISTINCT UPPER(diagnosis)) AS categorias_reais,
+  COUNT(*) FILTER (WHERE diagnosis = UPPER(diagnosis)) AS registros_em_maiusculas
+FROM hospital_patients_real_world
+WHERE diagnosis IS NOT NULL AND diagnosis <> '';</div></div>
+      <p>Esperado: <strong>28 categorias aparentes, 14 reais e 321 registros</strong> em caixa alta. Um gráfico de barras por diagnóstico partiria cada doença em duas.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 6 · Regras de negócio</div><h2>Sinalize; não “conserte”</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags: idade_fora_faixa para idade &lt; 0 ou &gt; 110; hospital_id_invalido fora de HOSP-[número]; cronologia_invalida quando discharge_date &lt; admission_date.
-
-Não apague nem inverta datas. Espero 0, 0 e 150 casos, respectivamente; se divergir, investigue antes de alterar a regra.</div></div>
+      <h2>Diagnóstico 5 · Alta antes da admissão</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT COUNT(*) AS altas_antes_da_admissao
+FROM hospital_patients_real_world
+WHERE dischargedate &lt; admissiondate;</div></div>
+      <p>Esperado: <strong>150</strong> registros em que o paciente teria saído antes de entrar. Nenhum deles é apagável sem decisão humana.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 7 · Indicador</div><h2>Permanência só quando válida</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie dias_internacao somente para datas válidas e cronologia coerente. Nos demais casos use pd.NA e mantenha a flag. Converta para Int64 anulável.
-
-Mostre describe(), mínimo e máximo; confirme que nenhum negativo foi aceito. Explique por que usar valor absoluto seria perigoso.</div></div>
+      <h2>Diagnóstico 6 · Duplicidade de paciente</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT COUNT(*) AS ids_repetidos
+FROM (
+  SELECT patientid
+  FROM hospital_patients_real_world
+  GROUP BY patientid
+  HAVING COUNT(*) > 1
+) repetidos;</div></div>
+      <p>Esperado: <strong>0</strong>. Nem toda falha de qualidade está presente, e registrar o que está <em>certo</em> também faz parte do parecer.</p>
     </div>
+
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 8 · Evidência</div><h2>Compare antes e depois</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie relatorio_qualidade com metrica, antes, depois, regra_aplicada e pendencia_humana. Inclua linhas, duplicidades, ausências, gêneros não informados, categorias de diagnóstico, capitalização, idade, hospital e cronologia.
-
-Salve em saidas/relatorio_qualidade.csv. Não trate uma flag pendente como erro resolvido.</div></div>
+      <h2>Diagnóstico 7 · A média que engana</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">SELECT
+  ROUND(AVG(dischargedate - admissiondate), 2) AS permanencia_media,
+  ROUND(AVG(dischargedate - admissiondate)
+        FILTER (WHERE dischargedate &gt;= admissiondate), 2) AS permanencia_media_coerente
+FROM hospital_patients_real_world;</div></div>
+      <p>As duas colunas saem diferentes. A primeira soma 150 permanências negativas; a segunda, não. Qual delas você levaria à diretoria?</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 9 · Produtos</div><h2>Separe tratado de pendente</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Exporte saidas/base_hospitalar_tratada.csv com 5.000 linhas, campos padronizados e flags. Exporte saidas/registros_para_revisao.csv com violações críticas. Crie saidas/dicionario_de_dados.md com coluna, tipo, significado, regra e ausência.
 
-Não exporte o índice e não modifique o arquivo bruto.</div></div>
-    </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 10 · Testes</div><h2>Execute do início ao fim</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Adicione asserts para: 5.000 linhas preservadas; patient_id único; gêneros válidos; nenhum dias_internacao negativo; 150 cronologias inválidas sinalizadas; saídas existentes.
-
-Reinicie o kernel e execute tudo em ordem. Se falhar, diagnostique; não remova nem enfraqueça o teste. Mostre as evidências finais.</div></div>
-    </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 11 · Auditoria e Git</div><h2>Registre também a participação da IA</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie REVISAO_IA.md com objetivo, prompts, sugestões aceitas e rejeitadas, regras humanas, testes, limitações e decisão de uso.
-
-Depois mostre git status e proponha add, commit e push apenas desta entrega. Não execute sem minha aprovação, não crie remoto e nunca use force. Mensagem: "Documenta limpeza auditável da base hospitalar".</div></div>
-    </div>
     <div class="slide slide-content" data-lesson-section="challenge">
-      <h2>Desafio: a base está apta?</h2>
-      <p>Em dupla, defenda uma decisão para a Diretoria de Operações:</p>
-      <ul><li>Quais análises podem usar a base tratada agora?</li><li>Quais registros devem ficar fora do indicador de permanência?</li><li>Qual problema cadastral deve ser corrigido primeiro?</li><li>Que sugestão do Antigravity vocês rejeitaram — e por quê?</li></ul>
+      <h2>Desafio · Painel de confiabilidade</h2>
+      <p>Salve cinco perguntas e monte um dashboard chamado <strong>Confiabilidade da base hospitalar</strong>:</p>
+      <ul>
+        <li>Total de linhas carregadas.</li>
+        <li>Ausências por coluna.</li>
+        <li>Categorias aparentes contra categorias reais.</li>
+        <li>Registros com cronologia impossível.</li>
+        <li>Permanência média com e sem os registros incoerentes.</li>
+      </ul>
     </div>
+
     <div class="slide slide-content" data-lesson-section="challenge">
       <h2>Entrega verificável</h2>
-      <ul><li><code>Aula_04_SeuNome.ipynb</code> executado do início ao fim.</li><li>Base tratada com as 5.000 linhas e flags preservadas.</li><li>Fila de revisão com as 150 cronologias incoerentes.</li><li>Relatório antes/depois e dicionário de dados.</li><li><code>REVISAO_IA.md</code>, commit e push.</li></ul>
+      <ul>
+        <li><code>docker-compose.yml</code> versionado no seu repositório.</li>
+        <li>Print do dashboard com os cinco cartões preenchidos.</li>
+        <li><code>PARECER_BASE.md</code>, em até dez linhas: quais decisões esta base sustenta hoje, quais não sustenta e por quê.</li>
+        <li>Números de conferência: 5.000 · 350 · 350 · 350 · 321 · 150 · 0.</li>
+        <li>Antes de sair: <strong>commit e push</strong>.</li>
+      </ul>
     </div>
+
     <div class="slide slide-content" data-lesson-section="summary">
-      <h2>Limpar é tornar a decisão auditável</h2>
-      <ul><li>Primeiro observar; depois formular regras.</li><li>IA acelera propostas, não transfere responsabilidade.</li><li>Ausência e incoerência carregam informação.</li><li>Flags preservam casos que exigem decisão humana.</li><li>Testes, relatório e Git transformam código em evidência.</li></ul>
+      <h2>Síntese</h2>
+      <p>Subir a ferramenta é a parte fácil; decidir se o dado merece confiança é o trabalho.</p>
+      <ul>
+        <li>Upload exige um banco que aceite escrita — H2 não serve.</li>
+        <li>O carregador nomeia e tipa as colunas por conta própria: confira antes de consultar.</li>
+        <li>Um parecer é feito de contagens, não de impressões.</li>
+      </ul>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comando</button><div class="code-block prompt-text">docker compose down        # para tudo e preserva os dados
+docker compose down -v     # apaga também os volumes</div></div>
     </div>
+
     <div class="slide slide-end" data-lesson-section="next-steps">
       <h2>Próximo laboratório</h2>
-      <p>Usaremos a base tratada para construir estatística descritiva voltada à gestão.</p>
-      <p>Antes de sair: <strong>execute tudo, revise, commit e push</strong>.</p>
+      <p>Você mediu o estrago. Na aula 6, vamos corrigi-lo com Pandas e revisão apoiada por IA — preservando a base bruta.</p>
+      <p>Antes de sair: <strong>salve o dashboard, commit e push</strong>.</p>
     </div>
   </div>
 
