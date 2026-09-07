@@ -1,0 +1,639 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-07",
+  "course": {
+    "title": "Laboratório de Programação, Ciência de Dados & IA",
+    "program": "Graduação em Administração",
+    "track": "BI & Data Science",
+    "instructor": "Prof. Afonso Cesar Lelis Brandão",
+    "workload_hours": 80,
+    "year": 2026,
+    "weekday": "quarta-feira",
+    "start": "19:00",
+    "end": "22:00",
+    "first_class": "2026-08-12",
+    "last_class": "2026-12-16",
+    "week_count": 19,
+    "assessment": "Exclusivamente formativa (acompanhamento contínuo)",
+    "homepage": "https://afonsolelis.github.io/einstein/"
+  },
+  "legend": {
+    "content_state": {
+      "escrita": "Aula com slides e material redigidos e validados",
+      "esqueleto": "Estrutura válida no site, conteúdo ainda por escrever"
+    }
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "lesson": 1,
+      "date": "12/08",
+      "date_iso": "2026-08-12",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Primeiros passos: Configurando sua ferramenta de análise",
+      "tag": "Ambiente",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "GitHub Codespaces",
+        "Jupyter",
+        "notebooks",
+        "variáveis",
+        "regras de negócio",
+        "introdução ao Pandas",
+        "Git e GitHub"
+      ],
+      "objectives": [
+        "Iniciar o ambiente configurado pelo repositório",
+        "Criar e executar um notebook Jupyter",
+        "Representar indicadores com variáveis",
+        "Aplicar regras condicionais",
+        "Versionar e enviar o notebook ao GitHub"
+      ],
+      "activity": "Construir e versionar um notebook executivo com indicadores de uma filial",
+      "deliverable": "Notebook Aula_01_SeuNome.ipynb executável do início ao fim, com recomendação baseada em indicador e commit enviado ao GitHub",
+      "slides": "slides/aula-01.html",
+      "material": "materiais/aula-01/index.html",
+      "files": []
+    },
+    {
+      "week": 2,
+      "lesson": 2,
+      "date": "19/08",
+      "date_iso": "2026-08-19",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Git, grafos e versionamento com Inteligência Artificial",
+      "tag": "Git · IA",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "controle de versão",
+        "grafos direcionados acíclicos",
+        "commits",
+        "branches",
+        "merge",
+        "diff",
+        "GitHub Copilot",
+        "revisão de código gerado por IA",
+        "previsão de demanda hospitalar",
+        "colaboração entre áreas"
+      ],
+      "objectives": [
+        "Explicar commit, branch e merge usando um grafo",
+        "Criar uma branch e commits verificáveis",
+        "Comparar versões com status, diff e log",
+        "Avaliar uma mudança sugerida por IA",
+        "Publicar uma branch e descrever uma proposta de mudança"
+      ],
+      "activity": "Integrar em branches contribuições de Operações e Suprimentos para uma previsão hospitalar proposta com apoio de IA",
+      "deliverable": "Branch remota com três commits coerentes, grafo do histórico, previsão executável, REVISAO_IA.md e proposta de pull request para revisão da Controladoria",
+      "slides": "slides/aula-02.html",
+      "material": "materiais/aula-02/index.html",
+      "files": []
+    },
+    {
+      "week": 3,
+      "lesson": 3,
+      "date": "26/08",
+      "date_iso": "2026-08-26",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Modelagem de dados e SQL I: Do negócio ao banco relacional",
+      "tag": "Dados · SQL",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "modelagem de dados",
+        "modelo entidade-relacionamento",
+        "modelo conceitual",
+        "modelo lógico",
+        "modelo físico",
+        "entidades",
+        "relacionamentos",
+        "cardinalidades 1:N e N:N",
+        "tabela associativa",
+        "atributos",
+        "chaves primárias e estrangeiras",
+        "normalização",
+        "DDL",
+        "DML",
+        "DQL",
+        "DCL",
+        "TCL"
+      ],
+      "objectives": [
+        "Identificar entidades, atributos e relacionamentos em um processo de negócio",
+        "Converter um modelo conceitual em esquema relacional",
+        "Definir chaves, tipos e restrições no modelo físico",
+        "Distinguir DDL, DML, DQL, DCL e TCL pela responsabilidade de cada grupo"
+      ],
+      "activity": "Comparar MER e DER, narrar as cardinalidades e converter o relacionamento N:N na tabela associativa AULA_DOCENTE",
+      "deliverable": "MER com quatro entidades e DER com cinco tabelas, três relações por FKs, PK composta e distinção entre DDL, DML e DQL",
+      "slides": "slides/aula-03.html",
+      "material": "materiais/aula-03/index.html",
+      "files": []
+    },
+    {
+      "week": 4,
+      "lesson": 4,
+      "date": "02/09",
+      "date_iso": "2026-09-02",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "SQL II: Exploração do Olist no Metabase",
+      "tag": "SQL · Metabase",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "Metabase",
+        "PostgreSQL",
+        "dataset Olist",
+        "DQL",
+        "perfilamento de dados",
+        "SELECT, filtros e ordenação",
+        "GROUP BY e séries temporais",
+        "JOIN",
+        "grão e validação de consultas",
+        "dashboards"
+      ],
+      "objectives": [
+        "Reconhecer um banco desconhecido: tabelas, colunas, período e volume",
+        "Perfilar colunas quanto a completude, cardinalidade e distribuição",
+        "Consultar dados com filtros, ordenação, agregação e JOIN em SQL",
+        "Validar granularidade, quantidade de linhas e totais antes de interpretar resultados",
+        "Representar cada resposta no gráfico adequado e reuni-las em um dashboard"
+      ],
+      "activity": "Treino livre: reconhecer o Olist, perfilar colunas e fechar a aula respondendo três perguntas com gráficos (linha, barras e mapa) reunidos em um dashboard na coleção pessoal do Metabase",
+      "deliverable": null,
+      "slides": "slides/aula-04.html",
+      "material": "materiais/aula-04/index.html",
+      "files": [
+        "materiais/aula-04/laboratorio-sql.html",
+        "materiais/aula-04/rede-cuidar.sqlite"
+      ]
+    },
+    {
+      "week": 5,
+      "lesson": 5,
+      "date": "09/09",
+      "date_iso": "2026-09-09",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Metabase local com Docker: subindo a sua própria base",
+      "tag": "Metabase · Docker",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "Metabase local",
+        "Docker Compose",
+        "GitHub Codespaces",
+        "encaminhamento de portas",
+        "PostgreSQL",
+        "banco da aplicação e banco analítico",
+        "upload de CSV",
+        "encoding e separador",
+        "SQL de diagnóstico",
+        "qualidade de dados",
+        "parecer de confiabilidade"
+      ],
+      "objectives": [
+        "Subir Metabase e PostgreSQL na própria máquina com um único arquivo Docker Compose",
+        "Configurar a conexão do banco analítico e o destino de uploads no Metabase",
+        "Carregar um CSV bruto reconhecendo encoding, separador e tipos inferidos",
+        "Escrever consultas que quantifiquem ausências, categorias duplicadas e cronologias impossíveis",
+        "Defender um parecer de confiabilidade sustentado por números verificáveis"
+      ],
+      "activity": "Subir Metabase e PostgreSQL com Docker Compose, configurar o destino de uploads, carregar a base hospitalar bruta e executar sete consultas de diagnóstico sobre a qualidade dela",
+      "deliverable": "docker-compose.yml versionado, dashboard Confiabilidade da base hospitalar com cinco cartões, PARECER_BASE.md de até dez linhas citando as contagens 5.000 · 350 · 350 · 350 · 321 · 150 · 0, commit e push",
+      "slides": "slides/aula-05.html",
+      "material": "materiais/aula-05/index.html",
+      "files": [
+        "materiais/aula-05/docker-compose.yml",
+        "materiais/aula-05/dados/README.md",
+        "materiais/aula-05/dados/hospital_patients_real_world.csv"
+      ]
+    },
+    {
+      "week": 6,
+      "lesson": 6,
+      "date": "16/09",
+      "date_iso": "2026-09-16",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Inteligência Artificial no dia a dia da administração",
+      "tag": "IA",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "inteligência artificial",
+        "administração"
+      ],
+      "objectives": [
+        "Distinguir automação, aprendizado de máquina e IA generativa",
+        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Avaliar risco, privacidade e necessidade de revisão humana"
+      ],
+      "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
+      "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência",
+      "slides": "slides/aula-06.html",
+      "material": "materiais/aula-06/index.html",
+      "files": []
+    },
+    {
+      "week": 7,
+      "lesson": 7,
+      "date": "23/09",
+      "date_iso": "2026-09-23",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Storytelling, Dashboards e Segmentação de Clientes",
+      "tag": "Visualização",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "escolha de gráfico",
+        "storytelling com dados",
+        "dashboards narrativos",
+        "segmentação RFV",
+        "recência, frequência e valor",
+        "Olist",
+        "Metabase",
+        "funções de janela",
+        "uso funcional da cor",
+        "vieses de visualização"
+      ],
+      "objectives": [
+        "Escolher o gráfico a partir da pergunta executiva, não do catálogo da ferramenta",
+        "Segmentar clientes por recência, frequência e valor usando SQL",
+        "Ordenar um dashboard como narrativa: contexto, tensão e recomendação",
+        "Reconhecer quando um gráfico mente porque a base está suja",
+        "Defender uma recomendação citando o número que a sustenta e o que a invalidaria"
+      ],
+      "activity": "Segmentar os clientes do Olist por recência, frequência e valor no Metabase da disciplina e montar um dashboard em ordem narrativa, terminando na demonstração de como a base suja da aula 5 produz um gráfico que mente",
+      "deliverable": "Dashboard De onde vem a receita e quem a sustenta com cinco cartões em ordem narrativa e títulos que afirmam, critério de segmentação escrito no painel, RECOMENDACAO.md com a recomendação, o número que a sustenta e o que a invalidaria, print das 28 barras de diagnóstico, commit e push",
+      "slides": "slides/aula-07.html",
+      "material": "materiais/aula-07/index.html",
+      "files": []
+    },
+    {
+      "week": 8,
+      "lesson": 8,
+      "date": "30/09",
+      "date_iso": "2026-09-30",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Limpeza de dados: Preparando a base para análises",
+      "tag": "Pandas",
+      "status": "complete",
+      "content_state": "escrita",
+      "topics": [
+        "limpeza de dados",
+        "Pandas",
+        "Antigravity",
+        "dados hospitalares sintéticos",
+        "dados ausentes",
+        "padronização categórica",
+        "consistência temporal",
+        "qualidade de dados",
+        "governança de IA"
+      ],
+      "objectives": [
+        "Diagnosticar completude, unicidade, padronização e consistência temporal",
+        "Orientar um agente de IA com escopo, restrições e evidências verificáveis",
+        "Aplicar transformações reproduzíveis sem sobrescrever a camada bruta",
+        "Validar produtos da limpeza com contagens, flags e testes",
+        "Defender quais análises gerenciais a base pode sustentar"
+      ],
+      "activity": "Conduzir no Antigravity uma limpeza auditável da base hospitalar, do diagnóstico à exportação, revisando cada plano e transformação",
+      "deliverable": "Notebook executado, base tratada com 5.000 linhas, fila com 150 cronologias incoerentes, relatório de qualidade, dicionário de dados, revisão da IA, commit e push",
+      "slides": "slides/aula-08.html",
+      "material": "materiais/aula-08/index.html",
+      "files": [
+        "materiais/aula-08/prompts-antigravity.md"
+      ]
+    },
+    {
+      "week": 9,
+      "lesson": 9,
+      "date": "07/10",
+      "date_iso": "2026-10-07",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Fazendo previsões com IA: Vendas e Tendências",
+      "tag": "ML · Regressão",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "engenharia de atributos",
+        "pipelines",
+        "vazamento temporal",
+        "regressão",
+        "previsão de vendas",
+        "tendências"
+      ],
+      "objectives": [
+        "Criar atributos derivados sem vazar informação futura",
+        "Organizar transformações em um pipeline reproduzível",
+        "Treinar uma regressão com separação temporal adequada",
+        "Interpretar MAE e comparar com um baseline",
+        "Comunicar previsão como faixa e hipótese,  não certeza"
+      ],
+      "activity": "Comparar baseline e regressão para vendas mensais",
+      "deliverable": "Notebook, tabela real versus previsto e recomendação de uso",
+      "slides": "slides/aula-09.html",
+      "material": "materiais/aula-09/index.html",
+      "files": []
+    },
+    {
+      "week": 10,
+      "lesson": 10,
+      "date": "14/10",
+      "date_iso": "2026-10-14",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
+      "tag": "Inferência",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "estudo de caso",
+        "qui-quadrado",
+        "tamanho amostral",
+        "teste t",
+        "testes A/B",
+        "testes estatísticos"
+      ],
+      "objectives": [
+        "Formular hipótese, métrica e unidade experimental antes do teste",
+        "Escolher teste t ou qui-quadrado conforme o desfecho",
+        "Interpretar efeito, intervalo e tamanho amostral junto ao p-valor",
+        "Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas"
+      ],
+      "activity": "Analisar um experimento com ticket e conversão e conduzir o caso de uma campanha comercial da auditoria da base à recomendação ao comitê",
+      "deliverable": "Protocolo do experimento e relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante",
+      "slides": "slides/aula-10.html",
+      "material": "materiais/aula-10/index.html",
+      "files": []
+    },
+    {
+      "week": 11,
+      "lesson": 11,
+      "date": "21/10",
+      "date_iso": "2026-10-21",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Auditoria automatizada: Detectando anomalias e riscos",
+      "tag": "Anomalias",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "auditoria",
+        "anomalias",
+        "riscos"
+      ],
+      "objectives": [
+        "Distinguir erro,  evento raro e fraude",
+        "Aplicar regras e escores de anomalia com contexto",
+        "Priorizar alertas por impacto e explicabilidade"
+      ],
+      "activity": "Combinar regra e escore para revisar alertas de pagamentos",
+      "deliverable": "Ranking com motivo, valor em risco, evidência e revisão",
+      "slides": "slides/aula-11.html",
+      "material": "materiais/aula-11/index.html",
+      "files": []
+    },
+    {
+      "week": 12,
+      "lesson": 12,
+      "date": "28/10",
+      "date_iso": "2026-10-28",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "IA aplicada à estratégia e tomada de decisão",
+      "tag": "IA · Estratégia",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "inteligência artificial",
+        "estratégia",
+        "decisão"
+      ],
+      "objectives": [
+        "Estruturar uma decisão em alternativas,  critérios e cenários",
+        "Combinar previsão e julgamento sem automatizar responsabilidade",
+        "Testar robustez da recomendação a mudanças de premissas"
+      ],
+      "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
+      "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão",
+      "slides": "slides/aula-12.html",
+      "material": "materiais/aula-12/index.html",
+      "files": []
+    },
+    {
+      "week": 13,
+      "lesson": 13,
+      "date": "04/11",
+      "date_iso": "2026-11-04",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Análise forense de dados: Identificando fraudes",
+      "tag": "Forense",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "análise forense",
+        "fraudes"
+      ],
+      "objectives": [
+        "Preservar cadeia de custódia e trilha de auditoria",
+        "Relacionar transações,  entidades e padrões suspeitos",
+        "Documentar achados sem ultrapassar a evidência"
+      ],
+      "activity": "Reconstruir uma sequência suspeita preservando a evidência",
+      "deliverable": "Dossiê com inventário, consultas, achados, alternativas e lacunas",
+      "slides": "slides/aula-13.html",
+      "material": "materiais/aula-13/index.html",
+      "files": []
+    },
+    {
+      "week": 14,
+      "lesson": 14,
+      "date": "11/11",
+      "date_iso": "2026-11-11",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
+      "tag": "Estudo de Caso",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "recursos humanos",
+        "análise de dados",
+        "estudo de caso"
+      ],
+      "objectives": [
+        "Definir indicadores de pessoas sem reduzir indivíduos a números",
+        "Investigar rotatividade com recortes e contexto",
+        "Propor intervenção mensurável e eticamente defensável"
+      ],
+      "activity": "Analisar rotatividade por área e senioridade e propor intervenção",
+      "deliverable": "Diagnóstico com indicador, recortes, limitações, ação e métrica",
+      "slides": "slides/aula-14.html",
+      "material": "materiais/aula-14/index.html",
+      "files": []
+    },
+    {
+      "week": 15,
+      "lesson": 15,
+      "date": "18/11",
+      "date_iso": "2026-11-18",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Estudo de Caso: Programação para previsão de caixas",
+      "tag": "Estudo de Caso",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "programação",
+        "previsão de caixa",
+        "estudo de caso"
+      ],
+      "objectives": [
+        "Organizar entradas e saídas em uma série temporal",
+        "Construir cenários de caixa e identificar rupturas",
+        "Automatizar atualização com premissas auditáveis"
+      ],
+      "activity": "Projetar 60 dias de caixa em três cenários",
+      "deliverable": "Notebook e quadro executivo com premissas, menor saldo e ação",
+      "slides": "slides/aula-15.html",
+      "material": "materiais/aula-15/index.html",
+      "files": []
+    },
+    {
+      "week": 16,
+      "lesson": 16,
+      "date": "25/11",
+      "date_iso": "2026-11-25",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Estudo de Caso: Previsão de demandas",
+      "tag": "Estudo de Caso",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "previsão de demanda",
+        "estudo de caso"
+      ],
+      "objectives": [
+        "Reconhecer tendência,  sazonalidade e eventos especiais",
+        "Validar previsões com janela temporal e baseline sazonal",
+        "Converter erro previsto em estoque e capacidade"
+      ],
+      "activity": "Comparar baseline semanal e média móvel e propor estoque de segurança",
+      "deliverable": "Avaliação temporal, previsão e recomendação de capacidade",
+      "slides": "slides/aula-16.html",
+      "material": "materiais/aula-16/index.html",
+      "files": []
+    },
+    {
+      "week": 17,
+      "lesson": 17,
+      "date": "02/12",
+      "date_iso": "2026-12-02",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Projeto Integrador: Resolvendo um problema de negócio real",
+      "tag": "Projeto",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "projeto integrador",
+        "problema de negócio"
+      ],
+      "objectives": [
+        "Delimitar problema,  usuário e decisão do projeto",
+        "Construir análise reproduzível com evidências",
+        "Planejar entrega com escopo,  riscos e critérios de sucesso"
+      ],
+      "activity": "Produzir o primeiro resultado verificável do projeto e receber revisão",
+      "deliverable": "Repositório executável, dados documentados, análise, visual e backlog",
+      "slides": "slides/aula-17.html",
+      "material": "materiais/aula-17/index.html",
+      "files": []
+    },
+    {
+      "week": 18,
+      "lesson": 18,
+      "date": "09/12",
+      "date_iso": "2026-12-09",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Apresentação de resultados e recomendações executivas",
+      "tag": "Apresentação",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "apresentação",
+        "resultados",
+        "recomendações executivas"
+      ],
+      "objectives": [
+        "Selecionar evidências essenciais para uma audiência executiva",
+        "Estruturar apresentação em decisão,  evidência e recomendação",
+        "Responder objeções com limites e próximos testes"
+      ],
+      "activity": "Converter o projeto em uma fala de cinco minutos e ensaiar objeções",
+      "deliverable": "Deck, resumo de uma página e roteiro de respostas",
+      "slides": "slides/aula-18.html",
+      "material": "materiais/aula-18/index.html",
+      "files": []
+    },
+    {
+      "week": 19,
+      "lesson": 19,
+      "date": "16/12",
+      "date_iso": "2026-12-16",
+      "weekday": "quarta-feira",
+      "start": "19:00",
+      "end": "22:00",
+      "theme": "Apresentação final de projetos",
+      "tag": "Apresentação",
+      "status": "complete",
+      "content_state": "esqueleto",
+      "topics": [
+        "apresentação final",
+        "projetos"
+      ],
+      "objectives": [
+        "Defender escolhas metodológicas com clareza e honestidade",
+        "Avaliar projetos com critérios comuns e feedback acionável",
+        "Consolidar aprendizados e plano de evolução"
+      ],
+      "activity": "Apresentar o projeto, responder à banca e priorizar feedback",
+      "deliverable": "Repositório final, apresentação, resumo executivo e retrospectiva",
+      "slides": "slides/aula-19.html",
+      "material": "materiais/aula-19/index.html",
+      "files": []
+    }
+  ]
+}

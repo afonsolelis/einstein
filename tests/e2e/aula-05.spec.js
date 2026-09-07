@@ -78,8 +78,35 @@ test('material da aula 5 traz os sete diagnosticos com os numeros de conferencia
   for (const numero of ['5.000', '350', '321', '150', '1.513', '28', '14']) {
     expect(conteudo, `numero de conferencia ${numero} ausente`).toContain(numero);
   }
-  await expect(page.locator('.code-block')).toHaveCount(13);
+  await expect(page.locator('.code-block')).toHaveCount(18);
   expect(errors).toEqual([]);
+});
+
+test('material da aula 5 documenta o caminho do Codespaces de ponta a ponta', async ({ page }) => {
+  const errors = watchPage(page);
+  await page.goto('/materiais/aula-05/index.html');
+  const conteudo = await page.locator('.content').innerText();
+  for (const marco of [
+    'Create codespace on main',
+    'Rebuild Container',
+    'docker compose config',
+    'PORTS',
+    'Port Visibility',
+    'postgres-dados'
+  ]) {
+    expect(conteudo, `passo ${marco} ausente do passo a passo`).toContain(marco);
+  }
+  await expect(page.getByRole('heading', { name: /Abrir o Metabase pela aba PORTS/ })).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('devcontainer entrega Docker e encaminha a porta do Metabase', async ({ request }) => {
+  const response = await request.get('/.devcontainer/devcontainer.json');
+  expect(response.ok()).toBeTruthy();
+  const devcontainer = JSON.parse(await response.text());
+  const features = Object.keys(devcontainer.features || {});
+  expect(features.some(id => id.includes('docker-in-docker')), 'feature docker-in-docker ausente').toBeTruthy();
+  expect(devcontainer.forwardPorts).toContain(3000);
 });
 
 test('slides e material da aula 5 nao geram overflow horizontal', async ({ page }) => {

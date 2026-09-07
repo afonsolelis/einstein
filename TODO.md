@@ -17,6 +17,31 @@ confiança injustificada.
 
 # Concluído
 
+## Aula 5 (09/09) · Passo a passo do Metabase no Codespaces
+O material ganhou os dez passos completos, do `Create codespace on main` ao primeiro
+`SELECT`, mais uma seção sobre suspensão do ambiente e uma tabela de sete sintomas.
+
+**Detalhe do ambiente que custou uma correção:** o Codespaces traz Docker na imagem
+*universal*, usada quando o repositório não tem `devcontainer.json`. Este repositório
+tem, e fixa `mcr.microsoft.com/devcontainers/python:1-3.12-bookworm` — nesse caminho o
+Codespaces monta só o que o arquivo declara, e essa imagem não traz o Docker CLI
+(conferido rodando a imagem). O `devcontainer.json` agora declara a feature
+`docker-in-docker:4` e encaminha a porta 3000, de modo que a garantia passa a valer
+também por aqui.
+
+Quem já tiver um Codespace criado precisa de **Rebuild Container**; o material e o
+README avisam.
+
+Pilha validada de verdade nesta passada: `docker compose up -d` sobe os três serviços,
+`/api/health` responde `{"status":"ok"}`, o log fecha em `Metabase Initialization COMPLETE`,
+`postgres-dados` resolve de dentro do contêiner do Metabase e só a 3000 é publicada.
+
+## calendar.json
+Cronograma das 19 semanas gerado a partir do `index.json`, com data ISO, dia da semana,
+horário, tópicos, entregável e caminhos. O campo `content_state` separa aula escrita de
+esqueleto, distinção que o `status` do `index.json` não faz — lá `complete` significa
+apenas estrutura válida.
+
 ## Aula 7 (23/09) · Storytelling, Dashboards e Segmentação
 Segmenta os clientes do Olist por RFV no Metabase da disciplina e fecha em um
 dashboard narrativo. Passa no validador `--complete`.

@@ -167,6 +167,7 @@
       font-size: 0.86em;
     }
 
+    kbd { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 5px; border: 1px solid #cbd5e1; border-bottom-width: 2px; background: #f8fafc; color: #1a2f5e; font-family: 'Fira Code', monospace; font-size: 0.85em; font-weight: 600; }
     .code-block {
       white-space: pre-wrap;
       position: relative;
@@ -481,7 +482,7 @@
       <h2>Passo 1 · Conferir o Docker</h2>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comando</button><div class="code-block prompt-text">docker --version
 docker compose version</div></div>
-      <p>Se algum dos dois falhar, instale o Docker Desktop antes de seguir. No Codespace, o Docker já vem pronto.</p>
+      <p>No Codespace o Docker vem declarado no <code>devcontainer.json</code>. Se o comando não existir, o Codespace é anterior a essa configuração: <kbd>F1</kbd> → <strong>Rebuild Container</strong>. Em máquina própria, Docker Desktop instalado antes da aula.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
@@ -515,7 +516,7 @@ volumes:
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comando</button><div class="code-block prompt-text">docker compose up -d
 docker compose ps
 docker compose logs -f metabase</div></div>
-      <p>A primeira subida baixa cerca de 500 MB e o Metabase leva de 1 a 3 minutos para responder. Abra <code>http://localhost:3000</code> quando o log parar de rolar.</p>
+      <p>A primeira subida baixa cerca de 500 MB; o log fecha com <code>Metabase Initialization COMPLETE</code>. No Codespace, abra pela aba <strong>PORTS</strong> → porta 3000 → ícone de globo. Em máquina própria, <code>http://localhost:3000</code>.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">

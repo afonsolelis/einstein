@@ -108,12 +108,19 @@ declarado no próprio arquivo.
 
 O repositório contém uma configuração em `.devcontainer/devcontainer.json`. Ao criar
 um Codespace, o ambiente instala automaticamente Python, Jupyter e as bibliotecas de
-`requirements.txt`, além das extensões Python e Jupyter do VS Code.
+`requirements.txt`, além das extensões Python e Jupyter do VS Code. A configuração
+também habilita **Docker e Docker Compose** dentro do Codespace (feature
+`docker-in-docker`) e encaminha a **porta 3000**, usada pelo Metabase do laboratório 5.
 
 1. No GitHub, selecione `Code → Codespaces → Create codespace`.
 2. Aguarde a instalação das dependências terminar.
 3. Abra ou crie um arquivo `.ipynb` e selecione o kernel Python sugerido.
 4. Ao terminar, faça commit e push das mudanças e interrompa o Codespace.
+
+Um Codespace criado **antes** da inclusão do Docker continua sem o comando `docker`.
+Nesse caso, execute `Codespaces: Rebuild Container` pela paleta de comandos (`F1`).
+O passo a passo completo de subida do Metabase está em
+[`materiais/aula-05/index.html`](materiais/aula-05/index.html).
 
 ### Visualizar localmente
 

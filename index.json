@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-03",
+  "generated_at": "2026-09-07",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -18,6 +18,7 @@
       "index.html",
       "professor.html",
       "index.json",
+      "calendar.json",
       "requirements.txt",
       "package.json",
       "package-lock.json",
@@ -299,6 +300,8 @@
       "topics": [
         "Metabase local",
         "Docker Compose",
+        "GitHub Codespaces",
+        "encaminhamento de portas",
         "PostgreSQL",
         "banco da aplicação e banco analítico",
         "upload de CSV",
@@ -329,11 +332,14 @@
       },
       "material": {
         "path": "materiais/aula-05/index.html",
-        "section_count": 10,
+        "section_count": 12,
         "highlights": [
+          "Passo a passo completo do Metabase no GitHub Codespaces, do Create codespace ao primeiro SELECT",
           "docker-compose.yml pronto com Metabase e dois PostgreSQL, disponível para download",
           "Separação explícita entre banco da aplicação e banco analítico",
           "Por que o docker run com H2 não suporta upload de arquivos",
+          "Acesso pela aba PORTS do Codespaces, visibilidade da porta e o que acontece quando o ambiente é suspenso",
+          "Tabela de sintomas e causas para os sete erros mais comuns da subida",
           "Consulta ao information_schema antes de escrever qualquer SQL de análise",
           "Sete diagnósticos com resultados de conferência: 5.000, 350, 321, 150 e 0",
           "A média de permanência calculada com e sem os 150 registros incoerentes"

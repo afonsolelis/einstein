@@ -59,6 +59,7 @@
     tbody tr:nth-child(even) { background: #f8fafc; }
     .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
     .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    kbd { display: inline-block; padding: 0.15rem 0.45rem; border-radius: 6px; border: 1px solid #cbd5e1; border-bottom-width: 2px; background: #f8fafc; color: #1a2f5e; font-family: 'Fira Code', monospace; font-size: 0.85em; font-weight: 600; }
     .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
     .evidence strong { display: block; margin-bottom: 0.35rem; }
     .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
@@ -78,6 +79,7 @@
       .badge { border: 1px solid #ccc; color: black; background: white; }
       .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
       .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      kbd { background: white; border: 1px solid #666; color: black; }
       p, li { color: black; }
       @page { margin: 2cm; }
     }
@@ -181,16 +183,31 @@
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>5. Prática guiada</h2>
+        <h2>5. Prática guiada: subindo o Metabase no Codespaces</h2>
+        <p>O caminho oficial da disciplina é o <strong>GitHub Codespaces</strong>: a máquina é do GitHub, o Docker já vem declarado no <code>.devcontainer/devcontainer.json</code> deste repositório e ninguém precisa instalar nada no computador pessoal. Os dez passos abaixo vão do Codespace recém-criado ao primeiro <code>SELECT</code>. Quem preferir rodar na própria máquina encontra as diferenças na seção 5.11.</p>
 
-        <h3>5.1 Conferir o ambiente</h3>
-        <p>Crie a pasta <code>aula-05-seunome</code> dentro do seu repositório da disciplina e confirme que o Docker responde:</p>
+        <h3>5.1 Abrir o Codespace</h3>
+        <p>No GitHub, abra o repositório da disciplina e clique em <strong>Code → Codespaces → Create codespace on main</strong>. Uma aba nova abre o VS Code no navegador e começa a montar o ambiente.</p>
+        <p>A primeira criação leva de três a cinco minutos, porque instala o Python, as bibliotecas de <code>requirements.txt</code> e o Docker dentro do contêiner. Espere a mensagem <em>Finishing up</em> desaparecer e o terminal aceitar comandos antes de seguir.</p>
+        <div class="alert-box">
+          <h4>Já tinha um Codespace criado antes desta aula?</h4>
+          <p>O suporte a Docker foi acrescentado ao <code>devcontainer.json</code> depois. Um Codespace criado antes disso continua sem o comando <code>docker</code>. Abra a paleta de comandos com <kbd>F1</kbd>, execute <strong>Codespaces: Rebuild Container</strong> e espere a remontagem — é mais rápido do que criar outro.</p>
+        </div>
+
+        <h3>5.2 Conferir que o Docker respondeu</h3>
+        <p>Abra o terminal integrado em <strong>Terminal → New Terminal</strong> e execute:</p>
         <div class="code-block">docker --version
 docker compose version</div>
-        <p>No GitHub Codespaces o Docker já vem instalado. Em máquina própria, instale o Docker Desktop antes da aula — a primeira instalação não cabe em três horas de laboratório.</p>
+        <p>Os dois precisam devolver um número de versão. Se aparecer <code>docker: command not found</code>, o ambiente ainda não terminou de montar ou o Codespace é anterior à configuração do Docker — volte ao alerta do passo 5.1.</p>
 
-        <h3>5.2 O arquivo <code>docker-compose.yml</code></h3>
-        <p>Salve o arquivo abaixo dentro da pasta que você acabou de criar. Ele descreve os três serviços e os dois volumes:</p>
+        <h3>5.3 Criar a pasta de trabalho</h3>
+        <p>Ainda no terminal, crie a pasta da aula dentro do repositório e entre nela:</p>
+        <div class="code-block">mkdir -p aula-05-seunome
+cd aula-05-seunome</div>
+        <p>Trabalhar dentro do repositório importa: no fim da aula, o <code>docker-compose.yml</code> e o parecer são entregues por commit e push, e não por download.</p>
+
+        <h3>5.4 Escrever o <code>docker-compose.yml</code></h3>
+        <p>Crie o arquivo <code>docker-compose.yml</code> dentro da pasta e cole o conteúdo abaixo. Ele descreve os três serviços e os dois volumes:</p>
         <div class="code-block">services:
   postgres-app:
     image: postgres:16
@@ -228,35 +245,53 @@ docker compose version</div>
 volumes:
   app-data:
   dados-data:</div>
-        <p>Repare que apenas o Metabase publica porta para fora (<code>3000:3000</code>). Os bancos ficam acessíveis somente dentro da rede do Compose, que é exatamente o que se quer: ninguém alcança o PostgreSQL pela internet.</p>
+        <p>Repare que apenas o Metabase publica porta (<code>3000:3000</code>). Os bancos ficam acessíveis somente dentro da rede do Compose, que é exatamente o que se quer: ninguém alcança o PostgreSQL de fora.</p>
+        <p>Antes de subir, peça ao próprio Compose que leia o arquivo. O comando abaixo não sobe nada: apenas expande a configuração e falha se houver erro de indentação, que é o defeito mais comum em YAML escrito à mão.</p>
+        <div class="code-block">docker compose config</div>
 
         <div class="alert-box">
           <h4>Senhas neste arquivo são de laboratório</h4>
-          <p>Usuário e senha iguais ao nome do banco servem para uma aula em máquina local, sem porta exposta. Em qualquer ambiente compartilhado ou com acesso externo, credenciais saem do arquivo versionado e vão para variáveis de ambiente ou um gerenciador de segredos.</p>
+          <p>Usuário e senha iguais ao nome do banco servem para uma aula sem porta exposta para a internet. Em qualquer ambiente compartilhado ou com acesso externo, credenciais saem do arquivo versionado e vão para variáveis de ambiente ou um gerenciador de segredos.</p>
         </div>
 
-        <h3>5.3 Subir a pilha</h3>
+        <h3>5.5 Subir a pilha</h3>
         <div class="code-block">docker compose up -d
-docker compose ps
-docker compose logs -f metabase</div>
-        <p>A primeira execução baixa cerca de 500 MB de imagens. Depois disso, o Metabase ainda leva de um a três minutos preparando o banco da aplicação: o log para de rolar quando ele estiver pronto. Abra <code>http://localhost:3000</code> e crie a conta de administrador — ela é local e não tem relação com a conta compartilhada da aula 4.</p>
+docker compose ps</div>
+        <p>A primeira execução baixa cerca de 500 MB de imagens. O <code>ps</code> precisa mostrar os três serviços com estado <code>running</code>; qualquer um em <code>exited</code> ou <code>restarting</code> é problema para resolver antes de abrir o navegador.</p>
+        <p>O Metabase ainda leva de trinta segundos a três minutos preparando o banco da aplicação. Acompanhe:</p>
+        <div class="code-block">docker compose logs -f metabase</div>
+        <p>Espere pela linha <code>Metabase Initialization COMPLETE</code> e saia do log com <kbd>Ctrl</kbd>+<kbd>C</kbd> — sair do log não derruba o serviço, porque ele está em segundo plano por causa do <code>-d</code>.</p>
 
-        <h3>5.4 Conectar o banco analítico</h3>
-        <p>Em <strong>Admin → Databases → Add database</strong>, escolha PostgreSQL e preencha:</p>
-        <div class="code-block">Host: postgres-dados
-Port: 5432
-Database name: dados
-Username: aluno
-Password: aluno</div>
-        <p>O erro mais comum da aula acontece aqui: escrever <code>localhost</code> no campo Host. Para o contêiner do Metabase, <code>localhost</code> é ele mesmo, não a sua máquina. Dentro de uma rede do Compose, cada serviço é alcançado pelo <strong>nome do serviço</strong>.</p>
+        <h3>5.6 Abrir o Metabase pela aba PORTS</h3>
+        <p>Este é o passo que muda no Codespaces e onde a turma costuma travar. O <code>localhost:3000</code> do enunciado é o endereço <em>dentro</em> da máquina do GitHub, e não do seu navegador. O acesso passa pelo encaminhamento de portas:</p>
+        <ol>
+          <li>Abra a aba <strong>PORTS</strong>, ao lado de TERMINAL, no painel inferior do VS Code.</li>
+          <li>Localize a linha da porta <strong>3000</strong>, rotulada <em>Metabase</em>. Ela aparece sozinha assim que o contêiner sobe.</li>
+          <li>Passe o mouse sobre a coluna <strong>Forwarded Address</strong> e clique no ícone de globo (<em>Open in Browser</em>).</li>
+        </ol>
+        <p>O endereço tem a forma <code>https://algo-3000.app.github.dev</code>. Ele é <strong>privado</strong> por padrão: só a sua conta do GitHub abre. Para mostrar a tela ao professor sem compartilhar a tela, clique com o botão direito na porta e escolha <strong>Port Visibility → Public</strong> — e volte para <em>Private</em> ao terminar, porque enquanto estiver pública qualquer pessoa com o link entra no seu Metabase.</p>
 
-        <h3>5.5 Ligar o upload</h3>
-        <p>Em <strong>Admin → Settings → Uploads</strong>, defina <code>dados</code> como banco e <code>public</code> como schema, e salve. Só depois disso o botão de upload aparece nas coleções.</p>
+        <h3>5.7 Criar a conta de administrador</h3>
+        <p>A tela de boas-vindas pede idioma, nome, e-mail e senha. Essa conta é <strong>local ao seu Metabase</strong> e não tem relação alguma com a conta compartilhada usada na aula 4. Anote a senha: não há recuperação por e-mail nesta instalação, porque não existe servidor de e-mail configurado.</p>
+        <p>Quando o assistente perguntar por um banco de dados, escolha adicionar depois. A conexão é feita no passo seguinte, pela tela de administração, onde os campos ficam mais claros.</p>
+
+        <h3>5.8 Conectar o banco analítico</h3>
+        <p>Em <strong>Admin settings → Databases → Add database</strong>, escolha PostgreSQL e preencha:</p>
+        <div class="code-block">Display name:   dados
+Host:           postgres-dados
+Port:           5432
+Database name:  dados
+Username:       aluno
+Password:       aluno</div>
+        <p>O erro mais comum da aula acontece aqui: escrever <code>localhost</code> no campo Host. Para o contêiner do Metabase, <code>localhost</code> é ele mesmo, não a sua máquina nem o Codespace. Dentro de uma rede do Compose, cada serviço é alcançado pelo <strong>nome do serviço</strong> — e o nome, aqui, é <code>postgres-dados</code>.</p>
+
+        <h3>5.9 Ligar o upload</h3>
+        <p>Em <strong>Admin settings → Settings → Uploads</strong>, defina <code>dados</code> como banco e <code>public</code> como schema, e salve. Só depois disso o botão de upload aparece nas coleções.</p>
         <p>Se a lista de bancos vier vazia, o passo anterior não foi concluído — o Metabase só oferece como destino bancos em que consegue criar tabelas.</p>
 
-        <h3>5.6 Carregar a base hospitalar</h3>
-        <p>O arquivo é o mesmo dataset sintético do Kaggle usado na próxima aula: <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas sob licença CC0. São 5.000 internações fictícias em 7 colunas.</p>
-        <p>Crie uma coleção, use o botão de upload e selecione o CSV. Três detalhes que valem para qualquer arquivo:</p>
+        <h3>5.10 Carregar a base hospitalar</h3>
+        <p>O arquivo é o mesmo dataset sintético do Kaggle usado na aula 8: <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium" target="_blank" rel="noopener noreferrer">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas sob licença CC0. São 5.000 internações fictícias em 7 colunas. Se o seu Codespace foi criado a partir do repositório da disciplina, o arquivo já está lá, em <code>materiais/aula-05/dados/</code>, e não precisa ser baixado. Caso contrário, use o botão <em>Baixar base CSV</em> no topo desta página e arraste o arquivo para dentro do Codespace.</p>
+        <p>Saia da administração, crie uma coleção, use o botão de upload e selecione o CSV. Três detalhes que valem para qualquer arquivo:</p>
         <ul>
           <li><strong>Formato:</strong> o upload aceita CSV e TSV. Um <code>.xlsx</code> não sobe — no Excel, use <em>Salvar como → CSV UTF-8</em>.</li>
           <li><strong>Separador:</strong> o Excel em português grava ponto e vírgula por padrão. Abra o arquivo em um editor de texto e confira antes de subir.</li>
@@ -264,26 +299,61 @@ Password: aluno</div>
         </ul>
 
         <div class="evidence"><strong>Assinatura da cópia usada na aula</strong><code>SHA-256 af6c3023e87c1950cb021579521534c3d44fc940953216ca560ca1d7e3eabc8a</code></div>
+        <p>Confira a sua cópia antes de subir, para não diagnosticar um arquivo diferente do da turma — no terminal do Codespace, a partir da raiz do repositório:</p>
+        <div class="code-block">sha256sum materiais/aula-05/dados/hospital_patients_real_world.csv</div>
 
-        <h3>5.7 Antes do SQL, descubra o que subiu</h3>
+        <h3>5.11 Na sua própria máquina, o que muda</h3>
+        <p>O Compose é idêntico; muda o entorno. Instale o Docker Desktop <strong>antes</strong> da aula, porque a primeira instalação não cabe em três horas de laboratório. Não existe aba PORTS: o endereço é literalmente <code>http://localhost:3000</code> no navegador. Em compensação, nada dorme sozinho e não há cota de horas a administrar.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>6. Quando o Codespace dorme e o que quebra junto</h2>
+        <p>Um Codespace parado por cerca de trinta minutos é suspenso automaticamente, e os contêineres param com ele. Nada se perde, mas nada volta sozinho: ao reabrir o Codespace, o Metabase estará fora do ar até você executar de novo, dentro da pasta da aula:</p>
+        <div class="code-block">cd aula-05-seunome
+docker compose up -d</div>
+        <p>A conta de administrador, o banco conectado e os dashboards voltam intactos, porque moram nos volumes <code>app-data</code> e <code>dados-data</code>. Três formas de perder esse trabalho, em ordem de probabilidade:</p>
+        <ul>
+          <li><code>docker compose down -v</code> apaga os volumes. Sem o <code>-v</code>, os dados ficam.</li>
+          <li><strong>Rebuild Container</strong> reconstrói o ambiente e leva junto o que estava dentro do Docker do Codespace.</li>
+          <li>Excluir o Codespace apaga tudo o que não tiver sido enviado por commit e push.</li>
+        </ul>
+        <p>Por isso a entrega da aula é o <code>docker-compose.yml</code> versionado e um parecer em texto: os dois sobrevivem ao ambiente. Ao terminar, encerre o Codespace em <strong>Codespaces → Stop current codespace</strong> — o plano gratuito tem cota mensal de horas, e um Codespace esquecido aberto consome enquanto ninguém olha.</p>
+
+        <h3>6.1 Quando alguma coisa não sobe</h3>
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th><th>O que fazer</th></tr></thead>
+          <tbody>
+            <tr><td><code>docker: command not found</code></td><td>Codespace criado antes do Docker entrar no <code>devcontainer.json</code></td><td><kbd>F1</kbd> → <strong>Codespaces: Rebuild Container</strong></td></tr>
+            <tr><td>A porta 3000 não aparece na aba PORTS</td><td>O contêiner do Metabase não subiu</td><td><code>docker compose ps</code> e, se preciso, <code>docker compose logs metabase</code></td></tr>
+            <tr><td>A página abre com erro 502</td><td>O Metabase ainda está inicializando</td><td>Esperar a linha <code>Metabase Initialization COMPLETE</code> no log e recarregar</td></tr>
+            <tr><td>O navegador pede login do GitHub e não abre</td><td>Porta privada aberta em outro navegador ou outra conta</td><td>Abrir pelo ícone de globo na aba PORTS, na mesma sessão</td></tr>
+            <tr><td>A conexão do banco falha com <em>connection refused</em></td><td>Host preenchido como <code>localhost</code></td><td>Trocar por <code>postgres-dados</code></td></tr>
+            <tr><td>A tela de uploads não lista banco algum</td><td>O banco analítico não foi conectado</td><td>Refazer o passo 5.8 e voltar</td></tr>
+            <tr><td>O upload falha em arquivo grande</td><td>Limite padrão de tamanho do upload</td><td>Conferir a mensagem de erro; a base da aula, com 5.000 linhas, fica bem abaixo do limite</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>7. Antes do SQL, descubra o que subiu</h2>
         <p>Abra o editor nativo apontando para o banco <code>dados</code> e rode:</p>
         <div class="code-block">SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'hospital_patients_real_world'
 ORDER BY ordinal_position;</div>
-        <p>Esta é a consulta mais importante da aula. Ela devolve os nomes e tipos <em>reais</em> das colunas depois da normalização feita no upload. <strong>Adapte todas as consultas seguintes ao que ela retornar</strong>: se as datas subiram como texto, por exemplo, a subtração do diagnóstico 7 precisa de uma conversão explícita com <code>CAST(... AS date)</code>.</p>
+        <p>Esta é a consulta mais importante da aula. Ela devolve os nomes e tipos <em>reais</em> das colunas depois da normalização feita no upload. <strong>Adapte as consultas seguintes ao que ela retornar</strong>: se as datas subiram como texto, por exemplo, a subtração do diagnóstico 8.7 precisa de uma conversão explícita com <code>CAST(... AS date)</code>.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>6. Os sete diagnósticos</h2>
+        <h2>8. Os sete diagnósticos</h2>
         <p>Cada consulta responde a uma pergunta de qualidade e tem um resultado esperado. Divergência não significa que você errou o SQL — significa que precisa investigar antes de seguir.</p>
 
-        <h3>6.1 A base chegou inteira?</h3>
+        <h3>8.1 A base chegou inteira?</h3>
         <div class="code-block">SELECT COUNT(*) AS linhas
 FROM hospital_patients_real_world;</div>
         <p>Esperado: <strong>5.000</strong>. Um número menor costuma indicar arquivo truncado no download ou upload interrompido.</p>
 
-        <h3>6.2 O que está faltando</h3>
+        <h3>8.2 O que está faltando</h3>
         <div class="code-block">SELECT
   COUNT(*) FILTER (WHERE age IS NULL)                         AS idade_ausente,
   COUNT(*) FILTER (WHERE gender IS NULL OR gender = '')       AS genero_ausente,
@@ -291,7 +361,7 @@ FROM hospital_patients_real_world;</div>
 FROM hospital_patients_real_world;</div>
         <p>Esperado: <strong>350, 350 e 350</strong>. O teste duplo existe porque carregadores nem sempre convertem campo vazio em nulo: contar só <code>IS NULL</code> pode devolver zero e dar a falsa impressão de base completa.</p>
 
-        <h3>6.3 Gênero que não informa nada</h3>
+        <h3>8.3 Gênero que não informa nada</h3>
         <div class="code-block">SELECT COALESCE(NULLIF(gender, ''), 'AUSENTE') AS genero,
        COUNT(*) AS registros
 FROM hospital_patients_real_world
@@ -299,7 +369,7 @@ GROUP BY 1
 ORDER BY registros DESC;</div>
         <p><code>Unknown</code> aparece 1.163 vezes e o campo vazio, 350. Somados, são <strong>1.513 registros</strong> — perto de 30% da base — sem gênero utilizável. Qualquer recorte por gênero nesta base descreve, na melhor das hipóteses, os 70% restantes.</p>
 
-        <h3>6.4 Categorias que se duplicam sozinhas</h3>
+        <h3>8.4 Categorias que se duplicam sozinhas</h3>
         <div class="code-block">SELECT
   COUNT(DISTINCT diagnosis)        AS categorias_aparentes,
   COUNT(DISTINCT UPPER(diagnosis)) AS categorias_reais,
@@ -308,13 +378,13 @@ FROM hospital_patients_real_world
 WHERE diagnosis IS NOT NULL AND diagnosis &lt;&gt; '';</div>
         <p>Esperado: <strong>28 categorias aparentes, 14 reais e 321 registros</strong> escritos em caixa alta. É o tipo de defeito que passa despercebido em uma tabela e explode em um gráfico: <code>Pneumonia</code> e <code>PNEUMONIA</code> viram duas barras, cada uma com metade do volume real.</p>
 
-        <h3>6.5 Alta antes da admissão</h3>
+        <h3>8.5 Alta antes da admissão</h3>
         <div class="code-block">SELECT COUNT(*) AS altas_antes_da_admissao
 FROM hospital_patients_real_world
 WHERE dischargedate &lt; admissiondate;</div>
         <p>Esperado: <strong>150</strong> registros em que o paciente teria saído antes de entrar. Nenhum deles é apagável sem decisão humana: pode ser inversão de campos no cadastro, erro de digitação de ano ou reinternação mal registrada, e cada hipótese leva a uma correção diferente.</p>
 
-        <h3>6.6 Duplicidade de paciente</h3>
+        <h3>8.6 Duplicidade de paciente</h3>
         <div class="code-block">SELECT COUNT(*) AS ids_repetidos
 FROM (
   SELECT patientid
@@ -324,13 +394,13 @@ FROM (
 ) repetidos;</div>
         <p>Esperado: <strong>0</strong>. Registrar o que está correto faz parte do parecer tanto quanto apontar defeitos — sem isso, o leitor não sabe se você verificou ou apenas não olhou.</p>
 
-        <h3>6.7 A média que engana</h3>
+        <h3>8.7 A média que engana</h3>
         <div class="code-block">SELECT
   ROUND(AVG(dischargedate - admissiondate), 2) AS permanencia_media,
   ROUND(AVG(dischargedate - admissiondate)
         FILTER (WHERE dischargedate &gt;= admissiondate), 2) AS permanencia_media_coerente
 FROM hospital_patients_real_world;</div>
-        <p>As duas colunas saem diferentes, e a diferença tem nome: as 150 permanências negativas do diagnóstico 6.5 puxam a primeira média para baixo. Nenhum alerta aparece na tela — o SQL calcula obedientemente a média de um número que não deveria existir. É esse silêncio que torna o parecer necessário.</p>
+        <p>As duas colunas saem diferentes, e a diferença tem nome: as 150 permanências negativas do diagnóstico 8.5 puxam a primeira média para baixo. Nenhum alerta aparece na tela — o SQL calcula obedientemente a média de um número que não deveria existir. É esse silêncio que torna o parecer necessário.</p>
 
         <div class="alert-box">
           <h4>Diagnóstico não é limpeza</h4>
@@ -339,7 +409,7 @@ FROM hospital_patients_real_world;</div>
       </section>
 
       <section data-lesson-section="challenge">
-        <h2>7. Desafio e entrega</h2>
+        <h2>9. Desafio e entrega</h2>
         <p>Monte um dashboard chamado <strong>Confiabilidade da base hospitalar</strong> com cinco perguntas salvas: total de linhas, ausências por coluna, categorias aparentes contra reais, registros com cronologia impossível e permanência média com e sem os incoerentes.</p>
         <p>Em seguida escreva <code>PARECER_BASE.md</code>, com no máximo dez linhas, respondendo a duas perguntas de forma direta: <em>quais decisões esta base sustenta hoje</em> e <em>quais não sustenta</em>. Cada afirmação precisa citar um número do dashboard.</p>
         <div class="code-block">git add aula-05-seunome/docker-compose.yml aula-05-seunome/PARECER_BASE.md
@@ -349,9 +419,12 @@ git push</div>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>8. Checklist de qualidade</h2>
+        <h2>10. Checklist de qualidade</h2>
         <ul>
+          <li><code>docker --version</code> e <code>docker compose version</code> respondem no terminal do Codespace.</li>
+          <li><code>docker compose config</code> aceitou o arquivo antes da primeira subida.</li>
           <li><code>docker compose ps</code> mostra os três serviços de pé.</li>
+          <li>O Metabase abriu pelo endereço encaminhado da aba PORTS, e não por <code>localhost</code> no navegador.</li>
           <li>O banco <code>dados</code> aparece conectado no Metabase e o upload tem destino configurado.</li>
           <li>A tabela carregada devolve 5.000 linhas.</li>
           <li>As consultas usam os nomes de coluna que o <code>information_schema</code> devolveu, não os do cabeçalho do CSV.</li>
@@ -359,17 +432,18 @@ git push</div>
           <li>Nenhum <code>UPDATE</code> ou <code>DELETE</code> foi executado sobre a base.</li>
           <li>O parecer separa evidência numérica de recomendação.</li>
           <li>Ao encerrar, <code>docker compose down</code> preserva os volumes; <code>docker compose down -v</code> apaga tudo.</li>
+          <li>O Codespace foi encerrado em <strong>Stop current codespace</strong> ao fim da aula.</li>
         </ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>9. Síntese</h2>
+        <h2>11. Síntese</h2>
         <p>Subir a ferramenta é a parte fácil e ocupa vinte minutos da aula. O trabalho está em decidir se o dado merece confiança, e essa decisão só é defensável quando vem acompanhada de contagens que outra pessoa consegue reproduzir.</p>
         <p>Três lições viajam para fora do Metabase: upload exige um banco que aceite escrita; carregador nenhum preserva os nomes e tipos que você espera, então confira antes de consultar; e uma média calculada sobre dados incoerentes não emite aviso algum — ela apenas erra em silêncio.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>10. Referências e continuidade</h2>
+        <h2>12. Referências e continuidade</h2>
         <p>Guarde o <code>PARECER_BASE.md</code>: ele reaparece duas vezes. Na aula 7, ao montar um dashboard sobre esta mesma base suja, os defeitos que você contou hoje vão aparecer desenhados nos gráficos. Na aula 8, eles são finalmente corrigidos com Pandas, e o antes/depois da limpeza será medido contra os números que você anotou aqui.</p>
         <ul>
           <li><a href="https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker" target="_blank" rel="noopener noreferrer">Executar o Metabase com Docker</a>.</li>

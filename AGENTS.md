@@ -19,6 +19,7 @@ A static content site for a Data Science & AI course curriculum.
 ## Ambiente de execução do curso
 - **GitHub Codespaces** é o ambiente oficial dos estudantes, definido em `.devcontainer/devcontainer.json` com as bibliotecas de `requirements.txt` (Jupyter, Pandas, NumPy, Matplotlib, Seaborn, scikit-learn).
 - Notebooks rodam em **Jupyter dentro do Codespace**; a persistência do trabalho é feita por **commit e push**, não por armazenamento em nuvem externo. Materiais e slides devem refletir esse fluxo.
+- O mesmo devcontainer habilita **Docker e Docker Compose** (feature `docker-in-docker`) e encaminha a **porta 3000**, usada pelo Metabase do laboratório 5. Aulas que subam serviços devem instruir o acesso pela aba **PORTS** do Codespaces, nunca por `localhost` no navegador do estudante.
 
 ## Navegação e Arquitetura Offline (Regra de Ouro)
 - **Links Explícitos:** Como o projeto costuma ser aberto diretamente pelos arquivos locais (`file://`) sem um servidor web, **NUNCA** deixe links apontando para diretórios. Links para materiais devem **SEMPRE** apontar explicitamente para o arquivo (ex: `materiais/aula-XX/index.html` ao invés de `materiais/aula-XX/`).
