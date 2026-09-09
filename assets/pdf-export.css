@@ -1,7 +1,8 @@
 /* Exportação em PDF · componente compartilhado */
 #pdf-export-button {
   position: fixed !important;
-  top: 1.25rem !important;
+  top: auto !important;
+  bottom: 1.25rem !important;
   right: 1.25rem !important;
   left: auto !important;
   z-index: 3000 !important;
@@ -42,30 +43,23 @@
 .pdf-export-icon { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; }
 
 @media (max-width: 600px) {
-  #pdf-export-button { top: 0.8rem !important; right: 0.8rem !important; min-height: 2.6rem; padding: 0.65rem 0.78rem !important; }
+  #pdf-export-button { bottom: 0.8rem !important; right: 0.8rem !important; min-height: 2.6rem; padding: 0.65rem 0.78rem !important; }
   #pdf-export-button .pdf-export-label { display: none; }
 }
 
-@media print {
-  #pdf-export-button { display: none !important; }
+body.pdf-export-slides #pdf-export-button { bottom: 6rem !important; }
 
-  body.pdf-export-slides { overflow: visible !important; background: #fff !important; }
-  body.pdf-export-slides #slider { width: auto !important; height: auto !important; background: #fff !important; }
-  body.pdf-export-slides .slide {
-    position: relative !important;
-    inset: auto !important;
-    display: flex !important;
-    width: 100% !important;
-    height: 100vh !important;
-    min-height: 100vh !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: none !important;
-    overflow: hidden !important;
-    break-after: page;
-    page-break-after: always;
-  }
-  body.pdf-export-slides #controls { display: none !important; }
-  body.pdf-export-slides .slide:last-child { break-after: auto; page-break-after: auto; }
+body.pdf-export-capturing #pdf-export-button,
+body.pdf-export-capturing .floating-nav,
+body.pdf-export-capturing .actions { display: none !important; }
+
+body.pdf-export-capturing.pdf-export-slides .slide {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+@media (max-width: 600px) {
+  body.pdf-export-slides #pdf-export-button { bottom: 5rem !important; }
 }
