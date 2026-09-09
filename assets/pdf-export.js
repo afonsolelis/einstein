@@ -40,6 +40,18 @@
     ignoreElements: (node) => node.id === 'pdf-export-button' || node.matches?.('.floating-nav, .actions')
   });
 
+  const addSlideTextLayer = (pdf, slide, canvas) => {
+    const text = slide.innerText.replace(/\n{3,}/g, '\n\n').trim();
+    if (!text) return;
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(16);
+    pdf.text(text, 50, 50, {
+      maxWidth: canvas.width - 100,
+      lineHeightFactor: 1.35,
+      renderingMode: 'invisible'
+    });
+  };
+
   const downloadSlides = async (slides) => {
     let pdf;
     for (let index = 0; index < slides.length; index += 1) {
@@ -55,6 +67,7 @@
         pdf.addPage([canvas.width, canvas.height], 'landscape');
       }
       pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, canvas.width, canvas.height, undefined, 'FAST');
+      addSlideTextLayer(pdf, slides[index], canvas);
     }
     pdf.save(safeFileName());
   };
@@ -77,6 +90,39 @@
     return slice;
   };
 
+  const materialTextBlocks = (element, scale) => {
+    const root = element.getBoundingClientRect();
+    return [...element.querySelectorAll('h1, h2, h3, h4, p, li, pre, th, td, .code-block')]
+      .filter((node) => !node.closest('.actions') && !node.closest('pre')?.matches('pre'))
+      .map((node) => {
+        const rect = node.getBoundingClientRect();
+        return {
+          text: node.innerText.replace(/\s+/g, ' ').trim(),
+          left: (rect.left - root.left) * scale,
+          top: (rect.top - root.top) * scale,
+          width: rect.width * scale
+        };
+      })
+      .filter((block) => block.text && block.width > 0);
+  };
+
+  const addMaterialTextLayer = (pdf, blocks, start, end, canvas, margin, printableWidth) => {
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(9);
+    blocks
+      .filter((block) => block.top >= start && block.top < end)
+      .forEach((block) => {
+        const x = margin + ((block.left / canvas.width) * printableWidth);
+        const y = margin + (((block.top - start) / canvas.width) * printableWidth) + 3;
+        const width = Math.max(10, (block.width / canvas.width) * printableWidth);
+        pdf.text(block.text, x, y, {
+          maxWidth: width,
+          lineHeightFactor: 1.25,
+          renderingMode: 'invisible'
+        });
+      });
+  };
+
   const downloadMaterial = async (element) => {
     const canvas = await capture(element);
     const pdf = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4', compress: true });
@@ -88,6 +134,7 @@
     const maximumSliceHeight = Math.floor((printableHeight * canvas.width) / printableWidth);
     const scale = canvas.width / element.scrollWidth;
     const breakPoints = materialBreakPoints(element, scale);
+    const textBlocks = materialTextBlocks(element, scale);
     let start = 0;
     let page = 0;
 
@@ -104,6 +151,7 @@
 
       if (page > 0) pdf.addPage();
       pdf.addImage(slice.toDataURL('image/jpeg', 0.92), 'JPEG', margin, margin, printableWidth, sliceHeight, undefined, 'FAST');
+      addMaterialTextLayer(pdf, textBlocks, start, end, canvas, margin, printableWidth);
       start = end;
       page += 1;
     }
