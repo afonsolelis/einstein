@@ -470,6 +470,45 @@
     }
     .tag + .tag { margin-left: .35rem; }
     .tag-ai { color: #087466; background: #e3f8f3; }
+
+    /* ---------- Aula de hoje ---------- */
+    .card-hoje {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0, 163, 217, .16), 0 18px 36px -14px rgba(26, 47, 94, .35);
+      background: linear-gradient(180deg, #f2fbff, var(--card) 55%);
+    }
+    .card-hoje .card-top {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+    }
+    .badge-hoje {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-bottom: .55rem;
+      padding: .3rem .7rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0, 163, 217, .35);
+    }
+    .badge-hoje::before {
+      content: "";
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #fff;
+      animation: pulso-hoje 1.6s ease-in-out infinite;
+    }
+    @keyframes pulso-hoje {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .35; transform: scale(.75); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .badge-hoje::before { animation: none; }
+    }
     .actions {
       display: flex;
       gap: .8rem;
@@ -677,11 +716,20 @@
     const pad = n => String(n).padStart(2, "0");
     const grid = document.getElementById("grid");
 
+    /* Todas as aulas acontecem em 2026; "data" vem no formato dd/mm. */
+    const ANO_LETIVO = 2026;
+    const hoje = new Date();
+    const hojeChave = `${pad(hoje.getDate())}/${pad(hoje.getMonth() + 1)}`;
+    const aulaDeHoje = hoje.getFullYear() === ANO_LETIVO
+      ? aulas.find(a => a.data === hojeChave)
+      : undefined;
+
     grid.innerHTML = aulas.map(a => {
       const id = pad(a.n);
       const recursos = recursosAulas[a.n] || {};
+      const eHoje = aulaDeHoje && aulaDeHoje.n === a.n;
       return `
-      <article class="card">
+      <article class="card${eHoje ? ' card-hoje' : ''}"${eHoje ? ' aria-current="date"' : ''}>
         <div class="card-top">
           <div class="aula-num">${id}</div>
           <div>
@@ -690,6 +738,7 @@
         </div>
         <div class="card-body">
           <div class="card-info">
+            ${eHoje ? '<div><span class="badge-hoje">Aula de hoje</span></div>' : ''}
             <h3>${a.tema}</h3>
             <span class="tag">${a.tag}</span>
             ${recursos.destaque ? `<span class="tag tag-ai">${recursos.destaque}</span>` : ''}
