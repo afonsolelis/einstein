@@ -59,23 +59,53 @@
     pdf.save(safeFileName());
   };
 
+  const materialBreakPoints = (element, scale) => {
+    const root = element.getBoundingClientRect();
+    const selectors = 'h1, h2, h3, h4, p, li, pre, table, figure, blockquote, .code-block, .alert-box, .figura';
+    const points = [...element.querySelectorAll(selectors)]
+      .map((node) => (node.getBoundingClientRect().top - root.top) * scale)
+      .filter((point) => point > 0)
+      .map((point) => Math.round(point));
+    return [...new Set([0, ...points])].sort((first, second) => first - second);
+  };
+
+  const canvasSlice = (canvas, start, end) => {
+    const slice = document.createElement('canvas');
+    slice.width = canvas.width;
+    slice.height = end - start;
+    slice.getContext('2d').drawImage(canvas, 0, start, canvas.width, end - start, 0, 0, canvas.width, end - start);
+    return slice;
+  };
+
   const downloadMaterial = async (element) => {
     const canvas = await capture(element);
     const pdf = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4', compress: true });
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const imageHeight = (canvas.height * pageWidth) / canvas.width;
-    const image = canvas.toDataURL('image/jpeg', 0.92);
-    let remainingHeight = imageHeight;
-    let position = 0;
+    const margin = 10;
+    const printableWidth = pageWidth - (margin * 2);
+    const printableHeight = pageHeight - (margin * 2);
+    const maximumSliceHeight = Math.floor((printableHeight * canvas.width) / printableWidth);
+    const scale = canvas.width / element.scrollWidth;
+    const breakPoints = materialBreakPoints(element, scale);
+    let start = 0;
+    let page = 0;
 
-    pdf.addImage(image, 'JPEG', 0, position, pageWidth, imageHeight, undefined, 'FAST');
-    remainingHeight -= pageHeight;
-    while (remainingHeight > 0) {
-      position = remainingHeight - imageHeight;
-      pdf.addPage();
-      pdf.addImage(image, 'JPEG', 0, position, pageWidth, imageHeight, undefined, 'FAST');
-      remainingHeight -= pageHeight;
+    while (start < canvas.height) {
+      const limit = Math.min(canvas.height, start + maximumSliceHeight);
+      const minimumPreferredBreak = start + (maximumSliceHeight * 0.45);
+      // Reserva espaço para o próximo bloco. Isso impede que uma lista,
+      // parágrafo ou caixa de código comece no rodapé e seja recortada.
+      const safeLimit = limit - Math.ceil(192 * scale);
+      const candidates = breakPoints.filter((point) => point > minimumPreferredBreak && point <= safeLimit);
+      const end = candidates.length ? candidates[candidates.length - 1] : limit;
+      const slice = canvasSlice(canvas, start, end);
+      const sliceHeight = (slice.height * printableWidth) / slice.width;
+
+      if (page > 0) pdf.addPage();
+      pdf.addImage(slice.toDataURL('image/jpeg', 0.92), 'JPEG', margin, margin, printableWidth, sliceHeight, undefined, 'FAST');
+      start = end;
+      page += 1;
     }
     pdf.save(safeFileName());
   };
