@@ -74,15 +74,21 @@ function render(s){
   if(focused!=null)document.querySelector(`[data-choice="${focused}"]`)?.focus();
 }
 
+let queued=null;
 async function vote(round,choice){
-  if(busy)return;busy=true;setMessage('Registrando sua decisão…');
-  try{await rpc('tbl_vote',{p_slug:SLUG,p_id:person.id,p_round:round,p_choice:choice});setMessage(`Escolha ${letters[choice]} registrada. Você pode alterá-la enquanto o tempo estiver aberto.`);await refresh(true)}
-  catch(e){
+  // Um clique durante o envio anterior não é descartado: a última escolha é enviada em seguida.
+  if(busy){queued={round,choice};setMessage(`Registrando a escolha ${letters[choice]}…`);return}
+  busy=true;setMessage(`Registrando a escolha ${letters[choice]}…`);
+  try{
+    await rpc('tbl_vote',{p_slug:SLUG,p_id:person.id,p_round:round,p_choice:choice});
+    if(!queued)setMessage(`Escolha ${letters[choice]} registrada. Você pode alterá-la enquanto o tempo estiver aberto.`);
+  }catch(e){
     // Participante apagado pelo reinício da sala: volta ao formulário em vez de insistir no voto.
-    if(e.message==='Entre na sala antes de votar.')leave();
-    else{setMessage(e.message);refresh(true)}
-  }
-  finally{busy=false}
+    if(e.message==='Entre na sala antes de votar.'){queued=null;leave()}
+    else if(!queued)setMessage(e.message);
+  }finally{busy=false}
+  if(queued){const next=queued;queued=null;return vote(next.round,next.choice)}
+  if(person)refresh(true);
 }
 
 async function refresh(force){

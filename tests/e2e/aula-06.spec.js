@@ -124,7 +124,9 @@ test('fluxo completo do TBL: duas rodadas, debate e revelação', async ({ brows
   await expect(host.locator('#phase')).toHaveText('Rodada 1');
 
   await expect(ana.page.locator('[data-choice]')).toHaveCount(4);
+  await ana.page.click('[data-choice="2"]');
   await ana.page.click('[data-choice="0"]');
+  await expect(ana.page.locator('#message')).toContainText('Escolha A registrada');
   await expect(ana.page.locator('[data-choice="0"]')).toHaveAttribute('aria-pressed', 'true');
   await bruno.page.click('[data-choice="1"]');
   await expect(host.locator('#progress')).toHaveText('· 2 de 2 votaram');
