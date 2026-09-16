@@ -34,6 +34,12 @@ function showJoin(message){
   $('#join-message').textContent=message||'';
   renderKey='';lastPhase='';
 }
+function leave(){
+  // A sala foi reiniciada pelo professor (nova turma): a identificação antiga não vale mais.
+  if(!person)return;
+  $('#name').value=person.name;person=null;save(null);
+  showJoin('A sala foi reiniciada pelo professor. Entre novamente para participar.');
+}
 function showRoom(){
   $('#join-panel').classList.add('hidden');
   $('#room').classList.remove('hidden');
@@ -71,7 +77,11 @@ function render(s){
 async function vote(round,choice){
   if(busy)return;busy=true;setMessage('Registrando sua decisão…');
   try{await rpc('tbl_vote',{p_slug:SLUG,p_id:person.id,p_round:round,p_choice:choice});setMessage(`Escolha ${letters[choice]} registrada. Você pode alterá-la enquanto o tempo estiver aberto.`);await refresh(true)}
-  catch(e){setMessage(e.message);refresh(true)}
+  catch(e){
+    // Participante apagado pelo reinício da sala: volta ao formulário em vez de insistir no voto.
+    if(e.message==='Entre na sala antes de votar.')leave();
+    else{setMessage(e.message);refresh(true)}
+  }
   finally{busy=false}
 }
 
@@ -83,12 +93,7 @@ async function refresh(force){
     if(mine<shown)return;
     shown=mine;
     // Só o SQL atual informa joined; a ausência do campo não é tratada como reinício.
-    if(s.mine?.joined===false){
-      // A sala foi reiniciada pelo professor (nova turma): a identificação antiga não vale mais.
-      const name=person.name;person=null;save(null);$('#name').value=name;
-      showJoin('A sala foi reiniciada pelo professor. Entre novamente para participar.');
-      return;
-    }
+    if(s.mine?.joined===false){leave();return}
     showRoom();render(s);
     if($('#message').dataset.offline){delete $('#message').dataset.offline;setMessage('')}
   }catch(e){

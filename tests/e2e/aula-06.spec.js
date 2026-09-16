@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 // Supabase simulado em memória com as mesmas regras de supabase/tbl-aula-06.sql.
-function fakeRoom() {
+function fakeRoom({ legacy = false } = {}) {
   const TOKEN = 'token-de-teste';
   const db = { status: 'lobby', stage: null, endsAt: null, participants: new Map(), votes: new Map() };
   const now = () => Date.now();
@@ -39,7 +39,7 @@ function fakeRoom() {
       votes_round2: [...db.votes.keys()].filter(k => k.endsWith(':2')).length,
       round1: p === 'reveal' ? distribution(1) : [], round2: p === 'reveal' ? distribution(2) : [],
       transitions,
-      mine: { joined: db.participants.has(id), round1: db.votes.get(`${id}:1`) ?? null, round2: db.votes.get(`${id}:2`) ?? null }
+      mine: { ...(legacy ? {} : { joined: db.participants.has(id) }), round1: db.votes.get(`${id}:1`) ?? null, round2: db.votes.get(`${id}:2`) ?? null }
     };
   };
   const hostState = () => ({
@@ -184,7 +184,7 @@ test('reiniciar para nova turma devolve os alunos ao formulário de entrada', as
   const host = await openHost(browser, room);
   const student = await openStudent(browser, room, 'Diego');
   await host.click('[data-action="clear"]');
-  await expect(host.locator('#host-message')).toHaveText('Sala reiniciada para uma nova turma.');
+  await expect(host.locator('#reset-message')).toHaveText('Sala reiniciada: 0 participantes e nenhum voto.');
   expect(room.db.participants.size).toBe(0);
   await expect(student.page.locator('#join-panel')).toBeVisible();
   await expect(student.page.locator('#join-message')).toContainText('reiniciada');
@@ -192,6 +192,23 @@ test('reiniciar para nova turma devolve os alunos ao formulário de entrada', as
   await student.page.click('#join-form button');
   await expect(student.page.locator('#room')).toBeVisible();
   expect(room.db.participants.size).toBe(1);
+});
+
+test('com as funções antigas do Supabase, o aluno removido volta ao formulário ao tentar votar', async ({ browser }) => {
+  const room = fakeRoom({ legacy: true });
+  const host = await openHost(browser, room);
+  const student = await openStudent(browser, room, 'Fábio');
+  await host.click('[data-action="clear"]');
+  await expect(host.locator('#reset-message')).toContainText('Sala reiniciada');
+  await host.click('[data-action="start"]');
+  await expect(student.page.locator('[data-choice]')).toHaveCount(4);
+  await student.page.click('[data-choice="2"]');
+  await expect(student.page.locator('#join-panel')).toBeVisible();
+  await expect(student.page.locator('#name')).toHaveValue('Fábio');
+  await student.page.click('#join-form button');
+  await expect(student.page.locator('[data-choice]')).toHaveCount(4);
+  await student.page.click('[data-choice="2"]');
+  await expect(student.page.locator('#message')).toContainText('Escolha C registrada');
 });
 
 test('falha de rede ao reabrir a página não apaga a identidade do aluno', async ({ browser }) => {

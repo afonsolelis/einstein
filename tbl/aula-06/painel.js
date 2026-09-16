@@ -94,18 +94,20 @@ $('#token-form').addEventListener('submit',e=>{e.preventDefault();token=$('#toke
 document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',async()=>{
   const action=b.dataset.action;
   if(CONFIRM[action]&&!confirm(CONFIRM[action]))return;
+  // A mensagem aparece junto do botão acionado; o reinício fica no fim da página, longe do topo.
+  const status=action==='clear'?$('#reset-message'):$('#host-message');
   const buttons=document.querySelectorAll('[data-action]');
   buttons.forEach(x=>x.disabled=true);
-  $('#host-message').textContent='Atualizando a sala…';
+  status.textContent='Atualizando a sala…';
   try{
     const s=await rpc('tbl_host',{p_slug:SLUG,p_token:token,p_action:action});
     shown=++seq;render(s);
-    $('#host-message').textContent=DONE[action];
+    status.textContent=action==='clear'?`Sala reiniciada: ${s.enrolled??s.participants} participantes e nenhum voto.`:DONE[action];
   }catch(e){
-    if(e.message==='Token do professor inválido.')logout(e.message);else{$('#host-message').textContent=e.message;refresh(true)}
+    if(e.message==='Token do professor inválido.')logout(e.message);else{status.textContent=e.message;refresh(true)}
   }finally{
     // Avançar, estender e revelar dependem da fase e são reabilitados pelo render.
-    ['start','lobby','clear'].forEach(a=>document.querySelector(`[data-action="${a}"]`).disabled=false);
+    ['start','lobby','clear'].forEach(a=>{const x=document.querySelector(`[data-action="${a}"]`);if(x)x.disabled=false});
   }
 }));
 $('#toggle-roster').addEventListener('click',()=>{rosterOpen=!rosterOpen;store.set(ROSTER_KEY,rosterOpen?'1':null);refresh(true)});
