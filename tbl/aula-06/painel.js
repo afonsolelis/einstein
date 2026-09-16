@@ -114,6 +114,11 @@ document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click'
 $('#toggle-roster').addEventListener('click',()=>{rosterOpen=!rosterOpen;store.set(ROSTER_KEY,rosterOpen?'1':null);refresh(true)});
 
 const studentUrl=location.protocol==='file:'?PUBLIC_URL:new URL('index.html',location.href).href;
+// A camada ampliada fica no body: o backdrop-filter dos painéis prenderia um position:fixed interno.
+const qr=open=>{$('#qr-overlay').classList.toggle('hidden',!open);$('#qr-toggle').setAttribute('aria-expanded',open);(open?$('#qr-overlay'):$('#qr-toggle')).focus()};
+$('#qr-toggle').addEventListener('click',()=>qr(true));
+$('#qr-overlay').addEventListener('click',()=>qr(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#qr-overlay').classList.contains('hidden'))qr(false)});
 $('#student-url').textContent=studentUrl;
 $('#copy-link').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(studentUrl);$('#copy-link').textContent='Link copiado ✓'}

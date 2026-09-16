@@ -53,6 +53,7 @@
       "tbl/aula-06/tbl.css",
       "tbl/aula-06/tbl.js",
       "tbl/aula-06/painel.js",
+      "tbl/aula-06/qrcode-sala.svg",
       "supabase/tbl-aula-06.sql"
     ],
     "official_documents": [
