@@ -729,6 +729,10 @@
         dados: "materiais/aula-05/dados/hospital_patients_real_world.csv",
         dadosNome: "hospital_patients_real_world.csv"
       },
+      6: {
+        destaque: "TBL ao vivo",
+        tbl: "tbl/aula-06/index.html"
+      },
       7: {
         destaque: "Olist"
       },
@@ -787,6 +791,7 @@
           <div class="actions">
             <a class="btn btn-slides" href="slides/aula-${id}.html">📊 Slides</a>
             <a class="btn btn-mat" href="materiais/aula-${id}/index.html">📎 Materiais</a>
+            ${recursos.tbl ? `<a class="btn btn-data" href="${recursos.tbl}">🧭 Entrar no TBL</a>` : ''}
             ${recursos.dados ? `<a class="btn btn-data" href="${recursos.dados}" download="${recursos.dadosNome}">⬇️ Baixar base</a>` : ''}
           </div>
         </div>

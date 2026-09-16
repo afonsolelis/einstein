@@ -189,7 +189,7 @@
     button.classList.add('pdf-download-action');
     button.type = 'button';
     button.onclick = createPdf;
-    button.setAttribute('aria-label', 'Baixar esta página em PDF');
+    button.setAttribute('aria-label', primary ? 'Baixar esta página em PDF' : 'Imprimir Material em PDF');
     button.title = 'Baixar esta página em PDF';
     button.innerHTML = primary
       ? `${icon}<span class="pdf-export-label">Baixar PDF</span>`
