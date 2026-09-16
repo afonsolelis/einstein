@@ -96,6 +96,7 @@ document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click'
   if(CONFIRM[action]&&!confirm(CONFIRM[action]))return;
   // A mensagem aparece junto do botão acionado; o reinício fica no fim da página, longe do topo.
   const status=action==='clear'?$('#reset-message'):$('#host-message');
+  $('#host-message').textContent='';$('#reset-message').textContent='';
   const buttons=document.querySelectorAll('[data-action]');
   buttons.forEach(x=>x.disabled=true);
   status.textContent='Atualizando a sala…';
