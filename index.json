@@ -366,16 +366,20 @@
         "inteligência artificial",
         "administração",
         "arquitetura de decisão financeira",
-        "Team-Based Learning"
+        "Team-Based Learning",
+        "BPMN",
+        "modelagem de dados",
+        "SQLite",
+        "IA agêntica"
       ],
       "objectives": [
         "Distinguir automação, aprendizado de máquina e IA generativa",
-        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Mapear um processo administrativo em BPMN e derivar dele um modelo de dados",
         "Avaliar risco, privacidade e necessidade de revisão humana"
       ],
       "slides": {
         "path": "slides/aula-06.html",
-        "slide_count": 12,
+        "slide_count": 15,
         "sections": [
           "agenda",
           "challenge",
@@ -390,12 +394,13 @@
         "path": "materiais/aula-06/index.html",
         "section_count": 8,
         "highlights": [
-          "Mapa de casos de uso e priorização por impacto e risco",
-          "Governança, verificação e revisão humana",
-          "TBL em duas rodadas sobre previsão de caixa, com debate de arquitetura e análise do deslocamento das escolhas"
+          "TBL em duas rodadas sobre previsão de caixa, com debate de arquitetura e análise do deslocamento das escolhas",
+          "Processo do estágio ou trabalho modelado em BPMN 2.0 com agente de IA e conferido no demo.bpmn.io",
+          "Entidades derivadas do fluxo no dbdiagram.io e implementadas em SQLite",
+          "Automatização simulada com fila de revisão humana para aprovações e exceções"
         ],
-        "activity": "Decidir e revisar em TBL a arquitetura de processo, dados e uso de IA para uma previsão de caixa de 13 semanas",
-        "deliverable": "Duas escolhas registradas e defesa oral da sequência, dos controles, da métrica e das condições que fariam a recomendação mudar"
+        "activity": "Mapear um processo do estágio ou trabalho em BPMN, derivar as entidades no dbdiagram.io e modelar a automatização em SQLite com IA agêntica",
+        "deliverable": "Pasta com fluxo.bpmn, modelo.dbml, schema.sql, processo.sqlite, automatizacao.py e README com revisão humana"
       }
     },
     {

@@ -156,6 +156,7 @@
       box-shadow: 0 0 10px rgba(0, 215, 176, 0.75);
     }
     .slide-content strong { color: #fff; font-weight: 700; }
+    .slide-content a { color: var(--cyan-light); }
     .slide-content em { color: var(--cyan-light); font-style: normal; }
     .slide-content code {
       padding: 0.14em 0.45em;
@@ -168,6 +169,7 @@
     }
 
     .code-block {
+      font-variant-ligatures: none;
       white-space: pre-wrap;
       position: relative;
       z-index: 1;
@@ -349,17 +351,23 @@
 <body>
   <div id="slider">
     <div class="slide slide-start active"><div class="badge">LABORATÓRIO 6 · 16/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Inteligência Artificial no dia a dia da administração</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear tarefas administrativas adequadas à assistência por IA</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>TBL: decisão individual, debate e reconsideração</li><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear um processo administrativo em BPMN e derivar dele um modelo de dados</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>TBL: decisão individual, debate e reconsideração</li><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada: BPMN, dbdiagram.io e SQLite com IA agêntica</li><li>Desafio e entrega</li></ul></div>
     <div class="slide slide-content" data-lesson-section="guided-practice"><h2>TBL: o caixa que precisa falar com o conselho</h2><p>Você terá 100 segundos para escolher uma arquitetura, 10 minutos para confrontar processo, dados e uso de IA, e outros 100 segundos para decidir novamente.</p><ul><li>Nenhuma opção elimina todos os custos</li><li>Defenda a sequência e as condições da sua escolha</li><li>A mudança entre rodadas é evidência para o debate, não um gabarito</li></ul></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA é um conjunto de técnicas que produz previsões, classificações ou conteúdo a partir de dados; valor surge quando a saída entra em um processo com dono e controle.</p></div>
     <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Casos úteis combinam volume, repetição e critério de qualidade claro</li><li>Prompts orientam modelos generativos, mas não garantem veracidade</li><li>Dados pessoais, decisões sensíveis e ações irreversíveis pedem governança</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">tarefas = [{"nome":"resumir atas","impacto":4,"risco":2},{"nome":"aprovar crédito","impacto":5,"risco":5}]
-for t in tarefas:
-    t["prioridade"] = t["impacto"] - t["risco"]
-print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Mapeie um processo administrativo, decomponha-o em tarefas e desenhe um fluxo com revisão humana, registro e critério de sucesso.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar canvas do caso de uso contendo entrada, saída, responsável, risco, métrica e plano de contingência.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada: do processo ao banco</h2><p>Um processo do seu estágio ou trabalho, sete etapas, um agente de IA escrevendo e você revisando.</p><ul><li><strong>1.</strong> Mapear o processo de cabeça, sem IA</li><li><strong>2–4.</strong> Gerar <code>fluxo.bpmn</code> com o agente e conferir no <a href="https://demo.bpmn.io/new">demo.bpmn.io</a></li><li><strong>5.</strong> Derivar as entidades em <code>modelo.dbml</code> no <a href="https://dbdiagram.io/d">dbdiagram.io</a></li><li><strong>6.</strong> Criar <code>processo.sqlite</code> a partir do modelo</li><li><strong>7.</strong> Modelar a automatização gravando no SQLite</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Etapa 1: mapeie de cabeça</h2><p>Se o agente descrever o processo por você, o BPMN mostrará um fluxo genérico, não o seu.</p><ul><li><strong>Gatilho:</strong> o que inicia o processo</li><li><strong>Atores:</strong> quem executa; cada um vira uma raia</li><li><strong>Tarefas e decisões:</strong> na ordem, com as saídas possíveis</li><li><strong>Fim:</strong> o que é entregue e a quem</li><li>Sem nomes, valores reais ou sistemas sigilosos no prompt</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Etapas 2–4: BPMN é só XML</h2><p>Baixe um exemplo no <a href="https://demo.bpmn.io/new">demo.bpmn.io</a> com <code>Ctrl + S</code>, peça ao agente o <code>fluxo.bpmn</code> e suba o arquivo de volta para conferir.</p><div class="code-block">&lt;bpmn:process id="Process_1"&gt;        <span class="code-comment">&lt;!-- o que acontece --&gt;</span>
+  &lt;bpmn:task id="Task_1" name=<span class="code-string">"Conferir nota fiscal"</span> /&gt;
+  &lt;bpmn:sequenceFlow sourceRef="StartEvent_1" targetRef="Task_1" /&gt;
+&lt;/bpmn:process&gt;
+&lt;bpmndi:BPMNDiagram&gt;                  <span class="code-comment">&lt;!-- onde desenhar --&gt;</span>
+  &lt;bpmndi:BPMNShape bpmnElement="Task_1"&gt;&lt;dc:Bounds x="250" y="80" ... /&gt;
+&lt;/bpmndi:BPMNDiagram&gt;</div><p style="margin-top: 1rem">Sem <code>BPMNDiagram</code>, o bpmn.io não tem o que desenhar: exija as duas partes no prompt.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Etapas 5–6: do fluxo às tabelas</h2><ul><li>O agente lê <code>fluxo.bpmn</code> e escreve <code>modelo.dbml</code></li><li><strong>Entidades de negócio:</strong> solicitação, documento, fornecedor</li><li><strong>Entidades de execução:</strong> qual instância passou por qual tarefa, quando, por quem e com qual resultado</li><li>Cole no <a href="https://dbdiagram.io/d">dbdiagram.io</a>, confira e corrija o DER</li><li>Converta em <code>schema.sql</code> e crie <code>processo.sqlite</code> com o módulo <code>sqlite3</code></li><li>Nenhuma tabela sem origem em uma tarefa ou decisão do fluxo</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Etapa 7: automatizar com revisão humana</h2><ul><li><code>automatizacao.py</code> lê o BPMN e segue os <code>sequenceFlows</code></li><li><strong>Tarefa automática:</strong> regra explícita e dado disponível; executa e registra</li><li><strong>Tarefa humana:</strong> julgamento, aprovação ou exceção; fica <code>pendente_revisao</code></li><li>20 instâncias fictícias, <code>random.seed(42)</code>, contagens reproduzíveis</li><li>Confira os números com consultas SQL, não com a palavra do agente</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Pasta <code>aula-06-seunome</code> publicada com commit e push:</p><ul><li><code>fluxo.bpmn</code>, <code>modelo.dbml</code>, <code>schema.sql</code>, <code>criar_banco.py</code>, <code>processo.sqlite</code>, <code>automatizacao.py</code></li><li><code>README.md</code> com o processo, tarefas automáticas e humanas justificadas e dois erros do agente corrigidos</li><li><strong>Aceite:</strong> quem clonar reproduz as mesmas contagens do README</li></ul></div>
     <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Adotar IA é redesenhar trabalho com controles, não apenas acrescentar uma ferramenta.</p><ul><li>Não inserir dados sigilosos em ferramentas não aprovadas</li><li>Verificar fatos e cálculos em fonte independente</li><li>Definir quem responde pela decisão final</li></ul></div>
     <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, transformamos números em narrativa: escolha de gráficos, dashboards e segmentação de clientes.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 6</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>

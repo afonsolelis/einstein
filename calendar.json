@@ -241,11 +241,11 @@
       ],
       "objectives": [
         "Distinguir automação, aprendizado de máquina e IA generativa",
-        "Mapear tarefas administrativas adequadas à assistência por IA",
+        "Mapear um processo administrativo em BPMN e derivar dele um modelo de dados",
         "Avaliar risco, privacidade e necessidade de revisão humana"
       ],
-      "activity": "Redesenhar um processo administrativo com assistência de IA e controles",
-      "deliverable": "Canvas com entrada, saída, responsável, risco, métrica e contingência",
+      "activity": "Mapear um processo do estágio ou trabalho em BPMN, derivar as entidades no dbdiagram.io e modelar a automatização em SQLite com IA agêntica",
+      "deliverable": "Pasta com fluxo.bpmn, modelo.dbml, schema.sql, processo.sqlite, automatizacao.py e README com revisão humana",
       "slides": "slides/aula-06.html",
       "material": "materiais/aula-06/index.html",
       "files": []

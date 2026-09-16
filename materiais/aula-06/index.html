@@ -21,6 +21,10 @@
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { background: #f4f8fb; color: #1a2f5e; }
     
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
@@ -30,7 +34,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { font-variant-ligatures: none; white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -115,19 +119,101 @@
     
     <div class="content">
       <p class="desc">IA é um conjunto de técnicas que produz previsões, classificações ou conteúdo a partir de dados; valor surge quando a saída entra em um processo com dono e controle. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear tarefas administrativas adequadas à assistência por IA</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></section>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Distinguir automação, aprendizado de máquina e IA generativa</li><li>Mapear um processo administrativo em BPMN e derivar dele um modelo de dados</li><li>Avaliar risco, privacidade e necessidade de revisão humana</li></ul></section>
       <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>IA é um conjunto de técnicas que produz previsões, classificações ou conteúdo a partir de dados; valor surge quando a saída entra em um processo com dono e controle.</p><ul><li>Casos úteis combinam volume, repetição e critério de qualidade claro</li><li>Prompts orientam modelos generativos, mas não garantem veracidade</li><li>Dados pessoais, decisões sensíveis e ações irreversíveis pedem governança</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
       <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
       <section data-lesson-section="guided-practice"><h2>3. TBL: arquitetura de uma decisão financeira</h2><p>No caso ao vivo, a rede hospitalar precisa apresentar uma previsão de caixa de 13 semanas enquanto ERP, planilhas e extratos ainda divergem. As quatro alternativas distribuem prioridade entre velocidade, modelagem da base, governança e execução incremental. Nenhuma elimina o conflito entre prazo e confiabilidade.</p><ol><li><strong>Rodada individual — 100 segundos:</strong> escolha a arquitetura que você adotaria antes de conhecer a posição da turma.</li><li><strong>Discussão — 10 minutos:</strong> explicite a ordem do processo, o grão da base, a reconciliação, o papel da IA e o responsável pela aprovação.</li><li><strong>Reconsideração — 100 segundos:</strong> vote novamente e identifique qual argumento sustentou ou alterou sua decisão.</li></ol><p><a class="btn btn-slides" href="../../tbl/aula-06/index.html">🧭 Entrar na sala TBL</a> <a class="btn btn-home" href="../../tbl/aula-06/painel.html">🎛️ Painel do professor</a></p></section>
-      <section data-lesson-section="guided-practice"><h2>4. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">tarefas = [{"nome":"resumir atas","impacto":4,"risco":2},{"nome":"aprovar crédito","impacto":5,"risco":5}]
-for t in tarefas:
-    t["prioridade"] = t["impacto"] - t["risco"]
-print(sorted(tarefas, key=lambda x:x["prioridade"], reverse=True))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">def avaliar_saida(texto, criterios):
-    return {c: c.lower() in texto.lower() for c in criterios}
-print(avaliar_saida("Resumo com fonte e prazo", ["fonte","prazo"]))</div><p>Mapeie um processo administrativo, decomponha-o em tarefas e desenhe um fluxo com revisão humana, registro e critério de sucesso.</p></section>
-      <section data-lesson-section="challenge"><h2>5. Desafio e entrega</h2><p>Entregar canvas do caso de uso contendo entrada, saída, responsável, risco, métrica e plano de contingência.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>6. Checklist de qualidade</h2><ul><li>Não inserir dados sigilosos em ferramentas não aprovadas</li><li>Verificar fatos e cálculos em fonte independente</li><li>Definir quem responde pela decisão final</li><li>Registrar versões de prompt, saída e revisão</li></ul></section>
-      <section data-lesson-section="summary"><h2>7. Síntese</h2><p>Adotar IA é redesenhar trabalho com controles, não apenas acrescentar uma ferramenta.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="guided-practice"><h2>4. Prática guiada: do processo ao banco com IA agêntica</h2><p>O TBL mostrou que a IA só entrega valor quando a ordem do processo, o grão dos dados e o responsável pela aprovação estão explícitos. Agora você fará esse percurso com um processo que conhece por dentro: um fluxo do seu estágio ou trabalho. Cada artefato é a entrada do seguinte. O processo vira BPMN, o BPMN vira modelo de entidades, o modelo vira banco SQLite e o banco recebe a automação. O agente de IA escreve os arquivos; você decide se cada um representa o processo real.</p>
+        <table><thead><tr><th>Etapa</th><th>Ferramenta</th><th>Artefato</th></tr></thead><tbody><tr><td>1. Mapear de cabeça</td><td>papel ou <code>README.md</code>, sem IA</td><td>anotações do processo</td></tr><tr><td>2 e 3. Modelar o fluxo</td><td>agente + <a href="https://demo.bpmn.io/new">demo.bpmn.io</a></td><td><code>fluxo.bpmn</code></td></tr><tr><td>4. Subir e conferir o fluxo</td><td>demo.bpmn.io + Git</td><td><code>fluxo.bpmn</code> revisado</td></tr><tr><td>5. Mapear entidades</td><td>agente + <a href="https://dbdiagram.io/d">dbdiagram.io</a></td><td><code>modelo.dbml</code></td></tr><tr><td>6. Criar o banco</td><td>agente + <code>sqlite3</code></td><td><code>schema.sql</code>, <code>processo.sqlite</code></td></tr><tr><td>7. Automatizar</td><td>agente + Python</td><td><code>automatizacao.py</code></td></tr></tbody></table>
+        <p>Crie a pasta <code>aula-06-seunome</code> no seu repositório do Codespaces e trabalhe com o Copilot em <strong>modo agente</strong> (ou com o Antigravity, se já estiver instalado). Mantenha a execução de comandos dependente da sua aprovação e leia o diff antes de aceitar cada arquivo.</p>
+
+        <h3>Etapa 1 — Mapeie o processo de cabeça</h3>
+        <p>Antes de abrir qualquer ferramenta, escreva em tópicos o processo como ele acontece hoje. Se o agente descrever o processo por você, o BPMN mostrará um fluxo genérico de livro, não o seu.</p>
+        <ul><li><strong>Gatilho:</strong> o que inicia o processo (ex.: “chegou um pedido de reembolso”).</li><li><strong>Atores:</strong> quem executa etapas; cada ator vira uma raia (<em>lane</em>).</li><li><strong>Tarefas:</strong> o que é feito, na ordem, com verbo no infinitivo.</li><li><strong>Decisões:</strong> onde o caminho se divide e quais são as saídas possíveis.</li><li><strong>Fim:</strong> o que é entregue e a quem.</li></ul>
+        <div class="alert-box"><h4>O agente processa o que você escreve</h4><p>Não coloque nomes de clientes, pacientes, colegas, valores reais ou detalhes de sistemas internos no prompt. Troque por rótulos genéricos (“Analista”, “Sistema de pedidos”, “valor acima do limite”). O processo continua o mesmo; o risco, não.</p></div>
+
+        <h3>Etapa 2 — Veja que um arquivo BPMN é só XML</h3>
+        <p>Abra o <a href="https://demo.bpmn.io/new">demo.bpmn.io</a> (é o <em>Try online</em> do <a href="https://bpmn.io/">bpmn.io</a>). Desenhe um evento de início, uma tarefa e um evento de fim e baixe o diagrama com <code>Ctrl + S</code> (<code>⌘ + S</code> no Mac). Salve como <code>exemplo.bpmn</code> na sua pasta e abra no editor. O conteúdo tem duas partes:</p>
+        <div class="code-block">&lt;bpmn:definitions ...&gt;
+  <span class="code-comment">&lt;!-- 1. Semântica: o que acontece e em que ordem --&gt;</span>
+  &lt;bpmn:process id="Process_1"&gt;
+    &lt;bpmn:startEvent id="StartEvent_1" /&gt;
+    &lt;bpmn:task id="Task_1" name=<span class="code-string">"Conferir nota fiscal"</span> /&gt;
+    &lt;bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1" /&gt;
+  &lt;/bpmn:process&gt;
+  <span class="code-comment">&lt;!-- 2. Desenho: onde cada forma aparece na tela --&gt;</span>
+  &lt;bpmndi:BPMNDiagram id="BPMNDiagram_1"&gt;
+    &lt;bpmndi:BPMNShape bpmnElement="Task_1"&gt;
+      &lt;dc:Bounds x="250" y="80" width="100" height="80" /&gt;
+    &lt;/bpmndi:BPMNShape&gt;
+  &lt;/bpmndi:BPMNDiagram&gt;
+&lt;/bpmn:definitions&gt;</div>
+        <p>A primeira parte descreve o processo; a segunda guarda coordenadas. Um arquivo sem <code>bpmndi:BPMNDiagram</code> pode ser BPMN válido, mas o bpmn.io não tem o que desenhar. Essa é a falha mais comum quando uma IA gera o arquivo, por isso o prompt a seguir exige as duas partes.</p>
+
+        <h3>Etapa 3 — Peça ao agente o <code>fluxo.bpmn</code></h3>
+        <div class="code-block">Leia @exemplo.bpmn apenas como referência do formato BPMN 2.0 usado pelo
+bpmn.io. Crie o arquivo fluxo.bpmn com o processo descrito abaixo, sem
+inventar etapas, atores ou decisões que não estejam na descrição.
+
+[cole aqui as suas anotações da etapa 1]
+
+Regras: uma pool com uma lane por ator; tarefas com verbo no infinitivo;
+gateways exclusivos com a condição escrita em cada saída; um evento de
+início e pelo menos um de fim. Inclua bpmndi:BPMNDiagram com coordenadas
+para cada forma e cada conexão, sem sobreposição. Depois valide com python3
+que o XML é bem formado e liste os ids das tarefas e gateways criados.</div>
+
+        <h3>Etapa 4 — Suba o fluxo e confira</h3>
+        <p>No <a href="https://demo.bpmn.io/new">demo.bpmn.io</a>, abra o <code>fluxo.bpmn</code> arrastando o arquivo para a tela ou com <code>Ctrl + O</code>. Compare o desenho com as suas anotações, não com o que o agente sugeriu: faltou alguma tarefa? Cada decisão tem todas as saídas? Cada raia contém apenas tarefas do seu ator? Se o arquivo não abrir, devolva a mensagem de erro ao agente. Ajustes manuais no layout são bem-vindos; baixe de novo com <code>Ctrl + S</code> sobrescrevendo <code>fluxo.bpmn</code> e publique a versão conferida:</p>
+        <div class="code-block">git add aula-06-seunome/fluxo.bpmn
+git commit -m <span class="code-string">"Modela em BPMN o processo de reembolso"</span>
+git push</div>
+
+        <h3>Etapa 5 — Mapeie as entidades no dbdiagram.io</h3>
+        <p>Um processo cria, consulta e altera informação. As entidades saem das tarefas e decisões do fluxo, e não de uma lista genérica de tabelas.</p>
+        <div class="code-block">Leia @fluxo.bpmn e identifique as entidades de dados que o processo cria,
+consulta ou altera. Separe dois grupos: (1) entidades de negócio, como
+solicitação, documento ou fornecedor; (2) entidades de execução, que
+registram qual instância do processo passou por qual tarefa, quando, por
+quem e com qual resultado. Escreva modelo.dbml na sintaxe DBML do
+dbdiagram.io, com chaves primárias, chaves estrangeiras, tipos e uma note
+em cada tabela indicando de qual tarefa ou decisão do BPMN ela vem.
+Não crie tabelas sem origem no fluxo.</div>
+        <p>Abra o <a href="https://dbdiagram.io/d">dbdiagram.io</a>, cole o conteúdo de <code>modelo.dbml</code> no editor à esquerda e leia o diagrama gerado. Verifique se cada tarefa que produz informação tem onde gravar e se cada decisão tem um campo que guarda o resultado. O que você corrigir no dbdiagram.io volta para <code>modelo.dbml</code> antes do próximo passo.</p>
+
+        <h3>Etapa 6 — Crie o banco SQLite a partir do modelo</h3>
+        <div class="code-block">Converta @modelo.dbml em schema.sql compatível com SQLite: INTEGER PRIMARY
+KEY, FOREIGN KEY com REFERENCES, CHECK para status e resultados de decisão
+e datas em TEXT no formato ISO 8601. Crie criar_banco.py, que apaga e
+recria processo.sqlite a partir de schema.sql usando apenas o módulo
+sqlite3 do Python, com PRAGMA foreign_keys = ON. Execute e mostre as
+tabelas criadas. Não insira dados nesta etapa.</div>
+        <p>Confira a estrutura com um script que não depende do agente:</p>
+        <div class="code-block"><span class="code-keyword">import</span> sqlite3
+
+con = sqlite3.connect(<span class="code-string">"processo.sqlite"</span>)
+tabelas = con.execute(<span class="code-string">"SELECT name FROM sqlite_master WHERE type = 'table'"</span>)
+<span class="code-keyword">for</span> (nome,) <span class="code-keyword">in</span> tabelas.fetchall():
+    colunas = [c[1] <span class="code-keyword">for</span> c <span class="code-keyword">in</span> con.execute(f<span class="code-string">"PRAGMA table_info({nome})"</span>)]
+    print(nome, colunas)</div>
+
+        <h3>Etapa 7 — Modele a automatização do processo</h3>
+        <p>Automatizar não é aprovar tudo sozinho. O script executa o que tem regra explícita e dado disponível; julgamento, aprovação e exceção continuam com uma pessoa, e o banco registra essa fila.</p>
+        <div class="code-block">Crie automatizacao.py, que simula 20 instâncias do processo de @fluxo.bpmn
+e grava cada passo em processo.sqlite, respeitando @schema.sql. Leia o BPMN
+com xml.etree.ElementTree e siga os sequenceFlows a partir do evento de
+início; não reescreva o fluxo à mão dentro do código. Classifique cada
+tarefa como automática (regra explícita e dado disponível) ou humana
+(julgamento, aprovação ou exceção) e mostre essa tabela antes de programar.
+Tarefas automáticas são executadas e registradas; tarefas humanas ficam com
+status "pendente_revisao" e um responsável, nunca aprovadas pelo script.
+Use dados fictícios, random.seed(42) e uma transação por instância. Ao
+final, imprima quantas instâncias concluíram e quantas aguardam revisão,
+agrupadas por tarefa.</div>
+        <p>Rode <code>python3 criar_banco.py &amp;&amp; python3 automatizacao.py</code> duas vezes: as contagens devem se repetir. Depois peça ao agente três consultas SQL (instâncias por status, tarefas com mais pendências e tempo entre início e fim das concluídas), execute-as e confira se os números batem com a saída do script.</p></section>
+      <section data-lesson-section="challenge"><h2>5. Desafio e entrega</h2><p>Publique no repositório a pasta <code>aula-06-seunome</code> com:</p><ul><li><code>fluxo.bpmn</code> que abre no demo.bpmn.io sem erro;</li><li><code>modelo.dbml</code> com a origem de cada tabela no fluxo;</li><li><code>schema.sql</code>, <code>criar_banco.py</code> e <code>processo.sqlite</code>;</li><li><code>automatizacao.py</code>;</li><li><code>README.md</code> com o processo mapeado de cabeça, a tabela de tarefas automáticas e humanas com justificativa e pelo menos dois erros do agente que você corrigiu.</li></ul><p><strong>Critério de aceite:</strong> outra pessoa clona o repositório, abre o fluxo no bpmn.io, executa <code>python3 criar_banco.py &amp;&amp; python3 automatizacao.py</code> e obtém as mesmas contagens registradas no README; nenhuma tarefa humana aparece como concluída pelo script.</p></section>
+      <section data-lesson-section="checklist"><h2>6. Checklist de qualidade</h2><ul><li>Nenhum dado de cliente, paciente, colega ou valor real foi enviado ao agente</li><li>O BPMN foi conferido contra o processo mapeado de cabeça</li><li>Cada tabela do modelo tem origem em uma tarefa ou decisão do fluxo</li><li>Aprovações e exceções ficam pendentes de revisão humana</li><li>Cada artefato validado foi commitado antes do seguinte</li></ul></section>
+      <section data-lesson-section="summary"><h2>7. Síntese</h2><p>Adotar IA é redesenhar trabalho com controles, não apenas acrescentar uma ferramenta.</p><p>Na prática de hoje, o processo veio antes do agente, o BPMN antes do banco e o banco antes da automação. Inverter essa ordem produz código que roda, mas automatiza um processo que ninguém executa. Antes de concluir, aponte no seu fluxo a tarefa em que a automação traria mais ganho e a tarefa que você não entregaria a um script.</p></section>
       <section data-lesson-section="next-steps"><h2>8. Referências e continuidade</h2><p>No próximo laboratório, transformamos números em narrativa: escolha de gráficos alinhada à pergunta executiva, dashboards e segmentação de clientes por comportamento e valor.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">

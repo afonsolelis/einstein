@@ -232,6 +232,30 @@ test('cronograma, slides e material levam ao TBL da aula 6', async ({ page }) =>
   await page.goto('/slides/aula-06.html');
   await expect(page.locator('.btn-group a[href="../tbl/aula-06/painel.html"]')).toBeVisible();
   await page.goto('/materiais/aula-06/index.html');
-  await expect(page.locator('h2', { hasText: '4. Prática guiada em Python' })).toHaveCount(1);
+  await expect(page.locator('h2', { hasText: '4. Prática guiada: do processo ao banco com IA agêntica' })).toHaveCount(1);
+  await expect(page.locator('a[href="https://demo.bpmn.io/new"]').first()).toBeVisible();
+  await expect(page.locator('a[href="https://dbdiagram.io/d"]').first()).toBeVisible();
   await expect(page.getByRole('button', { name: /Imprimir Material/ })).toBeVisible();
+});
+
+test('slides da prática guiada da aula 6 cabem na tela e o material não transborda', async ({ page }) => {
+  await page.goto('/slides/aula-06.html');
+  const next = page.locator('#btn-next');
+  const total = await page.locator('.slide').count();
+  for (let index = 1; index < total; index += 1) {
+    await next.click();
+    const dimensions = await page.locator('.slide.active').evaluate(element => ({
+      scrollHeight: element.scrollHeight,
+      clientHeight: element.clientHeight,
+      scrollWidth: element.scrollWidth,
+      clientWidth: element.clientWidth
+    }));
+    expect(dimensions.scrollHeight, `slide ${index + 1} foi cortado verticalmente`).toBeLessThanOrEqual(dimensions.clientHeight);
+    expect(dimensions.scrollWidth, `slide ${index + 1} foi cortado horizontalmente`).toBeLessThanOrEqual(dimensions.clientWidth);
+  }
+  await expect(page.locator('.slide h2', { hasText: 'Etapas 2–4: BPMN é só XML' })).toHaveCount(1);
+
+  await page.goto('/materiais/aula-06/index.html');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(0);
 });
