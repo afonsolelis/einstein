@@ -11,7 +11,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 class RpcError extends Error{constructor(message,status){super(message);this.status=status}}
 async function rpc(fn,body){
   let r;
-  try{r=await fetch(API+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(8000)})}
+  try{r=await fetch(API+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout?AbortSignal.timeout(8000):undefined})}
   catch{throw new RpcError('Sem conexão com o Supabase. Tentando novamente…',0)}
   const data=await r.json().catch(()=>({}));
   if(!r.ok)throw new RpcError(data.message||'Falha no painel.',r.status);
