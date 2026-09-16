@@ -226,6 +226,9 @@ test('falha de rede ao reabrir a página não apaga a identidade do aluno', asyn
 test('cronograma, slides e material levam ao TBL da aula 6', async ({ page }) => {
   await page.goto('/index.html');
   await expect(page.locator('.card').nth(5).locator('a[href="tbl/aula-06/index.html"]')).toBeVisible();
+  await expect(page.locator('.card').nth(5).locator('a[href="tbl/aula-06/painel.html"]')).toBeVisible();
+  await page.goto('/slides/aula-06.html');
+  await expect(page.locator('.btn-group a[href="../tbl/aula-06/painel.html"]')).toBeVisible();
   await page.goto('/materiais/aula-06/index.html');
   await expect(page.locator('h2', { hasText: '4. Prática guiada em Python' })).toHaveCount(1);
   await expect(page.getByRole('button', { name: /Imprimir Material/ })).toBeVisible();

@@ -731,7 +731,8 @@
       },
       6: {
         destaque: "TBL ao vivo",
-        tbl: "tbl/aula-06/index.html"
+        tbl: "tbl/aula-06/index.html",
+        tblPainel: "tbl/aula-06/painel.html"
       },
       7: {
         destaque: "Olist"
@@ -792,6 +793,7 @@
             <a class="btn btn-slides" href="slides/aula-${id}.html">📊 Slides</a>
             <a class="btn btn-mat" href="materiais/aula-${id}/index.html">📎 Materiais</a>
             ${recursos.tbl ? `<a class="btn btn-data" href="${recursos.tbl}">🧭 Entrar no TBL</a>` : ''}
+            ${recursos.tblPainel ? `<a class="btn btn-mat" href="${recursos.tblPainel}">🎛️ Painel do professor</a>` : ''}
             ${recursos.dados ? `<a class="btn btn-data" href="${recursos.dados}" download="${recursos.dadosNome}">⬇️ Baixar base</a>` : ''}
           </div>
         </div>
