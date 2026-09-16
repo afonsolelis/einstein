@@ -126,6 +126,7 @@
       <section data-lesson-section="guided-practice"><h2>4. Prática guiada: do processo ao banco com IA agêntica</h2><p>O TBL mostrou que a IA só entrega valor quando a ordem do processo, o grão dos dados e o responsável pela aprovação estão explícitos. Agora você fará esse percurso com um processo que conhece por dentro: um fluxo do seu estágio ou trabalho. Cada artefato é a entrada do seguinte. O processo vira BPMN, o BPMN vira modelo de entidades, o modelo vira banco SQLite e o banco recebe a automação. O agente de IA escreve os arquivos; você decide se cada um representa o processo real.</p>
         <table><thead><tr><th>Etapa</th><th>Ferramenta</th><th>Artefato</th></tr></thead><tbody><tr><td>1. Mapear de cabeça</td><td>papel ou <code>README.md</code>, sem IA</td><td>anotações do processo</td></tr><tr><td>2 e 3. Modelar o fluxo</td><td>agente + <a href="https://demo.bpmn.io/new">demo.bpmn.io</a></td><td><code>fluxo.bpmn</code></td></tr><tr><td>4. Subir e conferir o fluxo</td><td>demo.bpmn.io + Git</td><td><code>fluxo.bpmn</code> revisado</td></tr><tr><td>5. Mapear entidades</td><td>agente + <a href="https://dbdiagram.io/d">dbdiagram.io</a></td><td><code>modelo.dbml</code></td></tr><tr><td>6. Criar o banco</td><td>agente + <code>sqlite3</code></td><td><code>schema.sql</code>, <code>processo.sqlite</code></td></tr><tr><td>7. Automatizar</td><td>agente + Python</td><td><code>automatizacao.py</code></td></tr></tbody></table>
         <p>Crie a pasta <code>aula-06-seunome</code> no seu repositório do Codespaces e trabalhe com o Copilot em <strong>modo agente</strong> (ou com o Antigravity, se já estiver instalado). Mantenha a execução de comandos dependente da sua aprovação e leia o diff antes de aceitar cada arquivo.</p>
+        <p>O bpmn.io e o dbdiagram.io rodam no seu navegador, fora do Codespace. Para levar um arquivo do computador para a pasta, arraste-o para o <strong>Explorer</strong> do Codespace; para trazer um arquivo da pasta para o computador, clique com o botão direito sobre ele no Explorer e escolha <strong>Download</strong>.</p>
 
         <h3>Etapa 1 — Mapeie o processo de cabeça</h3>
         <p>Antes de abrir qualquer ferramenta, escreva em tópicos o processo como ele acontece hoje. Se o agente descrever o processo por você, o BPMN mostrará um fluxo genérico de livro, não o seu.</p>
@@ -133,7 +134,7 @@
         <div class="alert-box"><h4>O agente processa o que você escreve</h4><p>Não coloque nomes de clientes, pacientes, colegas, valores reais ou detalhes de sistemas internos no prompt. Troque por rótulos genéricos (“Analista”, “Sistema de pedidos”, “valor acima do limite”). O processo continua o mesmo; o risco, não.</p></div>
 
         <h3>Etapa 2 — Veja que um arquivo BPMN é só XML</h3>
-        <p>Abra o <a href="https://demo.bpmn.io/new">demo.bpmn.io</a> (é o <em>Try online</em> do <a href="https://bpmn.io/">bpmn.io</a>). Desenhe um evento de início, uma tarefa e um evento de fim e baixe o diagrama com <code>Ctrl + S</code> (<code>⌘ + S</code> no Mac). Salve como <code>exemplo.bpmn</code> na sua pasta e abra no editor. O conteúdo tem duas partes:</p>
+        <p>Abra o <a href="https://demo.bpmn.io/new">demo.bpmn.io</a> (é o <em>Try online</em> do <a href="https://bpmn.io/">bpmn.io</a>). Desenhe um evento de início, uma tarefa e um evento de fim e baixe o diagrama com <code>Ctrl + S</code> (<code>⌘ + S</code> no Mac). O site baixa <code>diagram.bpmn</code>: renomeie para <code>exemplo.bpmn</code>, arraste para a sua pasta no Codespace e abra no editor. O conteúdo tem duas partes:</p>
         <div class="code-block">&lt;bpmn:definitions ...&gt;
   <span class="code-comment">&lt;!-- 1. Semântica: o que acontece e em que ordem --&gt;</span>
   &lt;bpmn:process id="Process_1"&gt;
@@ -164,7 +165,7 @@ para cada forma e cada conexão, sem sobreposição. Depois valide com python3
 que o XML é bem formado e liste os ids das tarefas e gateways criados.</div>
 
         <h3>Etapa 4 — Suba o fluxo e confira</h3>
-        <p>No <a href="https://demo.bpmn.io/new">demo.bpmn.io</a>, abra o <code>fluxo.bpmn</code> arrastando o arquivo para a tela ou com <code>Ctrl + O</code>. Compare o desenho com as suas anotações, não com o que o agente sugeriu: faltou alguma tarefa? Cada decisão tem todas as saídas? Cada raia contém apenas tarefas do seu ator? Se o arquivo não abrir, devolva a mensagem de erro ao agente. Ajustes manuais no layout são bem-vindos; baixe de novo com <code>Ctrl + S</code> sobrescrevendo <code>fluxo.bpmn</code> e publique a versão conferida:</p>
+        <p>Baixe o <code>fluxo.bpmn</code> do Codespace e, no <a href="https://demo.bpmn.io/new">demo.bpmn.io</a>, abra-o arrastando o arquivo para a tela ou com <code>Ctrl + O</code>. Compare o desenho com as suas anotações, não com o que o agente sugeriu: faltou alguma tarefa? Cada decisão tem todas as saídas? Cada raia contém apenas tarefas do seu ator? Se o arquivo não abrir, devolva a mensagem de erro ao agente. Ajustes manuais no layout são bem-vindos; baixe de novo com <code>Ctrl + S</code>, renomeie para <code>fluxo.bpmn</code>, arraste de volta para a pasta substituindo o anterior e publique a versão conferida:</p>
         <div class="code-block">git add aula-06-seunome/fluxo.bpmn
 git commit -m <span class="code-string">"Modela em BPMN o processo de reembolso"</span>
 git push</div>
@@ -179,12 +180,13 @@ quem e com qual resultado. Escreva modelo.dbml na sintaxe DBML do
 dbdiagram.io, com chaves primárias, chaves estrangeiras, tipos e uma note
 em cada tabela indicando de qual tarefa ou decisão do BPMN ela vem.
 Não crie tabelas sem origem no fluxo.</div>
-        <p>Abra o <a href="https://dbdiagram.io/d">dbdiagram.io</a>, cole o conteúdo de <code>modelo.dbml</code> no editor à esquerda e leia o diagrama gerado. Verifique se cada tarefa que produz informação tem onde gravar e se cada decisão tem um campo que guarda o resultado. O que você corrigir no dbdiagram.io volta para <code>modelo.dbml</code> antes do próximo passo.</p>
+        <p>Abra o <a href="https://dbdiagram.io/d">dbdiagram.io</a>, apague o exemplo do editor à esquerda, cole o conteúdo de <code>modelo.dbml</code> e leia o diagrama gerado. Não é preciso criar conta nem salvar no site: a versão oficial do modelo é o arquivo no repositório. Verifique se cada tarefa que produz informação tem onde gravar e se cada decisão tem um campo que guarda o resultado. O que você corrigir no dbdiagram.io volta para <code>modelo.dbml</code> antes do próximo passo.</p>
 
         <h3>Etapa 6 — Crie o banco SQLite a partir do modelo</h3>
         <div class="code-block">Converta @modelo.dbml em schema.sql compatível com SQLite: INTEGER PRIMARY
 KEY, FOREIGN KEY com REFERENCES, CHECK para status e resultados de decisão
-e datas em TEXT no formato ISO 8601. Crie criar_banco.py, que apaga e
+e datas em TEXT no formato ISO 8601. A tabela que registra a execução das
+tarefas deve aceitar pelo menos os status "concluida" e "pendente_revisao". Crie criar_banco.py, que apaga e
 recria processo.sqlite a partir de schema.sql usando apenas o módulo
 sqlite3 do Python, com PRAGMA foreign_keys = ON. Execute e mostre as
 tabelas criadas. Não insira dados nesta etapa.</div>
@@ -207,8 +209,10 @@ tarefa como automática (regra explícita e dado disponível) ou humana
 (julgamento, aprovação ou exceção) e mostre essa tabela antes de programar.
 Tarefas automáticas são executadas e registradas; tarefas humanas ficam com
 status "pendente_revisao" e um responsável, nunca aprovadas pelo script.
-Use dados fictícios, random.seed(42) e uma transação por instância. Ao
-final, imprima quantas instâncias concluíram e quantas aguardam revisão,
+Use dados fictícios, random.seed(42), datas simuladas a partir de
+2026-09-01 08:00 (nunca o relógio do computador) e uma transação por
+instância. Se schema.sql não comportar a automação, pare e proponha a
+alteração em modelo.dbml e schema.sql antes de programar. Ao final, imprima quantas instâncias concluíram e quantas aguardam revisão,
 agrupadas por tarefa.</div>
         <p>Rode <code>python3 criar_banco.py &amp;&amp; python3 automatizacao.py</code> duas vezes: as contagens devem se repetir. Depois peça ao agente três consultas SQL (instâncias por status, tarefas com mais pendências e tempo entre início e fim das concluídas), execute-as e confira se os números batem com a saída do script.</p></section>
       <section data-lesson-section="challenge"><h2>5. Desafio e entrega</h2><p>Publique no repositório a pasta <code>aula-06-seunome</code> com:</p><ul><li><code>fluxo.bpmn</code> que abre no demo.bpmn.io sem erro;</li><li><code>modelo.dbml</code> com a origem de cada tabela no fluxo;</li><li><code>schema.sql</code>, <code>criar_banco.py</code> e <code>processo.sqlite</code>;</li><li><code>automatizacao.py</code>;</li><li><code>README.md</code> com o processo mapeado de cabeça, a tabela de tarefas automáticas e humanas com justificativa e pelo menos dois erros do agente que você corrigiu.</li></ul><p><strong>Critério de aceite:</strong> outra pessoa clona o repositório, abre o fluxo no bpmn.io, executa <code>python3 criar_banco.py &amp;&amp; python3 automatizacao.py</code> e obtém as mesmas contagens registradas no README; nenhuma tarefa humana aparece como concluída pelo script.</p></section>
