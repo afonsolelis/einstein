@@ -407,6 +407,26 @@
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
+    .card-sem-aula {
+      color: #64748b;
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      border-color: #cbd5e1;
+      box-shadow: none;
+    }
+    .card-sem-aula:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .card-sem-aula .card-top {
+      color: #475569;
+      background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+    }
+    .card-sem-aula .card-body h3 { color: #475569; }
+    .card-sem-aula .tag {
+      color: #475569;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+    }
     .card-top {
       background: linear-gradient(135deg, var(--navy), var(--blue));
       color: #fff;
@@ -649,7 +669,7 @@
     </section>
 
     <h2 class="section-title">Cronograma de Laboratórios</h2>
-    <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 16/12 · Cada laboratório reúne os slides e os materiais de apoio.</p>
+    <p class="section-sub">Quartas-feiras, 19h–22h · 12/08 a 23/12 · Sem aula em 14/10 · Cada laboratório reúne os slides e os materiais de apoio.</p>
     <div class="grid" id="grid"></div>
   </main>
 
@@ -681,16 +701,22 @@
       { n: 7,  data: "23/09", tema: "Storytelling, Dashboards e Segmentação de Clientes", tag: "Visualização" },
       { n: 8,  data: "30/09", tema: "Limpeza de dados: Preparando a base para análises", tag: "Pandas" },
       { n: 9,  data: "07/10", tema: "Fazendo previsões com IA: Vendas e Tendências", tag: "ML · Regressão" },
-      { n: 10, data: "14/10", tema: "Testes A/B: do desenho do experimento à decisão de negócio", tag: "Inferência" },
-      { n: 11, data: "21/10", tema: "Auditoria automatizada: Detectando anomalias e riscos", tag: "Anomalias" },
-      { n: 12, data: "28/10", tema: "IA aplicada à estratégia e tomada de decisão", tag: "IA · Estratégia" },
-      { n: 13, data: "04/11", tema: "Análise forense de dados: Identificando fraudes", tag: "Forense" },
-      { n: 14, data: "11/11", tema: "Estudo de Caso: Análise de dados aplicada ao RH", tag: "Estudo de Caso" },
-      { n: 15, data: "18/11", tema: "Estudo de Caso: Programação para previsão de caixas", tag: "Estudo de Caso" },
-      { n: 16, data: "25/11", tema: "Estudo de Caso: Previsão de demandas", tag: "Estudo de Caso" },
-      { n: 17, data: "02/12", tema: "Projeto Integrador: Resolvendo um problema de negócio real", tag: "Projeto" },
-      { n: 18, data: "09/12", tema: "Apresentação de resultados e recomendações executivas", tag: "Apresentação" },
-      { n: 19, data: "16/12", tema: "Apresentação final de projetos", tag: "Apresentação" },
+      { n: 10, data: "21/10", tema: "Testes A/B: do desenho do experimento à decisão de negócio", tag: "Inferência" },
+      { n: 11, data: "28/10", tema: "Auditoria automatizada: Detectando anomalias e riscos", tag: "Anomalias" },
+      { n: 12, data: "04/11", tema: "IA aplicada à estratégia e tomada de decisão", tag: "IA · Estratégia" },
+      { n: 13, data: "11/11", tema: "Análise forense de dados: Identificando fraudes", tag: "Forense" },
+      { n: 14, data: "18/11", tema: "Estudo de Caso: Análise de dados aplicada ao RH", tag: "Estudo de Caso" },
+      { n: 15, data: "25/11", tema: "Estudo de Caso: Programação para previsão de caixas", tag: "Estudo de Caso" },
+      { n: 16, data: "02/12", tema: "Estudo de Caso: Previsão de demandas", tag: "Estudo de Caso" },
+      { n: 17, data: "09/12", tema: "Projeto Integrador: Resolvendo um problema de negócio real", tag: "Projeto" },
+      { n: 18, data: "16/12", tema: "Apresentação de resultados e recomendações executivas", tag: "Apresentação" },
+      { n: 19, data: "23/12", tema: "Apresentação final de projetos", tag: "Apresentação" },
+    ];
+
+    const cronograma = [
+      ...aulas.slice(0, 9),
+      { data: "14/10", semAula: true, tema: "Não haverá aula", tag: "Pausa no calendário" },
+      ...aulas.slice(9)
     ];
 
     const recursosAulas = {
@@ -724,7 +750,22 @@
       ? aulas.find(a => a.data === hojeChave)
       : undefined;
 
-    grid.innerHTML = aulas.map(a => {
+    grid.innerHTML = cronograma.map(a => {
+      if (a.semAula) {
+        return `
+        <article class="card card-sem-aula" aria-label="14 de outubro: não haverá aula">
+          <div class="card-top">
+            <div class="aula-num" aria-hidden="true">—</div>
+            <div class="aula-date">${a.data}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-info">
+              <h3>${a.tema}</h3>
+              <span class="tag">${a.tag}</span>
+            </div>
+          </div>
+        </article>`;
+      }
       const id = pad(a.n);
       const recursos = recursosAulas[a.n] || {};
       const eHoje = aulaDeHoje && aulaDeHoje.n === a.n;

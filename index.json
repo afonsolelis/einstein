@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-07",
+  "generated_at": "2026-09-16",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -8,7 +8,7 @@
     "workload_hours": 80,
     "instructor": "Prof. Afonso Cesar Lelis Brandão",
     "lesson_count": 19,
-    "schedule": "Quartas-feiras, 19h–22h · 12/08 a 16/12",
+    "schedule": "Quartas-feiras, 19h–22h · 12/08 a 23/12 · sem aula em 14/10",
     "homepage": "index.html"
   },
   "project_files": {
@@ -540,7 +540,7 @@
     },
     {
       "number": 10,
-      "date": "14/10",
+      "date": "21/10",
       "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
       "tag": "Inferência",
       "status": "complete",
@@ -584,7 +584,7 @@
     },
     {
       "number": 11,
-      "date": "21/10",
+      "date": "28/10",
       "theme": "Auditoria automatizada: Detectando anomalias e riscos",
       "tag": "Anomalias",
       "status": "complete",
@@ -624,7 +624,7 @@
     },
     {
       "number": 12,
-      "date": "28/10",
+      "date": "04/11",
       "theme": "IA aplicada à estratégia e tomada de decisão",
       "tag": "IA · Estratégia",
       "status": "complete",
@@ -664,7 +664,7 @@
     },
     {
       "number": 13,
-      "date": "04/11",
+      "date": "11/11",
       "theme": "Análise forense de dados: Identificando fraudes",
       "tag": "Forense",
       "status": "complete",
@@ -703,7 +703,7 @@
     },
     {
       "number": 14,
-      "date": "11/11",
+      "date": "18/11",
       "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
       "tag": "Estudo de Caso",
       "status": "complete",
@@ -743,7 +743,7 @@
     },
     {
       "number": 15,
-      "date": "18/11",
+      "date": "25/11",
       "theme": "Estudo de Caso: Programação para previsão de caixas",
       "tag": "Estudo de Caso",
       "status": "complete",
@@ -783,7 +783,7 @@
     },
     {
       "number": 16,
-      "date": "25/11",
+      "date": "02/12",
       "theme": "Estudo de Caso: Previsão de demandas",
       "tag": "Estudo de Caso",
       "status": "complete",
@@ -822,7 +822,7 @@
     },
     {
       "number": 17,
-      "date": "02/12",
+      "date": "09/12",
       "theme": "Projeto Integrador: Resolvendo um problema de negócio real",
       "tag": "Projeto",
       "status": "complete",
@@ -861,7 +861,7 @@
     },
     {
       "number": 18,
-      "date": "09/12",
+      "date": "16/12",
       "theme": "Apresentação de resultados e recomendações executivas",
       "tag": "Apresentação",
       "status": "complete",
@@ -901,7 +901,7 @@
     },
     {
       "number": 19,
-      "date": "16/12",
+      "date": "23/12",
       "theme": "Apresentação final de projetos",
       "tag": "Apresentação",
       "status": "complete",

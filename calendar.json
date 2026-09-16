@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-07",
+  "generated_at": "2026-09-16",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -12,7 +12,10 @@
     "start": "19:00",
     "end": "22:00",
     "first_class": "2026-08-12",
-    "last_class": "2026-12-16",
+    "last_class": "2026-12-23",
+    "no_class_dates": [
+      "2026-10-14"
+    ],
     "week_count": 19,
     "assessment": "Exclusivamente formativa (acompanhamento contínuo)",
     "homepage": "https://afonsolelis.github.io/einstein/"
@@ -358,8 +361,8 @@
     {
       "week": 10,
       "lesson": 10,
-      "date": "14/10",
-      "date_iso": "2026-10-14",
+      "date": "21/10",
+      "date_iso": "2026-10-21",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -390,8 +393,8 @@
     {
       "week": 11,
       "lesson": 11,
-      "date": "21/10",
-      "date_iso": "2026-10-21",
+      "date": "28/10",
+      "date_iso": "2026-10-28",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -418,8 +421,8 @@
     {
       "week": 12,
       "lesson": 12,
-      "date": "28/10",
-      "date_iso": "2026-10-28",
+      "date": "04/11",
+      "date_iso": "2026-11-04",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -446,8 +449,8 @@
     {
       "week": 13,
       "lesson": 13,
-      "date": "04/11",
-      "date_iso": "2026-11-04",
+      "date": "11/11",
+      "date_iso": "2026-11-11",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -473,8 +476,8 @@
     {
       "week": 14,
       "lesson": 14,
-      "date": "11/11",
-      "date_iso": "2026-11-11",
+      "date": "18/11",
+      "date_iso": "2026-11-18",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -501,8 +504,8 @@
     {
       "week": 15,
       "lesson": 15,
-      "date": "18/11",
-      "date_iso": "2026-11-18",
+      "date": "25/11",
+      "date_iso": "2026-11-25",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -529,8 +532,8 @@
     {
       "week": 16,
       "lesson": 16,
-      "date": "25/11",
-      "date_iso": "2026-11-25",
+      "date": "02/12",
+      "date_iso": "2026-12-02",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -556,8 +559,8 @@
     {
       "week": 17,
       "lesson": 17,
-      "date": "02/12",
-      "date_iso": "2026-12-02",
+      "date": "09/12",
+      "date_iso": "2026-12-09",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -583,8 +586,8 @@
     {
       "week": 18,
       "lesson": 18,
-      "date": "09/12",
-      "date_iso": "2026-12-09",
+      "date": "16/12",
+      "date_iso": "2026-12-16",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",
@@ -611,8 +614,8 @@
     {
       "week": 19,
       "lesson": 19,
-      "date": "16/12",
-      "date_iso": "2026-12-16",
+      "date": "23/12",
+      "date_iso": "2026-12-23",
       "weekday": "quarta-feira",
       "start": "19:00",
       "end": "22:00",

@@ -19,7 +19,7 @@ reunindo os **slides** e os **materiais de apoio** do respectivo laboratório.
 | **Trilha** | BI & Data Science |
 | **Carga horária** | 80 horas |
 | **Formato** | Laboratório prático (quartas, 19h–22h) |
-| **Período** | 12/08 a 16/12 |
+| **Período** | 12/08 a 23/12 |
 | **Avaliação** | Exclusivamente formativa (acompanhamento contínuo) |
 | **Docente** | Prof. Afonso Cesar Lelis Brandão |
 
@@ -56,16 +56,17 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 | 7 | 23/09 | Refinando dados para modelos de decisão |
 | 8 | 30/09 | Fazendo previsões com IA: Vendas e Tendências |
 | 9 | 07/10 | Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral |
-| 10 | 14/10 | Estudo de Caso: Aplicação prática de Testes Estatísticos |
-| 11 | 21/10 | Auditoria automatizada: Detectando anomalias e riscos |
-| 12 | 28/10 | IA aplicada à estratégia e tomada de decisão |
-| 13 | 04/11 | Análise forense de dados: Identificando fraudes |
-| 14 | 11/11 | Estudo de Caso: Análise de dados aplicada ao RH |
-| 15 | 18/11 | Estudo de Caso: Programação para previsão de caixas |
-| 16 | 25/11 | Estudo de Caso: Previsão de demandas |
-| 17 | 02/12 | Projeto Integrador: Resolvendo um problema de negócio real |
-| 18 | 09/12 | Apresentação de resultados e recomendações executivas |
-| 19 | 16/12 | Apresentação final de projetos |
+| — | 14/10 | **Não haverá aula** |
+| 10 | 21/10 | Estudo de Caso: Aplicação prática de Testes Estatísticos |
+| 11 | 28/10 | Auditoria automatizada: Detectando anomalias e riscos |
+| 12 | 04/11 | IA aplicada à estratégia e tomada de decisão |
+| 13 | 11/11 | Análise forense de dados: Identificando fraudes |
+| 14 | 18/11 | Estudo de Caso: Análise de dados aplicada ao RH |
+| 15 | 25/11 | Estudo de Caso: Programação para previsão de caixas |
+| 16 | 02/12 | Estudo de Caso: Previsão de demandas |
+| 17 | 09/12 | Projeto Integrador: Resolvendo um problema de negócio real |
+| 18 | 16/12 | Apresentação de resultados e recomendações executivas |
+| 19 | 23/12 | Apresentação final de projetos |
 
 ---
 
