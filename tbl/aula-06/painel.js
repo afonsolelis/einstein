@@ -25,9 +25,9 @@ let rosterOpen=store.get(ROSTER_KEY)==='1';
 const CONFIRM={
   start:'Iniciar uma nova sequência? Os votos anteriores serão apagados (os participantes continuam na sala).',
   lobby:'Voltar ao lobby? Todos os votos desta sequência serão apagados.',
-  reset:'Limpar e reiniciar a sala para uma nova turma? Todos os participantes e votos serão apagados definitivamente.'
+  clear:'Limpar e reiniciar a sala para uma nova turma? Todos os participantes e votos serão apagados definitivamente.'
 };
-const DONE={start:'Sequência iniciada: 100 s + 10 min + 100 s.',advance:'Fase avançada.',extend:'Mais 1 minuto na fase atual.',reveal:'Resultados revelados.',lobby:'Sala de volta ao lobby, votos apagados.',reset:'Sala reiniciada para uma nova turma.'};
+const DONE={start:'Sequência iniciada: 100 s + 10 min + 100 s.',advance:'Fase avançada.',extend:'Mais 1 minuto na fase atual.',reveal:'Resultados revelados.',lobby:'Sala de volta ao lobby, votos apagados.',clear:'Sala reiniciada para uma nova turma.'};
 
 function clock(n){n=Math.max(0,Number(n)||0);return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`}
 function bars(data,title){const total=(data||[]).reduce((s,x)=>s+x.votes,0);return `<h3>${esc(title)}</h3><div class="bars">${(data||[]).map(x=>`<div class="barrow"><span class="letter">${letters[x.choice]}</span><div class="bartrack"><div class="barfill" style="width:${total?100*x.votes/total:0}%"></div></div><span class="barvalue">${x.votes} · ${total?Math.round(100*x.votes/total):0}%</span></div>`).join('')}</div>`}
@@ -51,10 +51,11 @@ function renderRoster(roster){
 
 function render(s){
   $('#participants').textContent=s.participants;
-  $('#enrolled').textContent=s.enrolled;
+  $('#enrolled').textContent=s.enrolled??s.participants;
   $('#phase').textContent=({lobby:'Lobby',round1:'Rodada 1',discussion:'Discussão',round2:'Rodada 2',reveal:'Revelação'})[s.phase]||s.phase;
   $('#phase-title').textContent=({lobby:'Sala em formação',round1:'Decisão individual',discussion:'Arquitetura em debate',round2:'Reconsideração individual',reveal:'Drift das escolhas'})[s.phase]||'Sala TBL';
-  $('#progress').textContent=s.phase==='round1'?`· ${s.votes_round1} de ${s.enrolled} votaram`:s.phase==='round2'?`· ${s.votes_round2} de ${s.enrolled} votaram`:'';
+  const voted=s['votes_'+s.phase];
+  $('#progress').textContent=voted==null?'':`· ${voted} de ${s.enrolled} votaram`;
   deadline=Date.now()+s.remaining*1000;timerPhase=s.phase;tick();
   const running=['round1','discussion','round2'].includes(s.phase);
   $('[data-action="advance"]').textContent=({lobby:'Iniciar rodada 1',round1:'Encerrar rodada 1',discussion:'Abrir rodada 2',round2:'Encerrar e revelar'})[s.phase]||'Avançar fase';
@@ -104,7 +105,7 @@ document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click'
     if(e.message==='Token do professor inválido.')logout(e.message);else{$('#host-message').textContent=e.message;refresh(true)}
   }finally{
     // Avançar, estender e revelar dependem da fase e são reabilitados pelo render.
-    ['start','lobby','reset'].forEach(a=>document.querySelector(`[data-action="${a}"]`).disabled=false);
+    ['start','lobby','clear'].forEach(a=>document.querySelector(`[data-action="${a}"]`).disabled=false);
   }
 }));
 $('#toggle-roster').addEventListener('click',()=>{rosterOpen=!rosterOpen;store.set(ROSTER_KEY,rosterOpen?'1':null);refresh(true)});

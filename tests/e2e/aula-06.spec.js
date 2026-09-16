@@ -71,7 +71,7 @@ function fakeRoom() {
       if (b.p_action === 'extend') { db.stage = p; db.endsAt = endsAt + 60_000; }
       if (b.p_action === 'reveal') db.status = 'revealed';
       if (b.p_action === 'lobby') { db.status = 'lobby'; db.votes.clear(); }
-      if (b.p_action === 'reset') { db.status = 'lobby'; db.votes.clear(); db.participants.clear(); }
+      if (b.p_action === 'clear') { db.status = 'lobby'; db.votes.clear(); db.participants.clear(); }
       return hostState();
     }
   };
@@ -183,7 +183,7 @@ test('reiniciar para nova turma devolve os alunos ao formulário de entrada', as
   const room = fakeRoom();
   const host = await openHost(browser, room);
   const student = await openStudent(browser, room, 'Diego');
-  await host.click('[data-action="reset"]');
+  await host.click('[data-action="clear"]');
   await expect(host.locator('#host-message')).toHaveText('Sala reiniciada para uma nova turma.');
   expect(room.db.participants.size).toBe(0);
   await expect(student.page.locator('#join-panel')).toBeVisible();

@@ -82,7 +82,8 @@ async function refresh(force){
     const s=await rpc('tbl_state',{p_slug:SLUG,p_id:person.id});
     if(mine<shown)return;
     shown=mine;
-    if(!s.mine?.joined){
+    // Só o SQL atual informa joined; a ausência do campo não é tratada como reinício.
+    if(s.mine?.joined===false){
       // A sala foi reiniciada pelo professor (nova turma): a identificação antiga não vale mais.
       const name=person.name;person=null;save(null);$('#name').value=name;
       showJoin('A sala foi reiniciada pelo professor. Entre novamente para participar.');
