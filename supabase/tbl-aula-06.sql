@@ -1,5 +1,7 @@
 -- TBL · Aula 06 · Inteligência Artificial no dia a dia da administração
 -- Sala isolada no projeto Supabase compartilhado pelos cursos.
+-- O script é idempotente: pode ser executado de novo para atualizar funções e o caso.
+-- Na primeira criação, troque __TBL_HOST_TOKEN__ por um token forte; reexecuções preservam o token já gravado.
 begin;
 
 create table if not exists public.tbl_sessions (
@@ -35,33 +37,51 @@ alter table public.tbl_sessions enable row level security;
 alter table public.tbl_participants enable row level security;
 alter table public.tbl_votes enable row level security;
 
-create or replace function public.tbl_phase(p_slug text)
-returns text language plpgsql stable security definer set search_path = public as $$
-declare s public.tbl_sessions; elapsed_seconds numeric; enrolled integer; voted integer;
+-- Fases em andamento: stage guarda a fase que o professor abriu por último e stage_ends_at o seu fim.
+-- Quando o prazo passa, as fases seguintes são derivadas: rodada 1 (100 s) → discussão (600 s) → rodada 2 (100 s) → revelação.
+alter table public.tbl_sessions add column if not exists stage text check (stage in ('round1','discussion','round2'));
+alter table public.tbl_sessions add column if not exists stage_ends_at timestamptz;
+update public.tbl_sessions set status='lobby',started_at=null where status='running' and stage is null;
+
+create or replace function public.tbl_timeline(p_slug text, out phase text, out ends_at timestamptz)
+language plpgsql volatile security definer set search_path = public as $$
+declare s public.tbl_sessions; t timestamptz := clock_timestamp(); st text; e timestamptz;
 begin
   select * into s from public.tbl_sessions where slug=p_slug;
-  if not found then return 'missing'; end if;
-  if s.status='lobby' then return 'lobby'; end if;
-  if s.status='revealed' then return 'reveal'; end if;
-  elapsed_seconds := extract(epoch from (clock_timestamp()-s.started_at));
-  if elapsed_seconds < 100 then return 'round1'; end if;
-  if elapsed_seconds < 700 then return 'discussion'; end if;
-  select count(*) into enrolled from public.tbl_participants where session_slug=p_slug and joined_at <= s.started_at;
-  select count(*) into voted from public.tbl_votes where session_slug=p_slug and round=2;
-  if elapsed_seconds < 800 and (enrolled=0 or voted<enrolled) then return 'round2'; end if;
-  return 'reveal';
+  if not found then phase:='missing'; return; end if;
+  if s.status='lobby' then phase:='lobby'; return; end if;
+  if s.status='revealed' then phase:='reveal'; return; end if;
+  st:=s.stage; e:=s.stage_ends_at;
+  if st='round1' then
+    if t<e then phase:='round1'; ends_at:=e; return; end if;
+    st:='discussion'; e:=e+interval '600 seconds';
+  end if;
+  if st='discussion' then
+    if t<e then phase:='discussion'; ends_at:=e; return; end if;
+    st:='round2'; e:=e+interval '100 seconds';
+  end if;
+  if st='round2' and t<e then phase:='round2'; ends_at:=e; return; end if;
+  phase:='reveal';
 end $$;
+
+create or replace function public.tbl_phase(p_slug text)
+returns text language sql volatile security definer set search_path = public as $$
+  select phase from public.tbl_timeline(p_slug);
+$$;
 
 create or replace function public.tbl_enter(p_slug text, p_id uuid, p_name text)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare clean_name text;
 begin
-  clean_name := trim(regexp_replace(p_name, '\s+', ' ', 'g'));
+  clean_name := trim(regexp_replace(coalesce(p_name,''), '\s+', ' ', 'g'));
   if char_length(clean_name) not between 2 and 60 then raise exception 'Informe seu nome com 2 a 60 caracteres.'; end if;
   if not exists(select 1 from public.tbl_sessions where slug=p_slug) then raise exception 'Sala inexistente.'; end if;
   insert into public.tbl_participants(id,session_slug,name) values(p_id,p_slug,clean_name)
   on conflict(id) do update set name=excluded.name,last_seen_at=now()
   where tbl_participants.session_slug=excluded.session_slug;
+  if not exists(select 1 from public.tbl_participants where id=p_id and session_slug=p_slug) then
+    raise exception 'Identificação já usada em outra sala. Recarregue a página.';
+  end if;
   return jsonb_build_object('id',p_id,'name',clean_name);
 end $$;
 
@@ -70,72 +90,117 @@ returns jsonb language plpgsql security definer set search_path = public as $$
 declare current_phase text;
 begin
   if not exists(select 1 from public.tbl_participants where id=p_id and session_slug=p_slug) then raise exception 'Entre na sala antes de votar.'; end if;
+  if p_round not in (1,2) then raise exception 'Rodada inválida.'; end if;
+  if p_choice not between 0 and 3 then raise exception 'Escolha inválida.'; end if;
   current_phase := public.tbl_phase(p_slug);
   if (p_round=1 and current_phase<>'round1') or (p_round=2 and current_phase<>'round2') then raise exception 'Esta rodada não está aberta.'; end if;
-  if p_choice not between 0 and 3 then raise exception 'Escolha inválida.'; end if;
   insert into public.tbl_votes(session_slug,participant_id,round,choice) values(p_slug,p_id,p_round,p_choice)
   on conflict(session_slug,participant_id,round) do update set choice=excluded.choice,voted_at=now();
+  update public.tbl_participants set last_seen_at=now() where id=p_id;
   return jsonb_build_object('saved',true,'round',p_round,'choice',p_choice);
 end $$;
 
+create or replace function public.tbl_distribution(p_slug text, p_round smallint)
+returns jsonb language sql stable security definer set search_path = public as $$
+  select coalesce(jsonb_agg(c order by choice),'[]'::jsonb) from (
+    select g choice,count(v.choice)::int votes
+    from generate_series(0,3) g
+    left join public.tbl_votes v on v.session_slug=p_slug and v.round=p_round and v.choice=g
+    group by g
+  ) c;
+$$;
+
+-- Estado público. A distribuição das rodadas só aparece para os alunos na revelação;
+-- o painel do professor recebe a primeira rodada antes, por tbl_host_state.
+-- Com p_id, registra presença (no máximo a cada 5 s) e informa se o participante ainda existe.
 create or replace function public.tbl_state(p_slug text, p_id uuid default null)
-returns jsonb language plpgsql stable security definer set search_path = public as $$
-declare s public.tbl_sessions; phase text; elapsed_seconds numeric; remaining integer; r1 jsonb; r2 jsonb; transitions jsonb; mine jsonb; total integer;
+returns jsonb language plpgsql volatile security definer set search_path = public as $$
+declare s public.tbl_sessions; phase text; ends_at timestamptz; remaining integer; r1 jsonb; r2 jsonb; transitions jsonb; mine jsonb; online integer; enrolled integer; v1 integer; v2 integer;
 begin
   select * into s from public.tbl_sessions where slug=p_slug;
   if not found then raise exception 'Sala inexistente.'; end if;
-  phase := public.tbl_phase(p_slug);
-  elapsed_seconds := case when s.started_at is null then 0 else extract(epoch from(clock_timestamp()-s.started_at)) end;
-  remaining := case phase when 'round1' then greatest(0,ceil(100-elapsed_seconds)) when 'discussion' then greatest(0,ceil(700-elapsed_seconds)) when 'round2' then greatest(0,ceil(800-elapsed_seconds)) else 0 end;
-  select count(*) into total from public.tbl_participants where session_slug=p_slug;
-  if phase in ('discussion','round2','reveal') then
-    select coalesce(jsonb_agg(c order by choice),'[]'::jsonb) into r1 from (select g choice,count(v.choice)::int votes from generate_series(0,3) g left join public.tbl_votes v on v.session_slug=p_slug and v.round=1 and v.choice=g group by g) c;
+  if p_id is not null then
+    update public.tbl_participants set last_seen_at=now()
+    where id=p_id and session_slug=p_slug and last_seen_at < now()-interval '5 seconds';
   end if;
+  select t.phase,t.ends_at into phase,ends_at from public.tbl_timeline(p_slug) t;
+  remaining := coalesce(greatest(0,ceil(extract(epoch from(ends_at-clock_timestamp()))))::int,0);
+  select count(*) filter(where last_seen_at > now()-interval '20 seconds'),count(*) into online,enrolled from public.tbl_participants where session_slug=p_slug;
+  select count(*) filter(where round=1),count(*) filter(where round=2) into v1,v2 from public.tbl_votes where session_slug=p_slug;
   if phase='reveal' then
-    select coalesce(jsonb_agg(c order by choice),'[]'::jsonb) into r2 from (select g choice,count(v.choice)::int votes from generate_series(0,3) g left join public.tbl_votes v on v.session_slug=p_slug and v.round=2 and v.choice=g group by g) c;
+    r1 := public.tbl_distribution(p_slug,1::smallint);
+    r2 := public.tbl_distribution(p_slug,2::smallint);
     select coalesce(jsonb_agg(t order by from_choice,to_choice),'[]'::jsonb) into transitions from (select a.choice from_choice,b.choice to_choice,count(*)::int people from public.tbl_votes a join public.tbl_votes b using(session_slug,participant_id) where a.session_slug=p_slug and a.round=1 and b.round=2 group by a.choice,b.choice) t;
   end if;
-  select jsonb_build_object('round1',max(choice) filter(where round=1),'round2',max(choice) filter(where round=2)) into mine from public.tbl_votes where session_slug=p_slug and participant_id=p_id;
-  return jsonb_build_object('slug',s.slug,'title',s.title,'case_title',s.case_title,'case_text',s.case_text,'options',s.options,'phase',phase,'remaining',remaining,'participants',total,'round1',coalesce(r1,'[]'::jsonb),'round2',coalesce(r2,'[]'::jsonb),'transitions',coalesce(transitions,'[]'::jsonb),'mine',coalesce(mine,'{}'::jsonb),'started_at',s.started_at);
-end $$;
-
-create or replace function public.tbl_host(p_slug text, p_token text, p_action text)
-returns jsonb language plpgsql security definer set search_path = public as $$
-declare s public.tbl_sessions;
-begin
-  select * into s from public.tbl_sessions where slug=p_slug and host_token=p_token;
-  if not found then raise exception 'Token do professor inválido.'; end if;
-  if p_action='start' then
-    delete from public.tbl_votes where session_slug=p_slug;
-    update public.tbl_sessions set status='running',started_at=clock_timestamp() where slug=p_slug;
-  elsif p_action='reveal' then
-    update public.tbl_sessions set status='revealed' where slug=p_slug;
-  elsif p_action='lobby' then
-    update public.tbl_sessions set status='lobby',started_at=null where slug=p_slug;
-    delete from public.tbl_votes where session_slug=p_slug;
-  elsif p_action='clear' then
-    update public.tbl_sessions set status='lobby',started_at=null where slug=p_slug;
-    delete from public.tbl_participants where session_slug=p_slug;
-  else raise exception 'Ação inválida.';
-  end if;
-  return public.tbl_state(p_slug,null);
+  select jsonb_build_object(
+    'joined',exists(select 1 from public.tbl_participants where id=p_id and session_slug=p_slug),
+    'round1',(select choice from public.tbl_votes where session_slug=p_slug and participant_id=p_id and round=1),
+    'round2',(select choice from public.tbl_votes where session_slug=p_slug and participant_id=p_id and round=2)
+  ) into mine;
+  return jsonb_build_object('slug',s.slug,'title',s.title,'case_title',s.case_title,'case_text',s.case_text,'options',s.options,'phase',phase,'remaining',remaining,
+    'participants',online,'enrolled',enrolled,'votes_round1',v1,'votes_round2',v2,
+    'round1',coalesce(r1,'[]'::jsonb),'round2',coalesce(r2,'[]'::jsonb),'transitions',coalesce(transitions,'[]'::jsonb),'mine',mine,'started_at',s.started_at);
 end $$;
 
 create or replace function public.tbl_host_state(p_slug text,p_token text)
-returns jsonb language plpgsql stable security definer set search_path = public as $$
+returns jsonb language plpgsql volatile security definer set search_path = public as $$
 declare base jsonb; roster jsonb;
 begin
   if not exists(select 1 from public.tbl_sessions where slug=p_slug and host_token=p_token) then raise exception 'Token do professor inválido.'; end if;
   base := public.tbl_state(p_slug,null);
   select coalesce(jsonb_agg(x order by name),'[]'::jsonb) into roster from (
-    select p.name,max(v.choice) filter(where v.round=1) r1,max(v.choice) filter(where v.round=2) r2
+    select p.name,p.last_seen_at > now()-interval '20 seconds' online,
+      max(v.choice) filter(where v.round=1) r1,max(v.choice) filter(where v.round=2) r2
     from public.tbl_participants p left join public.tbl_votes v on v.participant_id=p.id
-    where p.session_slug=p_slug group by p.id,p.name
+    where p.session_slug=p_slug group by p.id,p.name,p.last_seen_at
   ) x;
-  return base || jsonb_build_object('roster',roster);
+  return base || jsonb_build_object('roster',roster,'round1',public.tbl_distribution(p_slug,1::smallint));
 end $$;
 
-revoke all on function public.tbl_phase(text) from public,anon,authenticated;
+-- Ações do professor:
+--   start    inicia a sequência e apaga os votos anteriores (mantém os participantes)
+--   advance  encerra a fase atual e abre a seguinte
+--   extend   acrescenta 60 s à fase atual
+--   reveal   revela imediatamente
+--   lobby    volta ao lobby e apaga os votos (mantém os participantes)
+--   reset    nova turma: apaga participantes e votos e volta ao lobby
+create or replace function public.tbl_host(p_slug text, p_token text, p_action text)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare current_phase text; current_end timestamptz; t timestamptz := clock_timestamp();
+begin
+  perform 1 from public.tbl_sessions where slug=p_slug and host_token=p_token for update;
+  if not found then raise exception 'Token do professor inválido.'; end if;
+  select x.phase,x.ends_at into current_phase,current_end from public.tbl_timeline(p_slug) x;
+  if p_action='start' then
+    delete from public.tbl_votes where session_slug=p_slug;
+    update public.tbl_sessions set status='running',started_at=t,stage='round1',stage_ends_at=t+interval '100 seconds' where slug=p_slug;
+  elsif p_action='advance' then
+    if current_phase='lobby' then
+      update public.tbl_sessions set status='running',started_at=t,stage='round1',stage_ends_at=t+interval '100 seconds' where slug=p_slug;
+    elsif current_phase='round1' then
+      update public.tbl_sessions set stage='discussion',stage_ends_at=t+interval '600 seconds' where slug=p_slug;
+    elsif current_phase='discussion' then
+      update public.tbl_sessions set stage='round2',stage_ends_at=t+interval '100 seconds' where slug=p_slug;
+    elsif current_phase='round2' then
+      update public.tbl_sessions set status='revealed' where slug=p_slug;
+    end if;
+  elsif p_action='extend' then
+    if current_phase not in ('round1','discussion','round2') then raise exception 'Só é possível estender uma fase em andamento.'; end if;
+    update public.tbl_sessions set stage=current_phase,stage_ends_at=current_end+interval '60 seconds' where slug=p_slug;
+  elsif p_action='reveal' then
+    update public.tbl_sessions set status='revealed' where slug=p_slug;
+  elsif p_action='lobby' then
+    update public.tbl_sessions set status='lobby',started_at=null,stage=null,stage_ends_at=null where slug=p_slug;
+    delete from public.tbl_votes where session_slug=p_slug;
+  elsif p_action in ('reset','clear') then
+    update public.tbl_sessions set status='lobby',started_at=null,stage=null,stage_ends_at=null where slug=p_slug;
+    delete from public.tbl_participants where session_slug=p_slug;
+  else raise exception 'Ação inválida.';
+  end if;
+  return public.tbl_host_state(p_slug,p_token);
+end $$;
+
+revoke all on function public.tbl_timeline(text),public.tbl_phase(text),public.tbl_distribution(text,smallint) from public,anon,authenticated;
 grant execute on function public.tbl_enter(text,uuid,text),public.tbl_vote(text,uuid,smallint,smallint),public.tbl_state(text,uuid),public.tbl_host(text,text,text),public.tbl_host_state(text,text) to anon,authenticated;
 
 insert into public.tbl_sessions(slug,title,case_title,case_text,options,host_token)
@@ -152,6 +217,13 @@ values(
   ]'::jsonb,
   '__TBL_HOST_TOKEN__'
 )
-on conflict(slug) do update set title=excluded.title,case_title=excluded.case_title,case_text=excluded.case_text,options=excluded.options,host_token=excluded.host_token;
+on conflict(slug) do update set title=excluded.title,case_title=excluded.case_title,case_text=excluded.case_text,options=excluded.options;
+
+-- Impede publicar a sala com o token de exemplo (o literal é partido para sobreviver à substituição).
+do $$ begin
+  if exists(select 1 from public.tbl_sessions where slug='einstein-ia-a06-2026-2' and host_token='__TBL_'||'HOST_TOKEN__') then
+    raise exception 'Defina o token do professor antes de criar a sala.';
+  end if;
+end $$;
 
 commit;

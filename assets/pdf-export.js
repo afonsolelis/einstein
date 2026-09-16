@@ -191,9 +191,10 @@
     button.onclick = createPdf;
     button.setAttribute('aria-label', primary ? 'Baixar esta página em PDF' : 'Imprimir Material em PDF');
     button.title = 'Baixar esta página em PDF';
+    // O nome acessível precisa conter o texto visível; o botão do rodapé mantém o rótulo "Imprimir Material".
     button.innerHTML = primary
       ? `${icon}<span class="pdf-export-label">Baixar PDF</span>`
-      : `${icon}<span>Baixar PDF</span>`;
+      : `${icon}<span>Imprimir Material em PDF</span>`;
   };
 
   const setup = () => {
