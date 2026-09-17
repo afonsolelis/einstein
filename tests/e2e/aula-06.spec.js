@@ -136,7 +136,13 @@ test('fluxo completo do TBL: duas rodadas, debate e revelação', async ({ brows
   await expect(ana.page.locator('#phase')).toHaveText('Discussão');
   await expect(ana.page.locator('#content')).toContainText('Você escolheu A');
   await expect(ana.page.locator('.bars')).toHaveCount(0);
+  await expect(ana.page.locator('#content')).toContainText('Texto do caso');
+  await expect(ana.page.locator('#content .option')).toHaveCount(4);
+  await expect(ana.page.locator('[data-choice]')).toHaveCount(0);
+  await expect(ana.page.locator('#content .option.selected')).toHaveCount(1);
   await expect(host.locator('#host-content .bars')).toHaveCount(1);
+  await expect(host.locator('#host-content')).toContainText('Texto do caso');
+  await expect(host.locator('#host-content .option')).toHaveCount(4);
 
   await host.click('[data-action="extend"]');
   await expect(host.locator('#host-message')).toHaveText('Mais 1 minuto na fase atual.');
@@ -145,6 +151,9 @@ test('fluxo completo do TBL: duas rodadas, debate e revelação', async ({ brows
 
   await host.click('[data-action="advance"]');
   await expect(bruno.page.locator('#phase')).toHaveText('Rodada 2');
+  await expect(host.locator('#host-content')).toContainText('Texto do caso');
+  await expect(host.locator('#host-content .option')).toHaveCount(4);
+  await expect(bruno.page.locator('[data-choice]')).toHaveCount(4);
   await ana.page.click('[data-choice="3"]');
   await bruno.page.click('[data-choice="1"]');
   await expect(host.locator('#progress')).toHaveText('· 2 de 2 votaram');
