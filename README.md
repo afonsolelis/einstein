@@ -49,21 +49,21 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 |---|------|------|
 | 1 | 12/08 | Primeiros passos: Configurando sua ferramenta de análise |
 | 2 | 19/08 | Git, grafos e versionamento com Inteligência Artificial |
-| 3 | 26/08 | Limpeza de dados: Preparando a base para análises |
-| 4 | 02/09 | Entendendo o cenário: Estatística para gestão de negócios |
-| 5 | 09/09 | Storytelling, Dashboards e Segmentação de Clientes |
+| 3 | 26/08 | Modelagem de dados e SQL I: Do negócio ao banco relacional |
+| 4 | 02/09 | SQL II: Exploração do Olist no Metabase |
+| 5 | 09/09 | Metabase local com Docker: subindo a sua própria base |
 | 6 | 16/09 | Inteligência Artificial no dia a dia da administração |
-| 7 | 23/09 | Refinando dados para modelos de decisão |
-| 8 | 30/09 | Fazendo previsões com IA: Vendas e Tendências |
-| 9 | 07/10 | Testes A/B: Médias (t de Student), Proporções (Chi-quadrado) e Tamanho Amostral |
+| 7 | 23/09 | Data Visualization I: Fluxo de interação anotado e modelagem dimensional do Olist com IA |
+| 8 | 30/09 | Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard |
+| 9 | 07/10 | Data Visualization III: Dashboard online com GitHub Pages e Supabase |
 | — | 14/10 | **Não haverá aula** |
-| 10 | 21/10 | Estudo de Caso: Aplicação prática de Testes Estatísticos |
-| 11 | 28/10 | Auditoria automatizada: Detectando anomalias e riscos |
-| 12 | 04/11 | IA aplicada à estratégia e tomada de decisão |
-| 13 | 11/11 | Análise forense de dados: Identificando fraudes |
-| 14 | 18/11 | Estudo de Caso: Análise de dados aplicada ao RH |
-| 15 | 25/11 | Estudo de Caso: Programação para previsão de caixas |
-| 16 | 02/12 | Estudo de Caso: Previsão de demandas |
+| 10 | 21/10 | Limpeza de dados: Preparando a base para análises |
+| 11 | 28/10 | Fazendo previsões com IA: Vendas e Tendências |
+| 12 | 04/11 | Testes A/B: do desenho do experimento à decisão de negócio |
+| 13 | 11/11 | Auditoria e forense de dados: anomalias, riscos e fraudes |
+| 14 | 18/11 | IA aplicada à estratégia e tomada de decisão |
+| 15 | 25/11 | Estudo de Caso: Análise de dados aplicada ao RH |
+| 16 | 02/12 | Estudo de Caso: Previsão de caixa e de demanda |
 | 17 | 09/12 | Projeto Integrador: Resolvendo um problema de negócio real |
 | 18 | 16/12 | Apresentação de resultados e recomendações executivas |
 | 19 | 23/12 | Apresentação final de projetos |

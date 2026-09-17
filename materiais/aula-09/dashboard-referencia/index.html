@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olist 2019 · Dashboard de referência</title>
+  <meta name="description" content="Dashboard de referência da aula 9: as dez perguntas do Chief de Vendas da Olist, lidas das views do Supabase pela API REST.">
+  <link rel="icon" type="image/png" href="../../../assets/einstein-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&amp;family=Fira+Code:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js 4 pelo CDN jsdelivr. Se o CDN falhar, o painel mostra as tabelas de dados. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="pagina">
+    <nav class="topo-nav" aria-label="Navegação do curso">
+      <a href="../index.html">📎 Material da aula 9</a>
+      <a href="../../../slides/aula-09.html">📊 Slides</a>
+      <a href="../../../index.html">🏠 Cronograma</a>
+    </nav>
+
+    <header class="cabecalho">
+      <div class="badge">Laboratório 09 · Dashboard de referência</div>
+      <h1>Estratégias comerciais da Olist para 2019</h1>
+      <p>As dez perguntas do Chief de Vendas, respondidas pelas views do esquema estrela no seu Supabase. Nenhum número desta página está escrito no HTML: tudo vem da API REST no momento em que você abre o painel.</p>
+    </header>
+
+    <section class="conexao vidro" id="conexao" aria-labelledby="conexao-titulo">
+      <h2 id="conexao-titulo">Conecte o seu projeto Supabase</h2>
+      <p>Em <strong>Project Settings → API Keys</strong>, copie a chave publicável (<code>sb_publishable_…</code>; em projetos antigos, a <em>anon public</em>). A Project URL tem o formato <code>https://&lt;ref&gt;.supabase.co</code>, com o <code>&lt;ref&gt;</code> que aparece no endereço do painel, depois de <code>/project/</code>. A chave secreta e a senha do banco nunca entram aqui.</p>
+      <form id="form-conexao" novalidate>
+        <div class="campos">
+          <div class="campo">
+            <label for="supabase-url">Project URL</label>
+            <input id="supabase-url" name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://seu-projeto.supabase.co" required>
+            <small>Sem <code>/rest/v1</code> no final: o painel acrescenta.</small>
+          </div>
+          <div class="campo">
+            <label for="supabase-chave">Chave publicável</label>
+            <input id="supabase-chave" name="chave" type="text" autocomplete="off" spellcheck="false" placeholder="sb_publishable_…" required>
+            <small>Ela identifica o projeto; quem limita a leitura é o RLS e o <code>grant select</code> das views.</small>
+          </div>
+        </div>
+        <div class="linha-acoes">
+          <button class="botao" type="submit">Carregar o painel</button>
+          <label class="lembrar"><input type="checkbox" id="lembrar" checked> Lembrar neste navegador</label>
+        </div>
+        <p class="mensagem-form" id="mensagem-form" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <div class="status vidro" id="status" hidden>
+      <p id="status-texto" role="status" aria-live="polite"></p>
+      <div class="botoes">
+        <button class="botao botao-secundario" type="button" id="btn-recarregar">↻ Ler de novo</button>
+        <button class="botao botao-secundario" type="button" id="btn-trocar">Trocar projeto</button>
+        <button class="botao botao-secundario" type="button" id="btn-esquecer">Esquecer chave</button>
+      </div>
+    </div>
+
+    <main id="painel" aria-live="off"></main>
+
+    <noscript><p class="estado estado-erro">Este painel precisa de JavaScript para ler as views do Supabase.</p></noscript>
+
+    <footer class="nota-geral vidro">
+      <p><strong>Convenções.</strong> Receita é a soma do preço dos itens, sem frete, de pedidos com status <code>delivered</code>. O período cobre os meses completos da base, de janeiro de 2017 a agosto de 2018.</p>
+      <p><strong>Origem.</strong> Views de <code>materiais/aula-08/olist/views.sql</code>, sobre o esquema estrela de <code>materiais/aula-07/olist/estrela.sql</code>, lidas pela API REST do Supabase com a chave publicável.</p>
+      <p><strong>Privacidade.</strong> A URL e a chave ficam apenas no <code>localStorage</code> deste navegador; o GitHub Pages só entrega os arquivos estáticos.</p>
+    </footer>
+  </div>
+</body>
+</html>

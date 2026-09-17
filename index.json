@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-16",
+  "generated_at": "2026-09-17",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -45,7 +45,16 @@
       "materiais/aula-05/docker-compose.yml",
       "materiais/aula-05/dados/README.md",
       "materiais/aula-05/dados/hospital_patients_real_world.csv",
-      "materiais/aula-08/prompts-antigravity.md"
+      "materiais/aula-07/dados/olist_pedidos_clientes.xlsx",
+      "materiais/aula-07/dados/olist_itens_pagamentos_avaliacoes.xlsx",
+      "materiais/aula-07/dados/olist_catalogo.xlsx",
+      "materiais/aula-07/olist/carregar_olist.py",
+      "materiais/aula-07/olist/estrela.sql",
+      "materiais/aula-08/olist/views.sql",
+      "materiais/aula-09/dashboard-referencia/index.html",
+      "materiais/aula-09/dashboard-referencia/app.js",
+      "materiais/aula-09/dashboard-referencia/style.css",
+      "materiais/aula-10/prompts-antigravity.md"
     ],
     "live_activities": [
       "tbl/aula-06/index.html",
@@ -66,9 +75,12 @@
       "tests/e2e/aula-03.spec.js",
       "tests/e2e/aula-04.spec.js",
       "tests/e2e/aula-05.spec.js",
+      "tests/e2e/aula-06.spec.js",
       "tests/e2e/aula-07.spec.js",
       "tests/e2e/aula-08.spec.js",
-      "tests/test_aula_08_dataset.py",
+      "tests/e2e/aula-09.spec.js",
+      "tests/e2e/aula-10.spec.js",
+      "tests/test_aula_10_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -407,31 +419,31 @@
     {
       "number": 7,
       "date": "23/09",
-      "tag": "Visualização",
-      "theme": "Storytelling, Dashboards e Segmentação de Clientes",
+      "theme": "Data Visualization I: Fluxo de interação anotado e modelagem dimensional do Olist com IA",
+      "tag": "DataViz · Supabase",
       "status": "complete",
       "topics": [
-        "escolha de gráfico",
-        "storytelling com dados",
-        "dashboards narrativos",
-        "segmentação RFV",
-        "recência, frequência e valor",
-        "Olist",
-        "Metabase",
-        "funções de janela",
-        "uso funcional da cor",
-        "vieses de visualização"
+        "fluxo de interação anotado",
+        "Miro",
+        "case Olist",
+        "Supabase",
+        "PostgreSQL",
+        "discovery com IA",
+        "modelagem dimensional",
+        "esquema estrela",
+        "grão",
+        "chaves substitutas",
+        "reconciliação"
       ],
       "objectives": [
-        "Escolher o gráfico a partir da pergunta executiva, não do catálogo da ferramenta",
-        "Segmentar clientes por recência, frequência e valor usando SQL",
-        "Ordenar um dashboard como narrativa: contexto, tensão e recomendação",
-        "Reconhecer quando um gráfico mente porque a base está suja",
-        "Defender uma recomendação citando o número que a sustenta e o que a invalidaria"
+        "Construir, com a turma, o template do fluxo de interação anotado no Miro (raias, passos numerados, âncoras D1..Dn)",
+        "Criar um projeto Supabase e carregar o Olist bruto a partir dos Excels, conferindo as contagens",
+        "Conduzir a discovery do Olist com IA, verificando no SQL cada afirmação da IA (grão, chaves, armadilhas)",
+        "Projetar com IA um esquema estrela (fatos, dimensões, grão, chaves substitutas) e validá-lo por reconciliação"
       ],
       "slides": {
         "path": "slides/aula-07.html",
-        "slide_count": 25,
+        "slide_count": 30,
         "sections": [
           "agenda",
           "challenge",
@@ -444,23 +456,132 @@
       },
       "material": {
         "path": "materiais/aula-07/index.html",
-        "section_count": 10,
+        "section_count": 12,
         "highlights": [
-          "Tabela que liga cada tipo de pergunta à forma de gráfico correspondente",
-          "A regra dos dois eixos y e por que ela produz correlações inexistentes",
-          "Cor por função: identidade, magnitude e polaridade, nunca por ranking",
-          "A armadilha customer_id contra customer_unique_id na segmentação do Olist",
-          "Recência calculada a partir da data de corte da própria base",
-          "Agrupamento da cauda em Outros depois do ranqueamento, preservando o total",
-          "Figura com o top 7 de diagnósticos antes e depois de unificar a capitalização"
+          "Case do Chief de Vendas da Olist: dez perguntas para as estratégias comerciais de 2019, cada uma com métrica, recorte, período, filtro e decisão",
+          "Formato do fluxo de interação anotado: raias de usuário, interface e dado, passos numerados e âncoras de divergência registradas em cinco campos",
+          "Frame único da turma no Miro montado como template para as aulas seguintes",
+          "Projeto Supabase próprio e carga do Olist bruto pelo Session pooler com carregar_olist.py, conferindo as oito contagens contra os Excels",
+          "Discovery com IA verificada em SQL: oito armadilhas do Olist, como customer_id × customer_unique_id, 547 pedidos com avaliação duplicada, 775 pedidos sem item e meses incompletos nas pontas",
+          "Modelagem dimensional com dois fatos e quatro dimensões, chaves substitutas e RLS de leitura no gabarito estrela.sql",
+          "Reconciliação entre origem e estrela: R$ 13.591.643,70 de receita, 112.650 itens e 99.441 pedidos",
+          "Proteção da string de conexão: nunca em arquivo, prompt, print ou commit"
         ],
-        "activity": "Segmentar os clientes do Olist por recência, frequência e valor no Metabase da disciplina e montar um dashboard em ordem narrativa, terminando na demonstração de como a base suja da aula 5 produz um gráfico que mente",
-        "deliverable": "Dashboard De onde vem a receita e quem a sustenta com cinco cartões em ordem narrativa e títulos que afirmam, critério de segmentação escrito no painel, RECOMENDACAO.md com a recomendação, o número que a sustenta e o que a invalidaria, print das 28 barras de diagnóstico, commit e push"
+        "activity": "Montar com a turma o frame modelo do fluxo de interação anotado no Miro, carregar o Olist no próprio projeto Supabase, conduzir a discovery com IA verificada em SQL e projetar um esquema estrela validado por reconciliação",
+        "deliverable": "Pasta aula-07-seunome com DISCOVERY.md (tabelas, grão, cinco armadilhas com o SQL que as prova e afirmações erradas da IA), MODELO_ESTRELA.md (fatos, grão, dimensões, medidas, por que dois fatos e resultado da reconciliação) e print do Table Editor com as 6 tabelas do esquema estrela, commit e push; o frame da turma no Miro é o artefato coletivo"
       }
     },
     {
       "number": 8,
       "date": "30/09",
+      "theme": "Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard",
+      "tag": "DataViz · Fluxo",
+      "status": "complete",
+      "topics": [
+        "perguntas de negócio",
+        "brainstorming",
+        "Miro",
+        "fluxo de interação anotado",
+        "âncoras de divergência",
+        "escolha de gráfico",
+        "títulos que afirmam",
+        "dashboard como narrativa",
+        "views SQL",
+        "Supabase",
+        "API REST"
+      ],
+      "objectives": [
+        "Decompor as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão",
+        "Conduzir um brainstorming divergente e convergente de fluxos de navegação no Miro",
+        "Construir o fluxo de interação anotado do dashboard com âncoras de divergência registradas",
+        "Traduzir a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência"
+      ],
+      "slides": {
+        "path": "slides/aula-08.html",
+        "slide_count": 29,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-08/index.html",
+        "section_count": 13,
+        "highlights": [
+          "As 10 perguntas do Chief decompostas em métrica, recorte, filtro, decisão e view",
+          "Da pergunta à forma: tabela tarefa × gráfico, títulos que afirmam, cor por função e a regra de nunca usar dois eixos y",
+          "Dashboard como narrativa em contexto, tensão e decisão",
+          "Brainstorming no Miro com Crazy 8s e 1-2-4-All, papéis rotativos e três critérios de voto",
+          "Fluxo anotado aplicado à P06 e divergências típicas de cada pergunta com números de referência das views",
+          "Views como contrato: prompt para a IA escrever a view do grupo, consulta de conferência contra a referência e as 10 views do gabarito views.sql com security_invoker e grant para anon",
+          "Teste de uma view pela API REST do Supabase com curl e chave publicável"
+        ],
+        "activity": "Decompor as 10 perguntas do Chief de Vendas, conduzir brainstorming divergente e convergente no Miro, montar o fluxo anotado do dashboard com âncoras de divergência e traduzir a raia do dado em views no Supabase",
+        "deliverable": "aula-08-seunome/ESPECIFICACAO.md com uma linha por pergunta (decisão, view, colunas, visual, título que afirma, âncora tratada e suporte na tela), link do frame, views.sql do grupo e diferença encontrada em relação ao gabarito, commit e push"
+      }
+    },
+    {
+      "number": 9,
+      "date": "07/10",
+      "theme": "Data Visualization III: Dashboard online com GitHub Pages e Supabase",
+      "tag": "DataViz · Web",
+      "status": "complete",
+      "topics": [
+        "dashboard HTML",
+        "IA agêntica",
+        "API REST do Supabase",
+        "chave publicável",
+        "RLS",
+        "Chart.js",
+        "GitHub Pages",
+        "reconciliação",
+        "teste de leitura",
+        "recomendação executiva"
+      ],
+      "objectives": [
+        "Construir com IA agêntica um dashboard HTML que consome as views do Supabase pela API REST",
+        "Implementar na tela os suportes decididos no fluxo anotado (título que afirma, unidade, período, nota de origem)",
+        "Publicar o dashboard no GitHub Pages e verificar que ele funciona fora do Codespace",
+        "Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo"
+      ],
+      "slides": {
+        "path": "slides/aula-09.html",
+        "slide_count": 25,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-09/index.html",
+        "section_count": 16,
+        "highlights": [
+          "ESPECIFICACAO.md da aula 8 como contrato entre fluxo anotado e tela",
+          "Arquitetura GitHub Pages → navegador → API REST → views → esquema estrela com RLS",
+          "Chave publicável × chave secreta e os limites da leitura pública",
+          "fetch com apikey e Bearer, formatação pt-BR com Intl.NumberFormat e Chart.js com versão fixada no CDN",
+          "Dashboard de referência do professor com dez cartões em contexto, tensão e decisão, estados de carregamento e erro e recusa de chave secreta",
+          "Prompt ao agente com plano antes do código e revisão humana do diff em quatro perguntas",
+          "Teste local com http.server, publicação no GitHub Pages e tabela de sintomas e causas",
+          "Reconciliação tela × view e teste de leitura em voz alta por outro grupo"
+        ],
+        "activity": "Construir com IA agêntica o dashboard que lê as views do Supabase, publicá-lo no GitHub Pages do fork e submetê-lo a teste de leitura por outro grupo",
+        "deliverable": "aula-09-seunome/index.html publicado no GitHub Pages, README.md com URL, tabela de reconciliação, frases do teste de leitura e recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria, commit e push"
+      }
+    },
+    {
+      "number": 10,
+      "date": "21/10",
       "theme": "Limpeza de dados: Preparando a base para análises",
       "tag": "Pandas",
       "status": "complete",
@@ -483,7 +604,7 @@
         "Defender quais análises gerenciais a base pode sustentar"
       ],
       "slides": {
-        "path": "slides/aula-08.html",
+        "path": "slides/aula-10.html",
         "slide_count": 24,
         "sections": [
           "agenda",
@@ -496,7 +617,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-08/index.html",
+        "path": "materiais/aula-10/index.html",
         "section_count": 20,
         "highlights": [
           "Base hospitalar sintética CC0 com 5.000 registros disponível para download",
@@ -510,8 +631,8 @@
       }
     },
     {
-      "number": 9,
-      "date": "07/10",
+      "number": 11,
+      "date": "28/10",
       "theme": "Fazendo previsões com IA: Vendas e Tendências",
       "tag": "ML · Regressão",
       "status": "complete",
@@ -531,7 +652,7 @@
         "Comunicar previsão como faixa e hipótese,  não certeza"
       ],
       "slides": {
-        "path": "slides/aula-09.html",
+        "path": "slides/aula-11.html",
         "slide_count": 12,
         "sections": [
           "agenda",
@@ -544,7 +665,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-09/index.html",
+        "path": "materiais/aula-11/index.html",
         "section_count": 7,
         "highlights": [
           "Atributos, pipelines e prevenção de vazamento temporal",
@@ -556,8 +677,8 @@
       }
     },
     {
-      "number": 10,
-      "date": "21/10",
+      "number": 12,
+      "date": "04/11",
       "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
       "tag": "Inferência",
       "status": "complete",
@@ -576,88 +697,8 @@
         "Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas"
       ],
       "slides": {
-        "path": "slides/aula-10.html",
-        "slide_count": 13,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-10/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Cadeia entre contexto,  desenho,  teste e ação",
-          "Efeito estatístico,  impacto econômico e sensibilidade"
-        ],
-        "activity": "Analisar um experimento com ticket e conversão e conduzir o caso de uma campanha comercial da auditoria da base à recomendação ao comitê",
-        "deliverable": "Protocolo do experimento e relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante"
-      }
-    },
-    {
-      "number": 11,
-      "date": "28/10",
-      "theme": "Auditoria automatizada: Detectando anomalias e riscos",
-      "tag": "Anomalias",
-      "status": "complete",
-      "topics": [
-        "auditoria",
-        "anomalias",
-        "riscos"
-      ],
-      "objectives": [
-        "Distinguir erro,  evento raro e fraude",
-        "Aplicar regras e escores de anomalia com contexto",
-        "Priorizar alertas por impacto e explicabilidade"
-      ],
-      "slides": {
-        "path": "slides/aula-11.html",
-        "slide_count": 11,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-11/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Regras de negócio,  escores e falsos positivos",
-          "Fila de auditoria e revisão humana"
-        ],
-        "activity": "Combinar regra e escore para revisar alertas de pagamentos",
-        "deliverable": "Ranking com motivo, valor em risco, evidência e revisão"
-      }
-    },
-    {
-      "number": 12,
-      "date": "04/11",
-      "theme": "IA aplicada à estratégia e tomada de decisão",
-      "tag": "IA · Estratégia",
-      "status": "complete",
-      "topics": [
-        "inteligência artificial",
-        "estratégia",
-        "decisão"
-      ],
-      "objectives": [
-        "Estruturar uma decisão em alternativas,  critérios e cenários",
-        "Combinar previsão e julgamento sem automatizar responsabilidade",
-        "Testar robustez da recomendação a mudanças de premissas"
-      ],
-      "slides": {
         "path": "slides/aula-12.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -672,31 +713,37 @@
         "path": "materiais/aula-12/index.html",
         "section_count": 7,
         "highlights": [
-          "Matriz de decisão,  cenários e utilidade",
-          "Sensibilidade,  premissas e governança"
+          "Cadeia entre contexto,  desenho,  teste e ação",
+          "Efeito estatístico,  impacto econômico e sensibilidade"
         ],
-        "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
-        "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão"
+        "activity": "Analisar um experimento com ticket e conversão e conduzir o caso de uma campanha comercial da auditoria da base à recomendação ao comitê",
+        "deliverable": "Protocolo do experimento e relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante"
       }
     },
     {
       "number": 13,
       "date": "11/11",
-      "theme": "Análise forense de dados: Identificando fraudes",
-      "tag": "Forense",
+      "theme": "Auditoria e forense de dados: anomalias, riscos e fraudes",
+      "tag": "Auditoria · Forense",
       "status": "complete",
       "topics": [
+        "auditoria",
+        "anomalias",
+        "riscos",
         "análise forense",
-        "fraudes"
+        "fraudes",
+        "cadeia de custódia"
       ],
       "objectives": [
-        "Preservar cadeia de custódia e trilha de auditoria",
-        "Relacionar transações,  entidades e padrões suspeitos",
+        "Distinguir erro, evento raro e fraude",
+        "Combinar regras e escores de anomalia com contexto de negócio",
+        "Priorizar alertas por impacto e explicabilidade",
+        "Relacionar transações, entidades e padrões suspeitos preservando a cadeia de custódia",
         "Documentar achados sem ultrapassar a evidência"
       ],
       "slides": {
         "path": "slides/aula-13.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -711,28 +758,30 @@
         "path": "materiais/aula-13/index.html",
         "section_count": 7,
         "highlights": [
-          "Hash,  cadeia de custódia e reprodutibilidade",
-          "Redes transacionais,  linha do tempo e hipóteses alternativas"
+          "Regras de negócio, métodos estatísticos e custo operacional dos falsos positivos",
+          "Fila de auditoria combinando limite por fornecedor e escore IsolationForest",
+          "Hash SHA-256 da fonte e rede de transações entre contas",
+          "Dossiê do caso prioritário com inventário, consultas, hipóteses alternativas e lacunas"
         ],
-        "activity": "Reconstruir uma sequência suspeita preservando a evidência",
-        "deliverable": "Dossiê com inventário, consultas, achados, alternativas e lacunas"
+        "activity": "Combinar regra e escore para revisar alertas de pagamentos e reconstruir o caso prioritário preservando a evidência",
+        "deliverable": "Ranking com motivo, valor em risco, evidência e revisão, e dossiê do caso prioritário com inventário, consultas, achados, alternativas e lacunas"
       }
     },
     {
       "number": 14,
       "date": "18/11",
-      "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
-      "tag": "Estudo de Caso",
+      "theme": "IA aplicada à estratégia e tomada de decisão",
+      "tag": "IA · Estratégia",
       "status": "complete",
       "topics": [
-        "recursos humanos",
-        "análise de dados",
-        "estudo de caso"
+        "inteligência artificial",
+        "estratégia",
+        "decisão"
       ],
       "objectives": [
-        "Definir indicadores de pessoas sem reduzir indivíduos a números",
-        "Investigar rotatividade com recortes e contexto",
-        "Propor intervenção mensurável e eticamente defensável"
+        "Estruturar uma decisão em alternativas,  critérios e cenários",
+        "Combinar previsão e julgamento sem automatizar responsabilidade",
+        "Testar robustez da recomendação a mudanças de premissas"
       ],
       "slides": {
         "path": "slides/aula-14.html",
@@ -751,28 +800,28 @@
         "path": "materiais/aula-14/index.html",
         "section_count": 7,
         "highlights": [
-          "Rotatividade,  coortes e denominadores",
-          "Privacidade,  equidade e limites causais"
+          "Matriz de decisão,  cenários e utilidade",
+          "Sensibilidade,  premissas e governança"
         ],
-        "activity": "Analisar rotatividade por área e senioridade e propor intervenção",
-        "deliverable": "Diagnóstico com indicador, recortes, limitações, ação e métrica"
+        "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
+        "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão"
       }
     },
     {
       "number": 15,
       "date": "25/11",
-      "theme": "Estudo de Caso: Programação para previsão de caixas",
+      "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
       "tag": "Estudo de Caso",
       "status": "complete",
       "topics": [
-        "programação",
-        "previsão de caixa",
+        "recursos humanos",
+        "análise de dados",
         "estudo de caso"
       ],
       "objectives": [
-        "Organizar entradas e saídas em uma série temporal",
-        "Construir cenários de caixa e identificar rupturas",
-        "Automatizar atualização com premissas auditáveis"
+        "Definir indicadores de pessoas sem reduzir indivíduos a números",
+        "Investigar rotatividade com recortes e contexto",
+        "Propor intervenção mensurável e eticamente defensável"
       ],
       "slides": {
         "path": "slides/aula-15.html",
@@ -791,31 +840,35 @@
         "path": "materiais/aula-15/index.html",
         "section_count": 7,
         "highlights": [
-          "Fluxo diário,  saldo acumulado e cenários",
-          "Liquidez,  atraso e necessidade de capital"
+          "Rotatividade,  coortes e denominadores",
+          "Privacidade,  equidade e limites causais"
         ],
-        "activity": "Projetar 60 dias de caixa em três cenários",
-        "deliverable": "Notebook e quadro executivo com premissas, menor saldo e ação"
+        "activity": "Analisar rotatividade por área e senioridade e propor intervenção",
+        "deliverable": "Diagnóstico com indicador, recortes, limitações, ação e métrica"
       }
     },
     {
       "number": 16,
       "date": "02/12",
-      "theme": "Estudo de Caso: Previsão de demandas",
+      "theme": "Estudo de Caso: Previsão de caixa e de demanda",
       "tag": "Estudo de Caso",
       "status": "complete",
       "topics": [
+        "previsão de caixa",
         "previsão de demanda",
+        "séries temporais",
         "estudo de caso"
       ],
       "objectives": [
-        "Reconhecer tendência,  sazonalidade e eventos especiais",
+        "Organizar entradas, saídas e vendas em séries temporais",
+        "Reconhecer tendência, sazonalidade e eventos especiais",
         "Validar previsões com janela temporal e baseline sazonal",
-        "Converter erro previsto em estoque e capacidade"
+        "Construir cenários de caixa e identificar rupturas de liquidez",
+        "Converter erro previsto em estoque, capacidade e premissas auditáveis"
       ],
       "slides": {
         "path": "slides/aula-16.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -830,11 +883,13 @@
         "path": "materiais/aula-16/index.html",
         "section_count": 7,
         "highlights": [
-          "Sazonalidade,  baseline e validação temporal",
-          "Erro por horizonte e consequência operacional"
+          "Baseline sazonal, validação em janelas sucessivas e custo assimétrico do erro",
+          "MAE do baseline de 7 dias comparado à média móvel de 28 dias",
+          "Competência × pagamento, inadimplência e atraso como cenários de caixa",
+          "Saldo diário projetado em três cenários de atraso nos recebimentos"
         ],
-        "activity": "Comparar baseline semanal e média móvel e propor estoque de segurança",
-        "deliverable": "Avaliação temporal, previsão e recomendação de capacidade"
+        "activity": "Comparar baseline semanal e média móvel para a demanda, propor estoque de segurança e projetar 60 dias de caixa em três cenários",
+        "deliverable": "Notebook com avaliação temporal da demanda, recomendação de capacidade com faixa de incerteza e quadro executivo de caixa com premissas, menor saldo e ação"
       }
     },
     {

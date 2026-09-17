@@ -19,6 +19,10 @@
       --paper: #f8fafc;
       --text: #d7e5ef;
       --muted: #8faabd;
+      --postit-usuario: #fde68a;
+      --postit-interface: #bfdbfe;
+      --postit-dado: #bbf7d0;
+      --postit-ancora: #f9a8d4;
       --controls-height: 72px;
     }
 
@@ -91,20 +95,15 @@
       position: absolute;
       right: clamp(1.25rem, 3vw, 3rem);
       bottom: calc(var(--controls-height) + 0.8rem);
-      width: auto;
-      height: auto;
       color: rgba(215, 229, 239, 0.78);
-      background: none;
       font-size: clamp(0.62rem, 0.8vw, 0.76rem);
       font-weight: 700;
       letter-spacing: 0.16em;
-      opacity: 1;
     }
 
-    h1, h2, p, ul { position: relative; z-index: 1; }
+    h1, h2, p, ul, ol { position: relative; z-index: 1; }
     h1, h2 { letter-spacing: -0.04em; }
     .slide-content h2,
-    .slide-prof h2,
     .slide-end h2 {
       max-width: 1120px;
       margin: 0 0 clamp(1.2rem, 2.6vh, 2rem);
@@ -125,7 +124,7 @@
     }
     .slide-content p,
     .slide-content ul,
-    .slide-prof p,
+    .slide-content ol,
     .slide-end p {
       max-width: 1120px;
       margin-top: 0;
@@ -134,17 +133,9 @@
       font-weight: 300;
       line-height: 1.5;
     }
-    .slide-content ul {
-      margin-bottom: 1rem;
-      padding-left: 0;
-      list-style: none;
-    }
-    .slide-content li {
-      position: relative;
-      margin-bottom: clamp(0.45rem, 1vh, 0.8rem);
-      padding-left: 1.75rem;
-    }
-    .slide-content li::before {
+    .slide-content ul { margin-bottom: 1rem; padding-left: 0; list-style: none; }
+    .slide-content li { position: relative; margin-bottom: clamp(0.45rem, 1vh, 0.8rem); padding-left: 1.75rem; }
+    .slide-content ul > li::before {
       content: '';
       position: absolute;
       top: 0.58em;
@@ -156,25 +147,34 @@
       box-shadow: 0 0 10px rgba(0, 215, 176, 0.75);
     }
     .slide-content strong { color: #fff; font-weight: 700; }
+    .slide-content a { color: var(--cyan-light); }
     .slide-content em { color: var(--cyan-light); font-style: normal; }
     .slide-content code {
-      padding: 0.14em 0.45em;
+      padding: 0.1em 0.4em;
       border: 1px solid rgba(75, 196, 232, 0.24);
       border-radius: 6px;
       color: var(--cyan-light);
       background: rgba(0, 163, 217, 0.12);
       font-family: 'Fira Code', monospace;
-      font-size: 0.86em;
+      font-size: 0.84em;
+      font-variant-ligatures: none;
     }
+    .lead { font-weight: 400 !important; }
+
+    /* Slides densos: título menor e texto compacto */
+    .dense h2 { font-size: clamp(2rem, 3.4vw, 3.2rem) !important; margin-bottom: 0.9rem !important; }
+    .dense p, .dense ul, .dense ol { font-size: clamp(0.95rem, 1.35vw, 1.2rem) !important; line-height: 1.4 !important; }
+    .dense li { margin-bottom: 0.35rem !important; }
 
     .code-block {
+      font-variant-ligatures: none;
       white-space: pre-wrap;
       position: relative;
       z-index: 1;
       width: min(100%, 1120px);
       max-height: 44vh;
-      margin-top: 0.6rem;
-      padding: clamp(1rem, 2vw, 1.65rem);
+      margin-top: 0.4rem;
+      padding: clamp(0.9rem, 1.6vw, 1.4rem);
       overflow: auto;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-left: 5px solid var(--teal);
@@ -183,75 +183,150 @@
       background: rgba(4, 20, 34, 0.72);
       box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
       font-family: 'Fira Code', monospace;
-      font-size: clamp(0.82rem, 1.15vw, 1.04rem);
-      line-height: 1.52;
+      font-size: clamp(0.76rem, 1.05vw, 0.96rem);
+      line-height: 1.5;
       scrollbar-color: var(--cyan) transparent;
     }
+    .code-block.no-wrap { white-space: pre; }
     .code-comment { color: #7890a1; font-style: italic; }
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
-    .prompt-label {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 0.5rem;
-      color: #7ee7d4;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
-    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); margin-bottom: 0.9rem; }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 8.5rem; }
     .copy-prompt {
       position: absolute;
-      top: 0.85rem;
-      right: 0.85rem;
+      top: 0.7rem;
+      right: 0.9rem;
       z-index: 2;
-      padding: 0.55rem 0.75rem;
+      padding: 0.5rem 0.75rem;
       border: 1px solid rgba(126, 231, 212, 0.35);
       border-radius: 8px;
       color: #dffcf6;
-      background: rgba(0, 163, 137, 0.2);
+      background: rgba(0, 163, 137, 0.24);
       cursor: pointer;
+      font-size: 0.85rem;
     }
-    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.38); }
     .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
-    .download-link {
+
+    /* Tabelas compactas */
+    .slide-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.88rem, 1.2vw, 1.08rem);
+      line-height: 1.35;
+    }
+    .slide-table th, .slide-table td { padding: 0.5rem 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.09); text-align: left; vertical-align: top; }
+    .slide-table th { color: #7ee7d4; font-weight: 600; font-size: 0.82em; letter-spacing: 0.06em; text-transform: uppercase; }
+    .slide-table td:first-child { color: #fff; font-weight: 600; white-space: nowrap; }
+
+    /* Grade das 10 perguntas */
+    .perguntas {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem 1.4rem;
+      width: min(100%, 1180px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .perguntas li {
+      display: grid;
+      grid-template-columns: 3.2rem 1fr;
+      align-items: baseline;
+      gap: 0.4rem;
+      padding: 0.45rem 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text);
+      font-size: clamp(0.84rem, 1.12vw, 1.02rem);
+      line-height: 1.3;
+    }
+    .perguntas b { color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.9em; font-weight: 600; }
+    .perguntas small { display: block; color: var(--muted); font-size: 0.8em; }
+
+    /* Cartões em colunas */
+    .cols { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1180px); }
+    .cols.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cols.five { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.6rem; }
+    .card {
+      padding: 0.9rem 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 4px solid var(--teal);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: clamp(0.9rem, 1.2vw, 1.08rem);
+      line-height: 1.4;
+    }
+    .card h3 { margin: 0 0 0.35rem; color: #fff; font-size: 1.08em; font-weight: 700; }
+    .card p { margin: 0; font-size: 1em !important; }
+    .card .tag { display: inline-block; margin-bottom: 0.3rem; color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.78em; letter-spacing: 0.04em; }
+    .card.contexto { border-top-color: var(--cyan-light); }
+    .card.tensao { border-top-color: #f59e0b; }
+    .card.decisao { border-top-color: var(--teal); }
+    .card.usuario { border-top-color: var(--postit-usuario); }
+    .card.interface { border-top-color: var(--postit-interface); }
+    .card.dado { border-top-color: var(--postit-dado); }
+    .card.ancora { border-top-color: var(--postit-ancora); }
+
+    /* Linha do tempo cronometrada */
+    .timeline { position: relative; z-index: 1; display: grid; gap: 0.5rem; width: min(100%, 1120px); margin: 0; padding: 0; list-style: none; }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 7.2rem 1fr;
+      gap: 0.9rem;
+      align-items: baseline;
+      padding: 0.55rem 0.9rem !important;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.3vw, 1.15rem);
+      line-height: 1.35;
+    }
+    .timeline li::before { display: none; }
+    .timeline time { color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.86em; white-space: nowrap; }
+
+    /* Fluxo anotado em SVG */
+    .flow-wrap { position: relative; z-index: 1; width: min(100%, 1180px); }
+    .flow-svg { display: block; width: 100%; height: auto; max-height: 50vh; }
+    .flow-svg text { font-family: 'Outfit', system-ui, sans-serif; }
+    .flow-svg .task-bg { fill: rgba(0, 215, 176, 0.12); stroke: rgba(0, 215, 176, 0.45); }
+    .flow-svg .task-text { fill: #e8fbf6; }
+    .flow-svg .lane-bg { fill: rgba(255, 255, 255, 0.045); stroke: rgba(255, 255, 255, 0.08); }
+    .flow-svg .lane-label { fill: #d7e5ef; }
+    .flow-svg .pi-text { fill: #1e293b; }
+    .flow-svg .flow-arrow, .flow-svg .flow-link { stroke: #8faabd; }
+    .flow-svg .flow-arrowhead { fill: #8faabd; }
+    .flow-svg .flow-note { fill: #b6c8d6; }
+    .legend { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 0.7rem; color: var(--text); font-size: clamp(0.82rem, 1.05vw, 0.98rem); }
+    .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 4px; }
+
+    .miro-link {
       position: relative;
       z-index: 1;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-top: 0.7rem;
-      padding: 0.8rem 1.1rem;
-      border: 1px solid rgba(126, 231, 212, 0.38);
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      padding: 0.7rem 1.05rem;
+      border: 1px solid rgba(253, 230, 138, 0.45);
       border-radius: 10px;
-      color: #e9fffb;
-      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      color: #fff7d6 !important;
+      background: rgba(253, 230, 138, 0.12);
       font-weight: 700;
       text-decoration: none;
     }
-    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
-    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
-    .metric-row {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      width: min(100%, 1120px);
-      margin: 0.4rem 0 1rem;
-    }
-    .metric {
-      min-width: 150px;
-      padding: 0.85rem 1rem;
-      border: 1px solid rgba(75, 196, 232, 0.18);
-      border-radius: 12px;
-      background: rgba(8, 47, 73, 0.62);
-    }
-    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
-    .metric span { color: var(--muted); font-size: 0.86rem; }
+    .miro-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
 
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
@@ -282,30 +357,28 @@
       letter-spacing: 0.16em;
     }
     .slide-start h1 {
-      max-width: 820px;
+      max-width: 900px;
       margin: 0 0 1rem;
       color: #fff;
-      font-size: clamp(3.25rem, 6vw, 6rem);
+      font-size: clamp(3rem, 5.4vw, 5.4rem);
       font-weight: 700;
-      line-height: 0.98;
+      line-height: 1;
     }
     .slide-start p {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0;
       color: #e4f0f5;
-      font-size: clamp(1.3rem, 2.3vw, 2rem);
+      font-size: clamp(1.2rem, 2.1vw, 1.8rem);
       font-weight: 300;
       line-height: 1.4;
     }
 
-    .slide-prof,
     .slide-end {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
         linear-gradient(120deg, transparent 0 65%, rgba(255, 255, 255, 0.08) 65% 69%, transparent 69%),
         linear-gradient(135deg, #008d87, #00a990 50%, #00b99c);
     }
-    .slide-prof::before,
     .slide-end::before {
       content: '»';
       top: 7%;
@@ -315,12 +388,8 @@
       font-size: clamp(7rem, 13vw, 13rem);
       letter-spacing: -0.35em;
     }
-    .slide-prof h2,
     .slide-end h2 { max-width: 840px; color: #062f3c; }
-    .slide-prof p,
     .slide-end p { max-width: 850px; color: #093f48; font-weight: 400; }
-    .prof-avatar { display: none; }
-    .slide-prof::after,
     .slide-end::after { color: rgba(255, 255, 255, 0.88); }
 
     #controls {
@@ -364,48 +433,75 @@
     .ctrl-btn-only-icon { min-width: 42px; padding-inline: 0.7rem; }
     .slide-counter { min-width: 4.5rem; color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.84rem; text-align: center; }
 
-    @media (max-width: 768px) {
-      :root { --controls-height: 62px; }
-      .slide { padding: 4.25rem 1.5rem calc(var(--controls-height) + 2rem); }
-      .slide::before { top: 1rem; left: 1.1rem; }
-      .slide::after { right: 0.8rem; bottom: calc(var(--controls-height) + 0.7rem); font-size: 0.54rem; opacity: 0.72; }
-      .slide-content { justify-content: center; }
-      .slide-content h2,
-      .slide-prof h2,
-      .slide-end h2 { margin-bottom: 0.9rem; font-size: clamp(1.75rem, 7.3vw, 2.45rem); line-height: 1.08; }
-      .slide-content h2::after { width: 48px; height: 4px; margin-top: 0.5rem; }
-      .slide-content p,
-      .slide-content ul,
-      .slide-prof p,
-      .slide-end p { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; }
-      .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
-      .slide-content li::before { width: 7px; height: 7px; }
-      .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
-      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
-      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
-      .metric-row { gap: 0.45rem; }
-      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
-      .metric strong { font-size: 1.2rem; }
-      .metric span { font-size: 0.68rem; }
-      .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
-      .slide-start::before { width: 24%; opacity: 0.68; }
-      .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
-      .slide-start p { max-width: 84%; font-size: clamp(1.05rem, 5vw, 1.45rem); }
-      .slide-start .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
-      #controls { justify-content: center; padding: 0 0.35rem; }
-      .footer-text { display: none; }
-      .btn-group { width: 100%; justify-content: center; gap: 0.3rem; }
-      a.ctrl-btn { padding-inline: 0.65rem; font-size: 0; }
-      .ctrl-icon { margin: 0; font-size: 1rem; }
-      .ctrl-btn-only-icon { min-width: 38px; min-height: 40px; padding: 0.5rem; font-size: 0.95rem; }
-      .slide-counter { min-width: 3.4rem; font-size: 0.72rem; }
+    @media (max-width: 1100px) and (min-width: 769px) {
+      .slide { padding-inline: clamp(2.5rem, 6vw, 5rem); }
     }
 
-    @media (max-height: 680px) and (min-width: 769px) {
-      .slide { padding-top: 4.25rem; }
-      .slide-content h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); margin-bottom: 1rem; }
-      .slide-content p, .slide-content ul { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
-      .code-block { max-height: 42vh; }
+    @media (max-width: 768px) {
+      :root { --controls-height: 62px; }
+      .slide { padding: 4rem 1.1rem calc(var(--controls-height) + 1.6rem); }
+      .slide::before { top: 1rem; left: 1.1rem; }
+      .slide::after { right: 0.8rem; bottom: calc(var(--controls-height) + 0.5rem); font-size: 0.54rem; opacity: 0.72; }
+      .slide-content h2,
+      .slide-end h2 { margin-bottom: 0.8rem; font-size: clamp(1.6rem, 7vw, 2.3rem); line-height: 1.08; }
+      .dense h2 { font-size: clamp(1.35rem, 5.9vw, 1.8rem) !important; margin-bottom: 0.55rem !important; }
+      .slide-content h2::after { width: 48px; height: 4px; margin-top: 0.45rem; }
+      .slide-content p,
+      .slide-content ul,
+      .slide-content ol,
+      .slide-end p { font-size: clamp(0.88rem, 3.6vw, 1.02rem); line-height: 1.35; }
+      .dense p, .dense ul, .dense ol { font-size: clamp(0.74rem, 3.1vw, 0.86rem) !important; line-height: 1.3 !important; }
+      .dense li { margin-bottom: 0.2rem !important; }
+      .slide-content li { margin-bottom: 0.35rem; padding-left: 1.3rem; }
+      .slide-content ul > li::before { width: 7px; height: 7px; }
+      .code-block { max-height: 34vh; padding: 0.7rem; font-size: clamp(0.6rem, 2.5vw, 0.74rem); line-height: 1.38; }
+      .prompt-wrap .code-block { padding: 2.6rem 0.7rem 0.7rem; }
+      .copy-prompt { top: 0.4rem; right: 0.45rem; padding: 0.35rem 0.55rem; font-size: 0.7rem; }
+      .slide-table { font-size: clamp(0.62rem, 2.75vw, 0.78rem); line-height: 1.25; }
+      .slide-table th, .slide-table td { padding: 0.28rem 0.3rem; }
+      .slide-table td:first-child { white-space: normal; }
+      .perguntas { grid-template-columns: 1fr; gap: 0.22rem; }
+      .perguntas li { grid-template-columns: 2.3rem 1fr; padding: 0.22rem 0.45rem; font-size: clamp(0.62rem, 2.75vw, 0.76rem); line-height: 1.22; }
+      .perguntas small { display: none; }
+      .cols, .cols.two { grid-template-columns: 1fr; gap: 0.4rem; }
+      .cols.five { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem; }
+      .card { padding: 0.45rem 0.65rem; font-size: clamp(0.7rem, 3vw, 0.84rem); line-height: 1.28; border-top-width: 3px; }
+      .timeline { gap: 0.3rem; }
+      .timeline time { font-size: 0.74em; }
+      .timeline li { grid-template-columns: 4.6rem 1fr; gap: 0.45rem; padding: 0.32rem 0.5rem !important; font-size: clamp(0.7rem, 3vw, 0.84rem); line-height: 1.26; }
+      .flow-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.3rem; }
+      .flow-svg { width: 660px; max-width: none; max-height: none; }
+      .legend { gap: 0.3rem 0.7rem; font-size: 0.72rem; }
+      .legend i { width: 12px; height: 12px; }
+      .miro-link { padding: 0.5rem 0.75rem; font-size: 0.85rem; }
+      .hide-mobile { display: none !important; }
+      .slide-start, .slide-end { padding-left: 1.6rem; }
+      .slide-start::before { width: 24%; opacity: 0.68; }
+      .slide-start h1 { max-width: 86%; font-size: clamp(2.2rem, 10vw, 3.4rem); }
+      .slide-start p { max-width: 84%; font-size: clamp(1rem, 4.6vw, 1.35rem); }
+      .slide-start .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
+      #controls { justify-content: center; padding: 0 0.3rem; }
+      .footer-text { display: none; }
+      .btn-group { width: 100%; justify-content: center; gap: 0.25rem; }
+      a.ctrl-btn { padding-inline: 0.6rem; font-size: 0; }
+      .ctrl-icon { margin: 0; font-size: 1rem; }
+      .ctrl-btn-only-icon { min-width: 36px; min-height: 40px; padding: 0.5rem; font-size: 0.95rem; }
+      .slide-counter { min-width: 3.1rem; font-size: 0.7rem; }
+    }
+
+    @media (max-height: 760px) and (min-width: 769px) {
+      .slide { padding-top: 4rem; padding-bottom: calc(var(--controls-height) + 1.6rem); }
+      .slide-content h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); margin-bottom: 0.9rem; }
+      .dense h2 { font-size: clamp(1.7rem, 2.9vw, 2.5rem) !important; margin-bottom: 0.7rem !important; }
+      .slide-content p, .slide-content ul, .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .dense p, .dense ul, .dense ol { font-size: clamp(0.88rem, 1.2vw, 1.05rem) !important; line-height: 1.32 !important; }
+      .perguntas li { padding: 0.32rem 0.6rem; font-size: clamp(0.8rem, 1.05vw, 0.95rem); }
+      .timeline li { padding: 0.4rem 0.8rem !important; font-size: clamp(0.86rem, 1.15vw, 1.02rem); }
+      .card { padding: 0.65rem 0.85rem; font-size: clamp(0.84rem, 1.1vw, 0.98rem); }
+      .slide-table { font-size: clamp(0.8rem, 1.08vw, 0.96rem); }
+      .slide-table th, .slide-table td { padding: 0.36rem 0.6rem; }
+      .code-block { max-height: 40vh; }
+      .flow-svg { max-height: 46vh; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -418,131 +514,344 @@
   <div id="slider">
     <div class="slide slide-start active">
       <div class="badge">LABORATÓRIO 8 · 30/09</div>
-      <h1>Limpeza de dados com IA</h1>
-      <p>Uma auditoria hospitalar guiada pelo Antigravity e executada localmente com Pandas</p>
+      <h1>Brainstorming de fluxo: das 10 perguntas às views</h1>
+      <p>Data Visualization II: brainstorming das perguntas de negócio e fluxo de interação do dashboard</p>
     </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>O case: o board não aceita opinião sem número</h2>
+      <p>O Chief de Vendas da Olist vai levar ao board as estratégias comerciais de 2019. A turma é a equipe de dados que sustenta cada uma delas.</p>
+      <ul>
+        <li><strong>Aula 7:</strong> Olist no Supabase de cada um, esquema estrela reconciliado e o frame modelo do fluxo no Miro.</li>
+        <li><strong>Hoje:</strong> 10 perguntas viram um fluxo de interação anotado e 10 views conferidas contra o número de referência.</li>
+        <li><strong>Aula 9:</strong> o dashboard no GitHub Pages lê essas views pela API REST.</li>
+      </ul>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="objectives">
-      <h2>Ao final, você será capaz de…</h2>
-      <ul><li><strong>Diagnosticar</strong> problemas reais de qualidade em uma base hospitalar sintética.</li><li><strong>Orientar</strong> um agente de IA com restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> limpeza reproduzível com Pandas sem apagar a camada bruta.</li><li><strong>Validar</strong> a base tratada antes de apoiar uma decisão gerencial.</li></ul>
+      <h2>Objetivos de aprendizagem</h2>
+      <ul>
+        <li><strong>Decompor</strong> as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão.</li>
+        <li><strong>Conduzir</strong> um brainstorming divergente e convergente de fluxos de navegação no Miro.</li>
+        <li><strong>Construir</strong> o fluxo de interação anotado do dashboard com âncoras de divergência registradas.</li>
+        <li><strong>Traduzir</strong> a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência.</li>
+      </ul>
     </div>
-    <div class="slide slide-content" data-lesson-section="agenda">
-      <h2>Roteiro de 3 horas</h2>
-      <ul><li>Case e contrato de segurança.</li><li>Download e abertura do workspace no Antigravity.</li><li>Doze prompts: contrato → diagnóstico → validação.</li><li>Revisão humana, produtos da limpeza e entrega.</li><li>Commit e push das evidências.</li></ul>
+
+    <div class="slide slide-content dense" data-lesson-section="agenda">
+      <h2>Roteiro do laboratório</h2>
+      <ol class="timeline">
+        <li><time>19:00 · 15'</time><span>Retomada do case: quem decide o quê com as 10 perguntas</span></li>
+        <li><time>19:15 · 30'</time><span>Brainstorming divergente em grupos no Miro</span></li>
+        <li><time>19:45 · 35'</time><span>Convergência: votação, ordem narrativa e fluxo único do dashboard</span></li>
+        <li><time>20:20 · 10'</time><span>Intervalo</span></li>
+        <li><time>20:30 · 25'</time><span>Âncoras D1..Dn e registro de cinco campos</span></li>
+        <li><time>20:55 · 45'</time><span>Da raia do dado à view: IA escreve, você confere, gabarito nivela</span></li>
+        <li><time>21:40 · 10'</time><span>Teste de uma view pela API REST</span></li>
+        <li><time>21:50 · 10'</time><span>Síntese e entrega</span></li>
+      </ol>
     </div>
+
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>As 10 perguntas do Chief de Vendas</h2>
+      <ul class="perguntas">
+        <li><b>P01</b><span>Como evoluíram receita e pedidos mês a mês?<small>Tempo · meta e ritmo de 2019</small></span></li>
+        <li><b>P02</b><span>Em que dia da semana e faixa de horário o cliente compra?<small>Tempo · calendário de campanhas</small></span></li>
+        <li><b>P03</b><span>Quais 10 categorias concentram a receita e qual o ticket de cada?<small>Categoria · onde concentrar o mix</small></span></li>
+        <li><b>P04</b><span>Quais categorias mais cresceram de jan–ago/17 para jan–ago/18?<small>Categoria · apostas de crescimento</small></span></li>
+        <li><b>P05</b><span>Como a receita se distribui por estado do cliente?<small>Geografia · expansão fora de SP</small></span></li>
+        <li><b>P06</b><span>Quanto o frete pesa sobre o preço em cada região?<small>Geografia · subsídio de frete</small></span></li>
+        <li><b>P07</b><span>Em que estados mais se entrega com atraso?<small>Prazo · promessa de prazo por estado</small></span></li>
+        <li><b>P08</b><span>O atraso derruba a nota do cliente?<small>Satisfação · custo comercial do atraso</small></span></li>
+        <li><b>P09</b><span>Quantos clientes voltam a comprar?<small>Livre · programa de fidelização</small></span></li>
+        <li><b>P10</b><span>Quanto a receita depende dos maiores vendedores?<small>Livre · captação e retenção de sellers</small></span></li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>Cada pergunta tem cinco elementos</h2>
+      <p>Sem os cinco, duas pessoas escrevem a mesma pergunta e chegam a números diferentes. Exemplo com a <strong>P07</strong>:</p>
+      <div class="cols five">
+        <div class="card"><span class="tag">MÉTRICA</span><p>% de entregas depois da data estimada</p></div>
+        <div class="card"><span class="tag">RECORTE</span><p>estado do cliente</p></div>
+        <div class="card"><span class="tag">PERÍODO</span><p>compras de jan/17 a ago/18</p></div>
+        <div class="card"><span class="tag">FILTRO</span><p>pedidos entregues; estados com ≥ 500 entregas</p></div>
+        <div class="card decisao"><span class="tag">DECISÃO</span><p>promessa de prazo por estado</p></div>
+      </div>
+      <p style="margin-top: 1rem">Convenções da sequência: <strong>receita</strong> = soma do preço dos itens, sem frete, de pedidos <code>delivered</code>; <strong>período</strong> = jan/2017 a ago/2018, os meses completos da base.</p>
+    </div>
+
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>A pergunta escolhe a forma</h2>
+      <table class="slide-table">
+        <thead><tr><th>A tarefa é…</th><th>Forma</th><th>No case</th></tr></thead>
+        <tbody>
+          <tr><td>Tendência</td><td>linha, com eixo de tempo contínuo</td><td>P01 receita mensal</td></tr>
+          <tr><td>Comparação e ranking</td><td>barra horizontal ordenada pelo valor</td><td>P03, P05, P06, P07</td></tr>
+          <tr><td>Composição</td><td>barra empilhada 100% ou barras simples</td><td>P10 receita por decil</td></tr>
+          <tr><td>Distribuição</td><td>histograma</td><td>pedidos por cliente, por trás da P09</td></tr>
+          <tr><td>Relação</td><td>dispersão</td><td>taxa de atraso × volume de entregas (P07)</td></tr>
+          <tr><td>Número único</td><td>cartão com o número e a comparação ao lado</td><td>P09 recompra</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 0.9rem">Duas medidas de escala diferente pedem dois gráficos, nunca dois eixos y.</p>
+    </div>
+
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>Títulos que afirmam</h2>
+      <table class="slide-table">
+        <thead><tr><th>Título que descreve o eixo</th><th>Título que afirma o que o dado sustenta</th></tr></thead>
+        <tbody>
+          <tr><td>Nota por prazo de entrega</td><td>Pedidos atrasados recebem nota média 2,27; no prazo, 4,29</td></tr>
+          <tr><td>Receita por estado</td><td>SP responde por 38,4% da receita; RJ e MG somam 25%</td></tr>
+          <tr><td>Concentração de vendedores</td><td>295 vendedores (1º decil) geram 67,0% da receita</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 0.9rem">Teste: o título sobrevive sozinho num e-mail ao Chief? Se não há nada a afirmar, talvez o gráfico não precise estar no painel.</p>
+    </div>
+
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>Cor tem função, não gosto</h2>
+      <div class="cols two">
+        <div class="card"><h3>Identidade</h3><p>Categorias sem ordem: a região Norte tem a mesma cor em todos os cartões, atribuída em ordem fixa.</p></div>
+        <div class="card"><h3>Magnitude</h3><p>Um único tom, do claro ao escuro: pedidos por dia × faixa de horário (P02). Nunca arco-íris.</p></div>
+        <div class="card"><h3>Polaridade</h3><p>Acima ou abaixo de uma meta: duas cores opostas e cinza exatamente no zero.</p></div>
+        <div class="card"><h3>Destaque</h3><p>Tudo em cinza e uma cor só para o que o título afirma, como MA na taxa de atraso (P07).</p></div>
+      </div>
+      <p style="margin-top: 0.9rem">A cor acompanha a entidade, nunca a posição no ranking. Se um filtro reordena as barras, as cores não trocam de dono.</p>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Case: podemos confiar nesta base?</h2>
-      <p>A Diretoria de Operações recebeu 5.000 registros de internação para analisar permanência e demanda hospitalar. Antes de calcular qualquer indicador, a equipe precisa provar que os dados são utilizáveis.</p>
-      <ul><li><strong>Decisão:</strong> planejar capacidade e priorizar correções cadastrais.</li><li><strong>Risco:</strong> transformar erro de cadastro em falsa evidência.</li><li><strong>Papel da IA:</strong> propor código e testes; nunca decidir uma correção clínica.</li></ul>
+      <h2>Dashboard é narrativa, não galeria</h2>
+      <p>Dez gráficos corretos e desconexos não sustentam decisão nenhuma. A ordem carrega o argumento:</p>
+      <div class="cols">
+        <div class="card contexto"><h3>Contexto</h3><p>Onde estamos, desde quando e em que escala.</p></div>
+        <div class="card tensao"><h3>Tensão</h3><p>O que está fora do esperado e custa dinheiro.</p></div>
+        <div class="card decisao"><h3>Decisão</h3><p>O que fazer, com o número que sustenta e o limite que invalida.</p></div>
+      </div>
+      <p style="margin-top: 1rem">Leia só os títulos, de cima para baixo: se formarem um parágrafo com sentido, o dashboard está ordenado.</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>A base desta aula</h2>
-      <div class="metric-row"><div class="metric"><strong>5.000</strong><span>registros sintéticos</span></div><div class="metric"><strong>7</strong><span>colunas</span></div><div class="metric"><strong>CC0</strong><span>uso educacional</span></div><div class="metric"><strong>CSV</strong><span>333 KB</span></div></div>
-      <p>Hospital Records for Data Cleaning (Medium), de Nudrat Abbas, distribuída pelo Kaggle.</p>
-      <a class="download-link" href="../materiais/aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv">⬇️ Baixar hospital_patients_real_world.csv</a>
-    </div>
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Prepare o workspace local</h2>
-      <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-08-seunome</code>.</li><li>Abra essa pasta no Antigravity IDE.</li><li>Selecione o modo <strong>orientado por revisão</strong>.</li><li>Mantenha comandos do terminal sob aprovação.</li><li>Se o Python local não estiver pronto, use o Codespace da disciplina como ambiente de execução.</li></ol>
-    </div>
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Nosso contrato com a IA</h2>
-      <ul><li>O CSV bruto é evidência: <strong>nunca sobrescrever</strong>.</li><li>Ausência não é zero e não autoriza adivinhação.</li><li>Datas incoerentes são sinalizadas, não invertidas.</li><li>Cada transformação precisa de contagem antes/depois.</li><li>O aluno lê o plano, o diff e a saída antes de aceitar.</li></ul>
-      <p><em>O processamento ocorre no workspace; prompts e arquivos mencionados podem ser processados pelo serviço de IA. Use apenas a base sintética.</em></p>
-    </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 0 · Contrato de trabalho</div><h2>Primeiro planeje; não edite</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de qualidade de dados. Leia @hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos. Primeiro apresente um plano curto e aguarde minha aprovação.
 
-Preserve o CSV bruto; não invente ausentes; não troque datas por suposição; não exclua linhas silenciosamente; explique cada regra; trabalhe só nesta pasta; não instale pacotes nem execute comandos sem minha aprovação.</div></div>
+    <div class="slide slide-content dense" id="slide-formato" data-lesson-section="concepts">
+      <h2>O formato do fluxo de interação anotado</h2>
+      <div class="flow-wrap"><svg class="flow-svg" id="svg-formato" viewBox="0 0 1000 454" role="img" aria-labelledby="svg-formato-t svg-formato-d"><title id="svg-formato-t">Formato do fluxo de interação anotado</title><desc id="svg-formato-d">Cabeçalho com a tarefa de decisão e três raias horizontais: usuário em post-its amarelos, interface em azuis e dado em verdes. Os passos são numerados de 1 a 6 em ordem cronológica, alternando usuário e interface; setas horizontais seguem a sequência e conectores verticais ligam as raias da mesma coluna. Uma etiqueta rosa D1 marca, na raia do dado, o ponto em que o dado não sustenta a conclusão do usuário.</desc><defs><marker id="svg-formato-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="svg-formato-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1000" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · quem decide · o quê · até quando · com que consequência</text><rect x="0" y="64" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="104" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="121.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="180" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="180" width="8" height="104" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="237.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="296" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="296" width="8" height="104" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="353.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="111.5" font-size="17" class="pi-text" text-anchor="start">abre o painel com</text><text x="158" y="132.7" font-size="17" class="pi-text" text-anchor="start">a decisão na cabeça</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="263.0" y1="155" x2="263.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="116.0" x2="417" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="132" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que a tela oferece</text><text x="158" y="248.7" font-size="17" class="pi-text" text-anchor="start">(filtro, gráfico, número)</text><g class="step-num"><circle cx="134" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="263.0" y1="271" x2="263.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="232.0" x2="417" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="132" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="343.5" font-size="17" class="pi-text" text-anchor="start">fonte: tabela ou view</text><text x="146" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · limitação</text><rect x="422" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="448" y="111.5" font-size="17" class="pi-text" text-anchor="start">procura, compara,</text><text x="448" y="132.7" font-size="17" class="pi-text" text-anchor="start">lê um valor</text><g class="step-num"><circle cx="424" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="553.0" y1="155" x2="553.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="116.0" x2="707" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="422" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="448" y="227.5" font-size="17" class="pi-text" text-anchor="start">a forma que responde</text><text x="448" y="248.7" font-size="17" class="pi-text" text-anchor="start">(palavras ou rascunho)</text><g class="step-num"><circle cx="424" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="553.0" y1="271" x2="553.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="232.0" x2="707" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="422" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="436" y="343.5" font-size="17" class="pi-text" text-anchor="start">view que sustenta</text><text x="436" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · filtro · período</text><rect x="712" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="738" y="111.5" font-size="17" class="pi-text" text-anchor="start">conclui e decide:</text><text x="738" y="132.7" font-size="17" class="pi-text" text-anchor="start">“frase literal”</text><g class="step-num"><circle cx="714" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="843.0" y1="155" x2="843.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="738" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que sustenta ou</text><text x="738" y="248.7" font-size="17" class="pi-text" text-anchor="start">falta na tela</text><g class="step-num"><circle cx="714" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="843.0" y1="271" x2="843.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="726" y="343.5" font-size="17" class="pi-text" text-anchor="start">o que a base não tem</text><text x="726" y="364.7" font-size="17" class="pi-text" text-anchor="start">(limite da afirmação)</text><line x1="843.0" y1="414" x2="843.0" y2="389" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-formato-seta-d)"/><rect x="817.0" y="414" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="843.0" y="435" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><text x="132" y="435" font-size="15" class="flow-note" fill="#64748b">âncora de divergência: onde o dado não sustenta a conclusão →</text></svg></div>
+      <div class="legend" aria-hidden="true">
+        <span><i style="background: var(--postit-usuario)"></i>usuário: o que faz e conclui</span>
+        <span><i style="background: var(--postit-interface)"></i>interface: o que a tela oferece</span>
+        <span><i style="background: var(--postit-dado)"></i>dado: fonte, grão, limitação</span>
+        <span><i style="background: var(--postit-ancora)"></i>âncora D1..Dn</span>
+      </div>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 1 · Diagnóstico</div><h2>Veja antes de limpar</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie Aula_08_SeuNome.ipynb. Importe pathlib e pandas, carregue @hospital_patients_real_world.csv em bruta e mostre: head, shape, colunas, dtypes, ausências, linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
 
-Não limpe nada. Execute e resuma. Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div></div>
+    <div class="slide slide-content dense" id="slide-exemplo-p06" data-lesson-section="concepts">
+      <h2>Exemplo aplicado: P06, subsídio de frete</h2>
+      <div class="flow-wrap"><svg class="flow-svg" id="svg-p06" viewBox="0 0 1200 472" role="img" aria-labelledby="svg-p06-t svg-p06-d"><title id="svg-p06-t">Exemplo aplicado à P06: subsídio de frete</title><desc id="svg-p06-d">Tarefa: o Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday. Usuário: 1 abre o painel, 3 procura o Nordeste, 5 conclui que frete caro espanta cliente, 7 decide subsidiar o Nordeste. Interface: 2 filtro de período jan/17 a ago/18, 4 barras de frete sobre preço por região, 6 só vendas realizadas na tela, 8 nenhum custo do subsídio. Dado: dim_tempo com 20 meses completos; vw_p06_frete_regiao com grão de item entregue; não há carrinho abandonado na base; não há margem nem custo logístico. Âncoras: D1 no passo 4, D2 no passo 5 e D3 no passo 7.</desc><defs><marker id="svg-p06-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="svg-p06-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1200" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday</text><rect x="0" y="64" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="110" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="124.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="186" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="186" width="8" height="110" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="246.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="308" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="308" width="8" height="110" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="368.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="114.5" font-size="17" class="pi-text" text-anchor="start">abre o painel</text><text x="158" y="135.7" font-size="17" class="pi-text" text-anchor="start">antes do comitê</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="250.0" y1="161" x2="250.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="119.0" x2="395" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="132" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="236.5" font-size="17" class="pi-text" text-anchor="start">filtro de período</text><text x="158" y="257.7" font-size="17" class="pi-text" text-anchor="start">jan/17–ago/18</text><g class="step-num"><circle cx="134" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="250.0" y1="283" x2="250.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="241.0" x2="395" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="132" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="358.5" font-size="17" class="pi-text" text-anchor="start">dim_tempo</text><text x="146" y="379.7" font-size="17" class="pi-text" text-anchor="start">20 meses completos</text><rect x="400" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="426" y="125.1" font-size="17" class="pi-text" text-anchor="start">procura o Nordeste</text><g class="step-num"><circle cx="402" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="518.0" y1="161" x2="518.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="119.0" x2="663" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="400" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="426" y="236.5" font-size="17" class="pi-text" text-anchor="start">barras: frete ÷ preço</text><text x="426" y="257.7" font-size="17" class="pi-text" text-anchor="start">por região</text><g class="step-num"><circle cx="402" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="518.0" y1="283" x2="518.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="241.0" x2="663" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="400" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="414" y="358.5" font-size="17" class="pi-text" text-anchor="start">vw_p06_frete_regiao</text><text x="414" y="379.7" font-size="17" class="pi-text" text-anchor="start">grão: item entregue</text><rect x="668" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="694" y="114.5" font-size="17" class="pi-text" text-anchor="start">conclui: “frete caro</text><text x="694" y="135.7" font-size="17" class="pi-text" text-anchor="start">espanta cliente”</text><g class="step-num"><circle cx="670" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="786.0" y1="161" x2="786.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="119.0" x2="931" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="668" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="694" y="236.5" font-size="17" class="pi-text" text-anchor="start">só vendas realizadas</text><text x="694" y="257.7" font-size="17" class="pi-text" text-anchor="start">aparecem na tela</text><g class="step-num"><circle cx="670" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="786.0" y1="283" x2="786.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="241.0" x2="931" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="668" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="682" y="358.5" font-size="17" class="pi-text" text-anchor="start">não há carrinho</text><text x="682" y="379.7" font-size="17" class="pi-text" text-anchor="start">abandonado na base</text><rect x="936" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="962" y="114.5" font-size="17" class="pi-text" text-anchor="start">decide subsidiar</text><text x="962" y="135.7" font-size="17" class="pi-text" text-anchor="start">o Nordeste</text><g class="step-num"><circle cx="938" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">7</text></g><line x1="1054.0" y1="161" x2="1054.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="962" y="236.5" font-size="17" class="pi-text" text-anchor="start">nenhum custo do</text><text x="962" y="257.7" font-size="17" class="pi-text" text-anchor="start">subsídio na tela</text><g class="step-num"><circle cx="938" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">8</text></g><line x1="1054.0" y1="283" x2="1054.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="950" y="358.5" font-size="17" class="pi-text" text-anchor="start">sem margem nem custo</text><text x="950" y="379.7" font-size="17" class="pi-text" text-anchor="start">logístico na base</text><line x1="518.0" y1="432" x2="518.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="492.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="518.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><line x1="786.0" y1="432" x2="786.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="760.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="786.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D2</text><line x1="1054.0" y1="432" x2="1054.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="1028.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="1054.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D3</text></svg></div>
+      <p style="margin-top: 0.7rem">A tela mostra que o frete pesa <strong>22,7%</strong> sobre o preço no Norte e <strong>21,7%</strong> no Nordeste, contra <strong>15,2%</strong> no Sudeste. O que ela não mostra é venda perdida nem custo do subsídio.</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Checkpoint do diagnóstico</h2>
-      <div class="metric-row"><div class="metric"><strong>350</strong><span>idades ausentes</span></div><div class="metric"><strong>350</strong><span>gêneros ausentes</span></div><div class="metric"><strong>350</strong><span>diagnósticos ausentes</span></div><div class="metric"><strong>0</strong><span>chaves duplicadas</span></div></div>
-      <ul><li>Não “corrija” para alcançar essas contagens.</li><li>Se o resultado divergir, verifique arquivo, caminho e leitura.</li><li>O diagnóstico é a linha de base do relatório final.</li></ul>
-    </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 2 · Estrutura e tipos</div><h2>Trabalhe em uma cópia</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie base = bruta.copy(deep=True) e nunca sobrescreva bruta nem o CSV. Renomeie colunas para snake_case. Converta IDs, gênero e diagnóstico para string; idade para Float64; datas para datetime com errors="coerce".
 
-Conte falhas de conversão, mostre dtypes e explique cada escolha. Não faça imputação.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>Registro de uma âncora: cinco campos</h2>
+      <p>A âncora marca o golfo entre o que o usuário lê na tela e o que o dado autoriza. Exemplo, D2 da P06:</p>
+      <table class="slide-table">
+        <tbody>
+          <tr><td>Passo</td><td>⑤ o Chief conclui olhando as barras de frete por região</td></tr>
+          <tr><td>Leitura do usuário</td><td>“Frete caro espanta cliente do Nordeste.”</td></tr>
+          <tr><td>O que o dado autoriza</td><td>Entre os itens entregues de jan/17 a ago/18, o frete equivale a 21,7% do preço no Nordeste. A base só tem vendas realizadas.</td></tr>
+          <tr><td>Consequência</td><td>Subsídio aprovado para recuperar uma demanda perdida que ninguém mediu.</td></tr>
+          <tr><td>Suporte na tela</td><td>Nota de origem: “só pedidos realizados; a base não registra desistência”.</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 3 · Ausências</div><h2>Não preencha o que você não sabe</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags que preservem a origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente como pd.NA. Padronize gênero vazio ou Unknown e diagnóstico vazio como "Não informado".
 
-Gere tabela antes/depois com quantidade e percentual. Não use média, moda ou valor clínico inventado.</div></div>
-    </div>
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 4 · Categorias</div><h2>Padronize sem mudar significado</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Normalize espaços e capitalização de gender e diagnosis. Em gender, use dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e Unknown/vazio→Não informado.
+      <h2>Regras do board</h2>
+      <ul>
+        <li><strong>Cada passo é numerado</strong>, em ordem cronológica, qualquer que seja a raia.</li>
+        <li><strong>A cor diz de quem é a afirmação:</strong> verde é sempre dado, amarelo é sempre usuário.</li>
+        <li><strong>Toda explicação dita em voz alta vira post-it.</strong> O que não está no board não foi decidido.</li>
+        <li><strong>Nenhuma captura de tela:</strong> interface se descreve em palavras ou com formas.</li>
+      </ul>
+      <a class="miro-link" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer">🧩 Abrir o board da turma no Miro</a>
+    </div>
 
-Em diagnosis, una somente variantes de espaços ou capitalização. Mostre value_counts antes/depois e registre o mapeamento.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Brainstorming 1 · Divergir (30 min)</h2>
+      <p>Grupos de 4. Cada grupo recebe um par de perguntas: G1 P01+P02 · G2 P03+P04 · G3 P05+P06 · G4 P07+P08 · G5 P09+P10.</p>
+      <ol class="timeline">
+        <li><time>19:15 · 3'</time><span><strong>Preparar:</strong> duplicar o frame modelo da aula 7 e colar no topo as duas perguntas com os cinco elementos.</span></li>
+        <li><time>19:18 · 8'</time><span><strong>Crazy 8s, em silêncio:</strong> cada pessoa faz 8 rascunhos de tela em post-it azul, 1 minuto cada, 4 por pergunta.</span></li>
+        <li><time>19:26 · 7'</time><span><strong>1-2, em duplas:</strong> juntar rascunhos numa sequência de passos numerados, amarelo e azul alternados.</span></li>
+        <li><time>19:33 · 12'</time><span><strong>4, o grupo:</strong> um fluxo por pergunta, com a raia verde preenchida: view, grão e limitação.</span></li>
+      </ol>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 5 · Chaves</div><h2>Duplicidade exige evidência</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Audite duplicidade de linha e de patient_id. Não use drop_duplicates automaticamente. Se houver linhas idênticas, mostre a evidência antes de propor remoção. Se a mesma chave tiver conteúdos diferentes, crie chave_duplicada e envie para revisão.
 
-Registre também quando a contagem for zero e explique linha duplicada versus chave duplicada.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Regras para não virar debate de gosto</h2>
+      <ul>
+        <li><strong>Divergir não é avaliar:</strong> no Crazy 8s ninguém comenta a ideia de ninguém.</li>
+        <li><strong>Proibido “eu prefiro”.</strong> Toda defesa começa com “o Chief decide ___ mais rápido porque ___”.</li>
+        <li><strong>Discordou, desenhe:</strong> a alternativa entra em 1 minuto num post-it ao lado; argumento sem desenho não conta.</li>
+        <li><strong>Ideia sem pergunta (Pxx) e sem passo numerado não entra no frame.</strong></li>
+        <li><strong>Três critérios de voto, na tela:</strong> responde à decisão · existe view e coluna que sustentam · lê-se em 5 segundos.</li>
+        <li><strong>Empate:</strong> vence o fluxo com menos divergências abertas. Cronômetro tocou, caneta para.</li>
+      </ul>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 6 · Regras de negócio</div><h2>Sinalize; não “conserte”</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie flags: idade_fora_faixa para idade &lt; 0 ou &gt; 110; hospital_id_invalido fora de HOSP-[número]; cronologia_invalida quando discharge_date &lt; admission_date.
 
-Não apague nem inverta datas. Espero 0, 0 e 150 casos, respectivamente; se divergir, investigue antes de alterar a regra.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Brainstorming 2 · Convergir e decidir (35 min)</h2>
+      <ol class="timeline">
+        <li><time>19:45 · 10'</time><span><strong>Todos, em galeria:</strong> cada grupo lê os passos do seu fluxo em 90 segundos, sem defender.</span></li>
+        <li><time>19:55 · 5'</time><span><strong>Votação por pontos:</strong> 3 votos por pessoa, só em fluxos de outros grupos, pelos três critérios. Use a votação do Miro ou pontos roxos: amarelo, azul, verde e rosa já têm dono.</span></li>
+        <li><time>20:00 · 5'</time><span><strong>Ordem narrativa:</strong> os fluxos vencedores vão para a trilha contexto → tensão → decisão.</span></li>
+        <li><time>20:05 · 15'</time><span><strong>Fluxo único do dashboard:</strong> um frame novo, copiado do modelo, encadeia as 10 perguntas na ordem escolhida.</span></li>
+      </ol>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 7 · Indicador</div><h2>Permanência só quando válida</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie dias_internacao somente para datas válidas e cronologia coerente. Nos demais casos use pd.NA e mantenha a flag. Converta para Int64 anulável.
 
-Mostre describe(), mínimo e máximo; confirme que nenhum negativo foi aceito. Explique por que usar valor absoluto seria perigoso.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Uma ordem de partida para a narrativa</h2>
+      <p>Proposta para a turma contestar, não gabarito:</p>
+      <div class="cols">
+        <div class="card contexto"><h3>Contexto</h3><p><strong>P01</strong> ritmo da receita · <strong>P05</strong> onde está · <strong>P03</strong> o que vende</p></div>
+        <div class="card tensao"><h3>Tensão</h3><p><strong>P07</strong> onde atrasa · <strong>P08</strong> quanto custa na nota · <strong>P06</strong> quanto pesa o frete · <strong>P10</strong> dependência de poucos · <strong>P09</strong> poucos voltam</p></div>
+        <div class="card decisao"><h3>Decisão</h3><p><strong>P04</strong> onde apostar · <strong>P02</strong> quando fazer campanha</p></div>
+      </div>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 8 · Evidência</div><h2>Compare antes e depois</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie relatorio_qualidade com metrica, antes, depois, regra_aplicada e pendencia_humana. Inclua linhas, duplicidades, ausências, gêneros não informados, categorias de diagnóstico, capitalização, idade, hospital e cronologia.
 
-Salve em saidas/relatorio_qualidade.csv. Não trate uma flag pendente como erro resolvido.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Âncoras típicas · P01 a P05</h2>
+      <table class="slide-table">
+        <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th></tr></thead>
+        <tbody>
+          <tr><td>P01</td><td>“A receita caiu em 2018.”</td><td>Platô desde mar/18, entre R$ 839 mil e R$ 978 mil por mês; meses incompletos já estão fora.</td></tr>
+          <tr><td>P02</td><td>“Segunda é o dia da campanha.”</td><td>Segunda tem mais pedidos entregues (15.660); pedido não é conversão de campanha.</td></tr>
+          <tr><td>P03</td><td>“Relógios é a categoria mais lucrativa.”</td><td>Maior ticket (R$ 211,89), não maior margem: a base não tem custo.</td></tr>
+          <tr><td>P04</td><td>“Bebês é a melhor aposta.”</td><td>+268,6% sobre R$ 68 mil; sem o piso de R$ 50 mil, uma categoria de R$ 93,80 apareceria com +48.785,7%.</td></tr>
+          <tr><td>P05</td><td>“Os vendedores de SP vendem 38%.”</td><td>38,4% é do estado do <strong>cliente</strong>, no endereço mais recente.</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 9 · Produtos</div><h2>Separe tratado de pendente</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Exporte saidas/base_hospitalar_tratada.csv com 5.000 linhas, campos padronizados e flags. Exporte saidas/registros_para_revisao.csv com violações críticas. Crie saidas/dicionario_de_dados.md com coluna, tipo, significado, regra e ausência.
 
-Não exporte o índice e não modifique o arquivo bruto.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Âncoras típicas · P06 a P10</h2>
+      <table class="slide-table">
+        <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th></tr></thead>
+        <tbody>
+          <tr><td>P06</td><td>“Frete caro espanta cliente.”</td><td>Frete pesa 22,7% no Norte e 15,2% no Sudeste entre vendas realizadas; desistência não está na base.</td></tr>
+          <tr><td>P07</td><td>“RJ é onde mais atrasa.”</td><td>Maior taxa é MA (17,5%); RJ tem 12,2% com 12.312 entregas, e SP soma mais atrasos em número absoluto.</td></tr>
+          <tr><td>P08</td><td>“Zerar atraso leva a nota a 4,29.”</td><td>Atrasados têm nota 2,27 e no prazo 4,29: associação, não causa.</td></tr>
+          <tr><td>P09</td><td>“Ninguém volta a comprar.”</td><td>2.789 de 93.104 clientes (3,00%) em 20 meses; com <code>customer_id</code> daria zero.</td></tr>
+          <tr><td>P10</td><td>“Os 295 maiores são os mais rentáveis.”</td><td>Geram 67,0% da receita; a base não tem margem, e a cauda tem muitos vendedores novos.</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 10 · Testes</div><h2>Execute do início ao fim</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Adicione asserts para: 5.000 linhas preservadas; patient_id único; gêneros válidos; nenhum dias_internacao negativo; 150 cronologias inválidas sinalizadas; saídas existentes.
 
-Reinicie o kernel e execute tudo em ordem. Se falhar, diagnostique; não remova nem enfraqueça o teste. Mostre as evidências finais.</div></div>
+    <div class="slide slide-content dense" data-lesson-section="concepts">
+      <h2>Da raia verde à view</h2>
+      <p>A view é o contrato entre o fluxo e a tela: a aula 9 só mostra o que a view entrega.</p>
+      <div class="cols">
+        <div class="card dado"><h3>Post-it verde</h3><p><code>vw_p06_frete_regiao</code> · grão: item entregue · sem desistência</p></div>
+        <div class="card"><h3>View</h3><p>colunas <code>regiao</code>, <code>frete_sobre_preco_pct</code>, <code>frete_medio_item</code>, <code>itens</code>; filtro e período dentro dela</p></div>
+        <div class="card interface"><h3>Cartão da tela</h3><p>barras ordenadas, título que afirma, período no subtítulo, nota de origem</p></div>
+      </div>
+      <ul style="margin-top: 1rem">
+        <li><code>security_invoker = on</code>: a view respeita as permissões de quem consulta.</li>
+        <li><code>grant select … to anon</code>: a chave publicável lê; ninguém escreve pela API.</li>
+      </ul>
     </div>
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 11 · Auditoria e Git</div><h2>Registre também a participação da IA</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie REVISAO_IA.md com objetivo, prompts, sugestões aceitas e rejeitadas, regras humanas, testes, limitações e decisão de uso.
 
-Depois mostre git status e proponha add, commit e push apenas desta entrega. Não execute sem minha aprovação, não crie remoto e nunca use force. Mensagem: "Documenta limpeza auditável da base hospitalar".</div></div>
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>A IA escreve a view, você confere</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No Postgres do Supabase há um esquema estrela no schema public:
+fato_itens_pedido (grão: um item) com pedido_sk, item_seq, data_sk, cliente_sk,
+produto_sk, vendedor_sk, status, preco, frete; fato_pedidos (grão: um pedido)
+com pedido_sk, data_sk, hora_compra, cliente_sk, status, dias_entrega,
+entregue_no_prazo (1/0/null), nota_avaliacao; dim_tempo(data_sk, data, ano,
+mes, ano_mes, dia_semana, nome_dia_semana); dim_cliente(cliente_sk, estado,
+regiao); dim_produto(produto_sk, categoria); dim_vendedor(vendedor_sk, estado).
+Receita = soma de preco (sem frete) de status 'delivered'. Período: dim_tempo.data
+entre 2017-01-01 e 2018-08-31.
+Escreva create view public.vw_pNN_assunto_grupo with (security_invoker = on)
+para a pergunta: [PERGUNTA]. Colunas de saída: [COLUNAS].
+Antes do SQL, diga qual fato usa e por quê (grão). Não invente colunas.</div></div>
+      <p>Rode no SQL Editor e compare com a resposta de referência. Diferença é achado, não fracasso: registre a causa.</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="challenge">
-      <h2>Desafio: a base está apta?</h2>
-      <p>Em dupla, defenda uma decisão para a Diretoria de Operações:</p>
-      <ul><li>Quais análises podem usar a base tratada agora?</li><li>Quais registros devem ficar fora do indicador de permanência?</li><li>Qual problema cadastral deve ser corrigido primeiro?</li><li>Que sugestão do Antigravity vocês rejeitaram — e por quê?</li></ul>
+
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Confira contra a referência</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text no-wrap"><span class="code-comment">-- Antes do gabarito: mantenha só as linhas do grupo e troque o nome pela view _grupo</span>
+select p, valor, referencia, valor = referencia as confere from (
+  select ''::text p, ''::text valor, ''::text referencia where false
+  union all select 'P01', receita::text, '987765.37' from vw_p01_receita_mensal where ano_mes = '2017-11'
+  union all select 'P02', sum(pedidos)::text, '15660' from vw_p02_dia_hora where dia_semana = 1
+  union all select 'P03', participacao_pct::text, '9.3' from vw_p03_top_categorias where categoria = 'beleza_saude'
+  union all select 'P04', crescimento_pct::text, '268.6' from vw_p04_crescimento_categorias where categoria = 'bebes'
+  union all select 'P05', participacao_pct::text, '38.4' from vw_p05_receita_estado where estado = 'SP'
+  union all select 'P06', frete_sobre_preco_pct::text, '22.7' from vw_p06_frete_regiao where regiao = 'Norte'
+  union all select 'P07', atraso_pct::text, '17.5' from vw_p07_atraso_estado where estado = 'MA'
+  union all select 'P08', nota_media::text, '2.27' from vw_p08_nota_prazo where entrega = 'com atraso'
+  union all select 'P09', recompra_pct::text, '3.00' from vw_p09_recompra
+  union all select 'P10', participacao_pct::text, '67.0' from vw_p10_concentracao_vendedores where decil = 1
+) conferencia;</div></div>
+      <p class="hide-mobile">Causas típicas de diferença: frete somado à receita, <code>customer_id</code> no lugar da pessoa, status sem filtro, meses incompletos, média de médias.</p>
     </div>
-    <div class="slide slide-content" data-lesson-section="challenge">
-      <h2>Entrega verificável</h2>
-      <ul><li><code>Aula_08_SeuNome.ipynb</code> executado do início ao fim.</li><li>Base tratada com as 5.000 linhas e flags preservadas.</li><li>Fila de revisão com as 150 cronologias incoerentes.</li><li>Relatório antes/depois e dicionário de dados.</li><li><code>REVISAO_IA.md</code>, commit e push.</li></ul>
+
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Aplique o gabarito <code>views.sql</code></h2>
+      <p>Todos chegam à aula 9 com as mesmas 11 views, qualquer que tenha sido o resultado do grupo.</p>
+      <ol>
+        <li>Salve a sua versão em <code>aula-08-seunome/views.sql</code> e anote a diferença encontrada.</li>
+        <li>Apague as views <code>_grupo</code> do Supabase com <code>drop view</code>.</li>
+        <li>Abra <code>materiais/aula-08/olist/views.sql</code>, copie tudo, cole no SQL Editor e clique em <strong>Run</strong>.</li>
+        <li>Rode a conferência de novo, agora com os nomes do gabarito: dez linhas com <code>confere = true</code>.</li>
+      </ol>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">select table_name from information_schema.views
+where table_schema = 'public' order by 1;   <span class="code-comment">-- esperado: 11 linhas</span></div></div>
     </div>
+
+    <div class="slide slide-content dense" data-lesson-section="guided-practice">
+      <h2>Teste uma view pela API REST</h2>
+      <p>No terminal do Codespace. URL e chave publicável (<code>sb_publishable_…</code>) ficam em Project Settings → API Keys; nunca a secret nem a senha do banco.</p>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comandos</button><div class="code-block prompt-text">read -p "Project URL: " SUPABASE_URL
+read -p "Chave publicável: " SUPABASE_KEY
+curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
+  -H "apikey: $SUPABASE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_KEY"</div></div>
+      <p>Esperado: uma lista JSON com <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00. É exatamente o que o dashboard vai ler.</p>
+    </div>
+
+    <div class="slide slide-content dense" data-lesson-section="challenge">
+      <h2>Desafio e entrega</h2>
+      <p>Pasta <code>aula-08-seunome/</code> no seu fork, com commit e push:</p>
+      <ul>
+        <li><code>ESPECIFICACAO.md</code>: uma linha por pergunta com pergunta, decisão, view, colunas, visual escolhido, título que afirma, âncora tratada e suporte na tela.</li>
+        <li>Link do frame do dashboard no Miro, com pelo menos 4 âncoras registradas nos cinco campos.</li>
+        <li><code>views.sql</code> do grupo, escrito antes do gabarito, e a diferença encontrada.</li>
+        <li><strong>Aceite:</strong> a conferência retorna dez <code>confere = true</code> no seu Supabase e o <code>curl</code> devolve 2789 recorrentes.</li>
+      </ul>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="summary">
-      <h2>Limpar é tornar a decisão auditável</h2>
-      <ul><li>Primeiro observar; depois formular regras.</li><li>IA acelera propostas, não transfere responsabilidade.</li><li>Ausência e incoerência carregam informação.</li><li>Flags preservam casos que exigem decisão humana.</li><li>Testes, relatório e Git transformam código em evidência.</li></ul>
+      <h2>Síntese</h2>
+      <p>O gráfico é a última decisão, não a primeira.</p>
+      <ul>
+        <li>A pergunta com cinco elementos escolhe a forma; a ordem dos cartões carrega o argumento.</li>
+        <li>O fluxo anotado mostra onde a leitura do Chief ultrapassa o que o dado autoriza.</li>
+        <li>A view é o contrato: conferida contra a referência, ela sustenta a tela da aula 9.</li>
+      </ul>
     </div>
-    <div class="slide slide-end" data-lesson-section="next-steps">
-      <h2>Próximo laboratório</h2>
-      <p>Com a base tratada em mãos, partimos para previsão: atributos derivados, pipeline reproduzível e regressão.</p>
-      <p>Antes de sair: <strong>execute tudo, revise, commit e push</strong>.</p>
+
+    <div class="slide slide-content" data-lesson-section="next-steps">
+      <h2>Próximos passos: aula 9</h2>
+      <p>O fluxo anotado e a <code>ESPECIFICACAO.md</code> viram o dashboard HTML publicado no GitHub Pages do seu fork, lendo as views do Supabase pela API REST.</p>
+      <ul>
+        <li>Traga a URL do projeto e a chave publicável à mão.</li>
+        <li>Cada suporte na tela decidido hoje vira um elemento do cartão.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end">
+      <h2>Fim do Laboratório 8</h2>
+      <p>Antes de sair: fluxo no Miro, <code>ESPECIFICACAO.md</code> e <code>views.sql</code> com commit e push.</p>
     </div>
   </div>
 
@@ -551,11 +860,11 @@ Depois mostre git status e proponha add, commit e push apenas desta entrega. Nã
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-08/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
-      <a href="../materiais/aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
+      <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="Abrir o board da turma no Miro"><span class="ctrl-icon">🧩</span> Miro</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
-      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
-      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
-      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia">⛶</button>
+      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)" aria-label="Slide anterior">◄</button>
+      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)" aria-label="Próximo slide">►</button>
+      <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia" aria-label="Tela cheia">⛶</button>
     </div>
   </div>
 
@@ -616,10 +925,10 @@ Depois mostre git status e proponha add, commit e push apenas desta entrega. Nã
 
     document.querySelectorAll('.copy-prompt').forEach(button => {
       button.addEventListener('click', async () => {
-        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const text = button.parentElement.querySelector('.prompt-text').innerText.trim();
         const original = button.textContent;
         try {
-          await copyText(prompt);
+          await copyText(text);
           button.textContent = 'Copiado ✓';
         } catch (error) {
           button.textContent = 'Selecione o texto';

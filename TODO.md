@@ -92,6 +92,15 @@ modelo — é daí que sai o eixo do pitch da aula 6.
 
 # Concluído
 
+## Reorganização do cronograma (17/09)
+As aulas 7, 8 e 9 passam a formar a sequência de Data Visualization sobre o case
+Olist (fluxo de interação anotado, Supabase e dashboard no GitHub Pages). A antiga
+aula 7 (Storytelling, Dashboards e Segmentação RFV) saiu do cronograma; as notas
+históricas abaixo sobre ela e sobre a "aula 8" de limpeza referem-se à numeração
+anterior. Nova correspondência: limpeza 8 → 10; previsões 9 → 11; testes A/B
+10 → 12; IA estratégica 12 → 14; RH 14 → 15. Fusões em esqueleto: auditoria (11)
++ forense (13) → 13; previsão de caixa (15) + demanda (16) → 16.
+
 ## Aula 5 (09/09) · Passo a passo do Metabase no Codespaces
 O material ganhou os dez passos completos, do `Create codespace on main` ao primeiro
 `SELECT`, mais uma seção sobre suspensão do ambiente e uma tabela de sete sintomas.

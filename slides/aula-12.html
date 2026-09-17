@@ -348,19 +348,24 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 12 · 04/11</div><h1>Laboratório de Dados &amp; IA</h1><p>IA aplicada à estratégia e tomada de decisão</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
-for nome,v in alternativas.items():
-    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
-print(alternativas)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aprofundaremos rastreamento de evidências em uma investigação forense.</p></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 12 · 04/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Testes A/B: do desenho do experimento à decisão de negócio</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li><li>Defender uma recomendação com limitações explícitas</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos: hipótese, teste e tamanho amostral</li><li>Estudo de caso completo, do dado bruto à recomendação</li><li>Desafio, síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Do teste ao caso</h2><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: os dois testes</h2><div class="code-block">from scipy.stats import ttest_ind, chi2_contingency
+
+t, p = ttest_ind(grupo_a["ticket"], grupo_b["ticket"], equal_var=False)
+chi2, p_prop, gl, esperado = chi2_contingency(tabela_conversao)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: auditar antes de testar</h2><div class="code-block">import pandas as pd
+base = pd.read_csv("campanha.csv")
+print(base.groupby("grupo")["receita"].agg(["count","mean","median","std"]))
+print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê, validando pressupostos e analisando ticket e conversão.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar o protocolo do experimento e um relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Experimentos confiáveis começam no desenho; o valor do teste aparece quando a evidência estatística vira consequência econômica e risco.</p><ul><li>Definir métrica primária antes de olhar resultados</li><li>Verificar equilíbrio entre grupos e dados faltantes</li><li>Reportar efeito absoluto e relativo</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos detecção de padrões incomuns à auditoria e à análise forense de dados.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 12</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 

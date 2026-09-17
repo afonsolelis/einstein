@@ -109,24 +109,24 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 14</div>
-      <h1>Estudo de Caso: Análise de dados aplicada ao RH</h1>
+      <h1>IA aplicada à estratégia e tomada de decisão</h1>
     </div>
     
     <div class="content">
-      <p class="desc">People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Definir indicadores de pessoas sem reduzir indivíduos a números</li><li>Investigar rotatividade com recortes e contexto</li><li>Propor intervenção mensurável e eticamente defensável</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade.</p><ul><li>Taxa de saída precisa de período, população e denominador claros</li><li>Diferenças entre grupos podem refletir função, senioridade ou contexto</li><li>Modelos não devem automatizar decisões sensíveis sem avaliação e recurso</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
+      <p class="desc">IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
+      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></section>
+      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
       <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import pandas as pd
-rh = pd.read_csv("colaboradores.csv")
-rot = rh.groupby("area").agg(pessoas=("id","size"),saidas=("saiu","sum"))
-rot["taxa_saida"] = rot["saidas"]/rot["pessoas"]
-print(rot.sort_values("taxa_saida", ascending=False))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">coortes = pd.crosstab([rh["area"],rh["senioridade"]], rh["saiu"], normalize="index")
-print(coortes.round(3))</div><p>Analise rotatividade por área e senioridade, identifique uma hipótese e proponha teste de intervenção.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar diagnóstico com definição do indicador, recortes, limitações, ação e métrica de acompanhamento.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Minimizar dados pessoais utilizados</li><li>Não inferir causa de associação isolada</li><li>Revisar possíveis impactos entre grupos</li><li>Oferecer transparência e contestação</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>People analytics deve ampliar cuidado e capacidade de ação, nunca legitimar decisões opacas.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, construiremos uma previsão de fluxo de caixa orientada à gestão.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
+for nome,v in alternativas.items():
+    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
+print(alternativas)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">for peso_risco in [0.4,0.8,1.2]:
+    escolha = max(alternativas, key=lambda k: alternativas[k]["retorno"]-peso_risco*alternativas[k]["risco"])
+    print(peso_risco, escolha)</div><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></section>
+      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
+      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li><li>Definir gatilhos para reavaliar a decisão</li></ul></section>
+      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
+      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, aplicaremos análise de dados a decisões de recursos humanos.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>

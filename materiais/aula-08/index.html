@@ -4,16 +4,17 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 05</title>
+  <title>Material · 08</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
 
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-    .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
+    .container { max-width: 1100px; width: 100%; min-width: 0; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
 
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
+    .header .subtitle { margin: 0.8rem 0 0; color: #64748b; font-size: 1.1rem; }
 
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
@@ -21,6 +22,8 @@
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
+    h4 { color: #1a2f5e; font-size: 1.1rem; margin: 2rem 0 0.8rem; }
+    a { color: #1f6fb2; overflow-wrap: anywhere; }
 
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
@@ -28,59 +31,68 @@
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
 
-    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.75rem 0.9rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { background: #f4f8fb; color: #1a2f5e; }
+    td code, th code { white-space: nowrap; }
 
-    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; font-variant-ligatures: none; }
+
+    .code-block { font-variant-ligatures: none; white-space: pre; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block.wrap { white-space: pre-wrap; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
+    .code-wrap { position: relative; }
+    .code-wrap .code-block { padding-top: 3.2rem; }
+    .copy-btn { position: absolute; top: 0.7rem; right: 0.7rem; z-index: 1; padding: 0.35rem 0.8rem; border: 1px solid #cfe3f0; border-radius: 8px; background: #ffffff; color: #1f6fb2; font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .copy-btn:hover { background: #eef6fb; }
+    .copy-btn:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
 
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
+    .alert-box p + p { margin-top: 0.6rem; }
+
+    .view-card { margin: 2.5rem 0; padding: 1.6rem 1.8rem; border: 1px solid #e2ebf2; border-radius: 14px; background: #fbfdff; }
+    .view-card h3 { margin-top: 0; }
+    .view-card dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.5rem 1rem; margin: 0 0 1rem; }
+    .view-card dt { color: #1a2f5e; font-weight: 800; }
+    .view-card dd { margin: 0; }
+    .view-card .code-block { margin: 1rem 0; }
+    .ref { padding: 0.8rem 1rem; border-left: 4px solid #16a34a; border-radius: 0 10px 10px 0; background: #f0fdf4; color: #14532d; }
+    .ref strong { color: #14532d; }
+
+    .figura { margin: 2rem 0; padding: 1.5rem 1rem; border: 1px solid #e2ebf2; border-radius: 12px; background: #ffffff; }
+    .figura figcaption { margin: 1rem 0 0; color: #64748b; font-size: 0.92rem; line-height: 1.6; }
+    .flow-wrap { overflow-x: auto; }
+    .flow-svg { display: block; width: 100%; min-width: 0; height: auto; }
+    .flow-svg text { font-family: 'Outfit', system-ui, sans-serif; }
+    .flow-svg .task-bg { fill: #e0f2fe; stroke: #bae6fd; }
+    .flow-svg .task-text { fill: #1a2f5e; }
+    .flow-svg .lane-bg { fill: #f8fafc; stroke: #e2ebf2; }
+    .flow-svg .lane-label { fill: #1a2f5e; }
+    .flow-svg .pi { stroke: rgba(15, 23, 42, 0.12); }
+    .flow-svg .pi-text { fill: #1e293b; }
+    .flow-svg .flow-arrow, .flow-svg .flow-link { stroke: #64748b; }
+    .flow-svg .flow-arrowhead { fill: #64748b; }
+    .flow-svg .flow-note { fill: #64748b; }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin-top: 1rem; font-size: 0.92rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(15,23,42,0.15); }
+
+    .miro-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border-radius: 10px; background: #fef9c3; border: 1px solid #fde68a; color: #713f12; font-weight: 700; text-decoration: none; }
+    .miro-btn:hover { background: #fef08a; }
 
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
-    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
-    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
-
-    a { color: #1f6fb2; }
-    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
-    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
-    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
-    tbody tr:nth-child(even) { background: #f8fafc; }
-    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
-    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
-    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
-    .evidence strong { display: block; margin-bottom: 0.35rem; }
-    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
-
-    @media (max-width: 768px) {
-      .header, .content { padding: 2.5rem; }
-      .actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-    }
-
-    @media print {
-      body { background: white; padding: 0; display: block; font-size: 12pt; }
-      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
-      .header, .content { padding: 1rem 0; }
-      .actions, .btn-print, .btn-home, .btn-slides { display: none !important; }
-      h1, h2, h3 { color: black !important; break-after: avoid; }
-      .badge { border: 1px solid #ccc; color: black; background: white; }
-      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
-      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
-      p, li { color: black; }
-      @page { margin: 2cm; }
-    }
 
     /* Controles flutuantes de navegacao */
     .floating-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid #e2ebf2; border-radius: 999px; box-shadow: 0 10px 30px rgba(26,47,94,0.14); max-width: calc(100% - 1.5rem); }
@@ -89,19 +101,26 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
-    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
-    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
-    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
-    .floating-nav .nav-prompts:hover { background: #dceef8; }
+    .floating-nav .nav-miro { background: #fef9c3; color: #713f12; border-color: #fde68a; }
+    .floating-nav .nav-miro:hover { background: #fef08a; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
     body { padding-top: 6rem; }
 
     @media (max-width: 768px) {
+      .header, .content { padding: 2rem 1.25rem; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .code-block { font-size: 0.8rem; padding: 1rem; }
+      .code-wrap .code-block { padding-top: 2.8rem; }
+      .view-card { padding: 1.1rem 1rem; }
+      .view-card dl { grid-template-columns: 1fr; gap: 0.1rem; }
+      .view-card dd { margin-bottom: 0.6rem; }
+      .flow-svg { width: 760px; min-width: 760px; }
       .floating-nav { top: 0.6rem; gap: 0.35rem; padding: 0.35rem; }
       .floating-nav a, .floating-nav button { width: auto; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
-      body { padding-top: 4.75rem; }
+      body { padding: 4.75rem 0.5rem 2rem; }
     }
 
     @media (max-width: 480px) {
@@ -110,324 +129,749 @@
     }
 
     @media print {
-      .floating-nav { display: none !important; }
-      body { padding-top: 0 !important; }
+      body { background: white; padding: 0 !important; display: block; font-size: 12pt; }
+      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
+      .header, .content { padding: 1rem 0; }
+      .actions, .btn-print, .btn-home, .btn-slides, .floating-nav, .copy-btn { display: none !important; }
+      h1, h2, h3 { color: black !important; break-after: avoid; }
+      .badge { border: 1px solid #ccc; color: black; background: white; }
+      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; white-space: pre-wrap; }
+      .code-wrap .code-block { padding-top: 1rem; }
+      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      .figura, .view-card { break-inside: avoid; border: 1px solid #ccc; }
+      .flow-svg { width: 100%; min-width: 0; }
+      p, li { color: black; }
+      @page { margin: 2cm; }
     }
   </style>
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-08.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
-    <a href="../aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
-    <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
+    <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer" class="nav-miro" title="Abrir o board da turma no Miro">🧩 <span class="nav-label">Miro</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 08</div>
-      <h1>Limpeza de dados: Preparando a base para análises</h1>
+      <div class="badge">LABORATÓRIO 08 · 30/09</div>
+      <h1>Brainstorming de fluxo: das 10 perguntas às views</h1>
+      <p class="subtitle">Data Visualization II: brainstorming das perguntas de negócio e fluxo de interação do dashboard</p>
     </div>
 
     <div class="content">
-      <p class="desc">A Diretoria de Operações recebeu uma base com 5.000 internações sintéticas e quer calcular permanência hospitalar. Você já sabe o que há de errado nela: a aula 5 contou os defeitos e a aula 7 mostrou os gráficos que eles distorcem. Antes de transformar linhas em uma decisão sobre capacidade, a equipe deverá corrigir o que é corrigível e separar o que exige decisão humana. Nesta prática, o Antigravity ajuda a planejar, escrever e revisar o código; Pandas executa a limpeza no workspace; o estudante continua responsável por cada regra aceita.</p>
+      <p class="desc">O Chief de Vendas da Olist precisa levar ao board as estratégias comerciais de 2019 e não aceita opinião sem número. Na aula 7, cada estudante carregou o Olist no próprio Supabase e reconciliou um esquema estrela. Hoje a turma decide o que o dashboard vai mostrar, em que ordem e com que ressalvas, antes de desenhar qualquer gráfico. O percurso sai das 10 perguntas do Chief, passa por um brainstorming cronometrado no Miro, produz o fluxo de interação anotado do dashboard e termina em 10 views SQL conferidas contra números de referência. Essas views são o contrato que a aula 9 vai consumir pela API REST.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
-        <ul><li><strong>Diagnosticar</strong> completude, unicidade, padronização e consistência temporal.</li><li><strong>Orientar</strong> um agente de IA com escopo, restrições e evidências verificáveis.</li><li><strong>Aplicar</strong> transformações reproduzíveis sem sobrescrever a camada bruta.</li><li><strong>Validar</strong> produtos da limpeza com contagens, flags e testes.</li><li><strong>Defender</strong> quais análises gerenciais a base pode ou não sustentar.</li></ul>
+        <ul>
+          <li><strong>Decompor</strong> as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão.</li>
+          <li><strong>Conduzir</strong> um brainstorming divergente e convergente de fluxos de navegação no Miro.</li>
+          <li><strong>Construir</strong> o fluxo de interação anotado do dashboard com âncoras de divergência registradas.</li>
+          <li><strong>Traduzir</strong> a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência.</li>
+        </ul>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>2. O case e a base do Kaggle</h2>
-        <p>O arquivo <code>hospital_patients_real_world.csv</code> vem do dataset <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas no Kaggle sob licença CC0. Os registros são sintéticos e foram criados para exercícios de limpeza.</p>
-        <div class="download-panel"><a href="../aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
-        <table><thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead><tbody><tr><td><code>PatientID</code></td><td>Identificador sintético do registro</td><td>string</td></tr><tr><td><code>Age</code></td><td>Idade informada</td><td>número anulável</td></tr><tr><td><code>Gender</code></td><td>Categoria de gênero cadastrada</td><td>string</td></tr><tr><td><code>Diagnosis</code></td><td>Diagnóstico sintético</td><td>string</td></tr><tr><td><code>AdmissionDate</code></td><td>Data de admissão</td><td>data</td></tr><tr><td><code>DischargeDate</code></td><td>Data de alta</td><td>data</td></tr><tr><td><code>HospitalID</code></td><td>Identificador sintético do hospital</td><td>string</td></tr></tbody></table>
-        <div class="evidence"><strong>Assinatura da cópia usada na aula</strong><code>SHA-256 af6c3023e87c1950cb021579521534c3d44fc940953216ca560ca1d7e3eabc8a</code></div>
+        <h2>2. O case e onde estamos na sequência</h2>
+        <p>As aulas 7, 8 e 9 formam um único case. A turma é a equipe de dados que sustenta as estratégias comerciais que o Chief de Vendas vai apresentar ao board. Cada aula entrega um artefato que a seguinte consome:</p>
+        <table>
+          <thead><tr><th>Aula</th><th>Pergunta que responde</th><th>Artefato</th></tr></thead>
+          <tbody>
+            <tr><td>7 · 23/09</td><td>Os dados do Olist são confiáveis e estão modelados para análise?</td><td>Projeto Supabase com o schema <code>bruto</code> e o esquema estrela; frame modelo do fluxo anotado no Miro</td></tr>
+            <tr><td>8 · 30/09 (hoje)</td><td>O que o dashboard precisa mostrar, em que ordem, e o que ele não pode deixar o Chief concluir?</td><td>Fluxo anotado do dashboard, <code>ESPECIFICACAO.md</code> e 10 views conferidas</td></tr>
+            <tr><td>9 · 07/10</td><td>O painel funciona fora do Codespace e lê os números certos?</td><td>Dashboard HTML no GitHub Pages lendo as views pela API REST</td></tr>
+          </tbody>
+        </table>
+        <p>O esquema estrela que você reconciliou na aula 7 tem dois fatos e quatro dimensões. <code>fato_itens_pedido</code> tem grão de um item vendido e carrega <code>preco</code> e <code>frete</code>; <code>fato_pedidos</code> tem grão de um pedido e carrega o que só existe por pedido, como <code>hora_compra</code>, <code>entregue_no_prazo</code>, <code>dias_entrega</code> e <code>nota_avaliacao</code>. As dimensões são <code>dim_tempo</code>, <code>dim_cliente</code> (uma linha por pessoa, ou seja, por <code>customer_unique_id</code>), <code>dim_produto</code> e <code>dim_vendedor</code>. O gabarito está em <a href="../aula-07/olist/estrela.sql">materiais/aula-07/olist/estrela.sql</a>.</p>
+        <p>Duas convenções valem para as 10 perguntas e para as três aulas. <strong>Receita</strong> é a soma do preço dos itens, sem frete, de pedidos com status <code>delivered</code>. <strong>Período</strong> é de janeiro de 2017 a agosto de 2018, porque os meses de 2016 e setembro e outubro de 2018 estão incompletos na base (setembro de 2018 tem 16 pedidos). Com essas duas regras, a receita do período é <strong>R$ 13.181.027,13</strong> em <strong>96.211 pedidos</strong>. Qualquer view que some receita e não chegue a esse total mudou uma das convenções sem avisar.</p>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>3. O que sabemos antes da aula</h2>
-        <p>O professor já conferiu o arquivo original. Essas contagens funcionam como <em>checkpoints</em>: se o notebook produzir números diferentes, investigue leitura, caminho e regra antes de continuar.</p>
-        <table><thead><tr><th>Problema observado</th><th>Quantidade</th><th>Conduta esperada</th></tr></thead><tbody><tr><td>Idade ausente</td><td>350</td><td>Manter ausente e criar flag; não imputar.</td></tr><tr><td>Gênero vazio</td><td>350</td><td>Padronizar como “Não informado” e preservar flag.</td></tr><tr><td>Gênero <code>Unknown</code></td><td>1.163</td><td>Unificar com “Não informado”.</td></tr><tr><td>Diagnóstico ausente</td><td>350</td><td>Não inferir diagnóstico clínico.</td></tr><tr><td>Diagnóstico em maiúsculas</td><td>321</td><td>Unir apenas variações de capitalização.</td></tr><tr><td>Alta anterior à admissão</td><td>150</td><td>Sinalizar e retirar do cálculo de permanência.</td></tr><tr><td>Linha ou chave duplicada</td><td>0</td><td>Registrar a verificação; não apagar nada.</td></tr></tbody></table>
+        <h2>3. As 10 perguntas decompostas</h2>
+        <p>Uma pergunta de negócio só vira número verificável quando cinco elementos estão explícitos: a <strong>métrica</strong> (o que se calcula), o <strong>recorte</strong> (por qual dimensão), o <strong>período</strong>, o <strong>filtro</strong> (o que entra e o que fica de fora) e a <strong>decisão</strong> que o número vai orientar. Sem eles, dois grupos escrevem “receita por estado” e chegam a números diferentes, ambos defensáveis. A decisão entra na lista porque é ela que diz quando a resposta é suficiente.</p>
+        <table>
+          <thead><tr><th>#</th><th>Pergunta</th><th>Métrica</th><th>Recorte</th><th>Filtro (além de período e status entregue)</th><th>Decisão</th><th>View</th></tr></thead>
+          <tbody>
+            <tr><td>P01</td><td>Como evoluíram receita e pedidos mês a mês?</td><td>receita, pedidos, ticket médio</td><td>mês</td><td>nenhum</td><td>meta e ritmo de 2019</td><td><code>vw_p01_receita_mensal</code></td></tr>
+            <tr><td>P02</td><td>Em que dia da semana e faixa de horário o cliente compra?</td><td>pedidos</td><td>dia da semana × faixa de horário</td><td>nenhum</td><td>calendário de campanhas</td><td><code>vw_p02_dia_hora</code></td></tr>
+            <tr><td>P03</td><td>Quais 10 categorias concentram a receita e qual o ticket de cada?</td><td>receita, participação, ticket</td><td>categoria</td><td>10 maiores por receita</td><td>onde concentrar o mix</td><td><code>vw_p03_top_categorias</code></td></tr>
+            <tr><td>P04</td><td>Quais categorias mais cresceram de jan–ago/17 para jan–ago/18?</td><td>crescimento % da receita</td><td>categoria</td><td>jan–ago de cada ano; base ≥ R$ 50 mil em 2017</td><td>apostas de crescimento</td><td><code>vw_p04_crescimento_categorias</code></td></tr>
+            <tr><td>P05</td><td>Como a receita se distribui por estado do cliente?</td><td>receita, participação</td><td>estado do cliente</td><td>nenhum</td><td>expansão fora de SP</td><td><code>vw_p05_receita_estado</code></td></tr>
+            <tr><td>P06</td><td>Quanto o frete pesa sobre o preço em cada região?</td><td>frete ÷ preço, frete médio por item</td><td>região do cliente</td><td>nenhum</td><td>subsídio de frete</td><td><code>vw_p06_frete_regiao</code></td></tr>
+            <tr><td>P07</td><td>Em que estados mais se entrega com atraso?</td><td>% de entregas após a data estimada</td><td>estado do cliente</td><td>com data de entrega; estados com ≥ 500 entregas</td><td>promessa de prazo por estado</td><td><code>vw_p07_atraso_estado</code></td></tr>
+            <tr><td>P08</td><td>O atraso derruba a nota do cliente?</td><td>nota média, % de notas 1 e 2</td><td>no prazo × com atraso</td><td>pedidos avaliados e com data de entrega</td><td>custo comercial do atraso</td><td><code>vw_p08_nota_prazo</code></td></tr>
+            <tr><td>P09</td><td>Quantos clientes voltam a comprar?</td><td>% de clientes com mais de um pedido</td><td>nenhum (total)</td><td>cliente = pessoa (<code>customer_unique_id</code>)</td><td>programa de fidelização</td><td><code>vw_p09_recompra</code></td></tr>
+            <tr><td>P10</td><td>Quanto a receita depende dos maiores vendedores?</td><td>participação na receita</td><td>decil de vendedores por receita</td><td>nenhum</td><td>captação e retenção de sellers</td><td><code>vw_p10_concentracao_vendedores</code></td></tr>
+          </tbody>
+        </table>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>4. Antigravity: agente, execução local e revisão</h2>
-        <p>O <a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">codelab oficial do Antigravity IDE</a> orienta abrir uma pasta local, conversar pelo painel do agente e usar desenvolvimento orientado por revisão. O agente pode propor um plano, editar arquivos e solicitar execução no terminal; o estudante revisa essas ações e pode aceitar, comentar ou rejeitar.</p>
-        <ol><li>Baixe o CSV e coloque-o em uma pasta chamada <code>aula-08-seunome</code>.</li><li>Abra a pasta no Antigravity IDE e selecione o modo orientado por revisão.</li><li>Deixe a execução de terminal dependente de aprovação.</li><li>Use <code>@hospital_patients_real_world.csv</code> para mencionar a base no prompt.</li><li>Quando o Python local não estiver pronto, execute o notebook no GitHub Codespaces já configurado pela disciplina; não perca a aula instalando bibliotecas manualmente.</li></ol>
-        <div class="alert-box"><h4>“Local” não significa que o modelo está offline</h4><p>O CSV, o notebook e o Pandas ficam no workspace do estudante, mas prompts e arquivos mencionados podem ser processados pelo serviço de IA conforme a conta utilizada. Esta aula usa somente dados sintéticos CC0. Nunca envie prontuários, credenciais, tokens ou dados pessoais ao agente.</p></div>
+        <h2>4. Da pergunta à forma</h2>
+        <h3>4.1 A pergunta vem antes do gráfico</h3>
+        <p>Toda ferramenta de visualização abre com uma galeria de formas, e é natural escolher pela aparência. A ordem correta é a inversa: a pergunta define a <strong>tarefa</strong> que o leitor precisa cumprir, e a tarefa define a <strong>forma</strong>. Uma linha serve para ler tendência porque o olho acompanha a inclinação; uma barra serve para comparar porque o olho compara comprimentos alinhados numa mesma base com muito mais precisão do que ângulos ou áreas. Por isso a pizza não aparece na tabela: ela obriga a comparar ângulos e desmonta a partir de quatro fatias.</p>
+        <table>
+          <thead><tr><th>A tarefa é…</th><th>Forma</th><th>Cuidado principal</th><th>Ponto de partida no case</th></tr></thead>
+          <tbody>
+            <tr><td>Tendência</td><td>Linha</td><td>Eixo de tempo contínuo; nada de meses incompletos na ponta</td><td>P01</td></tr>
+            <tr><td>Comparação e ranking</td><td>Barra horizontal ordenada pelo valor</td><td>Ordenar pelo valor, não pelo alfabeto; agrupar a cauda em “Outros”</td><td>P03, P05, P06, P07</td></tr>
+            <tr><td>Composição</td><td>Barra empilhada 100% ou barras simples</td><td>Poucas partes; a soma precisa fechar 100%</td><td>P10</td></tr>
+            <tr><td>Distribuição</td><td>Histograma</td><td>Largura das faixas declarada</td><td>pedidos por cliente, por trás da P09</td></tr>
+            <tr><td>Relação</td><td>Dispersão</td><td>Relação não é causa; mostrar o tamanho da base</td><td>taxa de atraso × entregas por estado (P07)</td></tr>
+            <tr><td>Número único</td><td>Cartão com número grande e a comparação ao lado</td><td>O número sozinho não diz se é bom ou ruim</td><td>P09</td></tr>
+          </tbody>
+        </table>
+        <p>A coluna “ponto de partida” não é gabarito. A P02 pode virar um mapa de calor dia × faixa ou barras agrupadas; a P04 pode virar barras de crescimento ou um gráfico de inclinação 2017 → 2018; a P08 pode virar duas barras ou dois números lado a lado. O brainstorming existe para produzir essas alternativas; a tarefa de decisão é o critério para escolher entre elas.</p>
+        <div class="alert-box">
+          <h4>A regra que mais se quebra: nunca dois eixos y</h4>
+          <p>Receita e pedidos no mesmo gráfico, cada um com a sua escala, produzem cruzamentos que dependem só de onde cada eixo foi ancorado. Mova uma escala e a “relação” desaparece. Na P01, receita e pedidos pedem dois gráficos empilhados com o mesmo eixo de tempo, ou as duas séries indexadas a jan/17 = 100.</p>
+        </div>
+
+        <h3>4.2 Títulos que afirmam</h3>
+        <p>O título é o ponto em que a análise vira comunicação. Um título que descreve o eixo obriga o Chief a descobrir sozinho o que o gráfico mostra, e cada leitor descobre uma coisa. Um título que afirma entrega a conclusão e deixa o gráfico como prova. A afirmação, porém, não pode ir além do que a view sustenta.</p>
+        <table>
+          <thead><tr><th>Descreve o eixo</th><th>Afirma o que o dado sustenta</th></tr></thead>
+          <tbody>
+            <tr><td>Receita mensal</td><td>A receita cresceu ao longo de 2017 e está estável desde mar/18, entre R$ 839 mil e R$ 978 mil por mês</td></tr>
+            <tr><td>Receita por estado</td><td>SP responde por 38,4% da receita; RJ e MG somam 25%</td></tr>
+            <tr><td>Nota por prazo</td><td>Pedidos atrasados recebem nota média 2,27; no prazo, 4,29</td></tr>
+            <tr><td>Concentração de vendedores</td><td>295 vendedores, o 1º decil, geram 67,0% da receita</td></tr>
+          </tbody>
+        </table>
+        <p>O teste: o título sobrevive sozinho no corpo de um e-mail ao Chief? Se o grupo não consegue afirmar nada, talvez aquele gráfico não precise estar no painel.</p>
+
+        <h3>4.3 Cor tem função, não gosto</h3>
+        <ul>
+          <li><strong>Identidade</strong>: categorias sem ordem natural (regiões, categorias de produto) recebem cores distintas, atribuídas em ordem fixa. Se a região Norte é laranja no cartão da P06, ela é laranja em qualquer outro cartão. Acima de sete ou oito categorias, nenhuma paleta resolve: agrupe em “Outros”.</li>
+          <li><strong>Magnitude</strong>: um valor que cresce usa um único tom, do claro ao escuro. É o caso do mapa de calor de pedidos por dia × faixa de horário na P02. Arco-íris sugere categorias onde existe uma escala.</li>
+          <li><strong>Polaridade</strong>: desvio em relação a uma meta ou a zero usa duas cores opostas com cinza no meio, e o zero exatamente no cinza.</li>
+          <li><strong>Destaque</strong>: tudo em cinza e uma única cor para o elemento que o título afirma, como MA no ranking de atraso da P07.</li>
+        </ul>
+        <p>Uma regra fecha o assunto: <strong>a cor acompanha a entidade, nunca a posição no ranking</strong>. Se um filtro reordena as barras e as cores trocam de dono, o leitor que memorizou “o azul é SP” passa a ler o gráfico errado sem perceber. Rótulos e valores ficam na cor do texto; quem carrega a identidade é a marca colorida.</p>
+
+        <h3>4.4 Dashboard é narrativa, não galeria</h3>
+        <p>Dez gráficos corretos e desconexos não sustentam decisão nenhuma. O que transforma um painel em argumento é a ordem em que o Chief percorre os cartões:</p>
+        <ul>
+          <li><strong>Contexto</strong>: onde estamos, desde quando e em que escala. O leitor precisa disso antes de qualquer surpresa.</li>
+          <li><strong>Tensão</strong>: o que está fora do esperado e custa dinheiro. É aqui que o painel justifica a própria existência.</li>
+          <li><strong>Decisão</strong>: o que fazer, com o número que sustenta e o limite que invalida.</li>
+        </ul>
+        <p>Um teste rápido: leia só os títulos dos cartões, de cima para baixo. Se isso já formar um parágrafo com sentido, o dashboard está ordenado. Se soar como um índice de eixos, ainda não.</p>
+
+        <h3>4.5 O golfo entre o que se vê e o que o dado autoriza</h3>
+        <p>Donald Norman chama de golfo de avaliação a distância entre o que o sistema mostra e o que a pessoa entende que ele mostra. Num dashboard, esse golfo aparece quando o Chief lê numa barra uma conclusão que a base não sustenta: “frete caro espanta cliente”, quando a base só registra vendas que aconteceram. Nenhum número está errado, e mesmo assim a decisão sai errada. O fluxo de interação anotado existe para encontrar esses pontos antes de a tela ser construída, e a tela da aula 9 existe para fechá-los com título, unidade, período e nota de origem.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. O fluxo de interação anotado</h2>
+        <p>O fluxo anotado descreve, passo a passo, como uma pessoa real usa a tela para tomar uma decisão real, e o que o dado sustenta em cada passo. Na aula 7 a turma montou no Miro um frame modelo com esse formato. Hoje ele é reutilizado duas vezes: nos frames dos grupos, durante o brainstorming, e no frame único do dashboard.</p>
+        <figure class="figura">
+          <div class="flow-wrap"><svg class="flow-svg" id="fig-formato" viewBox="0 0 1000 454" role="img" aria-labelledby="fig-formato-t fig-formato-d"><title id="fig-formato-t">Formato do fluxo de interação anotado</title><desc id="fig-formato-d">Cabeçalho com a tarefa de decisão e três raias horizontais: usuário em post-its amarelos, interface em azuis e dado em verdes. Os passos são numerados de 1 a 6 em ordem cronológica, alternando usuário e interface; setas horizontais seguem a sequência e conectores verticais ligam as raias da mesma coluna. Uma etiqueta rosa D1 marca, na raia do dado, o ponto em que o dado não sustenta a conclusão do usuário.</desc><defs><marker id="fig-formato-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="fig-formato-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1000" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · quem decide · o quê · até quando · com que consequência</text><rect x="0" y="64" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="104" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="121.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="180" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="180" width="8" height="104" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="237.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="296" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="296" width="8" height="104" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="353.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="111.5" font-size="17" class="pi-text" text-anchor="start">abre o painel com</text><text x="158" y="132.7" font-size="17" class="pi-text" text-anchor="start">a decisão na cabeça</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="263.0" y1="155" x2="263.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="116.0" x2="417" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="132" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que a tela oferece</text><text x="158" y="248.7" font-size="17" class="pi-text" text-anchor="start">(filtro, gráfico, número)</text><g class="step-num"><circle cx="134" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="263.0" y1="271" x2="263.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="232.0" x2="417" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="132" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="343.5" font-size="17" class="pi-text" text-anchor="start">fonte: tabela ou view</text><text x="146" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · limitação</text><rect x="422" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="448" y="111.5" font-size="17" class="pi-text" text-anchor="start">procura, compara,</text><text x="448" y="132.7" font-size="17" class="pi-text" text-anchor="start">lê um valor</text><g class="step-num"><circle cx="424" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="553.0" y1="155" x2="553.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="116.0" x2="707" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="422" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="448" y="227.5" font-size="17" class="pi-text" text-anchor="start">a forma que responde</text><text x="448" y="248.7" font-size="17" class="pi-text" text-anchor="start">(palavras ou rascunho)</text><g class="step-num"><circle cx="424" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="553.0" y1="271" x2="553.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="232.0" x2="707" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="422" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="436" y="343.5" font-size="17" class="pi-text" text-anchor="start">view que sustenta</text><text x="436" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · filtro · período</text><rect x="712" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="738" y="111.5" font-size="17" class="pi-text" text-anchor="start">conclui e decide:</text><text x="738" y="132.7" font-size="17" class="pi-text" text-anchor="start">“frase literal”</text><g class="step-num"><circle cx="714" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="843.0" y1="155" x2="843.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="738" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que sustenta ou</text><text x="738" y="248.7" font-size="17" class="pi-text" text-anchor="start">falta na tela</text><g class="step-num"><circle cx="714" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="843.0" y1="271" x2="843.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="726" y="343.5" font-size="17" class="pi-text" text-anchor="start">o que a base não tem</text><text x="726" y="364.7" font-size="17" class="pi-text" text-anchor="start">(limite da afirmação)</text><line x1="843.0" y1="414" x2="843.0" y2="389" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-formato-seta-d)"/><rect x="817.0" y="414" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="843.0" y="435" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><text x="132" y="435" font-size="15" class="flow-note" fill="#64748b">âncora de divergência: onde o dado não sustenta a conclusão →</text></svg></div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background: #fde68a"></i>usuário: o que faz e conclui</span>
+            <span><i style="background: #bfdbfe"></i>interface: o que a tela oferece</span>
+            <span><i style="background: #bbf7d0"></i>dado: fonte, grão, limitação</span>
+            <span><i style="background: #f9a8d4"></i>âncora de divergência D1..Dn</span>
+          </div>
+          <figcaption>Formato do frame. O cabeçalho traz a tarefa de decisão; três raias horizontais separam usuário, interface e dado; os passos são numerados em ordem cronológica e as âncoras rosa marcam onde o dado não sustenta a conclusão.</figcaption>
+        </figure>
+        <table>
+          <thead><tr><th>Elemento</th><th>Cor no Miro</th><th>O que registra</th></tr></thead>
+          <tbody>
+            <tr><td>Cabeçalho <strong>TAREFA</strong></td><td>faixa no topo</td><td>Quem decide, o quê, até quando e com que consequência. Ex.: “O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday”.</td></tr>
+            <tr><td>Raia <strong>USUÁRIO</strong></td><td>post-it amarelo</td><td>O que a pessoa faz e conclui, do primeiro clique à decisão. Conclusões vão entre aspas, com as palavras que ela usaria.</td></tr>
+            <tr><td>Raia <strong>INTERFACE</strong></td><td>post-it azul</td><td>O que a tela oferece naquele passo, em palavras ou rascunho com formas. Nunca captura de tela.</td></tr>
+            <tr><td>Raia <strong>DADO</strong></td><td>post-it verde</td><td>Fonte (tabela ou view), grão e limitação que sustentam o passo. Não é numerada.</td></tr>
+            <tr><td>Passos ①②③…</td><td>número no post-it</td><td>Ordem cronológica, qualquer que seja a raia; usuário e interface se alternam. Setas horizontais seguem a sequência; conectores verticais ligam as raias da mesma coluna.</td></tr>
+            <tr><td>Âncora <strong>D1, D2…</strong></td><td>etiqueta rosa</td><td>O ponto em que o dado não sustenta o que o usuário conclui.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.1 Registro de cada âncora: cinco campos</h3>
+        <p>Uma etiqueta rosa sem registro é só um alerta. O registro transforma o alerta em requisito da tela:</p>
+        <ol>
+          <li><strong>Passo</strong>: o número do passo em que a divergência acontece.</li>
+          <li><strong>Leitura do usuário</strong>: a frase literal, entre aspas.</li>
+          <li><strong>O que o dado autoriza</strong>: a afirmação máxima que a fonte sustenta, com número, unidade e período.</li>
+          <li><strong>Consequência</strong>: a decisão que muda se a leitura errada prevalecer.</li>
+          <li><strong>Suporte na tela</strong>: o elemento concreto que fecha a divergência: título que afirma, unidade e período no subtítulo, nota de origem, base de comparação no mesmo gráfico ou remoção do gráfico.</li>
+        </ol>
+
+        <h3>5.2 Exemplo aplicado: P06, subsídio de frete</h3>
+        <figure class="figura">
+          <div class="flow-wrap"><svg class="flow-svg" id="fig-p06" viewBox="0 0 1200 472" role="img" aria-labelledby="fig-p06-t fig-p06-d"><title id="fig-p06-t">Exemplo aplicado à P06: subsídio de frete</title><desc id="fig-p06-d">Tarefa: o Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday. Usuário: 1 abre o painel, 3 procura o Nordeste, 5 conclui que frete caro espanta cliente, 7 decide subsidiar o Nordeste. Interface: 2 filtro de período jan/17 a ago/18, 4 barras de frete sobre preço por região, 6 só vendas realizadas na tela, 8 nenhum custo do subsídio. Dado: dim_tempo com 20 meses completos; vw_p06_frete_regiao com grão de item entregue; não há carrinho abandonado na base; não há margem nem custo logístico. Âncoras: D1 no passo 4, D2 no passo 5 e D3 no passo 7.</desc><defs><marker id="fig-p06-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="fig-p06-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1200" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday</text><rect x="0" y="64" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="110" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="124.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="186" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="186" width="8" height="110" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="246.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="308" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="308" width="8" height="110" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="368.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="114.5" font-size="17" class="pi-text" text-anchor="start">abre o painel</text><text x="158" y="135.7" font-size="17" class="pi-text" text-anchor="start">antes do comitê</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="250.0" y1="161" x2="250.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="119.0" x2="395" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="132" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="236.5" font-size="17" class="pi-text" text-anchor="start">filtro de período</text><text x="158" y="257.7" font-size="17" class="pi-text" text-anchor="start">jan/17–ago/18</text><g class="step-num"><circle cx="134" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="250.0" y1="283" x2="250.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="241.0" x2="395" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="132" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="358.5" font-size="17" class="pi-text" text-anchor="start">dim_tempo</text><text x="146" y="379.7" font-size="17" class="pi-text" text-anchor="start">20 meses completos</text><rect x="400" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="426" y="125.1" font-size="17" class="pi-text" text-anchor="start">procura o Nordeste</text><g class="step-num"><circle cx="402" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="518.0" y1="161" x2="518.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="119.0" x2="663" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="400" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="426" y="236.5" font-size="17" class="pi-text" text-anchor="start">barras: frete ÷ preço</text><text x="426" y="257.7" font-size="17" class="pi-text" text-anchor="start">por região</text><g class="step-num"><circle cx="402" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="518.0" y1="283" x2="518.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="241.0" x2="663" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="400" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="414" y="358.5" font-size="17" class="pi-text" text-anchor="start">vw_p06_frete_regiao</text><text x="414" y="379.7" font-size="17" class="pi-text" text-anchor="start">grão: item entregue</text><rect x="668" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="694" y="114.5" font-size="17" class="pi-text" text-anchor="start">conclui: “frete caro</text><text x="694" y="135.7" font-size="17" class="pi-text" text-anchor="start">espanta cliente”</text><g class="step-num"><circle cx="670" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="786.0" y1="161" x2="786.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="119.0" x2="931" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="668" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="694" y="236.5" font-size="17" class="pi-text" text-anchor="start">só vendas realizadas</text><text x="694" y="257.7" font-size="17" class="pi-text" text-anchor="start">aparecem na tela</text><g class="step-num"><circle cx="670" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="786.0" y1="283" x2="786.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="241.0" x2="931" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="668" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="682" y="358.5" font-size="17" class="pi-text" text-anchor="start">não há carrinho</text><text x="682" y="379.7" font-size="17" class="pi-text" text-anchor="start">abandonado na base</text><rect x="936" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="962" y="114.5" font-size="17" class="pi-text" text-anchor="start">decide subsidiar</text><text x="962" y="135.7" font-size="17" class="pi-text" text-anchor="start">o Nordeste</text><g class="step-num"><circle cx="938" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">7</text></g><line x1="1054.0" y1="161" x2="1054.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="962" y="236.5" font-size="17" class="pi-text" text-anchor="start">nenhum custo do</text><text x="962" y="257.7" font-size="17" class="pi-text" text-anchor="start">subsídio na tela</text><g class="step-num"><circle cx="938" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">8</text></g><line x1="1054.0" y1="283" x2="1054.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="950" y="358.5" font-size="17" class="pi-text" text-anchor="start">sem margem nem custo</text><text x="950" y="379.7" font-size="17" class="pi-text" text-anchor="start">logístico na base</text><line x1="518.0" y1="432" x2="518.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="492.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="518.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><line x1="786.0" y1="432" x2="786.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="760.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="786.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D2</text><line x1="1054.0" y1="432" x2="1054.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="1028.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="1054.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D3</text></svg></div>
+          <figcaption>Fluxo anotado da P06. A view <code>vw_p06_frete_regiao</code> mostra que o frete pesa 22,7% sobre o preço no Norte, 21,7% no Nordeste e 15,2% no Sudeste. As três âncoras marcam onde a leitura do Chief ultrapassa esse número.</figcaption>
+        </figure>
+        <table>
+          <thead><tr><th>Âncora</th><th>Passo</th><th>Leitura do usuário</th><th>O que o dado autoriza</th><th>Consequência</th><th>Suporte na tela</th></tr></thead>
+          <tbody>
+            <tr><td>D1</td><td>④</td><td>“No Nordeste, o frete custa 21,7% do pedido.”</td><td>Somando os itens entregues de clientes do Nordeste entre jan/17 e ago/18, o frete equivale a 21,7% do preço dos produtos. É razão de somas por item, não média por pedido.</td><td>Subsídio dimensionado sobre um valor de pedido que não foi medido.</td><td>Subtítulo: “frete total ÷ preço total dos itens entregues, jan/17–ago/18”.</td></tr>
+            <tr><td>D2</td><td>⑤</td><td>“Frete caro espanta cliente.”</td><td>A base só registra vendas realizadas. Não há carrinho abandonado nem pedido desistido por causa do frete.</td><td>Subsídio aprovado para recuperar uma demanda que ninguém mediu.</td><td>Nota de origem: “só pedidos realizados; a base não registra desistência”.</td></tr>
+            <tr><td>D3</td><td>⑦</td><td>“Subsidiar o Nordeste se paga.”</td><td>A base não tem custo logístico nem margem; o painel não calcula retorno.</td><td>O board aprova um gasto sem retorno estimado.</td><td>Nenhum indicador de retorno na tela; cartão com a lacuna explícita: “custo do subsídio fora da base”.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.3 Regras do board</h3>
+        <ul>
+          <li><strong>Cada passo é numerado</strong>, em ordem cronológica, qualquer que seja a raia.</li>
+          <li><strong>A cor diz de quem é a afirmação</strong>: verde é sempre dado, amarelo é sempre usuário. Uma conclusão do Chief escrita em verde vira “fato” no board sem ter sido verificada.</li>
+          <li><strong>Toda explicação dita em voz alta vira post-it.</strong> O que não está no board não foi decidido.</li>
+          <li><strong>Nenhuma captura de tela.</strong> A interface se descreve em palavras ou com formas, para que a discussão fique na tarefa e não na estética.</li>
+        </ul>
+        <p><a class="miro-btn" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer">🧩 Abrir o board da turma no Miro</a></p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 0 · contrato</span>
-        <h2>5. Comece pelo plano, não pela edição</h2>
-        <p>O primeiro prompt reduz autonomia e declara o que não pode ser feito. Só aprove o plano se ele preservar o arquivo original e separar diagnóstico, transformação e validação.</p>
-        <div class="prompt-block">Atue como meu assistente de qualidade de dados neste laboratório. Leia
-@hospital_patients_real_world.csv, mas ainda não edite nem crie arquivos.
-Primeiro apresente um plano curto e aguarde minha aprovação.
+        <h2>6. Prática guiada: brainstorming de fluxos no Miro</h2>
+        <p>Um brainstorming sem estrutura tende a produzir duas coisas: a ideia de quem fala mais alto e um debate sobre qual gráfico é mais bonito. A dinâmica abaixo separa as fases de gerar ideias e de escolher entre elas, e troca gosto por critério. Ela combina o <em>Crazy 8s</em> (oito rascunhos rápidos, um por minuto, para esgotar as ideias óbvias) com o <em>1-2-4-todos</em> das Liberating Structures (ideias individuais, depois em duplas, depois em quartetos, depois com a turma inteira).</p>
 
-Regras obrigatórias: preservar o CSV bruto; não inventar valores ausentes;
-não trocar datas por suposição; não excluir linhas silenciosamente; explicar
-cada regra de negócio; trabalhar apenas dentro desta pasta; não instalar
-pacotes nem executar comandos sem minha aprovação. A entrega terá notebook,
-base tratada, fila de revisão, relatório de qualidade e revisão da IA.</div>
+        <h3>6.1 Grupos, papéis e perguntas</h3>
+        <p>Grupos de 4 pessoas. Cada grupo recebe um par de perguntas do mesmo tipo, para que o fluxo tenha coerência interna:</p>
+        <table>
+          <thead><tr><th>Grupo</th><th>Perguntas</th><th>Tema</th></tr></thead>
+          <tbody>
+            <tr><td>G1</td><td>P01 + P02</td><td>tempo: ritmo e calendário</td></tr>
+            <tr><td>G2</td><td>P03 + P04</td><td>categoria: mix e apostas</td></tr>
+            <tr><td>G3</td><td>P05 + P06</td><td>geografia: receita e frete</td></tr>
+            <tr><td>G4</td><td>P07 + P08</td><td>prazo e satisfação</td></tr>
+            <tr><td>G5</td><td>P09 + P10</td><td>clientes e vendedores</td></tr>
+          </tbody>
+        </table>
+        <p>Se a turma passar de 20 pessoas, cada par de perguntas vai para dois grupos, e a convergência compara as duas versões. Em cada grupo, três papéis giram a cada fase: <strong>cronometrista</strong> (mantém o tempo e para as canetas), <strong>guardião da cor</strong> (confere se cada post-it está na raia e na cor certas) e <strong>relator</strong> (transforma o que é dito em post-it).</p>
+
+        <h3>6.2 Divergir · 19:15 a 19:45</h3>
+        <table>
+          <thead><tr><th>Horário</th><th>Formato</th><th>O que fazer</th><th>Saída no frame</th></tr></thead>
+          <tbody>
+            <tr><td>19:15 · 3 min</td><td>grupo</td><td>Duplicar o frame modelo da aula 7 e colar no topo as duas perguntas com os cinco elementos da seção 3.</td><td>frame do grupo com a tarefa escrita</td></tr>
+            <tr><td>19:18 · 8 min</td><td>individual, em silêncio (Crazy 8s)</td><td>Oito rascunhos de tela, um por minuto, quatro para cada pergunta, em post-its azuis. Vale palavra, forma e seta; não vale julgar.</td><td>8 post-its azuis por pessoa</td></tr>
+            <tr><td>19:26 · 7 min</td><td>duplas (1-2)</td><td>Cada dupla escolhe e combina rascunhos numa sequência de passos: o que o Chief faz (amarelo) e o que a tela oferece (azul), numerados.</td><td>uma sequência por dupla e por pergunta</td></tr>
+            <tr><td>19:33 · 12 min</td><td>quarteto (4)</td><td>O grupo escolhe um fluxo por pergunta e preenche a raia verde: qual view sustenta cada passo, grão e limitação.</td><td>dois fluxos com as três raias</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.3 Regras para não virar debate de gosto</h3>
+        <ol>
+          <li><strong>Divergir não é avaliar.</strong> Durante o Crazy 8s ninguém comenta a ideia de ninguém; quantidade vem antes de qualidade.</li>
+          <li><strong>Proibido “eu prefiro” e “fica mais bonito”.</strong> Toda defesa começa com “o Chief decide ___ mais rápido porque ___”.</li>
+          <li><strong>Discordou, desenhe.</strong> A alternativa entra em até 1 minuto num post-it ao lado; argumento sem desenho não conta.</li>
+          <li><strong>Ideia sem pergunta e sem passo numerado não entra no frame.</strong> Cada post-it traz o código da pergunta (P01…P10).</li>
+          <li><strong>Três critérios de voto, visíveis na tela</strong>: (a) responde à decisão da pergunta; (b) existe view e coluna que sustentam cada passo; (c) o Chief lê a conclusão em 5 segundos.</li>
+          <li><strong>Empate não se resolve no grito.</strong> Vence o fluxo com menos divergências abertas; persistindo o empate, o professor decide pelo critério (b).</li>
+          <li><strong>Cronômetro tocou, caneta para.</strong> O que não coube no tempo vai para uma área “estacionamento” do frame.</li>
+        </ol>
+
+        <h3>6.4 Convergir e decidir a ordem · 19:45 a 20:20</h3>
+        <table>
+          <thead><tr><th>Horário</th><th>Formato</th><th>O que fazer</th></tr></thead>
+          <tbody>
+            <tr><td>19:45 · 10 min</td><td>todos, em galeria</td><td>Cada grupo lê os passos do seu fluxo em 90 segundos, sem defender nem justificar. A turma só pode fazer perguntas de esclarecimento.</td></tr>
+            <tr><td>19:55 · 5 min</td><td>votação por pontos</td><td>Cada pessoa tem 3 votos para fluxos de outros grupos, aplicados pelos três critérios. Use a ferramenta de votação do Miro ou pontos roxos: amarelo, azul, verde e rosa já têm dono no board.</td></tr>
+            <tr><td>20:00 · 5 min</td><td>professor conduz</td><td>Os fluxos vencedores de cada pergunta vão para uma trilha com três colunas: contexto → tensão → decisão. A turma pode propor mudança de coluna, sempre com o critério “o Chief precisa saber disso antes de quê?”.</td></tr>
+            <tr><td>20:05 · 15 min</td><td>turma, com um relator por grupo</td><td>Um frame novo, copiado do modelo, encadeia as 10 perguntas na ordem escolhida: é o fluxo de interação anotado do dashboard. Cada grupo cola os passos da sua pergunta e ajusta as setas de ligação com o grupo anterior.</td></tr>
+          </tbody>
+        </table>
+        <p>Uma ordem de partida, para a turma contestar:</p>
+        <table>
+          <thead><tr><th>Contexto</th><th>Tensão</th><th>Decisão</th></tr></thead>
+          <tbody>
+            <tr><td>P01 ritmo da receita · P05 onde está a receita · P03 o que vende</td><td>P07 onde atrasa · P08 quanto o atraso custa na nota · P06 quanto pesa o frete · P10 dependência de poucos vendedores · P09 poucos clientes voltam</td><td>P04 onde apostar · P02 quando fazer campanha</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.5 Âncoras e registro · 20:30 a 20:55</h3>
+        <p>Depois do intervalo, cada grupo volta aos passos da sua pergunta no frame do dashboard e procura as âncoras: em que passo o Chief concluiria algo que a view não autoriza? Cada grupo registra pelo menos duas âncoras nos cinco campos da seção 5.1; a turma precisa terminar com pelo menos quatro registradas. A tabela da seção 7 traz as divergências mais prováveis, mas o grupo deve procurar as suas antes de consultá-la.</p>
+        <div class="alert-box">
+          <h4>O board é o registro oficial</h4>
+          <p>Tudo o que for decidido na discussão precisa estar em post-it antes de o cronômetro tocar. Na aula 9, a tela é construída a partir do frame e da <code>ESPECIFICACAO.md</code>, não da memória de quem estava presente.</p>
+        </div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 1 · perfil</span>
-        <h2>6. Diagnostique sem limpar</h2>
-        <div class="prompt-block">Crie Aula_08_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
-carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
-mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
-linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.
-Não faça nenhuma limpeza nesta etapa. Execute as células e resuma os achados.
-Espero 5.000 linhas e 7 colunas; se divergir, pare e me avise.</div>
-        <p>Uma implementação mínima e legível deve produzir evidência semelhante a:</p>
-        <div class="code-block">from pathlib import Path
-import pandas as pd
-
-caminho = Path("hospital_patients_real_world.csv")
-bruta = pd.read_csv(caminho)
-
-display(bruta.head())
-print("shape:", bruta.shape)
-display(bruta.isna().sum().rename("ausentes").to_frame())
-print("linhas duplicadas:", bruta.duplicated().sum())
-print("PatientID duplicado:", bruta.duplicated("PatientID").sum())</div>
-        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(5000, 7)</code>, com zero linhas e zero chaves duplicadas. Contagem zero também é uma evidência que deve entrar no relatório.</div>
+        <h2>7. Divergências típicas de cada pergunta</h2>
+        <p>Todos os números abaixo saem das views conferidas no Postgres com o mesmo banco que você carregou. A coluna “suporte na tela” é uma sugestão; o grupo pode propor outra, desde que feche a divergência.</p>
+        <table>
+          <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th><th>Suporte na tela</th></tr></thead>
+          <tbody>
+            <tr><td>P01</td><td>“A receita caiu em 2018.”</td><td>A receita cresceu ao longo de 2017, teve pico de R$ 987.765,37 em nov/17 (Black Friday) e está estável desde mar/18, entre R$ 838.576,64 (ago/18) e R$ 977.544,69 (mai/18). A série termina em ago/18 porque os meses seguintes estão incompletos.</td><td>Título que afirma o platô; subtítulo “meses completos, jan/17–ago/18”; nov/17 anotado como sazonal.</td></tr>
+            <tr><td>P02</td><td>“Segunda-feira é o melhor dia para campanha.”</td><td>Segunda concentra mais pedidos entregues (15.660) e sábado menos (10.519); a tarde tem 37.083 pedidos e a noite 33.021. Contagem de pedidos não mede receita nem conversão de campanha. Domingo à noite (4.999) supera qualquer faixa de sábado.</td><td>Nota “pedidos entregues por horário de compra registrado; não mede conversão”.</td></tr>
+            <tr><td>P03</td><td>“Relógios e presentes é a categoria mais lucrativa.”</td><td>beleza_saude tem a maior receita (R$ 1.229.557,50; 9,3%); relogios_presentes tem o maior ticket (R$ 211,89). A base não tem custo nem margem. As 10 categorias somam 62,5% da receita.</td><td>Subtítulo “receita de itens, não lucro”; ticket ao lado da receita.</td></tr>
+            <tr><td>P04</td><td>“Bebês é a categoria que mais cresce, é a melhor aposta.”</td><td>bebes cresceu 268,6% sobre R$ 67.998,26. Sem o piso de R$ 50 mil, portateis_casa_forno_e_cafe apareceria no topo com +48.785,7% sobre R$ 93,80. A Olist inteira cresceu 141,1% no mesmo recorte.</td><td>Receita de 2017 e de 2018 no mesmo gráfico; linha de referência com o crescimento total.</td></tr>
+            <tr><td>P05</td><td>“Os vendedores de SP respondem por 38% das vendas.”</td><td>SP responde por 38,4% da receita pelo estado do <strong>cliente</strong>, no endereço do pedido mais recente. Os três maiores estados somam 63,4%; os 17 menores, 12,2%.</td><td>Título com “clientes de SP”; top 10 mais “Outros”.</td></tr>
+            <tr><td>P06</td><td>“Frete caro espanta cliente do Norte e do Nordeste.”</td><td>O frete pesa 22,7% sobre o preço no Norte (R$ 36,82 por item) e 15,2% no Sudeste (R$ 17,34), entre vendas realizadas. Não há registro de desistência.</td><td>Nota “só vendas realizadas; a base não registra desistência”.</td></tr>
+            <tr><td>P07</td><td>“O RJ é onde mais se atrasa.”</td><td>A maior taxa é do MA (17,5% de 716 entregas). RJ tem 12,2% de 12.312 entregas. SP tem a menor taxa entre os grandes (4,5%), mas o maior número absoluto de pedidos atrasados (1.817, contra 1.496 no RJ). Dez estados com menos de 500 entregas ficam fora.</td><td>Número de entregas ao lado da taxa; nota sobre o corte de 500.</td></tr>
+            <tr><td>P08</td><td>“Se zerarmos os atrasos, a nota sobe para 4,29.”</td><td>Pedidos no prazo têm nota média 4,29 e 9,2% de notas 1 e 2 (89.182 avaliados); com atraso, 2,27 e 62,4% (6.378). É associação: atraso e nota andam juntos, e outras causas podem estar no mesmo pedido.</td><td>Título “pedidos atrasados recebem nota média 2,27; no prazo, 4,29”; nota “associação, não causa”.</td></tr>
+            <tr><td>P09</td><td>“Ninguém volta a comprar na Olist.”</td><td>2.789 de 93.104 clientes (3,00%) fizeram mais de um pedido entregue em 20 meses. Com <code>customer_id</code> no lugar da pessoa, a mesma conta dá 96.211 “clientes” e zero recorrentes.</td><td>Cartão com o número e a janela “jan/17–ago/18”; nota sobre a chave da pessoa.</td></tr>
+            <tr><td>P10</td><td>“Os 295 maiores vendedores são os mais rentáveis e devem ser priorizados.”</td><td>O 1º decil (295 vendedores) gera 67,0% da receita e os 5 decis inferiores, 3,3%. A base não tem margem. Nos 5 decis inferiores, 831 dos 1.470 vendedores fizeram a primeira venda do período em 2018: parte da cauda é vendedor novo, não vendedor fraco.</td><td>Subtítulo “receita de itens, não margem”; nota sobre vendedores novos.</td></tr>
+          </tbody>
+        </table>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 2 · estrutura</span>
-        <h2>7. Crie uma cópia e explicite os tipos</h2>
-        <div class="prompt-block">No mesmo notebook, crie base = bruta.copy(deep=True) e nunca sobrescreva
-bruta nem o CSV. Renomeie as colunas para snake_case. Converta identificadores,
-gênero e diagnóstico para string; idade para Float64; datas para datetime com
-errors="coerce". Conte falhas de conversão antes de prosseguir. Mostre o código,
-a saída e explique por que cada tipo foi escolhido. Não faça imputação.</div>
-        <div class="code-block">base = bruta.copy(deep=True)
-base.columns = (base.columns
-    .str.replace(r"(?&lt;!^)(?=[A-Z])", "_", regex=True)
-    .str.lower())
+        <h2>8. Da raia do dado às views SQL</h2>
+        <h3>8.1 A view como contrato</h3>
+        <p>Cada post-it verde do frame nomeia a fonte de um passo. A view é a forma executável desse post-it: um <code>select</code> salvo no banco com nome, colunas, grão, filtro e período fixos. Ela funciona como contrato entre o fluxo e a tela por três motivos. Primeiro, a regra de negócio fica num único lugar: se a convenção de receita mudar, muda a view, e o dashboard continua igual. Segundo, a tela da aula 9 só consegue mostrar o que a view entrega, o que impede o HTML de recalcular números por conta própria. Terceiro, a view pode ser conferida contra um número de referência antes de existir qualquer gráfico.</p>
+        <p>Duas cláusulas aparecem em todas as views do gabarito. <code>with (security_invoker = on)</code> faz a view respeitar as permissões e o RLS de quem consulta, e não as de quem a criou. <code>grant select … to anon, authenticated</code> permite que a chave publicável leia a view pela API; como não há permissão de escrita, ninguém altera dados por ela.</p>
 
-for coluna in ["patient_id", "gender", "diagnosis", "hospital_id"]:
-    base[coluna] = base[coluna].astype("string")
+        <h3>8.2 A IA escreve a view do grupo</h3>
+        <p>Às 20:55, cada grupo escreve as views das suas duas perguntas com IA: o Copilot Chat no Codespace ou o assistente do SQL Editor do Supabase. O nome termina em <code>_grupo</code> para não colidir com o gabarito. Troque <code>[PERGUNTA]</code>, <code>[COLUNAS]</code> e o nome da view:</p>
+        <div class="code-block wrap">No Postgres do Supabase há um esquema estrela no schema public:
+- fato_itens_pedido (grão: um item vendido): pedido_sk, item_seq, data_sk, cliente_sk,
+  produto_sk, vendedor_sk, status, preco, frete
+- fato_pedidos (grão: um pedido): pedido_sk, pedido_id, data_sk, hora_compra, cliente_sk,
+  status, qtd_itens, valor_itens, valor_frete, valor_pago, parcelas, meio_pagamento,
+  dias_entrega, dias_atraso, entregue_no_prazo (1, 0 ou null), nota_avaliacao
+- dim_tempo: data_sk (AAAAMMDD), data, ano, mes, ano_mes, trimestre, dia_semana (1 = segunda),
+  nome_dia_semana
+- dim_cliente (uma linha por pessoa): cliente_sk, cliente_id, cidade, estado, regiao
+- dim_produto: produto_sk, produto_id, categoria, categoria_en, peso_g
+- dim_vendedor: vendedor_sk, vendedor_id, cidade, estado, regiao
 
-base["age"] = pd.to_numeric(base["age"], errors="coerce").astype("Float64")
-base["admission_date"] = pd.to_datetime(base["admission_date"], errors="coerce")
-base["discharge_date"] = pd.to_datetime(base["discharge_date"], errors="coerce")</div>
-        <p>Identificadores são texto, mesmo quando contêm números. Datas convertidas permitem calcular intervalos. O parâmetro <code>errors="coerce"</code> não corrige valores: ele torna uma falha detectável como <code>NaT</code>.</p>
-      </section>
+Convenções: receita = soma de preco (sem frete) de itens com status 'delivered';
+período = dim_tempo.data entre 2017-01-01 e 2018-08-31.
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 3 · ausências</span>
-        <h2>8. Trate ausência sem adivinhar</h2>
-        <div class="prompt-block">Adicione uma seção sobre dados ausentes. Crie flags booleanas que preservem a
-origem das ausências em idade, gênero e diagnóstico. Mantenha idade ausente
-como pd.NA. Padronize gênero vazio ou Unknown como "Não informado" e diagnóstico
-vazio como "Não informado". Gere uma tabela antes/depois com quantidade e
-percentual. Não use média, moda ou qualquer valor clínico inventado.</div>
-        <div class="code-block">base["idade_ausente"] = base["age"].isna()
-base["genero_ausente"] = base["gender"].isna() | base["gender"].str.strip().eq("") | base["gender"].eq("Unknown")
-base["diagnostico_ausente"] = base["diagnosis"].isna() | base["diagnosis"].str.strip().eq("")
+Escreva, em Postgres, create view public.vw_p06_frete_regiao_grupo with (security_invoker = on)
+para responder à pergunta: [PERGUNTA].
+Colunas de saída, exatamente nesta ordem: [COLUNAS].
+Antes do SQL, diga em uma frase qual tabela de fato você usa e por quê, pensando no grão.
+Não use o schema bruto e não invente colunas. Depois do SQL, escreva um select de conferência.</div>
+        <p>Leia o SQL antes de executar. Três perguntas bastam para a revisão: o fato escolhido tem o grão certo para a métrica? Os filtros de status e período estão lá? Alguma coluna citada não existe no esquema acima? Execute no SQL Editor e confira na seção 8.3.</p>
+        <div class="alert-box">
+          <h4>O que nunca vai para o prompt</h4>
+          <p>A senha do banco, a string de conexão e a chave secreta (<code>sb_secret_…</code> ou <code>service_role</code>) não entram em prompt, arquivo, print nem commit. O prompt acima só descreve estrutura; nenhum dado de cliente é enviado à IA.</p>
+        </div>
 
-base.loc[base["genero_ausente"], "gender"] = "Não informado"
-base.loc[base["diagnostico_ausente"], "diagnosis"] = "Não informado"</div>
-        <p>Preencher idade com média poderia produzir uma tabela completa, mas criaria 350 idades fictícias. Para decisões responsáveis, uma ausência conhecida é melhor que uma precisão inventada.</p>
-      </section>
+        <h3>8.3 Conferir contra a referência</h3>
+        <p>A consulta abaixo compara um valor de cada view com a resposta de referência e devolve <code>true</code> quando batem. Antes do gabarito, mantenha só as linhas das perguntas do grupo e troque o nome da view pela versão <code>_grupo</code>. A primeira linha interna, com <code>where false</code>, só define os nomes das colunas; ela permite apagar qualquer outra linha sem quebrar a consulta.</p>
+        <div class="code-block">select p, valor, referencia, valor = referencia as confere from (
+  select ''::text p, ''::text valor, ''::text referencia where false
+  union all select 'P01', receita::text, '987765.37' from vw_p01_receita_mensal where ano_mes = '2017-11'
+  union all select 'P02', sum(pedidos)::text, '15660' from vw_p02_dia_hora where dia_semana = 1
+  union all select 'P03', participacao_pct::text, '9.3' from vw_p03_top_categorias where categoria = 'beleza_saude'
+  union all select 'P04', crescimento_pct::text, '268.6' from vw_p04_crescimento_categorias where categoria = 'bebes'
+  union all select 'P05', participacao_pct::text, '38.4' from vw_p05_receita_estado where estado = 'SP'
+  union all select 'P06', frete_sobre_preco_pct::text, '22.7' from vw_p06_frete_regiao where regiao = 'Norte'
+  union all select 'P07', atraso_pct::text, '17.5' from vw_p07_atraso_estado where estado = 'MA'
+  union all select 'P08', nota_media::text, '2.27' from vw_p08_nota_prazo where entrega = 'com atraso'
+  union all select 'P09', recompra_pct::text, '3.00' from vw_p09_recompra
+  union all select 'P10', participacao_pct::text, '67.0' from vw_p10_concentracao_vendedores where decil = 1
+) conferencia;</div>
+        <p>Um <code>false</code> não é fracasso: é o achado que vai para a entrega. As causas mais frequentes, em ordem de probabilidade:</p>
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th></tr></thead>
+          <tbody>
+            <tr><td>Receita maior que a referência</td><td>frete somado ao preço, ou pedidos de outros status incluídos</td></tr>
+            <tr><td>Recompra igual a zero</td><td>cliente contado por pedido (<code>customer_id</code>) e não por pessoa</td></tr>
+            <tr><td>Ticket médio menor que a referência</td><td>receita dividida por itens, e não por pedidos distintos</td></tr>
+            <tr><td>Nota média diferente na P08</td><td>nota lida por item, repetindo a nota de pedidos com vários itens</td></tr>
+            <tr><td>Participação que não fecha 100%</td><td>percentual calculado depois do <code>limit</code>, sobre as 10 maiores, e não sobre o total</td></tr>
+            <tr><td>Série com pontas despencando</td><td>período sem filtro, incluindo meses incompletos de 2016 e 2018</td></tr>
+            <tr><td>Taxa de atraso diferente na P07</td><td>média de médias entre estados, ou pedidos sem data de entrega contados como atraso</td></tr>
+          </tbody>
+        </table>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 4 · categorias</span>
-        <h2>9. Padronize sem alterar o significado</h2>
-        <div class="prompt-block">Normalize espaços e capitalização de gender e diagnosis. Para gender, aplique
-um dicionário explícito: Female→Feminino, Male→Masculino, Other→Outro e
-Unknown/vazio→Não informado. Em diagnosis, una apenas variantes que diferem por
-espaços ou capitalização; não faça aproximação clínica por significado.
-Mostre value_counts antes/depois e registre o mapeamento aplicado.</div>
-        <div class="code-block">mapa_genero = {
-    "Female": "Feminino",
-    "Male": "Masculino",
-    "Other": "Outro",
-    "Unknown": "Não informado",
-}
-base["gender"] = base["gender"].str.strip().replace(mapa_genero)
-base["diagnosis"] = (base["diagnosis"].str.strip().str.title()
-                     .replace({"Não Informado": "Não informado"}))
+        <h3>8.4 As 10 views do gabarito, uma a uma</h3>
+        <p>O arquivo completo está em <a href="olist/views.sql">materiais/aula-08/olist/views.sql</a>. Cada bloco abaixo reproduz exatamente o SQL do arquivo e explica o que ele calcula, o grão, o filtro e o cuidado de leitura. Todos os números de referência foram conferidos no Postgres com o mesmo banco que você carregou.</p>
 
-display(base["gender"].value_counts(dropna=False))
-display(base["diagnosis"].value_counts(dropna=False))</div>
-        <p>A IA não deve aproximar diagnósticos pelo significado. Nesta aula, <code>ASTHMA</code> e <code>Asthma</code> podem ser unidos porque diferem somente na capitalização; categorias clinicamente diferentes não podem ser fundidas por “parecerem semelhantes”.</p>
-      </section>
+        <div class="view-card" id="view-base">
+          <h3>Base comum · <code>vw_itens_entregues</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Nada é agregado: a view lista os itens de pedidos entregues no período, já com data, ano, mês, estado e região do cliente e categoria do produto.</dd>
+            <dt>Grão</dt><dd>Um item vendido (o mesmo de <code>fato_itens_pedido</code>).</dd>
+            <dt>Filtro</dt><dd><code>status = 'delivered'</code> e data da compra entre 2017-01-01 e 2018-08-31.</dd>
+            <dt>Cuidado de leitura</dt><dd>Não responde a nenhuma pergunta sozinha. Existe para que P01, P03, P04, P05, P06 e P10 usem exatamente a mesma receita: se a convenção mudar, muda aqui.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- Base comum: itens entregues no período, já com as dimensões</span>
+create or replace view public.vw_itens_entregues with (security_invoker = on) as
+select i.*, t.data, t.ano, t.mes, t.ano_mes, c.estado as estado_cliente, c.regiao as regiao_cliente,
+       p.categoria
+from public.fato_itens_pedido i
+join public.dim_tempo t   using (data_sk)
+join public.dim_cliente c using (cliente_sk)
+join public.dim_produto p using (produto_sk)
+where i.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31';</div>
+          <p class="ref"><strong>Referência:</strong> 109.880 itens de 96.211 pedidos, somando R$ 13.181.027,13 de receita.</p>
+        </div>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 5 · chaves</span>
-        <h2>10. Verifique duplicidades, mesmo quando não há nenhuma</h2>
-        <div class="prompt-block">Audite duplicidade de linha completa e de patient_id. Não use drop_duplicates
-automaticamente. Se houver linhas idênticas, apresente a evidência antes de
-propor remoção. Se a mesma chave tiver conteúdos diferentes, crie a flag
-chave_duplicada e envie esses registros para revisão. Registre também o caso
-em que a contagem for zero. Explique a diferença entre linha duplicada e chave
-de negócio duplicada.</div>
-        <div class="code-block">duplicada_exata = base.duplicated(keep=False)
-base["chave_duplicada"] = base.duplicated("patient_id", keep=False)
+        <div class="view-card" id="view-p01">
+          <h3>P01 · <code>vw_p01_receita_mensal</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, número de pedidos e ticket médio (receita ÷ pedidos) por mês.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por mês (20 linhas). Os pedidos são contados com <code>count(distinct pedido_sk)</code> porque um pedido com três itens aparece três vezes na fonte.</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>O pico de nov/17 é Black Friday, não tendência. A série termina em ago/18 por construção: os meses seguintes estão incompletos e desenhariam uma queda que não existe. Receita e pedidos pedem dois gráficos, não dois eixos y.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P01 · Tempo · Como evoluíram receita e pedidos mês a mês?</span>
+create view public.vw_p01_receita_mensal with (security_invoker = on) as
+select ano_mes, round(sum(preco), 2) as receita, count(distinct pedido_sk) as pedidos,
+       round(sum(preco) / count(distinct pedido_sk), 2) as ticket_medio
+from public.vw_itens_entregues
+group by ano_mes order by ano_mes;</div>
+          <p class="ref"><strong>Referência:</strong> R$ 111.798,36 em jan/17 → pico de R$ 987.765,37 em nov/17 → R$ 977.544,69 em mai/18 → R$ 838.576,64 em ago/18; platô desde mar/18.</p>
+        </div>
 
-print("linhas em grupos idênticos:", int(duplicada_exata.sum()))
-print("linhas com chave repetida:", int(base["chave_duplicada"].sum()))</div>
-        <p><code>drop_duplicates()</code> não é um ritual obrigatório. A base desta aula tem zero duplicidades, então remover linhas seria uma transformação sem justificativa.</p>
-      </section>
+        <div class="view-card" id="view-p02">
+          <h3>P02 · <code>vw_p02_dia_hora</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Número de pedidos por dia da semana e faixa de horário: madrugada (0h–5h), manhã (6h–11h), tarde (12h–17h) e noite (18h–23h).</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>, com grão de pedido, porque a pergunta conta compras e não itens. Saída com uma linha por dia × faixa (28 linhas).</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues com data da compra no período.</dd>
+            <dt>Cuidado de leitura</dt><dd>O número na frente da faixa (“1 madrugada”, “2 manhã”) só existe para ordenar corretamente. Para comparar dias, some as quatro faixas de cada dia. A contagem é de pedidos entregues, pelo horário registrado na base: não mede receita nem conversão de campanha.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P02 · Tempo · Em que dia da semana e em que faixa de horário o cliente compra?</span>
+create view public.vw_p02_dia_hora with (security_invoker = on) as
+select t.dia_semana, t.nome_dia_semana,
+       case when p.hora_compra &lt; 6 then '1 madrugada' when p.hora_compra &lt; 12 then '2 manhã'
+            when p.hora_compra &lt; 18 then '3 tarde' else '4 noite' end as faixa_horario,
+       count(*) as pedidos
+from public.fato_pedidos p
+join public.dim_tempo t using (data_sk)
+where p.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31'
+group by 1, 2, 3 order by 1, 3;</div>
+          <p class="ref"><strong>Referência:</strong> segunda 15.660 pedidos (maior), sábado 10.519 (menor); tarde 37.083, noite 33.021, manhã 21.525, madrugada 4.582.</p>
+        </div>
 
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 6 · regras</span>
-        <h2>11. Aplique regras hospitalares como flags</h2>
-        <div class="prompt-block">Implemente, sem apagar registros, as flags idade_fora_faixa para idade menor
-que 0 ou maior que 110, hospital_id_invalido para valores fora do padrão
-HOSP-[número] e cronologia_invalida quando discharge_date for anterior a
-admission_date. Mostre contagens e amostras. Não inverta datas automaticamente.
-Nesta versão espero 0 idades fora da faixa, 0 hospitais inválidos e 150
-cronologias inválidas; se divergir, investigue antes de alterar a regra.</div>
-        <div class="code-block">base["idade_fora_faixa"] = base["age"].notna() &amp; ~base["age"].between(0, 110)
-base["hospital_id_invalido"] = ~base["hospital_id"].str.fullmatch(r"HOSP-\d+", na=False)
-base["cronologia_invalida"] = (
-    base["admission_date"].notna()
-    &amp; base["discharge_date"].notna()
-    &amp; (base["discharge_date"] &lt; base["admission_date"])
+        <div class="view-card" id="view-p03">
+          <h3>P03 · <code>vw_p03_top_categorias</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, participação na receita total, pedidos que contêm a categoria e ticket médio (receita da categoria ÷ esses pedidos), para as 10 maiores categorias.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por categoria (10 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum, mais <code>limit 10</code> após ordenar pela receita.</dd>
+            <dt>Cuidado de leitura</dt><dd>A janela <code>sum(sum(preco)) over ()</code> é calculada antes do <code>limit</code>, então a participação é sobre a receita de todas as categorias: as 10 somam 62,5%, não 100%. Um pedido com itens de duas categorias conta nas duas (778 pedidos estão nessa situação). Receita não é lucro.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P03 · Categoria · Quais 10 categorias concentram a receita e qual o ticket de cada?</span>
+create view public.vw_p03_top_categorias with (security_invoker = on) as
+select categoria, round(sum(preco), 2) as receita,
+       round(100 * sum(preco) / sum(sum(preco)) over (), 1) as participacao_pct,
+       count(distinct pedido_sk) as pedidos,
+       round(sum(preco) / count(distinct pedido_sk), 2) as ticket_medio
+from public.vw_itens_entregues
+group by categoria order by receita desc limit 10;</div>
+          <p class="ref"><strong>Referência:</strong> beleza_saude R$ 1.229.557,50 (9,3%); relogios_presentes R$ 1.163.465,91 (8,8%, maior ticket, R$ 211,89); cama_mesa_banho 7,8% (ticket R$ 110,39).</p>
+        </div>
+
+        <div class="view-card" id="view-p04">
+          <h3>P04 · <code>vw_p04_crescimento_categorias</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita de jan–ago/2017, receita de jan–ago/2018 e crescimento percentual por categoria, com as 10 que mais cresceram.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por categoria.</dd>
+            <dt>Filtro</dt><dd>Base comum com <code>mes &lt;= 8</code>, para comparar os mesmos meses nos dois anos e deixar a Black Friday de fora; <code>having</code> exige pelo menos R$ 50 mil de receita em 2017.</dd>
+            <dt>Cuidado de leitura</dt><dd>Crescimento percentual sobre base pequena engana. Sem o piso, portateis_casa_forno_e_cafe lideraria com +48.785,7% sobre R$ 93,80. Compare cada categoria com o crescimento da Olist inteira no mesmo recorte, 141,1%: só quem cresceu acima disso ganhou participação.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P04 · Categoria · Quais categorias mais cresceram de jan–ago/2017 para jan–ago/2018?</span>
+<span class="code-comment">-- Só entram categorias com pelo menos R$ 50 mil em 2017: crescimento sobre base pequena engana.</span>
+create view public.vw_p04_crescimento_categorias with (security_invoker = on) as
+select categoria,
+       round(sum(preco) filter (where ano = 2017), 2) as receita_2017,
+       round(sum(preco) filter (where ano = 2018), 2) as receita_2018,
+       round(100 * (sum(preco) filter (where ano = 2018) / sum(preco) filter (where ano = 2017) - 1), 1)
+         as crescimento_pct
+from public.vw_itens_entregues
+where mes &lt;= 8
+group by categoria
+having sum(preco) filter (where ano = 2017) &gt;= 50000
+order by crescimento_pct desc limit 10;</div>
+          <p class="ref"><strong>Referência:</strong> bebes +268,6%; relogios_presentes +242,0%; beleza_saude +210,3%; utilidades_domesticas +207,2%; telefonia +203,0%.</p>
+        </div>
+
+        <div class="view-card" id="view-p05">
+          <h3>P05 · <code>vw_p05_receita_estado</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, participação na receita total e pedidos por estado do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por estado (27 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>É o estado do <strong>cliente</strong>, não do vendedor, e vem do endereço do pedido mais recente de cada pessoa em <code>dim_cliente</code>. Com 27 barras o gráfico vira parede: mostre as 10 maiores e agrupe o restante em “Outros” (12,2%), preservando o total.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P05 · Geografia · Como a receita se distribui por estado do cliente?</span>
+create view public.vw_p05_receita_estado with (security_invoker = on) as
+select estado_cliente as estado, round(sum(preco), 2) as receita,
+       round(100 * sum(preco) / sum(sum(preco)) over (), 1) as participacao_pct,
+       count(distinct pedido_sk) as pedidos
+from public.vw_itens_entregues
+group by estado_cliente order by receita desc;</div>
+          <p class="ref"><strong>Referência:</strong> SP 38,4% (R$ 5.057.381,81); RJ 13,3%; MG 11,7%; RS 5,5%; PR 5,0%.</p>
+        </div>
+
+        <div class="view-card" id="view-p06">
+          <h3>P06 · <code>vw_p06_frete_regiao</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Frete total ÷ preço total, em percentual, frete médio por item e número de itens, por região do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item, porque o frete está registrado por item; saída com uma linha por região (5 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>É razão de somas, não média das razões de cada item: itens baratos com frete alto pesam demais numa média simples, que daria 49,4% no Norte em vez de 22,7%. A base só tem vendas realizadas; não há como medir quem desistiu por causa do frete.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P06 · Geografia · Quanto o frete pesa sobre o preço em cada região?</span>
+create view public.vw_p06_frete_regiao with (security_invoker = on) as
+select regiao_cliente as regiao, round(100 * sum(frete) / sum(preco), 1) as frete_sobre_preco_pct,
+       round(avg(frete), 2) as frete_medio_item, count(*) as itens
+from public.vw_itens_entregues
+group by regiao_cliente order by frete_sobre_preco_pct desc;</div>
+          <p class="ref"><strong>Referência:</strong> Norte 22,7% (R$ 36,82 por item); Nordeste 21,7%; Sul 17,7%; Centro-Oeste 17,6%; Sudeste 15,2% (R$ 17,34 por item).</p>
+        </div>
+
+        <div class="view-card" id="view-p07">
+          <h3>P07 · <code>vw_p07_atraso_estado</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Entregas, percentual entregue depois da data estimada (<code>1 - avg(entregue_no_prazo)</code>) e dias médios de entrega, por estado do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>, porque prazo é atributo do pedido; saída com uma linha por estado (17 linhas).</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues no período com <code>entregue_no_prazo</code> preenchido (8 pedidos entregues sem data de entrega ficam fora) e estados com pelo menos 500 entregas.</dd>
+            <dt>Cuidado de leitura</dt><dd>Taxa e volume contam histórias diferentes. MA tem a maior taxa, mas SP, com 4,5%, tem o maior número de pedidos atrasados (1.817). Dez estados ficam fora do ranking porque, com poucas entregas, a taxa oscila demais.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P07 · Prazo · Em que estados mais se entrega com atraso?</span>
+<span class="code-comment">-- Estados com menos de 500 entregas ficam de fora: a taxa oscila demais.</span>
+create view public.vw_p07_atraso_estado with (security_invoker = on) as
+select c.estado, count(*) as entregas,
+       round(100 * (1 - avg(p.entregue_no_prazo)), 1) as atraso_pct,
+       round(avg(p.dias_entrega), 1) as dias_entrega_medio
+from public.fato_pedidos p
+join public.dim_tempo t   using (data_sk)
+join public.dim_cliente c using (cliente_sk)
+where p.status = 'delivered' and p.entregue_no_prazo is not null
+  and t.data between '2017-01-01' and '2018-08-31'
+group by c.estado having count(*) &gt;= 500
+order by atraso_pct desc;</div>
+          <p class="ref"><strong>Referência:</strong> MA 17,5%; CE 13,8%; RJ 12,2% com 12.312 entregas; BA 12,2%; SP 4,5% (8,7 dias em média).</p>
+        </div>
+
+        <div class="view-card" id="view-p08">
+          <h3>P08 · <code>vw_p08_nota_prazo</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Pedidos avaliados, nota média e percentual de notas 1 e 2, separando entregas no prazo e com atraso.</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>: a avaliação existe por pedido, e ler a nota por item duplicaria a nota de pedidos com vários itens. Saída com 2 linhas.</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues no período, com prazo e nota preenchidos. Nos 547 pedidos com mais de uma avaliação, <code>estrela.sql</code> já guardou a última respondida.</dd>
+            <dt>Cuidado de leitura</dt><dd>Correlação não é causa. Atraso e nota baixa andam juntos, mas o atraso é uma das causas possíveis: produto errado, avaria e atendimento podem estar no mesmo pedido. A view não autoriza prever quanto a nota subiria sem atrasos.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P08 · Satisfação · O atraso derruba a nota do cliente?</span>
+create view public.vw_p08_nota_prazo with (security_invoker = on) as
+select case p.entregue_no_prazo when 1 then 'no prazo' else 'com atraso' end as entrega,
+       count(*) as pedidos_avaliados,
+       round(avg(p.nota_avaliacao), 2) as nota_media,
+       round(100 * avg((p.nota_avaliacao &lt;= 2)::int), 1) as notas_1_e_2_pct
+from public.fato_pedidos p
+join public.dim_tempo t using (data_sk)
+where p.status = 'delivered' and p.entregue_no_prazo is not null and p.nota_avaliacao is not null
+  and t.data between '2017-01-01' and '2018-08-31'
+group by 1 order by 1 desc;</div>
+          <p class="ref"><strong>Referência:</strong> no prazo: nota 4,29 e 9,2% de notas 1–2 (89.182 pedidos); com atraso: nota 2,27 e 62,4% de notas 1–2 (6.378 pedidos).</p>
+        </div>
+
+        <div class="view-card" id="view-p09">
+          <h3>P09 · <code>vw_p09_recompra</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Clientes com pelo menos um pedido entregue no período, quantos têm mais de um e o percentual de recompra.</dd>
+            <dt>Grão</dt><dd>A CTE <code>por_cliente</code> tem uma linha por pessoa (<code>cliente_sk</code>, que vem de <code>customer_unique_id</code>); a saída tem uma linha.</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues com data da compra no período.</dd>
+            <dt>Cuidado de leitura</dt><dd>A janela é de 20 meses: quem comprou em 2016 e voltou em 2017 conta como cliente novo. Com <code>customer_id</code>, que muda a cada pedido, a mesma conta dá 96.211 clientes e zero recorrentes, uma conclusão fabricada pela chave errada.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P09 · Livre · Quantos clientes voltam a comprar?</span>
+create view public.vw_p09_recompra with (security_invoker = on) as
+with por_cliente as (
+  select p.cliente_sk, count(*) as pedidos
+  from public.fato_pedidos p
+  join public.dim_tempo t using (data_sk)
+  where p.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31'
+  group by p.cliente_sk
 )
+select count(*) as clientes,
+       count(*) filter (where pedidos &gt; 1) as clientes_recorrentes,
+       round(100.0 * count(*) filter (where pedidos &gt; 1) / count(*), 2) as recompra_pct
+from por_cliente;</div>
+          <p class="ref"><strong>Referência:</strong> 2.789 de 93.104 clientes voltaram a comprar (3,00%).</p>
+        </div>
 
-display(base[["idade_fora_faixa", "hospital_id_invalido", "cronologia_invalida"]].sum())</div>
-        <div class="alert-box"><h4>Por que não inverter as datas?</h4><p>Alta anterior à admissão prova que há uma inconsistência, mas não revela qual campo está errado. Trocar automaticamente as duas datas pode gerar uma permanência plausível e falsa. Os 150 casos seguem na base, marcados para revisão e excluídos apenas do indicador derivado.</p></div>
+        <div class="view-card" id="view-p10">
+          <h3>P10 · <code>vw_p10_concentracao_vendedores</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Ordena os vendedores pela receita, divide-os em 10 grupos de tamanho igual com <code>ntile(10)</code> e soma receita e participação de cada decil.</dd>
+            <dt>Grão</dt><dd>A CTE <code>por_vendedor</code> tem uma linha por vendedor (2.945 com venda entregue no período); a saída tem uma linha por decil.</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>Concentração de receita não diz se o vendedor grande é rentável: a base não tem margem nem custo. Os decis têm 295 ou 294 vendedores porque 2.945 não divide por 10. Nos 5 decis inferiores, 831 dos 1.470 vendedores fizeram a primeira venda do período em 2018, então parte da cauda é vendedor novo.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P10 · Livre · Quanto a receita depende dos maiores vendedores?</span>
+create view public.vw_p10_concentracao_vendedores with (security_invoker = on) as
+with por_vendedor as (
+  select vendedor_sk, sum(preco) as receita from public.vw_itens_entregues group by vendedor_sk
+), faixas as (
+  select receita, ntile(10) over (order by receita desc) as decil from por_vendedor
+)
+select decil, count(*) as vendedores, round(sum(receita), 2) as receita,
+       round(100 * sum(receita) / sum(sum(receita)) over (), 1) as participacao_pct
+from faixas group by decil order by decil;</div>
+          <p class="ref"><strong>Referência:</strong> 1º decil (295 vendedores) = 67,0% da receita; 2º decil = 15,2%; os 5 decis inferiores somam 3,3%.</p>
+        </div>
+
+        <h3>8.5 Aplicar o gabarito</h3>
+        <p>Depois de registrar a diferença encontrada, todos aplicam o gabarito. O objetivo não é apagar o trabalho do grupo, que fica no repositório, e sim garantir que a turma inteira chegue à aula 9 com as mesmas 11 views e os mesmos nomes de colunas.</p>
+        <ol>
+          <li>Salve o SQL do grupo em <code>aula-08-seunome/views.sql</code> e anote a diferença encontrada.</li>
+          <li>Apague as views do grupo no Supabase, para que a API exponha só as do gabarito:</li>
+        </ol>
+        <div class="code-block">drop view if exists public.vw_p06_frete_regiao_grupo;   <span class="code-comment">-- repita para cada view _grupo</span></div>
+        <ol start="3">
+          <li>Abra <a href="olist/views.sql">materiais/aula-08/olist/views.sql</a> (no Codespace, depois de sincronizar o fork com <strong>Sync fork</strong> no GitHub e rodar <code>git pull</code>, ou pelo link), copie o arquivo inteiro, cole no SQL Editor do Supabase e clique em <strong>Run</strong>. O arquivo pode ser executado de novo sem erro.</li>
+          <li>Confira as views criadas e rode a conferência da seção 8.3 completa, com os nomes do gabarito: as dez linhas devem voltar com <code>confere = true</code>.</li>
+        </ol>
+        <div class="code-block">select table_name
+from information_schema.views
+where table_schema = 'public'
+order by 1;   <span class="code-comment">-- esperado: 11 linhas, de vw_itens_entregues a vw_p10_concentracao_vendedores</span></div>
+        <p>As permissões do gabarito aparecem no fim do arquivo:</p>
+        <div class="code-block">grant select on public.vw_itens_entregues, public.vw_p01_receita_mensal, public.vw_p02_dia_hora,
+  public.vw_p03_top_categorias, public.vw_p04_crescimento_categorias, public.vw_p05_receita_estado,
+  public.vw_p06_frete_regiao, public.vw_p07_atraso_estado, public.vw_p08_nota_prazo, public.vw_p09_recompra,
+  public.vw_p10_concentracao_vendedores to anon, authenticated;</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 7 · indicador</span>
-        <h2>12. Calcule permanência somente quando for seguro</h2>
-        <div class="prompt-block">Crie dias_internacao somente para registros com datas válidas e cronologia
-coerente. Nos demais casos use pd.NA e mantenha a flag de revisão. Converta o
-resultado para Int64 anulável. Mostre describe(), mínimo, máximo e confirme que
-nenhum valor negativo foi aceito. Explique por que corrigir para valor absoluto
-seria uma decisão perigosa.</div>
-        <div class="code-block">duracao = (base["discharge_date"] - base["admission_date"]).dt.days
-datas_ausentes = base[["admission_date", "discharge_date"]].isna().any(axis=1)
-base["dias_internacao"] = (duracao
-    .mask(base["cronologia_invalida"] | datas_ausentes)
-    .astype("Int64"))
+        <h2>9. Teste uma view pela API REST</h2>
+        <p>O Supabase publica automaticamente uma API REST (PostgREST) para as tabelas e views do schema <code>public</code>. É por ela que o dashboard da aula 9, hospedado no GitHub Pages, vai ler os números. Testar agora, no terminal, separa dois problemas que costumam aparecer juntos: a view e as permissões estão certas? O HTML está certo? Hoje você responde à primeira pergunta.</p>
+        <ol>
+          <li>No painel do Supabase, abra <strong>Project Settings → API Keys</strong> e copie a chave publicável, que começa com <code>sb_publishable_</code> (em projetos antigos, a chave <strong>anon public</strong>). A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>; o <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code>.</li>
+          <li>No terminal do Codespace, rode os comandos abaixo. O <code>read</code> pede os dois valores sem gravá-los em arquivo.</li>
+        </ol>
+        <div class="code-block">read -p "Project URL: " SUPABASE_URL
+read -p "Chave publicável: " SUPABASE_KEY
 
-assert not (base["dias_internacao"].dropna() &lt; 0).any()</div>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 8 · relatório</span>
-        <h2>13. Construa a tabela antes/depois</h2>
-        <div class="prompt-block">Crie um DataFrame relatorio_qualidade com as colunas metrica, antes, depois,
-regra_aplicada e pendencia_humana. Inclua: linhas, duplicidades, chaves
-duplicadas, ausências, gêneros não informados, categorias de diagnóstico,
-capitalização inconsistente, idade fora da faixa, hospital inválido e cronologia
-inválida. Salve como saidas/relatorio_qualidade.csv e exiba a tabela completa.
-Não trate uma flag pendente como erro resolvido.</div>
-        <div class="code-block">from pathlib import Path
-
-saida = Path("saidas")
-saida.mkdir(exist_ok=True)
-
-metricas = [
-    {"metrica": "linhas", "antes": len(bruta), "depois": len(base),
-     "regra_aplicada": "preservar registros", "pendencia_humana": False},
-    {"metrica": "cronologia inválida", "antes": 150,
-     "depois": int(base["cronologia_invalida"].sum()),
-     "regra_aplicada": "sinalizar sem inverter", "pendencia_humana": True},
-]
-relatorio_qualidade = pd.DataFrame(metricas)</div>
-        <p>Complete a lista com as demais métricas. Em uma auditoria honesta, “depois = 150” pode ser o resultado correto: a inconsistência permanece, mas agora está detectada, separada e impedida de contaminar o indicador.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 9 · produtos</span>
-        <h2>14. Exporte tratado, revisão e dicionário</h2>
-        <div class="prompt-block">Exporte saidas/base_hospitalar_tratada.csv com todas as 5.000 linhas, campos
-padronizados e flags. Exporte saidas/registros_para_revisao.csv com qualquer
-regra crítica violada. Crie saidas/dicionario_de_dados.md explicando coluna,
-tipo, significado, regra e possibilidade de ausência. Não inclua o índice do
-DataFrame nos CSVs e não modifique o arquivo bruto.</div>
-        <div class="code-block">flags_criticas = [
-    "chave_duplicada", "idade_fora_faixa",
-    "hospital_id_invalido", "cronologia_invalida",
-]
-para_revisao = base[base[flags_criticas].any(axis=1)].copy()
-
-base.to_csv(saida / "base_hospitalar_tratada.csv", index=False)
-para_revisao.to_csv(saida / "registros_para_revisao.csv", index=False)
-relatorio_qualidade.to_csv(saida / "relatorio_qualidade.csv", index=False)</div>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 10 · testes</span>
-        <h2>15. Reinicie e execute tudo</h2>
-        <div class="prompt-block">Adicione ao final do notebook asserts legíveis para: 5.000 linhas preservadas;
-patient_id único; gêneros dentro do dicionário; nenhum dias_internacao negativo;
-150 cronologias inválidas devidamente sinalizadas; arquivos de saída existentes.
-Reinicie o kernel e execute todas as células em ordem. Se um teste falhar,
-diagnostique a causa; não remova nem enfraqueça o teste para fazê-lo passar.
-Mostre um resumo final das evidências.</div>
-        <div class="code-block">assert len(base) == 5_000
-assert base["patient_id"].is_unique
-assert set(base["gender"].dropna()) &lt;= {"Feminino", "Masculino", "Outro", "Não informado"}
-assert int(base["cronologia_invalida"].sum()) == 150
-assert not (base["dias_internacao"].dropna() &lt; 0).any()
-assert (saida / "base_hospitalar_tratada.csv").exists()
-assert (saida / "registros_para_revisao.csv").exists()
-assert (saida / "relatorio_qualidade.csv").exists()</div>
-        <p>Um teste não serve para confirmar que a IA “acertou”; ele serve para tentar revelar quando a transformação violou o contrato.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 11 · auditoria</span>
-        <h2>16. Documente a participação da IA e versione</h2>
-        <div class="prompt-block">Crie REVISAO_IA.md com: objetivo, prompts usados, sugestões aceitas, sugestões
-rejeitadas, regras humanas, testes executados, limitações e decisão sobre uso da
-base. Depois mostre git status e proponha comandos git add, commit e push apenas
-para os arquivos desta entrega. Não execute commit ou push sem minha aprovação,
-não crie remoto e nunca use force. Sugira a mensagem: "Documenta limpeza
-auditável da base hospitalar".</div>
-        <p>Leia <code>REVISAO_IA.md</code> e o diff antes de autorizar o versionamento. No repositório do estudante, a persistência oficial continua sendo commit e push:</p>
-        <div class="code-block">git status
-git add Aula_08_SeuNome.ipynb saidas REVISAO_IA.md
-git diff --staged
-git commit -m "Documenta limpeza auditável da base hospitalar"
-git push</div>
+curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
+  -H "apikey: $SUPABASE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_KEY"</div>
+        <p>A resposta esperada é uma lista JSON com um objeto: <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00. A API aceita filtros e ordenação na URL, o que ajuda a conferir outras views sem abrir o SQL Editor:</p>
+        <div class="code-block">curl -s "$SUPABASE_URL/rest/v1/vw_p07_atraso_estado?select=estado,atraso_pct,entregas&amp;order=atraso_pct.desc&amp;limit=3" \
+  -H "apikey: $SUPABASE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_KEY"</div>
+        <table>
+          <thead><tr><th>Resposta</th><th>O que significa</th><th>O que fazer</th></tr></thead>
+          <tbody>
+            <tr><td><code>[]</code> (lista vazia)</td><td>A view existe, mas a chave não enxerga as linhas.</td><td>Confira se <code>estrela.sql</code> rodou inteiro, com as políticas <code>leitura_publica</code>.</td></tr>
+            <tr><td>Erro <code>42P01</code> ou <code>PGRST205</code></td><td>A view não existe com esse nome ou a API ainda não recarregou o esquema.</td><td>Rode a consulta de <code>information_schema.views</code>; espere alguns segundos e tente de novo.</td></tr>
+            <tr><td>Erro <code>42501</code> (permission denied)</td><td>Falta o <code>grant select</code> para <code>anon</code>.</td><td>Rode <code>views.sql</code> inteiro de novo, incluindo o <code>grant</code> final.</td></tr>
+            <tr><td><code>401</code> ou “Invalid API key”</td><td>Chave errada, incompleta ou com espaço.</td><td>Copie a chave de novo em API Keys.</td></tr>
+          </tbody>
+        </table>
+        <div class="alert-box">
+          <h4>Chave publicável sim, chave secreta nunca</h4>
+          <p>A chave publicável foi feita para ficar no navegador: ela só lê o que o RLS e os <code>grant</code> permitem, e as views são somente leitura. A chave secreta e a senha do banco ignoram essas barreiras. Elas não entram no terminal compartilhado da aula, em prompt, em arquivo nem em commit.</p>
+        </div>
       </section>
 
       <section data-lesson-section="challenge">
-        <h2>17. Desafio e entrega</h2>
-        <p>Em dupla, responda à Diretoria de Operações: <strong>a base está apta para calcular permanência hospitalar?</strong> A resposta deve separar registros utilizáveis de registros que exigem revisão, apontar o principal risco cadastral e mencionar pelo menos uma sugestão do Antigravity que foi rejeitada ou alterada.</p>
-        <p><strong>Entrega verificável:</strong> <code>Aula_08_SeuNome.ipynb</code> executado do início ao fim; <code>base_hospitalar_tratada.csv</code> com 5.000 linhas; fila contendo as 150 cronologias incoerentes; relatório antes/depois; dicionário de dados; <code>REVISAO_IA.md</code>; commit e push.</p>
+        <h2>10. Desafio e entrega</h2>
+        <p>Crie no seu fork a pasta <code>aula-08-seunome/</code> com três itens:</p>
+        <ul>
+          <li><code>ESPECIFICACAO.md</code> com o link do frame do dashboard no Miro, a ordem narrativa escolhida e uma linha por pergunta com: pergunta, decisão, view, colunas, visual escolhido, título que afirma, âncora tratada e suporte na tela.</li>
+          <li><code>views.sql</code> com as views que o grupo escreveu com IA antes do gabarito.</li>
+          <li>Na própria <code>ESPECIFICACAO.md</code>, a diferença encontrada entre a versão do grupo e o gabarito, com a causa.</li>
+        </ul>
+        <p>Um modelo para começar, com a linha da P06 preenchida:</p>
+        <div class="code-block wrap"># Especificação do dashboard · Chief de Vendas Olist
+
+Frame do dashboard no Miro: &lt;link do frame&gt;
+Ordem narrativa: contexto (P01, P05, P03) → tensão (P07, P08, P06, P10, P09) → decisão (P04, P02)
+
+| # | Pergunta | Decisão | View | Colunas | Visual | Título que afirma | Âncora tratada | Suporte na tela |
+|---|---|---|---|---|---|---|---|---|
+| P06 | Quanto o frete pesa sobre o preço em cada região? | Subsídio de frete | vw_p06_frete_regiao | regiao, frete_sobre_preco_pct, frete_medio_item, itens | Barras horizontais ordenadas | No Norte, o frete equivale a 22,7% do preço; no Sudeste, a 15,2% | D2 "Frete caro espanta cliente" | Nota: só pedidos realizados; a base não registra desistência |
+
+## Views do grupo
+Arquivo: views.sql (escrito com IA antes do gabarito)
+Conferência: P05 confere; P06 retornou 49,4% no Norte, contra 22,7% da referência.
+Diferença encontrada: a IA calculou avg(frete / preco), a média das razões de cada item.
+O gabarito divide a soma do frete pela soma do preço; itens baratos com frete alto inflavam a média.</div>
+        <p>A linha “Diferença encontrada” do modelo é ilustrativa: registre a que o seu grupo encontrou, ou declare que as views bateram de primeira e o que foi conferido. Publique com commit e push:</p>
+        <div class="code-block">git add aula-08-seunome/
+git commit -m <span class="code-string">"Aula 08: especificação do dashboard e views do grupo"</span>
+git push</div>
+        <p><strong>Critério de aceite:</strong> as 10 perguntas aparecem na <code>ESPECIFICACAO.md</code> com todos os campos preenchidos; cada título afirma algo que a view sustenta; o frame do dashboard tem pelo menos 4 âncoras registradas nos cinco campos; a conferência da seção 8.3 retorna dez <code>confere = true</code> no seu Supabase; e o <code>curl</code> da seção 9 devolve 2789 clientes recorrentes.</p>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>18. Checklist de qualidade</h2>
-        <ul><li>O SHA-256 ou o shape confirma que a turma trabalhou com a base correta.</li><li>O CSV bruto permanece intacto e separado dos produtos da limpeza.</li><li>Cada ausência tem uma política explícita; nenhuma idade ou condição clínica foi inventada.</li><li>Diagnósticos foram unidos somente por espaços e capitalização.</li><li>Duplicidades foram verificadas e a contagem zero foi registrada.</li><li>As 150 cronologias inválidas permanecem sinalizadas e fora de <code>dias_internacao</code>.</li><li>O notebook reinicia e executa todas as células sem depender da ordem manual.</li><li>O relatório não apresenta pendência humana como problema “resolvido”.</li><li>A revisão da IA registra aceitações, rejeições, testes e limitações.</li><li>Commit e push preservam a entrega no repositório do estudante.</li></ul>
+        <h2>11. Checklist de qualidade</h2>
+        <ul>
+          <li>Cada pergunta tem métrica, recorte, período, filtro e decisão explícitos.</li>
+          <li>Todos os post-its do frame estão numerados e na cor da raia: amarelo usuário, azul interface, verde dado, rosa âncora.</li>
+          <li>Nenhuma captura de tela no board.</li>
+          <li>A ordem narrativa do dashboard foi decidida por critério, e não por gosto.</li>
+          <li>Pelo menos 4 âncoras têm os cinco campos: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela.</li>
+          <li>Nenhum gráfico planejado usa dois eixos y nem pizza.</li>
+          <li>Cada título planejado afirma uma conclusão que a view sustenta.</li>
+          <li>As views do grupo foram conferidas contra a referência antes do gabarito, e a diferença foi registrada.</li>
+          <li>O Supabase tem as 11 views do gabarito e a conferência retorna dez <code>true</code>.</li>
+          <li>O <code>curl</code> com a chave publicável devolve a <code>vw_p09_recompra</code>.</li>
+          <li>Nenhuma senha, string de conexão ou chave secreta foi para prompt, arquivo ou commit.</li>
+        </ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>19. Síntese</h2>
-        <p>Limpeza de dados não é fabricar uma tabela sem células vazias. É preservar a fonte, medir os problemas, aplicar somente regras justificáveis, impedir que inconsistências contaminem indicadores e encaminhar o restante para decisão humana.</p>
-        <p>O Antigravity acelerou planejamento, código e testes, mas as evidências permaneceram visíveis: contagens antes/depois, flags, produtos separados, execução completa e histórico Git. A responsabilidade pela regra continuou com o estudante.</p>
+        <h2>12. Síntese</h2>
+        <p>O gráfico é a última decisão do dashboard, não a primeira. Hoje a turma decompôs cada pergunta nos cinco elementos que a tornam verificável, gerou alternativas de fluxo sem julgar e escolheu entre elas por três critérios: responde à decisão, tem view que sustenta, lê-se em 5 segundos. A ordem contexto → tensão → decisão transformou dez respostas num argumento.</p>
+        <p>O fluxo anotado mostrou onde a leitura do Chief ultrapassa o que o dado autoriza. A P06 é o exemplo mais claro: o frete pesa 22,7% sobre o preço no Norte, e nada na base diz que isso espanta cliente. As views fecham o percurso como contrato: cada uma foi conferida contra um número de referência, e a mesma leitura chega pela API REST. Antes de sair, aponte no frame a âncora que mais mudaria a recomendação ao board se ficasse sem suporte na tela.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>20. Referências e continuidade</h2>
-        <p>No próximo laboratório, a base tratada alimenta um modelo de previsão. Guarde o relatório de qualidade: previsões só fazem sentido quando a população analisada e as exclusões estão documentadas, e o modelo herda cada defeito que a limpeza não resolveu.</p>
-        <ul><li><a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium">Fonte e licença do dataset no Kaggle</a>.</li><li><a href="https://codelabs.developers.google.com/getting-started-agy-ide?hl=pt-br">Codelab oficial do Antigravity IDE</a>.</li><li><a href="https://antigravity.google/docs/agent-settings">Configurações de revisão e execução do agente</a>.</li><li><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Documentação do Pandas sobre dados ausentes</a>.</li></ul>
+        <h2>13. Referências e continuidade</h2>
+        <p>Na aula 9, a <code>ESPECIFICACAO.md</code> e o frame do dashboard viram um painel HTML publicado no GitHub Pages do seu fork, lendo estas views pela API REST. Cada suporte na tela decidido hoje (título que afirma, unidade, período, nota de origem) vira um elemento do cartão. Traga a Project URL e a chave publicável à mão.</p>
+        <ul>
+          <li><a href="https://supabase.com/docs/guides/api" target="_blank" rel="noopener noreferrer">Supabase: REST API gerada a partir do banco</a>.</li>
+          <li><a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener noreferrer">Supabase: chaves publicáveis e secretas</a>.</li>
+          <li><a href="https://docs.postgrest.org/en/stable/references/api/tables_views.html" target="_blank" rel="noopener noreferrer">PostgREST: filtros, seleção de colunas e ordenação na URL</a>.</li>
+          <li><a href="https://www.postgresql.org/docs/current/sql-createview.html" target="_blank" rel="noopener noreferrer">PostgreSQL: <code>CREATE VIEW</code> e <code>security_invoker</code></a>.</li>
+          <li><a href="https://www.gv.com/sprint/" target="_blank" rel="noopener noreferrer">Google Ventures: o método Sprint, origem do Crazy 8s</a>.</li>
+          <li><a href="https://www.liberatingstructures.com/1-1-2-4-all/" target="_blank" rel="noopener noreferrer">Liberating Structures: 1-2-4-All</a>.</li>
+          <li>Donald Norman, <em>O design do dia a dia</em>: golfos de execução e de avaliação.</li>
+          <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Documentação do dataset Olist</a>.</li>
+        </ul>
       </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-08.html" class="btn btn-slides">📊 Ver Slides</a>
-        <a href="../aula-05/dados/hospital_patients_real_world.csv" download="hospital_patients_real_world.csv" class="btn btn-data">⬇️ Baixar Base</a>
-        <a href="prompts-antigravity.md" download="prompts-antigravity.md" class="btn btn-data">✨ Baixar Prompts</a>
+        <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer" class="btn btn-slides">🧩 Abrir o Miro</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
   </div>
+
+  <script>
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.code-block').forEach(block => {
+      const wrap = document.createElement('div');
+      wrap.className = 'code-wrap';
+      block.parentNode.insertBefore(wrap, block);
+      wrap.appendChild(block);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-btn';
+      button.textContent = 'Copiar';
+      button.setAttribute('aria-label', 'Copiar o código deste bloco');
+      button.addEventListener('click', async () => {
+        try {
+          await copyText(block.innerText.trim());
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = 'Copiar'; }, 1800);
+      });
+      wrap.appendChild(button);
+    });
+  </script>
 </body>
 </html>

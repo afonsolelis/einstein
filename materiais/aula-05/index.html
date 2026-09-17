@@ -291,7 +291,7 @@ Password:       aluno</div>
         <p>Se a lista de bancos vier vazia, o passo anterior não foi concluído — o Metabase só oferece como destino bancos em que consegue criar tabelas.</p>
 
         <h3>5.10 Carregar a base hospitalar</h3>
-        <p>O arquivo é o mesmo dataset sintético do Kaggle usado na aula 8: <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium" target="_blank" rel="noopener noreferrer">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas sob licença CC0. São 5.000 internações fictícias em 7 colunas. Se o seu Codespace foi criado a partir do repositório da disciplina, o arquivo já está lá, em <code>materiais/aula-05/dados/</code>, e não precisa ser baixado. Caso contrário, use o botão <em>Baixar base CSV</em> no topo desta página e arraste o arquivo para dentro do Codespace.</p>
+        <p>O arquivo é o mesmo dataset sintético do Kaggle usado na aula 10: <a href="https://www.kaggle.com/datasets/nudratabbas/hospital-records-for-data-cleaning-medium" target="_blank" rel="noopener noreferrer">Hospital Records for Data Cleaning (Medium)</a>, publicado por Nudrat Abbas sob licença CC0. São 5.000 internações fictícias em 7 colunas. Se o seu Codespace foi criado a partir do repositório da disciplina, o arquivo já está lá, em <code>materiais/aula-05/dados/</code>, e não precisa ser baixado. Caso contrário, use o botão <em>Baixar base CSV</em> no topo desta página e arraste o arquivo para dentro do Codespace.</p>
         <p>Saia da administração, crie uma coleção, use o botão de upload e selecione o CSV. Três detalhes que valem para qualquer arquivo:</p>
         <ul>
           <li><strong>Formato:</strong> o upload aceita CSV e TSV. Um <code>.xlsx</code> não sobe — no Excel, use <em>Salvar como → CSV UTF-8</em>.</li>
@@ -405,7 +405,7 @@ FROM hospital_patients_real_world;</div>
 
         <div class="alert-box">
           <h4>Diagnóstico não é limpeza</h4>
-          <p>Nenhuma consulta desta aula altera a base. Contar problemas e corrigi-los são atos distintos: o primeiro é reversível e serve de evidência; o segundo exige critério documentado e é o assunto da aula 8. Não use <code>UPDATE</code> ou <code>DELETE</code> aqui, mesmo que a tentação seja grande.</p>
+          <p>Nenhuma consulta desta aula altera a base. Contar problemas e corrigi-los são atos distintos: o primeiro é reversível e serve de evidência; o segundo exige critério documentado e é o assunto da aula 10. Não use <code>UPDATE</code> ou <code>DELETE</code> aqui, mesmo que a tentação seja grande.</p>
         </div>
       </section>
 
@@ -445,7 +445,7 @@ git push</div>
 
       <section data-lesson-section="next-steps">
         <h2>12. Referências e continuidade</h2>
-        <p>Guarde o <code>PARECER_BASE.md</code>: ele reaparece duas vezes. Na aula 7, ao montar um dashboard sobre esta mesma base suja, os defeitos que você contou hoje vão aparecer desenhados nos gráficos. Na aula 8, eles são finalmente corrigidos com Pandas, e o antes/depois da limpeza será medido contra os números que você anotou aqui.</p>
+        <p>Guarde o <code>PARECER_BASE.md</code>: ele reaparece na aula 10, quando os defeitos que você contou hoje são finalmente corrigidos com Pandas, e o antes/depois da limpeza será medido contra os números que você anotou aqui.</p>
         <ul>
           <li><a href="https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker" target="_blank" rel="noopener noreferrer">Executar o Metabase com Docker</a>.</li>
           <li><a href="https://www.metabase.com/docs/latest/databases/uploads" target="_blank" rel="noopener noreferrer">Configuração de uploads no Metabase</a>.</li>

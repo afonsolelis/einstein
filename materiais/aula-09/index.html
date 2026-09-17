@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="../../assets/einstein-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material · 08</title>
+  <title>Material · 09</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
     
@@ -30,7 +30,7 @@
     
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
     
-    .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
@@ -50,25 +50,6 @@
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
 
-    @media (max-width: 768px) {
-      .header, .content { padding: 2.5rem; }
-      .actions { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-    }
-
-    @media print {
-      body { background: white; padding: 0; display: block; font-size: 12pt; }
-      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
-      .header, .content { padding: 1rem 0; }
-      .actions, .btn-print, .btn-home, .btn-slides { display: none !important; }
-      h1, h2, h3 { color: black !important; break-after: avoid; }
-      .badge { border: 1px solid #ccc; color: black; background: white; }
-      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
-      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
-      p, li { color: black; }
-      @page { margin: 2cm; }
-    }
-
     /* Controles flutuantes de navegacao */
     .floating-nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid #e2ebf2; border-radius: 999px; box-shadow: 0 10px 30px rgba(26,47,94,0.14); max-width: calc(100% - 1.5rem); }
     .floating-nav a, .floating-nav button { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1.15rem; border-radius: 999px; border: 1px solid transparent; font-family: 'Outfit', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; cursor: pointer; transition: all 0.25s; }
@@ -82,6 +63,9 @@
     body { padding-top: 6rem; }
 
     @media (max-width: 768px) {
+      .header, .content { padding: 2.5rem; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
       .floating-nav { top: 0.6rem; gap: 0.35rem; padding: 0.35rem; }
       .floating-nav a, .floating-nav button { width: auto; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
       body { padding-top: 4.75rem; }
@@ -93,49 +77,606 @@
     }
 
     @media print {
-      .floating-nav { display: none !important; }
+      body { background: white; padding: 0; display: block; font-size: 12pt; }
+      .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
+      .header, .content { padding: 1rem 0; }
+      .actions, .btn-print, .btn-home, .btn-slides, .floating-nav { display: none !important; }
       body { padding-top: 0 !important; }
+      h1, h2, h3 { color: black !important; break-after: avoid; }
+      .badge { border: 1px solid #ccc; color: black; background: white; }
+      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
+      .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      p, li { color: black; }
+      @page { margin: 2cm; }
+    }
+
+    a { color: #1f6fb2; }
+    .header .tema { margin: 0.8rem 0 0; color: #64748b; font-size: 1.05rem; font-weight: 600; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.75rem 0.9rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { background: #f4f8fb; color: #1a2f5e; }
+    .code-block { font-variant-ligatures: none; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.92rem; }
+    ol .code-block { margin: 0.8rem 0; }
+    .prompt-wrap { position: relative; margin: 2rem 0; }
+    .prompt-wrap .code-block { margin: 0; padding-top: 3.2rem; }
+    .copy-prompt { position: absolute; top: 0.7rem; right: 0.8rem; padding: 0.45rem 0.85rem; border: 1px solid rgba(75, 196, 232, 0.4); border-radius: 8px; color: #1f6fb2; background: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 600; cursor: pointer; }
+    .copy-prompt:hover { background: #eef6fb; }
+    .copy-prompt:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
+    .figura { margin: 2rem 0; padding: 1.5rem 1rem; border: 1px solid #e2ebf2; border-radius: 12px; background: #ffffff; }
+    .figura svg { display: block; width: 100%; height: auto; margin: 0 auto 1rem; }
+    .figura .arq-v { display: none; max-width: 330px; }
+    .figura figcaption { margin: 0; color: #64748b; font-size: 0.9rem; line-height: 1.6; }
+    .figura .caixa { fill: #f4f8fb; stroke: #9cc7e4; stroke-width: 1.5; }
+    .figura .caixa-nav { fill: #e6faf6; stroke: #00a389; }
+    .figura .titulo { fill: #1a2f5e; font: 700 17px 'Outfit', system-ui, sans-serif; }
+    .figura .sub { fill: #475569; font: 400 13px 'Outfit', system-ui, sans-serif; }
+    .figura .mono { fill: #1f6fb2; font: 400 12px 'Fira Code', monospace; }
+    .figura .num { fill: #ffffff; font: 700 13px 'Outfit', system-ui, sans-serif; }
+    .figura .bola { fill: #00a389; }
+    .figura .seta { stroke: #1f6fb2; stroke-width: 2; fill: none; }
+    .figura .rotulo { fill: #334155; font: 600 12px 'Outfit', system-ui, sans-serif; }
+    .figura .bloqueio { stroke: #dc2626; stroke-width: 2; }
+    .figura .bloqueio-texto { fill: #b91c1c; font: 600 12px 'Outfit', system-ui, sans-serif; }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { position: relative; padding-left: 2rem; }
+    .checklist li::before { content: '☐'; position: absolute; left: 0; top: 0.35rem; color: #00a3d9; font-size: 1.1rem; }
+    @media (max-width: 768px) {
+      .code-block { font-size: 0.82rem; padding: 1rem; }
+      .figura .arq-h { display: none; }
+      .figura .arq-v { display: block; }
+      .copy-prompt { top: 0.5rem; right: 0.5rem; font-size: 0.85rem; }
+    }
+    @media (max-width: 480px) {
+      .header, .content { padding: 1.5rem 1.1rem; }
+      h2 { font-size: 1.6rem; }
+      th, td { padding: 0.55rem 0.6rem; font-size: 0.9rem; }
+    }
+    @media print {
+      .copy-prompt { display: none; }
+      .figura .arq-h { display: block !important; }
+      .figura .arq-v { display: none !important; }
+      table { display: table; }
     }
   </style>
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-09.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dashboard-referencia/index.html" class="nav-slides" title="Abrir o dashboard de referência">📈 <span class="nav-label">Dashboard</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 09</div>
-      <h1>Fazendo previsões com IA: Vendas e Tendências</h1>
+      <div class="badge">LABORATÓRIO 09 · 07/10</div>
+      <h1>Dashboard online: GitHub Pages lendo o Supabase</h1>
+      <p class="tema">Data Visualization III · DataViz · Web</p>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Criar atributos derivados sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos, atributos e contexto</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p><ul><li>Atributos são hipóteses codificadas e só podem usar informação disponível no momento da previsão</li><li>Codificação e escala devem ser aprendidas apenas no treino e aplicadas pelo mesmo pipeline ao teste</li><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul><p>Documente fonte, fórmula, momento de disponibilidade e risco de vazamento de cada atributo. No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
-y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
-modelo = LinearRegression().fit(X_treino, y_treino)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">pred = modelo.predict(X_teste)
-baseline = [y_treino.iloc[-1]] * len(y_teste)
-print("MAE modelo", mean_absolute_error(y_teste,pred))
-print("MAE baseline", mean_absolute_error(y_teste,baseline))</div><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Registrar fonte e momento de disponibilidade dos atributos</li><li>Separar treino e teste antes de aprender transformações</li><li>Respeitar a ordem temporal e impedir vazamento</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li><li>Registrar variáveis e horizonte da previsão</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, mudaremos de previsão para inferência em experimentos A/B.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">O Chief de Vendas da Olist leva ao board as estratégias comerciais de 2019 e não aceita opinião sem número. Nas aulas 7 e 8, a turma transformou o Olist num esquema estrela reconciliado, decompôs as dez perguntas do Chief em fluxo anotado e escreveu uma view por pergunta. Falta a parte que o board vê: uma tela que qualquer pessoa abre no celular, lê sem ajuda e que busca os números no banco no momento da leitura. Hoje você constrói essa tela com um agente de IA, revisa o que ele escreveu, publica no GitHub Pages do seu fork e verifica, número a número, que a tela diz o mesmo que a view.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Construir com IA agêntica um dashboard HTML que consome as views do Supabase pela API REST.</li>
+          <li>Implementar na tela os suportes decididos no fluxo anotado: título que afirma, unidade, período e nota de origem.</li>
+          <li>Publicar o dashboard no GitHub Pages e verificar que ele funciona fora do Codespace.</li>
+          <li>Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo.</li>
+        </ul>
+        <table>
+          <thead><tr><th>Horário</th><th>Atividade</th><th>Produto</th></tr></thead>
+          <tbody>
+            <tr><td>19:00</td><td>Retomada: o fluxo e a especificação são o contrato</td><td>Cada grupo com a sua <code>ESPECIFICACAO.md</code> aberta</td></tr>
+            <tr><td>19:10</td><td>Arquitetura, chave publicável e chave secreta</td><td>Project URL e chave publicável à mão</td></tr>
+            <tr><td>19:30</td><td>Construção com o Copilot em modo agente</td><td>Pasta <code>aula-09-seunome</code> com os quatro arquivos</td></tr>
+            <tr><td>20:30</td><td>Intervalo</td><td>—</td></tr>
+            <tr><td>20:40</td><td>Revisão humana do diff</td><td>Painel sem número digitado, com carregamento e erro</td></tr>
+            <tr><td>21:05</td><td>Publicação no GitHub Pages</td><td>URL aberta no celular</td></tr>
+            <tr><td>21:20</td><td>Teste de leitura em voz alta por outro grupo</td><td>Frases literais e ajustes</td></tr>
+            <tr><td>21:40</td><td>Recomendação ao Chief de Vendas e síntese da sequência</td><td><code>README.md</code> completo</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O contrato: da especificação à tela</h2>
+        <p>Um dashboard costuma nascer ao contrário: alguém abre a ferramenta, escolhe gráficos que parecem bons e, no fim, procura uma pergunta que eles respondam. O resultado é uma galeria. Na aula 8 invertemos essa ordem: primeiro a decisão do Chief, depois o fluxo de interação anotado, as âncoras de divergência (onde a leitura do usuário ultrapassa o que o dado autoriza) e, só então, a view. A <code>ESPECIFICACAO.md</code> registra essas decisões numa linha por pergunta. Ela é o contrato desta aula.</p>
+        <table>
+          <thead><tr><th>Campo da especificação (aula 8)</th><th>Onde aparece no dashboard</th></tr></thead>
+          <tbody>
+            <tr><td>Pergunta e decisão</td><td>Etiqueta do cartão e posição na narrativa (contexto → tensão → decisão)</td></tr>
+            <tr><td>View e colunas</td><td>A URL do <code>fetch</code> e os campos lidos da resposta</td></tr>
+            <tr><td>Visual escolhido</td><td>O tipo de gráfico, sem troca por preferência do agente</td></tr>
+            <tr><td>Título que afirma</td><td>Frase montada no JavaScript com os valores da view</td></tr>
+            <tr><td>Âncora tratada e suporte na tela</td><td>Subtítulo com unidade, período e filtro; base de comparação no mesmo gráfico; nota de leitura</td></tr>
+          </tbody>
+        </table>
+        <p>O agente de IA escreve rápido, e é justamente por isso que o contrato importa. Sem ele, o agente escolhe um gráfico de pizza para 27 estados, digita no HTML o número que viu no seu prompt e escreve títulos descritivos como “Receita por estado”. Com ele, a revisão deixa de ser uma questão de gosto: basta comparar o diff com a linha da especificação.</p>
+        <p>As views que o painel lê são as de <code>materiais/aula-08/olist/views.sql</code>, que você executou no seu Supabase na aula 8. Se o seu fork está desatualizado, sincronize antes de começar: <strong>Sync fork</strong> na página do fork no GitHub e <code>git pull</code> no terminal do Codespace.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. Arquitetura: quem conversa com quem</h2>
+        <p>O GitHub Pages é um serviço de hospedagem de arquivos estáticos: ele entrega HTML, CSS e JavaScript exatamente como estão no repositório, sem executar nada no servidor. O Supabase, por sua vez, publica automaticamente uma API REST (o PostgREST) para tabelas e views do schema <code>public</code>. Os dois nunca conversam entre si. Quem liga as pontas é o navegador de quem abre o painel.</p>
+        <figure class="figura">
+          <div role="img" aria-label="Arquitetura do dashboard: o GitHub Pages entrega os arquivos ao navegador; o navegador chama a API REST do Supabase com a chave publicável; a API lê as views, que leem o esquema estrela com RLS de leitura.">
+            <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
+              <defs><marker id="m-ponta-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
+              <g><rect class="caixa" x="0" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="22" cy="94" r="12"/><text class="num" x="22" y="99" text-anchor="middle">1</text><text class="titulo" x="40" y="100">GitHub Pages</text><text class="sub" x="14" y="132">entrega os arquivos</text><text class="mono" x="14" y="160">usuario.github.io</text></g>
+              <g><rect class="caixa caixa-nav" x="237" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="259" cy="94" r="12"/><text class="num" x="259" y="99" text-anchor="middle">2</text><text class="titulo" x="277" y="100">Navegador</text><text class="sub" x="251" y="132">executa o app.js</text><text class="mono" x="251" y="160">celular, notebook</text></g>
+              <g><rect class="caixa" x="474" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="496" cy="94" r="12"/><text class="num" x="496" y="99" text-anchor="middle">3</text><text class="titulo" x="514" y="100">API REST</text><text class="sub" x="488" y="132">PostgREST</text><text class="mono" x="488" y="160">/rest/v1/vw_p01…</text></g>
+              <g><rect class="caixa" x="711" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="733" cy="94" r="12"/><text class="num" x="733" y="99" text-anchor="middle">4</text><text class="titulo" x="751" y="100">Views</text><text class="sub" x="725" y="132">uma por pergunta</text><text class="mono" x="725" y="160">vw_p01 … vw_p10</text></g>
+              <g><rect class="caixa" x="948" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="970" cy="94" r="12"/><text class="num" x="970" y="99" text-anchor="middle">5</text><text class="titulo" x="988" y="100">Estrela</text><text class="sub" x="962" y="132">RLS: só leitura</text><text class="mono" x="962" y="160">fato_* · dim_*</text></g>
+              <line class="seta" x1="157" y1="126" x2="232" y2="126" marker-end="url(#m-ponta-h)"/>
+              <text class="rotulo" x="194" y="100" text-anchor="middle">HTML,</text>
+              <text class="rotulo" x="194" y="114" text-anchor="middle">JS, CSS</text>
+              <line class="seta" x1="394" y1="126" x2="469" y2="126" marker-end="url(#m-ponta-h)"/>
+              <text class="rotulo" x="432" y="86" text-anchor="middle">fetch +</text>
+              <text class="rotulo" x="432" y="100" text-anchor="middle">chave</text>
+              <text class="rotulo" x="432" y="114" text-anchor="middle">publicável</text>
+              <line class="seta" x1="631" y1="126" x2="706" y2="126" marker-end="url(#m-ponta-h)"/>
+              <text class="rotulo" x="668" y="100" text-anchor="middle">SELECT</text>
+              <text class="rotulo" x="668" y="114" text-anchor="middle">como anon</text>
+              <line class="seta" x1="868" y1="126" x2="943" y2="126" marker-end="url(#m-ponta-h)"/>
+              <text class="rotulo" x="906" y="100" text-anchor="middle">security_</text>
+              <text class="rotulo" x="906" y="114" text-anchor="middle">invoker</text>
+              <line class="bloqueio" x1="237" y1="222" x2="626" y2="222"/><text class="bloqueio-texto" x="432" y="214" text-anchor="middle">chave secreta e senha do banco nunca passam por aqui</text>
+            </svg>
+            <svg class="arq-v" viewBox="0 0 330 430" aria-hidden="true">
+              <defs><marker id="m-ponta-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
+              <g><rect class="caixa" x="0" y="0" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="29" r="11"/><text class="num" x="22" y="34" text-anchor="middle">1</text><text class="titulo" x="42" y="25">GitHub Pages</text><text class="sub" x="42" y="45">entrega HTML, JS e CSS</text></g>
+              <g><rect class="caixa caixa-nav" x="0" y="92" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="121" r="11"/><text class="num" x="22" y="126" text-anchor="middle">2</text><text class="titulo" x="42" y="117">Navegador</text><text class="sub" x="42" y="137">executa o app.js</text></g>
+              <g><rect class="caixa" x="0" y="184" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="213" r="11"/><text class="num" x="22" y="218" text-anchor="middle">3</text><text class="titulo" x="42" y="209">API REST do Supabase</text><text class="mono" x="42" y="229">/rest/v1/vw_p01…</text></g>
+              <g><rect class="caixa" x="0" y="276" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="305" r="11"/><text class="num" x="22" y="310" text-anchor="middle">4</text><text class="titulo" x="42" y="301">Views vw_p01 … vw_p10</text><text class="sub" x="42" y="321">security_invoker = on</text></g>
+              <g><rect class="caixa" x="0" y="368" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="397" r="11"/><text class="num" x="22" y="402" text-anchor="middle">5</text><text class="titulo" x="42" y="393">Esquema estrela</text><text class="sub" x="42" y="413">RLS: só leitura para anon</text></g>
+              <line class="seta" x1="40" y1="61" x2="40" y2="87" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="80">arquivos estáticos</text>
+              <line class="seta" x1="40" y1="153" x2="40" y2="179" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="172">fetch + chave publicável</text>
+              <line class="seta" x1="40" y1="245" x2="40" y2="271" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="264">SELECT como anon</text>
+              <line class="seta" x1="40" y1="337" x2="40" y2="363" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="356">permissões de quem chama</text>
+            </svg>
+          </div>
+          <figcaption>Figura 1. O caminho de um número até a tela. A chave secreta e a senha do banco não aparecem em nenhum trecho.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>GitHub Pages.</strong> O navegador pede <code>https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</code> e recebe <code>index.html</code>, <code>supabase.js</code>, <code>app.js</code> e <code>style.css</code>. Nenhum número está nesses arquivos.</li>
+          <li><strong>Navegador.</strong> Ao executar <code>app.js</code>, o navegador faz um <code>fetch</code> por view, com a chave publicável nos cabeçalhos <code>apikey</code> e <code>Authorization</code>.</li>
+          <li><strong>API REST do Supabase.</strong> O PostgREST valida a chave, assume o papel <code>anon</code> e traduz a URL <code>/rest/v1/vw_p09_recompra?select=*</code> num <code>select * from public.vw_p09_recompra</code>.</li>
+          <li><strong>Views.</strong> Criadas com <code>security_invoker = on</code>, elas rodam com as permissões de quem chama, e não com as de quem as criou.</li>
+          <li><strong>Esquema estrela.</strong> Como a view roda como <code>anon</code>, as tabelas de fato e dimensão precisam da política de leitura que <code>estrela.sql</code> criou. Sem ela, a resposta é uma lista vazia.</li>
+        </ol>
+        <p>A consequência prática desse desenho é que o painel publicado sempre mostra o estado atual do banco. Se você recriar uma view com outra regra, a tela muda na próxima leitura, sem novo deploy. A mesma propriedade exige disciplina: um número digitado no HTML deixaria de acompanhar o banco e ninguém perceberia.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Chave publicável × chave secreta</h2>
+        <p>No painel do Supabase, abra <strong>Project Settings → API Keys</strong>. A chave publicável começa com <code>sb_publishable_</code>; em projetos criados antes das chaves novas, o equivalente é a <strong>anon public</strong>, na aba de chaves legadas. A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code> (o mesmo procedimento da aula 8).</p>
+        <table>
+          <thead><tr><th></th><th>Chave publicável (<code>sb_publishable_…</code> ou anon)</th><th>Chave secreta (<code>sb_secret_…</code> ou service_role) e senha do banco</th></tr></thead>
+          <tbody>
+            <tr><td>Pode ir no HTML?</td><td>Sim. Foi desenhada para ficar no navegador.</td><td>Nunca: nem no HTML, nem em commit, print, prompt ou chat da turma.</td></tr>
+            <tr><td>O que libera</td><td>Só o que o <code>grant</code> e as políticas de RLS permitem ao papel <code>anon</code>.</td><td>Tudo. A chave secreta ignora o RLS; a senha abre o banco inteiro.</td></tr>
+            <tr><td>Se vazar</td><td>Alguém lê o que já era público.</td><td>Alguém lê, altera e apaga qualquer tabela do projeto.</td></tr>
+          </tbody>
+        </table>
+        <p>A leitura pública é segura neste case por três decisões que você executou nas aulas anteriores, e não pela chave em si. <code>estrela.sql</code> liga o RLS nas seis tabelas do esquema estrela e cria a política <code>leitura_publica</code> apenas <code>for select</code>. <code>views.sql</code> concede <code>grant select</code> nas views ao papel <code>anon</code>. E não existe nenhuma política de insert, update ou delete: sem política, o RLS bloqueia a escrita, qualquer que seja a chave publicável usada.</p>
+        <div class="alert-box">
+          <h4>O limite vale nos dois sentidos</h4>
+          <p>Tudo o que o <code>grant</code> e o RLS liberam para <code>anon</code> fica legível por qualquer pessoa que abra o seu painel e copie a chave do código-fonte, inclusive as tabelas de fato e dimensão, e não só as views. O Olist é um dataset público e anonimizado; por isso o desenho é aceitável aqui. Com dados de clientes, pacientes ou colaboradores reais, a leitura pública não se aplica: o acesso exigiria login e políticas por usuário.</p>
+        </div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. A chamada à API e o formato da resposta</h2>
+        <p>Antes de escrever uma linha de HTML, confira a view pelo terminal, como na aula 8. O <code>read</code> pede os dois valores sem gravá-los em arquivo:</p>
+        <div class="code-block">read -p "Project URL: " SUPABASE_URL
+read -p "Chave publicável: " SUPABASE_KEY
+
+curl -s "$SUPABASE_URL/rest/v1/vw_p08_nota_prazo?select=*" \
+  -H "apikey: $SUPABASE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_KEY"</div>
+        <p>A resposta é uma lista JSON com uma linha por linha da view, com os nomes de coluna exatamente como estão em <code>views.sql</code>:</p>
+        <div class="code-block">[{"entrega":"no prazo","pedidos_avaliados":89182,"nota_media":4.29,"notas_1_e_2_pct":9.2},
+ {"entrega":"com atraso","pedidos_avaliados":6378,"nota_media":2.27,"notas_1_e_2_pct":62.4}]</div>
+        <p>No navegador, a mesma chamada é um <code>fetch</code>. Os dois cabeçalhos carregam a chave publicável: <code>apikey</code> é exigido pelo gateway do Supabase para identificar o projeto, e <code>Authorization: Bearer</code> é o cabeçalho de autenticação que chega ao PostgREST. Com a chave publicável nos dois, a consulta roda com o papel <code>anon</code>.</p>
+        <div class="code-block"><span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(`${SUPABASE_URL}<span class="code-string">/rest/v1/vw_p01_receita_mensal?select=*</span>`, {
+  headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+});
+<span class="code-keyword">if</span> (!resposta.ok) <span class="code-keyword">throw new</span> Error(`HTTP ${resposta.status}`);  <span class="code-comment">// 401, 404…: não siga em frente</span>
+<span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();                       <span class="code-comment">// lista de objetos, um por mês</span></div>
+
+        <h3>Número chega como número; a tela precisa de texto em pt-BR</h3>
+        <p>O PostgREST monta a resposta com funções JSON do próprio Postgres, e colunas <code>numeric</code> e <code>bigint</code> chegam como <strong>número JSON</strong>, sem aspas. Dois detalhes, porém, afetam a tela. Primeiro, o JSON não guarda zeros à direita: <code>"recompra_pct":3.00</code> vira o número <code>3</code> no JavaScript, e a tela mostraria “3%” onde a view diz 3,00%. Segundo, o JavaScript escreve números no formato americano (<code>13181027.13</code>). A formatação resolve os dois problemas; a conversão com <code>Number()</code> entra como defesa, para o caso de uma view futura devolver texto (um <code>to_char</code>, um <code>::text</code>) e a soma virar concatenação.</p>
+        <div class="code-block"><span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
+<span class="code-keyword">const</span> inteiro = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>);
+<span class="code-keyword">const</span> duasCasas = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+brl.format(Number(13181027.13));   <span class="code-comment">// "R$ 13.181.027,13"</span>
+inteiro.format(Number(96211));     <span class="code-comment">// "96.211"</span>
+duasCasas.format(Number(3));       <span class="code-comment">// "3,00": os zeros voltam na formatação</span>
+<span class="code-string">'987765.37'</span> + 1;                  <span class="code-comment">// "987765.371": por isso o Number() defensivo</span></div>
+        <p>O <code>Intl.NumberFormat</code> é nativo do navegador: não exige biblioteca, respeita a vírgula decimal e o ponto de milhar e, com <code>style: 'currency'</code>, escreve o símbolo do real no lugar certo. Crie o formatador uma vez e reutilize; criá-lo a cada valor funciona, mas desperdiça processamento em gráficos com muitos pontos.</p>
+
+        <h3>Gráficos com Chart.js pelo CDN</h3>
+        <p>O Chart.js é uma biblioteca de gráficos em JavaScript que desenha num elemento <code>&lt;canvas&gt;</code>. Como o GitHub Pages não executa <code>npm install</code>, a biblioteca vem de um CDN (rede de distribuição de conteúdo) por uma tag <code>&lt;script&gt;</code>. Fixe a versão na URL: sem o número, uma atualização da biblioteca pode mudar o seu painel sem nenhum commit seu.</p>
+        <div class="code-block">&lt;script src=<span class="code-string">"https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"</span>&gt;&lt;/script&gt;</div>
+        <p>A escolha do tipo de gráfico já foi feita na especificação. Na tradução para o Chart.js, a tendência mensal é <code>type: 'line'</code>; ranking e comparação entre categorias são <code>type: 'bar'</code> com <code>indexAxis: 'y'</code> (barras horizontais, que acomodam nomes longos) e dados ordenados; um número isolado, como a taxa de recompra, dispensa gráfico. Duas regras não se negociam: o eixo de valores começa no zero (<code>beginAtZero: true</code>) e não existe segundo eixo y.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>6. O dashboard de referência</h2>
+        <p>Antes de construir o seu, abra o painel do professor. Ele lê as mesmas dez views do <strong>seu</strong> projeto e serve de gabarito de comportamento: o que acontece enquanto carrega, como o erro aparece, como o título se monta a partir dos dados e onde ficam unidade, período e nota de origem.</p>
+        <p><a class="btn btn-slides" href="dashboard-referencia/index.html">📈 Abrir o dashboard de referência</a></p>
+        <ol>
+          <li>Cole a Project URL e a chave publicável e clique em <strong>Carregar o painel</strong>. Com <em>Lembrar neste navegador</em> marcado, os dois valores ficam apenas no <code>localStorage</code> do seu navegador; o botão <strong>Esquecer chave</strong> apaga.</li>
+          <li>Os dez cartões aparecem em três blocos: <strong>Contexto</strong> (P01, P05, P03), <strong>Tensão</strong> (P10, P09, P07, P08) e <strong>Decisão</strong> (P04, P06, P02). Se a turma votou outra ordem na aula 8, a do seu painel segue a votação.</li>
+          <li>Em cada cartão, abra <em>Ver as linhas de vw_…</em>: a tabela mostra a resposta da view com os nomes das colunas. É o ponto de partida da reconciliação da seção 12.</li>
+          <li>Teste o erro: clique em <strong>Trocar projeto</strong>, apague um caractere da chave e carregue de novo. Os cartões mostram HTTP 401 e o formulário volta com a explicação.</li>
+          <li>Teste a proteção: cole uma chave que comece com <code>sb_secret_</code>. O painel recusa antes de fazer qualquer chamada.</li>
+        </ol>
+        <p>Com os dados do gabarito, os títulos que o painel monta são, por exemplo: “SP concentra 38,4% da receita; com RJ e MG, chega a 63,4%”, “Os 295 vendedores do 1º decil geram 67,0% da receita; os 5 decis inferiores somam 3,3%” e “Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2”. Nenhuma dessas frases está escrita no código: cada uma é calculada a partir das linhas da view. Se o seu número for diferente, o problema está na view do seu projeto, e o painel acabou de mostrar isso.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>7. Prática guiada: construção com o agente</h2>
+        <p>Trabalhe no Codespace do seu fork, com o Copilot em <strong>modo agente</strong> (ou o Antigravity), a execução de comandos dependente da sua aprovação e a leitura de cada diff antes de aceitar. A pasta fica na raiz do repositório, ao lado de <code>aula-08-seunome</code>:</p>
+        <div class="code-block">aula-09-seunome/
+├── index.html     <span class="code-comment"># estrutura dos cartões, textos fixos (pergunta, período, fonte)</span>
+├── supabase.js    <span class="code-comment"># Project URL, chave publicável e a função que lê uma view</span>
+├── app.js         <span class="code-comment"># um bloco por cartão: lê, calcula o título, desenha, trata erro</span>
+├── style.css      <span class="code-comment"># layout responsivo</span>
+└── README.md      <span class="code-comment"># URL, reconciliação, teste de leitura e recomendação</span></div>
+
+        <h3>7.1 O prompt</h3>
+        <p>O prompt a seguir descreve as regras que a revisão vai cobrar. A última instrução é a mais importante: o agente apresenta o plano, com a fórmula de cada título, antes de escrever código. Corrigir um plano custa uma frase; corrigir dez cartões já escritos custa a aula.</p>
+        <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-08-seunome/ESPECIFICACAO.md. Crie a pasta aula-09-seunome com
+index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
+no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
+
+Regras:
+- Dados só pela API REST do Supabase: fetch em SUPABASE_URL/rest/v1/&lt;view&gt;?select=*
+  com os headers apikey e Authorization: Bearer, usando a chave publicável que
+  vou colar em supabase.js. Nunca use chave secreta nem senha do banco.
+- Nenhum número digitado no HTML ou no JavaScript: valores, títulos e rótulos
+  numéricos saem das linhas da view.
+- Um cartão por pergunta, na ordem narrativa da especificação. Cada cartão tem
+  título que afirma montado com os dados; subtítulo com unidade, período
+  (jan/2017 a ago/2018) e filtro; o visual da especificação; a nota da âncora
+  tratada; e a fonte com o nome da view.
+- Converta valores com Number() e formate com Intl.NumberFormat('pt-BR').
+- Chart.js 4 de https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js.
+  Sem eixo y duplo; barra horizontal ordenada para ranking; linha para meses.
+- Cada cartão mostra "carregando" e, se a chamada falhar, uma mensagem com o
+  status HTTP e a view, sem derrubar os outros cartões.
+- HTML, CSS e JS puros, sem build; funciona com python -m http.server e no
+  GitHub Pages; sem rolagem horizontal no celular.
+Antes de escrever código, liste os arquivos e, para cada pergunta, a view, as
+colunas e a fórmula do título. Espere a minha aprovação.</div></div>
+        <p>Ao receber o plano, confira três pontos contra a especificação: a ordem dos cartões, o visual de cada pergunta e se a fórmula do título usa apenas colunas que existem na view. Um título como “beleza_saude lidera” só pode ser calculado se a fórmula ordenar a view por receita; se o plano disser “título: beleza_saude lidera”, o agente digitou o resultado.</p>
+
+        <h3>7.2 O esqueleto que o agente deve produzir</h3>
+        <p>Os blocos abaixo são uma versão mínima, com dois cartões, do que o prompt pede. Servem para você reconhecer as peças no código do agente, e também como ponto de partida se o agente travar. Eles funcionam como estão: basta trocar a URL e a chave em <code>supabase.js</code>.</p>
+        <p><strong><code>index.html</code></strong>: os textos fixos do cartão são definições (pergunta, período, fonte). O título começa como “Carregando…” e o JavaScript substitui. A ordem das tags <code>&lt;script&gt;</code> importa: o Chart.js e o <code>supabase.js</code> carregam antes, e o <code>defer</code> faz o <code>app.js</code> rodar depois que a página inteira foi lida.</p>
+        <div class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Olist 2019 · Painel do Chief de Vendas&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"&gt;&lt;/script&gt;
+  &lt;script src="supabase.js"&gt;&lt;/script&gt;
+  &lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Estratégias comerciais da Olist para 2019&lt;/h1&gt;
+    &lt;p&gt;Receita = preço dos itens, sem frete, de pedidos entregues · jan/2017 a ago/2018&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;h2&gt;Contexto&lt;/h2&gt;
+    &lt;article class="cartao" id="p01"&gt;
+      &lt;p class="etiqueta"&gt;P01 · Como evoluíram receita e pedidos mês a mês?&lt;/p&gt;
+      &lt;h3 class="titulo"&gt;Carregando…&lt;/h3&gt;
+      &lt;p class="subtitulo"&gt;Receita em R$ por mês · pedidos entregues · jan/2017 a ago/2018&lt;/p&gt;
+      &lt;div class="corpo"&gt;&lt;canvas aria-label="Receita mensal"&gt;&lt;/canvas&gt;&lt;/div&gt;
+      &lt;p class="fonte"&gt;Fonte: vw_p01_receita_mensal (Supabase)&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;h2&gt;Tensão&lt;/h2&gt;
+    &lt;article class="cartao" id="p09"&gt;
+      &lt;p class="etiqueta"&gt;P09 · Quantos clientes voltam a comprar?&lt;/p&gt;
+      &lt;h3 class="titulo"&gt;Carregando…&lt;/h3&gt;
+      &lt;p class="subtitulo"&gt;% de clientes com mais de um pedido entregue · jan/2017 a ago/2018&lt;/p&gt;
+      &lt;div class="corpo numero"&gt;&lt;/div&gt;
+      &lt;p class="fonte"&gt;Fonte: vw_p09_recompra (Supabase)&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+        <p><strong><code>supabase.js</code></strong>: o único arquivo com a configuração do projeto. A função <code>lerView</code> transforma qualquer resposta que não seja 2xx em erro com o status e o corpo da resposta, que é onde o Supabase explica o problema.</p>
+        <div class="code-block"><span class="code-comment">// Configuração pública do projeto: a chave publicável pode ficar aqui.</span>
+<span class="code-comment">// A chave secreta e a senha do banco, nunca.</span>
+const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_COLE_A_SUA_CHAVE';
+
+async function lerView(view) {
+  const resposta = await fetch(`${SUPABASE_URL}/rest/v1/${view}?select=*`, {
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+  });
+  if (!resposta.ok) {
+    const detalhe = await resposta.text();
+    throw new Error(`${view} respondeu HTTP ${resposta.status}: ${detalhe}`);
+  }
+  return resposta.json();
+}</div>
+        <p><strong><code>app.js</code></strong>: a função <code>preencherCartao</code> concentra o padrão de carregamento e erro; cada pergunta só descreve como calcular o título e desenhar. Repare que nenhum valor aparece no código: o pico de receita é encontrado com <code>Math.max</code>, e os meses vêm da coluna <code>ano_mes</code>.</p>
+        <div class="code-block">const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const inteiro = new Intl.NumberFormat('pt-BR');
+const duasCasas = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const mesCurto = anoMes =&gt; {
+  const [ano, mes] = anoMes.split('-');
+  return `${MESES[Number(mes) - 1]}/${ano.slice(2)}`;
+};
+
+<span class="code-comment">// Lê a view, desenha o cartão ou mostra o erro sem derrubar os outros cartões.</span>
+async function preencherCartao(id, view, desenhar) {
+  const cartao = document.getElementById(id);
+  try {
+    const linhas = await lerView(view);
+    if (linhas.length === 0) throw new Error(`${view} respondeu sem linhas`);
+    desenhar(cartao, linhas);
+  } catch (erro) {
+    cartao.classList.add('erro');
+    cartao.querySelector('.titulo').textContent = 'Não foi possível ler esta view';
+    cartao.querySelector('.corpo').textContent = erro.message;
+  }
+}
+
+<span class="code-comment">// P09 · um número basta: nada de gráfico de uma barra só</span>
+preencherCartao('p09', 'vw_p09_recompra', (cartao, linhas) =&gt; {
+  const clientes = Number(linhas[0].clientes);
+  const recorrentes = Number(linhas[0].clientes_recorrentes);
+  const taxa = Number(linhas[0].recompra_pct);
+  cartao.querySelector('.titulo').textContent =
+    `Só ${duasCasas.format(taxa)}% dos clientes voltaram a comprar: ` +
+    `${inteiro.format(recorrentes)} de ${inteiro.format(clientes)}`;
+  cartao.querySelector('.corpo').textContent = `${duasCasas.format(taxa)}%`;
+});
+
+<span class="code-comment">// P01 · tendência no tempo: linha, eixo começando no zero</span>
+preencherCartao('p01', 'vw_p01_receita_mensal', (cartao, linhas) =&gt; {
+  const meses = linhas.map(linha =&gt; mesCurto(linha.ano_mes));
+  const receitas = linhas.map(linha =&gt; Number(linha.receita));
+  const pico = receitas.indexOf(Math.max(...receitas));
+  const ultimo = receitas.length - 1;
+  cartao.querySelector('.titulo').textContent =
+    `A receita mensal foi de ${brl.format(receitas[0])} (${meses[0]}) para ` +
+    `${brl.format(receitas[ultimo])} (${meses[ultimo]}), com pico em ${meses[pico]}`;
+  new Chart(cartao.querySelector('canvas'), {
+    type: 'line',
+    data: { labels: meses, datasets: [{ data: receitas, borderColor: '#0a9ad0', borderWidth: 2, pointRadius: 0 }] },
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: item =&gt; brl.format(item.parsed.y) } }
+      },
+      scales: { y: { beginAtZero: true, ticks: { callback: valor =&gt; brl.format(valor) } } }
+    }
+  });
+});</div>
+        <p><strong><code>style.css</code></strong>: o Chart.js precisa de um contêiner com altura definida e <code>position: relative</code> quando <code>maintainAspectRatio</code> é <code>false</code>; sem isso, o gráfico cresce sem parar ou fica com altura zero.</p>
+        <div class="code-block">body { margin: 0 auto; max-width: 960px; padding: 1rem; font-family: system-ui, sans-serif; color: #1e293b; background: #f4f8fb; }
+.cartao { margin: 1rem 0; padding: 1rem 1.25rem; border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; }
+.etiqueta, .subtitulo, .fonte { color: #64748b; font-size: 0.9rem; }
+.titulo { margin: 0.3rem 0; font-size: 1.15rem; }
+.corpo { position: relative; height: 280px; }
+.corpo.numero { height: auto; font-size: 3rem; font-weight: 700; }
+.cartao.erro .corpo { height: auto; color: #b91c1c; font-size: 0.95rem; }</div>
+        <p>Com os dados do gabarito, esses dois cartões mostram “A receita mensal foi de R$ 111.798,36 (jan/17) para R$ 838.576,64 (ago/18), com pico em nov/17” e “Só 3,00% dos clientes voltaram a comprar: 2.789 de 93.104”. Os outros oito cartões seguem o mesmo padrão, cada um com o visual e o título da sua linha na especificação.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>8. Revisão humana: quatro perguntas ao diff</h2>
+        <p>O agente entrega código que roda. Rodar não é o critério; o critério é a tela afirmar só o que o dado autoriza. Antes de aceitar o diff, responda às quatro perguntas com uma verificação concreta, não com a leitura do que o agente disse que fez.</p>
+        <ol>
+          <li><strong>Há número digitado?</strong> Procure valores com casas decimais ou separador de milhar nos arquivos do painel. Cada ocorrência precisa ser justificada (uma largura em CSS, a versão do Chart.js); um valor de receita, taxa ou contagem é reprovação imediata.
+            <div class="code-block">grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*.html aula-09-seunome/*.js</div></li>
+          <li><strong>O carregamento e o erro aparecem?</strong> Com a rede lenta, cada cartão mostra “Carregando…”. Para testar o erro, troque temporariamente <code>vw_p09_recompra</code> por <code>vw_p09_recompraX</code> no <code>app.js</code> e recarregue: só aquele cartão pode mostrar HTTP 404, e os outros nove continuam de pé. Desfaça a troca.</li>
+          <li><strong>O título afirma e vem do dado?</strong> Leia cada título sozinho, como se estivesse num e-mail ao Chief. “Receita por estado” descreve o eixo; “SP concentra 38,4% da receita” afirma. Depois procure no código a linha que monta a frase e confira que cada número dela sai de uma variável lida da view.</li>
+          <li><strong>Unidade, período e fonte estão em todos os cartões?</strong> R$ ou %, jan/2017 a ago/2018, o filtro relevante (entregues, ≥ 500 entregas, ≥ R$ 50 mil em 2017) e o nome da view. Sem período, “3,00%” pode ser lido como taxa anual; sem filtro, a taxa de atraso do Maranhão parece comparável à de Roraima, que ficou fora da view.</li>
+        </ol>
+        <p>Verifique também as âncoras. Se a especificação diz que a P04 precisa mostrar a base de 2017 para impedir a leitura “bebês é a maior aposta”, e o agente desenhou só o crescimento percentual, o gráfico está tecnicamente certo e o contrato está quebrado.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>9. Teste no Codespace antes de publicar</h2>
+        <p>Abrir o <code>index.html</code> com duplo clique não reproduz o GitHub Pages. Um servidor estático local, sim: ele entrega os arquivos por HTTP, como o Pages fará. Na raiz do repositório:</p>
+        <div class="code-block">python -m http.server 8000</div>
+        <ol>
+          <li>O Codespace avisa que há uma aplicação na porta 8000. Se o aviso não aparecer, abra a aba <strong>PORTS</strong> do painel inferior.</li>
+          <li>Na linha da porta 8000, clique no ícone do globo (<em>Open in Browser</em>). O endereço abre na raiz do repositório.</li>
+          <li>Acrescente <code>/aula-09-seunome/</code> ao endereço. Não use <code>localhost</code> no seu navegador: o servidor roda no Codespace, não no seu computador.</li>
+          <li>Abra as ferramentas do desenvolvedor (<code>F12</code>), aba <strong>Network</strong>, e recarregue. Cada <code>vw_p…</code> precisa responder <strong>200</strong>; a aba <strong>Console</strong> não pode ter erro vermelho.</li>
+          <li>Ative a visualização de celular (ícone de dispositivo nas ferramentas do desenvolvedor) e role a página: não pode haver rolagem horizontal.</li>
+          <li>Pare o servidor com <code>Ctrl + C</code> no terminal.</li>
+        </ol>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>10. Publicação no GitHub Pages</h2>
+        <p>O GitHub Pages publica um site a partir de um branch do repositório. Como o curso é trunk-based, o branch é <code>main</code> e a pasta é a raiz; a sua pasta <code>aula-09-seunome</code> vira um endereço dentro do site do fork.</p>
+        <ol>
+          <li>Confirme que está no seu fork, e não no repositório do curso: <code>git remote -v</code> deve mostrar o seu usuário.</li>
+          <li>Publique o código:
+            <div class="code-block">git add aula-09-seunome
+git commit -m <span class="code-string">"Publica o dashboard do Chief de Vendas lendo as views do Supabase"</span>
+git push</div></li>
+          <li>No GitHub, abra o seu fork e vá em <strong>Settings → Pages</strong>.</li>
+          <li>Em <strong>Build and deployment</strong>, escolha <strong>Source: Deploy from a branch</strong>.</li>
+          <li>Em <strong>Branch</strong>, selecione <strong>main</strong> e a pasta <strong>/(root)</strong>. Clique em <strong>Save</strong>.</li>
+          <li>Acompanhe a execução <em>pages build and deployment</em> na aba <strong>Actions</strong>. Quando ela terminar, a página <strong>Settings → Pages</strong> mostra o endereço do site. A primeira publicação costuma levar alguns minutos.</li>
+          <li>Abra o endereço do painel, que segue o formato abaixo, no celular e fora do Codespace:
+            <div class="code-block">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</div></li>
+        </ol>
+        <p>Cada <code>git push</code> posterior dispara um novo deploy. O endereço diferencia maiúsculas de minúsculas: <code>Aula-09-SeuNome</code> e <code>aula-09-seunome</code> são páginas diferentes, e só uma existe.</p>
+        <div class="alert-box">
+          <h4>O fork precisa ser público</h4>
+          <p>No plano gratuito do GitHub, o Pages só publica repositórios públicos. Um fork de repositório público nasce público; se você criou uma cópia privada, a seção Pages pede upgrade de plano. Publicar um repositório público é também a razão pela qual a chave secreta nunca pode estar em nenhum arquivo dele, nem em commits antigos.</p>
+        </div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>11. Quando não funciona</h2>
+        <p>A maioria dos erros deste laboratório cai em uma de duas camadas: a API (chave, view, permissão) ou a hospedagem (endereço, deploy). O código de status HTTP, visto na aba Network, diz em qual camada procurar.</p>
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Como resolver</th></tr></thead>
+          <tbody>
+            <tr><td><code>401</code> com “Invalid API key”</td><td>Chave errada, cortada, com espaço ou de outro projeto.</td><td>Copie de novo em Project Settings → API Keys e confira se o <code>&lt;ref&gt;</code> da URL é do mesmo projeto.</td></tr>
+            <tr><td><code>401</code> ou <code>403</code> com código <code>42501</code></td><td>A chave foi aceita, mas <code>anon</code> não tem <code>grant select</code> na view ou nas tabelas da estrela.</td><td>Rode <code>views.sql</code> inteiro, com o <code>grant</code> final; se persistir, rode o bloco final de <code>estrela.sql</code>.</td></tr>
+            <tr><td><code>404</code> com código <code>PGRST205</code></td><td>A view não existe com esse nome, ou a API ainda não recarregou o esquema.</td><td>Confira o nome em <code>information_schema.views</code>; se a view acabou de ser criada, rode <code>notify pgrst, 'reload schema';</code> no SQL Editor.</td></tr>
+            <tr><td><code>200</code> com <code>[]</code></td><td>RLS ligado sem política de leitura nas tabelas que a view consulta.</td><td>Rode o bloco final de <code>estrela.sql</code>, que cria a política <code>leitura_publica</code>.</td></tr>
+            <tr><td>“Failed to fetch” ou mensagem de CORS no console</td><td>Quase nunca é CORS: a API do Supabase aceita chamadas de qualquer origem. A causa costuma ser Project URL errada (com <code>/rest/v1</code> duplicado, <code>http</code> ou erro de digitação) ou projeto pausado por inatividade no plano gratuito.</td><td>Abra a URL da view no navegador para ver a resposta real; se o projeto estiver pausado, restaure-o no painel do Supabase.</td></tr>
+            <tr><td><code>404</code> na página do GitHub Pages</td><td>Deploy ainda rodando, pasta com nome diferente (maiúsculas contam) ou arquivo que não se chama <code>index.html</code>.</td><td>Espere o fim do deploy em Actions e compare o endereço com o nome da pasta no repositório.</td></tr>
+            <tr><td>Página publicada mostra a versão antiga</td><td>Deploy do último push ainda não terminou ou o navegador guardou cache.</td><td>Aguarde a execução em Actions e recarregue com <code>Ctrl + Shift + R</code>.</td></tr>
+            <tr><td>“Chart is not defined” no console</td><td>O <code>app.js</code> rodou antes do Chart.js, ou a URL do CDN está errada.</td><td>Mantenha a tag do Chart.js antes do <code>app.js</code>, que usa <code>defer</code>.</td></tr>
+            <tr><td>Settings → Pages pede upgrade</td><td>Repositório privado no plano gratuito.</td><td>Use o fork público do repositório do curso.</td></tr>
+            <tr><td>Consulta direta a uma tabela de fato devolve exatamente 1.000 linhas</td><td>A API do Supabase limita o número de linhas por resposta.</td><td>Não é o caso das dez views, que têm no máximo 28 linhas; agregue no banco, com uma view, em vez de trazer o fato para o navegador.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>12. Reconciliação e teste de leitura</h2>
+        <h3>12.1 Tela × view</h3>
+        <p>A reconciliação da aula 7 garantiu que a estrela não perdeu receita; a conferência da aula 8 garantiu que as views batem com as respostas de referência. Falta o último elo: a tela mostra o que a view devolve? Arredondamento, ordenação e filtros no JavaScript são pontos em que o número pode mudar no caminho. Para cada cartão, escolha o número principal do título e confira no SQL Editor:</p>
+        <div class="code-block">select * from vw_p05_receita_estado where estado = <span class="code-string">'SP'</span>;
+select * from vw_p08_nota_prazo;
+select * from vw_p01_receita_mensal order by receita desc limit 1;</div>
+        <table>
+          <thead><tr><th>Cartão</th><th>Número na tela</th><th>View · coluna · linha</th><th>Valor na view</th><th>Igual?</th></tr></thead>
+          <tbody>
+            <tr><td>P05</td><td>SP 38,4%</td><td><code>vw_p05_receita_estado</code> · <code>participacao_pct</code> · SP</td><td>38.4</td><td>sim</td></tr>
+            <tr><td>P08</td><td>nota 2,27 com atraso</td><td><code>vw_p08_nota_prazo</code> · <code>nota_media</code> · com atraso</td><td>2.27</td><td>sim</td></tr>
+            <tr><td>P01</td><td>pico de R$ 987,8 mil em nov/17</td><td><code>vw_p01_receita_mensal</code> · <code>receita</code> · 2017-11</td><td>987765.37</td><td>sim, arredondado para mil</td></tr>
+          </tbody>
+        </table>
+        <p>Quando o título soma ou compara linhas (“com RJ e MG, chega a 63,4%”), a view não tem esse número pronto. Registre o cálculo: soma de <code>receita</code> das três primeiras linhas dividida pela soma de todas. Um número calculado na tela sem cálculo registrado é um número que ninguém consegue auditar.</p>
+
+        <h3>12.2 Teste de leitura em voz alta</h3>
+        <p>Um painel é lido sem o autor ao lado. O teste reproduz essa condição em 20 minutos:</p>
+        <ol>
+          <li>Troque de URL com outro grupo. O grupo leitor abre o seu painel no celular, sem nenhuma explicação.</li>
+          <li>Para cada cartão, um leitor diz em voz alta, em uma frase, o que concluiu. O seu grupo anota a frase literal, entre aspas, e não comenta.</li>
+          <li>Classifique cada frase: <strong>coincide</strong> com o que o dado autoriza; <strong>ultrapassa</strong> o que o dado autoriza (por exemplo, “o atraso derruba a nota”, quando a view mostra associação e não causa); ou <strong>não entendeu</strong> o cartão.</li>
+          <li>Frase que ultrapassa vira âncora de divergência, registrada nos cinco campos das aulas 7 e 8: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela. Frase de quem não entendeu vira ajuste de título, unidade ou visual.</li>
+          <li>Aplique pelo menos um ajuste, faça commit e push, e peça ao mesmo grupo que releia o cartão alterado.</li>
+        </ol>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>13. Desafio e entrega</h2>
+        <p>Publique no seu fork, com commit e push, a pasta <code>aula-09-seunome</code> com <code>index.html</code>, <code>supabase.js</code>, <code>app.js</code>, <code>style.css</code> e um <code>README.md</code> neste formato:</p>
+        <div class="code-block"># Aula 9 · Dashboard online · Seu Nome
+
+URL publicada: https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/
+
+## Reconciliação tela × view
+| Cartão | Número na tela | View · coluna · linha | Valor na view | Igual? |
+|---|---|---|---|---|
+| P01 | | vw_p01_receita_mensal · receita · 2017-11 | | |
+(uma linha por cartão, P01 a P10; cálculos feitos na tela descritos abaixo da tabela)
+
+## Teste de leitura (grupo leitor: ...)
+| Cartão | Frase literal | Coincide, ultrapassa ou não entendeu | Ajuste feito |
+|---|---|---|---|
+
+## Recomendação ao Chief de Vendas
+- Recomendação:
+- Número que a sustenta (cartão e view):
+- O que a invalidaria:</div>
+        <p>A recomendação é a síntese da sequência. Ela escolhe uma decisão, cita o número que a sustenta e declara a condição que a derrubaria. Um exemplo de formato, não de conteúdo obrigatório:</p>
+        <ul>
+          <li><strong>Recomendação:</strong> atacar o prazo de entrega no RJ antes de subsidiar frete no Nordeste.</li>
+          <li><strong>Número que a sustenta:</strong> o RJ tem 12.312 entregas e 12,2% com atraso (P07); com atraso, a nota média cai de 4,29 para 2,27 (P08).</li>
+          <li><strong>O que a invalidaria:</strong> se o atraso do RJ estiver concentrado em poucos vendedores, a ação é sobre sellers e não sobre a promessa de prazo; e se a nota baixa vier de outra causa, como produto, o ganho esperado com o prazo não se confirma.</li>
+        </ul>
+        <p><strong>Critério de aceite:</strong> a URL abre no celular, fora do Codespace; os dez cartões carregam do seu Supabase, na ordem da especificação; nenhum número de resultado está digitado no HTML ou no JavaScript; um cartão com view inexistente mostra erro sem derrubar os demais; a tabela de reconciliação tem dez linhas com “sim”; o README traz as frases do teste de leitura, ao menos um ajuste aplicado e a recomendação com os três campos.</p>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>14. Checklist de qualidade</h2>
+        <ul class="checklist">
+          <li>A chave em <code>supabase.js</code> começa com <code>sb_publishable_</code> (ou é a anon public); nenhuma chave secreta ou senha existe no repositório.</li>
+          <li><code>grep</code> não encontra número de resultado digitado no HTML ou no JavaScript.</li>
+          <li>Cada cartão tem título que afirma, unidade, período, filtro e fonte com o nome da view.</li>
+          <li>Os gráficos seguem a especificação: linha para meses, barras ordenadas para ranking, eixo começando no zero, sem eixo y duplo.</li>
+          <li>Há estado de carregamento e mensagem de erro por cartão, com status HTTP e view.</li>
+          <li>O painel foi testado com <code>python -m http.server 8000</code> e na URL do GitHub Pages, no celular.</li>
+          <li>As dez linhas da reconciliação conferem, e os cálculos feitos na tela estão descritos.</li>
+          <li>As frases do teste de leitura estão registradas e ao menos um ajuste foi publicado.</li>
+          <li>A recomendação cita o número, o cartão e a condição que a invalidaria.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>15. Síntese</h2>
+        <p>A sequência de Data Visualization percorreu o caminho inteiro de um número até a decisão. Na aula 7, o dado bruto virou um esquema estrela reconciliado. Na aula 8, a pergunta do Chief virou fluxo anotado, âncora de divergência e view. Hoje, a view virou uma tela pública que busca o número no banco a cada leitura e que outro grupo conseguiu ler sem o autor ao lado.</p>
+        <p>Em todas as etapas, a IA escreveu e a turma verificou: com SQL na aula 7, com a conferência contra as respostas de referência na aula 8 e, hoje, com o <code>grep</code>, a reconciliação tela × view e o teste de leitura. O mecanismo é o mesmo nas três: o artefato gerado só vale quando uma verificação independente do agente confirma o que ele afirma. Antes de encerrar, responda: qual frase do teste de leitura mais surpreendeu o seu grupo, e que elemento da tela a provocou?</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>16. Referências e continuidade</h2>
+        <p>Não há aula em 14/10. No laboratório 10, a base volta ao centro da análise: limpeza de dados com IA e Pandas, preservando a camada bruta. Antes disso, confira se a URL do seu painel abre no celular e se o <code>README.md</code> está publicado.</p>
+        <ul>
+          <li><a href="https://supabase.com/docs/guides/api">Supabase · REST API</a>: como o Supabase publica tabelas e views pela API.</li>
+          <li><a href="https://supabase.com/docs/guides/api/api-keys">Supabase · API keys</a>: chave publicável, chave secreta e chaves legadas.</li>
+          <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security">Supabase · Row Level Security</a>: políticas que limitam o que cada papel lê e escreve.</li>
+          <li><a href="https://docs.postgrest.org/en/stable/references/api/tables_views.html">PostgREST · Tables and Views</a>: filtros, ordenação e seleção de colunas na URL.</li>
+          <li><a href="https://docs.github.com/pt/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Pages · Configurar uma fonte de publicação</a>: deploy a partir de um branch.</li>
+          <li><a href="https://www.chartjs.org/docs/latest/">Chart.js · Documentação</a>: tipos de gráfico, eixos e tooltips.</li>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch">MDN · Usando Fetch</a> e <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN · Intl.NumberFormat</a>.</li>
+          <li>Arquivos do case: <a href="../aula-07/olist/estrela.sql">estrela.sql</a> (aula 7) e <a href="../aula-08/olist/views.sql">views.sql</a> (aula 8).</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-09.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dashboard-referencia/index.html" class="btn btn-slides">📈 Dashboard de referência</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
   </div>
+
+  <script>
+    function copiarTexto(texto) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
+      return new Promise((resolve, reject) => {
+        const area = document.createElement('textarea');
+        area.value = texto;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        const ok = document.execCommand('copy');
+        area.remove();
+        ok ? resolve() : reject(new Error('copy'));
+      });
+    }
+    document.querySelectorAll('.copy-prompt').forEach(botao => {
+      botao.addEventListener('click', async () => {
+        const texto = botao.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = botao.textContent;
+        try { await copiarTexto(texto); botao.textContent = 'Copiado ✓'; }
+        catch (erro) { botao.textContent = 'Selecione o texto'; }
+        window.setTimeout(() => { botao.textContent = original; }, 1800);
+      });
+    });
+  </script>
 </body>
 </html>

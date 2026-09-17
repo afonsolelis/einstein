@@ -348,20 +348,19 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 14 · 18/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Análise de dados aplicada ao RH</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Definir indicadores de pessoas sem reduzir indivíduos a números</li><li>Investigar rotatividade com recortes e contexto</li><li>Propor intervenção mensurável e eticamente defensável</li></ul></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 14 · 18/11</div><h1>Laboratório de Dados &amp; IA</h1><p>IA aplicada à estratégia e tomada de decisão</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></div>
     <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Taxa de saída precisa de período, população e denominador claros</li><li>Diferenças entre grupos podem refletir função, senioridade ou contexto</li><li>Modelos não devem automatizar decisões sensíveis sem avaliação e recurso</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
-rh = pd.read_csv("colaboradores.csv")
-rot = rh.groupby("area").agg(pessoas=("id","size"),saidas=("saiu","sum"))
-rot["taxa_saida"] = rot["saidas"]/rot["pessoas"]
-print(rot.sort_values("taxa_saida", ascending=False))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Analise rotatividade por área e senioridade, identifique uma hipótese e proponha teste de intervenção.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar diagnóstico com definição do indicador, recortes, limitações, ação e métrica de acompanhamento.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>People analytics deve ampliar cuidado e capacidade de ação, nunca legitimar decisões opacas.</p><ul><li>Minimizar dados pessoais utilizados</li><li>Não inferir causa de associação isolada</li><li>Revisar possíveis impactos entre grupos</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, construiremos uma previsão de fluxo de caixa orientada à gestão.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
+for nome,v in alternativas.items():
+    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
+print(alternativas)</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos análise de dados a decisões de recursos humanos.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 14</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 

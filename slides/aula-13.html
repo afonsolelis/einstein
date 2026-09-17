@@ -348,19 +348,24 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 13 · 11/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Análise forense de dados: Identificando fraudes</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Preservar cadeia de custódia e trilha de auditoria</li><li>Relacionar transações, entidades e padrões suspeitos</li><li>Documentar achados sem ultrapassar a evidência</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Análise forense reconstrói eventos a partir de registros preservados. Reprodutibilidade e integridade são tão importantes quanto o algoritmo.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import hashlib
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 13 · 11/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Auditoria e forense de dados: anomalias, riscos e fraudes</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir erro, evento raro e fraude</li><li>Combinar regras e escores de anomalia com contexto de negócio</li><li>Priorizar alertas por impacto e explicabilidade</li><li>Relacionar transações, entidades e padrões suspeitos preservando a cadeia de custódia</li><li>Documentar achados sem ultrapassar a evidência</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Da anomalia ao alerta: regras e escores</li><li>Do alerta ao dossiê: evidência preservada</li><li>Prática guiada, desafio e síntese</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Anomalia é observação incompatível com um padrão esperado; ela é um sinal para investigação, não uma sentença de irregularidade. A análise forense começa quando o alerta precisa virar evidência que outra pessoa consiga reproduzir.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Auditoria: critérios para gerar alertas</h2><ul><li>Regras de negócio capturam riscos conhecidos e são fáceis de explicar</li><li>Métodos estatísticos detectam desvios, mas exigem segmentação</li><li>Taxa de falsos positivos determina o custo operacional da fila</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Forense: do alerta à evidência</h2><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: regra de auditoria</h2><div class="code-block">import pandas as pd
+pag = pd.read_csv("pagamentos.csv")
+limite = pag.groupby("fornecedor")["valor"].transform(lambda s:s.quantile(.99))
+pag["alerta_regra"] = pag["valor"] &gt; limite</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: preservar a fonte</h2><div class="code-block">import hashlib
 from pathlib import Path
-arquivo = Path("transacoes.csv")
+arquivo = Path("pagamentos.csv")
 print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Reconstrua uma sequência de transações suspeitas, preserve o hash da fonte e produza uma linha do tempo.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar dossiê com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><ul><li>Trabalhar sobre cópia verificada</li><li>Registrar horário e autor de cada transformação</li><li>Usar linguagem de indício, não de culpa</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos análise de dados a decisões de recursos humanos.</p></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Monte uma fila de auditoria combinando regra conhecida e escore, revise manualmente os dez primeiros casos e reconstrua a sequência de transações do alerta prioritário, preservando o hash da fonte e produzindo uma linha do tempo.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar ranking de alertas com motivo, valor em risco, evidência e resultado da revisão, acompanhado do dossiê do caso prioritário com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Detecção eficiente combina sinais automáticos com investigação humana, e uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><ul><li>Não rotular fraude sem investigação</li><li>Trabalhar sobre cópia verificada</li><li>Usar linguagem de indício, não de culpa</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, ampliaremos a análise para decisões estratégicas apoiadas por IA.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 13</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 

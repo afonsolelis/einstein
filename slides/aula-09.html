@@ -156,6 +156,7 @@
       box-shadow: 0 0 10px rgba(0, 215, 176, 0.75);
     }
     .slide-content strong { color: #fff; font-weight: 700; }
+    .slide-content a { color: var(--cyan-light); }
     .slide-content em { color: var(--cyan-light); font-style: normal; }
     .slide-content code {
       padding: 0.14em 0.45em;
@@ -168,6 +169,7 @@
     }
 
     .code-block {
+      font-variant-ligatures: none;
       white-space: pre-wrap;
       position: relative;
       z-index: 1;
@@ -302,6 +304,85 @@
     .ctrl-btn-only-icon { min-width: 42px; padding-inline: 0.7rem; }
     .slide-counter { min-width: 4.5rem; color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.84rem; text-align: center; }
 
+
+    /* Componentes da aula 9 */
+    .kicker { position: relative; z-index: 1; margin: 0 0 0.6rem; color: #7ee7d4; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+    .slide-content ol { position: relative; z-index: 1; max-width: 1120px; margin: 0 0 1rem; padding-left: 1.6rem; color: var(--text); font-size: clamp(1.02rem, 1.55vw, 1.35rem); font-weight: 300; line-height: 1.45; }
+    .slide-content ol li { margin-bottom: 0.35rem; padding-left: 0.2rem; }
+    .slide-content ol li::before { display: none; }
+    .slide-content ol li::marker { color: var(--teal); font-weight: 700; }
+
+    .agenda { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.2rem 3rem; }
+    .agenda li { margin-bottom: 0.3rem; }
+    .agenda b { display: inline-block; min-width: 3.4rem; color: var(--cyan-light); font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.86em; }
+
+    .arq { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0.4rem 0 1.1rem; }
+    .arq svg { display: block; width: 100%; height: auto; }
+    .arq .arq-v { display: none; }
+    .arq .caixa { fill: rgba(8, 47, 73, 0.72); stroke: rgba(75, 196, 232, 0.4); stroke-width: 1.5; }
+    .arq .caixa-nav { fill: rgba(0, 215, 176, 0.12); stroke: var(--teal); }
+    .arq .titulo { fill: #ffffff; font: 700 17px 'Outfit', system-ui, sans-serif; }
+    .arq .sub { fill: #a9c3d4; font: 400 13px 'Outfit', system-ui, sans-serif; }
+    .arq .mono { fill: var(--cyan-light); font: 400 12px 'Fira Code', monospace; }
+    .arq .num { fill: #062f3c; font: 700 13px 'Outfit', system-ui, sans-serif; }
+    .arq .bola { fill: var(--teal); }
+    .arq .seta { stroke: var(--cyan-light); stroke-width: 2; fill: none; }
+    .arq .rotulo { fill: #d7e5ef; font: 600 12px 'Outfit', system-ui, sans-serif; }
+    .arq .bloqueio { stroke: #f87171; stroke-width: 2; }
+    .arq .bloqueio-texto { fill: #fca5a5; font: 600 12px 'Outfit', system-ui, sans-serif; }
+
+    .duas { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; width: min(100%, 1120px); }
+    .painel { padding: clamp(0.9rem, 1.8vw, 1.4rem); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; background: rgba(4, 20, 34, 0.55); }
+    .painel h3 { margin: 0 0 0.5rem; color: #ffffff; font-size: clamp(1.05rem, 1.6vw, 1.35rem); }
+    .painel h3 code { font-size: 0.8em; }
+    .painel ul { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem) !important; }
+    .painel.ok { border-top: 4px solid var(--teal); }
+    .painel.nunca { border-top: 4px solid #f87171; }
+
+    .tres { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1120px); margin-bottom: 1rem; }
+    .tres .painel p { margin: 0 0 0.5rem; font-size: clamp(0.85rem, 1.15vw, 1rem); color: var(--muted); }
+    .tres .painel h3 span { color: var(--teal); font-weight: 400; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .chips span { padding: 0.25rem 0.55rem; border: 1px solid rgba(75, 196, 232, 0.3); border-radius: 999px; color: #dff6ff; background: rgba(0, 163, 217, 0.12); font-size: clamp(0.78rem, 1.05vw, 0.95rem); }
+
+    .anatomia { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.6rem; align-items: center; width: min(100%, 1120px); }
+    .mock { padding: 1.1rem 1.2rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; background: rgba(15, 23, 42, 0.8); box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3); }
+    .mock .m-tag { display: inline-block; padding: 0.12rem 0.5rem; border: 1px solid rgba(75, 196, 232, 0.3); border-radius: 999px; color: var(--cyan-light); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; }
+    .mock .m-perg { color: #94a3b8; font-size: 0.8rem; margin-left: 0.4rem; }
+    .mock .m-tit { margin: 0.45rem 0 0.2rem; color: #fff; font-size: clamp(0.95rem, 1.35vw, 1.15rem); font-weight: 600; line-height: 1.25; }
+    .mock .m-sub { color: #94a3b8; font-size: 0.78rem; }
+    .mock .m-bar { display: grid; grid-template-columns: 6rem 1fr 3rem; gap: 0.5rem; align-items: center; margin-top: 0.5rem; color: #cbd5e1; font-size: 0.8rem; }
+    .mock .m-bar i { display: block; height: 14px; border-radius: 0 4px 4px 0; }
+    .mock .m-nota { margin-top: 0.7rem; padding: 0.4rem 0.6rem; border-left: 3px solid #d0772a; color: #cbd5e1; background: rgba(208, 119, 42, 0.08); font-size: 0.76rem; }
+    .mock .m-fonte { margin-top: 0.5rem; color: #94a3b8; font-size: 0.72rem; }
+    .mock .m-fonte code { font-size: 0.95em; }
+    .marca { display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; margin-right: 0.35rem; border-radius: 50%; color: #062f3c; background: var(--teal); font-size: 0.72em; font-weight: 800; vertical-align: 0.1em; }
+
+    .erros { position: relative; z-index: 1; display: grid; grid-template-columns: max-content 1fr; gap: 0.45rem 1.2rem; width: min(100%, 1120px); margin: 0; color: var(--text); font-size: clamp(0.98rem, 1.45vw, 1.25rem); font-weight: 300; line-height: 1.35; }
+    .erros dt { color: #ffffff; font-family: 'Fira Code', monospace; font-size: 0.86em; font-weight: 600; }
+    .erros dd { margin: 0; }
+
+    .tabela { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0 0 1rem; border-collapse: collapse; color: var(--text); font-size: clamp(0.9rem, 1.3vw, 1.12rem); }
+    .tabela th, .tabela td { padding: 0.5rem 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; }
+    .tabela th { color: var(--cyan-light); font-weight: 600; }
+    .tabela td code { font-size: 0.82em; overflow-wrap: anywhere; }
+
+    .formato { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0 0 1rem; padding: 1rem 1.2rem; border-left: 5px solid var(--teal); border-radius: 0 14px 14px 0; background: rgba(4, 20, 34, 0.6); }
+    .formato p { margin: 0 0 0.45rem !important; }
+    .formato p:last-child { margin-bottom: 0 !important; }
+    .formato b { color: #7ee7d4; font-weight: 700; }
+
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-top: 3rem; }
+    .copy-prompt { position: absolute; top: 0.6rem; right: 0.8rem; z-index: 2; padding: 0.45rem 0.75rem; border: 1px solid rgba(126, 231, 212, 0.35); border-radius: 8px; color: #dffcf6; background: rgba(0, 163, 137, 0.2); cursor: pointer; }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+
+    .link-destaque { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.6rem; margin: 0.2rem 0 1.1rem; padding: 0.8rem 1.15rem; border: 1px solid rgba(126, 231, 212, 0.38); border-radius: 10px; color: #e9fffb !important; background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2)); font-weight: 700; text-decoration: none; }
+    .link-destaque:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .link-destaque:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .url { position: relative; z-index: 1; display: inline-block; margin: 0.2rem 0 0.8rem; padding: 0.5rem 0.8rem; border-radius: 8px; color: #e9fffb; background: rgba(0, 163, 217, 0.14); font-family: 'Fira Code', monospace; font-size: clamp(0.8rem, 1.3vw, 1.05rem); overflow-wrap: anywhere; }
+
     @media (max-width: 768px) {
       :root { --controls-height: 62px; }
       .slide { padding: 4.25rem 1.5rem calc(var(--controls-height) + 2rem); }
@@ -320,7 +401,7 @@
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
-      .slide-start::before { width: 24%; opacity: 0.68; }
+      .slide-start::before { top: 0; width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
       .slide-start p { max-width: 84%; font-size: clamp(1.05rem, 5vw, 1.45rem); }
       .slide-start .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
@@ -343,27 +424,368 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+  
+    @media (max-width: 768px) {
+      .kicker { font-size: 0.66rem; margin-bottom: 0.35rem; }
+      .slide-content ol { font-size: clamp(0.88rem, 3.6vw, 1rem); line-height: 1.32; padding-left: 1.2rem; }
+      .slide-content ol li { margin-bottom: 0.22rem; }
+      .agenda { grid-template-columns: 1fr; gap: 0; }
+      .agenda li { margin-bottom: 0.2rem !important; }
+      .arq .arq-h { display: none; }
+      .arq .arq-v { display: block; max-width: 300px; }
+      .arq { margin: 0 0 0.6rem; }
+      .duas, .anatomia { grid-template-columns: 1fr; gap: 0.6rem; }
+      .painel { padding: 0.65rem 0.8rem; }
+      .painel h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+      .painel ul { font-size: 0.86rem !important; }
+      .painel ul li { margin-bottom: 0.15rem; }
+      .tres { gap: 0.4rem; margin-bottom: 0.6rem; }
+      .tres .painel { padding: 0.5rem 0.45rem; }
+      .tres .painel h3 { font-size: 0.86rem; }
+      .tres .painel h3 span { display: block; font-size: 0.72rem; }
+      .tres .painel p { display: none; }
+      .chips { gap: 0.25rem; }
+      .chips span { padding: 0.12rem 0.35rem; font-size: 0.7rem; }
+      .mock { padding: 0.7rem 0.8rem; }
+      .mock .m-perg { display: none; }
+      .mock .m-bar { grid-template-columns: 4.6rem 1fr 2.6rem; font-size: 0.72rem; margin-top: 0.3rem; }
+      .mock .m-nota { font-size: 0.7rem; margin-top: 0.45rem; }
+      .anatomia ul { font-size: 0.84rem !important; }
+      .anatomia ul li { margin-bottom: 0.12rem !important; padding-left: 0 !important; }
+      .anatomia ul li::before { display: none; }
+      .erros { grid-template-columns: 1fr; gap: 0 0; font-size: 0.86rem; }
+      .erros dd { margin-bottom: 0.4rem; color: #b9cfdc; }
+      .tabela { font-size: 0.76rem; }
+      .tabela th, .tabela td { padding: 0.32rem 0.25rem; }
+      .tabela td code { padding: 0.05em 0.2em; font-size: 0.74em; }
+      .formato { padding: 0.6rem 0.75rem; }
+      .prompt-wrap .code-block { padding-top: 2.6rem; max-height: 46vh; }
+      .copy-prompt { top: 0.4rem; right: 0.5rem; padding: 0.35rem 0.55rem; font-size: 0.72rem; }
+      .link-destaque { padding: 0.6rem 0.85rem; font-size: 0.9rem; margin-bottom: 0.7rem; }
+      .hide-mobile { display: none !important; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 9 · 30/09</div><h1>Laboratório de Dados &amp; IA</h1><p>Fazendo previsões com IA: Vendas e Tendências</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Criar atributos sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Atributos são hipóteses</h2><ul><li>Use somente informação disponível no momento da previsão.</li><li>Aprenda codificação e escala apenas no conjunto de treino.</li><li>Documente fonte, fórmula e risco de vazamento.</li><li>Encapsule transformações no mesmo pipeline do modelo.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
-y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
-modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><ul><li>Respeitar a ordem temporal</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, mudaremos de previsão para inferência em experimentos A/B.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 9</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 9 · 07/10</div><h1>Dashboard online</h1><p>GitHub Pages lendo o Supabase: as dez respostas do Chief de Vendas no ar</p></div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <p class="kicker">Case Olist · terceiro ato</p>
+      <h2>O board não aceita opinião sem número</h2>
+      <p>O Chief de Vendas da Olist leva ao board as estratégias comerciais de 2019. A turma é a equipe de dados que sustenta cada afirmação.</p>
+      <ul>
+        <li><strong>Aula 7:</strong> o Olist virou um esquema estrela no seu Supabase, reconciliado</li>
+        <li><strong>Aula 8:</strong> as dez perguntas viraram fluxo anotado, dez views e <code>ESPECIFICACAO.md</code></li>
+        <li><strong>Hoje:</strong> a especificação vira um painel público, lido do seu banco, que outro grupo entende sem você explicar</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <h2>Objetivos de aprendizagem</h2>
+      <ul>
+        <li>Construir com IA agêntica um dashboard HTML que consome as views do Supabase pela API REST</li>
+        <li>Implementar na tela os suportes decididos no fluxo anotado: título que afirma, unidade, período e nota de origem</li>
+        <li>Publicar o dashboard no GitHub Pages e verificar que ele funciona fora do Codespace</li>
+        <li>Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <h2>Roteiro do laboratório</h2>
+      <ul class="agenda">
+        <li><b>19:00</b> O contrato: fluxo e especificação</li>
+        <li><b>19:10</b> Arquitetura e chaves</li>
+        <li><b>19:30</b> Construção com o agente</li>
+        <li><b>20:30</b> Intervalo</li>
+        <li><b>20:40</b> Revisão humana</li>
+        <li><b>21:05</b> Publicação no GitHub Pages</li>
+        <li><b>21:20</b> Teste de leitura em voz alta</li>
+        <li><b>21:40</b> Recomendação e síntese</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>A especificação é o contrato</h2>
+      <p>O agente escreve o HTML. Quem decide o que a tela afirma é a <code>ESPECIFICACAO.md</code> da aula 8.</p>
+      <ul>
+        <li><strong>Pergunta e decisão</strong> → posição do cartão na narrativa</li>
+        <li><strong>View e colunas</strong> → o que o <code>fetch</code> lê</li>
+        <li><strong>Visual escolhido</strong> → o gráfico, sem troca por gosto do agente</li>
+        <li><strong>Título que afirma</strong> → frase montada com os dados, nunca digitada</li>
+        <li><strong>Âncora e suporte na tela</strong> → unidade, período, base de comparação, nota</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts" data-slide="arquitetura">
+      <h2>Quem conversa com quem</h2>
+      <figure class="arq" role="img" aria-label="Arquitetura: o GitHub Pages entrega os arquivos; o navegador chama a API REST do Supabase, que lê as views sobre o esquema estrela">
+        <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
+          <defs><marker id="ponta-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker></defs>
+          <g><rect class="caixa" x="0" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="22" cy="94" r="12"/><text class="num" x="22" y="99" text-anchor="middle">1</text><text class="titulo" x="40" y="100">GitHub Pages</text><text class="sub" x="14" y="132">entrega os arquivos</text><text class="mono" x="14" y="160">usuario.github.io</text></g>
+          <g><rect class="caixa caixa-nav" x="237" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="259" cy="94" r="12"/><text class="num" x="259" y="99" text-anchor="middle">2</text><text class="titulo" x="277" y="100">Navegador</text><text class="sub" x="251" y="132">executa o app.js</text><text class="mono" x="251" y="160">celular, notebook</text></g>
+          <g><rect class="caixa" x="474" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="496" cy="94" r="12"/><text class="num" x="496" y="99" text-anchor="middle">3</text><text class="titulo" x="514" y="100">API REST</text><text class="sub" x="488" y="132">PostgREST</text><text class="mono" x="488" y="160">/rest/v1/vw_p01…</text></g>
+          <g><rect class="caixa" x="711" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="733" cy="94" r="12"/><text class="num" x="733" y="99" text-anchor="middle">4</text><text class="titulo" x="751" y="100">Views</text><text class="sub" x="725" y="132">uma por pergunta</text><text class="mono" x="725" y="160">vw_p01 … vw_p10</text></g>
+          <g><rect class="caixa" x="948" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="970" cy="94" r="12"/><text class="num" x="970" y="99" text-anchor="middle">5</text><text class="titulo" x="988" y="100">Estrela</text><text class="sub" x="962" y="132">RLS: só leitura</text><text class="mono" x="962" y="160">fato_* · dim_*</text></g>
+          <line class="seta" x1="157" y1="126" x2="232" y2="126" marker-end="url(#ponta-h)"/>
+          <text class="rotulo" x="194" y="100" text-anchor="middle">HTML,</text>
+          <text class="rotulo" x="194" y="114" text-anchor="middle">JS, CSS</text>
+          <line class="seta" x1="394" y1="126" x2="469" y2="126" marker-end="url(#ponta-h)"/>
+          <text class="rotulo" x="432" y="86" text-anchor="middle">fetch +</text>
+          <text class="rotulo" x="432" y="100" text-anchor="middle">chave</text>
+          <text class="rotulo" x="432" y="114" text-anchor="middle">publicável</text>
+          <line class="seta" x1="631" y1="126" x2="706" y2="126" marker-end="url(#ponta-h)"/>
+          <text class="rotulo" x="668" y="100" text-anchor="middle">SELECT</text>
+          <text class="rotulo" x="668" y="114" text-anchor="middle">como anon</text>
+          <line class="seta" x1="868" y1="126" x2="943" y2="126" marker-end="url(#ponta-h)"/>
+          <text class="rotulo" x="906" y="100" text-anchor="middle">security_</text>
+          <text class="rotulo" x="906" y="114" text-anchor="middle">invoker</text>
+          <line class="bloqueio" x1="237" y1="222" x2="626" y2="222"/><text class="bloqueio-texto" x="432" y="214" text-anchor="middle">chave secreta e senha do banco nunca passam por aqui</text>
+        </svg>
+        <svg class="arq-v" viewBox="0 0 330 430" aria-hidden="true">
+          <defs><marker id="ponta-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker></defs>
+          <g><rect class="caixa" x="0" y="0" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="29" r="11"/><text class="num" x="22" y="34" text-anchor="middle">1</text><text class="titulo" x="42" y="25">GitHub Pages</text><text class="sub" x="42" y="45">entrega HTML, JS e CSS</text></g>
+          <g><rect class="caixa caixa-nav" x="0" y="92" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="121" r="11"/><text class="num" x="22" y="126" text-anchor="middle">2</text><text class="titulo" x="42" y="117">Navegador</text><text class="sub" x="42" y="137">executa o app.js</text></g>
+          <g><rect class="caixa" x="0" y="184" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="213" r="11"/><text class="num" x="22" y="218" text-anchor="middle">3</text><text class="titulo" x="42" y="209">API REST do Supabase</text><text class="mono" x="42" y="230">/rest/v1/vw_p01…</text></g>
+          <g><rect class="caixa" x="0" y="276" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="305" r="11"/><text class="num" x="22" y="310" text-anchor="middle">4</text><text class="titulo" x="42" y="301">Views vw_p01 … vw_p10</text><text class="sub" x="42" y="321">security_invoker = on</text></g>
+          <g><rect class="caixa" x="0" y="368" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="397" r="11"/><text class="num" x="22" y="402" text-anchor="middle">5</text><text class="titulo" x="42" y="393">Esquema estrela</text><text class="sub" x="42" y="413">RLS: só leitura para anon</text></g>
+          <line class="seta" x1="40" y1="61" x2="40" y2="87" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="80">arquivos estáticos</text>
+          <line class="seta" x1="40" y1="153" x2="40" y2="179" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="172">fetch + chave publicável</text>
+          <line class="seta" x1="40" y1="245" x2="40" y2="271" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="264">SELECT como anon</text>
+          <line class="seta" x1="40" y1="337" x2="40" y2="363" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="356">permissões de quem chama</text>
+        </svg>
+      </figure>
+      <p>O GitHub Pages não fala com o Supabase: quem busca os dados é o navegador de quem abre o painel.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Uma view, uma URL</h2>
+      <div class="code-block"><span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(
+  `${SUPABASE_URL}<span class="code-string">/rest/v1/vw_p09_recompra?select=*</span>`,
+  { headers: { apikey: SUPABASE_KEY,
+               Authorization: `Bearer ${SUPABASE_KEY}` } }
+);
+<span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();
+<span class="code-comment">// [{"clientes":93104,"clientes_recorrentes":2789,"recompra_pct":3.00}]</span></div>
+      <p style="margin-top: 1rem">O Supabase publica cada view do schema <code>public</code> como endpoint. A resposta é uma lista de linhas em JSON, com os nomes de coluna da view.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Chave publicável × chave secreta</h2>
+      <p>Supabase → <strong>Project Settings → API Keys</strong>: Project URL e chaves.</p>
+      <div class="duas">
+        <div class="painel ok"><h3>Publicável <code>sb_publishable_…</code></h3><ul><li>Pode ir no HTML e no commit</li><li>Identifica o projeto; em projetos antigos, é a <em>anon public</em></li><li>Lê só o que o grant e o RLS liberam</li></ul></div>
+        <div class="painel nunca"><h3>Secreta <code>sb_secret_…</code> e senha</h3><ul><li>Nunca no HTML, no commit, no print ou no prompt</li><li>Ignora o RLS: quem copia, escreve e apaga</li><li>Em projetos antigos, é a <em>service_role</em></li></ul></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Por que a leitura pública é segura aqui</h2>
+      <ul>
+        <li><code>estrela.sql</code> liga o RLS nas seis tabelas com uma política só de <strong>SELECT</strong> para <code>anon</code></li>
+        <li><code>views.sql</code> cria as views com <code>security_invoker = on</code> e dá <code>grant select</code> a <code>anon</code></li>
+        <li>Não existe política de insert, update ou delete: a chave publicável não escreve</li>
+        <li>O limite também vale ao contrário: tudo que o grant libera fica legível por qualquer pessoa. Dado pessoal real não se publica assim</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Número chega, número se formata</h2>
+      <div class="code-block"><span class="code-keyword">const</span> taxa = Number(linha.recompra_pct);    <span class="code-comment">// 3.00 chega como 3</span>
+<span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>,
+  { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
+<span class="code-keyword">const</span> pct = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>,
+  { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+brl.format(Number(<span class="code-string">'13181027.13'</span>));      <span class="code-comment">// "R$ 13.181.027,13"</span>
+pct.format(taxa) + <span class="code-string">'%'</span>;                  <span class="code-comment">// "3,00%"</span></div>
+      <p style="margin-top: 1rem">A API já entrega número JSON; <code>Number()</code> é conversão defensiva, caso a view mude e mande texto. <code>Intl</code> devolve a vírgula decimal, o ponto de milhar e os zeros que o JSON perdeu.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Anatomia de um cartão</h2>
+      <div class="anatomia">
+        <div class="mock" aria-label="Exemplo de cartão da pergunta 8">
+          <span class="m-tag"><span class="marca">1</span>P08 · SATISFAÇÃO</span><span class="m-perg">O atraso derruba a nota do cliente?</span>
+          <div class="m-tit"><span class="marca">2</span>Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2</div>
+          <div class="m-sub"><span class="marca">3</span>% de notas 1 e 2 · pedidos entregues e avaliados · jan/2017 a ago/2018</div>
+          <div class="m-bar"><span>No prazo</span><i style="width:9.2%;background:#0a9ad0"></i><span>9,2%</span></div>
+          <div class="m-bar"><span><span class="marca">4</span>Atraso</span><i style="width:62.4%;background:#d0772a"></i><span>62,4%</span></div>
+          <div class="m-nota"><span class="marca">5</span>Atraso e nota baixa andam juntos; a view não prova que um causa o outro.</div>
+          <div class="m-fonte"><span class="marca">6</span>Fonte: <code>public.vw_p08_nota_prazo</code></div>
+        </div>
+        <ul>
+          <li><span class="marca">1</span>Pergunta e tipo</li>
+          <li><span class="marca">2</span>Título que afirma, calculado com os dados</li>
+          <li><span class="marca">3</span>Unidade, filtro e período</li>
+          <li><span class="marca">4</span>Visual escolhido na especificação</li>
+          <li><span class="marca">5</span>Suporte da âncora: o que o dado não autoriza</li>
+          <li><span class="marca">6</span>Nota de origem com a view</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Dashboard de referência</h2>
+      <a class="link-destaque" href="../materiais/aula-09/dashboard-referencia/index.html">📈 Abrir o dashboard de referência</a>
+      <ul>
+        <li>Cole a Project URL e a chave publicável do <strong>seu</strong> projeto: elas ficam só no seu navegador</li>
+        <li>Os dez cartões leem as views de <code>views.sql</code> e desenham com Chart.js</li>
+        <li>Cada título é calculado a partir da view; em <em>Ver as linhas</em> você reconcilia a tela com a view</li>
+        <li>É gabarito de comportamento, não de estética: o seu painel segue a especificação do seu grupo</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Ordem narrativa, não galeria</h2>
+      <div class="tres">
+        <div class="painel"><h3>1. Contexto <span>onde estamos</span></h3><p>ritmo, geografia e mix</p><div class="chips"><span>P01</span><span>P05</span><span>P03</span></div></div>
+        <div class="painel"><h3>2. Tensão <span>o que ameaça</span></h3><p>sellers, recompra, prazo e nota</p><div class="chips"><span>P10</span><span>P09</span><span>P07</span><span>P08</span></div></div>
+        <div class="painel"><h3>3. Decisão <span>onde agir</span></h3><p>categorias, frete e calendário</p><div class="chips"><span>P04</span><span>P06</span><span>P02</span></div></div>
+      </div>
+      <p>Esta é a ordem do dashboard de referência. Se a turma votou outra ordem na aula 8, vale a da turma: a especificação manda.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Construção com o agente</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-08-seunome/ESPECIFICACAO.md. Crie a pasta aula-09-seunome com
+index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
+no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
+
+Regras:
+- Dados só pela API REST do Supabase: fetch em SUPABASE_URL/rest/v1/&lt;view&gt;?select=*
+  com os headers apikey e Authorization: Bearer, usando a chave publicável que
+  vou colar em supabase.js. Nunca use chave secreta nem senha do banco.
+- Nenhum número digitado no HTML ou no JavaScript: valores, títulos e rótulos
+  numéricos saem das linhas da view.
+- Um cartão por pergunta, na ordem narrativa da especificação. Cada cartão tem
+  título que afirma montado com os dados; subtítulo com unidade, período
+  (jan/2017 a ago/2018) e filtro; o visual da especificação; a nota da âncora
+  tratada; e a fonte com o nome da view.
+- Converta valores com Number() e formate com Intl.NumberFormat('pt-BR').
+- Chart.js 4 de https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js.
+  Sem eixo y duplo; barra horizontal ordenada para ranking; linha para meses.
+- Cada cartão mostra "carregando" e, se a chamada falhar, uma mensagem com o
+  status HTTP e a view, sem derrubar os outros cartões.
+- HTML, CSS e JS puros, sem build; funciona com python -m http.server e no
+  GitHub Pages; sem rolagem horizontal no celular.
+Antes de escrever código, liste os arquivos e, para cada pergunta, a view, as
+colunas e a fórmula do título. Espere a minha aprovação.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Revisão humana: quatro perguntas ao diff</h2>
+      <ol>
+        <li><strong>Há número digitado?</strong> Procure com <code>grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*</code> e justifique cada ocorrência</li>
+        <li><strong>O erro aparece?</strong> Troque o nome de uma view no código, recarregue: só aquele cartão pode falhar</li>
+        <li><strong>O título afirma e vem do dado?</strong> Se a view mudar, a frase muda junto</li>
+        <li><strong>Unidade, período e fonte</strong> estão em todos os cartões?</li>
+      </ol>
+      <p>Aceite o diff só quando as quatro respostas forem sim.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Teste no Codespace antes de publicar</h2>
+      <div class="code-block">python -m http.server 8000</div>
+      <ul style="margin-top: 1rem">
+        <li>Rode na raiz do repositório e abra a aba <strong>PORTS</strong></li>
+        <li>Na porta 8000, clique no globo e acrescente <code>/aula-09-seunome/</code> ao endereço</li>
+        <li><code>F12</code> → <strong>Network</strong>: cada <code>vw_p…</code> precisa responder 200</li>
+        <li>Pare o servidor com <code>Ctrl + C</code> quando terminar</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Publique no GitHub Pages</h2>
+      <ol>
+        <li><code>git add</code>, <code>git commit</code> e <code>git push</code> da pasta <code>aula-09-seunome</code></li>
+        <li>No seu fork: <strong>Settings → Pages</strong></li>
+        <li><strong>Source:</strong> Deploy from a branch · <strong>Branch:</strong> main · pasta <strong>/(root)</strong> → Save</li>
+        <li>Espere o <em>pages build and deployment</em> terminar na aba Actions</li>
+      </ol>
+      <span class="url">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</span>
+      <p>Abra no celular, fora do Codespace. Se funcionou lá, funciona para o board.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Quando não funciona</h2>
+      <dl class="erros">
+        <dt>401</dt><dd>Chave errada, incompleta ou de outro projeto</dd>
+        <dt>404 PGRST205</dt><dd>View inexistente ou cache da API: <code>notify pgrst, 'reload schema';</code></dd>
+        <dt>200 com []</dt><dd>RLS ligado sem política de leitura: confira o final de <code>estrela.sql</code></dd>
+        <dt>404 do Pages</dt><dd>Caminho ou maiúscula errada, ou o deploy ainda está rodando</dd>
+        <dt>CORS</dt><dd>Quase sempre é URL errada; a API do Supabase aceita qualquer origem</dd>
+        <dt>Sem Pages</dt><dd>Repositório privado no plano gratuito: o fork precisa ser público</dd>
+      </dl>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Reconciliação: tela × view</h2>
+      <table class="tabela">
+        <thead><tr><th class="hide-mobile">Cartão</th><th>Na tela</th><th>View · coluna</th><th>Na view</th><th>Igual?</th></tr></thead>
+        <tbody>
+          <tr><td class="hide-mobile">P05</td><td>SP 38,4%</td><td><code>vw_p05 · participacao_pct</code></td><td>38.4</td><td>sim</td></tr>
+          <tr><td class="hide-mobile">P09</td><td>3,00%</td><td><code>vw_p09 · recompra_pct</code></td><td>3.00</td><td>sim</td></tr>
+          <tr><td class="hide-mobile">P01</td><td>R$ 987,8 mil</td><td><code>vw_p01 · receita</code></td><td>987765.37</td><td>sim, arredondado</td></tr>
+        </tbody>
+      </table>
+      <div class="code-block">select * from vw_p05_receita_estado where estado = 'SP';</div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Teste de leitura em voz alta</h2>
+      <ul>
+        <li>Outro grupo abre a sua URL no celular, <strong>sem explicação</strong></li>
+        <li>Lê cada cartão em uma frase; você anota a frase literal, entre aspas</li>
+        <li>Frase que ultrapassa o que o dado autoriza vira ajuste de tela</li>
+        <li>Registre como âncora: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela</li>
+      </ul>
+      <p>Você não pode defender o painel durante o teste. No board, também não estará lá.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>Desafio e entrega</h2>
+      <p>Pasta <code>aula-09-seunome</code> com commit, push e URL funcionando:</p>
+      <ul>
+        <li><code>index.html</code>, <code>supabase.js</code>, <code>app.js</code> e <code>style.css</code></li>
+        <li><code>README.md</code> com a URL publicada e a tabela de reconciliação dos dez cartões</li>
+        <li>Frases do teste de leitura e o ajuste que cada uma gerou</li>
+        <li>Recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria</li>
+        <li><strong>Aceite:</strong> a URL abre no celular, os dez cartões carregam e nenhum número está digitado</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <h2>A recomendação ao Chief de Vendas</h2>
+      <div class="formato">
+        <p><b>Recomendação:</b> atacar o prazo no RJ antes de subsidiar frete no Nordeste.</p>
+        <p><b>Número que sustenta:</b> RJ tem 12.312 entregas e 12,2% com atraso; com atraso, a nota média cai para 2,27.</p>
+        <p><b>O que a invalidaria:</b> se o atraso do RJ vier de poucos vendedores, a ação é sobre sellers, não sobre a promessa de prazo.</p>
+      </div>
+      <p>Uma recomendação sem a condição que a invalida é opinião com gráfico.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <h2>Síntese da sequência</h2>
+      <ul>
+        <li><strong>Aula 7:</strong> o dado bruto virou modelo reconciliado</li>
+        <li><strong>Aula 8:</strong> a pergunta virou fluxo, âncora e view</li>
+        <li><strong>Aula 9:</strong> a view virou tela pública que outra pessoa lê sozinha</li>
+      </ul>
+      <p>Nas três, a IA escreveu e a turma verificou: no SQL, na reconciliação e na leitura de outro grupo.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="next-steps">
+      <h2>Próximos passos</h2>
+      <p>Não há aula em 14/10. No laboratório 10, a base volta ao centro: limpeza de dados com IA e Pandas, preservando a camada bruta.</p>
+      <ul>
+        <li>Antes de sair: abra a sua URL no celular</li>
+        <li>Commit e push do <code>README.md</code> com reconciliação, frases e recomendação</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end"><h2>Fim do Laboratório 9</h2><p>Um painel só está pronto quando outra pessoa o lê e chega à mesma decisão.</p></div>
   </div>
 
   <div id="controls">
@@ -371,6 +793,7 @@ modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-09/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-09/dashboard-referencia/index.html" class="ctrl-btn" title="Abrir o dashboard de referência"><span class="ctrl-icon">📈</span> Dashboard</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -415,6 +838,37 @@ modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+  
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      return new Promise((resolve, reject) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand('copy');
+        textarea.remove();
+        ok ? resolve() : reject(new Error('copy'));
+      });
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();
