@@ -67,7 +67,7 @@ function render(s){
   let html='';
   if(s.phase==='lobby')html='<p class="lead">Você já está na sala. A atividade começa quando o professor liberar a primeira rodada.</p>';
   if(s.phase==='round1')html=caseBlock(s,1);
-  if(s.phase==='discussion')html=discussion(s)+caseBlock(s,1,false);
+  if(s.phase==='discussion')html=caseBlock(s,1,false)+discussion(s);
   if(s.phase==='round2')html=`<div class="panel"><p class="eyebrow">Reconsideração</p><h2>O que a discussão alterou no seu critério?</h2><p class="case">Vote outra vez. Você pode manter sua escolha ou mudar, e pode alterá-la enquanto o tempo estiver aberto. A distribuição permanece oculta até a revelação.</p></div>${caseBlock(s,2)}`;
   if(s.phase==='reveal')html=story(s);
   const focused=document.activeElement?.dataset?.choice;

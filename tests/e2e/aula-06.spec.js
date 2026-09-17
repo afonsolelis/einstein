@@ -136,7 +136,7 @@ test('fluxo completo do TBL: duas rodadas, debate e revelação', async ({ brows
   await expect(ana.page.locator('#phase')).toHaveText('Discussão');
   await expect(ana.page.locator('#content')).toContainText('Você escolheu A');
   await expect(ana.page.locator('.bars')).toHaveCount(0);
-  await expect(ana.page.locator('#content')).toContainText('Texto do caso');
+  await expect(ana.page.locator('#content > :first-child')).toContainText('Texto do caso');
   await expect(ana.page.locator('#content .option')).toHaveCount(4);
   await expect(ana.page.locator('[data-choice]')).toHaveCount(0);
   await expect(ana.page.locator('#content .option.selected')).toHaveCount(1);
