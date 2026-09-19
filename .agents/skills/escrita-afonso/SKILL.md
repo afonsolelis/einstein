@@ -27,7 +27,7 @@ Não imponha essa sequência quando o gênero textual exigir outra organização
 - Prefira substantivos concretos, verbos de ação e relações causais explicitadas.
 - Faça o referencial trabalhar: diga qual pergunta ele responde, qual decisão orienta ou qual artefato produz.
 - Mencione tabelas, figuras, testes e documentos no ponto em que sustentam o argumento.
-- Use primeira pessoa do plural quando houver ação ou decisão dos autores; evite voz passiva apenas para simular impessoalidade.
+- Prefira o artefato ou fenômeno como sujeito e formas impessoais naturais com “se”, recorrentes na dissertação: “percebe-se”, “verifica-se”, “escolheu-se”. Use primeira pessoa do plural quando a ação dos autores ou o gênero a justificar.
 - Admita repetição deliberada dos conceitos estruturantes quando ela mantiver a cadeia argumentativa visível.
 - Evite ornamentação, abstrações sem consequência, listas de nomes desacompanhadas de função e jargão usado como substituto de explicação.
 
@@ -77,3 +77,7 @@ Antes de entregar, confirme:
 - O mecanismo proposto está identificado como evidência ou hipótese?
 - A conclusão responde ao objetivo sem exceder o desenho do estudo?
 - O texto continua reconhecível como assertivo e aplicado?
+
+## Amostra autoral e humanização
+
+A dissertação está em `../../../../tese/escrita/Afonso Cesar Lelis Brandao.pdf` (projeto irmão `tese`). Para retirar ornamentação, frases de efeito e padrões repetitivos, aplique [humanizacao](../humanizacao/SKILL.md), preservando evidências, citações e a marcação do arquivo (comandos LaTeX, tags e entidades HTML). A amostra orienta a voz sem substituir normas atuais ou instruções do usuário.

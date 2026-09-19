@@ -27,3 +27,6 @@ A static content site for a Data Science & AI course curriculum.
 ## Regras de Interface (UI)
 - **Cards do Cronograma**: Os cards no `index.html` devem manter um layout de **lista horizontal** no desktop (`flex-direction: row`), com o bloco de data/aula na lateral e conteúdo no restante da linha. No mobile, eles devem empilhar (`flex-direction: column`). Não utilize layouts em grid multi-colunas para os cards.
 - **Aparência Premium**: Mantenha a paleta oficial, utilize gradientes sutis e efeitos de hover para garantir que o projeto mantenha uma estética sofisticada.
+## Escrita (obrigatório)
+
+Todo texto destinado ao aluno (slides, materiais, páginas, quizzes, atividades) segue as skills `escrita-afonso` e `humanizacao`, em `.agents/skills/`. Aplique-as já na redação, e não só numa revisão posterior. Evite linguagem de rede social: título em forma de aforismo, travessão como conector, "não é X, é Y", negrito na prosa, setas decorativas e frases de efeito no fechamento. Títulos de slide devem ser descritivos e curtos, cabendo em uma linha na projeção. Preserve números, fatos, código e prompts.

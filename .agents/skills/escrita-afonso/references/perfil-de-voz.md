@@ -2,7 +2,7 @@
 
 ## Fonte e finalidade
 
-Perfil derivado da leitura integral da dissertação de mestrado de 2014, com atenção à introdução, objetivos, justificativa, metodologia, resultados, discussão e conclusão. A fonte revela a identidade argumentativa do autor; não deve ser imitada em seus erros gramaticais ou em convenções editoriais superadas.
+Perfil autoral já presente no projeto, agora vinculado à dissertação local [Afonso Cesar Lelis Brandao.pdf](../../../../../tese/escrita/Afonso%20Cesar%20Lelis%20Brandao.pdf) (projeto irmão `tese`), com atenção à introdução, objetivos, justificativa, metodologia, resultados, discussão e conclusão. A fonte revela a identidade argumentativa do autor; não deve ser imitada em seus erros gramaticais ou em convenções editoriais superadas.
 
 ## Marcas centrais
 
@@ -89,3 +89,7 @@ Em slides, cada tela deve cumprir uma função argumentativa reconhecível. Em m
 - Usar “garante”, “comprova”, “qualidade de produção” ou “zero vulnerabilidades” sem desenho e evidência correspondentes.
 - Inventar dados para fechar uma lacuna narrativa.
 - Confundir clareza com simplificação que apague o mecanismo técnico.
+
+## Conferência com a fonte importada
+
+A capa e a folha de rosto indicam 2013; a ficha catalográfica indica 2014. Preserve essa distinção ao identificar a fonte. A conferência dirigida do texto extraído confirma formas como “escolheu-se”, “percebe-se”, “pode-se notar” e “verifica-se”. A impessoalidade com “se” deve integrar a voz, sem impor uma única pessoa gramatical a todos os gêneros.
