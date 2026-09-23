@@ -156,7 +156,8 @@
     </div>
 
     <div class="content">
-      <p class="desc">O Chief de Vendas da Olist leva ao board as estratégias comerciais de 2019 e não aceita opinião sem número. Nas aulas 7 e 8, a turma transformou o Olist num esquema estrela reconciliado, decompôs as dez perguntas do Chief em fluxo anotado e escreveu uma view por pergunta. Falta a parte que o board vê: uma tela que qualquer pessoa abre no celular, lê sem ajuda e que busca os números no banco no momento da leitura. Hoje você constrói essa tela com um agente de IA, revisa o que ele escreveu, publica no GitHub Pages do seu fork e verifica, número a número, que a tela diz o mesmo que a view.</p>
+      <p class="desc">O Chief de Vendas da Olist apresentará ao board as estratégias comerciais de 2019, e cada estratégia precisa vir sustentada por números. Esta aula encerra a sequência iniciada nas aulas 7 e 8. Na aula 7, os dados brutos do Olist foram carregados no Supabase de cada estudante e modelados como um esquema estrela reconciliado, e a turma construiu no quadro do Miro o template do fluxo de interação anotado. Na aula 8, as dez perguntas do Chief foram decompostas no fluxo de interação anotado do dashboard, com âncoras D1 a Dn registradas nos cinco campos, e cada pergunta passou a ter uma view conferida contra a resposta de referência. Resta a parte que o board efetivamente vê: uma tela que qualquer pessoa abre no celular, lê sem ajuda e que busca os números no banco no momento da leitura. Nesta aula, essa tela é construída com um agente de IA, revisada pelo grupo, publicada no GitHub Pages do fork e reconciliada, número a número, com as views.</p>
+      <p>Para acompanhar a aula, cada estudante precisa ter à mão os produtos das aulas anteriores: a <code>ESPECIFICACAO.md</code> e o <code>views.sql</code> do grupo, na pasta <code>aula-08-seunome</code>; o frame do dashboard no quadro do Miro, com as âncoras registradas; as 11 views do gabarito no Supabase, com a conferência da aula 8 retornando dez linhas <code>confere = true</code>; e a Project URL e a chave publicável do projeto.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
@@ -169,7 +170,7 @@
         <table>
           <thead><tr><th>Horário</th><th>Atividade</th><th>Produto</th></tr></thead>
           <tbody>
-            <tr><td>19:00</td><td>Retomada: o fluxo e a especificação são o contrato</td><td>Cada grupo com a sua <code>ESPECIFICACAO.md</code> aberta</td></tr>
+            <tr><td>19:00</td><td>Retomada das aulas 7 e 8 e da especificação como contrato</td><td>Cada grupo com a sua <code>ESPECIFICACAO.md</code> aberta</td></tr>
             <tr><td>19:10</td><td>Arquitetura, chave publicável e chave secreta</td><td>Project URL e chave publicável à mão</td></tr>
             <tr><td>19:30</td><td>Construção com o Copilot em modo agente</td><td>Pasta <code>aula-09-seunome</code> com os quatro arquivos</td></tr>
             <tr><td>20:30</td><td>Intervalo</td><td>—</td></tr>
@@ -182,25 +183,25 @@
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>2. O contrato: da especificação à tela</h2>
-        <p>Um dashboard costuma nascer ao contrário: alguém abre a ferramenta, escolhe gráficos que parecem bons e, no fim, procura uma pergunta que eles respondam. O resultado é uma galeria. Na aula 8 invertemos essa ordem: primeiro a decisão do Chief, depois o fluxo de interação anotado, as âncoras de divergência (onde a leitura do usuário ultrapassa o que o dado autoriza) e, só então, a view. A <code>ESPECIFICACAO.md</code> registra essas decisões numa linha por pergunta. Ela é o contrato desta aula.</p>
+        <h2>2. Da especificação à tela</h2>
+        <p>Um dashboard costuma nascer ao contrário: alguém abre a ferramenta, escolhe gráficos que parecem bons e, no fim, procura uma pergunta que eles respondam. O resultado é uma coleção de gráficos sem argumento que os conecte. Na aula 8, essa ordem foi invertida: primeiro a decisão do Chief, depois o fluxo de interação anotado, as âncoras de divergência (os pontos em que a leitura do usuário ultrapassa o que o dado autoriza) e, só então, a view. A <code>ESPECIFICACAO.md</code> registra essas decisões em uma linha por pergunta e, nesta aula, funciona como contrato, porque a tela deve implementar exatamente o que ela registra.</p>
         <table>
           <thead><tr><th>Campo da especificação (aula 8)</th><th>Onde aparece no dashboard</th></tr></thead>
           <tbody>
-            <tr><td>Pergunta e decisão</td><td>Etiqueta do cartão e posição na narrativa (contexto → tensão → decisão)</td></tr>
+            <tr><td>Pergunta e decisão</td><td>Etiqueta do cartão e posição na narrativa (contexto, tensão e decisão)</td></tr>
             <tr><td>View e colunas</td><td>A URL do <code>fetch</code> e os campos lidos da resposta</td></tr>
             <tr><td>Visual escolhido</td><td>O tipo de gráfico, sem troca por preferência do agente</td></tr>
             <tr><td>Título que afirma</td><td>Frase montada no JavaScript com os valores da view</td></tr>
             <tr><td>Âncora tratada e suporte na tela</td><td>Subtítulo com unidade, período e filtro; base de comparação no mesmo gráfico; nota de leitura</td></tr>
           </tbody>
         </table>
-        <p>O agente de IA escreve rápido, e é justamente por isso que o contrato importa. Sem ele, o agente escolhe um gráfico de pizza para 27 estados, digita no HTML o número que viu no seu prompt e escreve títulos descritivos como “Receita por estado”. Com ele, a revisão deixa de ser uma questão de gosto: basta comparar o diff com a linha da especificação.</p>
-        <p>As views que o painel lê são as de <code>materiais/aula-08/olist/views.sql</code>, que você executou no seu Supabase na aula 8. Se o seu fork está desatualizado, sincronize antes de começar: <strong>Sync fork</strong> na página do fork no GitHub e <code>git pull</code> no terminal do Codespace.</p>
+        <p>Como o agente de IA produz código rapidamente, o contrato se torna necessário para orientar a revisão. Sem ele, o agente escolhe um gráfico de pizza para 27 estados, digita no HTML o número que viu no seu prompt e escreve títulos descritivos como “Receita por estado”. Com ele, a revisão deixa de depender de preferência pessoal e passa a consistir na comparação entre o diff e a linha correspondente da especificação.</p>
+        <p>As views que o painel lê são as de <code>materiais/aula-08/olist/views.sql</code>, que você executou no seu Supabase na aula 8. Se o seu fork está desatualizado, sincronize-o antes de começar, com Sync fork na página do fork no GitHub e <code>git pull</code> no terminal do Codespace.</p>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>3. Arquitetura: quem conversa com quem</h2>
-        <p>O GitHub Pages é um serviço de hospedagem de arquivos estáticos: ele entrega HTML, CSS e JavaScript exatamente como estão no repositório, sem executar nada no servidor. O Supabase, por sua vez, publica automaticamente uma API REST (o PostgREST) para tabelas e views do schema <code>public</code>. Os dois nunca conversam entre si. Quem liga as pontas é o navegador de quem abre o painel.</p>
+        <h2>3. Arquitetura do dashboard</h2>
+        <p>O GitHub Pages é um serviço de hospedagem de arquivos estáticos: ele entrega HTML, CSS e JavaScript exatamente como estão no repositório, sem executar nada no servidor. O Supabase, por sua vez, publica automaticamente uma API REST (o PostgREST) para tabelas e views do schema <code>public</code>. Os dois serviços não se comunicam diretamente: é o navegador de quem abre o painel que obtém os arquivos de um e os dados do outro.</p>
         <figure class="figura">
           <div role="img" aria-label="Arquitetura do dashboard: o GitHub Pages entrega os arquivos ao navegador; o navegador chama a API REST do Supabase com a chave publicável; a API lê as views, que leem o esquema estrela com RLS de leitura.">
             <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
@@ -247,23 +248,23 @@
           <li><strong>Views.</strong> Criadas com <code>security_invoker = on</code>, elas rodam com as permissões de quem chama, e não com as de quem as criou.</li>
           <li><strong>Esquema estrela.</strong> Como a view roda como <code>anon</code>, as tabelas de fato e dimensão precisam da política de leitura que <code>estrela.sql</code> criou. Sem ela, a resposta é uma lista vazia.</li>
         </ol>
-        <p>A consequência prática desse desenho é que o painel publicado sempre mostra o estado atual do banco. Se você recriar uma view com outra regra, a tela muda na próxima leitura, sem novo deploy. A mesma propriedade exige disciplina: um número digitado no HTML deixaria de acompanhar o banco e ninguém perceberia.</p>
+        <p>A consequência prática desse desenho é que o painel publicado sempre mostra o estado atual do banco. Se você recriar uma view com outra regra, a tela muda na próxima leitura, sem novo deploy. Essa propriedade, contudo, só se mantém se nenhum número for digitado no HTML, pois um valor fixo deixaria de acompanhar o banco sem que a divergência fosse percebida.</p>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>4. Chave publicável × chave secreta</h2>
-        <p>No painel do Supabase, abra <strong>Project Settings → API Keys</strong>. A chave publicável começa com <code>sb_publishable_</code>; em projetos criados antes das chaves novas, o equivalente é a <strong>anon public</strong>, na aba de chaves legadas. A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code> (o mesmo procedimento da aula 8).</p>
+        <h2>4. Chave publicável e chave secreta</h2>
+        <p>No painel do Supabase, abra Project Settings e, em seguida, a seção API Keys. A chave publicável começa com <code>sb_publishable_</code>; em projetos criados antes das chaves novas, o equivalente é a <strong>anon public</strong>, na aba de chaves legadas. A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code> (o mesmo procedimento da aula 8).</p>
         <table>
           <thead><tr><th></th><th>Chave publicável (<code>sb_publishable_…</code> ou anon)</th><th>Chave secreta (<code>sb_secret_…</code> ou service_role) e senha do banco</th></tr></thead>
           <tbody>
-            <tr><td>Pode ir no HTML?</td><td>Sim. Foi desenhada para ficar no navegador.</td><td>Nunca: nem no HTML, nem em commit, print, prompt ou chat da turma.</td></tr>
-            <tr><td>O que libera</td><td>Só o que o <code>grant</code> e as políticas de RLS permitem ao papel <code>anon</code>.</td><td>Tudo. A chave secreta ignora o RLS; a senha abre o banco inteiro.</td></tr>
+            <tr><td>Pode ir no HTML?</td><td>Sim. Ela foi projetada para ficar no navegador.</td><td>Não. Elas não podem constar no HTML, em commit, captura de tela, prompt ou chat da turma.</td></tr>
+            <tr><td>O que libera</td><td>Só o que o <code>grant</code> e as políticas de RLS permitem ao papel <code>anon</code>.</td><td>Todo o projeto. A chave secreta ignora o RLS, e a senha dá acesso ao banco inteiro.</td></tr>
             <tr><td>Se vazar</td><td>Alguém lê o que já era público.</td><td>Alguém lê, altera e apaga qualquer tabela do projeto.</td></tr>
           </tbody>
         </table>
-        <p>A leitura pública é segura neste case por três decisões que você executou nas aulas anteriores, e não pela chave em si. <code>estrela.sql</code> liga o RLS nas seis tabelas do esquema estrela e cria a política <code>leitura_publica</code> apenas <code>for select</code>. <code>views.sql</code> concede <code>grant select</code> nas views ao papel <code>anon</code>. E não existe nenhuma política de insert, update ou delete: sem política, o RLS bloqueia a escrita, qualquer que seja a chave publicável usada.</p>
+        <p>A leitura pública é segura neste case por três decisões que você executou nas aulas anteriores, e não pela chave em si. <code>estrela.sql</code> liga o RLS nas seis tabelas do esquema estrela e cria a política <code>leitura_publica</code> apenas <code>for select</code>. <code>views.sql</code> concede <code>grant select</code> nas views ao papel <code>anon</code>. Por fim, não existe política de insert, update ou delete, e, sem política, o RLS bloqueia a escrita feita com a chave publicável.</p>
         <div class="alert-box">
-          <h4>O limite vale nos dois sentidos</h4>
+          <h4>Limite da leitura pública</h4>
           <p>Tudo o que o <code>grant</code> e o RLS liberam para <code>anon</code> fica legível por qualquer pessoa que abra o seu painel e copie a chave do código-fonte, inclusive as tabelas de fato e dimensão, e não só as views. O Olist é um dataset público e anonimizado; por isso o desenho é aceitável aqui. Com dados de clientes, pacientes ou colaboradores reais, a leitura pública não se aplica: o acesso exigiria login e políticas por usuário.</p>
         </div>
       </section>
@@ -287,8 +288,8 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p08_nota_prazo?select=*" \
 <span class="code-keyword">if</span> (!resposta.ok) <span class="code-keyword">throw new</span> Error(`HTTP ${resposta.status}`);  <span class="code-comment">// 401, 404…: não siga em frente</span>
 <span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();                       <span class="code-comment">// lista de objetos, um por mês</span></div>
 
-        <h3>Número chega como número; a tela precisa de texto em pt-BR</h3>
-        <p>O PostgREST monta a resposta com funções JSON do próprio Postgres, e colunas <code>numeric</code> e <code>bigint</code> chegam como <strong>número JSON</strong>, sem aspas. Dois detalhes, porém, afetam a tela. Primeiro, o JSON não guarda zeros à direita: <code>"recompra_pct":3.00</code> vira o número <code>3</code> no JavaScript, e a tela mostraria “3%” onde a view diz 3,00%. Segundo, o JavaScript escreve números no formato americano (<code>13181027.13</code>). A formatação resolve os dois problemas; a conversão com <code>Number()</code> entra como defesa, para o caso de uma view futura devolver texto (um <code>to_char</code>, um <code>::text</code>) e a soma virar concatenação.</p>
+        <h3>Formatação dos números em pt-BR</h3>
+        <p>O PostgREST monta a resposta com funções JSON do próprio Postgres, e colunas <code>numeric</code> e <code>bigint</code> chegam como número JSON, sem aspas. Dois detalhes, porém, afetam a tela. Primeiro, o JSON não guarda zeros à direita: <code>"recompra_pct":3.00</code> vira o número <code>3</code> no JavaScript, e a tela mostraria “3%” onde a view diz 3,00%. Segundo, o JavaScript escreve números no formato americano, como em <code>13181027.13</code>, que é a receita dos pedidos delivered de jan/2017 a ago/2018 definida na aula 8. A formatação resolve os dois problemas; a conversão com <code>Number()</code> entra como defesa, para o caso de uma view futura devolver texto (um <code>to_char</code>, um <code>::text</code>) e a soma virar concatenação.</p>
         <div class="code-block"><span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
 <span class="code-keyword">const</span> inteiro = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>);
 <span class="code-keyword">const</span> duasCasas = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -302,13 +303,13 @@ duasCasas.format(Number(3));       <span class="code-comment">// "3,00": os zero
         <h3>Gráficos com Chart.js pelo CDN</h3>
         <p>O Chart.js é uma biblioteca de gráficos em JavaScript que desenha num elemento <code>&lt;canvas&gt;</code>. Como o GitHub Pages não executa <code>npm install</code>, a biblioteca vem de um CDN (rede de distribuição de conteúdo) por uma tag <code>&lt;script&gt;</code>. Fixe a versão na URL: sem o número, uma atualização da biblioteca pode mudar o seu painel sem nenhum commit seu.</p>
         <div class="code-block">&lt;script src=<span class="code-string">"https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"</span>&gt;&lt;/script&gt;</div>
-        <p>A escolha do tipo de gráfico já foi feita na especificação. Na tradução para o Chart.js, a tendência mensal é <code>type: 'line'</code>; ranking e comparação entre categorias são <code>type: 'bar'</code> com <code>indexAxis: 'y'</code> (barras horizontais, que acomodam nomes longos) e dados ordenados; um número isolado, como a taxa de recompra, dispensa gráfico. Duas regras não se negociam: o eixo de valores começa no zero (<code>beginAtZero: true</code>) e não existe segundo eixo y.</p>
+        <p>A escolha do tipo de gráfico já foi feita na especificação. Na tradução para o Chart.js, a tendência mensal é <code>type: 'line'</code>; ranking e comparação entre categorias são <code>type: 'bar'</code> com <code>indexAxis: 'y'</code> (barras horizontais, que acomodam nomes longos) e dados ordenados; um número isolado, como a taxa de recompra, dispensa gráfico. Duas regras são obrigatórias: o eixo de valores começa no zero (<code>beginAtZero: true</code>) e não existe segundo eixo y.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
         <h2>6. O dashboard de referência</h2>
-        <p>Antes de construir o seu, abra o painel do professor. Ele lê as mesmas dez views do <strong>seu</strong> projeto e serve de gabarito de comportamento: o que acontece enquanto carrega, como o erro aparece, como o título se monta a partir dos dados e onde ficam unidade, período e nota de origem.</p>
-        <p><a class="btn btn-slides" href="dashboard-referencia/index.html">📈 Abrir o dashboard de referência</a></p>
+        <p>Antes de construir o seu, abra o painel do professor. Ele lê as mesmas dez views do projeto de cada estudante e serve de gabarito de comportamento: o que acontece enquanto carrega, como o erro aparece, como o título se monta a partir dos dados e onde ficam unidade, período e nota de origem.</p>
+        <p><a class="btn btn-slides" href="dashboard-referencia/index.html">Abrir o dashboard de referência</a></p>
         <ol>
           <li>Cole a Project URL e a chave publicável e clique em <strong>Carregar o painel</strong>. Com <em>Lembrar neste navegador</em> marcado, os dois valores ficam apenas no <code>localStorage</code> do seu navegador; o botão <strong>Esquecer chave</strong> apaga.</li>
           <li>Os dez cartões aparecem em três blocos: <strong>Contexto</strong> (P01, P05, P03), <strong>Tensão</strong> (P10, P09, P07, P08) e <strong>Decisão</strong> (P04, P06, P02). Se a turma votou outra ordem na aula 8, a do seu painel segue a votação.</li>
@@ -316,12 +317,12 @@ duasCasas.format(Number(3));       <span class="code-comment">// "3,00": os zero
           <li>Teste o erro: clique em <strong>Trocar projeto</strong>, apague um caractere da chave e carregue de novo. Os cartões mostram HTTP 401 e o formulário volta com a explicação.</li>
           <li>Teste a proteção: cole uma chave que comece com <code>sb_secret_</code>. O painel recusa antes de fazer qualquer chamada.</li>
         </ol>
-        <p>Com os dados do gabarito, os títulos que o painel monta são, por exemplo: “SP concentra 38,4% da receita; com RJ e MG, chega a 63,4%”, “Os 295 vendedores do 1º decil geram 67,0% da receita; os 5 decis inferiores somam 3,3%” e “Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2”. Nenhuma dessas frases está escrita no código: cada uma é calculada a partir das linhas da view. Se o seu número for diferente, o problema está na view do seu projeto, e o painel acabou de mostrar isso.</p>
+        <p>Com os dados do gabarito, os títulos que o painel monta são, por exemplo: “SP concentra 38,4% da receita; com RJ e MG, chega a 63,4%”, “Os 295 vendedores do 1º decil geram 67,0% da receita; os 5 decis inferiores somam 3,3%” e “Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2”. Nenhuma dessas frases está escrita no código: cada uma é calculada a partir das linhas da view. Se o número obtido for diferente, a divergência está na view do seu projeto, e o painel serve justamente para evidenciá-la.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
         <h2>7. Prática guiada: construção com o agente</h2>
-        <p>Trabalhe no Codespace do seu fork, com o Copilot em <strong>modo agente</strong> (ou o Antigravity), a execução de comandos dependente da sua aprovação e a leitura de cada diff antes de aceitar. A pasta fica na raiz do repositório, ao lado de <code>aula-08-seunome</code>:</p>
+        <p>Trabalhe no Codespace do seu fork, com o Copilot em modo agente (ou o Antigravity), a execução de comandos dependente da sua aprovação e a leitura de cada diff antes de aceitar. A pasta fica na raiz do repositório, ao lado de <code>aula-08-seunome</code>:</p>
         <div class="code-block">aula-09-seunome/
 ├── index.html     <span class="code-comment"># estrutura dos cartões, textos fixos (pergunta, período, fonte)</span>
 ├── supabase.js    <span class="code-comment"># Project URL, chave publicável e a função que lê uma view</span>
@@ -330,7 +331,7 @@ duasCasas.format(Number(3));       <span class="code-comment">// "3,00": os zero
 └── README.md      <span class="code-comment"># URL, reconciliação, teste de leitura e recomendação</span></div>
 
         <h3>7.1 O prompt</h3>
-        <p>O prompt a seguir descreve as regras que a revisão vai cobrar. A última instrução é a mais importante: o agente apresenta o plano, com a fórmula de cada título, antes de escrever código. Corrigir um plano custa uma frase; corrigir dez cartões já escritos custa a aula.</p>
+        <p>O prompt a seguir descreve as regras que a revisão vai cobrar. A última instrução é a mais importante: o agente apresenta o plano, com a fórmula de cada título, antes de escrever código. Corrigir um plano exige uma frase, enquanto corrigir dez cartões já escritos consumiria boa parte da aula.</p>
         <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-08-seunome/ESPECIFICACAO.md. Crie a pasta aula-09-seunome com
 index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
 no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
@@ -480,8 +481,8 @@ preencherCartao('p01', 'vw_p01_receita_mensal', (cartao, linhas) =&gt; {
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>8. Revisão humana: quatro perguntas ao diff</h2>
-        <p>O agente entrega código que roda. Rodar não é o critério; o critério é a tela afirmar só o que o dado autoriza. Antes de aceitar o diff, responda às quatro perguntas com uma verificação concreta, não com a leitura do que o agente disse que fez.</p>
+        <h2>8. Revisão humana do diff</h2>
+        <p>O código entregue pelo agente costuma executar sem erro, mas o critério de aceite é outro: a tela deve afirmar apenas o que o dado autoriza. Por isso, antes de aceitar o diff, cada uma das quatro perguntas abaixo é respondida com uma verificação concreta, e não com base no relato do agente sobre o que fez.</p>
         <ol>
           <li><strong>Há número digitado?</strong> Procure valores com casas decimais ou separador de milhar nos arquivos do painel. Cada ocorrência precisa ser justificada (uma largura em CSS, a versão do Chart.js); um valor de receita, taxa ou contagem é reprovação imediata.
             <div class="code-block">grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*.html aula-09-seunome/*.js</div></li>
@@ -489,12 +490,12 @@ preencherCartao('p01', 'vw_p01_receita_mensal', (cartao, linhas) =&gt; {
           <li><strong>O título afirma e vem do dado?</strong> Leia cada título sozinho, como se estivesse num e-mail ao Chief. “Receita por estado” descreve o eixo; “SP concentra 38,4% da receita” afirma. Depois procure no código a linha que monta a frase e confira que cada número dela sai de uma variável lida da view.</li>
           <li><strong>Unidade, período e fonte estão em todos os cartões?</strong> R$ ou %, jan/2017 a ago/2018, o filtro relevante (entregues, ≥ 500 entregas, ≥ R$ 50 mil em 2017) e o nome da view. Sem período, “3,00%” pode ser lido como taxa anual; sem filtro, a taxa de atraso do Maranhão parece comparável à de Roraima, que ficou fora da view.</li>
         </ol>
-        <p>Verifique também as âncoras. Se a especificação diz que a P04 precisa mostrar a base de 2017 para impedir a leitura “bebês é a maior aposta”, e o agente desenhou só o crescimento percentual, o gráfico está tecnicamente certo e o contrato está quebrado.</p>
+        <p>Verifique também as âncoras. Se a especificação diz que a P04 precisa mostrar a base de 2017 para impedir a leitura “bebês é a maior aposta”, e o agente desenhou só o crescimento percentual, o gráfico está tecnicamente correto, mas descumpre a especificação.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
         <h2>9. Teste no Codespace antes de publicar</h2>
-        <p>Abrir o <code>index.html</code> com duplo clique não reproduz o GitHub Pages. Um servidor estático local, sim: ele entrega os arquivos por HTTP, como o Pages fará. Na raiz do repositório:</p>
+        <p>Abrir o <code>index.html</code> com duplo clique não reproduz o GitHub Pages. Um servidor estático local o reproduz, porque entrega os arquivos por HTTP, como o Pages fará. Na raiz do repositório:</p>
         <div class="code-block">python -m http.server 8000</div>
         <ol>
           <li>O Codespace avisa que há uma aplicação na porta 8000. Se o aviso não aparecer, abra a aba <strong>PORTS</strong> do painel inferior.</li>
@@ -515,10 +516,10 @@ preencherCartao('p01', 'vw_p01_receita_mensal', (cartao, linhas) =&gt; {
             <div class="code-block">git add aula-09-seunome
 git commit -m <span class="code-string">"Publica o dashboard do Chief de Vendas lendo as views do Supabase"</span>
 git push</div></li>
-          <li>No GitHub, abra o seu fork e vá em <strong>Settings → Pages</strong>.</li>
+          <li>No GitHub, abra o seu fork, entre em Settings e, depois, na seção Pages.</li>
           <li>Em <strong>Build and deployment</strong>, escolha <strong>Source: Deploy from a branch</strong>.</li>
           <li>Em <strong>Branch</strong>, selecione <strong>main</strong> e a pasta <strong>/(root)</strong>. Clique em <strong>Save</strong>.</li>
-          <li>Acompanhe a execução <em>pages build and deployment</em> na aba <strong>Actions</strong>. Quando ela terminar, a página <strong>Settings → Pages</strong> mostra o endereço do site. A primeira publicação costuma levar alguns minutos.</li>
+          <li>Acompanhe a execução <em>pages build and deployment</em> na aba <strong>Actions</strong>. Quando ela terminar, a seção Pages, em Settings, mostra o endereço do site. A primeira publicação costuma levar alguns minutos.</li>
           <li>Abra o endereço do painel, que segue o formato abaixo, no celular e fora do Codespace:
             <div class="code-block">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</div></li>
         </ol>
@@ -530,20 +531,20 @@ git push</div></li>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>11. Quando não funciona</h2>
+        <h2>11. Diagnóstico de erros</h2>
         <p>A maioria dos erros deste laboratório cai em uma de duas camadas: a API (chave, view, permissão) ou a hospedagem (endereço, deploy). O código de status HTTP, visto na aba Network, diz em qual camada procurar.</p>
         <table>
           <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Como resolver</th></tr></thead>
           <tbody>
-            <tr><td><code>401</code> com “Invalid API key”</td><td>Chave errada, cortada, com espaço ou de outro projeto.</td><td>Copie de novo em Project Settings → API Keys e confira se o <code>&lt;ref&gt;</code> da URL é do mesmo projeto.</td></tr>
+            <tr><td><code>401</code> com “Invalid API key”</td><td>Chave errada, cortada, com espaço ou de outro projeto.</td><td>Copie de novo em Project Settings, na seção API Keys, e confira se o <code>&lt;ref&gt;</code> da URL é do mesmo projeto.</td></tr>
             <tr><td><code>401</code> ou <code>403</code> com código <code>42501</code></td><td>A chave foi aceita, mas <code>anon</code> não tem <code>grant select</code> na view ou nas tabelas da estrela.</td><td>Rode <code>views.sql</code> inteiro, com o <code>grant</code> final; se persistir, rode o bloco final de <code>estrela.sql</code>.</td></tr>
             <tr><td><code>404</code> com código <code>PGRST205</code></td><td>A view não existe com esse nome, ou a API ainda não recarregou o esquema.</td><td>Confira o nome em <code>information_schema.views</code>; se a view acabou de ser criada, rode <code>notify pgrst, 'reload schema';</code> no SQL Editor.</td></tr>
             <tr><td><code>200</code> com <code>[]</code></td><td>RLS ligado sem política de leitura nas tabelas que a view consulta.</td><td>Rode o bloco final de <code>estrela.sql</code>, que cria a política <code>leitura_publica</code>.</td></tr>
-            <tr><td>“Failed to fetch” ou mensagem de CORS no console</td><td>Quase nunca é CORS: a API do Supabase aceita chamadas de qualquer origem. A causa costuma ser Project URL errada (com <code>/rest/v1</code> duplicado, <code>http</code> ou erro de digitação) ou projeto pausado por inatividade no plano gratuito.</td><td>Abra a URL da view no navegador para ver a resposta real; se o projeto estiver pausado, restaure-o no painel do Supabase.</td></tr>
+            <tr><td>“Failed to fetch” ou mensagem de CORS no console</td><td>Raramente se trata de CORS, pois a API do Supabase aceita chamadas de qualquer origem. A causa costuma ser Project URL errada (com <code>/rest/v1</code> duplicado, <code>http</code> ou erro de digitação) ou projeto pausado por inatividade no plano gratuito.</td><td>Abra a URL da view no navegador para ver a resposta real; se o projeto estiver pausado, restaure-o no painel do Supabase.</td></tr>
             <tr><td><code>404</code> na página do GitHub Pages</td><td>Deploy ainda rodando, pasta com nome diferente (maiúsculas contam) ou arquivo que não se chama <code>index.html</code>.</td><td>Espere o fim do deploy em Actions e compare o endereço com o nome da pasta no repositório.</td></tr>
             <tr><td>Página publicada mostra a versão antiga</td><td>Deploy do último push ainda não terminou ou o navegador guardou cache.</td><td>Aguarde a execução em Actions e recarregue com <code>Ctrl + Shift + R</code>.</td></tr>
             <tr><td>“Chart is not defined” no console</td><td>O <code>app.js</code> rodou antes do Chart.js, ou a URL do CDN está errada.</td><td>Mantenha a tag do Chart.js antes do <code>app.js</code>, que usa <code>defer</code>.</td></tr>
-            <tr><td>Settings → Pages pede upgrade</td><td>Repositório privado no plano gratuito.</td><td>Use o fork público do repositório do curso.</td></tr>
+            <tr><td>A seção Pages, em Settings, pede upgrade</td><td>Repositório privado no plano gratuito.</td><td>Use o fork público do repositório do curso.</td></tr>
             <tr><td>Consulta direta a uma tabela de fato devolve exatamente 1.000 linhas</td><td>A API do Supabase limita o número de linhas por resposta.</td><td>Não é o caso das dez views, que têm no máximo 28 linhas; agregue no banco, com uma view, em vez de trazer o fato para o navegador.</td></tr>
           </tbody>
         </table>
@@ -551,8 +552,8 @@ git push</div></li>
 
       <section data-lesson-section="guided-practice">
         <h2>12. Reconciliação e teste de leitura</h2>
-        <h3>12.1 Tela × view</h3>
-        <p>A reconciliação da aula 7 garantiu que a estrela não perdeu receita; a conferência da aula 8 garantiu que as views batem com as respostas de referência. Falta o último elo: a tela mostra o que a view devolve? Arredondamento, ordenação e filtros no JavaScript são pontos em que o número pode mudar no caminho. Para cada cartão, escolha o número principal do título e confira no SQL Editor:</p>
+        <h3>12.1 Reconciliação entre tela e view</h3>
+        <p>A reconciliação da aula 7 garantiu que a estrela não perdeu receita; a conferência da aula 8 garantiu que as views batem com as respostas de referência. Resta verificar o último elo, isto é, se a tela mostra o que a view devolve. Arredondamento, ordenação e filtros no JavaScript são pontos em que o número pode mudar no caminho. Para cada cartão, escolha o número principal do título e confira no SQL Editor:</p>
         <div class="code-block">select * from vw_p05_receita_estado where estado = <span class="code-string">'SP'</span>;
 select * from vw_p08_nota_prazo;
 select * from vw_p01_receita_mensal order by receita desc limit 1;</div>
@@ -564,15 +565,15 @@ select * from vw_p01_receita_mensal order by receita desc limit 1;</div>
             <tr><td>P01</td><td>pico de R$ 987,8 mil em nov/17</td><td><code>vw_p01_receita_mensal</code> · <code>receita</code> · 2017-11</td><td>987765.37</td><td>sim, arredondado para mil</td></tr>
           </tbody>
         </table>
-        <p>Quando o título soma ou compara linhas (“com RJ e MG, chega a 63,4%”), a view não tem esse número pronto. Registre o cálculo: soma de <code>receita</code> das três primeiras linhas dividida pela soma de todas. Um número calculado na tela sem cálculo registrado é um número que ninguém consegue auditar.</p>
+        <p>Quando o título soma ou compara linhas (“com RJ e MG, chega a 63,4%”), a view não tem esse número pronto. Registre o cálculo: soma de <code>receita</code> das três primeiras linhas dividida pela soma de todas. Sem esse registro, o número calculado na tela não pode ser auditado.</p>
 
         <h3>12.2 Teste de leitura em voz alta</h3>
-        <p>Um painel é lido sem o autor ao lado. O teste reproduz essa condição em 20 minutos:</p>
+        <p>No board, o painel será lido sem o autor presente. O teste reproduz essa condição em 20 minutos:</p>
         <ol>
           <li>Troque de URL com outro grupo. O grupo leitor abre o seu painel no celular, sem nenhuma explicação.</li>
           <li>Para cada cartão, um leitor diz em voz alta, em uma frase, o que concluiu. O seu grupo anota a frase literal, entre aspas, e não comenta.</li>
           <li>Classifique cada frase: <strong>coincide</strong> com o que o dado autoriza; <strong>ultrapassa</strong> o que o dado autoriza (por exemplo, “o atraso derruba a nota”, quando a view mostra associação e não causa); ou <strong>não entendeu</strong> o cartão.</li>
-          <li>Frase que ultrapassa vira âncora de divergência, registrada nos cinco campos das aulas 7 e 8: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela. Frase de quem não entendeu vira ajuste de título, unidade ou visual.</li>
+          <li>Cada frase que ultrapassa o dado é registrada como âncora de divergência, com os mesmos cinco campos das aulas 7 e 8 (Passo, Leitura do usuário, O que o dado autoriza, Consequência e Suporte na tela), e acrescentada ao frame do dashboard no quadro do Miro com o próximo número livre de âncora. A frase de quem não entendeu o cartão orienta um ajuste de título, unidade ou visual.</li>
           <li>Aplique pelo menos um ajuste, faça commit e push, e peça ao mesmo grupo que releia o cartão alterado.</li>
         </ol>
       </section>

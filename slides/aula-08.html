@@ -514,39 +514,40 @@
   <div id="slider">
     <div class="slide slide-start active">
       <div class="badge">LABORATÓRIO 8 · 30/09</div>
-      <h1>Brainstorming de fluxo: das 10 perguntas às views</h1>
-      <p>Data Visualization II: brainstorming das perguntas de negócio e fluxo de interação do dashboard</p>
+      <h1>Fluxo do dashboard e views SQL</h1>
+      <p>Data Visualization II. Case Olist: brainstorming das perguntas de negócio, fluxo de interação anotado do dashboard e views SQL no Supabase</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>O case: o board não aceita opinião sem número</h2>
-      <p>O Chief de Vendas da Olist vai levar ao board as estratégias comerciais de 2019. A turma é a equipe de dados que sustenta cada uma delas.</p>
+      <h2>O case Olist nas aulas 7 a 9</h2>
+      <p>O Chief de Vendas da Olist precisa apresentar ao board as estratégias comerciais de 2019, e a turma atua como a equipe de dados que sustenta cada estratégia. Esta aula parte do que foi produzido na aula 7.</p>
       <ul>
-        <li><strong>Aula 7:</strong> Olist no Supabase de cada um, esquema estrela reconciliado e o frame modelo do fluxo no Miro.</li>
-        <li><strong>Hoje:</strong> 10 perguntas viram um fluxo de interação anotado e 10 views conferidas contra o número de referência.</li>
-        <li><strong>Aula 9:</strong> o dashboard no GitHub Pages lê essas views pela API REST.</li>
+        <li>Aula 7: carga do Olist no Supabase, discovery, esquema estrela reconciliado e frame da turma com o template do fluxo no quadro do Miro</li>
+        <li>Aula 8: conversão das 10 perguntas em fluxo de interação anotado do dashboard e em 10 views conferidas contra números de referência</li>
+        <li>Aula 9: publicação do dashboard no GitHub Pages, com leitura das views pela API REST</li>
+        <li>Para hoje, cada estudante precisa ter o projeto Supabase ativo com a estrela reconciliada, acesso ao quadro do Miro e o <code>DISCOVERY.md</code> e o <code>MODELO_ESTRELA.md</code> no fork</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="objectives">
       <h2>Objetivos de aprendizagem</h2>
       <ul>
-        <li><strong>Decompor</strong> as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão.</li>
-        <li><strong>Conduzir</strong> um brainstorming divergente e convergente de fluxos de navegação no Miro.</li>
-        <li><strong>Construir</strong> o fluxo de interação anotado do dashboard com âncoras de divergência registradas.</li>
-        <li><strong>Traduzir</strong> a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência.</li>
+        <li>Decompor as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão</li>
+        <li>Conduzir no quadro do Miro um brainstorming com etapa divergente e etapa convergente sobre os fluxos de navegação</li>
+        <li>Construir o fluxo de interação anotado do dashboard, com as âncoras de divergência registradas nos cinco campos</li>
+        <li>Traduzir a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência</li>
       </ul>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="agenda">
       <h2>Roteiro do laboratório</h2>
       <ol class="timeline">
-        <li><time>19:00 · 15'</time><span>Retomada do case: quem decide o quê com as 10 perguntas</span></li>
-        <li><time>19:15 · 30'</time><span>Brainstorming divergente em grupos no Miro</span></li>
-        <li><time>19:45 · 35'</time><span>Convergência: votação, ordem narrativa e fluxo único do dashboard</span></li>
+        <li><time>19:00 · 15'</time><span>Retomada da aula 7 e das decisões ligadas às 10 perguntas</span></li>
+        <li><time>19:15 · 30'</time><span>Brainstorming divergente em grupos no quadro do Miro</span></li>
+        <li><time>19:45 · 35'</time><span>Convergência, com votação, ordem narrativa e fluxo único do dashboard</span></li>
         <li><time>20:20 · 10'</time><span>Intervalo</span></li>
-        <li><time>20:30 · 25'</time><span>Âncoras D1..Dn e registro de cinco campos</span></li>
-        <li><time>20:55 · 45'</time><span>Da raia do dado à view: IA escreve, você confere, gabarito nivela</span></li>
+        <li><time>20:30 · 25'</time><span>Âncoras D1 a Dn e registro de cinco campos</span></li>
+        <li><time>20:55 · 45'</time><span>Views escritas com IA a partir da raia do dado, conferência e gabarito</span></li>
         <li><time>21:40 · 10'</time><span>Teste de uma view pela API REST</span></li>
         <li><time>21:50 · 10'</time><span>Síntese e entrega</span></li>
       </ol>
@@ -570,7 +571,7 @@
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
       <h2>Cada pergunta tem cinco elementos</h2>
-      <p>Sem os cinco, duas pessoas escrevem a mesma pergunta e chegam a números diferentes. Exemplo com a <strong>P07</strong>:</p>
+      <p>Quando algum dos cinco elementos fica implícito, duas pessoas podem partir da mesma pergunta e chegar a números diferentes. O exemplo usa a P07, a mesma tarefa trabalhada no quadro na aula 7.</p>
       <div class="cols five">
         <div class="card"><span class="tag">MÉTRICA</span><p>% de entregas depois da data estimada</p></div>
         <div class="card"><span class="tag">RECORTE</span><p>estado do cliente</p></div>
@@ -578,11 +579,11 @@
         <div class="card"><span class="tag">FILTRO</span><p>pedidos entregues; estados com ≥ 500 entregas</p></div>
         <div class="card decisao"><span class="tag">DECISÃO</span><p>promessa de prazo por estado</p></div>
       </div>
-      <p style="margin-top: 1rem">Convenções da sequência: <strong>receita</strong> = soma do preço dos itens, sem frete, de pedidos <code>delivered</code>; <strong>período</strong> = jan/2017 a ago/2018, os meses completos da base.</p>
+      <p style="margin-top: 1rem">Convenções da sequência: receita é a soma do preço dos itens, sem frete, de pedidos <code>delivered</code>; o período vai de jan/2017 a ago/2018, os meses completos da base. Com essas convenções, a receita de referência é R$ 13.181.027,13 em 96.211 pedidos. O valor difere dos R$ 13.591.643,70 reconciliados na aula 7 porque aquele total inclui todos os status e todo o período da base.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
-      <h2>A pergunta escolhe a forma</h2>
+      <h2>Tarefa analítica e forma do gráfico</h2>
       <table class="slide-table">
         <thead><tr><th>A tarefa é…</th><th>Forma</th><th>No case</th></tr></thead>
         <tbody>
@@ -594,11 +595,11 @@
           <tr><td>Número único</td><td>cartão com o número e a comparação ao lado</td><td>P09 recompra</td></tr>
         </tbody>
       </table>
-      <p style="margin-top: 0.9rem">Duas medidas de escala diferente pedem dois gráficos, nunca dois eixos y.</p>
+      <p style="margin-top: 0.9rem">Duas medidas de escala diferente devem ocupar dois gráficos, e não dois eixos y, porque o segundo eixo permite sugerir qualquer relação ajustando as escalas.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
-      <h2>Títulos que afirmam</h2>
+      <h2>Títulos descritivos e títulos que afirmam</h2>
       <table class="slide-table">
         <thead><tr><th>Título que descreve o eixo</th><th>Título que afirma o que o dado sustenta</th></tr></thead>
         <tbody>
@@ -607,138 +608,140 @@
           <tr><td>Concentração de vendedores</td><td>295 vendedores (1º decil) geram 67,0% da receita</td></tr>
         </tbody>
       </table>
-      <p style="margin-top: 0.9rem">Teste: o título sobrevive sozinho num e-mail ao Chief? Se não há nada a afirmar, talvez o gráfico não precise estar no painel.</p>
+      <p style="margin-top: 0.9rem">Como teste, verifica-se se o título seria compreendido sozinho num e-mail ao Chief. Se o gráfico não sustenta nenhuma afirmação, convém reavaliar sua presença no painel.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
-      <h2>Cor tem função, não gosto</h2>
+      <h2>Funções da cor no dashboard</h2>
       <div class="cols two">
         <div class="card"><h3>Identidade</h3><p>Categorias sem ordem: a região Norte tem a mesma cor em todos os cartões, atribuída em ordem fixa.</p></div>
-        <div class="card"><h3>Magnitude</h3><p>Um único tom, do claro ao escuro: pedidos por dia × faixa de horário (P02). Nunca arco-íris.</p></div>
+        <div class="card"><h3>Magnitude</h3><p>Um único tom, do claro ao escuro: pedidos por dia × faixa de horário (P02). Paletas em arco-íris não servem, pois não têm ordem perceptível.</p></div>
         <div class="card"><h3>Polaridade</h3><p>Acima ou abaixo de uma meta: duas cores opostas e cinza exatamente no zero.</p></div>
         <div class="card"><h3>Destaque</h3><p>Tudo em cinza e uma cor só para o que o título afirma, como MA na taxa de atraso (P07).</p></div>
       </div>
-      <p style="margin-top: 0.9rem">A cor acompanha a entidade, nunca a posição no ranking. Se um filtro reordena as barras, as cores não trocam de dono.</p>
+      <p style="margin-top: 0.9rem">A cor acompanha a entidade, e não a posição no ranking. Assim, quando um filtro reordena as barras, cada entidade mantém a sua cor.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Dashboard é narrativa, não galeria</h2>
-      <p>Dez gráficos corretos e desconexos não sustentam decisão nenhuma. A ordem carrega o argumento:</p>
+      <h2>Ordem narrativa do dashboard</h2>
+      <p>Dez gráficos corretos, apresentados sem encadeamento, dificultam a decisão. Por isso, os cartões seguem uma ordem que organiza o argumento em três blocos.</p>
       <div class="cols">
         <div class="card contexto"><h3>Contexto</h3><p>Onde estamos, desde quando e em que escala.</p></div>
         <div class="card tensao"><h3>Tensão</h3><p>O que está fora do esperado e custa dinheiro.</p></div>
         <div class="card decisao"><h3>Decisão</h3><p>O que fazer, com o número que sustenta e o limite que invalida.</p></div>
       </div>
-      <p style="margin-top: 1rem">Leia só os títulos, de cima para baixo: se formarem um parágrafo com sentido, o dashboard está ordenado.</p>
+      <p style="margin-top: 1rem">Para verificar a ordem, leem-se apenas os títulos, de cima para baixo. Se eles formarem um parágrafo com sentido, a sequência dos cartões está adequada.</p>
     </div>
 
     <div class="slide slide-content dense" id="slide-formato" data-lesson-section="concepts">
-      <h2>O formato do fluxo de interação anotado</h2>
+      <h2>Retomada da aula 7: formato do fluxo</h2>
       <div class="flow-wrap"><svg class="flow-svg" id="svg-formato" viewBox="0 0 1000 454" role="img" aria-labelledby="svg-formato-t svg-formato-d"><title id="svg-formato-t">Formato do fluxo de interação anotado</title><desc id="svg-formato-d">Cabeçalho com a tarefa de decisão e três raias horizontais: usuário em post-its amarelos, interface em azuis e dado em verdes. Os passos são numerados de 1 a 6 em ordem cronológica, alternando usuário e interface; setas horizontais seguem a sequência e conectores verticais ligam as raias da mesma coluna. Uma etiqueta rosa D1 marca, na raia do dado, o ponto em que o dado não sustenta a conclusão do usuário.</desc><defs><marker id="svg-formato-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="svg-formato-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1000" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · quem decide · o quê · até quando · com que consequência</text><rect x="0" y="64" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="104" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="121.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="180" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="180" width="8" height="104" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="237.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="296" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="296" width="8" height="104" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="353.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="111.5" font-size="17" class="pi-text" text-anchor="start">abre o painel com</text><text x="158" y="132.7" font-size="17" class="pi-text" text-anchor="start">a decisão na cabeça</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="263.0" y1="155" x2="263.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="116.0" x2="417" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="132" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que a tela oferece</text><text x="158" y="248.7" font-size="17" class="pi-text" text-anchor="start">(filtro, gráfico, número)</text><g class="step-num"><circle cx="134" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="263.0" y1="271" x2="263.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="232.0" x2="417" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="132" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="343.5" font-size="17" class="pi-text" text-anchor="start">fonte: tabela ou view</text><text x="146" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · limitação</text><rect x="422" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="448" y="111.5" font-size="17" class="pi-text" text-anchor="start">procura, compara,</text><text x="448" y="132.7" font-size="17" class="pi-text" text-anchor="start">lê um valor</text><g class="step-num"><circle cx="424" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="553.0" y1="155" x2="553.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="116.0" x2="707" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="422" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="448" y="227.5" font-size="17" class="pi-text" text-anchor="start">a forma que responde</text><text x="448" y="248.7" font-size="17" class="pi-text" text-anchor="start">(palavras ou rascunho)</text><g class="step-num"><circle cx="424" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="553.0" y1="271" x2="553.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="232.0" x2="707" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-formato-seta)"/><rect x="422" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="436" y="343.5" font-size="17" class="pi-text" text-anchor="start">view que sustenta</text><text x="436" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · filtro · período</text><rect x="712" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="738" y="111.5" font-size="17" class="pi-text" text-anchor="start">conclui e decide:</text><text x="738" y="132.7" font-size="17" class="pi-text" text-anchor="start">“frase literal”</text><g class="step-num"><circle cx="714" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="843.0" y1="155" x2="843.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="738" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que sustenta ou</text><text x="738" y="248.7" font-size="17" class="pi-text" text-anchor="start">falta na tela</text><g class="step-num"><circle cx="714" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="843.0" y1="271" x2="843.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="726" y="343.5" font-size="17" class="pi-text" text-anchor="start">o que a base não tem</text><text x="726" y="364.7" font-size="17" class="pi-text" text-anchor="start">(limite da afirmação)</text><line x1="843.0" y1="414" x2="843.0" y2="389" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-formato-seta-d)"/><rect x="817.0" y="414" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="843.0" y="435" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><text x="132" y="435" font-size="15" class="flow-note" fill="#64748b">âncora de divergência: onde o dado não sustenta a conclusão →</text></svg></div>
       <div class="legend" aria-hidden="true">
         <span><i style="background: var(--postit-usuario)"></i>usuário: o que faz e conclui</span>
         <span><i style="background: var(--postit-interface)"></i>interface: o que a tela oferece</span>
         <span><i style="background: var(--postit-dado)"></i>dado: fonte, grão, limitação</span>
-        <span><i style="background: var(--postit-ancora)"></i>âncora D1..Dn</span>
+        <span><i style="background: var(--postit-ancora)"></i>âncora D1 a Dn: divergência</span>
       </div>
     </div>
 
     <div class="slide slide-content dense" id="slide-exemplo-p06" data-lesson-section="concepts">
-      <h2>Exemplo aplicado: P06, subsídio de frete</h2>
+      <h2>Exemplo aplicado à P06: subsídio de frete</h2>
       <div class="flow-wrap"><svg class="flow-svg" id="svg-p06" viewBox="0 0 1200 472" role="img" aria-labelledby="svg-p06-t svg-p06-d"><title id="svg-p06-t">Exemplo aplicado à P06: subsídio de frete</title><desc id="svg-p06-d">Tarefa: o Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday. Usuário: 1 abre o painel, 3 procura o Nordeste, 5 conclui que frete caro espanta cliente, 7 decide subsidiar o Nordeste. Interface: 2 filtro de período jan/17 a ago/18, 4 barras de frete sobre preço por região, 6 só vendas realizadas na tela, 8 nenhum custo do subsídio. Dado: dim_tempo com 20 meses completos; vw_p06_frete_regiao com grão de item entregue; não há carrinho abandonado na base; não há margem nem custo logístico. Âncoras: D1 no passo 4, D2 no passo 5 e D3 no passo 7.</desc><defs><marker id="svg-p06-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="svg-p06-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1200" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday</text><rect x="0" y="64" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="110" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="124.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="186" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="186" width="8" height="110" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="246.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="308" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="308" width="8" height="110" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="368.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="114.5" font-size="17" class="pi-text" text-anchor="start">abre o painel</text><text x="158" y="135.7" font-size="17" class="pi-text" text-anchor="start">antes do comitê</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="250.0" y1="161" x2="250.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="119.0" x2="395" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="132" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="236.5" font-size="17" class="pi-text" text-anchor="start">filtro de período</text><text x="158" y="257.7" font-size="17" class="pi-text" text-anchor="start">jan/17–ago/18</text><g class="step-num"><circle cx="134" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="250.0" y1="283" x2="250.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="241.0" x2="395" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="132" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="358.5" font-size="17" class="pi-text" text-anchor="start">dim_tempo</text><text x="146" y="379.7" font-size="17" class="pi-text" text-anchor="start">20 meses completos</text><rect x="400" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="426" y="125.1" font-size="17" class="pi-text" text-anchor="start">procura o Nordeste</text><g class="step-num"><circle cx="402" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="518.0" y1="161" x2="518.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="119.0" x2="663" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="400" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="426" y="236.5" font-size="17" class="pi-text" text-anchor="start">barras: frete ÷ preço</text><text x="426" y="257.7" font-size="17" class="pi-text" text-anchor="start">por região</text><g class="step-num"><circle cx="402" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="518.0" y1="283" x2="518.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="241.0" x2="663" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="400" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="414" y="358.5" font-size="17" class="pi-text" text-anchor="start">vw_p06_frete_regiao</text><text x="414" y="379.7" font-size="17" class="pi-text" text-anchor="start">grão: item entregue</text><rect x="668" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="694" y="114.5" font-size="17" class="pi-text" text-anchor="start">conclui: “frete caro</text><text x="694" y="135.7" font-size="17" class="pi-text" text-anchor="start">espanta cliente”</text><g class="step-num"><circle cx="670" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="786.0" y1="161" x2="786.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="119.0" x2="931" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="668" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="694" y="236.5" font-size="17" class="pi-text" text-anchor="start">só vendas realizadas</text><text x="694" y="257.7" font-size="17" class="pi-text" text-anchor="start">aparecem na tela</text><g class="step-num"><circle cx="670" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="786.0" y1="283" x2="786.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="241.0" x2="931" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#svg-p06-seta)"/><rect x="668" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="682" y="358.5" font-size="17" class="pi-text" text-anchor="start">não há carrinho</text><text x="682" y="379.7" font-size="17" class="pi-text" text-anchor="start">abandonado na base</text><rect x="936" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="962" y="114.5" font-size="17" class="pi-text" text-anchor="start">decide subsidiar</text><text x="962" y="135.7" font-size="17" class="pi-text" text-anchor="start">o Nordeste</text><g class="step-num"><circle cx="938" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">7</text></g><line x1="1054.0" y1="161" x2="1054.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="962" y="236.5" font-size="17" class="pi-text" text-anchor="start">nenhum custo do</text><text x="962" y="257.7" font-size="17" class="pi-text" text-anchor="start">subsídio na tela</text><g class="step-num"><circle cx="938" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">8</text></g><line x1="1054.0" y1="283" x2="1054.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="950" y="358.5" font-size="17" class="pi-text" text-anchor="start">sem margem nem custo</text><text x="950" y="379.7" font-size="17" class="pi-text" text-anchor="start">logístico na base</text><line x1="518.0" y1="432" x2="518.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="492.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="518.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><line x1="786.0" y1="432" x2="786.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="760.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="786.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D2</text><line x1="1054.0" y1="432" x2="1054.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#svg-p06-seta-d)"/><rect x="1028.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="1054.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D3</text></svg></div>
-      <p style="margin-top: 0.7rem">A tela mostra que o frete pesa <strong>22,7%</strong> sobre o preço no Norte e <strong>21,7%</strong> no Nordeste, contra <strong>15,2%</strong> no Sudeste. O que ela não mostra é venda perdida nem custo do subsídio.</p>
+      <p style="margin-top: 0.7rem">É o mesmo exemplo da aula 7. A tela mostra que o frete pesa 22,7% sobre o preço no Norte e 21,7% no Nordeste, contra 15,2% no Sudeste, mas não mostra venda perdida nem custo do subsídio.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
-      <h2>Registro de uma âncora: cinco campos</h2>
-      <p>A âncora marca o golfo entre o que o usuário lê na tela e o que o dado autoriza. Exemplo, D2 da P06:</p>
+      <h2>Retomada da aula 7: registro da âncora D2</h2>
+      <p>A âncora marca a distância entre o que o usuário lê na tela e o que o dado autoriza. O registro da D2 da P06, visto na aula 7, usa os cinco campos abaixo.</p>
       <table class="slide-table">
         <tbody>
           <tr><td>Passo</td><td>⑤ o Chief conclui olhando as barras de frete por região</td></tr>
           <tr><td>Leitura do usuário</td><td>“Frete caro espanta cliente do Nordeste.”</td></tr>
           <tr><td>O que o dado autoriza</td><td>Entre os itens entregues de jan/17 a ago/18, o frete equivale a 21,7% do preço no Nordeste. A base só tem vendas realizadas.</td></tr>
-          <tr><td>Consequência</td><td>Subsídio aprovado para recuperar uma demanda perdida que ninguém mediu.</td></tr>
+          <tr><td>Consequência</td><td>Aprovação do subsídio para recuperar uma demanda perdida que não foi medida.</td></tr>
           <tr><td>Suporte na tela</td><td>Nota de origem: “só pedidos realizados; a base não registra desistência”.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Regras do board</h2>
+      <h2>Retomada da aula 7: regras do quadro</h2>
       <ul>
-        <li><strong>Cada passo é numerado</strong>, em ordem cronológica, qualquer que seja a raia.</li>
-        <li><strong>A cor diz de quem é a afirmação:</strong> verde é sempre dado, amarelo é sempre usuário.</li>
-        <li><strong>Toda explicação dita em voz alta vira post-it.</strong> O que não está no board não foi decidido.</li>
-        <li><strong>Nenhuma captura de tela:</strong> interface se descreve em palavras ou com formas.</li>
+        <li>Os passos são numerados em ordem cronológica, independentemente da raia</li>
+        <li>A cor identifica a origem da afirmação: verde para o dado, amarelo para o usuário e azul para a tela</li>
+        <li>A raia do dado não recebe numeração e registra fonte, grão e limitação</li>
+        <li>O post-it rosa marca a divergência entre a conclusão do usuário e o que o dado autoriza</li>
+        <li>Toda explicação dada oralmente durante a construção é registrada em post-it</li>
+        <li>Capturas de tela não são usadas; a interface é descrita em palavras ou formas</li>
       </ul>
-      <a class="miro-link" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer">🧩 Abrir o board da turma no Miro</a>
+      <a class="miro-link" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer">Abrir o quadro da turma no Miro</a>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Brainstorming 1 · Divergir (30 min)</h2>
-      <p>Grupos de 4. Cada grupo recebe um par de perguntas: G1 P01+P02 · G2 P03+P04 · G3 P05+P06 · G4 P07+P08 · G5 P09+P10.</p>
+      <h2>Brainstorming 1: divergência (30 min)</h2>
+      <p>A turma trabalha em grupos de 4, e cada grupo recebe um par de perguntas: G1, P01 e P02; G2, P03 e P04; G3, P05 e P06; G4, P07 e P08; G5, P09 e P10.</p>
       <ol class="timeline">
-        <li><time>19:15 · 3'</time><span><strong>Preparar:</strong> duplicar o frame modelo da aula 7 e colar no topo as duas perguntas com os cinco elementos.</span></li>
-        <li><time>19:18 · 8'</time><span><strong>Crazy 8s, em silêncio:</strong> cada pessoa faz 8 rascunhos de tela em post-it azul, 1 minuto cada, 4 por pergunta.</span></li>
-        <li><time>19:26 · 7'</time><span><strong>1-2, em duplas:</strong> juntar rascunhos numa sequência de passos numerados, amarelo e azul alternados.</span></li>
-        <li><time>19:33 · 12'</time><span><strong>4, o grupo:</strong> um fluxo por pergunta, com a raia verde preenchida: view, grão e limitação.</span></li>
+        <li><time>19:15 · 3'</time><span>Preparação: duplicar o frame da turma construído na aula 7 e colar no topo as duas perguntas com os cinco elementos.</span></li>
+        <li><time>19:18 · 8'</time><span>Crazy 8s, em silêncio: cada pessoa faz 8 rascunhos de tela em post-it azul, com 1 minuto para cada um e 4 por pergunta.</span></li>
+        <li><time>19:26 · 7'</time><span>1-2, em duplas: os rascunhos são reunidos numa sequência de passos numerados, alternando amarelo e azul.</span></li>
+        <li><time>19:33 · 12'</time><span>4, com o grupo todo: um fluxo por pergunta, com a raia do dado preenchida com view, grão e limitação.</span></li>
       </ol>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Regras para não virar debate de gosto</h2>
+      <h2>Regras da dinâmica de grupo</h2>
       <ul>
-        <li><strong>Divergir não é avaliar:</strong> no Crazy 8s ninguém comenta a ideia de ninguém.</li>
-        <li><strong>Proibido “eu prefiro”.</strong> Toda defesa começa com “o Chief decide ___ mais rápido porque ___”.</li>
-        <li><strong>Discordou, desenhe:</strong> a alternativa entra em 1 minuto num post-it ao lado; argumento sem desenho não conta.</li>
-        <li><strong>Ideia sem pergunta (Pxx) e sem passo numerado não entra no frame.</strong></li>
-        <li><strong>Três critérios de voto, na tela:</strong> responde à decisão · existe view e coluna que sustentam · lê-se em 5 segundos.</li>
-        <li><strong>Empate:</strong> vence o fluxo com menos divergências abertas. Cronômetro tocou, caneta para.</li>
+        <li>No Crazy 8s, as ideias não são comentadas, porque a etapa serve para gerar alternativas, e não para avaliá-las</li>
+        <li>A defesa de um fluxo começa com “o Chief decide ___ mais rápido porque ___”, e não com preferência pessoal</li>
+        <li>Quem discorda desenha a alternativa em 1 minuto num post-it ao lado, para que a comparação se faça entre propostas concretas</li>
+        <li>Ideias sem pergunta associada (Pxx) e sem passo numerado ficam fora do frame</li>
+        <li>O voto segue três critérios: a tela responde à decisão, existem view e coluna que a sustentam e a leitura leva até 5 segundos</li>
+        <li>Em caso de empate, prevalece o fluxo com menos divergências abertas; os tempos de cada etapa são respeitados</li>
       </ul>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Brainstorming 2 · Convergir e decidir (35 min)</h2>
+      <h2>Brainstorming 2: convergência (35 min)</h2>
       <ol class="timeline">
-        <li><time>19:45 · 10'</time><span><strong>Todos, em galeria:</strong> cada grupo lê os passos do seu fluxo em 90 segundos, sem defender.</span></li>
-        <li><time>19:55 · 5'</time><span><strong>Votação por pontos:</strong> 3 votos por pessoa, só em fluxos de outros grupos, pelos três critérios. Use a votação do Miro ou pontos roxos: amarelo, azul, verde e rosa já têm dono.</span></li>
-        <li><time>20:00 · 5'</time><span><strong>Ordem narrativa:</strong> os fluxos vencedores vão para a trilha contexto → tensão → decisão.</span></li>
-        <li><time>20:05 · 15'</time><span><strong>Fluxo único do dashboard:</strong> um frame novo, copiado do modelo, encadeia as 10 perguntas na ordem escolhida.</span></li>
+        <li><time>19:45 · 10'</time><span>Galeria com toda a turma: cada grupo lê os passos do seu fluxo em 90 segundos, sem defendê-lo.</span></li>
+        <li><time>19:55 · 5'</time><span>Votação por pontos: 3 votos por pessoa, apenas em fluxos de outros grupos, pelos três critérios. Use a votação do Miro ou pontos roxos, já que amarelo, azul, verde e rosa têm significado no fluxo.</span></li>
+        <li><time>20:00 · 5'</time><span>Ordem narrativa: os fluxos escolhidos são distribuídos entre contexto, tensão e decisão.</span></li>
+        <li><time>20:05 · 15'</time><span>Fluxo único do dashboard: um frame novo, copiado do template da aula 7, encadeia as 10 perguntas na ordem escolhida.</span></li>
       </ol>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
       <h2>Uma ordem de partida para a narrativa</h2>
-      <p>Proposta para a turma contestar, não gabarito:</p>
+      <p>A ordem abaixo é uma proposta inicial para a turma discutir e alterar, e não um gabarito.</p>
       <div class="cols">
-        <div class="card contexto"><h3>Contexto</h3><p><strong>P01</strong> ritmo da receita · <strong>P05</strong> onde está · <strong>P03</strong> o que vende</p></div>
-        <div class="card tensao"><h3>Tensão</h3><p><strong>P07</strong> onde atrasa · <strong>P08</strong> quanto custa na nota · <strong>P06</strong> quanto pesa o frete · <strong>P10</strong> dependência de poucos · <strong>P09</strong> poucos voltam</p></div>
-        <div class="card decisao"><h3>Decisão</h3><p><strong>P04</strong> onde apostar · <strong>P02</strong> quando fazer campanha</p></div>
+        <div class="card contexto"><h3>Contexto</h3><p>P01, ritmo da receita; P05, distribuição geográfica; P03, categorias que vendem</p></div>
+        <div class="card tensao"><h3>Tensão</h3><p>P07, estados com atraso; P08, efeito na nota; P06, peso do frete; P10, dependência de poucos vendedores; P09, recompra baixa</p></div>
+        <div class="card decisao"><h3>Decisão</h3><p>P04, categorias para apostar; P02, calendário de campanhas</p></div>
       </div>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Âncoras típicas · P01 a P05</h2>
+      <h2>Âncoras típicas de P01 a P05</h2>
       <table class="slide-table">
         <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th></tr></thead>
         <tbody>
           <tr><td>P01</td><td>“A receita caiu em 2018.”</td><td>Platô desde mar/18, entre R$ 839 mil e R$ 978 mil por mês; meses incompletos já estão fora.</td></tr>
-          <tr><td>P02</td><td>“Segunda é o dia da campanha.”</td><td>Segunda tem mais pedidos entregues (15.660); pedido não é conversão de campanha.</td></tr>
-          <tr><td>P03</td><td>“Relógios é a categoria mais lucrativa.”</td><td>Maior ticket (R$ 211,89), não maior margem: a base não tem custo.</td></tr>
+          <tr><td>P02</td><td>“Segunda é o dia da campanha.”</td><td>Segunda tem mais pedidos entregues (15.660), mas número de pedidos não mede conversão de campanha.</td></tr>
+          <tr><td>P03</td><td>“Relógios é a categoria mais lucrativa.”</td><td>Maior ticket (R$ 211,89); a margem não pode ser calculada, porque a base não tem custo.</td></tr>
           <tr><td>P04</td><td>“Bebês é a melhor aposta.”</td><td>+268,6% sobre R$ 68 mil; sem o piso de R$ 50 mil, uma categoria de R$ 93,80 apareceria com +48.785,7%.</td></tr>
-          <tr><td>P05</td><td>“Os vendedores de SP vendem 38%.”</td><td>38,4% é do estado do <strong>cliente</strong>, no endereço mais recente.</td></tr>
+          <tr><td>P05</td><td>“Os vendedores de SP vendem 38%.”</td><td>Os 38,4% se referem ao estado do cliente, no endereço mais recente, e não ao do vendedor.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Âncoras típicas · P06 a P10</h2>
+      <h2>Âncoras típicas de P06 a P10</h2>
       <table class="slide-table">
         <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th></tr></thead>
         <tbody>
           <tr><td>P06</td><td>“Frete caro espanta cliente.”</td><td>Frete pesa 22,7% no Norte e 15,2% no Sudeste entre vendas realizadas; desistência não está na base.</td></tr>
           <tr><td>P07</td><td>“RJ é onde mais atrasa.”</td><td>Maior taxa é MA (17,5%); RJ tem 12,2% com 12.312 entregas, e SP soma mais atrasos em número absoluto.</td></tr>
-          <tr><td>P08</td><td>“Zerar atraso leva a nota a 4,29.”</td><td>Atrasados têm nota 2,27 e no prazo 4,29: associação, não causa.</td></tr>
+          <tr><td>P08</td><td>“Zerar atraso leva a nota a 4,29.”</td><td>Atrasados têm nota 2,27 e, no prazo, 4,29; a base mostra associação, sem isolar a causa.</td></tr>
           <tr><td>P09</td><td>“Ninguém volta a comprar.”</td><td>2.789 de 93.104 clientes (3,00%) em 20 meses; com <code>customer_id</code> daria zero.</td></tr>
           <tr><td>P10</td><td>“Os 295 maiores são os mais rentáveis.”</td><td>Geram 67,0% da receita; a base não tem margem, e a cauda tem muitos vendedores novos.</td></tr>
         </tbody>
@@ -746,21 +749,21 @@
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
-      <h2>Da raia verde à view</h2>
-      <p>A view é o contrato entre o fluxo e a tela: a aula 9 só mostra o que a view entrega.</p>
+      <h2>Da raia do dado à view</h2>
+      <p>A view funciona como contrato entre o fluxo e a tela, pois o dashboard da aula 9 exibe apenas o que as views entregam.</p>
       <div class="cols">
-        <div class="card dado"><h3>Post-it verde</h3><p><code>vw_p06_frete_regiao</code> · grão: item entregue · sem desistência</p></div>
+        <div class="card dado"><h3>Post-it verde</h3><p><code>vw_p06_frete_regiao</code>; grão de item entregue; sem registro de desistência</p></div>
         <div class="card"><h3>View</h3><p>colunas <code>regiao</code>, <code>frete_sobre_preco_pct</code>, <code>frete_medio_item</code>, <code>itens</code>; filtro e período dentro dela</p></div>
         <div class="card interface"><h3>Cartão da tela</h3><p>barras ordenadas, título que afirma, período no subtítulo, nota de origem</p></div>
       </div>
       <ul style="margin-top: 1rem">
         <li><code>security_invoker = on</code>: a view respeita as permissões de quem consulta.</li>
-        <li><code>grant select … to anon</code>: a chave publicável lê; ninguém escreve pela API.</li>
+        <li><code>grant select … to anon</code>: a chave publicável permite leitura, e a API não aceita escrita.</li>
       </ul>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>A IA escreve a view, você confere</h2>
+      <h2>Views escritas com IA e conferidas</h2>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No Postgres do Supabase há um esquema estrela no schema public:
 fato_itens_pedido (grão: um item) com pedido_sk, item_seq, data_sk, cliente_sk,
 produto_sk, vendedor_sk, status, preco, frete; fato_pedidos (grão: um pedido)
@@ -773,11 +776,11 @@ entre 2017-01-01 e 2018-08-31.
 Escreva create view public.vw_pNN_assunto_grupo with (security_invoker = on)
 para a pergunta: [PERGUNTA]. Colunas de saída: [COLUNAS].
 Antes do SQL, diga qual fato usa e por quê (grão). Não invente colunas.</div></div>
-      <p>Rode no SQL Editor e compare com a resposta de referência. Diferença é achado, não fracasso: registre a causa.</p>
+      <p>Execute a view no SQL Editor e compare o resultado com a referência. Cada diferença encontrada deve ter a causa registrada, pois ela documenta uma decisão de modelagem.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Confira contra a referência</h2>
+      <h2>Conferência contra a referência</h2>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text no-wrap"><span class="code-comment">-- Antes do gabarito: mantenha só as linhas do grupo e troque o nome pela view _grupo</span>
 select p, valor, referencia, valor = referencia as confere from (
   select ''::text p, ''::text valor, ''::text referencia where false
@@ -796,12 +799,12 @@ select p, valor, referencia, valor = referencia as confere from (
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Aplique o gabarito <code>views.sql</code></h2>
-      <p>Todos chegam à aula 9 com as mesmas 11 views, qualquer que tenha sido o resultado do grupo.</p>
+      <h2>Aplicação do gabarito <code>views.sql</code></h2>
+      <p>O gabarito garante que todos cheguem à aula 9 com as mesmas 11 views, independentemente do resultado do grupo.</p>
       <ol>
         <li>Salve a sua versão em <code>aula-08-seunome/views.sql</code> e anote a diferença encontrada.</li>
         <li>Apague as views <code>_grupo</code> do Supabase com <code>drop view</code>.</li>
-        <li>Abra <code>materiais/aula-08/olist/views.sql</code>, copie tudo, cole no SQL Editor e clique em <strong>Run</strong>.</li>
+        <li>Abra <code>materiais/aula-08/olist/views.sql</code>, copie todo o conteúdo, cole no SQL Editor e clique em Run.</li>
         <li>Rode a conferência de novo, agora com os nomes do gabarito: dez linhas com <code>confere = true</code>.</li>
       </ol>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar SQL</button><div class="code-block prompt-text">select table_name from information_schema.views
@@ -809,14 +812,14 @@ where table_schema = 'public' order by 1;   <span class="code-comment">-- espera
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
-      <h2>Teste uma view pela API REST</h2>
-      <p>No terminal do Codespace. URL e chave publicável (<code>sb_publishable_…</code>) ficam em Project Settings → API Keys; nunca a secret nem a senha do banco.</p>
+      <h2>Teste de uma view pela API REST</h2>
+      <p>No terminal do Codespace, use a Project URL e a chave publicável (<code>sb_publishable_…</code>), disponíveis em Project Settings, na seção API Keys. A chave secreta e a senha do banco não entram neste teste.</p>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar comandos</button><div class="code-block prompt-text">read -p "Project URL: " SUPABASE_URL
 read -p "Chave publicável: " SUPABASE_KEY
 curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
   -H "apikey: $SUPABASE_KEY" \
   -H "Authorization: Bearer $SUPABASE_KEY"</div></div>
-      <p>Esperado: uma lista JSON com <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00. É exatamente o que o dashboard vai ler.</p>
+      <p>O resultado esperado é uma lista JSON com <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00, que é o mesmo conteúdo lido pelo dashboard na aula 9.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="challenge">
@@ -824,34 +827,36 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
       <p>Pasta <code>aula-08-seunome/</code> no seu fork, com commit e push:</p>
       <ul>
         <li><code>ESPECIFICACAO.md</code>: uma linha por pergunta com pergunta, decisão, view, colunas, visual escolhido, título que afirma, âncora tratada e suporte na tela.</li>
-        <li>Link do frame do dashboard no Miro, com pelo menos 4 âncoras registradas nos cinco campos.</li>
+        <li>Link do frame do dashboard no quadro do Miro, com pelo menos 4 âncoras registradas nos cinco campos.</li>
         <li><code>views.sql</code> do grupo, escrito antes do gabarito, e a diferença encontrada.</li>
-        <li><strong>Aceite:</strong> a conferência retorna dez <code>confere = true</code> no seu Supabase e o <code>curl</code> devolve 2789 recorrentes.</li>
+        <li>Critério de aceite: a conferência retorna dez <code>confere = true</code> no seu Supabase e o <code>curl</code> devolve 2789 recorrentes.</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="summary">
       <h2>Síntese</h2>
-      <p>O gráfico é a última decisão, não a primeira.</p>
+      <p>Nesta aula, a escolha do gráfico veio depois da definição da pergunta, do fluxo e da view.</p>
       <ul>
-        <li>A pergunta com cinco elementos escolhe a forma; a ordem dos cartões carrega o argumento.</li>
-        <li>O fluxo anotado mostra onde a leitura do Chief ultrapassa o que o dado autoriza.</li>
-        <li>A view é o contrato: conferida contra a referência, ela sustenta a tela da aula 9.</li>
+        <li>Os cinco elementos da pergunta orientam a forma do gráfico, e a ordem dos cartões organiza o argumento</li>
+        <li>O fluxo anotado indica em que pontos a leitura do Chief ultrapassa o que o dado autoriza</li>
+        <li>As views conferidas contra a referência sustentam a tela da aula 9</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="next-steps">
       <h2>Próximos passos: aula 9</h2>
-      <p>O fluxo anotado e a <code>ESPECIFICACAO.md</code> viram o dashboard HTML publicado no GitHub Pages do seu fork, lendo as views do Supabase pela API REST.</p>
+      <p>Aula 9 (07/10): o fluxo anotado e a <code>ESPECIFICACAO.md</code> serão convertidos num dashboard HTML publicado no GitHub Pages do seu fork, com leitura das views pela API REST. A aula começa pela verificação destes itens:</p>
       <ul>
-        <li>Traga a URL do projeto e a chave publicável à mão.</li>
-        <li>Cada suporte na tela decidido hoje vira um elemento do cartão.</li>
+        <li><code>ESPECIFICACAO.md</code> e <code>views.sql</code> do grupo com commit e push</li>
+        <li>Frame do dashboard no quadro do Miro, com as âncoras registradas</li>
+        <li>Conferência com dez <code>confere = true</code> no seu Supabase</li>
+        <li>Project URL e chave publicável disponíveis</li>
       </ul>
     </div>
 
     <div class="slide slide-end">
       <h2>Fim do Laboratório 8</h2>
-      <p>Antes de sair: fluxo no Miro, <code>ESPECIFICACAO.md</code> e <code>views.sql</code> com commit e push.</p>
+      <p>Na aula 9, a especificação e as views produzidas hoje serão a base do dashboard publicado.</p>
     </div>
   </div>
 
@@ -860,7 +865,8 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-08/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
-      <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmFyejh1MVBONzF3QjhHZUVXM3N2NjJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=238603895059" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="Abrir o board da turma no Miro"><span class="ctrl-icon">🧩</span> Miro</a>
+      <a href="../materiais/aula-07/dados/olist_pedidos_clientes.xlsx" download class="ctrl-btn" id="btn-dados" title="Baixar os três arquivos Excel do Olist"><span class="ctrl-icon">⬇️</span> Dados</a>
+      <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="Convite para o quadro da turma no Miro"><span class="ctrl-icon">🧩</span> Miro</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)" aria-label="Slide anterior">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)" aria-label="Próximo slide">►</button>
@@ -900,6 +906,20 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
         e.preventDefault();
         if (current > 0) { current--; update(); }
       }
+    });
+
+    // Um único botão baixa os três Excels do Olist; o href cobre o caso sem JavaScript
+    const arquivosOlist = ['olist_pedidos_clientes.xlsx', 'olist_itens_pagamentos_avaliacoes.xlsx', 'olist_catalogo.xlsx'];
+    document.getElementById('btn-dados').addEventListener('click', (e) => {
+      e.preventDefault();
+      arquivosOlist.forEach((nome, i) => setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = `../materiais/aula-07/dados/${nome}`;
+        link.download = nome;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }, i * 400));
     });
 
     btnFs.addEventListener('click', () => {

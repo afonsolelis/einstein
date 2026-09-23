@@ -414,6 +414,14 @@
       .slide-counter { min-width: 3.4rem; font-size: 0.72rem; }
     }
 
+    /* Cinco atalhos no rodapé: compacta os botões nas telas mais estreitas */
+    @media (max-width: 440px) {
+      .btn-group { gap: 0.15rem; }
+      a.ctrl-btn { padding-inline: 0.45rem; }
+      .ctrl-btn-only-icon { min-width: 34px; padding: 0.45rem; }
+      .slide-counter { min-width: 2.9rem; font-size: 0.68rem; }
+    }
+
     @media (max-height: 680px) and (min-width: 769px) {
       .slide { padding-top: 4.25rem; }
       .slide-content h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); margin-bottom: 1rem; }
@@ -469,16 +477,17 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 9 · 07/10</div><h1>Dashboard online</h1><p>GitHub Pages lendo o Supabase: as dez respostas do Chief de Vendas no ar</p></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 9 · 07/10</div><h1>Dashboard online</h1><p>Data Visualization III. Publicação no GitHub Pages de um dashboard que lê as views do Supabase e responde às dez perguntas do Chief de Vendas</p></div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <p class="kicker">Case Olist · terceiro ato</p>
-      <h2>O board não aceita opinião sem número</h2>
-      <p>O Chief de Vendas da Olist leva ao board as estratégias comerciais de 2019. A turma é a equipe de dados que sustenta cada afirmação.</p>
+      <p class="kicker">Retomada das aulas 7 e 8</p>
+      <h2>O case Olist nas aulas 7 a 9</h2>
+      <p>O Chief de Vendas da Olist apresenta ao board as estratégias comerciais de 2019, e a turma atua como a equipe de dados que sustenta cada afirmação. Esta aula parte dos artefatos produzidos nas duas anteriores.</p>
       <ul>
-        <li><strong>Aula 7:</strong> o Olist virou um esquema estrela no seu Supabase, reconciliado</li>
-        <li><strong>Aula 8:</strong> as dez perguntas viraram fluxo anotado, dez views e <code>ESPECIFICACAO.md</code></li>
-        <li><strong>Hoje:</strong> a especificação vira um painel público, lido do seu banco, que outro grupo entende sem você explicar</li>
+        <li>Aula 7: o Olist carregado no Supabase de cada estudante e transformado em esquema estrela reconciliado</li>
+        <li>Aula 8: as dez perguntas convertidas em fluxo de interação anotado, <code>ESPECIFICACAO.md</code> e <code>views.sql</code>, com o frame do dashboard no quadro do Miro</li>
+        <li>Para hoje: a conferência com dez <code>confere = true</code> no seu Supabase, a Project URL e a chave publicável</li>
+        <li>Aula 9: publicação da especificação como dashboard, lido do seu banco e compreensível para outro grupo sem explicação oral</li>
       </ul>
     </div>
 
@@ -495,11 +504,11 @@
     <div class="slide slide-content" data-lesson-section="agenda">
       <h2>Roteiro do laboratório</h2>
       <ul class="agenda">
-        <li><b>19:00</b> O contrato: fluxo e especificação</li>
+        <li><b>19:00</b> Retomada do fluxo anotado e da especificação</li>
         <li><b>19:10</b> Arquitetura e chaves</li>
-        <li><b>19:30</b> Construção com o agente</li>
+        <li><b>19:30</b> Construção do dashboard com o agente</li>
         <li><b>20:30</b> Intervalo</li>
-        <li><b>20:40</b> Revisão humana</li>
+        <li><b>20:40</b> Revisão humana do código</li>
         <li><b>21:05</b> Publicação no GitHub Pages</li>
         <li><b>21:20</b> Teste de leitura em voz alta</li>
         <li><b>21:40</b> Recomendação e síntese</li>
@@ -507,19 +516,19 @@
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>A especificação é o contrato</h2>
-      <p>O agente escreve o HTML. Quem decide o que a tela afirma é a <code>ESPECIFICACAO.md</code> da aula 8.</p>
+      <h2>A especificação como contrato</h2>
+      <p>O agente escreve o HTML, mas o que a tela afirma é definido pela <code>ESPECIFICACAO.md</code> da aula 8. Cada campo da especificação determina um elemento do dashboard.</p>
       <ul>
-        <li><strong>Pergunta e decisão</strong> → posição do cartão na narrativa</li>
-        <li><strong>View e colunas</strong> → o que o <code>fetch</code> lê</li>
-        <li><strong>Visual escolhido</strong> → o gráfico, sem troca por gosto do agente</li>
-        <li><strong>Título que afirma</strong> → frase montada com os dados, nunca digitada</li>
-        <li><strong>Âncora e suporte na tela</strong> → unidade, período, base de comparação, nota</li>
+        <li><strong>Pergunta e decisão:</strong> posição do cartão na narrativa</li>
+        <li><strong>View e colunas:</strong> o que o <code>fetch</code> lê</li>
+        <li><strong>Visual escolhido:</strong> o gráfico, que o agente não substitui por outro</li>
+        <li><strong>Título que afirma:</strong> frase montada a partir dos dados, e não digitada</li>
+        <li><strong>Âncora e suporte na tela:</strong> unidade, período, base de comparação e nota</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts" data-slide="arquitetura">
-      <h2>Quem conversa com quem</h2>
+      <h2>Arquitetura do dashboard</h2>
       <figure class="arq" role="img" aria-label="Arquitetura: o GitHub Pages entrega os arquivos; o navegador chama a API REST do Supabase, que lê as views sobre o esquema estrela">
         <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
           <defs><marker id="ponta-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker></defs>
@@ -556,11 +565,11 @@
           <line class="seta" x1="40" y1="337" x2="40" y2="363" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="356">permissões de quem chama</text>
         </svg>
       </figure>
-      <p>O GitHub Pages não fala com o Supabase: quem busca os dados é o navegador de quem abre o painel.</p>
+      <p>O GitHub Pages apenas entrega os arquivos estáticos. Os dados são buscados no Supabase pelo navegador de quem abre o painel.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Uma view, uma URL</h2>
+      <h2>Cada view como endpoint da API</h2>
       <div class="code-block"><span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(
   `${SUPABASE_URL}<span class="code-string">/rest/v1/vw_p09_recompra?select=*</span>`,
   { headers: { apikey: SUPABASE_KEY,
@@ -568,30 +577,30 @@
 );
 <span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();
 <span class="code-comment">// [{"clientes":93104,"clientes_recorrentes":2789,"recompra_pct":3.00}]</span></div>
-      <p style="margin-top: 1rem">O Supabase publica cada view do schema <code>public</code> como endpoint. A resposta é uma lista de linhas em JSON, com os nomes de coluna da view.</p>
+      <p style="margin-top: 1rem">O Supabase publica cada view do schema <code>public</code> como um endpoint da API REST. A resposta é uma lista de linhas em JSON, com os mesmos nomes de coluna da view.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
       <h2>Chave publicável × chave secreta</h2>
-      <p>Supabase → <strong>Project Settings → API Keys</strong>: Project URL e chaves.</p>
+      <p>A Project URL e as chaves ficam no Supabase, em Project Settings, na seção API Keys.</p>
       <div class="duas">
-        <div class="painel ok"><h3>Publicável <code>sb_publishable_…</code></h3><ul><li>Pode ir no HTML e no commit</li><li>Identifica o projeto; em projetos antigos, é a <em>anon public</em></li><li>Lê só o que o grant e o RLS liberam</li></ul></div>
-        <div class="painel nunca"><h3>Secreta <code>sb_secret_…</code> e senha</h3><ul><li>Nunca no HTML, no commit, no print ou no prompt</li><li>Ignora o RLS: quem copia, escreve e apaga</li><li>Em projetos antigos, é a <em>service_role</em></li></ul></div>
+        <div class="painel ok"><h3>Publicável <code>sb_publishable_…</code></h3><ul><li>Pode constar no HTML e no commit</li><li>Identifica o projeto; em projetos antigos, é a <em>anon public</em></li><li>Lê só o que o grant e o RLS liberam</li></ul></div>
+        <div class="painel nunca"><h3>Secreta <code>sb_secret_…</code> e senha</h3><ul><li>Não deve constar no HTML, em commits, capturas de tela ou prompts</li><li>Ignora o RLS, de modo que quem a obtém pode escrever e apagar dados</li><li>Em projetos antigos, é a <em>service_role</em></li></ul></div>
       </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
       <h2>Por que a leitura pública é segura aqui</h2>
       <ul>
-        <li><code>estrela.sql</code> liga o RLS nas seis tabelas com uma política só de <strong>SELECT</strong> para <code>anon</code></li>
+        <li><code>estrela.sql</code> liga o RLS nas seis tabelas com uma política apenas de SELECT para <code>anon</code></li>
         <li><code>views.sql</code> cria as views com <code>security_invoker = on</code> e dá <code>grant select</code> a <code>anon</code></li>
-        <li>Não existe política de insert, update ou delete: a chave publicável não escreve</li>
-        <li>O limite também vale ao contrário: tudo que o grant libera fica legível por qualquer pessoa. Dado pessoal real não se publica assim</li>
+        <li>Como não existe política de insert, update ou delete, a chave publicável não altera dados</li>
+        <li>Por outro lado, tudo o que o grant libera fica legível por qualquer pessoa; por isso, dados pessoais reais não devem ser publicados dessa forma</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Número chega, número se formata</h2>
+      <h2>Conversão e formatação de números</h2>
       <div class="code-block"><span class="code-keyword">const</span> taxa = Number(linha.recompra_pct);    <span class="code-comment">// 3.00 chega como 3</span>
 <span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>,
   { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
@@ -600,7 +609,7 @@
 
 brl.format(Number(<span class="code-string">'13181027.13'</span>));      <span class="code-comment">// "R$ 13.181.027,13"</span>
 pct.format(taxa) + <span class="code-string">'%'</span>;                  <span class="code-comment">// "3,00%"</span></div>
-      <p style="margin-top: 1rem">A API já entrega número JSON; <code>Number()</code> é conversão defensiva, caso a view mude e mande texto. <code>Intl</code> devolve a vírgula decimal, o ponto de milhar e os zeros que o JSON perdeu.</p>
+      <p style="margin-top: 1rem">A API já entrega números JSON; <code>Number()</code> funciona como conversão defensiva, caso a view passe a enviar texto. O <code>Intl</code> restitui a vírgula decimal, o ponto de milhar e os zeros que o JSON descarta.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
@@ -628,23 +637,23 @@ pct.format(taxa) + <span class="code-string">'%'</span>;                  <span 
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
       <h2>Dashboard de referência</h2>
-      <a class="link-destaque" href="../materiais/aula-09/dashboard-referencia/index.html">📈 Abrir o dashboard de referência</a>
+      <a class="link-destaque" href="../materiais/aula-09/dashboard-referencia/index.html">Abrir o dashboard de referência</a>
       <ul>
-        <li>Cole a Project URL e a chave publicável do <strong>seu</strong> projeto: elas ficam só no seu navegador</li>
-        <li>Os dez cartões leem as views de <code>views.sql</code> e desenham com Chart.js</li>
-        <li>Cada título é calculado a partir da view; em <em>Ver as linhas</em> você reconcilia a tela com a view</li>
-        <li>É gabarito de comportamento, não de estética: o seu painel segue a especificação do seu grupo</li>
+        <li>Cole a Project URL e a chave publicável do seu projeto; os valores ficam armazenados apenas no seu navegador</li>
+        <li>Os dez cartões leem as views de <code>views.sql</code> e desenham os gráficos com Chart.js</li>
+        <li>Cada título é calculado a partir da view, e a opção Ver as linhas permite reconciliar a tela com a view</li>
+        <li>A referência serve de gabarito para o comportamento do painel; a aparência do seu segue a especificação do seu grupo</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Ordem narrativa, não galeria</h2>
+      <h2>Ordem narrativa dos cartões</h2>
       <div class="tres">
         <div class="painel"><h3>1. Contexto <span>onde estamos</span></h3><p>ritmo, geografia e mix</p><div class="chips"><span>P01</span><span>P05</span><span>P03</span></div></div>
         <div class="painel"><h3>2. Tensão <span>o que ameaça</span></h3><p>sellers, recompra, prazo e nota</p><div class="chips"><span>P10</span><span>P09</span><span>P07</span><span>P08</span></div></div>
         <div class="painel"><h3>3. Decisão <span>onde agir</span></h3><p>categorias, frete e calendário</p><div class="chips"><span>P04</span><span>P06</span><span>P02</span></div></div>
       </div>
-      <p>Esta é a ordem do dashboard de referência. Se a turma votou outra ordem na aula 8, vale a da turma: a especificação manda.</p>
+      <p>Esta é a ordem do dashboard de referência. Se a turma votou outra ordem na aula 8, prevalece a ordem registrada na especificação.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
@@ -675,53 +684,53 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Revisão humana: quatro perguntas ao diff</h2>
+      <h2>Revisão humana do diff</h2>
       <ol>
-        <li><strong>Há número digitado?</strong> Procure com <code>grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*</code> e justifique cada ocorrência</li>
-        <li><strong>O erro aparece?</strong> Troque o nome de uma view no código, recarregue: só aquele cartão pode falhar</li>
-        <li><strong>O título afirma e vem do dado?</strong> Se a view mudar, a frase muda junto</li>
-        <li><strong>Unidade, período e fonte</strong> estão em todos os cartões?</li>
+        <li>Há número digitado? Procure com <code>grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*</code> e justifique cada ocorrência</li>
+        <li>O erro aparece? Troque o nome de uma view no código e recarregue a página; apenas aquele cartão deve falhar</li>
+        <li>O título afirma e vem do dado? Se a view mudar, a frase deve mudar junto</li>
+        <li>Unidade, período e fonte estão em todos os cartões?</li>
       </ol>
-      <p>Aceite o diff só quando as quatro respostas forem sim.</p>
+      <p>O diff é aceito somente quando as quatro respostas forem afirmativas.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
       <h2>Teste no Codespace antes de publicar</h2>
       <div class="code-block">python -m http.server 8000</div>
       <ul style="margin-top: 1rem">
-        <li>Rode na raiz do repositório e abra a aba <strong>PORTS</strong></li>
+        <li>Execute o comando na raiz do repositório e abra a aba PORTS</li>
         <li>Na porta 8000, clique no globo e acrescente <code>/aula-09-seunome/</code> ao endereço</li>
-        <li><code>F12</code> → <strong>Network</strong>: cada <code>vw_p…</code> precisa responder 200</li>
+        <li>Com <code>F12</code>, abra a aba Network e verifique se cada <code>vw_p…</code> responde com status 200</li>
         <li>Pare o servidor com <code>Ctrl + C</code> quando terminar</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Publique no GitHub Pages</h2>
+      <h2>Publicação no GitHub Pages</h2>
       <ol>
         <li><code>git add</code>, <code>git commit</code> e <code>git push</code> da pasta <code>aula-09-seunome</code></li>
-        <li>No seu fork: <strong>Settings → Pages</strong></li>
-        <li><strong>Source:</strong> Deploy from a branch · <strong>Branch:</strong> main · pasta <strong>/(root)</strong> → Save</li>
-        <li>Espere o <em>pages build and deployment</em> terminar na aba Actions</li>
+        <li>No seu fork, abra Settings e, em seguida, Pages</li>
+        <li>Em Source, escolha Deploy from a branch; em Branch, selecione main e a pasta /(root); depois, clique em Save</li>
+        <li>Aguarde o término do pages build and deployment na aba Actions</li>
       </ol>
       <span class="url">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</span>
-      <p>Abra no celular, fora do Codespace. Se funcionou lá, funciona para o board.</p>
+      <p>Abra o endereço no celular, fora do Codespace. Esse teste reproduz a condição em que o board acessará o painel.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Quando não funciona</h2>
+      <h2>Diagnóstico de erros comuns</h2>
       <dl class="erros">
         <dt>401</dt><dd>Chave errada, incompleta ou de outro projeto</dd>
         <dt>404 PGRST205</dt><dd>View inexistente ou cache da API: <code>notify pgrst, 'reload schema';</code></dd>
         <dt>200 com []</dt><dd>RLS ligado sem política de leitura: confira o final de <code>estrela.sql</code></dd>
         <dt>404 do Pages</dt><dd>Caminho ou maiúscula errada, ou o deploy ainda está rodando</dd>
-        <dt>CORS</dt><dd>Quase sempre é URL errada; a API do Supabase aceita qualquer origem</dd>
-        <dt>Sem Pages</dt><dd>Repositório privado no plano gratuito: o fork precisa ser público</dd>
+        <dt>CORS</dt><dd>Em geral, indica URL errada, pois a API do Supabase aceita qualquer origem</dd>
+        <dt>Sem Pages</dt><dd>Repositório privado no plano gratuito; o fork precisa ser público</dd>
       </dl>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Reconciliação: tela × view</h2>
+      <h2>Reconciliação entre tela e view</h2>
       <table class="tabela">
         <thead><tr><th class="hide-mobile">Cartão</th><th>Na tela</th><th>View · coluna</th><th>Na view</th><th>Igual?</th></tr></thead>
         <tbody>
@@ -736,12 +745,12 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     <div class="slide slide-content" data-lesson-section="guided-practice">
       <h2>Teste de leitura em voz alta</h2>
       <ul>
-        <li>Outro grupo abre a sua URL no celular, <strong>sem explicação</strong></li>
-        <li>Lê cada cartão em uma frase; você anota a frase literal, entre aspas</li>
-        <li>Frase que ultrapassa o que o dado autoriza vira ajuste de tela</li>
-        <li>Registre como âncora: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela</li>
+        <li>Outro grupo abre a sua URL no celular, sem receber explicação</li>
+        <li>O grupo lê cada cartão em uma frase, e você anota a frase literal, entre aspas</li>
+        <li>Cada frase que ultrapassa o que o dado autoriza gera um ajuste na tela</li>
+        <li>Registre a divergência como âncora, com os cinco campos das aulas 7 e 8 (passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela), no frame do dashboard no quadro do Miro</li>
       </ul>
-      <p>Você não pode defender o painel durante o teste. No board, também não estará lá.</p>
+      <p>Durante o teste, o autor não explica nem defende o painel, pois essa também será a condição de leitura no board.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="challenge">
@@ -752,7 +761,7 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
         <li><code>README.md</code> com a URL publicada e a tabela de reconciliação dos dez cartões</li>
         <li>Frases do teste de leitura e o ajuste que cada uma gerou</li>
         <li>Recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria</li>
-        <li><strong>Aceite:</strong> a URL abre no celular, os dez cartões carregam e nenhum número está digitado</li>
+        <li><strong>Critério de aceite:</strong> a URL abre no celular, os dez cartões carregam e nenhum número está digitado</li>
       </ul>
     </div>
 
@@ -761,31 +770,31 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
       <div class="formato">
         <p><b>Recomendação:</b> atacar o prazo no RJ antes de subsidiar frete no Nordeste.</p>
         <p><b>Número que sustenta:</b> RJ tem 12.312 entregas e 12,2% com atraso; com atraso, a nota média cai para 2,27.</p>
-        <p><b>O que a invalidaria:</b> se o atraso do RJ vier de poucos vendedores, a ação é sobre sellers, não sobre a promessa de prazo.</p>
+        <p><b>O que a invalidaria:</b> se o atraso do RJ vier de poucos vendedores, a ação deve recair sobre esses sellers, e não sobre a promessa de prazo.</p>
       </div>
-      <p>Uma recomendação sem a condição que a invalida é opinião com gráfico.</p>
+      <p>A recomendação só é aceita quando traz o número que a sustenta e a condição que a invalidaria.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="summary">
       <h2>Síntese da sequência</h2>
       <ul>
-        <li><strong>Aula 7:</strong> o dado bruto virou modelo reconciliado</li>
-        <li><strong>Aula 8:</strong> a pergunta virou fluxo, âncora e view</li>
-        <li><strong>Aula 9:</strong> a view virou tela pública que outra pessoa lê sozinha</li>
+        <li>Aula 7: os dados brutos foram carregados no Supabase e organizados em um esquema estrela reconciliado com a origem</li>
+        <li>Aula 8: as perguntas do Chief de Vendas foram convertidas em fluxo de interação anotado, âncoras e views conferidas</li>
+        <li>Aula 9: as views passaram a alimentar um dashboard público, testado por leitores que não participaram da construção</li>
       </ul>
-      <p>Nas três, a IA escreveu e a turma verificou: no SQL, na reconciliação e na leitura de outro grupo.</p>
+      <p>Nas três aulas, a IA produziu propostas e código, e a turma verificou os resultados por consultas SQL, por reconciliação e pelo teste de leitura de outro grupo.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="next-steps">
       <h2>Próximos passos</h2>
-      <p>Não há aula em 14/10. No laboratório 10, a base volta ao centro: limpeza de dados com IA e Pandas, preservando a camada bruta.</p>
+      <p>Não há aula em 14/10. O laboratório 10 trata da limpeza de dados com IA e Pandas, preservando a camada bruta.</p>
       <ul>
-        <li>Antes de sair: abra a sua URL no celular</li>
+        <li>Antes de sair, abra a sua URL no celular</li>
         <li>Commit e push do <code>README.md</code> com reconciliação, frases e recomendação</li>
       </ul>
     </div>
 
-    <div class="slide slide-end"><h2>Fim do Laboratório 9</h2><p>Um painel só está pronto quando outra pessoa o lê e chega à mesma decisão.</p></div>
+    <div class="slide slide-end"><h2>Fim do Laboratório 9</h2><p>A entrega inclui a URL publicada, a reconciliação dos dez cartões, as frases do teste de leitura e a recomendação ao Chief de Vendas.</p></div>
   </div>
 
   <div id="controls">
@@ -793,6 +802,8 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-09/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-07/dados/olist_pedidos_clientes.xlsx" download class="ctrl-btn" id="btn-dados" title="Baixar os três arquivos Excel do Olist"><span class="ctrl-icon">⬇️</span> Dados</a>
+      <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="Convite para o quadro da turma no Miro"><span class="ctrl-icon">🧩</span> Miro</a>
       <a href="../materiais/aula-09/dashboard-referencia/index.html" class="ctrl-btn" title="Abrir o dashboard de referência"><span class="ctrl-icon">📈</span> Dashboard</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
@@ -833,6 +844,20 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
         e.preventDefault();
         if (current > 0) { current--; update(); }
       }
+    });
+
+    // Um único botão baixa os três Excels do Olist; o href cobre o caso sem JavaScript
+    const arquivosOlist = ['olist_pedidos_clientes.xlsx', 'olist_itens_pagamentos_avaliacoes.xlsx', 'olist_catalogo.xlsx'];
+    document.getElementById('btn-dados').addEventListener('click', (e) => {
+      e.preventDefault();
+      arquivosOlist.forEach((nome, i) => setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = `../materiais/aula-07/dados/${nome}`;
+        link.download = nome;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }, i * 400));
     });
 
     btnFs.addEventListener('click', () => {

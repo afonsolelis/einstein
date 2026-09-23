@@ -171,7 +171,7 @@
   <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-07.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
-    <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="nav-data" title="Abrir o board da turma no Miro">🧩 <span class="nav-label">Miro</span></a>
+    <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="nav-data" title="Abrir o quadro da turma no Miro">🧩 <span class="nav-label">Miro</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
@@ -179,38 +179,38 @@
     <div class="header">
       <div class="badge">LABORATÓRIO 07 · 23/09</div>
       <h1>Data Visualization I: fluxo de interação anotado e modelagem dimensional do Olist com IA</h1>
-      <p class="subtitle">Do fluxo ao modelo: o case Olist no Supabase</p>
+      <p class="subtitle">Fluxo anotado e modelo dimensional do case Olist no Supabase</p>
     </div>
 
     <div class="content">
-      <p class="desc">O Chief de Vendas da Olist precisa levar ao board as estratégias comerciais de 2019 e não aceita opinião sem número. Nas aulas 7, 8 e 9 a turma é a equipe de dados que sustenta essas estratégias, e o produto final é um dashboard publicado na web. Esta aula constrói o que vem antes do dashboard e decide se ele merecerá confiança: um formato para desenhar como a pessoa vai ler a tela, um banco Postgres próprio com o Olist carregado, uma discovery em que a IA levanta hipóteses e o SQL decide quais sobrevivem, e um esquema estrela reconciliado centavo a centavo com a origem.</p>
+      <p class="desc">O Chief de Vendas da Olist precisa apresentar ao board as estratégias comerciais de 2019, e cada estratégia deve vir sustentada por dados. Nas aulas 7, 8 e 9, a turma atua como a equipe de dados responsável por essa sustentação, e o produto final é um dashboard publicado na web. Esta aula constrói as bases das quais depende a confiabilidade desse dashboard: um formato para descrever como o usuário lerá a tela, um banco Postgres próprio com os dados do Olist, uma discovery em que a IA formula hipóteses e consultas SQL as confirmam ou derrubam, e um esquema estrela reconciliado com a origem até o centavo.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos e roteiro</h2>
         <p>Ao final do laboratório, você deverá ser capaz de:</p>
         <ul>
-          <li><strong>Construir</strong>, com a turma, o template do fluxo de interação anotado no Miro (raias, passos numerados, âncoras D1..Dn).</li>
-          <li><strong>Criar</strong> um projeto Supabase e carregar o Olist bruto a partir dos Excels, conferindo as contagens.</li>
-          <li><strong>Conduzir</strong> a discovery do Olist com IA, verificando no SQL cada afirmação da IA (grão, chaves, armadilhas).</li>
-          <li><strong>Projetar</strong> com IA um esquema estrela (fatos, dimensões, grão, chaves substitutas) e validá-lo por reconciliação.</li>
+          <li>Construir, com a turma, o template do fluxo de interação anotado no Miro, com raias, passos numerados e âncoras D1 a Dn.</li>
+          <li>Criar um projeto no Supabase e carregar os dados brutos do Olist a partir dos arquivos Excel, conferindo as contagens de linhas.</li>
+          <li>Conduzir a discovery do Olist com apoio de IA, verificando em SQL cada afirmação sobre grão, chaves e armadilhas.</li>
+          <li>Projetar com IA um esquema estrela (fatos, dimensões, grão e chaves substitutas) e validá-lo por reconciliação com a origem.</li>
         </ul>
         <table>
           <thead><tr><th>Horário</th><th>Atividade</th><th>Seção</th></tr></thead>
           <tbody>
-            <tr><td>19:00</td><td>O case e por que visualização começa no usuário</td><td>2 e 3</td></tr>
-            <tr><td>19:15</td><td>Formato do fluxo anotado e montagem do frame único da turma no Miro</td><td>3 e 4</td></tr>
-            <tr><td>20:00</td><td>Projeto Supabase e carga do Olist bruto no Codespace</td><td>5</td></tr>
+            <tr><td>19:00</td><td>O case Olist e a tarefa do usuário como ponto de partida</td><td>2 e 3</td></tr>
+            <tr><td>19:15</td><td>Formato do fluxo anotado e construção coletiva no Miro</td><td>3 e 4</td></tr>
+            <tr><td>20:00</td><td>Projeto no Supabase e carga dos dados brutos do Olist no Codespace</td><td>5</td></tr>
             <tr><td>20:25</td><td>Intervalo</td><td></td></tr>
-            <tr><td>20:35</td><td>Discovery do Olist com IA, verificada no SQL Editor</td><td>6</td></tr>
-            <tr><td>21:10</td><td>Modelagem dimensional com IA, gabarito <code>estrela.sql</code> e reconciliação</td><td>7 e 8</td></tr>
-            <tr><td>21:50</td><td>Síntese e ponte para a aula 8</td><td>11 e 12</td></tr>
+            <tr><td>20:35</td><td>Discovery do Olist com IA e verificação no SQL Editor</td><td>6</td></tr>
+            <tr><td>21:10</td><td>Modelagem dimensional com IA, comparação com o gabarito <code>estrela.sql</code> e reconciliação</td><td>7 e 8</td></tr>
+            <tr><td>21:50</td><td>Síntese e encaminhamento para a aula 8</td><td>11 e 12</td></tr>
           </tbody>
         </table>
       </section>
 
       <section data-lesson-section="concepts">
         <h2>2. O case: estratégias comerciais da Olist para 2019</h2>
-        <p>A Olist é um marketplace brasileiro que conecta lojistas a grandes canais de venda on-line. A base pública que usamos cobre cerca de 99 mil pedidos feitos entre 2016 e 2018, com itens, pagamentos, avaliações, produtos e vendedores. O Chief de Vendas precisa apresentar ao board as estratégias de 2019 e fez dez perguntas. Cada uma tem cinco elementos: métrica, recorte, período, filtro e a decisão que ela sustenta.</p>
+        <p>A Olist é um marketplace brasileiro que conecta lojistas a grandes canais de venda on-line. A base pública utilizada cobre cerca de 99 mil pedidos feitos entre 2016 e 2018, com itens, pagamentos, avaliações, produtos e vendedores. Para apresentar ao board as estratégias de 2019, o Chief de Vendas formulou dez perguntas, cada uma composta por cinco elementos: métrica, recorte, período, filtro e a decisão que ela sustenta.</p>
         <table>
           <thead><tr><th>#</th><th>Tipo</th><th>Pergunta</th><th>Decisão que sustenta</th></tr></thead>
           <tbody>
@@ -226,11 +226,11 @@
             <tr><td>P10</td><td>Livre</td><td>Quanto a receita depende dos maiores vendedores?</td><td>Captação e retenção de sellers</td></tr>
           </tbody>
         </table>
-        <p>Nenhuma delas é respondida hoje. Duas convenções que valerão para as dez, porém, nascem da discovery desta aula: <strong>receita</strong> é a soma do preço dos itens, sem frete, de pedidos com status <code>delivered</code>; <strong>período</strong> é de janeiro de 2017 a agosto de 2018, porque os meses das pontas estão incompletos. Você vai provar, com SQL, por que cada convenção existe.</p>
+        <p>Nesta aula, nenhuma das perguntas é respondida ainda. A discovery, porém, estabelece duas convenções que valerão para as dez: <strong>receita</strong> é a soma do preço dos itens, sem frete, de pedidos com status <code>delivered</code>; <strong>período</strong> vai de janeiro de 2017 a agosto de 2018, porque os meses das pontas estão incompletos. As consultas da seção 6 mostram, com SQL, a razão de cada convenção.</p>
         <table>
           <thead><tr><th>Aula</th><th>Pergunta que responde</th><th>Artefato</th></tr></thead>
           <tbody>
-            <tr><td>7 · 23/09</td><td>Como o usuário lê a tela, e que dado confiável existe para sustentá-la?</td><td>Frame modelo no Miro, Olist no Supabase, discovery e esquema estrela reconciliado</td></tr>
+            <tr><td>7 · 23/09</td><td>Como o usuário lê a tela, e que dado confiável existe para sustentá-la?</td><td>Frame modelo no quadro do Miro, Olist no Supabase, discovery e esquema estrela reconciliado</td></tr>
             <tr><td>8 · 30/09</td><td>Que tela responde a cada pergunta, em que ordem, e de qual view vem cada número?</td><td>Fluxo anotado do dashboard e views SQL conferidas</td></tr>
             <tr><td>9 · 07/10</td><td>O painel publicado mostra exatamente o que as views autorizam?</td><td>Dashboard no GitHub Pages lendo o Supabase</td></tr>
           </tbody>
@@ -238,9 +238,9 @@
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>3. Visualização começa no usuário: o fluxo de interação anotado</h2>
-        <p>O erro mais caro de um dashboard não é o gráfico feio. É o gráfico correto lido de um jeito que o dado não autoriza. O Chief olha barras de frete por região, conclui que frete caro espanta cliente e aprova um subsídio; nenhuma barra estava errada, e mesmo assim a decisão não tinha sustentação. Esse desencontro acontece entre três coisas que costumam ser desenhadas separadamente: o que a pessoa faz e conclui, o que a tela oferece e o que o dado de fato registra.</p>
-        <p>O <strong>fluxo de interação anotado</strong> coloca as três na mesma folha, sobre uma tarefa de decisão real. Ele se parece com o BPMN da aula 6 porque também usa raias, mas responde a outra pergunta. O BPMN descreve o processo da organização; o fluxo anotado descreve a leitura de uma pessoa diante de uma tela e marca onde essa leitura ultrapassa o dado.</p>
+        <h2>3. A tarefa do usuário e o fluxo de interação anotado</h2>
+        <p>Em um dashboard, o erro de maior custo costuma ser a leitura de um gráfico correto em um sentido que o dado não autoriza, e não um defeito de aparência. O Chief observa barras de frete por região, conclui que frete caro afasta clientes e aprova um subsídio; nenhuma barra estava errada e, ainda assim, a decisão não tinha sustentação. Esse desencontro ocorre entre três elementos que costumam ser desenhados separadamente: o que o usuário faz e conclui, o que a tela oferece e o que o dado de fato registra.</p>
+        <p>O <strong>fluxo de interação anotado</strong> reúne os três elementos na mesma folha, a partir de uma tarefa de decisão real. Ele se assemelha ao BPMN da aula 6 por também usar raias, mas responde a outra pergunta: o BPMN descreve o processo da organização, enquanto o fluxo anotado descreve a leitura de um usuário diante de uma tela e marca os pontos em que essa leitura ultrapassa o dado.</p>
 
         <h3>3.1 Anatomia do formato</h3>
         <table>
@@ -248,9 +248,9 @@
           <tbody>
             <tr><td><strong>TAREFA</strong> (cabeçalho)</td><td>neutra</td><td>Quem decide, o quê, até quando e com que consequência. “Chief de Vendas decide, até o comitê de outubro, em quais estados subsidiar frete na Black Friday.”</td></tr>
             <tr><td>Raia <strong>USUÁRIO</strong></td><td><span class="tag tag-usuario">amarelo</span></td><td>O que a pessoa faz e conclui, do primeiro clique à decisão.</td></tr>
-            <tr><td>Raia <strong>INTERFACE</strong></td><td><span class="tag tag-interface">azul</span></td><td>O que a tela oferece naquele passo, em palavras ou rascunho com formas, nunca captura de tela.</td></tr>
-            <tr><td>Raia <strong>DADO</strong></td><td><span class="tag tag-dado">verde</span></td><td>Fonte (tabela ou view), grão e limitação que sustentam o passo. Não é numerada.</td></tr>
-            <tr><td><strong>Passos</strong> 1, 2, 3…</td><td>número no post-it</td><td>Ordem cronológica, qualquer que seja a raia: usuário e interface se alternam. Setas horizontais seguem a sequência; conectores verticais ligam as raias da mesma coluna.</td></tr>
+            <tr><td>Raia <strong>INTERFACE</strong></td><td><span class="tag tag-interface">azul</span></td><td>O que a tela oferece naquele passo, descrito em palavras ou em rascunho com formas, sem capturas de tela.</td></tr>
+            <tr><td>Raia <strong>DADO</strong></td><td><span class="tag tag-dado">verde</span></td><td>Fonte (tabela ou view), grão e limitação que sustentam o passo. Esta raia não recebe numeração.</td></tr>
+            <tr><td><strong>Passos</strong> 1, 2, 3…</td><td>número no post-it</td><td>Ordem cronológica, independentemente da raia, com usuário e interface em alternância. Setas horizontais indicam a sequência, e conectores verticais ligam as raias da mesma coluna.</td></tr>
             <tr><td><strong>Âncoras</strong> D1, D2…</td><td><span class="tag tag-ancora">rosa</span></td><td>Onde o dado não sustenta o que o usuário conclui.</td></tr>
           </tbody>
         </table>
@@ -258,9 +258,9 @@
           <div class="figura-scroll" tabindex="0" aria-label="Figura do fluxo de interação anotado; role para os lados em telas pequenas">
             <svg id="fluxo-anotado-material" class="fluxo-svg" viewBox="0 0 1200 530" role="img" aria-labelledby="fluxo-anotado-material-t fluxo-anotado-material-d" xmlns="http://www.w3.org/2000/svg"><title id="fluxo-anotado-material-t">Formato do fluxo de interação anotado</title><desc id="fluxo-anotado-material-d">Cabeçalho com a tarefa de decisão e três raias horizontais. Na raia do usuário, post-its amarelos com os passos 1, 3, 5 e 7: abre o painel, procura o Nordeste, conclui que frete caro espanta cliente e decide subsidiar o Nordeste. Na raia da interface, post-its azuis com os passos 2, 4, 6 e 8: filtro de período, barras de frete sobre preço por região, nenhuma venda perdida na tela e nenhum custo do subsídio na tela. Na raia do dado, post-its verdes sem número: dim_tempo de janeiro de 2017 a agosto de 2018, vw_p06 com grão item agregada por região, ausência de registro de carrinho abandonado e ausência de margem na base. Âncoras rosa D1, D2 e D3 marcam as colunas dos passos 3 e 4, 5 e 6, 7 e 8.</desc><defs><marker id="fluxo-anotado-material-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fl-arrowhead"/></marker></defs><g class="fl-tarefa"><rect class="fl-task-box" x="0" y="0" width="1200" height="50" rx="10"/><text class="fl-task-label" x="18" y="32">TAREFA</text><text class="fl-task-text" x="112" y="32">Chief de Vendas decide, até o comitê de outubro, em quais estados subsidiar frete na Black Friday</text></g><g class="raia raia-usuario" data-raia="usuario"><rect class="fl-lane" x="0" y="66" width="1200" height="120" rx="10"/><rect class="fl-chip nota-usuario" x="14" y="117" width="18" height="18" rx="4"/><text class="fl-lane-label" x="40" y="132">USUÁRIO</text></g><g class="raia raia-interface" data-raia="interface"><rect class="fl-lane" x="0" y="202" width="1200" height="120" rx="10"/><rect class="fl-chip nota-interface" x="14" y="253" width="18" height="18" rx="4"/><text class="fl-lane-label" x="40" y="268">INTERFACE</text></g><g class="raia raia-dado" data-raia="dado"><rect class="fl-lane" x="0" y="338" width="1200" height="120" rx="10"/><rect class="fl-chip nota-dado" x="14" y="389" width="18" height="18" rx="4"/><text class="fl-lane-label" x="40" y="404">DADO</text></g><line class="fl-connector" x1="273" y1="172" x2="273" y2="216"/><line class="fl-connector" x1="273" y1="308" x2="273" y2="352"/><line class="fl-connector" x1="536" y1="172" x2="536" y2="216"/><line class="fl-connector" x1="536" y1="308" x2="536" y2="352"/><line class="fl-connector" x1="798" y1="172" x2="798" y2="216"/><line class="fl-connector" x1="798" y1="308" x2="798" y2="352"/><line class="fl-connector" x1="1061" y1="172" x2="1061" y2="216"/><line class="fl-connector" x1="1061" y1="308" x2="1061" y2="352"/><line class="fl-arrow" x1="385" y1="126" x2="423" y2="126" marker-end="url(#fluxo-anotado-material-seta)"/><line class="fl-arrow" x1="648" y1="126" x2="685" y2="126" marker-end="url(#fluxo-anotado-material-seta)"/><line class="fl-arrow" x1="910" y1="126" x2="948" y2="126" marker-end="url(#fluxo-anotado-material-seta)"/><line class="fl-arrow" x1="385" y1="262" x2="423" y2="262" marker-end="url(#fluxo-anotado-material-seta)"/><line class="fl-arrow" x1="648" y1="262" x2="685" y2="262" marker-end="url(#fluxo-anotado-material-seta)"/><line class="fl-arrow" x1="910" y1="262" x2="948" y2="262" marker-end="url(#fluxo-anotado-material-seta)"/><g class="passo passo-usuario" data-passo="1"><rect class="fl-note nota-usuario" x="164" y="80" width="218" height="92" rx="6"/><circle class="fl-num" cx="184" cy="101" r="13"/><text class="fl-num-text" x="184" y="107" text-anchor="middle">1</text><text class="fl-note-text" x="206" y="108" font-weight="700">abre o painel</text></g><g class="passo passo-usuario" data-passo="3"><rect class="fl-note nota-usuario" x="427" y="80" width="218" height="92" rx="6"/><circle class="fl-num" cx="447" cy="101" r="13"/><text class="fl-num-text" x="447" y="107" text-anchor="middle">3</text><text class="fl-note-text" x="469" y="108" font-weight="700">procura o</text><text class="fl-note-text" x="441" y="134">Nordeste</text></g><g class="passo passo-usuario" data-passo="5"><rect class="fl-note nota-usuario" x="689" y="80" width="218" height="92" rx="6"/><circle class="fl-num" cx="709" cy="101" r="13"/><text class="fl-num-text" x="709" y="107" text-anchor="middle">5</text><text class="fl-note-text" x="731" y="108" font-weight="700">conclui</text><text class="fl-note-text" x="703" y="134">“frete caro espanta</text><text class="fl-note-text" x="703" y="157">cliente”</text></g><g class="passo passo-usuario" data-passo="7"><rect class="fl-note nota-usuario" x="952" y="80" width="218" height="92" rx="6"/><circle class="fl-num" cx="972" cy="101" r="13"/><text class="fl-num-text" x="972" y="107" text-anchor="middle">7</text><text class="fl-note-text" x="994" y="108" font-weight="700">decide</text><text class="fl-note-text" x="966" y="134">subsidiar o Nordeste</text></g><g class="passo passo-interface" data-passo="2"><rect class="fl-note nota-interface" x="164" y="216" width="218" height="92" rx="6"/><circle class="fl-num" cx="184" cy="237" r="13"/><text class="fl-num-text" x="184" y="243" text-anchor="middle">2</text><text class="fl-note-text" x="206" y="244" font-weight="700">filtro de</text><text class="fl-note-text" x="178" y="270">período</text></g><g class="passo passo-interface" data-passo="4"><rect class="fl-note nota-interface" x="427" y="216" width="218" height="92" rx="6"/><circle class="fl-num" cx="447" cy="237" r="13"/><text class="fl-num-text" x="447" y="243" text-anchor="middle">4</text><text class="fl-note-text" x="469" y="244" font-weight="700">barras de</text><text class="fl-note-text" x="441" y="270">frete ÷ preço</text><text class="fl-note-text" x="441" y="293">por região</text></g><g class="passo passo-interface" data-passo="6"><rect class="fl-note nota-interface" x="689" y="216" width="218" height="92" rx="6"/><circle class="fl-num" cx="709" cy="237" r="13"/><text class="fl-num-text" x="709" y="243" text-anchor="middle">6</text><text class="fl-note-text" x="731" y="244" font-weight="700">nenhuma venda</text><text class="fl-note-text" x="703" y="270">perdida na tela</text></g><g class="passo passo-interface" data-passo="8"><rect class="fl-note nota-interface" x="952" y="216" width="218" height="92" rx="6"/><circle class="fl-num" cx="972" cy="237" r="13"/><text class="fl-num-text" x="972" y="243" text-anchor="middle">8</text><text class="fl-note-text" x="994" y="244" font-weight="700">nenhum custo</text><text class="fl-note-text" x="966" y="270">do subsídio na tela</text></g><g class="fonte-dado"><rect class="fl-note nota-dado" x="164" y="352" width="218" height="92" rx="6"/><text class="fl-note-text" x="178" y="382">dim_tempo</text><text class="fl-note-text" x="178" y="405">jan/2017–ago/2018</text></g><g class="fonte-dado"><rect class="fl-note nota-dado" x="427" y="352" width="218" height="92" rx="6"/><text class="fl-note-text" x="441" y="382">vw_p06 · grão item</text><text class="fl-note-text" x="441" y="405">agregado por região,</text><text class="fl-note-text" x="441" y="428">não por estado</text></g><g class="fonte-dado"><rect class="fl-note nota-dado" x="689" y="352" width="218" height="92" rx="6"/><text class="fl-note-text" x="703" y="382">não há registro de</text><text class="fl-note-text" x="703" y="405">carrinho abandonado</text></g><g class="fonte-dado"><rect class="fl-note nota-dado" x="952" y="352" width="218" height="92" rx="6"/><text class="fl-note-text" x="966" y="382">nenhuma margem</text><text class="fl-note-text" x="966" y="405">na base</text></g><g class="ancora" data-ancora="D1"><path class="fl-anchor-pointer" d="M527,486 L536,470 L545,486 z"/><rect class="fl-anchor" x="502" y="486" width="68" height="36" rx="8"/><text class="fl-anchor-text" x="536" y="511" text-anchor="middle">D1</text></g><g class="ancora" data-ancora="D2"><path class="fl-anchor-pointer" d="M789,486 L798,470 L807,486 z"/><rect class="fl-anchor" x="764" y="486" width="68" height="36" rx="8"/><text class="fl-anchor-text" x="798" y="511" text-anchor="middle">D2</text></g><g class="ancora" data-ancora="D3"><path class="fl-anchor-pointer" d="M1052,486 L1061,470 L1070,486 z"/><rect class="fl-anchor" x="1027" y="486" width="68" height="36" rx="8"/><text class="fl-anchor-text" x="1061" y="511" text-anchor="middle">D3</text></g></svg>
           </div>
-          <figcaption>Formato do fluxo de interação anotado sobre a tarefa do subsídio de frete. Amarelo é sempre o usuário, azul é sempre a tela, verde é sempre o dado e rosa marca divergência. Os números seguem a ordem do tempo, não a raia.</figcaption>
+          <figcaption>Formato do fluxo de interação anotado aplicado à tarefa do subsídio de frete. O amarelo identifica o usuário, o azul a tela, o verde o dado e o rosa a divergência. A numeração segue a ordem cronológica, e não a raia.</figcaption>
         </figure>
-        <p>A mesma estrutura em texto, útil para anotar no caderno antes de ir ao board:</p>
+        <p>A mesma estrutura em texto, útil para anotações no caderno antes do trabalho no quadro do Miro:</p>
         <div class="code-block ascii">TAREFA: Chief de Vendas decide em quais estados subsidiar frete na Black Friday
 
 USUÁRIO    ①abre o painel ──▶ ③procura o Nordeste ──▶ ⑤conclui "frete caro espanta cliente" ──▶ ⑦decide subsidiar NE
@@ -270,50 +270,52 @@ INTERFACE  ②filtro de período ─▶ ④barras de frete/preço ──▶ ⑥s
 DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há registro de carrinho abandonado   nenhuma margem na base
                                     ▲                          ▲                                    ▲
                                    D1                         D2                                   D3</div>
-        <p><code>vw_p06</code> é a view da pergunta P06, que a turma escreve na aula 8 sobre o <code>fato_itens_pedido</code> construído hoje. Na raia do dado, cite a fonte pelo nome que ela terá no banco: é esse nome que vai virar consulta.</p>
+        <p><code>vw_p06</code> é a view da pergunta P06, que a turma escreve na aula 8 sobre o <code>fato_itens_pedido</code> construído hoje. Na raia do dado, a fonte é citada pelo nome que terá no banco, porque é esse nome que será usado na consulta.</p>
 
         <h3>3.2 O registro de cada âncora</h3>
-        <p>Um post-it rosa sozinho diz que há um problema, mas não diz qual. Cada âncora ganha um registro de cinco campos. O campo que mais exige disciplina é “o que o dado autoriza”: escreva a afirmação máxima que a fonte sustenta, com número, unidade e período, e nada além disso.</p>
+        <p>Um post-it rosa isolado indica que há um problema, mas não o identifica. Por isso, cada âncora recebe um registro de cinco campos: Passo, Leitura do usuário, O que o dado autoriza, Consequência e Suporte na tela. O campo que mais exige disciplina é “O que o dado autoriza”, no qual se escreve a afirmação máxima que a fonte sustenta, com número, unidade e período, sem ir além disso.</p>
         <table>
           <thead><tr><th>Campo</th><th>D1 · passo 3</th><th>D2 · passo 5</th><th>D3 · passo 7</th></tr></thead>
           <tbody>
             <tr><td><strong>Leitura do usuário</strong></td><td>“O Nordeste é onde preciso agir.”</td><td>“Frete caro espanta cliente.”</td><td>“Vale subsidiar o Nordeste.”</td></tr>
-            <tr><td><strong>O que o dado autoriza</strong></td><td>A tarefa pede estados, mas a fonte agrega por região: a tela não distingue BA de MA.</td><td>No Nordeste, o frete equivale a 21,7% do preço dos itens entregues, de jan/2017 a ago/2018. A base não registra quem desistiu da compra.</td><td>A base não tem margem nem custo logístico: o valor do subsídio não pode ser comparado a nenhum ganho.</td></tr>
-            <tr><td><strong>Consequência</strong></td><td>O subsídio cobre estados que talvez não precisem dele.</td><td>Subsídio aprovado sem evidência de que traria venda nova.</td><td>Custo recorrente aprovado sem retorno estimável.</td></tr>
+            <tr><td><strong>O que o dado autoriza</strong></td><td>A tarefa pede estados, mas a fonte agrega por região, de modo que a tela não distingue BA de MA.</td><td>No Nordeste, o frete equivale a 21,7% do preço dos itens entregues, de jan/2017 a ago/2018. A base não registra quem desistiu da compra.</td><td>A base não tem margem nem custo logístico; portanto, o valor do subsídio não pode ser comparado a nenhum ganho.</td></tr>
+            <tr><td><strong>Consequência</strong></td><td>O subsídio cobre estados que talvez não precisem dele.</td><td>Aprovação do subsídio sem evidência de que ele geraria vendas adicionais.</td><td>Custo recorrente aprovado sem retorno estimável.</td></tr>
             <tr><td><strong>Suporte na tela</strong></td><td>Detalhe por estado no mesmo gráfico, ou título que diga “por região”.</td><td>Subtítulo “frete ÷ preço, itens entregues, jan/2017–ago/2018” e nota “a base não registra carrinho abandonado”.</td><td>Nota de origem “sem margem na base” e remoção de qualquer gráfico que sugira retorno.</td></tr>
           </tbody>
         </table>
-        <p>Repare no último campo. Suporte na tela é um elemento concreto: título que afirma, unidade e período no subtítulo, nota de origem, base de comparação no mesmo gráfico ou a remoção do gráfico. “Explicar melhor” não é suporte, porque não aparece na tela.</p>
+        <p>O último campo exige um elemento concreto da tela: título que afirma, unidade e período no subtítulo, nota de origem, base de comparação no mesmo gráfico ou a remoção do gráfico. Uma intenção como “explicar melhor” não conta como suporte, porque não aparece na tela.</p>
 
-        <h3>3.3 Regras do board</h3>
+        <h3>3.3 Regras de preenchimento do quadro</h3>
         <ul>
-          <li>Cada passo é numerado, em ordem cronológica, em qualquer raia.</li>
-          <li>A cor diz de quem é a afirmação: verde é sempre dado, amarelo é sempre usuário, azul é sempre a tela.</li>
-          <li>Toda explicação dita em voz alta vira post-it; se não está no board, não foi decidido.</li>
-          <li>Nenhuma captura de tela: a interface é descrita em palavras ou desenhada com formas.</li>
+          <li>Os passos são numerados em ordem cronológica, independentemente da raia.</li>
+          <li>A cor identifica a origem da afirmação: verde para o dado, amarelo para o usuário e azul para a tela.</li>
+          <li>A raia do dado não recebe numeração e registra fonte, grão e limitação.</li>
+          <li>O post-it rosa marca a divergência entre a conclusão do usuário e o que o dado autoriza.</li>
+          <li>Toda explicação dada oralmente durante a construção é registrada em post-it.</li>
+          <li>Capturas de tela não são usadas; a interface é descrita em palavras ou formas.</li>
         </ul>
         <div class="alert-box">
-          <h4>Verde não é opinião</h4>
-          <p>O erro mais comum na primeira montagem é escrever em verde o que o usuário acha do dado (“o frete está alto”). Isso é amarelo. Verde traz só fonte, grão e limitação, algo que alguém poderia conferir com uma consulta.</p>
+          <h4>O post-it verde registra apenas o dado</h4>
+          <p>O erro mais comum na primeira montagem é escrever em verde a opinião do usuário sobre o dado (“o frete está alto”), que pertence à raia amarela. O verde traz somente fonte, grão e limitação, isto é, informações que outra pessoa poderia conferir com uma consulta.</p>
         </div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>4. Prática 1: o frame único da turma no Miro</h2>
-        <p>Hoje a turma inteira monta <strong>um único frame</strong>, conduzido pelo professor. Ele é o template que cada grupo copia na aula 8 para desenhar o fluxo do dashboard. Por isso a qualidade do frame importa mais que a velocidade: é nele que as regras ficam visíveis para todos.</p>
+        <h2>4. Prática 1: construção coletiva do fluxo no Miro</h2>
+        <p>Nesta aula, a turma inteira monta um único frame no quadro do Miro, com condução do professor. Esse frame serve de template para o trabalho de cada grupo na aula 8, quando será copiado para desenhar o fluxo do dashboard. Por isso, a qualidade do frame importa mais do que a velocidade, já que é nele que as regras ficam visíveis para todos.</p>
         <div class="inline-actions">
-          <a class="btn btn-data" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer">🧩 Abrir o board da turma no Miro</a>
+          <a class="btn btn-data" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer">Abrir o quadro da turma no Miro</a>
         </div>
         <ol class="steps">
-          <li><strong>Entre pelo convite.</strong> Use a conta Miro do seu e-mail; aceite o convite para o board da turma. Não crie um board próprio.</li>
-          <li><strong>O professor cria o frame</strong> “Template · Fluxo anotado” com o cabeçalho TAREFA e três raias horizontais identificadas: USUÁRIO, INTERFACE e DADO.</li>
-          <li><strong>A turma escreve a tarefa.</strong> Tarefa-exemplo: <em>o Chief de Vendas decide, até o comitê de outubro, em quais estados revisar a promessa de prazo de entrega antes da Black Friday</em>. Confira os quatro componentes: quem, o quê, até quando, consequência.</li>
-          <li><strong>A turma dita os passos.</strong> Cada estudante que propõe um passo cola o post-it na cor da raia e com o número seguinte. Amarelo e azul se alternam; ninguém pula número.</li>
-          <li><strong>Cada fonte citada vira verde.</strong> Na coluna do passo, sem número, com tabela, grão e limitação.</li>
-          <li><strong>Divergência vira rosa.</strong> Quem discordar de uma conclusão cola uma etiqueta D1, D2… e dita os cinco campos do registro, que o professor anota ao lado do frame.</li>
-          <li><strong>Revisão final.</strong> A turma confere as regras da seção 3.3 contra o frame, post-it por post-it.</li>
+          <li><strong>Entrada pelo convite.</strong> Use a conta Miro do seu e-mail e aceite o convite para o quadro da turma, sem criar um quadro próprio.</li>
+          <li><strong>Criação do frame.</strong> O professor cria o frame “Template · Fluxo anotado”, com o cabeçalho TAREFA e três raias horizontais identificadas como USUÁRIO, INTERFACE e DADO.</li>
+          <li><strong>Redação da tarefa.</strong> Tarefa-exemplo: <em>o Chief de Vendas decide, até o comitê de outubro, em quais estados revisar a promessa de prazo de entrega antes da Black Friday</em>. Confira os quatro componentes: quem decide, o que decide, em que prazo e com que consequência.</li>
+          <li><strong>Passos.</strong> Cada estudante que propõe um passo cola o post-it na cor da raia, com o número seguinte da sequência. Post-its amarelos (usuário) e azuis (interface) se alternam, sem lacunas na numeração.</li>
+          <li><strong>Fontes.</strong> Cada fonte citada é registrada em post-it verde, na coluna do passo, sem número, com tabela, grão e limitação.</li>
+          <li><strong>Divergências.</strong> Quem discordar de uma conclusão cola um post-it rosa com a âncora (D1, D2 e assim por diante) e dita os cinco campos do registro, que o professor anota ao lado do frame.</li>
+          <li><strong>Revisão final.</strong> A turma confere o frame, post-it por post-it, contra as regras da seção 3.3.</li>
         </ol>
-        <p>Uma sequência possível, para o professor conduzir sem entregar pronta. As fontes são as tabelas que você vai construir hoje:</p>
+        <p>A tabela abaixo apresenta uma sequência possível, que o professor conduz sem entregá-la pronta. As fontes são as tabelas construídas nesta aula.</p>
         <table>
           <thead><tr><th>Passo</th><th>Raia</th><th>Post-it</th><th>Dado na mesma coluna</th></tr></thead>
           <tbody>
@@ -330,72 +332,72 @@ DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há reg
         <table>
           <thead><tr><th>Âncora</th><th>Leitura do usuário</th><th>O que o dado autoriza</th><th>Consequência</th><th>Suporte na tela</th></tr></thead>
           <tbody>
-            <tr><td><span class="tag tag-ancora">D1</span> passo 3</td><td>“MA é o pior estado.”</td><td>MA tem a maior taxa de atraso (17,5%) entre estados com pelo menos 500 entregas. A taxa não mede volume: com 716 entregas, o MA soma cerca de 125 atrasos; o RJ, com 12,2% de 12.312 entregas, cerca de 1.500.</td><td>Priorizar o estado com menos clientes afetados.</td><td>Número de entregas ao lado da taxa, no mesmo gráfico.</td></tr>
-            <tr><td><span class="tag tag-ancora">D2</span> passo 5</td><td>“O atraso derruba a nota.”</td><td>Pedidos atrasados têm nota média 2,27; pedidos no prazo, 4,29. É associação: produto, vendedor e região também variam entre os dois grupos.</td><td>Investir só em prazo e deixar outras causas da nota baixa intactas.</td><td>Título que afirma a diferença e nota “associação observada, não efeito medido”.</td></tr>
-            <tr><td><span class="tag tag-ancora">D3</span> passo 7</td><td>“Alongar a promessa resolve.”</td><td>O atraso é medido contra a data estimada. Prometer mais tarde reduz a taxa sem acelerar nenhuma entrega; a base não mostra o efeito sobre a venda.</td><td>O indicador melhora, a entrega não, e a conversão pode cair.</td><td>Dias médios de entrega ao lado da taxa e nota “atraso = entrega depois da data estimada”.</td></tr>
+            <tr><td><span class="tag tag-ancora">D1</span> passo 3</td><td>“MA é o pior estado.”</td><td>MA tem a maior taxa de atraso (17,5%) entre estados com pelo menos 500 entregas. A taxa não mede o volume afetado: com 716 entregas, o MA soma cerca de 125 atrasos, enquanto o RJ, com 12,2% de 12.312 entregas, soma cerca de 1.500.</td><td>Priorizar o estado com menos clientes afetados.</td><td>Número de entregas ao lado da taxa, no mesmo gráfico.</td></tr>
+            <tr><td><span class="tag tag-ancora">D2</span> passo 5</td><td>“O atraso derruba a nota.”</td><td>Pedidos atrasados têm nota média 2,27, e pedidos no prazo, 4,29. Trata-se de associação, pois produto, vendedor e região também variam entre os dois grupos.</td><td>Investir só em prazo e deixar outras causas da nota baixa intactas.</td><td>Título que afirma a diferença e nota “associação observada, não efeito medido”.</td></tr>
+            <tr><td><span class="tag tag-ancora">D3</span> passo 7</td><td>“Alongar a promessa resolve.”</td><td>Como o atraso é medido contra a data estimada, prometer uma data mais tarde reduz a taxa sem acelerar nenhuma entrega. A base não mostra o efeito dessa mudança sobre a venda.</td><td>Melhora do indicador sem melhora da entrega, com possível queda da conversão.</td><td>Dias médios de entrega ao lado da taxa e nota “atraso = entrega depois da data estimada”.</td></tr>
           </tbody>
         </table>
-        <p>Os números de D1 e D2 vêm das views P07 e P08 que a turma escreve na aula 8; aqui eles servem para mostrar como um registro bem feito cita número, unidade e base.</p>
-        <p><strong>O frame está pronto quando:</strong> a tarefa tem os quatro componentes; os passos seguem 1, 2, 3… sem lacuna; cada coluna tem pelo menos um verde com grão; há pelo menos três âncoras com os cinco campos preenchidos; e ninguém encontra uma captura de tela ou uma opinião escrita em verde.</p>
+        <p>Os números de D1 e D2 vêm das views P07 e P08, que a turma escreve na aula 8. Aqui, eles ilustram como um registro bem feito cita número, unidade e base.</p>
+        <p><strong>Critério de conclusão do frame:</strong> a tarefa tem os quatro componentes; os passos seguem a numeração 1, 2, 3 sem lacuna; cada coluna tem pelo menos um post-it verde com grão; há pelo menos três âncoras com os cinco campos preenchidos; e não há capturas de tela nem opiniões escritas em verde.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>5. Prática 2: seu Postgres no Supabase com o Olist bruto</h2>
-        <p>Nas aulas 4 e 5, o Olist estava num banco compartilhado e somente leitura. Agora cada estudante terá o próprio banco, porque vai criar tabelas, views e, na aula 9, publicar um dashboard que lê esse banco pela internet. O <strong>Supabase</strong> entrega um PostgreSQL gerenciado com editor SQL, visualizador de tabelas e uma API REST gerada automaticamente. É esse último recurso que permite, na aula 9, uma página estática do GitHub Pages ler dados sem servidor próprio.</p>
+        <h2>5. Prática 2: projeto no Supabase e carga dos dados brutos do Olist</h2>
+        <p>Nas aulas 4 e 5, o Olist estava em um banco compartilhado e somente leitura. A partir desta aula, cada estudante terá o próprio banco, porque criará tabelas e views e, na aula 9, publicará um dashboard que lê esse banco pela internet. O <strong>Supabase</strong> oferece um PostgreSQL gerenciado com editor SQL, visualizador de tabelas e uma API REST gerada automaticamente. Esse último recurso permite que, na aula 9, uma página estática do GitHub Pages leia os dados sem servidor próprio.</p>
 
-        <h3>5.1 Garanta que o Codespace está no seu fork atualizado</h3>
-        <p>Os Excels e o script desta aula foram publicados no repositório do curso depois que você fez o fork. Antes de abrir o Codespace:</p>
+        <h3>5.1 Atualização do fork e do Codespace</h3>
+        <p>Os arquivos Excel e o script desta aula foram publicados no repositório do curso depois da criação do seu fork. Antes de abrir o Codespace, siga estes passos:</p>
         <ol class="steps">
-          <li>No GitHub, abra o <strong>seu fork</strong> e clique em <strong>Sync fork → Update branch</strong>.</li>
+          <li>No GitHub, abra o seu fork, clique em <strong>Sync fork</strong> e, em seguida, em <strong>Update branch</strong>.</li>
           <li>Abra o Codespace desse fork. Se você tiver arquivos alterados e não commitados, faça commit antes de continuar.</li>
           <li>No terminal, confira o remoto e traga as atualizações.</li>
         </ol>
         <div class="code-block">git remote -v   <span class="code-comment"># origin deve apontar para github.com/SEU-USUARIO/..., não para o repositório do professor</span>
 git pull
 ls materiais/aula-07/dados   <span class="code-comment"># três arquivos .xlsx, cerca de 52 MB no total</span></div>
-        <p>O fork importa por dois motivos: a entrega vai por commit e push no seu repositório, e o GitHub Pages da aula 9 será publicado a partir dele.</p>
+        <p>O fork é necessário por dois motivos: a entrega é feita por commit e push no seu repositório, e o GitHub Pages da aula 9 será publicado a partir dele.</p>
 
-        <h3>5.2 Crie o projeto</h3>
+        <h3>5.2 Criação do projeto</h3>
         <ol class="steps">
           <li>Acesse <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">supabase.com/dashboard</a> e entre com <strong>Continue with GitHub</strong>.</li>
           <li>Clique em <strong>New project</strong>. Na organização pessoal, use o plano <strong>Free</strong>.</li>
           <li><strong>Project name:</strong> <code>olist-seunome</code>.</li>
           <li><strong>Database Password:</strong> use <strong>Generate a password</strong> e copie a senha para um gerenciador de senhas antes de avançar. Se preferir criar a sua, use só letras e números: caracteres como <code>@</code>, <code>#</code>, <code>/</code> e <code>:</code> têm significado dentro da string de conexão e fazem o script falhar.</li>
-          <li><strong>Region:</strong> South America (São Paulo). Banco perto do usuário significa consultas mais rápidas na aula 9.</li>
+          <li><strong>Region:</strong> South America (São Paulo). Um banco próximo do usuário responde mais rápido às consultas da aula 9.</li>
           <li>Clique em <strong>Create new project</strong> e aguarde o painel indicar que o projeto está pronto, o que leva alguns minutos.</li>
         </ol>
-        <p>A interface do Supabase muda com frequência. Se um rótulo estiver diferente, procure a função: nome do projeto, senha do banco e região.</p>
+        <p>A interface do Supabase muda com frequência. Se um rótulo estiver diferente, procure o campo pela função: nome do projeto, senha do banco e região.</p>
 
-        <h3>5.3 Copie a string do Session pooler, e entenda por que não a conexão direta</h3>
-        <p>No topo do painel do projeto, clique em <strong>Connect</strong>. Na aba de connection string, o Supabase oferece três métodos. Escolha <strong>Session pooler</strong> e copie a URI:</p>
+        <h3>5.3 String de conexão pelo Session pooler</h3>
+        <p>No topo do painel do projeto, clique em <strong>Connect</strong>. Na aba de connection string, o Supabase oferece três métodos; escolha <strong>Session pooler</strong> e copie a URI:</p>
         <div class="code-block">postgresql://postgres.<span class="code-string">&lt;ref-do-projeto&gt;</span>:<span class="code-keyword">[YOUR-PASSWORD]</span>@aws-0-sa-east-1.pooler.supabase.com:5432/postgres</div>
         <table>
           <thead><tr><th>Método</th><th>Endereço</th><th>Funciona no Codespaces?</th></tr></thead>
           <tbody>
-            <tr><td>Direct connection</td><td><code>db.&lt;ref&gt;.supabase.co:5432</code></td><td><strong>Não.</strong> O endereço do banco é IPv6, e o Codespaces não tem saída IPv6. A conexão falha antes mesmo de autenticar.</td></tr>
-            <tr><td><strong>Session pooler</strong></td><td><code>aws-0-sa-east-1.pooler.supabase.com:5432</code></td><td><strong>Sim.</strong> O pooler aceita IPv4 e mantém uma sessão completa, compatível com o <code>COPY</code> que o script usa.</td></tr>
-            <tr><td>Transaction pooler</td><td>mesmo host, porta <code>6543</code></td><td>Conecta, mas é pensado para muitas conexões curtas de aplicações; não é o que usamos.</td></tr>
+            <tr><td>Direct connection</td><td><code>db.&lt;ref&gt;.supabase.co:5432</code></td><td>Não. O endereço do banco é IPv6, e o Codespaces não tem saída IPv6, de modo que a conexão falha antes da autenticação.</td></tr>
+            <tr><td><strong>Session pooler</strong></td><td><code>aws-0-sa-east-1.pooler.supabase.com:5432</code></td><td>Sim. O pooler aceita IPv4 e mantém uma sessão completa, compatível com o <code>COPY</code> que o script usa.</td></tr>
+            <tr><td>Transaction pooler</td><td>mesmo host, porta <code>6543</code></td><td>Conecta, mas foi projetado para muitas conexões curtas de aplicações e não é usado neste curso.</td></tr>
           </tbody>
         </table>
-        <p>O trecho <code>aws-0</code> pode aparecer como <code>aws-1</code> no seu projeto: copie sempre do painel. Repare também que, no pooler, o usuário é <code>postgres.&lt;ref-do-projeto&gt;</code>, e não apenas <code>postgres</code>. A string fica na área de transferência; você só troca <code>[YOUR-PASSWORD]</code> pela senha no instante de colar no terminal, e em nenhum outro lugar.</p>
+        <p>O trecho <code>aws-0</code> pode aparecer como <code>aws-1</code> no seu projeto; por isso, copie a string sempre do painel. Observe também que, no pooler, o usuário é <code>postgres.&lt;ref-do-projeto&gt;</code>, e não apenas <code>postgres</code>. A string permanece na área de transferência, e <code>[YOUR-PASSWORD]</code> é trocado pela senha somente no momento de colar a string no terminal.</p>
 
         <div class="alert-box">
-          <h4>A string de conexão é a chave do seu banco</h4>
-          <p>Com a string completa, qualquer pessoa pode apagar ou alterar tudo o que você construir até a aula 9.</p>
+          <h4>Cuidados com a string de conexão</h4>
+          <p>A string contém a senha do banco. Com ela, qualquer pessoa pode apagar ou alterar tudo o que você construir até a aula 9, e por isso ela é tratada como credencial.</p>
           <ul>
-            <li>Nunca em arquivo do repositório, <code>.env</code> commitado, notebook ou <code>README</code>.</li>
-            <li>Nunca em prompt de IA, seja Copilot, Supabase Assistant ou qualquer outra ferramenta.</li>
-            <li>Nunca em print: confira a imagem antes de anexar à entrega.</li>
-            <li>Nunca em commit. Uma senha commitada continua no histórico mesmo depois de apagada do arquivo.</li>
-            <li>Nada de <code>export SUPABASE_DB_URL=...</code> digitado no terminal: o comando fica no histórico do shell. Se quiser usar a variável, cadastre-a como secret do Codespaces nas configurações do GitHub.</li>
-            <li>Vazou? Supabase → <strong>Project Settings → Database → Reset database password</strong>. A senha antiga deixa de funcionar na hora.</li>
+            <li>Não a registre em arquivos do repositório, <code>.env</code> commitado, notebook ou <code>README</code>.</li>
+            <li>Não a inclua em prompts de IA, seja no Copilot, no Supabase Assistant ou em qualquer outra ferramenta.</li>
+            <li>Não a deixe visível em capturas de tela; confira a imagem antes de anexá-la à entrega.</li>
+            <li>Não a inclua em commits, pois uma senha commitada continua no histórico mesmo depois de apagada do arquivo.</li>
+            <li>Evite digitar <code>export SUPABASE_DB_URL=...</code> no terminal, pois o comando fica registrado no histórico do shell. Se precisar da variável, cadastre-a como secret do Codespaces nas configurações do GitHub.</li>
+            <li>Em caso de vazamento, redefina a senha no Supabase, em Project Settings, na seção Database, com <strong>Reset database password</strong>. A senha antiga deixa de funcionar imediatamente.</li>
           </ul>
         </div>
 
-        <h3>5.4 Rode o carregador no terminal</h3>
-        <p>O script <a href="olist/carregar_olist.py">carregar_olist.py</a> lê as oito abas dos três Excels, cria o schema <code>bruto</code> no seu Postgres e carrega cada tabela com <code>COPY</code>, o comando de carga em massa do PostgreSQL. Na raiz do repositório:</p>
+        <h3>5.4 Execução do carregador no terminal</h3>
+        <p>O script <a href="olist/carregar_olist.py">carregar_olist.py</a> lê as oito abas dos três Excels, cria o schema <code>bruto</code> no seu Postgres e carrega cada tabela com <code>COPY</code>, o comando de carga em massa do PostgreSQL. Execute-o a partir da raiz do repositório:</p>
         <div class="code-block">python materiais/aula-07/olist/carregar_olist.py</div>
-        <p>O script primeiro lê os Excels e só depois pede a string de conexão. Quando aparecer <code>Cole a string do Session pooler:</code>, cole a string já com a senha (<code>Ctrl + V</code>, ou <code>Cmd + V</code> no Mac) e tecle Enter. <strong>Nada aparece na tela enquanto você cola</strong>: é o <code>getpass</code>, a mesma função que esconde senhas em qualquer terminal. O que você cola não é exibido nem gravado no histórico. A saída esperada:</p>
+        <p>O script lê primeiro os arquivos Excel e só depois solicita a string de conexão. Quando aparecer <code>Cole a string do Session pooler:</code>, cole a string já com a senha (<code>Ctrl + V</code>, ou <code>Cmd + V</code> no Mac) e tecle Enter. Nada aparece na tela durante a colagem, porque o script usa o <code>getpass</code>, a mesma função que oculta senhas em qualquer terminal; o valor colado não é exibido nem gravado no histórico. A saída esperada é a seguinte:</p>
         <div class="code-block saida">Lendo olist_catalogo.xlsx…
 Lendo olist_itens_pagamentos_avaliacoes.xlsx…
 Lendo olist_pedidos_clientes.xlsx…
@@ -409,21 +411,21 @@ bruto.products: 32,951 linhas (Excel: 32,951)
 bruto.sellers: 3,095 linhas (Excel: 3,095)
 bruto.category_translation: 71 linhas (Excel: 71)
 Carga concluída. Abra o SQL Editor do Supabase e confira as contagens.</div>
-        <p>Cada linha compara o que chegou ao banco com o que havia no Excel. Os dois números precisam ser iguais: é a primeira reconciliação do dia. O script apaga e recria as tabelas do schema <code>bruto</code>, então pode ser executado de novo sem duplicar nada.</p>
+        <p>Cada linha compara o que chegou ao banco com o que havia no Excel, e os dois números devem coincidir. Essa é a primeira reconciliação da aula. Como o script apaga e recria as tabelas do schema <code>bruto</code>, ele pode ser executado novamente sem duplicar registros.</p>
         <table>
           <thead><tr><th>Mensagem</th><th>Causa provável</th><th>O que fazer</th></tr></thead>
           <tbody>
             <tr><td><code>Troque [YOUR-PASSWORD] pela senha do banco…</code></td><td>A string foi colada sem a senha.</td><td>Rode de novo e cole a string com a senha no lugar do marcador.</td></tr>
             <tr><td><code>Network is unreachable</code>, <code>timeout</code> ou host <code>db.&lt;ref&gt;.supabase.co</code></td><td>Foi usada a conexão direta, que é IPv6.</td><td>Copie a string do <strong>Session pooler</strong>.</td></tr>
-            <tr><td><code>password authentication failed</code></td><td>Senha errada ou com caractere especial.</td><td>Redefina a senha em Project Settings → Database, só com letras e números.</td></tr>
+            <tr><td><code>password authentication failed</code></td><td>Senha errada ou com caractere especial.</td><td>Redefina a senha em Project Settings, na seção Database, usando só letras e números.</td></tr>
             <tr><td><code>Tenant or user not found</code></td><td>O usuário da string não é <code>postgres.&lt;ref&gt;</code>.</td><td>Copie novamente a string do Session pooler no painel.</td></tr>
             <tr><td><code>ModuleNotFoundError: No module named 'psycopg'</code></td><td>Codespace criado antes da atualização do <code>requirements.txt</code>.</td><td>Rode <code>pip install -r requirements.txt</code> e execute o script de novo.</td></tr>
             <tr><td><code>FileNotFoundError</code> em <code>dados/</code></td><td>Fork não sincronizado ou comando fora da raiz do repositório.</td><td>Refaça a seção 5.1 e rode o comando na raiz.</td></tr>
           </tbody>
         </table>
 
-        <h3>5.5 Confira no SQL Editor</h3>
-        <p>No menu lateral do Supabase, abra <strong>SQL Editor</strong>, crie uma consulta nova, cole o código e clique em <strong>Run</strong> (ou <code>Ctrl + Enter</code>). O editor mostra o resultado da última instrução executada, por isso rode uma consulta por vez.</p>
+        <h3>5.5 Conferência das contagens no SQL Editor</h3>
+        <p>No menu lateral do Supabase, abra <strong>SQL Editor</strong>, crie uma consulta nova, cole o código e clique em <strong>Run</strong> (ou <code>Ctrl + Enter</code>). Como o editor mostra apenas o resultado da última instrução executada, rode uma consulta por vez.</p>
         <div class="code-block"><span class="code-keyword">select</span> <span class="code-string">'customers'</span> <span class="code-keyword">as</span> tabela, count(*) <span class="code-keyword">as</span> linhas <span class="code-keyword">from</span> bruto.customers
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'orders'</span>, count(*) <span class="code-keyword">from</span> bruto.orders
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'order_items'</span>, count(*) <span class="code-keyword">from</span> bruto.order_items
@@ -432,19 +434,19 @@ Carga concluída. Abra o SQL Editor do Supabase e confira as contagens.</div>
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'products'</span>, count(*) <span class="code-keyword">from</span> bruto.products
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'sellers'</span>, count(*) <span class="code-keyword">from</span> bruto.sellers
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'category_translation'</span>, count(*) <span class="code-keyword">from</span> bruto.category_translation;</div>
-        <p>Resultado esperado, em qualquer ordem: customers 99.441 · orders 99.441 · order_items 112.650 · order_payments 103.886 · order_reviews 99.224 · products 32.951 · sellers 3.095 · category_translation 71.</p>
+        <p>Resultado esperado, em qualquer ordem: customers 99.441, orders 99.441, order_items 112.650, order_payments 103.886, order_reviews 99.224, products 32.951, sellers 3.095 e category_translation 71.</p>
 
-        <h3>5.6 Olhe as tabelas no Table Editor</h3>
-        <p>Em <strong>Table Editor</strong>, troque o seletor de schema de <code>public</code> para <code>bruto</code> e abra <code>orders</code>. Olhar linhas antes de modelar é hábito, não perda de tempo: você verá hashes de 32 caracteres como identificadores, datas com hora e colunas vazias em pedidos não entregues. O schema <code>bruto</code> não é exposto pela API do Supabase; só o <code>public</code> é. A camada bruta fica protegida, e o que for publicado será escolhido por você.</p>
+        <h3>5.6 Inspeção das tabelas no Table Editor</h3>
+        <p>Em <strong>Table Editor</strong>, troque o seletor de schema de <code>public</code> para <code>bruto</code> e abra <code>orders</code>. A inspeção das linhas antes da modelagem revela características que a estrutura não mostra, como hashes de 32 caracteres usados como identificadores, datas com hora e colunas vazias em pedidos não entregues. O schema <code>bruto</code> não é exposto pela API do Supabase, que publica apenas o <code>public</code>. Desse modo, a camada bruta fica protegida, e o conteúdo publicado depende de uma escolha explícita.</p>
         <div class="note-box">
           <h4>Projeto gratuito pausa quando fica parado</h4>
-          <p>No plano Free, projetos sem atividade por cerca de uma semana podem ser pausados. Os dados não se perdem: abra o painel e clique em restaurar. Faça isso antes das aulas 8 e 9, e não no meio delas.</p>
+          <p>No plano Free, projetos sem atividade por cerca de uma semana podem ser pausados. Os dados não se perdem, e basta abrir o painel e clicar em restaurar. Faça isso antes das aulas 8 e 9, e não durante elas.</p>
         </div>
       </section>
 
       <section data-lesson-section="guided-practice">
         <h2>6. Prática 3: discovery do Olist com IA</h2>
-        <p><strong>Discovery</strong> é a etapa em que se descobre o que a base realmente contém antes de prometer qualquer número: o que cada linha representa, como as tabelas se ligam e onde estão as armadilhas. A IA acelera essa etapa porque reconhece padrões de nomes e sugere hipóteses em segundos. Ela também erra com a mesma confiança com que acerta, porque não viu os seus dados. A divisão de trabalho é simples: <strong>a IA levanta hipóteses; você prova ou derruba cada uma com SQL</strong>.</p>
+        <p><strong>Discovery</strong> é a etapa em que se verifica o que a base realmente contém antes de apresentar qualquer número: o que cada linha representa, como as tabelas se ligam e onde estão as armadilhas. A IA acelera essa etapa porque reconhece padrões de nomes e sugere hipóteses em segundos, mas também erra com a mesma confiança com que acerta, já que não viu os dados. Por isso, a divisão de trabalho é a seguinte: a IA formula hipóteses, e cada hipótese só é aceita depois de testada por uma consulta SQL.</p>
         <table>
           <thead><tr><th>Etapa</th><th>Quem faz</th><th>Evidência</th></tr></thead>
           <tbody>
@@ -456,17 +458,17 @@ Carga concluída. Abra o SQL Editor do Supabase e confira as contagens.</div>
           </tbody>
         </table>
 
-        <h3>6.1 Extraia a estrutura</h3>
+        <h3>6.1 Extração da estrutura</h3>
         <div class="code-block"><span class="code-keyword">select</span> table_name <span class="code-keyword">as</span> tabela,
        string_agg(column_name || <span class="code-string">' '</span> || data_type, <span class="code-string">', '</span> <span class="code-keyword">order by</span> ordinal_position) <span class="code-keyword">as</span> colunas
 <span class="code-keyword">from</span> information_schema.columns
 <span class="code-keyword">where</span> table_schema = <span class="code-string">'bruto'</span>
 <span class="code-keyword">group by</span> table_name
 <span class="code-keyword">order by</span> table_name;</div>
-        <p>O resultado tem oito linhas, uma por tabela, com colunas e tipos. É só isso que vai para a IA: estrutura, nunca linhas de dados e nunca a string de conexão. O Olist é público, mas o hábito vale para a base da empresa em que você vai trabalhar.</p>
+        <p>O resultado tem oito linhas, uma por tabela, com colunas e tipos. Apenas essa estrutura é enviada à IA, sem linhas de dados e sem a string de conexão. O Olist é público, mas o mesmo procedimento se aplica à base de qualquer empresa.</p>
 
-        <h3>6.2 Peça hipóteses à IA</h3>
-        <p>Use o <strong>Copilot Chat</strong> do Codespace em modo de pergunta (<em>Ask</em>), sem permissão para editar arquivos, ou o <strong>Assistant</strong> do Supabase no painel do projeto. O Assistant já enxerga a estrutura do seu banco; mesmo assim, use o prompt abaixo para exigir a consulta de cada hipótese.</p>
+        <h3>6.2 Hipóteses formuladas pela IA</h3>
+        <p>Use o <strong>Copilot Chat</strong> do Codespace em modo de pergunta (<em>Ask</em>), sem permissão para editar arquivos, ou o <strong>Assistant</strong> do Supabase no painel do projeto. O Assistant já enxerga a estrutura do seu banco, mas o prompt abaixo continua necessário para exigir a consulta de cada hipótese.</p>
         <div class="code-block prompt">Você vai me ajudar na discovery de uma base de e-commerce antes da modelagem.
 Abaixo estão as tabelas e colunas do schema "bruto" de um PostgreSQL (só a
 estrutura, sem dados):
@@ -481,12 +483,12 @@ Liste 10 hipóteses verificáveis sobre essa base, cobrindo:
 Para cada hipótese, escreva uma consulta SQL para PostgreSQL, usando o schema
 bruto, que a confirme ou a derrube. Não invente números nem resultados: eu vou
 executar as consultas e trazer os resultados.</div>
-        <p>Guarde a resposta. As hipóteses que a IA errar entram no <code>DISCOVERY.md</code>, e são tão valiosas quanto as que ela acertar: mostram exatamente onde confiar sem conferir teria custado caro.</p>
+        <p>Guarde a resposta. As hipóteses em que a IA errar também entram no <code>DISCOVERY.md</code>, porque indicam os pontos em que aceitar a resposta sem conferência teria produzido números errados.</p>
 
-        <h3>6.3 Prove ou derrube: as armadilhas do Olist</h3>
-        <p>Compare as hipóteses da IA com as consultas abaixo. Todas foram executadas contra uma cópia idêntica do schema <code>bruto</code> que você acabou de carregar; se o seu número for diferente, a carga não está íntegra.</p>
+        <h3>6.3 Verificação das armadilhas do Olist</h3>
+        <p>Compare as hipóteses da IA com as consultas abaixo. Todas foram executadas contra uma cópia idêntica do schema <code>bruto</code> carregado na seção 5; um número diferente indica que a carga não está íntegra.</p>
 
-        <h4>Armadilha 1 · Grão: o que é uma linha de pedido e uma linha de item</h4>
+        <h4>Armadilha 1: grão das tabelas de pedidos e de itens</h4>
         <div class="code-block"><span class="code-keyword">select</span> count(*) <span class="code-keyword">as</span> linhas, count(<span class="code-keyword">distinct</span> order_id) <span class="code-keyword">as</span> pedidos
 <span class="code-keyword">from</span> bruto.orders;
 
@@ -494,9 +496,9 @@ executar as consultas e trazer os resultados.</div>
        count(<span class="code-keyword">distinct</span> order_id) <span class="code-keyword">as</span> pedidos,
        count(<span class="code-keyword">distinct</span> (order_id, order_item_id)) <span class="code-keyword">as</span> pedido_e_item
 <span class="code-keyword">from</span> bruto.order_items;</div>
-        <p><strong>Resultado:</strong> <code>orders</code> tem 99.441 linhas e 99.441 pedidos distintos, logo uma linha por pedido. <code>order_items</code> tem 112.650 linhas, 98.666 pedidos distintos e 112.650 pares pedido-item: uma linha por item, identificada por <code>order_id</code> + <code>order_item_id</code>. <strong>Por que importa:</strong> receita somada em <code>order_items</code> está no grão do item; contar pedidos ali exige <code>count(distinct order_id)</code>.</p>
+        <p><strong>Resultado:</strong> <code>orders</code> tem 99.441 linhas e 99.441 pedidos distintos, ou seja, uma linha por pedido. <code>order_items</code> tem 112.650 linhas, 98.666 pedidos distintos e 112.650 pares pedido-item, ou seja, uma linha por item, identificada por <code>order_id</code> + <code>order_item_id</code>. <strong>Implicação:</strong> a receita somada em <code>order_items</code> está no grão do item, e a contagem de pedidos nessa tabela exige <code>count(distinct order_id)</code>.</p>
 
-        <h4>Armadilha 2 · Pedido não é pessoa: customer_id × customer_unique_id</h4>
+        <h4>Armadilha 2: identificação do cliente (customer_id e customer_unique_id)</h4>
         <div class="code-block"><span class="code-keyword">select</span> count(<span class="code-keyword">distinct</span> customer_id)        <span class="code-keyword">as</span> customer_ids,
        count(<span class="code-keyword">distinct</span> customer_unique_id) <span class="code-keyword">as</span> pessoas
 <span class="code-keyword">from</span> bruto.customers;
@@ -510,23 +512,23 @@ executar as consultas e trazer os resultados.</div>
       <span class="code-keyword">from</span> bruto.orders o
       <span class="code-keyword">join</span> bruto.customers c <span class="code-keyword">on</span> c.customer_id = o.customer_id
       <span class="code-keyword">group by</span> c.customer_unique_id <span class="code-keyword">having</span> count(*) &gt; 1) <span class="code-keyword">as</span> y;</div>
-        <p><strong>Resultado:</strong> 99.441 <code>customer_id</code> para 96.096 pessoas. Com <code>customer_id</code>, <strong>zero</strong> clientes compraram mais de uma vez; com <code>customer_unique_id</code>, 2.997 pessoas fizeram mais de um pedido na base inteira, com qualquer status. <strong>Por que importa:</strong> o <code>customer_id</code> é criado a cada pedido. Uma análise de recompra com a chave errada diria ao Chief que o programa de fidelização não tem público nenhum. O número de P09 na aula 8 será diferente de 2.997 porque lá entram só pedidos entregues de jan/2017 a ago/2018.</p>
+        <p><strong>Resultado:</strong> há 99.441 <code>customer_id</code> para 96.096 pessoas. Com <code>customer_id</code>, zero clientes compraram mais de uma vez; com <code>customer_unique_id</code>, 2.997 pessoas fizeram mais de um pedido na base inteira, com qualquer status. <strong>Implicação:</strong> como o <code>customer_id</code> é criado a cada pedido, uma análise de recompra com essa chave indicaria ao Chief que o programa de fidelização não tem público. O número da P09 na aula 8 será diferente de 2.997, porque lá entram apenas pedidos entregues de jan/2017 a ago/2018.</p>
 
-        <h4>Armadilha 3 · Avaliação duplicada por pedido</h4>
+        <h4>Armadilha 3: avaliação duplicada por pedido</h4>
         <div class="code-block"><span class="code-keyword">select</span> count(*) <span class="code-keyword">as</span> pedidos_com_mais_de_uma_avaliacao
 <span class="code-keyword">from</span> (<span class="code-keyword">select</span> order_id <span class="code-keyword">from</span> bruto.order_reviews
       <span class="code-keyword">group by</span> order_id <span class="code-keyword">having</span> count(*) &gt; 1) <span class="code-keyword">as</span> x;</div>
-        <p><strong>Resultado:</strong> 547 pedidos têm mais de uma avaliação. <strong>Por que importa:</strong> juntar avaliações a pedidos sem tratar isso conta esses pedidos duas vezes na nota média. O modelo precisa escolher uma regra; o gabarito usa a última avaliação respondida.</p>
+        <p><strong>Resultado:</strong> 547 pedidos têm mais de uma avaliação. <strong>Implicação:</strong> a junção de avaliações a pedidos sem esse tratamento conta esses pedidos duas vezes na nota média. O modelo precisa adotar uma regra, e o gabarito usa a última avaliação respondida.</p>
 
-        <h4>Armadilha 4 · Pedido sem item</h4>
+        <h4>Armadilha 4: pedido sem item</h4>
         <div class="code-block"><span class="code-keyword">select</span> o.order_status, count(*) <span class="code-keyword">as</span> pedidos_sem_item
 <span class="code-keyword">from</span> bruto.orders o
 <span class="code-keyword">where not exists</span> (<span class="code-keyword">select</span> 1 <span class="code-keyword">from</span> bruto.order_items i <span class="code-keyword">where</span> i.order_id = o.order_id)
 <span class="code-keyword">group by</span> o.order_status
 <span class="code-keyword">order by</span> pedidos_sem_item <span class="code-keyword">desc</span>;</div>
-        <p><strong>Resultado:</strong> 775 pedidos não têm nenhum item: unavailable 603, canceled 164, created 5, invoiced 2, shipped 1. <strong>Por que importa:</strong> um <code>join</code> entre pedidos e itens faz esses pedidos desaparecerem em silêncio. Se o modelo usar <code>join</code> onde precisava de <code>left join</code>, a contagem de pedidos deixa de fechar com a origem.</p>
+        <p><strong>Resultado:</strong> 775 pedidos não têm nenhum item (unavailable 603, canceled 164, created 5, invoiced 2 e shipped 1). <strong>Implicação:</strong> um <code>join</code> entre pedidos e itens elimina esses pedidos sem qualquer aviso. Se o modelo usar <code>join</code> onde seria necessário <code>left join</code>, a contagem de pedidos deixa de coincidir com a origem.</p>
 
-        <h4>Armadilha 5 · Produto sem categoria e categoria sem tradução</h4>
+        <h4>Armadilha 5: produto sem categoria e categoria sem tradução</h4>
         <div class="code-block"><span class="code-keyword">select</span> count(*) filter (<span class="code-keyword">where</span> product_category_name <span class="code-keyword">is null</span>) <span class="code-keyword">as</span> produtos_sem_categoria
 <span class="code-keyword">from</span> bruto.products;
 
@@ -535,16 +537,16 @@ executar as consultas e trazer os resultados.</div>
 <span class="code-keyword">left join</span> bruto.category_translation t <span class="code-keyword">on</span> t.product_category_name = p.product_category_name
 <span class="code-keyword">where</span> p.product_category_name <span class="code-keyword">is not null</span>
   <span class="code-keyword">and</span> t.product_category_name <span class="code-keyword">is null</span>;</div>
-        <p><strong>Resultado:</strong> 610 produtos sem categoria e 2 categorias sem tradução: <code>pc_gamer</code> e <code>portateis_cozinha_e_preparadores_de_alimentos</code>. <strong>Por que importa:</strong> num ranking de categorias (P03), a receita desses produtos vira uma barra “vazia” ou some. O modelo precisa de um rótulo explícito, como <code>sem_categoria</code>.</p>
+        <p><strong>Resultado:</strong> 610 produtos sem categoria e 2 categorias sem tradução, <code>pc_gamer</code> e <code>portateis_cozinha_e_preparadores_de_alimentos</code>. <strong>Implicação:</strong> em um ranking de categorias (P03), a receita desses produtos aparece como uma barra sem rótulo ou deixa de aparecer. O modelo precisa de um rótulo explícito, como <code>sem_categoria</code>.</p>
 
-        <h4>Armadilha 6 · Status: pedido registrado não é venda</h4>
+        <h4>Armadilha 6: status do pedido</h4>
         <div class="code-block"><span class="code-keyword">select</span> order_status, count(*) <span class="code-keyword">as</span> pedidos
 <span class="code-keyword">from</span> bruto.orders
 <span class="code-keyword">group by</span> order_status
 <span class="code-keyword">order by</span> pedidos <span class="code-keyword">desc</span>;</div>
-        <p><strong>Resultado:</strong> delivered 96.478 · shipped 1.107 · canceled 625 · unavailable 609 · invoiced 314 · processing 301 · created 5 · approved 2. <strong>Por que importa:</strong> receita de pedido cancelado não é receita. É daqui que sai a convenção de considerar só <code>delivered</code>.</p>
+        <p><strong>Resultado:</strong> delivered 96.478, shipped 1.107, canceled 625, unavailable 609, invoiced 314, processing 301, created 5 e approved 2. <strong>Implicação:</strong> pedidos cancelados não geram receita e precisam de tratamento explícito. Esse resultado fundamenta a convenção de considerar apenas <code>delivered</code>.</p>
 
-        <h4>Armadilha 7 · Período com pontas incompletas</h4>
+        <h4>Armadilha 7: período com pontas incompletas</h4>
         <div class="code-block"><span class="code-keyword">select</span> min(order_purchase_timestamp) <span class="code-keyword">as</span> primeira_compra,
        max(order_purchase_timestamp) <span class="code-keyword">as</span> ultima_compra
 <span class="code-keyword">from</span> bruto.orders;
@@ -553,16 +555,16 @@ executar as consultas e trazer os resultados.</div>
 <span class="code-keyword">from</span> bruto.orders
 <span class="code-keyword">group by</span> ano_mes
 <span class="code-keyword">order by</span> ano_mes;</div>
-        <p><strong>Resultado:</strong> compras de 04/09/2016 a 17/10/2018. Set/2016 tem 4 pedidos, out/2016 tem 324, nov/2016 não aparece, dez/2016 tem 1; do outro lado, ago/2018 tem 6.512, set/2018 tem 16 e out/2018 tem 4. <strong>Por que importa:</strong> um gráfico mensal da base inteira termina num despencar que é do calendário de coleta, não do negócio. Daí o período de análise de jan/2017 a ago/2018, só com meses completos.</p>
+        <p><strong>Resultado:</strong> as compras vão de 04/09/2016 a 17/10/2018. Set/2016 tem 4 pedidos, out/2016 tem 324, nov/2016 não aparece e dez/2016 tem 1; na outra ponta, ago/2018 tem 6.512, set/2018 tem 16 e out/2018 tem 4. <strong>Implicação:</strong> um gráfico mensal da base inteira termina em uma queda abrupta que decorre do calendário de coleta, e não do negócio. Por isso, adota-se como período de análise jan/2017 a ago/2018, apenas com meses completos.</p>
 
-        <h4>Armadilha 8 · Nomes que vêm tortos da origem</h4>
+        <h4>Armadilha 8: nomes com erro na origem</h4>
         <div class="code-block"><span class="code-keyword">select</span> table_name, column_name
 <span class="code-keyword">from</span> information_schema.columns
 <span class="code-keyword">where</span> table_schema = <span class="code-string">'bruto'</span> <span class="code-keyword">and</span> column_name <span class="code-keyword">like</span> <span class="code-string">'%lenght%'</span>;</div>
         <div class="code-block">python -c <span class="code-string">"import pandas as pd; print(pd.ExcelFile('materiais/aula-07/dados/olist_catalogo.xlsx').sheet_names)"</span></div>
-        <p><strong>Resultado:</strong> <code>product_name_lenght</code> e <code>product_description_lenght</code>, com “lenght” no lugar de “length”; e as abas <code>['olist_products', 'olist_sellers', 'product_category_name_translati']</code>. O Excel limita nomes de aba a 31 caracteres e cortou <code>product_category_name_translation</code>. <strong>Por que importa:</strong> a camada bruta reproduz a origem, com os defeitos, para que qualquer pessoa possa conferir uma contagem contra a fonte. Renomear coluna no bruto quebra essa rastreabilidade; quem renomeia e traduz é a camada modelada, como o <code>estrela.sql</code> faz.</p>
+        <p><strong>Resultado:</strong> <code>product_name_lenght</code> e <code>product_description_lenght</code>, com “lenght” no lugar de “length”; e as abas <code>['olist_products', 'olist_sellers', 'product_category_name_translati']</code>. O Excel limita nomes de aba a 31 caracteres e, por isso, cortou <code>product_category_name_translation</code>. <strong>Implicação:</strong> a camada bruta reproduz a origem com os defeitos, para que qualquer pessoa possa conferir uma contagem contra a fonte. Renomear colunas no bruto comprometeria essa rastreabilidade; a renomeação e a tradução cabem à camada modelada, como faz o <code>estrela.sql</code>.</p>
 
-        <h3>6.4 Devolva os resultados à IA e registre</h3>
+        <h3>6.4 Devolução dos resultados à IA e registro</h3>
         <div class="code-block prompt">Executei as consultas. Seguem os resultados, na mesma ordem das hipóteses:
 
 [cole aqui cada hipótese com o número obtido]
@@ -572,56 +574,56 @@ usando apenas esses resultados. Aponte explicitamente onde a sua hipótese
 original estava errada. Depois, liste as 5 armadilhas mais graves para as
 perguntas de receita, recompra, nota, prazo e evolução mensal, cada uma com a
 decisão de modelagem que ela exige.</div>
-        <p>Leia a resposta com o mesmo critério de antes: qualquer número que a IA citar e que não estiver no resultado que você colou é invenção. A decisão de modelagem que ela sugerir entra na seção 7 como hipótese a comparar com o gabarito.</p>
+        <p>A resposta deve ser lida com o mesmo critério: qualquer número citado pela IA que não conste do resultado colado deve ser tratado como invenção. As decisões de modelagem sugeridas entram na seção 7 como hipóteses a comparar com o gabarito.</p>
       </section>
 
       <section data-lesson-section="concepts">
         <h2>7. Modelagem dimensional: fatos, dimensões, grão e chaves</h2>
-        <p>A camada bruta responde a qualquer pergunta, desde que quem pergunta conheça as oito armadilhas. Um dashboard não pode depender disso: cada view da aula 8 repetiria os mesmos cuidados, e bastaria esquecer um para o board ver um número errado. A <strong>modelagem dimensional</strong>, sistematizada por Ralph Kimball nos anos 1990 para data warehouses, resolve esse problema uma vez: as decisões da discovery ficam gravadas na estrutura das tabelas, e a pergunta seguinte já nasce protegida.</p>
+        <p>A camada bruta responde a qualquer pergunta, desde que quem consulta conheça as oito armadilhas. Um dashboard não deve depender dessa condição, pois cada view da aula 8 teria de repetir os mesmos cuidados, e um único esquecimento levaria um número errado ao board. A <strong>modelagem dimensional</strong>, sistematizada por Ralph Kimball nos anos 1990 para data warehouses, trata esse problema de uma só vez: as decisões da discovery ficam gravadas na estrutura das tabelas, e as consultas seguintes já partem delas.</p>
 
         <h3>7.1 Os quatro conceitos</h3>
         <table>
           <thead><tr><th>Conceito</th><th>Definição</th><th>No case</th></tr></thead>
           <tbody>
-            <tr><td><strong>Fato</strong></td><td>Tabela de eventos medidos. Cresce rápido e guarda números que se somam.</td><td>Cada item vendido; cada pedido fechado.</td></tr>
+            <tr><td><strong>Fato</strong></td><td>Tabela de eventos medidos. Cresce rapidamente e guarda valores que podem ser somados.</td><td>Cada item vendido; cada pedido fechado.</td></tr>
             <tr><td><strong>Dimensão</strong></td><td>Tabela de contexto que responde quando, quem, o quê e onde. Cresce devagar e guarda textos para filtrar e agrupar.</td><td>Dia, pessoa, produto, vendedor.</td></tr>
             <tr><td><strong>Grão</strong></td><td>O que exatamente uma linha do fato representa. É a primeira decisão do modelo, antes de qualquer coluna.</td><td>“Um item vendido dentro de um pedido.”</td></tr>
             <tr><td><strong>Medida</strong></td><td>Número do fato. Aditiva quando pode ser somada em qualquer recorte.</td><td><code>preco</code>, <code>frete</code> e <code>valor_pago</code> somam; <code>nota_avaliacao</code> e <code>dias_entrega</code> se agregam por média.</td></tr>
           </tbody>
         </table>
-        <p>O nome <strong>esquema estrela</strong> vem do desenho: o fato no centro, as dimensões em volta, cada uma ligada ao fato por uma chave. Consultar fica previsível: parte-se do fato, junta-se a dimensão do recorte e agrega-se a medida.</p>
+        <p>O nome <strong>esquema estrela</strong> vem do desenho, com o fato no centro e as dimensões em volta, cada uma ligada ao fato por uma chave. As consultas seguem um padrão previsível: parte-se do fato, junta-se a dimensão do recorte e agrega-se a medida.</p>
         <figure class="figura">
           <div class="figura-scroll" tabindex="0" aria-label="Figura do esquema estrela; role para os lados em telas pequenas">
             <svg id="estrela-material" class="estrela-svg" viewBox="0 0 970 400" role="img" aria-labelledby="estrela-material-t estrela-material-d" xmlns="http://www.w3.org/2000/svg"><title id="estrela-material-t">Esquema estrela do case Olist</title><desc id="estrela-material-d">Dois fatos, fato_pedidos com grão pedido e 99.441 linhas e fato_itens_pedido com grão item e 112.650 linhas. Ambos se ligam a dim_tempo, 774 dias, e a dim_cliente, 96.096 pessoas. Só fato_itens_pedido se liga a dim_produto, 32.951 produtos, e a dim_vendedor, 3.095 vendedores.</desc><line class="st-edge" x1="140" y1="202" x2="395" y2="53"/><line class="st-edge" x1="140" y1="202" x2="395" y2="347"/><line class="st-edge" x1="650" y1="202" x2="395" y2="53"/><line class="st-edge" x1="650" y1="202" x2="395" y2="347"/><line class="st-edge" x1="650" y1="202" x2="845" y2="53"/><line class="st-edge" x1="650" y1="202" x2="845" y2="347"/><g class="st-fato" data-tabela="fato_pedidos"><rect class="st-box st-box-fato" x="20" y="160" width="240" height="84" rx="10"/><text class="st-name" x="140" y="198" text-anchor="middle">fato_pedidos</text><text class="st-sub" x="140" y="222" text-anchor="middle">grão: pedido · 99.441</text></g><g class="st-dim" data-tabela="dim_tempo"><rect class="st-box st-box-dim" x="290" y="18" width="210" height="70" rx="10"/><text class="st-name" x="395" y="49" text-anchor="middle">dim_tempo</text><text class="st-sub" x="395" y="73" text-anchor="middle">um dia · 774</text></g><g class="st-dim" data-tabela="dim_cliente"><rect class="st-box st-box-dim" x="290" y="312" width="210" height="70" rx="10"/><text class="st-name" x="395" y="343" text-anchor="middle">dim_cliente</text><text class="st-sub" x="395" y="367" text-anchor="middle">uma pessoa · 96.096</text></g><g class="st-fato" data-tabela="fato_itens_pedido"><rect class="st-box st-box-fato" x="530" y="160" width="240" height="84" rx="10"/><text class="st-name" x="650" y="198" text-anchor="middle">fato_itens_pedido</text><text class="st-sub" x="650" y="222" text-anchor="middle">grão: item · 112.650</text></g><g class="st-dim" data-tabela="dim_produto"><rect class="st-box st-box-dim" x="740" y="18" width="210" height="70" rx="10"/><text class="st-name" x="845" y="49" text-anchor="middle">dim_produto</text><text class="st-sub" x="845" y="73" text-anchor="middle">um produto · 32.951</text></g><g class="st-dim" data-tabela="dim_vendedor"><rect class="st-box st-box-dim" x="740" y="312" width="210" height="70" rx="10"/><text class="st-name" x="845" y="343" text-anchor="middle">dim_vendedor</text><text class="st-sub" x="845" y="367" text-anchor="middle">um vendedor · 3.095</text></g></svg>
           </div>
-          <figcaption>Esquema estrela do case com o número de linhas de cada tabela. Os dois fatos compartilham tempo e cliente; produto e vendedor só existem no grão do item.</figcaption>
+          <figcaption>Esquema estrela do case com o número de linhas de cada tabela. As dimensões de tempo e de cliente são compartilhadas pelos dois fatos, enquanto produto e vendedor se relacionam apenas com o fato de grão item.</figcaption>
         </figure>
 
-        <h3>7.2 Por que dois fatos, e não um</h3>
-        <p>A tentação é uma tabela única, larga, com item, pagamento e avaliação lado a lado. O problema está no grão: um pedido com três itens tem uma avaliação e, às vezes, dois pagamentos. Juntar tudo numa linha por item obriga a copiar o pagamento e a nota para cada item, e a cópia muda os totais sem emitir nenhum aviso. Rode e veja:</p>
+        <h3>7.2 Justificativa para dois fatos</h3>
+        <p>Uma alternativa aparentemente mais simples seria uma tabela única e larga, com item, pagamento e avaliação lado a lado. O problema está no grão: um pedido com três itens tem uma avaliação e, às vezes, dois pagamentos. Reunir tudo em uma linha por item obriga a copiar o pagamento e a nota para cada item, e essa cópia altera os totais sem emitir nenhum aviso, como mostra a consulta a seguir.</p>
         <div class="code-block"><span class="code-keyword">select</span> (<span class="code-keyword">select</span> sum(price) <span class="code-keyword">from</span> bruto.order_items) <span class="code-keyword">as</span> receita_correta,
        (<span class="code-keyword">select</span> sum(i.price)
         <span class="code-keyword">from</span> bruto.order_items i
         <span class="code-keyword">join</span> bruto.order_payments p <span class="code-keyword">on</span> p.order_id = i.order_id) <span class="code-keyword">as</span> receita_com_pagamentos;</div>
-        <p><strong>Resultado:</strong> R$ 13.591.643,70 contra R$ 14.209.115,34. Mais de R$ 600 mil de receita surgem do nada, porque cada item foi repetido para cada pagamento do seu pedido. A nota sofre o mesmo mecanismo, ao contrário: depois de construir a estrela, compare a nota média por pedido com a nota copiada para cada item.</p>
+        <p><strong>Resultado:</strong> R$ 13.591.643,70 contra R$ 14.209.115,34. A segunda soma acrescenta mais de R$ 600 mil de receita inexistente, porque cada item foi repetido para cada pagamento do seu pedido. A nota sofre o mesmo mecanismo em sentido inverso, o que pode ser verificado depois da construção da estrela, comparando a nota média por pedido com a nota copiada para cada item.</p>
         <div class="code-block"><span class="code-keyword">select</span> round(avg(nota_avaliacao), 2) <span class="code-keyword">as</span> nota_por_pedido
 <span class="code-keyword">from</span> public.fato_pedidos;
 
 <span class="code-keyword">select</span> round(avg(p.nota_avaliacao), 2) <span class="code-keyword">as</span> nota_copiada_para_itens
 <span class="code-keyword">from</span> public.fato_itens_pedido i
 <span class="code-keyword">join</span> public.fato_pedidos p <span class="code-keyword">on</span> p.pedido_sk = i.pedido_sk;</div>
-        <p><strong>Resultado:</strong> 4,09 por pedido contra 4,03 copiada para os itens. Pedidos com vários itens pesam mais na segunda média, e esses pedidos têm nota menor. A diferença parece pequena, mas é um erro de grão: a pergunta “qual a nota do cliente?” tem o pedido como unidade. Por isso o modelo tem <strong>dois fatos</strong>: <code>fato_itens_pedido</code>, com grão item, para receita, categoria e vendedor; e <code>fato_pedidos</code>, com grão pedido, para pagamento, prazo e avaliação.</p>
+        <p><strong>Resultado:</strong> 4,09 por pedido contra 4,03 copiada para os itens. Pedidos com vários itens pesam mais na segunda média, e esses pedidos têm nota menor. Embora pequena, a diferença decorre de um erro de grão, já que a pergunta “qual a nota do cliente?” tem o pedido como unidade. Por isso, o modelo tem dois fatos: <code>fato_itens_pedido</code>, com grão item, para receita, categoria e vendedor, e <code>fato_pedidos</code>, com grão pedido, para pagamento, prazo e avaliação.</p>
 
-        <h3>7.3 Chave substituta</h3>
+        <h3>7.3 Chaves substitutas</h3>
         <p>Na origem, <code>order_id</code> é um hash de 32 caracteres. No modelo, cada tabela ganha uma <strong>chave substituta</strong> (<em>surrogate key</em>, sufixo <code>_sk</code>): um inteiro sem significado de negócio, gerado pelo próprio modelo.</p>
         <ul>
-          <li><strong>Junções leves:</strong> comparar inteiros de 4 bytes é mais barato que comparar textos de 32 caracteres, e os índices das tabelas que mais crescem ficam menores.</li>
-          <li><strong>Independência da origem:</strong> se o sistema de pedidos trocar o formato do identificador, o modelo e as views não mudam.</li>
-          <li><strong>Grão explícito:</strong> <code>cliente_sk</code> aponta para uma pessoa, e não para um <code>customer_id</code> de pedido. A armadilha 2 fica resolvida na chave, não em cada consulta.</li>
+          <li><strong>Junções mais leves:</strong> comparar inteiros de 4 bytes custa menos do que comparar textos de 32 caracteres, e os índices das tabelas que mais crescem ficam menores.</li>
+          <li><strong>Independência da origem:</strong> se o sistema de pedidos alterar o formato do identificador, o modelo e as views permanecem os mesmos.</li>
+          <li><strong>Grão explícito:</strong> <code>cliente_sk</code> aponta para uma pessoa, e não para um <code>customer_id</code> de pedido. Assim, a armadilha 2 é resolvida uma vez na chave, sem depender de cada consulta.</li>
         </ul>
-        <p>Uma limitação precisa ficar escrita: no gabarito, as chaves são recalculadas a cada execução, ordenadas por data e identificador. Com a mesma origem, o resultado é sempre o mesmo. Num data warehouse em produção, em que a origem muda diariamente, uma tabela de mapeamento preservaria a chave de cada registro entre cargas.</p>
+        <p>Uma limitação deve ser registrada: no gabarito, as chaves são recalculadas a cada execução, com ordenação por data e identificador. Com a mesma origem, o resultado é sempre o mesmo, mas, em um data warehouse em produção, no qual a origem muda diariamente, seria necessária uma tabela de mapeamento para preservar a chave de cada registro entre cargas.</p>
 
-        <h3>7.4 Da armadilha à decisão de modelagem</h3>
+        <h3>7.4 Decisões de modelagem derivadas das armadilhas</h3>
         <table>
           <thead><tr><th>Armadilha provada na discovery</th><th>Decisão no modelo</th></tr></thead>
           <tbody>
@@ -631,7 +633,7 @@ decisão de modelagem que ela exige.</div>
             <tr><td>610 produtos sem categoria; 2 sem tradução</td><td><code>categoria = 'sem_categoria'</code>; <code>categoria_en</code> cai no nome em português</td></tr>
             <tr><td>Pagamento e avaliação por pedido</td><td>Dois fatos com grãos diferentes</td></tr>
             <tr><td>Status variados</td><td><code>status</code> nos dois fatos, para que as views filtrem <code>delivered</code></td></tr>
-            <tr><td>Meses incompletos</td><td><code>dim_tempo</code> com <code>data</code> e <code>ano_mes</code>, para que as views recortem jan/2017–ago/2018</td></tr>
+            <tr><td>Meses incompletos</td><td><code>dim_tempo</code> com <code>data</code> e <code>ano_mes</code>, para que as views recortem o período de jan/2017 a ago/2018</td></tr>
           </tbody>
         </table>
       </section>
@@ -639,7 +641,7 @@ decisão de modelagem que ela exige.</div>
       <section data-lesson-section="guided-practice">
         <h2>8. Prática 4: modelagem com IA, gabarito e reconciliação</h2>
 
-        <h3>8.1 Peça uma proposta à IA</h3>
+        <h3>8.1 Proposta de modelo gerada pela IA</h3>
         <div class="code-block prompt">Com base na estrutura do schema "bruto" e nas armadilhas que confirmei na
 discovery (listadas abaixo), proponha um esquema estrela no schema "public"
 para responder perguntas de receita por mês, categoria, estado e vendedor,
@@ -651,7 +653,7 @@ Para cada tabela, informe: nome, se é fato ou dimensão, o grão em uma frase,
 a chave substituta, as chaves estrangeiras e as medidas ou atributos.
 Justifique por que pagamento e avaliação ficam (ou não) no mesmo fato que os
 itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
-        <p>Compare a proposta com o gabarito usando estas perguntas, e anote as diferenças para o <code>MODELO_ESTRELA.md</code>:</p>
+        <p>Compare a proposta com o gabarito por meio das perguntas abaixo e anote as diferenças no <code>MODELO_ESTRELA.md</code>:</p>
         <ul>
           <li>O grão de cada fato foi declarado em uma frase, antes das colunas?</li>
           <li>A nota e o pagamento ficaram no grão do pedido?</li>
@@ -661,10 +663,10 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
           <li>Existe uma consulta de reconciliação contra a origem?</li>
         </ul>
 
-        <h3>8.2 O gabarito <code>estrela.sql</code>, bloco a bloco</h3>
+        <h3>8.2 Estrutura do gabarito <code>estrela.sql</code></h3>
         <div class="inline-actions">
-          <a class="btn btn-slides" href="olist/estrela.sql">📄 Abrir estrela.sql</a>
-          <a class="btn btn-home" href="olist/carregar_olist.py">🐍 Abrir carregar_olist.py</a>
+          <a class="btn btn-slides" href="olist/estrela.sql">Abrir estrela.sql</a>
+          <a class="btn btn-home" href="olist/carregar_olist.py">Abrir carregar_olist.py</a>
         </div>
         <table>
           <thead><tr><th>Bloco</th><th>O que faz</th><th>Decisão que materializa</th></tr></thead>
@@ -678,33 +680,33 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
             <tr><td><code>pedido_chave</code> (temporária)</td><td>Gera <code>pedido_sk</code> por ordem de compra e resolve <code>data_sk</code> e <code>cliente_sk</code> de cada pedido.</td><td>Os dois fatos compartilham a mesma chave de pedido.</td></tr>
             <tr><td><code>fato_itens_pedido</code></td><td>112.650 itens com <code>pedido_sk</code>, <code>item_seq</code>, chaves das quatro dimensões, <code>status</code>, <code>preco</code> e <code>frete</code>.</td><td>Grão item; chave primária composta <code>(pedido_sk, item_seq)</code>.</td></tr>
             <tr><td><code>fato_pedidos</code></td><td>99.441 pedidos. Três CTEs agregam itens, pagamentos e a última avaliação; calcula <code>hora_compra</code>, <code>dias_entrega</code>, <code>dias_atraso</code> e <code>entregue_no_prazo</code>.</td><td>Armadilhas 3 e 4; pagamento e nota no grão certo.</td></tr>
-            <tr><td>Chaves estrangeiras e índices</td><td>Declara no banco as ligações da estrela e indexa as chaves mais usadas.</td><td>O desenho deixa de ser só um diagrama: o banco recusa uma chave órfã.</td></tr>
-            <tr><td>Bloco <code>do $$ … $$</code></td><td>Liga o RLS nas seis tabelas, cria política de leitura para <code>anon</code> e <code>authenticated</code> e concede <code>select</code>.</td><td>Na aula 9, a página lê pela API com a chave publicável; sem política de escrita, ninguém altera nada por ela.</td></tr>
-            <tr><td>Consulta final</td><td>Reconciliação de receita, itens e pedidos entre origem e estrela.</td><td>Prova de que o modelo não perdeu nem inventou nada.</td></tr>
+            <tr><td>Chaves estrangeiras e índices</td><td>Declara no banco as ligações da estrela e indexa as chaves mais usadas.</td><td>As ligações passam a ser verificadas pelo banco, que recusa chaves órfãs.</td></tr>
+            <tr><td>Bloco <code>do $$ … $$</code></td><td>Liga o RLS nas seis tabelas, cria política de leitura para <code>anon</code> e <code>authenticated</code> e concede <code>select</code>.</td><td>Na aula 9, a página lê os dados pela API com a chave publicável; como não há política de escrita, essa chave não permite alterações.</td></tr>
+            <tr><td>Consulta final</td><td>Reconciliação de receita, itens e pedidos entre origem e estrela.</td><td>Comprovação de que o modelo não perdeu nem duplicou registros.</td></tr>
           </tbody>
         </table>
-        <p>Três trechos merecem leitura atenta. O primeiro resolve a pessoa e o endereço:</p>
+        <p>Três trechos do script exigem leitura atenta. O primeiro resolve a pessoa e o endereço:</p>
         <div class="code-block"><span class="code-keyword">select distinct on</span> (c.customer_unique_id)
        c.customer_unique_id <span class="code-keyword">as</span> cliente_id, c.customer_city <span class="code-keyword">as</span> cidade, c.customer_state <span class="code-keyword">as</span> estado
 <span class="code-keyword">from</span> bruto.orders o
 <span class="code-keyword">join</span> bruto.customers c <span class="code-keyword">on</span> c.customer_id = o.customer_id
 <span class="code-keyword">order by</span> c.customer_unique_id, o.order_purchase_timestamp <span class="code-keyword">desc</span></div>
-        <p><code>distinct on</code> é um recurso do PostgreSQL: mantém a primeira linha de cada <code>customer_unique_id</code> segundo o <code>order by</code>. Como a ordem é pela data de compra decrescente, a primeira linha é o pedido mais recente. O segundo trecho escolhe uma avaliação por pedido com o mesmo mecanismo:</p>
+        <p><code>distinct on</code> é um recurso do PostgreSQL que mantém a primeira linha de cada <code>customer_unique_id</code> segundo o <code>order by</code>. Como a ordenação é pela data de compra decrescente, a primeira linha corresponde ao pedido mais recente. O segundo trecho escolhe uma avaliação por pedido com o mesmo mecanismo:</p>
         <div class="code-block"><span class="code-comment">-- 547 pedidos têm mais de uma avaliação: vale a última respondida.</span>
 <span class="code-keyword">select distinct on</span> (order_id) order_id, review_score <span class="code-keyword">as</span> nota_avaliacao
 <span class="code-keyword">from</span> bruto.order_reviews <span class="code-keyword">order by</span> order_id, review_answer_timestamp <span class="code-keyword">desc</span></div>
-        <p>O terceiro define o que é atraso, e é a origem de D3 no frame da turma:</p>
+        <p>O terceiro define o atraso e está na origem da âncora D3 do frame da turma:</p>
         <div class="code-block"><span class="code-keyword">case when</span> o.order_delivered_customer_date <span class="code-keyword">is null then null</span>
      <span class="code-keyword">else</span> (o.order_delivered_customer_date::date &lt;= o.order_estimated_delivery_date::date)::int <span class="code-keyword">end</span>
   <span class="code-keyword">as</span> entregue_no_prazo</div>
-        <p>Vale 1 quando a entrega chegou até a data estimada, 0 quando chegou depois e <code>null</code> quando não houve entrega. O <code>null</code> é deliberado: pedido cancelado não foi entregue no prazo nem com atraso, e contá-lo como 0 inflaria a taxa de atraso.</p>
+        <p>O valor é 1 quando a entrega chegou até a data estimada, 0 quando chegou depois e <code>null</code> quando não houve entrega. O <code>null</code> é deliberado, porque um pedido cancelado não foi entregue no prazo nem com atraso, e contá-lo como 0 inflaria a taxa de atraso.</p>
 
-        <h3>8.3 Execute o gabarito no SQL Editor</h3>
+        <h3>8.3 Execução do gabarito no SQL Editor</h3>
         <ol class="steps">
           <li>No Codespace, abra <code>materiais/aula-07/olist/estrela.sql</code>, selecione tudo (<code>Ctrl + A</code>) e copie.</li>
           <li>No Supabase, abra o <strong>SQL Editor</strong>, crie uma consulta nova, cole e clique em <strong>Run</strong>.</li>
-          <li>Se o editor avisar que a consulta contém operações destrutivas, confirme: o script apaga e recria somente as seis tabelas da estrela.</li>
-          <li>O resultado exibido é o da última instrução, a reconciliação.</li>
+          <li>Se o editor avisar que a consulta contém operações destrutivas, confirme, pois o script apaga e recria somente as seis tabelas da estrela.</li>
+          <li>O resultado exibido é o da última instrução, que faz a reconciliação.</li>
         </ol>
         <div class="code-block"><span class="code-keyword">select</span> (<span class="code-keyword">select</span> sum(price) <span class="code-keyword">from</span> bruto.order_items)          <span class="code-keyword">as</span> receita_bruto,
        (<span class="code-keyword">select</span> sum(preco) <span class="code-keyword">from</span> public.fato_itens_pedido)    <span class="code-keyword">as</span> receita_fato_itens,
@@ -721,7 +723,7 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
             <tr><td>Pedidos</td><td>99.441</td><td>99.441</td></tr>
           </tbody>
         </table>
-        <p>Um centavo de diferença não é arredondamento, porque os valores são <code>numeric</code> exatos: é sinal de junção que duplicou ou perdeu linhas. Pare e investigue antes de seguir. Depois, confira as seis tabelas e use a estrela pela primeira vez:</p>
+        <p>Os totais da origem e do modelo devem coincidir exatamente. Como os valores são <code>numeric</code> exatos, uma diferença, ainda que de um centavo, indica uma junção que duplicou ou perdeu linhas e deve ser investigada antes da etapa seguinte. Em seguida, confira as seis tabelas e faça a primeira consulta na estrela:</p>
         <div class="code-block"><span class="code-keyword">select</span> <span class="code-string">'dim_tempo'</span> <span class="code-keyword">as</span> tabela, count(*) <span class="code-keyword">as</span> linhas <span class="code-keyword">from</span> public.dim_tempo
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'dim_cliente'</span>, count(*) <span class="code-keyword">from</span> public.dim_cliente
 <span class="code-keyword">union all</span> <span class="code-keyword">select</span> <span class="code-string">'dim_produto'</span>, count(*) <span class="code-keyword">from</span> public.dim_produto
@@ -735,13 +737,13 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
 <span class="code-keyword">join</span> public.dim_cliente c <span class="code-keyword">on</span> c.cliente_sk = i.cliente_sk
 <span class="code-keyword">group by</span> c.regiao
 <span class="code-keyword">order by</span> receita <span class="code-keyword">desc</span>;</div>
-        <p>Contagens esperadas: dim_tempo 774 · dim_cliente 96.096 · dim_produto 32.951 · dim_vendedor 3.095 · fato_itens_pedido 112.650 · fato_pedidos 99.441. Na segunda consulta, some as cinco regiões: o total tem de dar 13.591.643,70. A consulta ainda não é resposta a nenhuma pergunta do Chief, porque não filtra status nem período; isso é trabalho das views da aula 8.</p>
-        <p>Por fim, abra o <strong>Table Editor</strong> no schema <code>public</code> e tire o print com as seis tabelas na lista lateral. Confira que a imagem não mostra nenhuma string de conexão.</p>
+        <p>Contagens esperadas: dim_tempo 774, dim_cliente 96.096, dim_produto 32.951, dim_vendedor 3.095, fato_itens_pedido 112.650 e fato_pedidos 99.441. Na segunda consulta, a soma das cinco regiões deve totalizar 13.591.643,70. Essa consulta ainda não responde a nenhuma pergunta do Chief, porque não filtra status nem período; esses filtros ficam a cargo das views da aula 8.</p>
+        <p>Por fim, abra o <strong>Table Editor</strong> no schema <code>public</code> e faça uma captura de tela com as seis tabelas na lista lateral, conferindo que a imagem não mostra nenhuma string de conexão.</p>
       </section>
 
       <section data-lesson-section="challenge">
         <h2>9. Desafio e entrega</h2>
-        <p>Crie a pasta <code>aula-07-seunome/</code> na raiz do seu fork com três arquivos. O frame do Miro é o artefato coletivo da turma e não precisa ser entregue individualmente.</p>
+        <p>Crie a pasta <code>aula-07-seunome/</code> na raiz do seu fork com três arquivos. O frame no Miro constitui o artefato coletivo da turma e não precisa ser entregue individualmente.</p>
         <h3>9.1 <code>DISCOVERY.md</code></h3>
         <div class="code-block"># Discovery do Olist · seu nome
 
@@ -784,41 +786,41 @@ Impacto para o Chief de Vendas: (qual pergunta ou decisão erraria)
 | Receita | | | |
 | Itens | | | |
 | Pedidos | | | |</div>
-        <h3>9.3 Print e publicação</h3>
-        <p>Salve o print do Table Editor como <code>aula-07-seunome/table-editor.png</code> e publique:</p>
+        <h3>9.3 Captura de tela e publicação</h3>
+        <p>Salve a captura do Table Editor como <code>aula-07-seunome/table-editor.png</code> e publique:</p>
         <div class="code-block">git add aula-07-seunome/
 git status   <span class="code-comment"># confira que nenhum arquivo contém senha ou string de conexão</span>
 git commit -m <span class="code-string">"Aula 07: discovery e modelo estrela do Olist no Supabase"</span>
 git push</div>
-        <p><strong>Critério de aceite:</strong> o <code>DISCOVERY.md</code> traz cinco armadilhas, cada uma com consulta e número que outra pessoa reproduz no próprio Supabase; pelo menos uma afirmação da IA aparece como derrubada ou ajustada, com a evidência; o <code>MODELO_ESTRELA.md</code> declara o grão dos dois fatos em uma frase e registra a reconciliação com receita de 13.591.643,70, 112.650 itens e 99.441 pedidos iguais na origem e na estrela; o print mostra as seis tabelas; nenhum arquivo, commit ou imagem contém senha ou string de conexão.</p>
+        <p><strong>Critério de aceite:</strong> o <code>DISCOVERY.md</code> traz cinco armadilhas, cada uma com consulta e número que outra pessoa reproduz no próprio Supabase; pelo menos uma afirmação da IA aparece como derrubada ou ajustada, com a evidência; o <code>MODELO_ESTRELA.md</code> declara o grão dos dois fatos em uma frase e registra a reconciliação com receita de 13.591.643,70, 112.650 itens e 99.441 pedidos iguais na origem e na estrela; a captura mostra as seis tabelas; nenhum arquivo, commit ou imagem contém senha ou string de conexão.</p>
       </section>
 
       <section data-lesson-section="checklist">
         <h2>10. Checklist de qualidade</h2>
         <ul>
-          <li>O frame da turma tem tarefa com quem, o quê, até quando e consequência.</li>
-          <li>Os passos do frame estão numerados em sequência, e o verde traz só fonte, grão e limitação.</li>
+          <li>A tarefa do frame da turma informa quem decide, o que decide, em que prazo e com que consequência.</li>
+          <li>Os passos do frame estão numerados em sequência, e os post-its verdes trazem apenas fonte, grão e limitação.</li>
           <li>Cada âncora tem os cinco campos, e o suporte na tela é um elemento concreto.</li>
           <li>O Codespace está no seu fork (<code>git remote -v</code>) e sincronizado.</li>
           <li>O projeto Supabase está na região São Paulo, e a senha está num gerenciador de senhas.</li>
           <li>A carga usou o Session pooler, e as oito contagens do bruto batem com o Excel.</li>
-          <li>Nenhum prompt recebeu dados ou string de conexão; só estrutura e resultados agregados.</li>
+          <li>Nenhum prompt recebeu dados ou string de conexão, apenas estrutura e resultados agregados.</li>
           <li>Cada hipótese da IA tem veredito sustentado por uma consulta executada.</li>
-          <li>A recompra usa <code>customer_unique_id</code>; a nota fica no grão do pedido.</li>
-          <li>A reconciliação fecha no centavo e nas contagens de itens e pedidos.</li>
+          <li>A recompra usa <code>customer_unique_id</code>, e a nota fica no grão do pedido.</li>
+          <li>A reconciliação coincide até o centavo e nas contagens de itens e pedidos.</li>
           <li>Commit e push feitos, sem segredo em nenhum arquivo.</li>
         </ul>
       </section>
 
       <section data-lesson-section="summary">
         <h2>11. Síntese</h2>
-        <p>O dashboard da aula 9 só merece a confiança do board se o fluxo e o modelo merecerem. Hoje construímos as duas bases. O fluxo de interação anotado mostra, antes de existir qualquer tela, em que passo a leitura do usuário ultrapassa o que o dado autoriza, e obriga a turma a dizer que elemento da tela fecha essa distância. A discovery transformou afirmações da IA em fatos verificados: 99.441 identificadores de cliente que são, na verdade, 96.096 pessoas; 547 pedidos com avaliação duplicada; 775 pedidos sem item; meses incompletos nas pontas. A modelagem dimensional gravou essas descobertas na estrutura, com dois fatos porque pagamento e avaliação vivem no grão do pedido. A reconciliação provou que nada se perdeu nem se duplicou.</p>
-        <p>O mecanismo comum às três partes é o mesmo: separar o que alguém afirma do que a evidência sustenta. No board, é o post-it rosa; no SQL Editor, é a consulta que derruba a hipótese; no modelo, é a soma que precisa fechar no centavo. Antes de sair, responda: qual pergunta do Chief teria recebido um número errado se você tivesse aceitado a primeira proposta da IA?</p>
+        <p>A confiabilidade do dashboard da aula 9 depende do fluxo anotado e do modelo construídos nesta aula. O fluxo de interação anotado indica, antes de existir qualquer tela, em que passo a leitura do usuário ultrapassa o que o dado autoriza, e exige que a turma defina o elemento da tela que corrige essa distância. A discovery converteu afirmações da IA em fatos verificados por consulta: 99.441 identificadores de cliente que correspondem a 96.096 pessoas, 547 pedidos com avaliação duplicada, 775 pedidos sem item e meses incompletos nas pontas do período. A modelagem dimensional registrou essas constatações na estrutura, com dois fatos porque pagamento e avaliação existem no grão do pedido. Por fim, a reconciliação comprovou que nenhum registro se perdeu nem foi duplicado.</p>
+        <p>As três partes compartilham um procedimento: separar o que se afirma do que a evidência sustenta. No quadro do Miro, esse procedimento aparece no post-it rosa; no SQL Editor, na consulta que confirma ou derruba a hipótese; no modelo, na soma que precisa coincidir até o centavo. Como verificação final, responda: qual pergunta do Chief teria recebido um número errado se a primeira proposta da IA tivesse sido aceita sem conferência?</p>
       </section>
 
       <section data-lesson-section="next-steps">
         <h2>12. Referências e continuidade</h2>
-        <p>Na aula 8 (30/09), a turma decompõe as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão, faz um brainstorming de fluxos no Miro, monta o fluxo anotado do dashboard a partir do template de hoje e traduz a raia do dado em views SQL no seu Supabase. Chegue com o projeto ativo, a estrela reconciliada e a senha no gerenciador.</p>
+        <p>Na aula 8 (30/09), a turma decompõe as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão, faz um brainstorming de fluxos no quadro do Miro, constrói o fluxo anotado do dashboard a partir do template desta aula e traduz a raia do dado em views SQL no Supabase de cada estudante. Chegue com o projeto Supabase ativo e a estrela reconciliada. Projetos gratuitos sem uso podem ser pausados pelo Supabase; por isso, abra o painel antes da aula. Mantenha a senha no gerenciador de senhas, fora do repositório.</p>
         <ul>
           <li><a href="https://supabase.com/docs/guides/database/connecting-to-postgres" target="_blank" rel="noopener noreferrer">Supabase: formas de conexão ao Postgres, incluindo Session pooler e IPv6</a>.</li>
           <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener noreferrer">Supabase: Row Level Security</a>, base da leitura pública da aula 9.</li>
@@ -831,7 +833,7 @@ git push</div>
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-07.html" class="btn btn-slides">📊 Ver Slides</a>
-        <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="btn btn-data">🧩 Board no Miro</a>
+        <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="btn btn-data">🧩 Quadro no Miro</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
