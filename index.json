@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-17",
+  "generated_at": "2026-09-26",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -50,11 +50,11 @@
       "materiais/aula-07/dados/olist_catalogo.xlsx",
       "materiais/aula-07/olist/carregar_olist.py",
       "materiais/aula-07/olist/estrela.sql",
-      "materiais/aula-08/olist/views.sql",
-      "materiais/aula-09/dashboard-referencia/index.html",
-      "materiais/aula-09/dashboard-referencia/app.js",
-      "materiais/aula-09/dashboard-referencia/style.css",
-      "materiais/aula-10/prompts-antigravity.md"
+      "materiais/aula-09/olist/views.sql",
+      "materiais/aula-10/dashboard-referencia/index.html",
+      "materiais/aula-10/dashboard-referencia/app.js",
+      "materiais/aula-10/dashboard-referencia/style.css",
+      "materiais/aula-11/prompts-antigravity.md"
     ],
     "live_activities": [
       "tbl/aula-06/index.html",
@@ -77,10 +77,10 @@
       "tests/e2e/aula-05.spec.js",
       "tests/e2e/aula-06.spec.js",
       "tests/e2e/aula-07.spec.js",
-      "tests/e2e/aula-08.spec.js",
       "tests/e2e/aula-09.spec.js",
       "tests/e2e/aula-10.spec.js",
-      "tests/test_aula_10_dataset.py",
+      "tests/e2e/aula-11.spec.js",
+      "tests/test_aula_11_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -474,6 +474,33 @@
     {
       "number": 8,
       "date": "30/09",
+      "theme": "Mentoria profissional",
+      "tag": "Mentoria",
+      "status": "complete",
+      "topics": [
+        "mentoria profissional"
+      ],
+      "objectives": [
+        "Discutir trajetória e desenvolvimento profissional com a turma"
+      ],
+      "slides": {
+        "path": "slides/aula-08.html",
+        "slide_count": 1,
+        "sections": []
+      },
+      "material": {
+        "path": "materiais/aula-08/index.html",
+        "section_count": 1,
+        "highlights": [
+          "Encontro de mentoria profissional, sem material de apoio nem entrega"
+        ],
+        "activity": "Mentoria profissional com a turma",
+        "deliverable": "Sem entrega"
+      }
+    },
+    {
+      "number": 9,
+      "date": "07/10",
       "theme": "Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard",
       "tag": "DataViz · Fluxo",
       "status": "complete",
@@ -497,7 +524,7 @@
         "Traduzir a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência"
       ],
       "slides": {
-        "path": "slides/aula-08.html",
+        "path": "slides/aula-09.html",
         "slide_count": 29,
         "sections": [
           "agenda",
@@ -510,7 +537,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-08/index.html",
+        "path": "materiais/aula-09/index.html",
         "section_count": 13,
         "highlights": [
           "As 10 perguntas do Chief decompostas em métrica, recorte, filtro, decisão e view",
@@ -522,12 +549,12 @@
           "Teste de uma view pela API REST do Supabase com curl e chave publicável"
         ],
         "activity": "Decompor as 10 perguntas do Chief de Vendas, conduzir brainstorming divergente e convergente no Miro, montar o fluxo anotado do dashboard com âncoras de divergência e traduzir a raia do dado em views no Supabase",
-        "deliverable": "aula-08-seunome/ESPECIFICACAO.md com uma linha por pergunta (decisão, view, colunas, visual, título que afirma, âncora tratada e suporte na tela), link do frame, views.sql do grupo e diferença encontrada em relação ao gabarito, commit e push"
+        "deliverable": "aula-09-seunome/ESPECIFICACAO.md com uma linha por pergunta (decisão, view, colunas, visual, título que afirma, âncora tratada e suporte na tela), link do frame, views.sql do grupo e diferença encontrada em relação ao gabarito, commit e push"
       }
     },
     {
-      "number": 9,
-      "date": "07/10",
+      "number": 10,
+      "date": "21/10",
       "theme": "Data Visualization III: Dashboard online com GitHub Pages e Supabase",
       "tag": "DataViz · Web",
       "status": "complete",
@@ -550,7 +577,7 @@
         "Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo"
       ],
       "slides": {
-        "path": "slides/aula-09.html",
+        "path": "slides/aula-10.html",
         "slide_count": 25,
         "sections": [
           "agenda",
@@ -563,10 +590,10 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-09/index.html",
+        "path": "materiais/aula-10/index.html",
         "section_count": 16,
         "highlights": [
-          "ESPECIFICACAO.md da aula 8 como contrato entre fluxo anotado e tela",
+          "ESPECIFICACAO.md da aula 9 como contrato entre fluxo anotado e tela",
           "Arquitetura GitHub Pages → navegador → API REST → views → esquema estrela com RLS",
           "Chave publicável × chave secreta e os limites da leitura pública",
           "fetch com apikey e Bearer, formatação pt-BR com Intl.NumberFormat e Chart.js com versão fixada no CDN",
@@ -576,12 +603,12 @@
           "Reconciliação tela × view e teste de leitura em voz alta por outro grupo"
         ],
         "activity": "Construir com IA agêntica o dashboard que lê as views do Supabase, publicá-lo no GitHub Pages do fork e submetê-lo a teste de leitura por outro grupo",
-        "deliverable": "aula-09-seunome/index.html publicado no GitHub Pages, README.md com URL, tabela de reconciliação, frases do teste de leitura e recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria, commit e push"
+        "deliverable": "aula-10-seunome/index.html publicado no GitHub Pages, README.md com URL, tabela de reconciliação, frases do teste de leitura e recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria, commit e push"
       }
     },
     {
-      "number": 10,
-      "date": "21/10",
+      "number": 11,
+      "date": "28/10",
       "theme": "Limpeza de dados: Preparando a base para análises",
       "tag": "Pandas",
       "status": "complete",
@@ -604,7 +631,7 @@
         "Defender quais análises gerenciais a base pode sustentar"
       ],
       "slides": {
-        "path": "slides/aula-10.html",
+        "path": "slides/aula-11.html",
         "slide_count": 24,
         "sections": [
           "agenda",
@@ -617,7 +644,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-10/index.html",
+        "path": "materiais/aula-11/index.html",
         "section_count": 20,
         "highlights": [
           "Base hospitalar sintética CC0 com 5.000 registros disponível para download",
@@ -631,8 +658,8 @@
       }
     },
     {
-      "number": 11,
-      "date": "28/10",
+      "number": 12,
+      "date": "04/11",
       "theme": "Fazendo previsões com IA: Vendas e Tendências",
       "tag": "ML · Regressão",
       "status": "complete",
@@ -652,7 +679,7 @@
         "Comunicar previsão como faixa e hipótese,  não certeza"
       ],
       "slides": {
-        "path": "slides/aula-11.html",
+        "path": "slides/aula-12.html",
         "slide_count": 12,
         "sections": [
           "agenda",
@@ -665,7 +692,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-11/index.html",
+        "path": "materiais/aula-12/index.html",
         "section_count": 7,
         "highlights": [
           "Atributos, pipelines e prevenção de vazamento temporal",
@@ -677,8 +704,8 @@
       }
     },
     {
-      "number": 12,
-      "date": "04/11",
+      "number": 13,
+      "date": "11/11",
       "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
       "tag": "Inferência",
       "status": "complete",
@@ -697,7 +724,7 @@
         "Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas"
       ],
       "slides": {
-        "path": "slides/aula-12.html",
+        "path": "slides/aula-13.html",
         "slide_count": 13,
         "sections": [
           "agenda",
@@ -710,7 +737,7 @@
         ]
       },
       "material": {
-        "path": "materiais/aula-12/index.html",
+        "path": "materiais/aula-13/index.html",
         "section_count": 7,
         "highlights": [
           "Cadeia entre contexto,  desenho,  teste e ação",
@@ -721,8 +748,8 @@
       }
     },
     {
-      "number": 13,
-      "date": "11/11",
+      "number": 14,
+      "date": "18/11",
       "theme": "Auditoria e forense de dados: anomalias, riscos e fraudes",
       "tag": "Auditoria · Forense",
       "status": "complete",
@@ -742,50 +769,8 @@
         "Documentar achados sem ultrapassar a evidência"
       ],
       "slides": {
-        "path": "slides/aula-13.html",
-        "slide_count": 13,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-13/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Regras de negócio, métodos estatísticos e custo operacional dos falsos positivos",
-          "Fila de auditoria combinando limite por fornecedor e escore IsolationForest",
-          "Hash SHA-256 da fonte e rede de transações entre contas",
-          "Dossiê do caso prioritário com inventário, consultas, hipóteses alternativas e lacunas"
-        ],
-        "activity": "Combinar regra e escore para revisar alertas de pagamentos e reconstruir o caso prioritário preservando a evidência",
-        "deliverable": "Ranking com motivo, valor em risco, evidência e revisão, e dossiê do caso prioritário com inventário, consultas, achados, alternativas e lacunas"
-      }
-    },
-    {
-      "number": 14,
-      "date": "18/11",
-      "theme": "IA aplicada à estratégia e tomada de decisão",
-      "tag": "IA · Estratégia",
-      "status": "complete",
-      "topics": [
-        "inteligência artificial",
-        "estratégia",
-        "decisão"
-      ],
-      "objectives": [
-        "Estruturar uma decisão em alternativas,  critérios e cenários",
-        "Combinar previsão e julgamento sem automatizar responsabilidade",
-        "Testar robustez da recomendação a mudanças de premissas"
-      ],
-      "slides": {
         "path": "slides/aula-14.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -800,28 +785,30 @@
         "path": "materiais/aula-14/index.html",
         "section_count": 7,
         "highlights": [
-          "Matriz de decisão,  cenários e utilidade",
-          "Sensibilidade,  premissas e governança"
+          "Regras de negócio, métodos estatísticos e custo operacional dos falsos positivos",
+          "Fila de auditoria combinando limite por fornecedor e escore IsolationForest",
+          "Hash SHA-256 da fonte e rede de transações entre contas",
+          "Dossiê do caso prioritário com inventário, consultas, hipóteses alternativas e lacunas"
         ],
-        "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
-        "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão"
+        "activity": "Combinar regra e escore para revisar alertas de pagamentos e reconstruir o caso prioritário preservando a evidência",
+        "deliverable": "Ranking com motivo, valor em risco, evidência e revisão, e dossiê do caso prioritário com inventário, consultas, achados, alternativas e lacunas"
       }
     },
     {
       "number": 15,
       "date": "25/11",
-      "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
-      "tag": "Estudo de Caso",
+      "theme": "IA aplicada à estratégia e tomada de decisão",
+      "tag": "IA · Estratégia",
       "status": "complete",
       "topics": [
-        "recursos humanos",
-        "análise de dados",
-        "estudo de caso"
+        "inteligência artificial",
+        "estratégia",
+        "decisão"
       ],
       "objectives": [
-        "Definir indicadores de pessoas sem reduzir indivíduos a números",
-        "Investigar rotatividade com recortes e contexto",
-        "Propor intervenção mensurável e eticamente defensável"
+        "Estruturar uma decisão em alternativas,  critérios e cenários",
+        "Combinar previsão e julgamento sem automatizar responsabilidade",
+        "Testar robustez da recomendação a mudanças de premissas"
       ],
       "slides": {
         "path": "slides/aula-15.html",
@@ -840,6 +827,46 @@
         "path": "materiais/aula-15/index.html",
         "section_count": 7,
         "highlights": [
+          "Matriz de decisão,  cenários e utilidade",
+          "Sensibilidade,  premissas e governança"
+        ],
+        "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
+        "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão"
+      }
+    },
+    {
+      "number": 16,
+      "date": "02/12",
+      "theme": "Estudo de Caso: Análise de dados aplicada ao RH",
+      "tag": "Estudo de Caso",
+      "status": "complete",
+      "topics": [
+        "recursos humanos",
+        "análise de dados",
+        "estudo de caso"
+      ],
+      "objectives": [
+        "Definir indicadores de pessoas sem reduzir indivíduos a números",
+        "Investigar rotatividade com recortes e contexto",
+        "Propor intervenção mensurável e eticamente defensável"
+      ],
+      "slides": {
+        "path": "slides/aula-16.html",
+        "slide_count": 11,
+        "sections": [
+          "agenda",
+          "challenge",
+          "concepts",
+          "guided-practice",
+          "next-steps",
+          "objectives",
+          "summary"
+        ]
+      },
+      "material": {
+        "path": "materiais/aula-16/index.html",
+        "section_count": 7,
+        "highlights": [
           "Rotatividade,  coortes e denominadores",
           "Privacidade,  equidade e limites causais"
         ],
@@ -848,8 +875,8 @@
       }
     },
     {
-      "number": 16,
-      "date": "02/12",
+      "number": 17,
+      "date": "09/12",
       "theme": "Estudo de Caso: Previsão de caixa e de demanda",
       "tag": "Estudo de Caso",
       "status": "complete",
@@ -867,49 +894,8 @@
         "Converter erro previsto em estoque, capacidade e premissas auditáveis"
       ],
       "slides": {
-        "path": "slides/aula-16.html",
-        "slide_count": 13,
-        "sections": [
-          "agenda",
-          "challenge",
-          "concepts",
-          "guided-practice",
-          "next-steps",
-          "objectives",
-          "summary"
-        ]
-      },
-      "material": {
-        "path": "materiais/aula-16/index.html",
-        "section_count": 7,
-        "highlights": [
-          "Baseline sazonal, validação em janelas sucessivas e custo assimétrico do erro",
-          "MAE do baseline de 7 dias comparado à média móvel de 28 dias",
-          "Competência × pagamento, inadimplência e atraso como cenários de caixa",
-          "Saldo diário projetado em três cenários de atraso nos recebimentos"
-        ],
-        "activity": "Comparar baseline semanal e média móvel para a demanda, propor estoque de segurança e projetar 60 dias de caixa em três cenários",
-        "deliverable": "Notebook com avaliação temporal da demanda, recomendação de capacidade com faixa de incerteza e quadro executivo de caixa com premissas, menor saldo e ação"
-      }
-    },
-    {
-      "number": 17,
-      "date": "09/12",
-      "theme": "Projeto Integrador: Resolvendo um problema de negócio real",
-      "tag": "Projeto",
-      "status": "complete",
-      "topics": [
-        "projeto integrador",
-        "problema de negócio"
-      ],
-      "objectives": [
-        "Delimitar problema,  usuário e decisão do projeto",
-        "Construir análise reproduzível com evidências",
-        "Planejar entrega com escopo,  riscos e critérios de sucesso"
-      ],
-      "slides": {
         "path": "slides/aula-17.html",
-        "slide_count": 11,
+        "slide_count": 13,
         "sections": [
           "agenda",
           "challenge",
@@ -924,28 +910,29 @@
         "path": "materiais/aula-17/index.html",
         "section_count": 7,
         "highlights": [
-          "Canvas do problema,  escopo mínimo e critérios de aceite",
-          "Matriz de riscos,  revisão cruzada e reprodutibilidade"
+          "Baseline sazonal, validação em janelas sucessivas e custo assimétrico do erro",
+          "MAE do baseline de 7 dias comparado à média móvel de 28 dias",
+          "Competência × pagamento, inadimplência e atraso como cenários de caixa",
+          "Saldo diário projetado em três cenários de atraso nos recebimentos"
         ],
-        "activity": "Produzir o primeiro resultado verificável do projeto e receber revisão",
-        "deliverable": "Repositório executável, dados documentados, análise, visual e backlog"
+        "activity": "Comparar baseline semanal e média móvel para a demanda, propor estoque de segurança e projetar 60 dias de caixa em três cenários",
+        "deliverable": "Notebook com avaliação temporal da demanda, recomendação de capacidade com faixa de incerteza e quadro executivo de caixa com premissas, menor saldo e ação"
       }
     },
     {
       "number": 18,
       "date": "16/12",
-      "theme": "Apresentação de resultados e recomendações executivas",
-      "tag": "Apresentação",
+      "theme": "Projeto Integrador: Resolvendo um problema de negócio real",
+      "tag": "Projeto",
       "status": "complete",
       "topics": [
-        "apresentação",
-        "resultados",
-        "recomendações executivas"
+        "projeto integrador",
+        "problema de negócio"
       ],
       "objectives": [
-        "Selecionar evidências essenciais para uma audiência executiva",
-        "Estruturar apresentação em decisão,  evidência e recomendação",
-        "Responder objeções com limites e próximos testes"
+        "Delimitar problema,  usuário e decisão do projeto",
+        "Construir análise reproduzível com evidências",
+        "Planejar entrega com escopo,  riscos e critérios de sucesso"
       ],
       "slides": {
         "path": "slides/aula-18.html",
@@ -964,27 +951,28 @@
         "path": "materiais/aula-18/index.html",
         "section_count": 7,
         "highlights": [
-          "Narrativa executiva orientada à decisão",
-          "Gráficos com mensagem,  recomendação e ensaio"
+          "Canvas do problema,  escopo mínimo e critérios de aceite",
+          "Matriz de riscos,  revisão cruzada e reprodutibilidade"
         ],
-        "activity": "Converter o projeto em uma fala de cinco minutos e ensaiar objeções",
-        "deliverable": "Deck, resumo de uma página e roteiro de respostas"
+        "activity": "Produzir o primeiro resultado verificável do projeto e receber revisão",
+        "deliverable": "Repositório executável, dados documentados, análise, visual e backlog"
       }
     },
     {
       "number": 19,
       "date": "23/12",
-      "theme": "Apresentação final de projetos",
+      "theme": "Apresentação de resultados e recomendações executivas",
       "tag": "Apresentação",
       "status": "complete",
       "topics": [
-        "apresentação final",
-        "projetos"
+        "apresentação",
+        "resultados",
+        "recomendações executivas"
       ],
       "objectives": [
-        "Defender escolhas metodológicas com clareza e honestidade",
-        "Avaliar projetos com critérios comuns e feedback acionável",
-        "Consolidar aprendizados e plano de evolução"
+        "Selecionar evidências essenciais para uma audiência executiva",
+        "Estruturar apresentação em decisão,  evidência e recomendação",
+        "Responder objeções com limites e próximos testes"
       ],
       "slides": {
         "path": "slides/aula-19.html",
@@ -1003,11 +991,11 @@
         "path": "materiais/aula-19/index.html",
         "section_count": 7,
         "highlights": [
-          "Defesa profissional,  rubrica e feedback acionável",
-          "Reprodutibilidade,  limitações e continuidade"
+          "Narrativa executiva orientada à decisão",
+          "Gráficos com mensagem,  recomendação e ensaio"
         ],
-        "activity": "Apresentar o projeto, responder à banca e priorizar feedback",
-        "deliverable": "Repositório final, apresentação, resumo executivo e retrospectiva"
+        "activity": "Converter o projeto em uma fala de cinco minutos e ensaiar objeções",
+        "deliverable": "Deck, resumo de uma página e roteiro de respostas"
       }
     }
   ]

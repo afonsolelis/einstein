@@ -7,42 +7,86 @@
   <title>Material · 09</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-    .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+    .container { max-width: 1100px; width: 100%; min-width: 0; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+    .header .subtitle { margin: 0.8rem 0 0; color: #64748b; font-size: 1.1rem; }
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+    h4 { color: #1a2f5e; font-size: 1.1rem; margin: 2rem 0 0.8rem; }
+    a { color: #1f6fb2; overflow-wrap: anywhere; }
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
-    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
-    .code-block { background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.75rem 0.9rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { background: #f4f8fb; color: #1a2f5e; }
+    td code, th code { white-space: nowrap; }
+
+    code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; font-variant-ligatures: none; }
+
+    .code-block { font-variant-ligatures: none; white-space: pre; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
+    .code-block.wrap { white-space: pre-wrap; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+    .code-wrap { position: relative; }
+    .code-wrap .code-block { padding-top: 3.2rem; }
+    .copy-btn { position: absolute; top: 0.7rem; right: 0.7rem; z-index: 1; padding: 0.35rem 0.8rem; border: 1px solid #cfe3f0; border-radius: 8px; background: #ffffff; color: #1f6fb2; font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .copy-btn:hover { background: #eef6fb; }
+    .copy-btn:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+    .alert-box p + p { margin-top: 0.6rem; }
+
+    .view-card { margin: 2.5rem 0; padding: 1.6rem 1.8rem; border: 1px solid #e2ebf2; border-radius: 14px; background: #fbfdff; }
+    .view-card h3 { margin-top: 0; }
+    .view-card dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.5rem 1rem; margin: 0 0 1rem; }
+    .view-card dt { color: #1a2f5e; font-weight: 800; }
+    .view-card dd { margin: 0; }
+    .view-card .code-block { margin: 1rem 0; }
+    .ref { padding: 0.8rem 1rem; border-left: 4px solid #16a34a; border-radius: 0 10px 10px 0; background: #f0fdf4; color: #14532d; }
+    .ref strong { color: #14532d; }
+
+    .figura { margin: 2rem 0; padding: 1.5rem 1rem; border: 1px solid #e2ebf2; border-radius: 12px; background: #ffffff; }
+    .figura figcaption { margin: 1rem 0 0; color: #64748b; font-size: 0.92rem; line-height: 1.6; }
+    .flow-wrap { overflow-x: auto; }
+    .flow-svg { display: block; width: 100%; min-width: 0; height: auto; }
+    .flow-svg text { font-family: 'Outfit', system-ui, sans-serif; }
+    .flow-svg .task-bg { fill: #e0f2fe; stroke: #bae6fd; }
+    .flow-svg .task-text { fill: #1a2f5e; }
+    .flow-svg .lane-bg { fill: #f8fafc; stroke: #e2ebf2; }
+    .flow-svg .lane-label { fill: #1a2f5e; }
+    .flow-svg .pi { stroke: rgba(15, 23, 42, 0.12); }
+    .flow-svg .pi-text { fill: #1e293b; }
+    .flow-svg .flow-arrow, .flow-svg .flow-link { stroke: #64748b; }
+    .flow-svg .flow-arrowhead { fill: #64748b; }
+    .flow-svg .flow-note { fill: #64748b; }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin-top: 1rem; font-size: 0.92rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(15,23,42,0.15); }
+
+    .miro-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border-radius: 10px; background: #fef9c3; border: 1px solid #fde68a; color: #713f12; font-weight: 700; text-decoration: none; }
+    .miro-btn:hover { background: #fef08a; }
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
@@ -57,18 +101,26 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-miro { background: #fef9c3; color: #713f12; border-color: #fde68a; }
+    .floating-nav .nav-miro:hover { background: #fef08a; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
     body { padding-top: 6rem; }
 
     @media (max-width: 768px) {
-      .header, .content { padding: 2.5rem; }
+      .header, .content { padding: 2rem 1.25rem; }
       .actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
+      .code-block { font-size: 0.8rem; padding: 1rem; }
+      .code-wrap .code-block { padding-top: 2.8rem; }
+      .view-card { padding: 1.1rem 1rem; }
+      .view-card dl { grid-template-columns: 1fr; gap: 0.1rem; }
+      .view-card dd { margin-bottom: 0.6rem; }
+      .flow-svg { width: 760px; min-width: 760px; }
       .floating-nav { top: 0.6rem; gap: 0.35rem; padding: 0.35rem; }
       .floating-nav a, .floating-nav button { width: auto; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
-      body { padding-top: 4.75rem; }
+      body { padding: 4.75rem 0.5rem 2rem; }
     }
 
     @media (max-width: 480px) {
@@ -77,65 +129,19 @@
     }
 
     @media print {
-      body { background: white; padding: 0; display: block; font-size: 12pt; }
+      body { background: white; padding: 0 !important; display: block; font-size: 12pt; }
       .container { box-shadow: none; border: none; max-width: 100%; border-radius: 0; }
       .header, .content { padding: 1rem 0; }
-      .actions, .btn-print, .btn-home, .btn-slides, .floating-nav { display: none !important; }
-      body { padding-top: 0 !important; }
+      .actions, .btn-print, .btn-home, .btn-slides, .floating-nav, .copy-btn { display: none !important; }
       h1, h2, h3 { color: black !important; break-after: avoid; }
       .badge { border: 1px solid #ccc; color: black; background: white; }
-      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; }
+      .code-block { background: #f9f9f9; border: 1px solid #ccc; border-left: 4px solid black; break-inside: avoid; white-space: pre-wrap; }
+      .code-wrap .code-block { padding-top: 1rem; }
       .alert-box { background: white; border: 1px solid #ccc; border-left: 4px solid black; }
+      .figura, .view-card { break-inside: avoid; border: 1px solid #ccc; }
+      .flow-svg { width: 100%; min-width: 0; }
       p, li { color: black; }
       @page { margin: 2cm; }
-    }
-
-    a { color: #1f6fb2; }
-    .header .tema { margin: 0.8rem 0 0; color: #64748b; font-size: 1.05rem; font-weight: 600; }
-    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
-    th, td { padding: 0.75rem 0.9rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
-    th { background: #f4f8fb; color: #1a2f5e; }
-    .code-block { font-variant-ligatures: none; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.92rem; }
-    ol .code-block { margin: 0.8rem 0; }
-    .prompt-wrap { position: relative; margin: 2rem 0; }
-    .prompt-wrap .code-block { margin: 0; padding-top: 3.2rem; }
-    .copy-prompt { position: absolute; top: 0.7rem; right: 0.8rem; padding: 0.45rem 0.85rem; border: 1px solid rgba(75, 196, 232, 0.4); border-radius: 8px; color: #1f6fb2; background: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 600; cursor: pointer; }
-    .copy-prompt:hover { background: #eef6fb; }
-    .copy-prompt:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
-    .figura { margin: 2rem 0; padding: 1.5rem 1rem; border: 1px solid #e2ebf2; border-radius: 12px; background: #ffffff; }
-    .figura svg { display: block; width: 100%; height: auto; margin: 0 auto 1rem; }
-    .figura .arq-v { display: none; max-width: 330px; }
-    .figura figcaption { margin: 0; color: #64748b; font-size: 0.9rem; line-height: 1.6; }
-    .figura .caixa { fill: #f4f8fb; stroke: #9cc7e4; stroke-width: 1.5; }
-    .figura .caixa-nav { fill: #e6faf6; stroke: #00a389; }
-    .figura .titulo { fill: #1a2f5e; font: 700 17px 'Outfit', system-ui, sans-serif; }
-    .figura .sub { fill: #475569; font: 400 13px 'Outfit', system-ui, sans-serif; }
-    .figura .mono { fill: #1f6fb2; font: 400 12px 'Fira Code', monospace; }
-    .figura .num { fill: #ffffff; font: 700 13px 'Outfit', system-ui, sans-serif; }
-    .figura .bola { fill: #00a389; }
-    .figura .seta { stroke: #1f6fb2; stroke-width: 2; fill: none; }
-    .figura .rotulo { fill: #334155; font: 600 12px 'Outfit', system-ui, sans-serif; }
-    .figura .bloqueio { stroke: #dc2626; stroke-width: 2; }
-    .figura .bloqueio-texto { fill: #b91c1c; font: 600 12px 'Outfit', system-ui, sans-serif; }
-    .checklist { list-style: none; padding-left: 0; }
-    .checklist li { position: relative; padding-left: 2rem; }
-    .checklist li::before { content: '☐'; position: absolute; left: 0; top: 0.35rem; color: #00a3d9; font-size: 1.1rem; }
-    @media (max-width: 768px) {
-      .code-block { font-size: 0.82rem; padding: 1rem; }
-      .figura .arq-h { display: none; }
-      .figura .arq-v { display: block; }
-      .copy-prompt { top: 0.5rem; right: 0.5rem; font-size: 0.85rem; }
-    }
-    @media (max-width: 480px) {
-      .header, .content { padding: 1.5rem 1.1rem; }
-      h2 { font-size: 1.6rem; }
-      th, td { padding: 0.55rem 0.6rem; font-size: 0.9rem; }
-    }
-    @media print {
-      .copy-prompt { display: none; }
-      .figura .arq-h { display: block !important; }
-      .figura .arq-v { display: none !important; }
-      table { display: table; }
     }
   </style>
   <script src="../../assets/pdf-export.js" defer></script>
@@ -144,539 +150,747 @@
   <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-09.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
-    <a href="dashboard-referencia/index.html" class="nav-slides" title="Abrir o dashboard de referência">📈 <span class="nav-label">Dashboard</span></a>
+    <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="nav-miro" title="Abrir o quadro da turma no Miro">🧩 <span class="nav-label">Miro</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 09 · 07/10</div>
-      <h1>Dashboard online: GitHub Pages lendo o Supabase</h1>
-      <p class="tema">Data Visualization III · DataViz · Web</p>
+      <h1>Fluxo do dashboard e views SQL das 10 perguntas</h1>
+      <p class="subtitle">Data Visualization II: brainstorming das perguntas de negócio e fluxo de interação do dashboard</p>
     </div>
 
     <div class="content">
-      <p class="desc">O Chief de Vendas da Olist apresentará ao board as estratégias comerciais de 2019, e cada estratégia precisa vir sustentada por números. Esta aula encerra a sequência iniciada nas aulas 7 e 8. Na aula 7, os dados brutos do Olist foram carregados no Supabase de cada estudante e modelados como um esquema estrela reconciliado, e a turma construiu no quadro do Miro o template do fluxo de interação anotado. Na aula 8, as dez perguntas do Chief foram decompostas no fluxo de interação anotado do dashboard, com âncoras D1 a Dn registradas nos cinco campos, e cada pergunta passou a ter uma view conferida contra a resposta de referência. Resta a parte que o board efetivamente vê: uma tela que qualquer pessoa abre no celular, lê sem ajuda e que busca os números no banco no momento da leitura. Nesta aula, essa tela é construída com um agente de IA, revisada pelo grupo, publicada no GitHub Pages do fork e reconciliada, número a número, com as views.</p>
-      <p>Para acompanhar a aula, cada estudante precisa ter à mão os produtos das aulas anteriores: a <code>ESPECIFICACAO.md</code> e o <code>views.sql</code> do grupo, na pasta <code>aula-08-seunome</code>; o frame do dashboard no quadro do Miro, com as âncoras registradas; as 11 views do gabarito no Supabase, com a conferência da aula 8 retornando dez linhas <code>confere = true</code>; e a Project URL e a chave publicável do projeto.</p>
+      <p class="desc">O Chief de Vendas da Olist precisa apresentar ao board as estratégias comerciais de 2019, e cada estratégia deve vir sustentada por dados. Esta aula continua diretamente a aula 7, na qual cada estudante carregou os dados brutos do Olist no próprio Supabase, construiu e reconciliou o esquema estrela e, com a turma, montou no quadro do Miro o frame modelo do fluxo de interação anotado. Nesta aula, a turma decide o que o dashboard vai mostrar, em que ordem e com que ressalvas, antes de desenhar qualquer gráfico. O percurso parte das 10 perguntas do Chief, passa por um brainstorming cronometrado no quadro do Miro, produz o fluxo de interação anotado do dashboard e termina em 10 views SQL conferidas contra números de referência. Essas views constituem o contrato que a aula 10 consome pela API REST.</p>
+
+      <div class="alert-box">
+        <h4>O que precisa estar pronto desde a aula 7</h4>
+        <ul>
+          <li>Projeto Supabase ativo. Projetos gratuitos sem uso podem ser pausados, por isso convém abrir o painel antes da aula.</li>
+          <li>Esquema estrela reconciliado: a última consulta de <a href="../aula-07/olist/estrela.sql">materiais/aula-07/olist/estrela.sql</a> retorna R$ 13.591.643,70 em <code>bruto.order_items</code>, <code>fato_itens_pedido</code> e <code>fato_pedidos</code>.</li>
+          <li>Frame da turma no quadro do Miro, com o formato do fluxo de interação anotado.</li>
+          <li><code>DISCOVERY.md</code> e <code>MODELO_ESTRELA.md</code> na pasta <code>aula-07-seunome/</code>, com commit e push no seu fork.</li>
+        </ul>
+      </div>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
         <ul>
-          <li>Construir com IA agêntica um dashboard HTML que consome as views do Supabase pela API REST.</li>
-          <li>Implementar na tela os suportes decididos no fluxo anotado: título que afirma, unidade, período e nota de origem.</li>
-          <li>Publicar o dashboard no GitHub Pages e verificar que ele funciona fora do Codespace.</li>
-          <li>Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo.</li>
+          <li>Decompor as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão.</li>
+          <li>Conduzir um brainstorming divergente e convergente de fluxos de navegação no quadro do Miro.</li>
+          <li>Construir o fluxo de interação anotado do dashboard com âncoras de divergência registradas.</li>
+          <li>Traduzir a raia do dado em views SQL no Supabase e conferir cada view contra o número de referência.</li>
         </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O case e onde estamos na sequência</h2>
+        <p>As aulas 7, 8 e 9 formam um único case. A turma atua como a equipe de dados responsável por sustentar as estratégias comerciais que o Chief de Vendas vai apresentar ao board, e cada aula entrega um artefato consumido pela seguinte:</p>
         <table>
-          <thead><tr><th>Horário</th><th>Atividade</th><th>Produto</th></tr></thead>
+          <thead><tr><th>Aula</th><th>Pergunta que responde</th><th>Artefato</th></tr></thead>
           <tbody>
-            <tr><td>19:00</td><td>Retomada das aulas 7 e 8 e da especificação como contrato</td><td>Cada grupo com a sua <code>ESPECIFICACAO.md</code> aberta</td></tr>
-            <tr><td>19:10</td><td>Arquitetura, chave publicável e chave secreta</td><td>Project URL e chave publicável à mão</td></tr>
-            <tr><td>19:30</td><td>Construção com o Copilot em modo agente</td><td>Pasta <code>aula-09-seunome</code> com os quatro arquivos</td></tr>
-            <tr><td>20:30</td><td>Intervalo</td><td>—</td></tr>
-            <tr><td>20:40</td><td>Revisão humana do diff</td><td>Painel sem número digitado, com carregamento e erro</td></tr>
-            <tr><td>21:05</td><td>Publicação no GitHub Pages</td><td>URL aberta no celular</td></tr>
-            <tr><td>21:20</td><td>Teste de leitura em voz alta por outro grupo</td><td>Frases literais e ajustes</td></tr>
-            <tr><td>21:40</td><td>Recomendação ao Chief de Vendas e síntese da sequência</td><td><code>README.md</code> completo</td></tr>
+            <tr><td>7 · 23/09</td><td>Os dados do Olist são confiáveis e estão modelados para análise?</td><td>Projeto Supabase com o schema <code>bruto</code> e o esquema estrela; frame modelo do fluxo anotado no quadro do Miro</td></tr>
+            <tr><td>9 · 07/10 (esta aula)</td><td>O que o dashboard precisa mostrar, em que ordem, e o que ele não pode deixar o Chief concluir?</td><td>Fluxo anotado do dashboard, <code>ESPECIFICACAO.md</code> e 10 views conferidas</td></tr>
+            <tr><td>10 · 21/10</td><td>O painel funciona fora do Codespace e lê os números certos?</td><td>Dashboard HTML no GitHub Pages lendo as views pela API REST</td></tr>
+          </tbody>
+        </table>
+        <p>O esquema estrela que você reconciliou na aula 7 tem dois fatos e quatro dimensões. <code>fato_itens_pedido</code> tem grão de um item vendido e carrega <code>preco</code> e <code>frete</code>; <code>fato_pedidos</code> tem grão de um pedido e carrega o que só existe por pedido, como <code>hora_compra</code>, <code>entregue_no_prazo</code>, <code>dias_entrega</code> e <code>nota_avaliacao</code>. As dimensões são <code>dim_tempo</code>, <code>dim_cliente</code> (uma linha por pessoa, ou seja, por <code>customer_unique_id</code>), <code>dim_produto</code> e <code>dim_vendedor</code>. O gabarito está em <a href="../aula-07/olist/estrela.sql">materiais/aula-07/olist/estrela.sql</a>.</p>
+        <p>Duas convenções valem para as 10 perguntas e para as três aulas. A receita é a soma do preço dos itens, sem frete, de pedidos com status <code>delivered</code>. O período vai de janeiro de 2017 a agosto de 2018, porque os meses de 2016 e setembro e outubro de 2018 estão incompletos na base (setembro de 2018 tem 16 pedidos), como a discovery da aula 7 mostrou. Com essas duas regras, a receita do período é R$ 13.181.027,13 em 96.211 pedidos. Esse total difere dos R$ 13.591.643,70 reconciliados na aula 7 porque aquele valor soma os itens de todos os status e de todo o período da base. Uma view que some receita e não chegue a R$ 13.181.027,13 alterou uma das convenções, e a alteração precisa ser identificada.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. As 10 perguntas decompostas</h2>
+        <p>Uma pergunta de negócio só vira número verificável quando cinco elementos estão explícitos: a <strong>métrica</strong> (o que se calcula), o <strong>recorte</strong> (por qual dimensão), o <strong>período</strong>, o <strong>filtro</strong> (o que entra e o que fica de fora) e a <strong>decisão</strong> que o número vai orientar. Na ausência desses elementos, dois grupos podem escrever “receita por estado” e chegar a números diferentes, ambos defensáveis. A decisão integra a lista porque indica quando a resposta é suficiente.</p>
+        <table>
+          <thead><tr><th>#</th><th>Pergunta</th><th>Métrica</th><th>Recorte</th><th>Filtro (além de período e status entregue)</th><th>Decisão</th><th>View</th></tr></thead>
+          <tbody>
+            <tr><td>P01</td><td>Como evoluíram receita e pedidos mês a mês?</td><td>receita, pedidos, ticket médio</td><td>mês</td><td>nenhum</td><td>meta e ritmo de 2019</td><td><code>vw_p01_receita_mensal</code></td></tr>
+            <tr><td>P02</td><td>Em que dia da semana e faixa de horário o cliente compra?</td><td>pedidos</td><td>dia da semana × faixa de horário</td><td>nenhum</td><td>calendário de campanhas</td><td><code>vw_p02_dia_hora</code></td></tr>
+            <tr><td>P03</td><td>Quais 10 categorias concentram a receita e qual o ticket de cada?</td><td>receita, participação, ticket</td><td>categoria</td><td>10 maiores por receita</td><td>onde concentrar o mix</td><td><code>vw_p03_top_categorias</code></td></tr>
+            <tr><td>P04</td><td>Quais categorias mais cresceram de jan–ago/17 para jan–ago/18?</td><td>crescimento % da receita</td><td>categoria</td><td>jan–ago de cada ano; base ≥ R$ 50 mil em 2017</td><td>apostas de crescimento</td><td><code>vw_p04_crescimento_categorias</code></td></tr>
+            <tr><td>P05</td><td>Como a receita se distribui por estado do cliente?</td><td>receita, participação</td><td>estado do cliente</td><td>nenhum</td><td>expansão fora de SP</td><td><code>vw_p05_receita_estado</code></td></tr>
+            <tr><td>P06</td><td>Quanto o frete pesa sobre o preço em cada região?</td><td>frete ÷ preço, frete médio por item</td><td>região do cliente</td><td>nenhum</td><td>subsídio de frete</td><td><code>vw_p06_frete_regiao</code></td></tr>
+            <tr><td>P07</td><td>Em que estados mais se entrega com atraso?</td><td>% de entregas após a data estimada</td><td>estado do cliente</td><td>com data de entrega; estados com ≥ 500 entregas</td><td>promessa de prazo por estado</td><td><code>vw_p07_atraso_estado</code></td></tr>
+            <tr><td>P08</td><td>O atraso derruba a nota do cliente?</td><td>nota média, % de notas 1 e 2</td><td>no prazo × com atraso</td><td>pedidos avaliados e com data de entrega</td><td>custo comercial do atraso</td><td><code>vw_p08_nota_prazo</code></td></tr>
+            <tr><td>P09</td><td>Quantos clientes voltam a comprar?</td><td>% de clientes com mais de um pedido</td><td>nenhum (total)</td><td>cliente = pessoa (<code>customer_unique_id</code>)</td><td>programa de fidelização</td><td><code>vw_p09_recompra</code></td></tr>
+            <tr><td>P10</td><td>Quanto a receita depende dos maiores vendedores?</td><td>participação na receita</td><td>decil de vendedores por receita</td><td>nenhum</td><td>captação e retenção de sellers</td><td><code>vw_p10_concentracao_vendedores</code></td></tr>
           </tbody>
         </table>
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>2. Da especificação à tela</h2>
-        <p>Um dashboard costuma nascer ao contrário: alguém abre a ferramenta, escolhe gráficos que parecem bons e, no fim, procura uma pergunta que eles respondam. O resultado é uma coleção de gráficos sem argumento que os conecte. Na aula 8, essa ordem foi invertida: primeiro a decisão do Chief, depois o fluxo de interação anotado, as âncoras de divergência (os pontos em que a leitura do usuário ultrapassa o que o dado autoriza) e, só então, a view. A <code>ESPECIFICACAO.md</code> registra essas decisões em uma linha por pergunta e, nesta aula, funciona como contrato, porque a tela deve implementar exatamente o que ela registra.</p>
+        <h2>4. Da pergunta à forma</h2>
+        <h3>4.1 A pergunta vem antes do gráfico</h3>
+        <p>As ferramentas de visualização costumam abrir com uma galeria de formas, o que induz a escolha pela aparência. A ordem recomendada é a inversa, pois a pergunta define a tarefa que o leitor precisa cumprir, e a tarefa define a forma. A linha serve para ler tendência porque o olho acompanha a inclinação; a barra serve para comparar porque o olho compara comprimentos alinhados numa mesma base com muito mais precisão do que ângulos ou áreas. Por isso, o gráfico de pizza não aparece na tabela: ele obriga a comparar ângulos e perde legibilidade a partir de quatro fatias.</p>
         <table>
-          <thead><tr><th>Campo da especificação (aula 8)</th><th>Onde aparece no dashboard</th></tr></thead>
+          <thead><tr><th>A tarefa é…</th><th>Forma</th><th>Cuidado principal</th><th>Ponto de partida no case</th></tr></thead>
           <tbody>
-            <tr><td>Pergunta e decisão</td><td>Etiqueta do cartão e posição na narrativa (contexto, tensão e decisão)</td></tr>
-            <tr><td>View e colunas</td><td>A URL do <code>fetch</code> e os campos lidos da resposta</td></tr>
-            <tr><td>Visual escolhido</td><td>O tipo de gráfico, sem troca por preferência do agente</td></tr>
-            <tr><td>Título que afirma</td><td>Frase montada no JavaScript com os valores da view</td></tr>
-            <tr><td>Âncora tratada e suporte na tela</td><td>Subtítulo com unidade, período e filtro; base de comparação no mesmo gráfico; nota de leitura</td></tr>
+            <tr><td>Tendência</td><td>Linha</td><td>Eixo de tempo contínuo; nada de meses incompletos na ponta</td><td>P01</td></tr>
+            <tr><td>Comparação e ranking</td><td>Barra horizontal ordenada pelo valor</td><td>Ordenar pelo valor, não pelo alfabeto; agrupar a cauda em “Outros”</td><td>P03, P05, P06, P07</td></tr>
+            <tr><td>Composição</td><td>Barra empilhada 100% ou barras simples</td><td>Poucas partes; a soma precisa fechar 100%</td><td>P10</td></tr>
+            <tr><td>Distribuição</td><td>Histograma</td><td>Largura das faixas declarada</td><td>pedidos por cliente, por trás da P09</td></tr>
+            <tr><td>Relação</td><td>Dispersão</td><td>Relação não implica causalidade; mostrar o tamanho da base</td><td>taxa de atraso × entregas por estado (P07)</td></tr>
+            <tr><td>Número único</td><td>Cartão com número grande e a comparação ao lado</td><td>O número isolado não indica se o resultado é bom ou ruim</td><td>P09</td></tr>
           </tbody>
         </table>
-        <p>Como o agente de IA produz código rapidamente, o contrato se torna necessário para orientar a revisão. Sem ele, o agente escolhe um gráfico de pizza para 27 estados, digita no HTML o número que viu no seu prompt e escreve títulos descritivos como “Receita por estado”. Com ele, a revisão deixa de depender de preferência pessoal e passa a consistir na comparação entre o diff e a linha correspondente da especificação.</p>
-        <p>As views que o painel lê são as de <code>materiais/aula-08/olist/views.sql</code>, que você executou no seu Supabase na aula 8. Se o seu fork está desatualizado, sincronize-o antes de começar, com Sync fork na página do fork no GitHub e <code>git pull</code> no terminal do Codespace.</p>
-      </section>
-
-      <section data-lesson-section="concepts">
-        <h2>3. Arquitetura do dashboard</h2>
-        <p>O GitHub Pages é um serviço de hospedagem de arquivos estáticos: ele entrega HTML, CSS e JavaScript exatamente como estão no repositório, sem executar nada no servidor. O Supabase, por sua vez, publica automaticamente uma API REST (o PostgREST) para tabelas e views do schema <code>public</code>. Os dois serviços não se comunicam diretamente: é o navegador de quem abre o painel que obtém os arquivos de um e os dados do outro.</p>
-        <figure class="figura">
-          <div role="img" aria-label="Arquitetura do dashboard: o GitHub Pages entrega os arquivos ao navegador; o navegador chama a API REST do Supabase com a chave publicável; a API lê as views, que leem o esquema estrela com RLS de leitura.">
-            <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
-              <defs><marker id="m-ponta-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
-              <g><rect class="caixa" x="0" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="22" cy="94" r="12"/><text class="num" x="22" y="99" text-anchor="middle">1</text><text class="titulo" x="40" y="100">GitHub Pages</text><text class="sub" x="14" y="132">entrega os arquivos</text><text class="mono" x="14" y="160">usuario.github.io</text></g>
-              <g><rect class="caixa caixa-nav" x="237" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="259" cy="94" r="12"/><text class="num" x="259" y="99" text-anchor="middle">2</text><text class="titulo" x="277" y="100">Navegador</text><text class="sub" x="251" y="132">executa o app.js</text><text class="mono" x="251" y="160">celular, notebook</text></g>
-              <g><rect class="caixa" x="474" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="496" cy="94" r="12"/><text class="num" x="496" y="99" text-anchor="middle">3</text><text class="titulo" x="514" y="100">API REST</text><text class="sub" x="488" y="132">PostgREST</text><text class="mono" x="488" y="160">/rest/v1/vw_p01…</text></g>
-              <g><rect class="caixa" x="711" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="733" cy="94" r="12"/><text class="num" x="733" y="99" text-anchor="middle">4</text><text class="titulo" x="751" y="100">Views</text><text class="sub" x="725" y="132">uma por pergunta</text><text class="mono" x="725" y="160">vw_p01 … vw_p10</text></g>
-              <g><rect class="caixa" x="948" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="970" cy="94" r="12"/><text class="num" x="970" y="99" text-anchor="middle">5</text><text class="titulo" x="988" y="100">Estrela</text><text class="sub" x="962" y="132">RLS: só leitura</text><text class="mono" x="962" y="160">fato_* · dim_*</text></g>
-              <line class="seta" x1="157" y1="126" x2="232" y2="126" marker-end="url(#m-ponta-h)"/>
-              <text class="rotulo" x="194" y="100" text-anchor="middle">HTML,</text>
-              <text class="rotulo" x="194" y="114" text-anchor="middle">JS, CSS</text>
-              <line class="seta" x1="394" y1="126" x2="469" y2="126" marker-end="url(#m-ponta-h)"/>
-              <text class="rotulo" x="432" y="86" text-anchor="middle">fetch +</text>
-              <text class="rotulo" x="432" y="100" text-anchor="middle">chave</text>
-              <text class="rotulo" x="432" y="114" text-anchor="middle">publicável</text>
-              <line class="seta" x1="631" y1="126" x2="706" y2="126" marker-end="url(#m-ponta-h)"/>
-              <text class="rotulo" x="668" y="100" text-anchor="middle">SELECT</text>
-              <text class="rotulo" x="668" y="114" text-anchor="middle">como anon</text>
-              <line class="seta" x1="868" y1="126" x2="943" y2="126" marker-end="url(#m-ponta-h)"/>
-              <text class="rotulo" x="906" y="100" text-anchor="middle">security_</text>
-              <text class="rotulo" x="906" y="114" text-anchor="middle">invoker</text>
-              <line class="bloqueio" x1="237" y1="222" x2="626" y2="222"/><text class="bloqueio-texto" x="432" y="214" text-anchor="middle">chave secreta e senha do banco nunca passam por aqui</text>
-            </svg>
-            <svg class="arq-v" viewBox="0 0 330 430" aria-hidden="true">
-              <defs><marker id="m-ponta-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
-              <g><rect class="caixa" x="0" y="0" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="29" r="11"/><text class="num" x="22" y="34" text-anchor="middle">1</text><text class="titulo" x="42" y="25">GitHub Pages</text><text class="sub" x="42" y="45">entrega HTML, JS e CSS</text></g>
-              <g><rect class="caixa caixa-nav" x="0" y="92" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="121" r="11"/><text class="num" x="22" y="126" text-anchor="middle">2</text><text class="titulo" x="42" y="117">Navegador</text><text class="sub" x="42" y="137">executa o app.js</text></g>
-              <g><rect class="caixa" x="0" y="184" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="213" r="11"/><text class="num" x="22" y="218" text-anchor="middle">3</text><text class="titulo" x="42" y="209">API REST do Supabase</text><text class="mono" x="42" y="229">/rest/v1/vw_p01…</text></g>
-              <g><rect class="caixa" x="0" y="276" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="305" r="11"/><text class="num" x="22" y="310" text-anchor="middle">4</text><text class="titulo" x="42" y="301">Views vw_p01 … vw_p10</text><text class="sub" x="42" y="321">security_invoker = on</text></g>
-              <g><rect class="caixa" x="0" y="368" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="397" r="11"/><text class="num" x="22" y="402" text-anchor="middle">5</text><text class="titulo" x="42" y="393">Esquema estrela</text><text class="sub" x="42" y="413">RLS: só leitura para anon</text></g>
-              <line class="seta" x1="40" y1="61" x2="40" y2="87" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="80">arquivos estáticos</text>
-              <line class="seta" x1="40" y1="153" x2="40" y2="179" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="172">fetch + chave publicável</text>
-              <line class="seta" x1="40" y1="245" x2="40" y2="271" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="264">SELECT como anon</text>
-              <line class="seta" x1="40" y1="337" x2="40" y2="363" marker-end="url(#m-ponta-v)"/><text class="rotulo" x="54" y="356">permissões de quem chama</text>
-            </svg>
-          </div>
-          <figcaption>Figura 1. O caminho de um número até a tela. A chave secreta e a senha do banco não aparecem em nenhum trecho.</figcaption>
-        </figure>
-        <ol>
-          <li><strong>GitHub Pages.</strong> O navegador pede <code>https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</code> e recebe <code>index.html</code>, <code>supabase.js</code>, <code>app.js</code> e <code>style.css</code>. Nenhum número está nesses arquivos.</li>
-          <li><strong>Navegador.</strong> Ao executar <code>app.js</code>, o navegador faz um <code>fetch</code> por view, com a chave publicável nos cabeçalhos <code>apikey</code> e <code>Authorization</code>.</li>
-          <li><strong>API REST do Supabase.</strong> O PostgREST valida a chave, assume o papel <code>anon</code> e traduz a URL <code>/rest/v1/vw_p09_recompra?select=*</code> num <code>select * from public.vw_p09_recompra</code>.</li>
-          <li><strong>Views.</strong> Criadas com <code>security_invoker = on</code>, elas rodam com as permissões de quem chama, e não com as de quem as criou.</li>
-          <li><strong>Esquema estrela.</strong> Como a view roda como <code>anon</code>, as tabelas de fato e dimensão precisam da política de leitura que <code>estrela.sql</code> criou. Sem ela, a resposta é uma lista vazia.</li>
-        </ol>
-        <p>A consequência prática desse desenho é que o painel publicado sempre mostra o estado atual do banco. Se você recriar uma view com outra regra, a tela muda na próxima leitura, sem novo deploy. Essa propriedade, contudo, só se mantém se nenhum número for digitado no HTML, pois um valor fixo deixaria de acompanhar o banco sem que a divergência fosse percebida.</p>
-      </section>
-
-      <section data-lesson-section="concepts">
-        <h2>4. Chave publicável e chave secreta</h2>
-        <p>No painel do Supabase, abra Project Settings e, em seguida, a seção API Keys. A chave publicável começa com <code>sb_publishable_</code>; em projetos criados antes das chaves novas, o equivalente é a <strong>anon public</strong>, na aba de chaves legadas. A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code> (o mesmo procedimento da aula 8).</p>
-        <table>
-          <thead><tr><th></th><th>Chave publicável (<code>sb_publishable_…</code> ou anon)</th><th>Chave secreta (<code>sb_secret_…</code> ou service_role) e senha do banco</th></tr></thead>
-          <tbody>
-            <tr><td>Pode ir no HTML?</td><td>Sim. Ela foi projetada para ficar no navegador.</td><td>Não. Elas não podem constar no HTML, em commit, captura de tela, prompt ou chat da turma.</td></tr>
-            <tr><td>O que libera</td><td>Só o que o <code>grant</code> e as políticas de RLS permitem ao papel <code>anon</code>.</td><td>Todo o projeto. A chave secreta ignora o RLS, e a senha dá acesso ao banco inteiro.</td></tr>
-            <tr><td>Se vazar</td><td>Alguém lê o que já era público.</td><td>Alguém lê, altera e apaga qualquer tabela do projeto.</td></tr>
-          </tbody>
-        </table>
-        <p>A leitura pública é segura neste case por três decisões que você executou nas aulas anteriores, e não pela chave em si. <code>estrela.sql</code> liga o RLS nas seis tabelas do esquema estrela e cria a política <code>leitura_publica</code> apenas <code>for select</code>. <code>views.sql</code> concede <code>grant select</code> nas views ao papel <code>anon</code>. Por fim, não existe política de insert, update ou delete, e, sem política, o RLS bloqueia a escrita feita com a chave publicável.</p>
+        <p>A coluna “ponto de partida” traz sugestões, e não um gabarito. A P02 pode virar um mapa de calor dia × faixa ou barras agrupadas; a P04 pode virar barras de crescimento ou um gráfico de inclinação entre 2017 e 2018; a P08 pode virar duas barras ou dois números lado a lado. O brainstorming serve para produzir essas alternativas, e a tarefa de decisão é o critério para escolher entre elas.</p>
         <div class="alert-box">
-          <h4>Limite da leitura pública</h4>
-          <p>Tudo o que o <code>grant</code> e o RLS liberam para <code>anon</code> fica legível por qualquer pessoa que abra o seu painel e copie a chave do código-fonte, inclusive as tabelas de fato e dimensão, e não só as views. O Olist é um dataset público e anonimizado; por isso o desenho é aceitável aqui. Com dados de clientes, pacientes ou colaboradores reais, a leitura pública não se aplica: o acesso exigiria login e políticas por usuário.</p>
+          <h4>Gráficos com dois eixos y</h4>
+          <p>Quando receita e pedidos aparecem no mesmo gráfico, cada um com a sua escala, os cruzamentos entre as séries dependem apenas de onde cada eixo foi ancorado, e basta alterar uma das escalas para que a aparente relação desapareça. Na P01, receita e pedidos pedem dois gráficos empilhados com o mesmo eixo de tempo, ou as duas séries indexadas a jan/17 = 100.</p>
+        </div>
+
+        <h3>4.2 Títulos que afirmam</h3>
+        <p>O título é o ponto em que a análise se converte em comunicação. Um título que apenas descreve o eixo obriga o Chief a descobrir sozinho o que o gráfico mostra, e leitores diferentes tendem a chegar a conclusões diferentes. Um título que afirma apresenta a conclusão e deixa o gráfico como evidência, desde que a afirmação não vá além do que a view sustenta.</p>
+        <table>
+          <thead><tr><th>Descreve o eixo</th><th>Afirma o que o dado sustenta</th></tr></thead>
+          <tbody>
+            <tr><td>Receita mensal</td><td>A receita cresceu ao longo de 2017 e está estável desde mar/18, entre R$ 839 mil e R$ 978 mil por mês</td></tr>
+            <tr><td>Receita por estado</td><td>SP responde por 38,4% da receita; RJ e MG somam 25%</td></tr>
+            <tr><td>Nota por prazo</td><td>Pedidos atrasados recebem nota média 2,27; no prazo, 4,29</td></tr>
+            <tr><td>Concentração de vendedores</td><td>295 vendedores, o 1º decil, geram 67,0% da receita</td></tr>
+          </tbody>
+        </table>
+        <p>Um teste útil é verificar se o título, copiado sozinho no corpo de um e-mail ao Chief, ainda comunica a conclusão. Se o grupo não consegue formular nenhuma afirmação, convém reavaliar se aquele gráfico precisa estar no painel.</p>
+
+        <h3>4.3 Funções da cor</h3>
+        <ul>
+          <li><strong>Identidade</strong>: categorias sem ordem natural (regiões, categorias de produto) recebem cores distintas, atribuídas em ordem fixa. Se a região Norte é laranja no cartão da P06, ela é laranja em qualquer outro cartão. Acima de sete ou oito categorias, nenhuma paleta mantém as cores distinguíveis, e o recomendado é agrupar a cauda em “Outros”.</li>
+          <li><strong>Magnitude</strong>: um valor que cresce usa um único tom, do claro ao escuro. É o caso do mapa de calor de pedidos por dia × faixa de horário na P02. Uma paleta arco-íris sugere categorias onde existe uma escala contínua.</li>
+          <li><strong>Polaridade</strong>: desvio em relação a uma meta ou a zero usa duas cores opostas com cinza no meio, e o zero exatamente no cinza.</li>
+          <li><strong>Destaque</strong>: tudo em cinza e uma única cor para o elemento que o título afirma, como MA no ranking de atraso da P07.</li>
+        </ul>
+        <p>Em todos os casos, a cor acompanha a entidade, e não a posição no ranking. Se um filtro reordena as barras e as cores trocam de dono, o leitor que memorizou “o azul é SP” passa a ler o gráfico de forma errada sem perceber. Rótulos e valores ficam na cor do texto, e a identidade é carregada pela marca colorida.</p>
+
+        <h3>4.4 Ordem narrativa do dashboard</h3>
+        <p>Dez gráficos corretos, mas desconexos, não sustentam uma decisão. O que transforma um painel em argumento é a ordem em que o Chief percorre os cartões, organizada em três blocos:</p>
+        <ul>
+          <li><strong>Contexto</strong>: onde estamos, desde quando e em que escala. O leitor precisa dessa informação antes de qualquer resultado inesperado.</li>
+          <li><strong>Tensão</strong>: o que está fora do esperado e tem custo para o negócio, que é a razão de o painel existir.</li>
+          <li><strong>Decisão</strong>: o que fazer, com o número que sustenta e o limite que invalida.</li>
+        </ul>
+        <p>Para verificar a ordem, leem-se apenas os títulos dos cartões, de cima para baixo. Se eles formarem um parágrafo com sentido, o dashboard está ordenado; se soarem como um índice de eixos, a ordem ainda precisa ser revista.</p>
+
+        <h3>4.5 Golfo de avaliação: o que se vê e o que o dado autoriza</h3>
+        <p>Donald Norman chama de golfo de avaliação a distância entre o que o sistema mostra e o que a pessoa entende que ele mostra. Num dashboard, esse golfo aparece quando o Chief lê numa barra uma conclusão que a base não sustenta: “frete caro espanta cliente”, quando a base só registra vendas que aconteceram. Nesse caso, nenhum número está errado, e ainda assim a decisão resultante é equivocada. O fluxo de interação anotado serve para encontrar esses pontos antes de a tela ser construída, e a tela da aula 10 deve fechá-los com título, unidade, período e nota de origem.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Retomada do fluxo de interação anotado (aula 7)</h2>
+        <p>O fluxo de interação anotado, apresentado na aula 7, descreve passo a passo como o usuário percorre a tela para tomar uma decisão e que dado sustenta cada passo. Na aula 7, a turma montou no quadro do Miro um frame modelo com esse formato, que nesta aula é reutilizado duas vezes: nos frames dos grupos, durante o brainstorming, e no frame único do dashboard. A figura e a tabela abaixo retomam o formato.</p>
+        <figure class="figura">
+          <div class="flow-wrap"><svg class="flow-svg" id="fig-formato" viewBox="0 0 1000 454" role="img" aria-labelledby="fig-formato-t fig-formato-d"><title id="fig-formato-t">Formato do fluxo de interação anotado</title><desc id="fig-formato-d">Cabeçalho com a tarefa de decisão e três raias horizontais: usuário em post-its amarelos, interface em azuis e dado em verdes. Os passos são numerados de 1 a 6 em ordem cronológica, alternando usuário e interface; setas horizontais seguem a sequência e conectores verticais ligam as raias da mesma coluna. Uma etiqueta rosa D1 marca, na raia do dado, o ponto em que o dado não sustenta a conclusão do usuário.</desc><defs><marker id="fig-formato-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="fig-formato-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1000" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · quem decide · o quê · até quando · com que consequência</text><rect x="0" y="64" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="104" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="121.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="180" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="180" width="8" height="104" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="237.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="296" width="1000" height="104" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="296" width="8" height="104" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="353.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="111.5" font-size="17" class="pi-text" text-anchor="start">abre o painel com</text><text x="158" y="132.7" font-size="17" class="pi-text" text-anchor="start">a decisão na cabeça</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="263.0" y1="155" x2="263.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="116.0" x2="417" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="132" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que a tela oferece</text><text x="158" y="248.7" font-size="17" class="pi-text" text-anchor="start">(filtro, gráfico, número)</text><g class="step-num"><circle cx="134" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="263.0" y1="271" x2="263.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="397" y1="232.0" x2="417" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="132" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="343.5" font-size="17" class="pi-text" text-anchor="start">fonte: tabela ou view</text><text x="146" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · limitação</text><rect x="422" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="448" y="111.5" font-size="17" class="pi-text" text-anchor="start">procura, compara,</text><text x="448" y="132.7" font-size="17" class="pi-text" text-anchor="start">lê um valor</text><g class="step-num"><circle cx="424" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="553.0" y1="155" x2="553.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="116.0" x2="707" y2="116.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="422" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="448" y="227.5" font-size="17" class="pi-text" text-anchor="start">a forma que responde</text><text x="448" y="248.7" font-size="17" class="pi-text" text-anchor="start">(palavras ou rascunho)</text><g class="step-num"><circle cx="424" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="424" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="553.0" y1="271" x2="553.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="687" y1="232.0" x2="707" y2="232.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-formato-seta)"/><rect x="422" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="436" y="343.5" font-size="17" class="pi-text" text-anchor="start">view que sustenta</text><text x="436" y="364.7" font-size="17" class="pi-text" text-anchor="start">grão · filtro · período</text><rect x="712" y="77" width="262" height="78" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="738" y="111.5" font-size="17" class="pi-text" text-anchor="start">conclui e decide:</text><text x="738" y="132.7" font-size="17" class="pi-text" text-anchor="start">“frase literal”</text><g class="step-num"><circle cx="714" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="843.0" y1="155" x2="843.0" y2="193" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="193" width="262" height="78" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="738" y="227.5" font-size="17" class="pi-text" text-anchor="start">o que sustenta ou</text><text x="738" y="248.7" font-size="17" class="pi-text" text-anchor="start">falta na tela</text><g class="step-num"><circle cx="714" cy="195" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="714" y="200" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="843.0" y1="271" x2="843.0" y2="309" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="712" y="309" width="262" height="78" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="726" y="343.5" font-size="17" class="pi-text" text-anchor="start">o que a base não tem</text><text x="726" y="364.7" font-size="17" class="pi-text" text-anchor="start">(limite da afirmação)</text><line x1="843.0" y1="414" x2="843.0" y2="389" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-formato-seta-d)"/><rect x="817.0" y="414" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="843.0" y="435" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><text x="132" y="435" font-size="15" class="flow-note" fill="#64748b">âncora de divergência: onde o dado não sustenta a conclusão →</text></svg></div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background: #fde68a"></i>usuário: o que faz e conclui</span>
+            <span><i style="background: #bfdbfe"></i>interface: o que a tela oferece</span>
+            <span><i style="background: #bbf7d0"></i>dado: fonte, grão, limitação</span>
+            <span><i style="background: #f9a8d4"></i>âncora de divergência D1 a Dn</span>
+          </div>
+          <figcaption>Formato do frame. O cabeçalho traz a tarefa de decisão; três raias horizontais separam usuário, interface e dado; os passos são numerados em ordem cronológica e as âncoras rosa marcam onde o dado não sustenta a conclusão.</figcaption>
+        </figure>
+        <table>
+          <thead><tr><th>Elemento</th><th>Cor no Miro</th><th>O que registra</th></tr></thead>
+          <tbody>
+            <tr><td>Cabeçalho <strong>TAREFA</strong></td><td>faixa no topo</td><td>Quem decide, o quê, até quando e com que consequência. Ex.: “O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday”.</td></tr>
+            <tr><td>Raia <strong>USUÁRIO</strong></td><td>post-it amarelo</td><td>O que a pessoa faz e conclui, do primeiro clique à decisão. Conclusões vão entre aspas, com as palavras que ela usaria.</td></tr>
+            <tr><td>Raia <strong>INTERFACE</strong></td><td>post-it azul</td><td>O que a tela oferece naquele passo, em palavras ou rascunho com formas. Capturas de tela não são usadas.</td></tr>
+            <tr><td>Raia <strong>DADO</strong></td><td>post-it verde</td><td>Fonte (tabela ou view), grão e limitação que sustentam o passo. A raia do dado não recebe numeração.</td></tr>
+            <tr><td>Passos ①②③…</td><td>número no post-it</td><td>Os passos são numerados em ordem cronológica, independentemente da raia; usuário e interface se alternam. Setas horizontais seguem a sequência; conectores verticais ligam as raias da mesma coluna.</td></tr>
+            <tr><td>Âncora <strong>D1, D2…</strong></td><td>etiqueta rosa</td><td>O ponto em que o dado não sustenta o que o usuário conclui.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.1 Registro da âncora em cinco campos (retomada da aula 7)</h3>
+        <p>Uma etiqueta rosa sem registro indica apenas que há uma divergência. O registro em cinco campos, o mesmo usado para a âncora D2 na aula 7, converte essa indicação em requisito da tela:</p>
+        <ol>
+          <li><strong>Passo</strong>: o número do passo em que a divergência acontece.</li>
+          <li><strong>Leitura do usuário</strong>: a frase literal, entre aspas.</li>
+          <li><strong>O que o dado autoriza</strong>: a afirmação máxima que a fonte sustenta, com número, unidade e período.</li>
+          <li><strong>Consequência</strong>: a decisão que muda se a leitura errada prevalecer.</li>
+          <li><strong>Suporte na tela</strong>: o elemento concreto que fecha a divergência: título que afirma, unidade e período no subtítulo, nota de origem, base de comparação no mesmo gráfico ou remoção do gráfico.</li>
+        </ol>
+
+        <h3>5.2 Exemplo aplicado: P06, subsídio de frete</h3>
+        <figure class="figura">
+          <div class="flow-wrap"><svg class="flow-svg" id="fig-p06" viewBox="0 0 1200 472" role="img" aria-labelledby="fig-p06-t fig-p06-d"><title id="fig-p06-t">Exemplo aplicado à P06: subsídio de frete</title><desc id="fig-p06-d">Tarefa: o Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday. Usuário: 1 abre o painel, 3 procura o Nordeste, 5 conclui que frete caro espanta cliente, 7 decide subsidiar o Nordeste. Interface: 2 filtro de período jan/17 a ago/18, 4 barras de frete sobre preço por região, 6 só vendas realizadas na tela, 8 nenhum custo do subsídio. Dado: dim_tempo com 20 meses completos; vw_p06_frete_regiao com grão de item entregue; não há carrinho abandonado na base; não há margem nem custo logístico. Âncoras: D1 no passo 4, D2 no passo 5 e D3 no passo 7.</desc><defs><marker id="fig-p06-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" fill="#8faabd"/></marker><marker id="fig-p06-seta-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f472b6"/></marker></defs><rect x="0" y="0" width="1200" height="52" rx="10" class="task-bg" fill="#e0f2fe"/><text x="18" y="32.1" font-size="17" class="task-text" fill="#1a2f5e"><tspan font-weight="800">TAREFA</tspan> · O Chief de Vendas decide, até o comitê de outubro, em quais regiões subsidiar frete na Black Friday</text><rect x="0" y="64" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="64" width="8" height="110" rx="4" class="pi-usuario" fill="#fde68a"/><text x="22" y="124.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">USUÁRIO</text><rect x="0" y="186" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="186" width="8" height="110" rx="4" class="pi-interface" fill="#bfdbfe"/><text x="22" y="246.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">INTERFACE</text><rect x="0" y="308" width="1200" height="110" rx="10" class="lane-bg" fill="#f1f5f9"/><rect x="0" y="308" width="8" height="110" rx="4" class="pi-dado" fill="#bbf7d0"/><text x="22" y="368.0" font-size="15" font-weight="800" letter-spacing="1" class="lane-label" fill="#1a2f5e">DADO</text><rect x="132" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="158" y="114.5" font-size="17" class="pi-text" text-anchor="start">abre o painel</text><text x="158" y="135.7" font-size="17" class="pi-text" text-anchor="start">antes do comitê</text><g class="step-num"><circle cx="134" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">1</text></g><line x1="250.0" y1="161" x2="250.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="119.0" x2="395" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="132" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="158" y="236.5" font-size="17" class="pi-text" text-anchor="start">filtro de período</text><text x="158" y="257.7" font-size="17" class="pi-text" text-anchor="start">jan/17–ago/18</text><g class="step-num"><circle cx="134" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="134" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">2</text></g><line x1="250.0" y1="283" x2="250.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="371" y1="241.0" x2="395" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="132" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="146" y="358.5" font-size="17" class="pi-text" text-anchor="start">dim_tempo</text><text x="146" y="379.7" font-size="17" class="pi-text" text-anchor="start">20 meses completos</text><rect x="400" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="426" y="125.1" font-size="17" class="pi-text" text-anchor="start">procura o Nordeste</text><g class="step-num"><circle cx="402" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">3</text></g><line x1="518.0" y1="161" x2="518.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="119.0" x2="663" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="400" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="426" y="236.5" font-size="17" class="pi-text" text-anchor="start">barras: frete ÷ preço</text><text x="426" y="257.7" font-size="17" class="pi-text" text-anchor="start">por região</text><g class="step-num"><circle cx="402" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="402" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">4</text></g><line x1="518.0" y1="283" x2="518.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="639" y1="241.0" x2="663" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="400" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="414" y="358.5" font-size="17" class="pi-text" text-anchor="start">vw_p06_frete_regiao</text><text x="414" y="379.7" font-size="17" class="pi-text" text-anchor="start">grão: item entregue</text><rect x="668" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="694" y="114.5" font-size="17" class="pi-text" text-anchor="start">conclui: “frete caro</text><text x="694" y="135.7" font-size="17" class="pi-text" text-anchor="start">espanta cliente”</text><g class="step-num"><circle cx="670" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">5</text></g><line x1="786.0" y1="161" x2="786.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="119.0" x2="931" y2="119.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="668" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="694" y="236.5" font-size="17" class="pi-text" text-anchor="start">só vendas realizadas</text><text x="694" y="257.7" font-size="17" class="pi-text" text-anchor="start">aparecem na tela</text><g class="step-num"><circle cx="670" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="670" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">6</text></g><line x1="786.0" y1="283" x2="786.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><line x1="907" y1="241.0" x2="931" y2="241.0" class="flow-arrow" stroke="#8faabd" stroke-width="2.5" marker-end="url(#fig-p06-seta)"/><rect x="668" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="682" y="358.5" font-size="17" class="pi-text" text-anchor="start">não há carrinho</text><text x="682" y="379.7" font-size="17" class="pi-text" text-anchor="start">abandonado na base</text><rect x="936" y="77" width="236" height="84" rx="6" class="pi pi-usuario" fill="#fde68a"/><text x="962" y="114.5" font-size="17" class="pi-text" text-anchor="start">decide subsidiar</text><text x="962" y="135.7" font-size="17" class="pi-text" text-anchor="start">o Nordeste</text><g class="step-num"><circle cx="938" cy="79" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="84" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">7</text></g><line x1="1054.0" y1="161" x2="1054.0" y2="199" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="199" width="236" height="84" rx="6" class="pi pi-interface" fill="#bfdbfe"/><text x="962" y="236.5" font-size="17" class="pi-text" text-anchor="start">nenhum custo do</text><text x="962" y="257.7" font-size="17" class="pi-text" text-anchor="start">subsídio na tela</text><g class="step-num"><circle cx="938" cy="201" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><text x="938" y="206" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">8</text></g><line x1="1054.0" y1="283" x2="1054.0" y2="321" class="flow-link" stroke="#8faabd" stroke-width="2" stroke-dasharray="5 5"/><rect x="936" y="321" width="236" height="84" rx="6" class="pi pi-dado" fill="#bbf7d0"/><text x="950" y="358.5" font-size="17" class="pi-text" text-anchor="start">sem margem nem custo</text><text x="950" y="379.7" font-size="17" class="pi-text" text-anchor="start">logístico na base</text><line x1="518.0" y1="432" x2="518.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="492.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="518.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D1</text><line x1="786.0" y1="432" x2="786.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="760.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="786.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D2</text><line x1="1054.0" y1="432" x2="1054.0" y2="407" class="flow-anchor-link" stroke="#f472b6" stroke-width="2.5" marker-end="url(#fig-p06-seta-d)"/><rect x="1028.0" y="432" width="52" height="30" rx="15" class="tag-d" fill="#f9a8d4"/><text x="1054.0" y="453" font-size="16" font-weight="800" text-anchor="middle" class="pi-text" fill="#1e293b">D3</text></svg></div>
+          <figcaption>Fluxo anotado da P06. A view <code>vw_p06_frete_regiao</code> mostra que o frete pesa 22,7% sobre o preço no Norte, 21,7% no Nordeste e 15,2% no Sudeste. As três âncoras marcam onde a leitura do Chief ultrapassa esse número.</figcaption>
+        </figure>
+        <table>
+          <thead><tr><th>Âncora</th><th>Passo</th><th>Leitura do usuário</th><th>O que o dado autoriza</th><th>Consequência</th><th>Suporte na tela</th></tr></thead>
+          <tbody>
+            <tr><td>D1</td><td>④</td><td>“No Nordeste, o frete custa 21,7% do pedido.”</td><td>Somando os itens entregues de clientes do Nordeste entre jan/17 e ago/18, o frete equivale a 21,7% do preço dos produtos. Trata-se de razão de somas por item, e não de média por pedido.</td><td>Subsídio dimensionado sobre um valor de pedido que não foi medido.</td><td>Subtítulo: “frete total ÷ preço total dos itens entregues, jan/17–ago/18”.</td></tr>
+            <tr><td>D2</td><td>⑤</td><td>“Frete caro espanta cliente.”</td><td>A base só registra vendas realizadas. Não há carrinho abandonado nem pedido desistido por causa do frete.</td><td>Aprovação de subsídio para recuperar uma demanda que não foi medida.</td><td>Nota de origem: “só pedidos realizados; a base não registra desistência”.</td></tr>
+            <tr><td>D3</td><td>⑦</td><td>“Subsidiar o Nordeste se paga.”</td><td>A base não tem custo logístico nem margem; o painel não calcula retorno.</td><td>O board aprova um gasto sem retorno estimado.</td><td>Nenhum indicador de retorno na tela; cartão com a lacuna explícita: “custo do subsídio fora da base”.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>5.3 Regras de preenchimento do quadro (retomada da aula 7)</h3>
+        <ul>
+          <li>Os passos são numerados em ordem cronológica, independentemente da raia.</li>
+          <li>A cor identifica a origem da afirmação: verde para o dado, amarelo para o usuário e azul para a tela. Uma conclusão do Chief escrita em verde passa a ser lida como fato sem ter sido verificada.</li>
+          <li>A raia do dado não recebe numeração e registra fonte, grão e limitação.</li>
+          <li>O post-it rosa marca a divergência entre a conclusão do usuário e o que o dado autoriza.</li>
+          <li>Toda explicação dada oralmente durante a construção é registrada em post-it, pois o que não está no quadro não conta como decisão da turma.</li>
+          <li>Capturas de tela não são usadas; a interface é descrita em palavras ou formas, para que a discussão se concentre na tarefa e não na estética.</li>
+        </ul>
+        <p><a class="miro-btn" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer">Abrir o quadro da turma no Miro</a></p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>6. Prática guiada: brainstorming de fluxos no Miro</h2>
+        <p>Sem estrutura, um brainstorming tende a favorecer a ideia de quem fala mais alto e a se converter em debate sobre qual gráfico é mais bonito. A dinâmica abaixo separa a geração de ideias da escolha entre elas e substitui a preferência pessoal por critérios explícitos. Ela combina o <em>Crazy 8s</em> (oito rascunhos rápidos, um por minuto, para esgotar as ideias óbvias) com o <em>1-2-4-todos</em> das Liberating Structures (ideias individuais, depois em duplas, depois em quartetos, depois com a turma inteira).</p>
+
+        <h3>6.1 Grupos, papéis e perguntas</h3>
+        <p>A turma se organiza em grupos de 4 pessoas, e cada grupo recebe um par de perguntas do mesmo tipo, para que o fluxo tenha coerência interna:</p>
+        <table>
+          <thead><tr><th>Grupo</th><th>Perguntas</th><th>Tema</th></tr></thead>
+          <tbody>
+            <tr><td>G1</td><td>P01 + P02</td><td>tempo: ritmo e calendário</td></tr>
+            <tr><td>G2</td><td>P03 + P04</td><td>categoria: mix e apostas</td></tr>
+            <tr><td>G3</td><td>P05 + P06</td><td>geografia: receita e frete</td></tr>
+            <tr><td>G4</td><td>P07 + P08</td><td>prazo e satisfação</td></tr>
+            <tr><td>G5</td><td>P09 + P10</td><td>clientes e vendedores</td></tr>
+          </tbody>
+        </table>
+        <p>Se a turma passar de 20 pessoas, cada par de perguntas vai para dois grupos, e a convergência compara as duas versões. Em cada grupo, três papéis giram a cada fase: <strong>cronometrista</strong> (mantém o tempo e para as canetas), <strong>guardião da cor</strong> (confere se cada post-it está na raia e na cor certas) e <strong>relator</strong> (transforma o que é dito em post-it).</p>
+
+        <h3>6.2 Divergir (19:15 a 19:45)</h3>
+        <table>
+          <thead><tr><th>Horário</th><th>Formato</th><th>O que fazer</th><th>Saída no frame</th></tr></thead>
+          <tbody>
+            <tr><td>19:15 · 3 min</td><td>grupo</td><td>Duplicar o frame modelo da aula 7 e colar no topo as duas perguntas com os cinco elementos da seção 3.</td><td>frame do grupo com a tarefa escrita</td></tr>
+            <tr><td>19:18 · 8 min</td><td>individual, em silêncio (Crazy 8s)</td><td>Oito rascunhos de tela, um por minuto, quatro para cada pergunta, em post-its azuis. Valem palavras, formas e setas, e nenhum rascunho é julgado nesta fase.</td><td>8 post-its azuis por pessoa</td></tr>
+            <tr><td>19:26 · 7 min</td><td>duplas (1-2)</td><td>Cada dupla escolhe e combina rascunhos numa sequência de passos: o que o Chief faz (amarelo) e o que a tela oferece (azul), numerados.</td><td>uma sequência por dupla e por pergunta</td></tr>
+            <tr><td>19:33 · 12 min</td><td>quarteto (4)</td><td>O grupo escolhe um fluxo por pergunta e preenche a raia verde: qual view sustenta cada passo, grão e limitação.</td><td>dois fluxos com as três raias</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.3 Regras da dinâmica</h3>
+        <ol>
+          <li>Durante o Crazy 8s, ninguém comenta as ideias dos colegas, porque nessa fase a quantidade de alternativas importa mais do que a qualidade.</li>
+          <li>“Eu prefiro” e “fica mais bonito” não valem como argumento. Toda defesa começa com “o Chief decide ___ mais rápido porque ___”.</li>
+          <li>Quem discorda desenha a alternativa em até 1 minuto, num post-it ao lado; argumentos sem desenho não são considerados.</li>
+          <li>Ideias sem pergunta associada e sem passo numerado não entram no frame. Cada post-it traz o código da pergunta (P01 a P10).</li>
+          <li>Os três critérios de voto ficam visíveis na tela: (a) responde à decisão da pergunta; (b) existe view e coluna que sustentam cada passo; (c) o Chief lê a conclusão em 5 segundos.</li>
+          <li>Em caso de empate, vence o fluxo com menos divergências abertas; se o empate persistir, o professor decide pelo critério (b).</li>
+          <li>Quando o cronômetro toca, a fase se encerra. O que não coube no tempo vai para uma área de “estacionamento” do frame.</li>
+        </ol>
+
+        <h3>6.4 Convergir e decidir a ordem (19:45 a 20:20)</h3>
+        <table>
+          <thead><tr><th>Horário</th><th>Formato</th><th>O que fazer</th></tr></thead>
+          <tbody>
+            <tr><td>19:45 · 10 min</td><td>todos, em galeria</td><td>Cada grupo lê os passos do seu fluxo em 90 segundos, sem defender nem justificar. A turma só pode fazer perguntas de esclarecimento.</td></tr>
+            <tr><td>19:55 · 5 min</td><td>votação por pontos</td><td>Cada pessoa tem 3 votos para fluxos de outros grupos, aplicados pelos três critérios. Use a ferramenta de votação do Miro ou pontos roxos, pois amarelo, azul, verde e rosa já têm função definida no quadro.</td></tr>
+            <tr><td>20:00 · 5 min</td><td>professor conduz</td><td>Os fluxos vencedores de cada pergunta vão para uma trilha com três colunas: contexto, tensão e decisão. A turma pode propor mudança de coluna, sempre com o critério “o Chief precisa saber disso antes de quê?”.</td></tr>
+            <tr><td>20:05 · 15 min</td><td>turma, com um relator por grupo</td><td>Um frame novo, copiado do modelo, encadeia as 10 perguntas na ordem escolhida e constitui o fluxo de interação anotado do dashboard. Cada grupo cola os passos da sua pergunta e ajusta as setas de ligação com o grupo anterior.</td></tr>
+          </tbody>
+        </table>
+        <p>A tabela abaixo propõe uma ordem inicial, que a turma pode contestar:</p>
+        <table>
+          <thead><tr><th>Contexto</th><th>Tensão</th><th>Decisão</th></tr></thead>
+          <tbody>
+            <tr><td>P01 ritmo da receita · P05 onde está a receita · P03 o que vende</td><td>P07 onde atrasa · P08 quanto o atraso custa na nota · P06 quanto pesa o frete · P10 dependência de poucos vendedores · P09 poucos clientes voltam</td><td>P04 onde apostar · P02 quando fazer campanha</td></tr>
+          </tbody>
+        </table>
+
+        <h3>6.5 Âncoras e registro (20:30 a 20:55)</h3>
+        <p>Depois do intervalo, cada grupo volta aos passos da sua pergunta no frame do dashboard e procura as âncoras: em que passo o Chief concluiria algo que a view não autoriza? Cada grupo registra pelo menos duas âncoras nos cinco campos da seção 5.1; a turma precisa terminar com pelo menos quatro registradas. A tabela da seção 7 traz as divergências mais prováveis, mas o grupo deve procurar as suas antes de consultá-la.</p>
+        <div class="alert-box">
+          <h4>O quadro como registro oficial</h4>
+          <p>Tudo o que for decidido na discussão precisa estar em post-it antes de o cronômetro tocar. Na aula 10, a tela é construída a partir do frame e da <code>ESPECIFICACAO.md</code>, e não da memória de quem estava presente.</p>
         </div>
       </section>
 
-      <section data-lesson-section="concepts">
-        <h2>5. A chamada à API e o formato da resposta</h2>
-        <p>Antes de escrever uma linha de HTML, confira a view pelo terminal, como na aula 8. O <code>read</code> pede os dois valores sem gravá-los em arquivo:</p>
+      <section data-lesson-section="guided-practice">
+        <h2>7. Divergências típicas de cada pergunta</h2>
+        <p>Todos os números abaixo saem das views conferidas no Postgres com o mesmo banco que você carregou. A coluna “suporte na tela” é uma sugestão; o grupo pode propor outra, desde que feche a divergência.</p>
+        <table>
+          <thead><tr><th>#</th><th>Leitura provável</th><th>O que o dado autoriza</th><th>Suporte na tela</th></tr></thead>
+          <tbody>
+            <tr><td>P01</td><td>“A receita caiu em 2018.”</td><td>A receita cresceu ao longo de 2017, teve pico de R$ 987.765,37 em nov/17 (Black Friday) e está estável desde mar/18, entre R$ 838.576,64 (ago/18) e R$ 977.544,69 (mai/18). A série termina em ago/18 porque os meses seguintes estão incompletos.</td><td>Título que afirma o platô; subtítulo “meses completos, jan/17–ago/18”; nov/17 anotado como sazonal.</td></tr>
+            <tr><td>P02</td><td>“Segunda-feira é o melhor dia para campanha.”</td><td>Segunda concentra mais pedidos entregues (15.660) e sábado menos (10.519); a tarde tem 37.083 pedidos e a noite 33.021. Contagem de pedidos não mede receita nem conversão de campanha. Domingo à noite (4.999) supera qualquer faixa de sábado.</td><td>Nota “pedidos entregues por horário de compra registrado; não mede conversão”.</td></tr>
+            <tr><td>P03</td><td>“Relógios e presentes é a categoria mais lucrativa.”</td><td>beleza_saude tem a maior receita (R$ 1.229.557,50; 9,3%); relogios_presentes tem o maior ticket (R$ 211,89). A base não tem custo nem margem. As 10 categorias somam 62,5% da receita.</td><td>Subtítulo “receita de itens, não lucro”; ticket ao lado da receita.</td></tr>
+            <tr><td>P04</td><td>“Bebês é a categoria que mais cresce, é a melhor aposta.”</td><td>bebes cresceu 268,6% sobre R$ 67.998,26. Sem o piso de R$ 50 mil, portateis_casa_forno_e_cafe apareceria no topo com +48.785,7% sobre R$ 93,80. A Olist inteira cresceu 141,1% no mesmo recorte.</td><td>Receita de 2017 e de 2018 no mesmo gráfico; linha de referência com o crescimento total.</td></tr>
+            <tr><td>P05</td><td>“Os vendedores de SP respondem por 38% das vendas.”</td><td>SP responde por 38,4% da receita pelo estado do cliente, no endereço do pedido mais recente. Os três maiores estados somam 63,4%; os 17 menores, 12,2%.</td><td>Título com “clientes de SP”; top 10 mais “Outros”.</td></tr>
+            <tr><td>P06</td><td>“Frete caro espanta cliente do Norte e do Nordeste.”</td><td>O frete pesa 22,7% sobre o preço no Norte (R$ 36,82 por item) e 15,2% no Sudeste (R$ 17,34), entre vendas realizadas. Não há registro de desistência.</td><td>Nota “só vendas realizadas; a base não registra desistência”.</td></tr>
+            <tr><td>P07</td><td>“O RJ é onde mais se atrasa.”</td><td>A maior taxa é do MA (17,5% de 716 entregas). RJ tem 12,2% de 12.312 entregas. SP tem a menor taxa entre os grandes (4,5%), mas o maior número absoluto de pedidos atrasados (1.817, contra 1.496 no RJ). Dez estados com menos de 500 entregas ficam fora.</td><td>Número de entregas ao lado da taxa; nota sobre o corte de 500.</td></tr>
+            <tr><td>P08</td><td>“Se zerarmos os atrasos, a nota sobe para 4,29.”</td><td>Pedidos no prazo têm nota média 4,29 e 9,2% de notas 1 e 2 (89.182 avaliados); com atraso, 2,27 e 62,4% (6.378). Trata-se de associação: atraso e nota variam juntos, e outras causas podem estar presentes no mesmo pedido.</td><td>Título “pedidos atrasados recebem nota média 2,27; no prazo, 4,29”; nota “associação, não causa”.</td></tr>
+            <tr><td>P09</td><td>“Ninguém volta a comprar na Olist.”</td><td>2.789 de 93.104 clientes (3,00%) fizeram mais de um pedido entregue em 20 meses. Com <code>customer_id</code> no lugar da pessoa, a mesma conta dá 96.211 “clientes” e zero recorrentes.</td><td>Cartão com o número e a janela “jan/17–ago/18”; nota sobre a chave da pessoa.</td></tr>
+            <tr><td>P10</td><td>“Os 295 maiores vendedores são os mais rentáveis e devem ser priorizados.”</td><td>O 1º decil (295 vendedores) gera 67,0% da receita e os 5 decis inferiores, 3,3%. A base não tem margem. Nos 5 decis inferiores, 831 dos 1.470 vendedores fizeram a primeira venda do período em 2018: parte da cauda corresponde a vendedores novos, e não necessariamente a vendedores com baixo desempenho.</td><td>Subtítulo “receita de itens, não margem”; nota sobre vendedores novos.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>8. Da raia do dado às views SQL</h2>
+        <h3>8.1 A view como contrato</h3>
+        <p>Cada post-it verde do frame nomeia a fonte de um passo. A view é a forma executável desse post-it: um <code>select</code> salvo no banco com nome, colunas, grão, filtro e período fixos. Ela funciona como contrato entre o fluxo e a tela por três motivos. Primeiro, a regra de negócio fica num único lugar: se a convenção de receita mudar, muda a view, e o dashboard continua igual. Segundo, a tela da aula 10 só consegue mostrar o que a view entrega, o que impede o HTML de recalcular números por conta própria. Terceiro, a view pode ser conferida contra um número de referência antes de existir qualquer gráfico.</p>
+        <p>Duas cláusulas aparecem em todas as views do gabarito. <code>with (security_invoker = on)</code> faz a view respeitar as permissões e o RLS de quem consulta, e não as de quem a criou. <code>grant select … to anon, authenticated</code> permite que a chave publicável leia a view pela API; como não há permissão de escrita, ninguém altera dados por ela.</p>
+
+        <h3>8.2 A IA escreve a view do grupo</h3>
+        <p>Às 20:55, cada grupo escreve as views das suas duas perguntas com IA, usando o Copilot Chat no Codespace ou o assistente do SQL Editor do Supabase. O nome termina em <code>_grupo</code> para não colidir com o gabarito. Troque <code>[PERGUNTA]</code>, <code>[COLUNAS]</code> e o nome da view:</p>
+        <div class="code-block wrap">No Postgres do Supabase há um esquema estrela no schema public:
+- fato_itens_pedido (grão: um item vendido): pedido_sk, item_seq, data_sk, cliente_sk,
+  produto_sk, vendedor_sk, status, preco, frete
+- fato_pedidos (grão: um pedido): pedido_sk, pedido_id, data_sk, hora_compra, cliente_sk,
+  status, qtd_itens, valor_itens, valor_frete, valor_pago, parcelas, meio_pagamento,
+  dias_entrega, dias_atraso, entregue_no_prazo (1, 0 ou null), nota_avaliacao
+- dim_tempo: data_sk (AAAAMMDD), data, ano, mes, ano_mes, trimestre, dia_semana (1 = segunda),
+  nome_dia_semana
+- dim_cliente (uma linha por pessoa): cliente_sk, cliente_id, cidade, estado, regiao
+- dim_produto: produto_sk, produto_id, categoria, categoria_en, peso_g
+- dim_vendedor: vendedor_sk, vendedor_id, cidade, estado, regiao
+
+Convenções: receita = soma de preco (sem frete) de itens com status 'delivered';
+período = dim_tempo.data entre 2017-01-01 e 2018-08-31.
+
+Escreva, em Postgres, create view public.vw_p06_frete_regiao_grupo with (security_invoker = on)
+para responder à pergunta: [PERGUNTA].
+Colunas de saída, exatamente nesta ordem: [COLUNAS].
+Antes do SQL, diga em uma frase qual tabela de fato você usa e por quê, pensando no grão.
+Não use o schema bruto e não invente colunas. Depois do SQL, escreva um select de conferência.</div>
+        <p>Leia o SQL antes de executar. Três perguntas bastam para a revisão: o fato escolhido tem o grão certo para a métrica? Os filtros de status e período estão lá? Alguma coluna citada não existe no esquema acima? Execute no SQL Editor e confira na seção 8.3.</p>
+        <div class="alert-box">
+          <h4>Dados que não entram no prompt</h4>
+          <p>A senha do banco, a string de conexão e a chave secreta (<code>sb_secret_…</code> ou <code>service_role</code>) não entram em prompt, arquivo, print nem commit. O prompt acima só descreve estrutura; nenhum dado de cliente é enviado à IA.</p>
+        </div>
+
+        <h3>8.3 Conferir contra a referência</h3>
+        <p>A consulta abaixo compara um valor de cada view com a resposta de referência e devolve <code>true</code> quando batem. Antes do gabarito, mantenha só as linhas das perguntas do grupo e troque o nome da view pela versão <code>_grupo</code>. A primeira linha interna, com <code>where false</code>, só define os nomes das colunas; ela permite apagar qualquer outra linha sem quebrar a consulta.</p>
+        <div class="code-block">select p, valor, referencia, valor = referencia as confere from (
+  select ''::text p, ''::text valor, ''::text referencia where false
+  union all select 'P01', receita::text, '987765.37' from vw_p01_receita_mensal where ano_mes = '2017-11'
+  union all select 'P02', sum(pedidos)::text, '15660' from vw_p02_dia_hora where dia_semana = 1
+  union all select 'P03', participacao_pct::text, '9.3' from vw_p03_top_categorias where categoria = 'beleza_saude'
+  union all select 'P04', crescimento_pct::text, '268.6' from vw_p04_crescimento_categorias where categoria = 'bebes'
+  union all select 'P05', participacao_pct::text, '38.4' from vw_p05_receita_estado where estado = 'SP'
+  union all select 'P06', frete_sobre_preco_pct::text, '22.7' from vw_p06_frete_regiao where regiao = 'Norte'
+  union all select 'P07', atraso_pct::text, '17.5' from vw_p07_atraso_estado where estado = 'MA'
+  union all select 'P08', nota_media::text, '2.27' from vw_p08_nota_prazo where entrega = 'com atraso'
+  union all select 'P09', recompra_pct::text, '3.00' from vw_p09_recompra
+  union all select 'P10', participacao_pct::text, '67.0' from vw_p10_concentracao_vendedores where decil = 1
+) conferencia;</div>
+        <p>Um resultado <code>false</code> indica uma diferença que deve ser investigada e registrada na entrega. As causas mais frequentes, em ordem de probabilidade, são as seguintes:</p>
+        <table>
+          <thead><tr><th>Sintoma</th><th>Causa provável</th></tr></thead>
+          <tbody>
+            <tr><td>Receita maior que a referência</td><td>frete somado ao preço, ou pedidos de outros status incluídos</td></tr>
+            <tr><td>Recompra igual a zero</td><td>cliente contado por pedido (<code>customer_id</code>) e não por pessoa</td></tr>
+            <tr><td>Ticket médio menor que a referência</td><td>receita dividida por itens, e não por pedidos distintos</td></tr>
+            <tr><td>Nota média diferente na P08</td><td>nota lida por item, repetindo a nota de pedidos com vários itens</td></tr>
+            <tr><td>Participação que não fecha 100%</td><td>percentual calculado depois do <code>limit</code>, sobre as 10 maiores, e não sobre o total</td></tr>
+            <tr><td>Série com pontas despencando</td><td>período sem filtro, incluindo meses incompletos de 2016 e 2018</td></tr>
+            <tr><td>Taxa de atraso diferente na P07</td><td>média de médias entre estados, ou pedidos sem data de entrega contados como atraso</td></tr>
+          </tbody>
+        </table>
+
+        <h3>8.4 As 10 views do gabarito, uma a uma</h3>
+        <p>O arquivo completo está em <a href="olist/views.sql">materiais/aula-09/olist/views.sql</a>. Cada bloco abaixo reproduz exatamente o SQL do arquivo e explica o que ele calcula, o grão, o filtro e o cuidado de leitura. Todos os números de referência foram conferidos no Postgres com o mesmo banco que você carregou.</p>
+
+        <div class="view-card" id="view-base">
+          <h3>Base comum · <code>vw_itens_entregues</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Nada é agregado: a view lista os itens de pedidos entregues no período, já com data, ano, mês, estado e região do cliente e categoria do produto.</dd>
+            <dt>Grão</dt><dd>Um item vendido (o mesmo de <code>fato_itens_pedido</code>).</dd>
+            <dt>Filtro</dt><dd><code>status = 'delivered'</code> e data da compra entre 2017-01-01 e 2018-08-31.</dd>
+            <dt>Cuidado de leitura</dt><dd>Não responde a nenhuma pergunta sozinha. Existe para que P01, P03, P04, P05, P06 e P10 usem exatamente a mesma receita: se a convenção mudar, muda aqui.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- Base comum: itens entregues no período, já com as dimensões</span>
+create or replace view public.vw_itens_entregues with (security_invoker = on) as
+select i.*, t.data, t.ano, t.mes, t.ano_mes, c.estado as estado_cliente, c.regiao as regiao_cliente,
+       p.categoria
+from public.fato_itens_pedido i
+join public.dim_tempo t   using (data_sk)
+join public.dim_cliente c using (cliente_sk)
+join public.dim_produto p using (produto_sk)
+where i.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31';</div>
+          <p class="ref"><strong>Referência:</strong> 109.880 itens de 96.211 pedidos, somando R$ 13.181.027,13 de receita.</p>
+        </div>
+
+        <div class="view-card" id="view-p01">
+          <h3>P01 · <code>vw_p01_receita_mensal</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, número de pedidos e ticket médio (receita ÷ pedidos) por mês.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por mês (20 linhas). Os pedidos são contados com <code>count(distinct pedido_sk)</code> porque um pedido com três itens aparece três vezes na fonte.</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>O pico de nov/17 corresponde à Black Friday e não indica tendência. A série termina em ago/18 por construção: os meses seguintes estão incompletos e desenhariam uma queda que não existe. Receita e pedidos devem ser apresentados em dois gráficos, sem eixo y duplo.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P01 · Tempo · Como evoluíram receita e pedidos mês a mês?</span>
+create view public.vw_p01_receita_mensal with (security_invoker = on) as
+select ano_mes, round(sum(preco), 2) as receita, count(distinct pedido_sk) as pedidos,
+       round(sum(preco) / count(distinct pedido_sk), 2) as ticket_medio
+from public.vw_itens_entregues
+group by ano_mes order by ano_mes;</div>
+          <p class="ref"><strong>Referência:</strong> R$ 111.798,36 em jan/17, pico de R$ 987.765,37 em nov/17, R$ 977.544,69 em mai/18 e R$ 838.576,64 em ago/18; platô desde mar/18.</p>
+        </div>
+
+        <div class="view-card" id="view-p02">
+          <h3>P02 · <code>vw_p02_dia_hora</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Número de pedidos por dia da semana e faixa de horário: madrugada (0h–5h), manhã (6h–11h), tarde (12h–17h) e noite (18h–23h).</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>, com grão de pedido, porque a pergunta conta compras e não itens. Saída com uma linha por dia × faixa (28 linhas).</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues com data da compra no período.</dd>
+            <dt>Cuidado de leitura</dt><dd>O número na frente da faixa (“1 madrugada”, “2 manhã”) só existe para ordenar corretamente. Para comparar dias, some as quatro faixas de cada dia. A contagem é de pedidos entregues, pelo horário registrado na base: não mede receita nem conversão de campanha.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P02 · Tempo · Em que dia da semana e em que faixa de horário o cliente compra?</span>
+create view public.vw_p02_dia_hora with (security_invoker = on) as
+select t.dia_semana, t.nome_dia_semana,
+       case when p.hora_compra &lt; 6 then '1 madrugada' when p.hora_compra &lt; 12 then '2 manhã'
+            when p.hora_compra &lt; 18 then '3 tarde' else '4 noite' end as faixa_horario,
+       count(*) as pedidos
+from public.fato_pedidos p
+join public.dim_tempo t using (data_sk)
+where p.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31'
+group by 1, 2, 3 order by 1, 3;</div>
+          <p class="ref"><strong>Referência:</strong> segunda 15.660 pedidos (maior), sábado 10.519 (menor); tarde 37.083, noite 33.021, manhã 21.525, madrugada 4.582.</p>
+        </div>
+
+        <div class="view-card" id="view-p03">
+          <h3>P03 · <code>vw_p03_top_categorias</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, participação na receita total, pedidos que contêm a categoria e ticket médio (receita da categoria ÷ esses pedidos), para as 10 maiores categorias.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por categoria (10 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum, mais <code>limit 10</code> após ordenar pela receita.</dd>
+            <dt>Cuidado de leitura</dt><dd>A janela <code>sum(sum(preco)) over ()</code> é calculada antes do <code>limit</code>, então a participação é sobre a receita de todas as categorias: e por isso as 10 somam 62,5%, e não 100%. Um pedido com itens de duas categorias conta nas duas (778 pedidos estão nessa situação). A receita não mede lucro.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P03 · Categoria · Quais 10 categorias concentram a receita e qual o ticket de cada?</span>
+create view public.vw_p03_top_categorias with (security_invoker = on) as
+select categoria, round(sum(preco), 2) as receita,
+       round(100 * sum(preco) / sum(sum(preco)) over (), 1) as participacao_pct,
+       count(distinct pedido_sk) as pedidos,
+       round(sum(preco) / count(distinct pedido_sk), 2) as ticket_medio
+from public.vw_itens_entregues
+group by categoria order by receita desc limit 10;</div>
+          <p class="ref"><strong>Referência:</strong> beleza_saude R$ 1.229.557,50 (9,3%); relogios_presentes R$ 1.163.465,91 (8,8%, maior ticket, R$ 211,89); cama_mesa_banho 7,8% (ticket R$ 110,39).</p>
+        </div>
+
+        <div class="view-card" id="view-p04">
+          <h3>P04 · <code>vw_p04_crescimento_categorias</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita de jan–ago/2017, receita de jan–ago/2018 e crescimento percentual por categoria, com as 10 que mais cresceram.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por categoria.</dd>
+            <dt>Filtro</dt><dd>Base comum com <code>mes &lt;= 8</code>, para comparar os mesmos meses nos dois anos e deixar a Black Friday de fora; <code>having</code> exige pelo menos R$ 50 mil de receita em 2017.</dd>
+            <dt>Cuidado de leitura</dt><dd>O crescimento percentual calculado sobre base pequena distorce o ranking. Sem o piso, portateis_casa_forno_e_cafe lideraria com +48.785,7% sobre R$ 93,80. Compare cada categoria com o crescimento da Olist inteira no mesmo recorte, 141,1%: só quem cresceu acima disso ganhou participação.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P04 · Categoria · Quais categorias mais cresceram de jan–ago/2017 para jan–ago/2018?</span>
+<span class="code-comment">-- Só entram categorias com pelo menos R$ 50 mil em 2017: crescimento sobre base pequena engana.</span>
+create view public.vw_p04_crescimento_categorias with (security_invoker = on) as
+select categoria,
+       round(sum(preco) filter (where ano = 2017), 2) as receita_2017,
+       round(sum(preco) filter (where ano = 2018), 2) as receita_2018,
+       round(100 * (sum(preco) filter (where ano = 2018) / sum(preco) filter (where ano = 2017) - 1), 1)
+         as crescimento_pct
+from public.vw_itens_entregues
+where mes &lt;= 8
+group by categoria
+having sum(preco) filter (where ano = 2017) &gt;= 50000
+order by crescimento_pct desc limit 10;</div>
+          <p class="ref"><strong>Referência:</strong> bebes +268,6%; relogios_presentes +242,0%; beleza_saude +210,3%; utilidades_domesticas +207,2%; telefonia +203,0%.</p>
+        </div>
+
+        <div class="view-card" id="view-p05">
+          <h3>P05 · <code>vw_p05_receita_estado</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Receita, participação na receita total e pedidos por estado do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item; saída com uma linha por estado (27 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>Trata-se do estado do cliente, e não do vendedor, e vem do endereço do pedido mais recente de cada pessoa em <code>dim_cliente</code>. Com 27 barras, o gráfico perde legibilidade; recomenda-se mostrar as 10 maiores e agrupar o restante em “Outros” (12,2%), preservando o total.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P05 · Geografia · Como a receita se distribui por estado do cliente?</span>
+create view public.vw_p05_receita_estado with (security_invoker = on) as
+select estado_cliente as estado, round(sum(preco), 2) as receita,
+       round(100 * sum(preco) / sum(sum(preco)) over (), 1) as participacao_pct,
+       count(distinct pedido_sk) as pedidos
+from public.vw_itens_entregues
+group by estado_cliente order by receita desc;</div>
+          <p class="ref"><strong>Referência:</strong> SP 38,4% (R$ 5.057.381,81); RJ 13,3%; MG 11,7%; RS 5,5%; PR 5,0%.</p>
+        </div>
+
+        <div class="view-card" id="view-p06">
+          <h3>P06 · <code>vw_p06_frete_regiao</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Frete total ÷ preço total, em percentual, frete médio por item e número de itens, por região do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte com grão de item, porque o frete está registrado por item; saída com uma linha por região (5 linhas).</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>Trata-se de razão de somas, e não de média das razões de cada item, porque itens baratos com frete alto pesam demais numa média simples, que daria 49,4% no Norte em vez de 22,7%. A base só tem vendas realizadas; não há como medir quem desistiu por causa do frete.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P06 · Geografia · Quanto o frete pesa sobre o preço em cada região?</span>
+create view public.vw_p06_frete_regiao with (security_invoker = on) as
+select regiao_cliente as regiao, round(100 * sum(frete) / sum(preco), 1) as frete_sobre_preco_pct,
+       round(avg(frete), 2) as frete_medio_item, count(*) as itens
+from public.vw_itens_entregues
+group by regiao_cliente order by frete_sobre_preco_pct desc;</div>
+          <p class="ref"><strong>Referência:</strong> Norte 22,7% (R$ 36,82 por item); Nordeste 21,7%; Sul 17,7%; Centro-Oeste 17,6%; Sudeste 15,2% (R$ 17,34 por item).</p>
+        </div>
+
+        <div class="view-card" id="view-p07">
+          <h3>P07 · <code>vw_p07_atraso_estado</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Entregas, percentual entregue depois da data estimada (<code>1 - avg(entregue_no_prazo)</code>) e dias médios de entrega, por estado do cliente.</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>, porque prazo é atributo do pedido; saída com uma linha por estado (17 linhas).</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues no período com <code>entregue_no_prazo</code> preenchido (8 pedidos entregues sem data de entrega ficam fora) e estados com pelo menos 500 entregas.</dd>
+            <dt>Cuidado de leitura</dt><dd>Taxa e volume contam histórias diferentes. MA tem a maior taxa, mas SP, com 4,5%, tem o maior número de pedidos atrasados (1.817). Dez estados ficam fora do ranking porque, com poucas entregas, a taxa oscila demais.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P07 · Prazo · Em que estados mais se entrega com atraso?</span>
+<span class="code-comment">-- Estados com menos de 500 entregas ficam de fora: a taxa oscila demais.</span>
+create view public.vw_p07_atraso_estado with (security_invoker = on) as
+select c.estado, count(*) as entregas,
+       round(100 * (1 - avg(p.entregue_no_prazo)), 1) as atraso_pct,
+       round(avg(p.dias_entrega), 1) as dias_entrega_medio
+from public.fato_pedidos p
+join public.dim_tempo t   using (data_sk)
+join public.dim_cliente c using (cliente_sk)
+where p.status = 'delivered' and p.entregue_no_prazo is not null
+  and t.data between '2017-01-01' and '2018-08-31'
+group by c.estado having count(*) &gt;= 500
+order by atraso_pct desc;</div>
+          <p class="ref"><strong>Referência:</strong> MA 17,5%; CE 13,8%; RJ 12,2% com 12.312 entregas; BA 12,2%; SP 4,5% (8,7 dias em média).</p>
+        </div>
+
+        <div class="view-card" id="view-p08">
+          <h3>P08 · <code>vw_p08_nota_prazo</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Pedidos avaliados, nota média e percentual de notas 1 e 2, separando entregas no prazo e com atraso.</dd>
+            <dt>Grão</dt><dd>Fonte <code>fato_pedidos</code>: a avaliação existe por pedido, e ler a nota por item duplicaria a nota de pedidos com vários itens. Saída com 2 linhas.</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues no período, com prazo e nota preenchidos. Nos 547 pedidos com mais de uma avaliação, <code>estrela.sql</code> já guardou a última respondida.</dd>
+            <dt>Cuidado de leitura</dt><dd>A view mostra correlação, e não causa. Atraso e nota baixa variam juntos, mas o atraso é apenas uma das causas possíveis: produto errado, avaria e atendimento podem estar no mesmo pedido. A view não autoriza prever quanto a nota subiria sem atrasos.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P08 · Satisfação · O atraso derruba a nota do cliente?</span>
+create view public.vw_p08_nota_prazo with (security_invoker = on) as
+select case p.entregue_no_prazo when 1 then 'no prazo' else 'com atraso' end as entrega,
+       count(*) as pedidos_avaliados,
+       round(avg(p.nota_avaliacao), 2) as nota_media,
+       round(100 * avg((p.nota_avaliacao &lt;= 2)::int), 1) as notas_1_e_2_pct
+from public.fato_pedidos p
+join public.dim_tempo t using (data_sk)
+where p.status = 'delivered' and p.entregue_no_prazo is not null and p.nota_avaliacao is not null
+  and t.data between '2017-01-01' and '2018-08-31'
+group by 1 order by 1 desc;</div>
+          <p class="ref"><strong>Referência:</strong> no prazo: nota 4,29 e 9,2% de notas 1–2 (89.182 pedidos); com atraso: nota 2,27 e 62,4% de notas 1–2 (6.378 pedidos).</p>
+        </div>
+
+        <div class="view-card" id="view-p09">
+          <h3>P09 · <code>vw_p09_recompra</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Clientes com pelo menos um pedido entregue no período, quantos têm mais de um e o percentual de recompra.</dd>
+            <dt>Grão</dt><dd>A CTE <code>por_cliente</code> tem uma linha por pessoa (<code>cliente_sk</code>, que vem de <code>customer_unique_id</code>); a saída tem uma linha.</dd>
+            <dt>Filtro</dt><dd>Pedidos entregues com data da compra no período.</dd>
+            <dt>Cuidado de leitura</dt><dd>A janela é de 20 meses: quem comprou em 2016 e voltou em 2017 conta como cliente novo. Com <code>customer_id</code>, que muda a cada pedido, a mesma conta dá 96.211 clientes e zero recorrentes, conclusão produzida pela escolha da chave errada.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P09 · Livre · Quantos clientes voltam a comprar?</span>
+create view public.vw_p09_recompra with (security_invoker = on) as
+with por_cliente as (
+  select p.cliente_sk, count(*) as pedidos
+  from public.fato_pedidos p
+  join public.dim_tempo t using (data_sk)
+  where p.status = 'delivered' and t.data between '2017-01-01' and '2018-08-31'
+  group by p.cliente_sk
+)
+select count(*) as clientes,
+       count(*) filter (where pedidos &gt; 1) as clientes_recorrentes,
+       round(100.0 * count(*) filter (where pedidos &gt; 1) / count(*), 2) as recompra_pct
+from por_cliente;</div>
+          <p class="ref"><strong>Referência:</strong> 2.789 de 93.104 clientes voltaram a comprar (3,00%).</p>
+        </div>
+
+        <div class="view-card" id="view-p10">
+          <h3>P10 · <code>vw_p10_concentracao_vendedores</code></h3>
+          <dl>
+            <dt>O que calcula</dt><dd>Ordena os vendedores pela receita, divide-os em 10 grupos de tamanho igual com <code>ntile(10)</code> e soma receita e participação de cada decil.</dd>
+            <dt>Grão</dt><dd>A CTE <code>por_vendedor</code> tem uma linha por vendedor (2.945 com venda entregue no período); a saída tem uma linha por decil.</dd>
+            <dt>Filtro</dt><dd>O da base comum.</dd>
+            <dt>Cuidado de leitura</dt><dd>Concentração de receita não diz se o vendedor grande é rentável: a base não tem margem nem custo. Os decis têm 295 ou 294 vendedores porque 2.945 não divide por 10. Nos 5 decis inferiores, 831 dos 1.470 vendedores fizeram a primeira venda do período em 2018, o que indica que parte da cauda é formada por vendedores novos.</dd>
+          </dl>
+          <div class="code-block"><span class="code-comment">-- P10 · Livre · Quanto a receita depende dos maiores vendedores?</span>
+create view public.vw_p10_concentracao_vendedores with (security_invoker = on) as
+with por_vendedor as (
+  select vendedor_sk, sum(preco) as receita from public.vw_itens_entregues group by vendedor_sk
+), faixas as (
+  select receita, ntile(10) over (order by receita desc) as decil from por_vendedor
+)
+select decil, count(*) as vendedores, round(sum(receita), 2) as receita,
+       round(100 * sum(receita) / sum(sum(receita)) over (), 1) as participacao_pct
+from faixas group by decil order by decil;</div>
+          <p class="ref"><strong>Referência:</strong> 1º decil (295 vendedores) = 67,0% da receita; 2º decil = 15,2%; os 5 decis inferiores somam 3,3%.</p>
+        </div>
+
+        <h3>8.5 Aplicar o gabarito</h3>
+        <p>Depois de registrar a diferença encontrada, todos aplicam o gabarito. O trabalho do grupo permanece no repositório, e o gabarito garante que a turma inteira chegue à aula 10 com as mesmas 11 views e os mesmos nomes de colunas.</p>
+        <ol>
+          <li>Salve o SQL do grupo em <code>aula-09-seunome/views.sql</code> e anote a diferença encontrada.</li>
+          <li>Apague as views do grupo no Supabase, para que a API exponha só as do gabarito:</li>
+        </ol>
+        <div class="code-block">drop view if exists public.vw_p06_frete_regiao_grupo;   <span class="code-comment">-- repita para cada view _grupo</span></div>
+        <ol start="3">
+          <li>Abra <a href="olist/views.sql">materiais/aula-09/olist/views.sql</a> (no Codespace, depois de sincronizar o fork com <strong>Sync fork</strong> no GitHub e rodar <code>git pull</code>, ou pelo link), copie o arquivo inteiro, cole no SQL Editor do Supabase e clique em <strong>Run</strong>. O arquivo pode ser executado de novo sem erro.</li>
+          <li>Confira as views criadas e rode a conferência da seção 8.3 completa, com os nomes do gabarito: as dez linhas devem voltar com <code>confere = true</code>.</li>
+        </ol>
+        <div class="code-block">select table_name
+from information_schema.views
+where table_schema = 'public'
+order by 1;   <span class="code-comment">-- esperado: 11 linhas, de vw_itens_entregues a vw_p10_concentracao_vendedores</span></div>
+        <p>As permissões do gabarito aparecem no fim do arquivo:</p>
+        <div class="code-block">grant select on public.vw_itens_entregues, public.vw_p01_receita_mensal, public.vw_p02_dia_hora,
+  public.vw_p03_top_categorias, public.vw_p04_crescimento_categorias, public.vw_p05_receita_estado,
+  public.vw_p06_frete_regiao, public.vw_p07_atraso_estado, public.vw_p08_nota_prazo, public.vw_p09_recompra,
+  public.vw_p10_concentracao_vendedores to anon, authenticated;</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>9. Teste uma view pela API REST</h2>
+        <p>O Supabase publica automaticamente uma API REST (PostgREST) para as tabelas e views do schema <code>public</code>. É por ela que o dashboard da aula 10, hospedado no GitHub Pages, vai ler os números. O teste no terminal separa dois problemas que costumam aparecer juntos: a correção da view e das permissões, verificada nesta aula, e a correção do HTML, verificada na aula 10.</p>
+        <ol>
+          <li>No painel do Supabase, abra <strong>Project Settings</strong>, na seção <strong>API Keys</strong>, e copie a chave publicável, que começa com <code>sb_publishable_</code> (em projetos antigos, a chave <strong>anon public</strong>). A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>; o <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code>.</li>
+          <li>No terminal do Codespace, rode os comandos abaixo. O <code>read</code> pede os dois valores sem gravá-los em arquivo.</li>
+        </ol>
         <div class="code-block">read -p "Project URL: " SUPABASE_URL
 read -p "Chave publicável: " SUPABASE_KEY
 
-curl -s "$SUPABASE_URL/rest/v1/vw_p08_nota_prazo?select=*" \
+curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
   -H "apikey: $SUPABASE_KEY" \
   -H "Authorization: Bearer $SUPABASE_KEY"</div>
-        <p>A resposta é uma lista JSON com uma linha por linha da view, com os nomes de coluna exatamente como estão em <code>views.sql</code>:</p>
-        <div class="code-block">[{"entrega":"no prazo","pedidos_avaliados":89182,"nota_media":4.29,"notas_1_e_2_pct":9.2},
- {"entrega":"com atraso","pedidos_avaliados":6378,"nota_media":2.27,"notas_1_e_2_pct":62.4}]</div>
-        <p>No navegador, a mesma chamada é um <code>fetch</code>. Os dois cabeçalhos carregam a chave publicável: <code>apikey</code> é exigido pelo gateway do Supabase para identificar o projeto, e <code>Authorization: Bearer</code> é o cabeçalho de autenticação que chega ao PostgREST. Com a chave publicável nos dois, a consulta roda com o papel <code>anon</code>.</p>
-        <div class="code-block"><span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(`${SUPABASE_URL}<span class="code-string">/rest/v1/vw_p01_receita_mensal?select=*</span>`, {
-  headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-});
-<span class="code-keyword">if</span> (!resposta.ok) <span class="code-keyword">throw new</span> Error(`HTTP ${resposta.status}`);  <span class="code-comment">// 401, 404…: não siga em frente</span>
-<span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();                       <span class="code-comment">// lista de objetos, um por mês</span></div>
-
-        <h3>Formatação dos números em pt-BR</h3>
-        <p>O PostgREST monta a resposta com funções JSON do próprio Postgres, e colunas <code>numeric</code> e <code>bigint</code> chegam como número JSON, sem aspas. Dois detalhes, porém, afetam a tela. Primeiro, o JSON não guarda zeros à direita: <code>"recompra_pct":3.00</code> vira o número <code>3</code> no JavaScript, e a tela mostraria “3%” onde a view diz 3,00%. Segundo, o JavaScript escreve números no formato americano, como em <code>13181027.13</code>, que é a receita dos pedidos delivered de jan/2017 a ago/2018 definida na aula 8. A formatação resolve os dois problemas; a conversão com <code>Number()</code> entra como defesa, para o caso de uma view futura devolver texto (um <code>to_char</code>, um <code>::text</code>) e a soma virar concatenação.</p>
-        <div class="code-block"><span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
-<span class="code-keyword">const</span> inteiro = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>);
-<span class="code-keyword">const</span> duasCasas = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-brl.format(Number(13181027.13));   <span class="code-comment">// "R$ 13.181.027,13"</span>
-inteiro.format(Number(96211));     <span class="code-comment">// "96.211"</span>
-duasCasas.format(Number(3));       <span class="code-comment">// "3,00": os zeros voltam na formatação</span>
-<span class="code-string">'987765.37'</span> + 1;                  <span class="code-comment">// "987765.371": por isso o Number() defensivo</span></div>
-        <p>O <code>Intl.NumberFormat</code> é nativo do navegador: não exige biblioteca, respeita a vírgula decimal e o ponto de milhar e, com <code>style: 'currency'</code>, escreve o símbolo do real no lugar certo. Crie o formatador uma vez e reutilize; criá-lo a cada valor funciona, mas desperdiça processamento em gráficos com muitos pontos.</p>
-
-        <h3>Gráficos com Chart.js pelo CDN</h3>
-        <p>O Chart.js é uma biblioteca de gráficos em JavaScript que desenha num elemento <code>&lt;canvas&gt;</code>. Como o GitHub Pages não executa <code>npm install</code>, a biblioteca vem de um CDN (rede de distribuição de conteúdo) por uma tag <code>&lt;script&gt;</code>. Fixe a versão na URL: sem o número, uma atualização da biblioteca pode mudar o seu painel sem nenhum commit seu.</p>
-        <div class="code-block">&lt;script src=<span class="code-string">"https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"</span>&gt;&lt;/script&gt;</div>
-        <p>A escolha do tipo de gráfico já foi feita na especificação. Na tradução para o Chart.js, a tendência mensal é <code>type: 'line'</code>; ranking e comparação entre categorias são <code>type: 'bar'</code> com <code>indexAxis: 'y'</code> (barras horizontais, que acomodam nomes longos) e dados ordenados; um número isolado, como a taxa de recompra, dispensa gráfico. Duas regras são obrigatórias: o eixo de valores começa no zero (<code>beginAtZero: true</code>) e não existe segundo eixo y.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>6. O dashboard de referência</h2>
-        <p>Antes de construir o seu, abra o painel do professor. Ele lê as mesmas dez views do projeto de cada estudante e serve de gabarito de comportamento: o que acontece enquanto carrega, como o erro aparece, como o título se monta a partir dos dados e onde ficam unidade, período e nota de origem.</p>
-        <p><a class="btn btn-slides" href="dashboard-referencia/index.html">Abrir o dashboard de referência</a></p>
-        <ol>
-          <li>Cole a Project URL e a chave publicável e clique em <strong>Carregar o painel</strong>. Com <em>Lembrar neste navegador</em> marcado, os dois valores ficam apenas no <code>localStorage</code> do seu navegador; o botão <strong>Esquecer chave</strong> apaga.</li>
-          <li>Os dez cartões aparecem em três blocos: <strong>Contexto</strong> (P01, P05, P03), <strong>Tensão</strong> (P10, P09, P07, P08) e <strong>Decisão</strong> (P04, P06, P02). Se a turma votou outra ordem na aula 8, a do seu painel segue a votação.</li>
-          <li>Em cada cartão, abra <em>Ver as linhas de vw_…</em>: a tabela mostra a resposta da view com os nomes das colunas. É o ponto de partida da reconciliação da seção 12.</li>
-          <li>Teste o erro: clique em <strong>Trocar projeto</strong>, apague um caractere da chave e carregue de novo. Os cartões mostram HTTP 401 e o formulário volta com a explicação.</li>
-          <li>Teste a proteção: cole uma chave que comece com <code>sb_secret_</code>. O painel recusa antes de fazer qualquer chamada.</li>
-        </ol>
-        <p>Com os dados do gabarito, os títulos que o painel monta são, por exemplo: “SP concentra 38,4% da receita; com RJ e MG, chega a 63,4%”, “Os 295 vendedores do 1º decil geram 67,0% da receita; os 5 decis inferiores somam 3,3%” e “Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2”. Nenhuma dessas frases está escrita no código: cada uma é calculada a partir das linhas da view. Se o número obtido for diferente, a divergência está na view do seu projeto, e o painel serve justamente para evidenciá-la.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>7. Prática guiada: construção com o agente</h2>
-        <p>Trabalhe no Codespace do seu fork, com o Copilot em modo agente (ou o Antigravity), a execução de comandos dependente da sua aprovação e a leitura de cada diff antes de aceitar. A pasta fica na raiz do repositório, ao lado de <code>aula-08-seunome</code>:</p>
-        <div class="code-block">aula-09-seunome/
-├── index.html     <span class="code-comment"># estrutura dos cartões, textos fixos (pergunta, período, fonte)</span>
-├── supabase.js    <span class="code-comment"># Project URL, chave publicável e a função que lê uma view</span>
-├── app.js         <span class="code-comment"># um bloco por cartão: lê, calcula o título, desenha, trata erro</span>
-├── style.css      <span class="code-comment"># layout responsivo</span>
-└── README.md      <span class="code-comment"># URL, reconciliação, teste de leitura e recomendação</span></div>
-
-        <h3>7.1 O prompt</h3>
-        <p>O prompt a seguir descreve as regras que a revisão vai cobrar. A última instrução é a mais importante: o agente apresenta o plano, com a fórmula de cada título, antes de escrever código. Corrigir um plano exige uma frase, enquanto corrigir dez cartões já escritos consumiria boa parte da aula.</p>
-        <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-08-seunome/ESPECIFICACAO.md. Crie a pasta aula-09-seunome com
-index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
-no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
-
-Regras:
-- Dados só pela API REST do Supabase: fetch em SUPABASE_URL/rest/v1/&lt;view&gt;?select=*
-  com os headers apikey e Authorization: Bearer, usando a chave publicável que
-  vou colar em supabase.js. Nunca use chave secreta nem senha do banco.
-- Nenhum número digitado no HTML ou no JavaScript: valores, títulos e rótulos
-  numéricos saem das linhas da view.
-- Um cartão por pergunta, na ordem narrativa da especificação. Cada cartão tem
-  título que afirma montado com os dados; subtítulo com unidade, período
-  (jan/2017 a ago/2018) e filtro; o visual da especificação; a nota da âncora
-  tratada; e a fonte com o nome da view.
-- Converta valores com Number() e formate com Intl.NumberFormat('pt-BR').
-- Chart.js 4 de https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js.
-  Sem eixo y duplo; barra horizontal ordenada para ranking; linha para meses.
-- Cada cartão mostra "carregando" e, se a chamada falhar, uma mensagem com o
-  status HTTP e a view, sem derrubar os outros cartões.
-- HTML, CSS e JS puros, sem build; funciona com python -m http.server e no
-  GitHub Pages; sem rolagem horizontal no celular.
-Antes de escrever código, liste os arquivos e, para cada pergunta, a view, as
-colunas e a fórmula do título. Espere a minha aprovação.</div></div>
-        <p>Ao receber o plano, confira três pontos contra a especificação: a ordem dos cartões, o visual de cada pergunta e se a fórmula do título usa apenas colunas que existem na view. Um título como “beleza_saude lidera” só pode ser calculado se a fórmula ordenar a view por receita; se o plano disser “título: beleza_saude lidera”, o agente digitou o resultado.</p>
-
-        <h3>7.2 O esqueleto que o agente deve produzir</h3>
-        <p>Os blocos abaixo são uma versão mínima, com dois cartões, do que o prompt pede. Servem para você reconhecer as peças no código do agente, e também como ponto de partida se o agente travar. Eles funcionam como estão: basta trocar a URL e a chave em <code>supabase.js</code>.</p>
-        <p><strong><code>index.html</code></strong>: os textos fixos do cartão são definições (pergunta, período, fonte). O título começa como “Carregando…” e o JavaScript substitui. A ordem das tags <code>&lt;script&gt;</code> importa: o Chart.js e o <code>supabase.js</code> carregam antes, e o <code>defer</code> faz o <code>app.js</code> rodar depois que a página inteira foi lida.</p>
-        <div class="code-block">&lt;!DOCTYPE html&gt;
-&lt;html lang="pt-BR"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Olist 2019 · Painel do Chief de Vendas&lt;/title&gt;
-  &lt;link rel="stylesheet" href="style.css"&gt;
-  &lt;script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"&gt;&lt;/script&gt;
-  &lt;script src="supabase.js"&gt;&lt;/script&gt;
-  &lt;script src="app.js" defer&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;header&gt;
-    &lt;h1&gt;Estratégias comerciais da Olist para 2019&lt;/h1&gt;
-    &lt;p&gt;Receita = preço dos itens, sem frete, de pedidos entregues · jan/2017 a ago/2018&lt;/p&gt;
-  &lt;/header&gt;
-  &lt;main&gt;
-    &lt;h2&gt;Contexto&lt;/h2&gt;
-    &lt;article class="cartao" id="p01"&gt;
-      &lt;p class="etiqueta"&gt;P01 · Como evoluíram receita e pedidos mês a mês?&lt;/p&gt;
-      &lt;h3 class="titulo"&gt;Carregando…&lt;/h3&gt;
-      &lt;p class="subtitulo"&gt;Receita em R$ por mês · pedidos entregues · jan/2017 a ago/2018&lt;/p&gt;
-      &lt;div class="corpo"&gt;&lt;canvas aria-label="Receita mensal"&gt;&lt;/canvas&gt;&lt;/div&gt;
-      &lt;p class="fonte"&gt;Fonte: vw_p01_receita_mensal (Supabase)&lt;/p&gt;
-    &lt;/article&gt;
-    &lt;h2&gt;Tensão&lt;/h2&gt;
-    &lt;article class="cartao" id="p09"&gt;
-      &lt;p class="etiqueta"&gt;P09 · Quantos clientes voltam a comprar?&lt;/p&gt;
-      &lt;h3 class="titulo"&gt;Carregando…&lt;/h3&gt;
-      &lt;p class="subtitulo"&gt;% de clientes com mais de um pedido entregue · jan/2017 a ago/2018&lt;/p&gt;
-      &lt;div class="corpo numero"&gt;&lt;/div&gt;
-      &lt;p class="fonte"&gt;Fonte: vw_p09_recompra (Supabase)&lt;/p&gt;
-    &lt;/article&gt;
-  &lt;/main&gt;
-&lt;/body&gt;
-&lt;/html&gt;</div>
-        <p><strong><code>supabase.js</code></strong>: o único arquivo com a configuração do projeto. A função <code>lerView</code> transforma qualquer resposta que não seja 2xx em erro com o status e o corpo da resposta, que é onde o Supabase explica o problema.</p>
-        <div class="code-block"><span class="code-comment">// Configuração pública do projeto: a chave publicável pode ficar aqui.</span>
-<span class="code-comment">// A chave secreta e a senha do banco, nunca.</span>
-const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_COLE_A_SUA_CHAVE';
-
-async function lerView(view) {
-  const resposta = await fetch(`${SUPABASE_URL}/rest/v1/${view}?select=*`, {
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-  });
-  if (!resposta.ok) {
-    const detalhe = await resposta.text();
-    throw new Error(`${view} respondeu HTTP ${resposta.status}: ${detalhe}`);
-  }
-  return resposta.json();
-}</div>
-        <p><strong><code>app.js</code></strong>: a função <code>preencherCartao</code> concentra o padrão de carregamento e erro; cada pergunta só descreve como calcular o título e desenhar. Repare que nenhum valor aparece no código: o pico de receita é encontrado com <code>Math.max</code>, e os meses vêm da coluna <code>ano_mes</code>.</p>
-        <div class="code-block">const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-const inteiro = new Intl.NumberFormat('pt-BR');
-const duasCasas = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-const mesCurto = anoMes =&gt; {
-  const [ano, mes] = anoMes.split('-');
-  return `${MESES[Number(mes) - 1]}/${ano.slice(2)}`;
-};
-
-<span class="code-comment">// Lê a view, desenha o cartão ou mostra o erro sem derrubar os outros cartões.</span>
-async function preencherCartao(id, view, desenhar) {
-  const cartao = document.getElementById(id);
-  try {
-    const linhas = await lerView(view);
-    if (linhas.length === 0) throw new Error(`${view} respondeu sem linhas`);
-    desenhar(cartao, linhas);
-  } catch (erro) {
-    cartao.classList.add('erro');
-    cartao.querySelector('.titulo').textContent = 'Não foi possível ler esta view';
-    cartao.querySelector('.corpo').textContent = erro.message;
-  }
-}
-
-<span class="code-comment">// P09 · um número basta: nada de gráfico de uma barra só</span>
-preencherCartao('p09', 'vw_p09_recompra', (cartao, linhas) =&gt; {
-  const clientes = Number(linhas[0].clientes);
-  const recorrentes = Number(linhas[0].clientes_recorrentes);
-  const taxa = Number(linhas[0].recompra_pct);
-  cartao.querySelector('.titulo').textContent =
-    `Só ${duasCasas.format(taxa)}% dos clientes voltaram a comprar: ` +
-    `${inteiro.format(recorrentes)} de ${inteiro.format(clientes)}`;
-  cartao.querySelector('.corpo').textContent = `${duasCasas.format(taxa)}%`;
-});
-
-<span class="code-comment">// P01 · tendência no tempo: linha, eixo começando no zero</span>
-preencherCartao('p01', 'vw_p01_receita_mensal', (cartao, linhas) =&gt; {
-  const meses = linhas.map(linha =&gt; mesCurto(linha.ano_mes));
-  const receitas = linhas.map(linha =&gt; Number(linha.receita));
-  const pico = receitas.indexOf(Math.max(...receitas));
-  const ultimo = receitas.length - 1;
-  cartao.querySelector('.titulo').textContent =
-    `A receita mensal foi de ${brl.format(receitas[0])} (${meses[0]}) para ` +
-    `${brl.format(receitas[ultimo])} (${meses[ultimo]}), com pico em ${meses[pico]}`;
-  new Chart(cartao.querySelector('canvas'), {
-    type: 'line',
-    data: { labels: meses, datasets: [{ data: receitas, borderColor: '#0a9ad0', borderWidth: 2, pointRadius: 0 }] },
-    options: {
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: item =&gt; brl.format(item.parsed.y) } }
-      },
-      scales: { y: { beginAtZero: true, ticks: { callback: valor =&gt; brl.format(valor) } } }
-    }
-  });
-});</div>
-        <p><strong><code>style.css</code></strong>: o Chart.js precisa de um contêiner com altura definida e <code>position: relative</code> quando <code>maintainAspectRatio</code> é <code>false</code>; sem isso, o gráfico cresce sem parar ou fica com altura zero.</p>
-        <div class="code-block">body { margin: 0 auto; max-width: 960px; padding: 1rem; font-family: system-ui, sans-serif; color: #1e293b; background: #f4f8fb; }
-.cartao { margin: 1rem 0; padding: 1rem 1.25rem; border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; }
-.etiqueta, .subtitulo, .fonte { color: #64748b; font-size: 0.9rem; }
-.titulo { margin: 0.3rem 0; font-size: 1.15rem; }
-.corpo { position: relative; height: 280px; }
-.corpo.numero { height: auto; font-size: 3rem; font-weight: 700; }
-.cartao.erro .corpo { height: auto; color: #b91c1c; font-size: 0.95rem; }</div>
-        <p>Com os dados do gabarito, esses dois cartões mostram “A receita mensal foi de R$ 111.798,36 (jan/17) para R$ 838.576,64 (ago/18), com pico em nov/17” e “Só 3,00% dos clientes voltaram a comprar: 2.789 de 93.104”. Os outros oito cartões seguem o mesmo padrão, cada um com o visual e o título da sua linha na especificação.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>8. Revisão humana do diff</h2>
-        <p>O código entregue pelo agente costuma executar sem erro, mas o critério de aceite é outro: a tela deve afirmar apenas o que o dado autoriza. Por isso, antes de aceitar o diff, cada uma das quatro perguntas abaixo é respondida com uma verificação concreta, e não com base no relato do agente sobre o que fez.</p>
-        <ol>
-          <li><strong>Há número digitado?</strong> Procure valores com casas decimais ou separador de milhar nos arquivos do painel. Cada ocorrência precisa ser justificada (uma largura em CSS, a versão do Chart.js); um valor de receita, taxa ou contagem é reprovação imediata.
-            <div class="code-block">grep -nE '[0-9]{2,}[.,][0-9]' aula-09-seunome/*.html aula-09-seunome/*.js</div></li>
-          <li><strong>O carregamento e o erro aparecem?</strong> Com a rede lenta, cada cartão mostra “Carregando…”. Para testar o erro, troque temporariamente <code>vw_p09_recompra</code> por <code>vw_p09_recompraX</code> no <code>app.js</code> e recarregue: só aquele cartão pode mostrar HTTP 404, e os outros nove continuam de pé. Desfaça a troca.</li>
-          <li><strong>O título afirma e vem do dado?</strong> Leia cada título sozinho, como se estivesse num e-mail ao Chief. “Receita por estado” descreve o eixo; “SP concentra 38,4% da receita” afirma. Depois procure no código a linha que monta a frase e confira que cada número dela sai de uma variável lida da view.</li>
-          <li><strong>Unidade, período e fonte estão em todos os cartões?</strong> R$ ou %, jan/2017 a ago/2018, o filtro relevante (entregues, ≥ 500 entregas, ≥ R$ 50 mil em 2017) e o nome da view. Sem período, “3,00%” pode ser lido como taxa anual; sem filtro, a taxa de atraso do Maranhão parece comparável à de Roraima, que ficou fora da view.</li>
-        </ol>
-        <p>Verifique também as âncoras. Se a especificação diz que a P04 precisa mostrar a base de 2017 para impedir a leitura “bebês é a maior aposta”, e o agente desenhou só o crescimento percentual, o gráfico está tecnicamente correto, mas descumpre a especificação.</p>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>9. Teste no Codespace antes de publicar</h2>
-        <p>Abrir o <code>index.html</code> com duplo clique não reproduz o GitHub Pages. Um servidor estático local o reproduz, porque entrega os arquivos por HTTP, como o Pages fará. Na raiz do repositório:</p>
-        <div class="code-block">python -m http.server 8000</div>
-        <ol>
-          <li>O Codespace avisa que há uma aplicação na porta 8000. Se o aviso não aparecer, abra a aba <strong>PORTS</strong> do painel inferior.</li>
-          <li>Na linha da porta 8000, clique no ícone do globo (<em>Open in Browser</em>). O endereço abre na raiz do repositório.</li>
-          <li>Acrescente <code>/aula-09-seunome/</code> ao endereço. Não use <code>localhost</code> no seu navegador: o servidor roda no Codespace, não no seu computador.</li>
-          <li>Abra as ferramentas do desenvolvedor (<code>F12</code>), aba <strong>Network</strong>, e recarregue. Cada <code>vw_p…</code> precisa responder <strong>200</strong>; a aba <strong>Console</strong> não pode ter erro vermelho.</li>
-          <li>Ative a visualização de celular (ícone de dispositivo nas ferramentas do desenvolvedor) e role a página: não pode haver rolagem horizontal.</li>
-          <li>Pare o servidor com <code>Ctrl + C</code> no terminal.</li>
-        </ol>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>10. Publicação no GitHub Pages</h2>
-        <p>O GitHub Pages publica um site a partir de um branch do repositório. Como o curso é trunk-based, o branch é <code>main</code> e a pasta é a raiz; a sua pasta <code>aula-09-seunome</code> vira um endereço dentro do site do fork.</p>
-        <ol>
-          <li>Confirme que está no seu fork, e não no repositório do curso: <code>git remote -v</code> deve mostrar o seu usuário.</li>
-          <li>Publique o código:
-            <div class="code-block">git add aula-09-seunome
-git commit -m <span class="code-string">"Publica o dashboard do Chief de Vendas lendo as views do Supabase"</span>
-git push</div></li>
-          <li>No GitHub, abra o seu fork, entre em Settings e, depois, na seção Pages.</li>
-          <li>Em <strong>Build and deployment</strong>, escolha <strong>Source: Deploy from a branch</strong>.</li>
-          <li>Em <strong>Branch</strong>, selecione <strong>main</strong> e a pasta <strong>/(root)</strong>. Clique em <strong>Save</strong>.</li>
-          <li>Acompanhe a execução <em>pages build and deployment</em> na aba <strong>Actions</strong>. Quando ela terminar, a seção Pages, em Settings, mostra o endereço do site. A primeira publicação costuma levar alguns minutos.</li>
-          <li>Abra o endereço do painel, que segue o formato abaixo, no celular e fora do Codespace:
-            <div class="code-block">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/</div></li>
-        </ol>
-        <p>Cada <code>git push</code> posterior dispara um novo deploy. O endereço diferencia maiúsculas de minúsculas: <code>Aula-09-SeuNome</code> e <code>aula-09-seunome</code> são páginas diferentes, e só uma existe.</p>
+        <p>A resposta esperada é uma lista JSON com um objeto: <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00. A API aceita filtros e ordenação na URL, o que ajuda a conferir outras views sem abrir o SQL Editor:</p>
+        <div class="code-block">curl -s "$SUPABASE_URL/rest/v1/vw_p07_atraso_estado?select=estado,atraso_pct,entregas&amp;order=atraso_pct.desc&amp;limit=3" \
+  -H "apikey: $SUPABASE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_KEY"</div>
+        <table>
+          <thead><tr><th>Resposta</th><th>O que significa</th><th>O que fazer</th></tr></thead>
+          <tbody>
+            <tr><td><code>[]</code> (lista vazia)</td><td>A view existe, mas a chave não enxerga as linhas.</td><td>Confira se <code>estrela.sql</code> rodou inteiro, com as políticas <code>leitura_publica</code>.</td></tr>
+            <tr><td>Erro <code>42P01</code> ou <code>PGRST205</code></td><td>A view não existe com esse nome ou a API ainda não recarregou o esquema.</td><td>Rode a consulta de <code>information_schema.views</code>; espere alguns segundos e tente de novo.</td></tr>
+            <tr><td>Erro <code>42501</code> (permission denied)</td><td>Falta o <code>grant select</code> para <code>anon</code>.</td><td>Rode <code>views.sql</code> inteiro de novo, incluindo o <code>grant</code> final.</td></tr>
+            <tr><td><code>401</code> ou “Invalid API key”</td><td>Chave errada, incompleta ou com espaço.</td><td>Copie a chave de novo em API Keys.</td></tr>
+          </tbody>
+        </table>
         <div class="alert-box">
-          <h4>O fork precisa ser público</h4>
-          <p>No plano gratuito do GitHub, o Pages só publica repositórios públicos. Um fork de repositório público nasce público; se você criou uma cópia privada, a seção Pages pede upgrade de plano. Publicar um repositório público é também a razão pela qual a chave secreta nunca pode estar em nenhum arquivo dele, nem em commits antigos.</p>
+          <h4>Chave publicável e chave secreta</h4>
+          <p>A chave publicável foi feita para ficar no navegador: ela só lê o que o RLS e os <code>grant</code> permitem, e as views são somente leitura. A chave secreta e a senha do banco ignoram essas barreiras. Elas não entram no terminal compartilhado da aula, em prompt, em arquivo nem em commit.</p>
         </div>
       </section>
 
-      <section data-lesson-section="concepts">
-        <h2>11. Diagnóstico de erros</h2>
-        <p>A maioria dos erros deste laboratório cai em uma de duas camadas: a API (chave, view, permissão) ou a hospedagem (endereço, deploy). O código de status HTTP, visto na aba Network, diz em qual camada procurar.</p>
-        <table>
-          <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Como resolver</th></tr></thead>
-          <tbody>
-            <tr><td><code>401</code> com “Invalid API key”</td><td>Chave errada, cortada, com espaço ou de outro projeto.</td><td>Copie de novo em Project Settings, na seção API Keys, e confira se o <code>&lt;ref&gt;</code> da URL é do mesmo projeto.</td></tr>
-            <tr><td><code>401</code> ou <code>403</code> com código <code>42501</code></td><td>A chave foi aceita, mas <code>anon</code> não tem <code>grant select</code> na view ou nas tabelas da estrela.</td><td>Rode <code>views.sql</code> inteiro, com o <code>grant</code> final; se persistir, rode o bloco final de <code>estrela.sql</code>.</td></tr>
-            <tr><td><code>404</code> com código <code>PGRST205</code></td><td>A view não existe com esse nome, ou a API ainda não recarregou o esquema.</td><td>Confira o nome em <code>information_schema.views</code>; se a view acabou de ser criada, rode <code>notify pgrst, 'reload schema';</code> no SQL Editor.</td></tr>
-            <tr><td><code>200</code> com <code>[]</code></td><td>RLS ligado sem política de leitura nas tabelas que a view consulta.</td><td>Rode o bloco final de <code>estrela.sql</code>, que cria a política <code>leitura_publica</code>.</td></tr>
-            <tr><td>“Failed to fetch” ou mensagem de CORS no console</td><td>Raramente se trata de CORS, pois a API do Supabase aceita chamadas de qualquer origem. A causa costuma ser Project URL errada (com <code>/rest/v1</code> duplicado, <code>http</code> ou erro de digitação) ou projeto pausado por inatividade no plano gratuito.</td><td>Abra a URL da view no navegador para ver a resposta real; se o projeto estiver pausado, restaure-o no painel do Supabase.</td></tr>
-            <tr><td><code>404</code> na página do GitHub Pages</td><td>Deploy ainda rodando, pasta com nome diferente (maiúsculas contam) ou arquivo que não se chama <code>index.html</code>.</td><td>Espere o fim do deploy em Actions e compare o endereço com o nome da pasta no repositório.</td></tr>
-            <tr><td>Página publicada mostra a versão antiga</td><td>Deploy do último push ainda não terminou ou o navegador guardou cache.</td><td>Aguarde a execução em Actions e recarregue com <code>Ctrl + Shift + R</code>.</td></tr>
-            <tr><td>“Chart is not defined” no console</td><td>O <code>app.js</code> rodou antes do Chart.js, ou a URL do CDN está errada.</td><td>Mantenha a tag do Chart.js antes do <code>app.js</code>, que usa <code>defer</code>.</td></tr>
-            <tr><td>A seção Pages, em Settings, pede upgrade</td><td>Repositório privado no plano gratuito.</td><td>Use o fork público do repositório do curso.</td></tr>
-            <tr><td>Consulta direta a uma tabela de fato devolve exatamente 1.000 linhas</td><td>A API do Supabase limita o número de linhas por resposta.</td><td>Não é o caso das dez views, que têm no máximo 28 linhas; agregue no banco, com uma view, em vez de trazer o fato para o navegador.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section data-lesson-section="guided-practice">
-        <h2>12. Reconciliação e teste de leitura</h2>
-        <h3>12.1 Reconciliação entre tela e view</h3>
-        <p>A reconciliação da aula 7 garantiu que a estrela não perdeu receita; a conferência da aula 8 garantiu que as views batem com as respostas de referência. Resta verificar o último elo, isto é, se a tela mostra o que a view devolve. Arredondamento, ordenação e filtros no JavaScript são pontos em que o número pode mudar no caminho. Para cada cartão, escolha o número principal do título e confira no SQL Editor:</p>
-        <div class="code-block">select * from vw_p05_receita_estado where estado = <span class="code-string">'SP'</span>;
-select * from vw_p08_nota_prazo;
-select * from vw_p01_receita_mensal order by receita desc limit 1;</div>
-        <table>
-          <thead><tr><th>Cartão</th><th>Número na tela</th><th>View · coluna · linha</th><th>Valor na view</th><th>Igual?</th></tr></thead>
-          <tbody>
-            <tr><td>P05</td><td>SP 38,4%</td><td><code>vw_p05_receita_estado</code> · <code>participacao_pct</code> · SP</td><td>38.4</td><td>sim</td></tr>
-            <tr><td>P08</td><td>nota 2,27 com atraso</td><td><code>vw_p08_nota_prazo</code> · <code>nota_media</code> · com atraso</td><td>2.27</td><td>sim</td></tr>
-            <tr><td>P01</td><td>pico de R$ 987,8 mil em nov/17</td><td><code>vw_p01_receita_mensal</code> · <code>receita</code> · 2017-11</td><td>987765.37</td><td>sim, arredondado para mil</td></tr>
-          </tbody>
-        </table>
-        <p>Quando o título soma ou compara linhas (“com RJ e MG, chega a 63,4%”), a view não tem esse número pronto. Registre o cálculo: soma de <code>receita</code> das três primeiras linhas dividida pela soma de todas. Sem esse registro, o número calculado na tela não pode ser auditado.</p>
-
-        <h3>12.2 Teste de leitura em voz alta</h3>
-        <p>No board, o painel será lido sem o autor presente. O teste reproduz essa condição em 20 minutos:</p>
-        <ol>
-          <li>Troque de URL com outro grupo. O grupo leitor abre o seu painel no celular, sem nenhuma explicação.</li>
-          <li>Para cada cartão, um leitor diz em voz alta, em uma frase, o que concluiu. O seu grupo anota a frase literal, entre aspas, e não comenta.</li>
-          <li>Classifique cada frase: <strong>coincide</strong> com o que o dado autoriza; <strong>ultrapassa</strong> o que o dado autoriza (por exemplo, “o atraso derruba a nota”, quando a view mostra associação e não causa); ou <strong>não entendeu</strong> o cartão.</li>
-          <li>Cada frase que ultrapassa o dado é registrada como âncora de divergência, com os mesmos cinco campos das aulas 7 e 8 (Passo, Leitura do usuário, O que o dado autoriza, Consequência e Suporte na tela), e acrescentada ao frame do dashboard no quadro do Miro com o próximo número livre de âncora. A frase de quem não entendeu o cartão orienta um ajuste de título, unidade ou visual.</li>
-          <li>Aplique pelo menos um ajuste, faça commit e push, e peça ao mesmo grupo que releia o cartão alterado.</li>
-        </ol>
-      </section>
-
       <section data-lesson-section="challenge">
-        <h2>13. Desafio e entrega</h2>
-        <p>Publique no seu fork, com commit e push, a pasta <code>aula-09-seunome</code> com <code>index.html</code>, <code>supabase.js</code>, <code>app.js</code>, <code>style.css</code> e um <code>README.md</code> neste formato:</p>
-        <div class="code-block"># Aula 9 · Dashboard online · Seu Nome
-
-URL publicada: https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-09-seunome/
-
-## Reconciliação tela × view
-| Cartão | Número na tela | View · coluna · linha | Valor na view | Igual? |
-|---|---|---|---|---|
-| P01 | | vw_p01_receita_mensal · receita · 2017-11 | | |
-(uma linha por cartão, P01 a P10; cálculos feitos na tela descritos abaixo da tabela)
-
-## Teste de leitura (grupo leitor: ...)
-| Cartão | Frase literal | Coincide, ultrapassa ou não entendeu | Ajuste feito |
-|---|---|---|---|
-
-## Recomendação ao Chief de Vendas
-- Recomendação:
-- Número que a sustenta (cartão e view):
-- O que a invalidaria:</div>
-        <p>A recomendação é a síntese da sequência. Ela escolhe uma decisão, cita o número que a sustenta e declara a condição que a derrubaria. Um exemplo de formato, não de conteúdo obrigatório:</p>
+        <h2>10. Desafio e entrega</h2>
+        <p>Crie no seu fork a pasta <code>aula-09-seunome/</code> com três itens:</p>
         <ul>
-          <li><strong>Recomendação:</strong> atacar o prazo de entrega no RJ antes de subsidiar frete no Nordeste.</li>
-          <li><strong>Número que a sustenta:</strong> o RJ tem 12.312 entregas e 12,2% com atraso (P07); com atraso, a nota média cai de 4,29 para 2,27 (P08).</li>
-          <li><strong>O que a invalidaria:</strong> se o atraso do RJ estiver concentrado em poucos vendedores, a ação é sobre sellers e não sobre a promessa de prazo; e se a nota baixa vier de outra causa, como produto, o ganho esperado com o prazo não se confirma.</li>
+          <li><code>ESPECIFICACAO.md</code> com o link do frame do dashboard no Miro, a ordem narrativa escolhida e uma linha por pergunta com: pergunta, decisão, view, colunas, visual escolhido, título que afirma, âncora tratada e suporte na tela.</li>
+          <li><code>views.sql</code> com as views que o grupo escreveu com IA antes do gabarito.</li>
+          <li>Na própria <code>ESPECIFICACAO.md</code>, a diferença encontrada entre a versão do grupo e o gabarito, com a causa.</li>
         </ul>
-        <p><strong>Critério de aceite:</strong> a URL abre no celular, fora do Codespace; os dez cartões carregam do seu Supabase, na ordem da especificação; nenhum número de resultado está digitado no HTML ou no JavaScript; um cartão com view inexistente mostra erro sem derrubar os demais; a tabela de reconciliação tem dez linhas com “sim”; o README traz as frases do teste de leitura, ao menos um ajuste aplicado e a recomendação com os três campos.</p>
+        <p>Um modelo para começar, com a linha da P06 preenchida:</p>
+        <div class="code-block wrap"># Especificação do dashboard · Chief de Vendas Olist
+
+Frame do dashboard no Miro: &lt;link do frame&gt;
+Ordem narrativa: contexto (P01, P05, P03) → tensão (P07, P08, P06, P10, P09) → decisão (P04, P02)
+
+| # | Pergunta | Decisão | View | Colunas | Visual | Título que afirma | Âncora tratada | Suporte na tela |
+|---|---|---|---|---|---|---|---|---|
+| P06 | Quanto o frete pesa sobre o preço em cada região? | Subsídio de frete | vw_p06_frete_regiao | regiao, frete_sobre_preco_pct, frete_medio_item, itens | Barras horizontais ordenadas | No Norte, o frete equivale a 22,7% do preço; no Sudeste, a 15,2% | D2 "Frete caro espanta cliente" | Nota: só pedidos realizados; a base não registra desistência |
+
+## Views do grupo
+Arquivo: views.sql (escrito com IA antes do gabarito)
+Conferência: P05 confere; P06 retornou 49,4% no Norte, contra 22,7% da referência.
+Diferença encontrada: a IA calculou avg(frete / preco), a média das razões de cada item.
+O gabarito divide a soma do frete pela soma do preço; itens baratos com frete alto inflavam a média.</div>
+        <p>A linha “Diferença encontrada” do modelo é ilustrativa: registre a que o seu grupo encontrou, ou declare que as views bateram de primeira e o que foi conferido. Publique com commit e push:</p>
+        <div class="code-block">git add aula-09-seunome/
+git commit -m <span class="code-string">"Aula 09: especificação do dashboard e views do grupo"</span>
+git push</div>
+        <p><strong>Critério de aceite:</strong> as 10 perguntas aparecem na <code>ESPECIFICACAO.md</code> com todos os campos preenchidos; cada título afirma algo que a view sustenta; o frame do dashboard tem pelo menos 4 âncoras registradas nos cinco campos; a conferência da seção 8.3 retorna dez <code>confere = true</code> no seu Supabase; e o <code>curl</code> da seção 9 devolve 2789 clientes recorrentes.</p>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>14. Checklist de qualidade</h2>
-        <ul class="checklist">
-          <li>A chave em <code>supabase.js</code> começa com <code>sb_publishable_</code> (ou é a anon public); nenhuma chave secreta ou senha existe no repositório.</li>
-          <li><code>grep</code> não encontra número de resultado digitado no HTML ou no JavaScript.</li>
-          <li>Cada cartão tem título que afirma, unidade, período, filtro e fonte com o nome da view.</li>
-          <li>Os gráficos seguem a especificação: linha para meses, barras ordenadas para ranking, eixo começando no zero, sem eixo y duplo.</li>
-          <li>Há estado de carregamento e mensagem de erro por cartão, com status HTTP e view.</li>
-          <li>O painel foi testado com <code>python -m http.server 8000</code> e na URL do GitHub Pages, no celular.</li>
-          <li>As dez linhas da reconciliação conferem, e os cálculos feitos na tela estão descritos.</li>
-          <li>As frases do teste de leitura estão registradas e ao menos um ajuste foi publicado.</li>
-          <li>A recomendação cita o número, o cartão e a condição que a invalidaria.</li>
+        <h2>11. Checklist de qualidade</h2>
+        <ul>
+          <li>Cada pergunta tem métrica, recorte, período, filtro e decisão explícitos.</li>
+          <li>Todos os post-its do frame estão numerados e na cor da raia: amarelo usuário, azul interface, verde dado, rosa âncora.</li>
+          <li>Nenhuma captura de tela no quadro do Miro.</li>
+          <li>A ordem narrativa do dashboard foi decidida por critério, e não por gosto.</li>
+          <li>Pelo menos 4 âncoras têm os cinco campos: passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela.</li>
+          <li>Nenhum gráfico planejado usa dois eixos y nem pizza.</li>
+          <li>Cada título planejado afirma uma conclusão que a view sustenta.</li>
+          <li>As views do grupo foram conferidas contra a referência antes do gabarito, e a diferença foi registrada.</li>
+          <li>O Supabase tem as 11 views do gabarito e a conferência retorna dez <code>true</code>.</li>
+          <li>O <code>curl</code> com a chave publicável devolve a <code>vw_p09_recompra</code>.</li>
+          <li>Nenhuma senha, string de conexão ou chave secreta foi para prompt, arquivo ou commit.</li>
         </ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>15. Síntese</h2>
-        <p>A sequência de Data Visualization percorreu o caminho inteiro de um número até a decisão. Na aula 7, o dado bruto virou um esquema estrela reconciliado. Na aula 8, a pergunta do Chief virou fluxo anotado, âncora de divergência e view. Hoje, a view virou uma tela pública que busca o número no banco a cada leitura e que outro grupo conseguiu ler sem o autor ao lado.</p>
-        <p>Em todas as etapas, a IA escreveu e a turma verificou: com SQL na aula 7, com a conferência contra as respostas de referência na aula 8 e, hoje, com o <code>grep</code>, a reconciliação tela × view e o teste de leitura. O mecanismo é o mesmo nas três: o artefato gerado só vale quando uma verificação independente do agente confirma o que ele afirma. Antes de encerrar, responda: qual frase do teste de leitura mais surpreendeu o seu grupo, e que elemento da tela a provocou?</p>
+        <h2>12. Síntese</h2>
+        <p>Nesta aula, a escolha do gráfico ficou para o fim do processo. A turma decompôs cada pergunta nos cinco elementos que a tornam verificável, gerou alternativas de fluxo sem julgá-las e escolheu entre elas por três critérios: responder à decisão, ter view que sustente cada passo e permitir a leitura em 5 segundos. A ordem contexto, tensão e decisão organizou as dez respostas como um argumento.</p>
+        <p>O fluxo anotado mostrou onde a leitura do Chief ultrapassa o que o dado autoriza. A P06 é o exemplo mais claro: o frete pesa 22,7% sobre o preço no Norte, e nada na base diz que isso espanta cliente. As views funcionam como contrato entre o fluxo e a tela: cada uma foi conferida contra um número de referência, e a mesma leitura chega pela API REST. Antes de sair, aponte no frame a âncora que mais mudaria a recomendação ao board se ficasse sem suporte na tela.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>16. Referências e continuidade</h2>
-        <p>Não há aula em 14/10. No laboratório 10, a base volta ao centro da análise: limpeza de dados com IA e Pandas, preservando a camada bruta. Antes disso, confira se a URL do seu painel abre no celular e se o <code>README.md</code> está publicado.</p>
+        <h2>13. Referências e continuidade</h2>
+        <p>Na aula 10, a <code>ESPECIFICACAO.md</code> e o frame do dashboard servem de base para um painel HTML publicado no GitHub Pages do seu fork, que lê estas views pela API REST. Cada suporte na tela decidido nesta aula (título que afirma, unidade, período e nota de origem) torna-se um elemento do cartão. A aula 10 parte dos seguintes itens, que devem estar prontos:</p>
         <ul>
-          <li><a href="https://supabase.com/docs/guides/api">Supabase · REST API</a>: como o Supabase publica tabelas e views pela API.</li>
-          <li><a href="https://supabase.com/docs/guides/api/api-keys">Supabase · API keys</a>: chave publicável, chave secreta e chaves legadas.</li>
-          <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security">Supabase · Row Level Security</a>: políticas que limitam o que cada papel lê e escreve.</li>
-          <li><a href="https://docs.postgrest.org/en/stable/references/api/tables_views.html">PostgREST · Tables and Views</a>: filtros, ordenação e seleção de colunas na URL.</li>
-          <li><a href="https://docs.github.com/pt/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Pages · Configurar uma fonte de publicação</a>: deploy a partir de um branch.</li>
-          <li><a href="https://www.chartjs.org/docs/latest/">Chart.js · Documentação</a>: tipos de gráfico, eixos e tooltips.</li>
-          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch">MDN · Usando Fetch</a> e <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN · Intl.NumberFormat</a>.</li>
-          <li>Arquivos do case: <a href="../aula-07/olist/estrela.sql">estrela.sql</a> (aula 7) e <a href="../aula-08/olist/views.sql">views.sql</a> (aula 8).</li>
+          <li><code>ESPECIFICACAO.md</code> em <code>aula-09-seunome/</code>, com commit e push no seu fork;</li>
+          <li><code>views.sql</code> do grupo, escrito antes do gabarito, com a diferença encontrada;</li>
+          <li>frame do dashboard no quadro do Miro, com pelo menos 4 âncoras registradas nos cinco campos;</li>
+          <li>as 11 views do gabarito no Supabase, com a conferência da seção 8.3 retornando dez <code>confere = true</code>;</li>
+          <li>Project URL e chave publicável à mão, sem a chave secreta nem a senha do banco.</li>
+        </ul>
+        <p>Referências consultadas:</p>
+        <ul>
+          <li><a href="https://supabase.com/docs/guides/api" target="_blank" rel="noopener noreferrer">Supabase: REST API gerada a partir do banco</a>.</li>
+          <li><a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener noreferrer">Supabase: chaves publicáveis e secretas</a>.</li>
+          <li><a href="https://docs.postgrest.org/en/stable/references/api/tables_views.html" target="_blank" rel="noopener noreferrer">PostgREST: filtros, seleção de colunas e ordenação na URL</a>.</li>
+          <li><a href="https://www.postgresql.org/docs/current/sql-createview.html" target="_blank" rel="noopener noreferrer">PostgreSQL: <code>CREATE VIEW</code> e <code>security_invoker</code></a>.</li>
+          <li><a href="https://www.gv.com/sprint/" target="_blank" rel="noopener noreferrer">Google Ventures: o método Sprint, origem do Crazy 8s</a>.</li>
+          <li><a href="https://www.liberatingstructures.com/1-1-2-4-all/" target="_blank" rel="noopener noreferrer">Liberating Structures: 1-2-4-All</a>.</li>
+          <li>Donald Norman, <em>O design do dia a dia</em>: golfos de execução e de avaliação.</li>
+          <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Documentação do dataset Olist</a>.</li>
         </ul>
       </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-09.html" class="btn btn-slides">📊 Ver Slides</a>
-        <a href="dashboard-referencia/index.html" class="btn btn-slides">📈 Dashboard de referência</a>
+        <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="btn btn-slides">Abrir o quadro no Miro</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
   </div>
 
   <script>
-    function copiarTexto(texto) {
-      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
-      return new Promise((resolve, reject) => {
-        const area = document.createElement('textarea');
-        area.value = texto;
-        area.setAttribute('readonly', '');
-        area.style.position = 'fixed';
-        area.style.opacity = '0';
-        document.body.appendChild(area);
-        area.select();
-        const ok = document.execCommand('copy');
-        area.remove();
-        ok ? resolve() : reject(new Error('copy'));
-      });
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
     }
-    document.querySelectorAll('.copy-prompt').forEach(botao => {
-      botao.addEventListener('click', async () => {
-        const texto = botao.parentElement.querySelector('.prompt-text').innerText.trim();
-        const original = botao.textContent;
-        try { await copiarTexto(texto); botao.textContent = 'Copiado ✓'; }
-        catch (erro) { botao.textContent = 'Selecione o texto'; }
-        window.setTimeout(() => { botao.textContent = original; }, 1800);
+
+    document.querySelectorAll('.code-block').forEach(block => {
+      const wrap = document.createElement('div');
+      wrap.className = 'code-wrap';
+      block.parentNode.insertBefore(wrap, block);
+      wrap.appendChild(block);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-btn';
+      button.textContent = 'Copiar';
+      button.setAttribute('aria-label', 'Copiar o código deste bloco');
+      button.addEventListener('click', async () => {
+        try {
+          await copyText(block.innerText.trim());
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = 'Copiar'; }, 1800);
       });
+      wrap.appendChild(button);
     });
   </script>
 </body>

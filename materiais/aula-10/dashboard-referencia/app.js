@@ -1,4 +1,4 @@
-/* Dashboard de referência · Aula 9 · Laboratório de Programação, Ciência de Dados & IA
+/* Dashboard de referência · Aula 10 · Laboratório de Programação, Ciência de Dados & IA
  *
  * Fluxo: navegador → (GitHub Pages entrega este arquivo) → fetch → API REST do Supabase → views.
  * Nenhum resultado está escrito aqui: títulos, rótulos e valores saem das linhas de cada view.
@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  const CHAVE_ARMAZENAMENTO = 'einstein-aula09-dashboard-referencia';
+  const CHAVE_ARMAZENAMENTO = 'einstein-aula10-dashboard-referencia';
   const TEMPO_LIMITE_MS = 20000;
 
   const CORES = {

@@ -138,7 +138,7 @@ create index on public.fato_itens_pedido (vendedor_sk);
 create index on public.fato_pedidos (data_sk);
 create index on public.fato_pedidos (cliente_sk);
 
--- Leitura pública pela API (o dashboard da aula 9 usa a chave publicável); escrita continua bloqueada.
+-- Leitura pública pela API (o dashboard da aula 10 usa a chave publicável); escrita continua bloqueada.
 do $$
 declare t text;
 begin

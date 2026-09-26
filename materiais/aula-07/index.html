@@ -203,7 +203,7 @@
             <tr><td>20:25</td><td>Intervalo</td><td></td></tr>
             <tr><td>20:35</td><td>Discovery do Olist com IA e verificação no SQL Editor</td><td>6</td></tr>
             <tr><td>21:10</td><td>Modelagem dimensional com IA, comparação com o gabarito <code>estrela.sql</code> e reconciliação</td><td>7 e 8</td></tr>
-            <tr><td>21:50</td><td>Síntese e encaminhamento para a aula 8</td><td>11 e 12</td></tr>
+            <tr><td>21:50</td><td>Síntese e encaminhamento para a aula 9</td><td>11 e 12</td></tr>
           </tbody>
         </table>
       </section>
@@ -231,8 +231,8 @@
           <thead><tr><th>Aula</th><th>Pergunta que responde</th><th>Artefato</th></tr></thead>
           <tbody>
             <tr><td>7 · 23/09</td><td>Como o usuário lê a tela, e que dado confiável existe para sustentá-la?</td><td>Frame modelo no quadro do Miro, Olist no Supabase, discovery e esquema estrela reconciliado</td></tr>
-            <tr><td>8 · 30/09</td><td>Que tela responde a cada pergunta, em que ordem, e de qual view vem cada número?</td><td>Fluxo anotado do dashboard e views SQL conferidas</td></tr>
-            <tr><td>9 · 07/10</td><td>O painel publicado mostra exatamente o que as views autorizam?</td><td>Dashboard no GitHub Pages lendo o Supabase</td></tr>
+            <tr><td>9 · 07/10</td><td>Que tela responde a cada pergunta, em que ordem, e de qual view vem cada número?</td><td>Fluxo anotado do dashboard e views SQL conferidas</td></tr>
+            <tr><td>10 · 21/10</td><td>O painel publicado mostra exatamente o que as views autorizam?</td><td>Dashboard no GitHub Pages lendo o Supabase</td></tr>
           </tbody>
         </table>
       </section>
@@ -270,7 +270,7 @@ INTERFACE  ②filtro de período ─▶ ④barras de frete/preço ──▶ ⑥s
 DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há registro de carrinho abandonado   nenhuma margem na base
                                     ▲                          ▲                                    ▲
                                    D1                         D2                                   D3</div>
-        <p><code>vw_p06</code> é a view da pergunta P06, que a turma escreve na aula 8 sobre o <code>fato_itens_pedido</code> construído hoje. Na raia do dado, a fonte é citada pelo nome que terá no banco, porque é esse nome que será usado na consulta.</p>
+        <p><code>vw_p06</code> é a view da pergunta P06, que a turma escreve na aula 9 sobre o <code>fato_itens_pedido</code> construído hoje. Na raia do dado, a fonte é citada pelo nome que terá no banco, porque é esse nome que será usado na consulta.</p>
 
         <h3>3.2 O registro de cada âncora</h3>
         <p>Um post-it rosa isolado indica que há um problema, mas não o identifica. Por isso, cada âncora recebe um registro de cinco campos: Passo, Leitura do usuário, O que o dado autoriza, Consequência e Suporte na tela. O campo que mais exige disciplina é “O que o dado autoriza”, no qual se escreve a afirmação máxima que a fonte sustenta, com número, unidade e período, sem ir além disso.</p>
@@ -302,7 +302,7 @@ DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há reg
 
       <section data-lesson-section="guided-practice">
         <h2>4. Prática 1: construção coletiva do fluxo no Miro</h2>
-        <p>Nesta aula, a turma inteira monta um único frame no quadro do Miro, com condução do professor. Esse frame serve de template para o trabalho de cada grupo na aula 8, quando será copiado para desenhar o fluxo do dashboard. Por isso, a qualidade do frame importa mais do que a velocidade, já que é nele que as regras ficam visíveis para todos.</p>
+        <p>Nesta aula, a turma inteira monta um único frame no quadro do Miro, com condução do professor. Esse frame serve de template para o trabalho de cada grupo na aula 9, quando será copiado para desenhar o fluxo do dashboard. Por isso, a qualidade do frame importa mais do que a velocidade, já que é nele que as regras ficam visíveis para todos.</p>
         <div class="inline-actions">
           <a class="btn btn-data" href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer">Abrir o quadro da turma no Miro</a>
         </div>
@@ -337,13 +337,13 @@ DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há reg
             <tr><td><span class="tag tag-ancora">D3</span> passo 7</td><td>“Alongar a promessa resolve.”</td><td>Como o atraso é medido contra a data estimada, prometer uma data mais tarde reduz a taxa sem acelerar nenhuma entrega. A base não mostra o efeito dessa mudança sobre a venda.</td><td>Melhora do indicador sem melhora da entrega, com possível queda da conversão.</td><td>Dias médios de entrega ao lado da taxa e nota “atraso = entrega depois da data estimada”.</td></tr>
           </tbody>
         </table>
-        <p>Os números de D1 e D2 vêm das views P07 e P08, que a turma escreve na aula 8. Aqui, eles ilustram como um registro bem feito cita número, unidade e base.</p>
+        <p>Os números de D1 e D2 vêm das views P07 e P08, que a turma escreve na aula 9. Aqui, eles ilustram como um registro bem feito cita número, unidade e base.</p>
         <p><strong>Critério de conclusão do frame:</strong> a tarefa tem os quatro componentes; os passos seguem a numeração 1, 2, 3 sem lacuna; cada coluna tem pelo menos um post-it verde com grão; há pelo menos três âncoras com os cinco campos preenchidos; e não há capturas de tela nem opiniões escritas em verde.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
         <h2>5. Prática 2: projeto no Supabase e carga dos dados brutos do Olist</h2>
-        <p>Nas aulas 4 e 5, o Olist estava em um banco compartilhado e somente leitura. A partir desta aula, cada estudante terá o próprio banco, porque criará tabelas e views e, na aula 9, publicará um dashboard que lê esse banco pela internet. O <strong>Supabase</strong> oferece um PostgreSQL gerenciado com editor SQL, visualizador de tabelas e uma API REST gerada automaticamente. Esse último recurso permite que, na aula 9, uma página estática do GitHub Pages leia os dados sem servidor próprio.</p>
+        <p>Nas aulas 4 e 5, o Olist estava em um banco compartilhado e somente leitura. A partir desta aula, cada estudante terá o próprio banco, porque criará tabelas e views e, na aula 10, publicará um dashboard que lê esse banco pela internet. O <strong>Supabase</strong> oferece um PostgreSQL gerenciado com editor SQL, visualizador de tabelas e uma API REST gerada automaticamente. Esse último recurso permite que, na aula 10, uma página estática do GitHub Pages leia os dados sem servidor próprio.</p>
 
         <h3>5.1 Atualização do fork e do Codespace</h3>
         <p>Os arquivos Excel e o script desta aula foram publicados no repositório do curso depois da criação do seu fork. Antes de abrir o Codespace, siga estes passos:</p>
@@ -355,7 +355,7 @@ DADO       dim_tempo · jan/17–ago/18  vw_p06 · grão item       não há reg
         <div class="code-block">git remote -v   <span class="code-comment"># origin deve apontar para github.com/SEU-USUARIO/..., não para o repositório do professor</span>
 git pull
 ls materiais/aula-07/dados   <span class="code-comment"># três arquivos .xlsx, cerca de 52 MB no total</span></div>
-        <p>O fork é necessário por dois motivos: a entrega é feita por commit e push no seu repositório, e o GitHub Pages da aula 9 será publicado a partir dele.</p>
+        <p>O fork é necessário por dois motivos: a entrega é feita por commit e push no seu repositório, e o GitHub Pages da aula 10 será publicado a partir dele.</p>
 
         <h3>5.2 Criação do projeto</h3>
         <ol class="steps">
@@ -363,7 +363,7 @@ ls materiais/aula-07/dados   <span class="code-comment"># três arquivos .xlsx, 
           <li>Clique em <strong>New project</strong>. Na organização pessoal, use o plano <strong>Free</strong>.</li>
           <li><strong>Project name:</strong> <code>olist-seunome</code>.</li>
           <li><strong>Database Password:</strong> use <strong>Generate a password</strong> e copie a senha para um gerenciador de senhas antes de avançar. Se preferir criar a sua, use só letras e números: caracteres como <code>@</code>, <code>#</code>, <code>/</code> e <code>:</code> têm significado dentro da string de conexão e fazem o script falhar.</li>
-          <li><strong>Region:</strong> South America (São Paulo). Um banco próximo do usuário responde mais rápido às consultas da aula 9.</li>
+          <li><strong>Region:</strong> South America (São Paulo). Um banco próximo do usuário responde mais rápido às consultas da aula 10.</li>
           <li>Clique em <strong>Create new project</strong> e aguarde o painel indicar que o projeto está pronto, o que leva alguns minutos.</li>
         </ol>
         <p>A interface do Supabase muda com frequência. Se um rótulo estiver diferente, procure o campo pela função: nome do projeto, senha do banco e região.</p>
@@ -383,7 +383,7 @@ ls materiais/aula-07/dados   <span class="code-comment"># três arquivos .xlsx, 
 
         <div class="alert-box">
           <h4>Cuidados com a string de conexão</h4>
-          <p>A string contém a senha do banco. Com ela, qualquer pessoa pode apagar ou alterar tudo o que você construir até a aula 9, e por isso ela é tratada como credencial.</p>
+          <p>A string contém a senha do banco. Com ela, qualquer pessoa pode apagar ou alterar tudo o que você construir até a aula 10, e por isso ela é tratada como credencial.</p>
           <ul>
             <li>Não a registre em arquivos do repositório, <code>.env</code> commitado, notebook ou <code>README</code>.</li>
             <li>Não a inclua em prompts de IA, seja no Copilot, no Supabase Assistant ou em qualquer outra ferramenta.</li>
@@ -440,7 +440,7 @@ Carga concluída. Abra o SQL Editor do Supabase e confira as contagens.</div>
         <p>Em <strong>Table Editor</strong>, troque o seletor de schema de <code>public</code> para <code>bruto</code> e abra <code>orders</code>. A inspeção das linhas antes da modelagem revela características que a estrutura não mostra, como hashes de 32 caracteres usados como identificadores, datas com hora e colunas vazias em pedidos não entregues. O schema <code>bruto</code> não é exposto pela API do Supabase, que publica apenas o <code>public</code>. Desse modo, a camada bruta fica protegida, e o conteúdo publicado depende de uma escolha explícita.</p>
         <div class="note-box">
           <h4>Projeto gratuito pausa quando fica parado</h4>
-          <p>No plano Free, projetos sem atividade por cerca de uma semana podem ser pausados. Os dados não se perdem, e basta abrir o painel e clicar em restaurar. Faça isso antes das aulas 8 e 9, e não durante elas.</p>
+          <p>No plano Free, projetos sem atividade por cerca de uma semana podem ser pausados. Os dados não se perdem, e basta abrir o painel e clicar em restaurar. Faça isso antes das aulas 9 e 10, e não durante elas.</p>
         </div>
       </section>
 
@@ -512,7 +512,7 @@ executar as consultas e trazer os resultados.</div>
       <span class="code-keyword">from</span> bruto.orders o
       <span class="code-keyword">join</span> bruto.customers c <span class="code-keyword">on</span> c.customer_id = o.customer_id
       <span class="code-keyword">group by</span> c.customer_unique_id <span class="code-keyword">having</span> count(*) &gt; 1) <span class="code-keyword">as</span> y;</div>
-        <p><strong>Resultado:</strong> há 99.441 <code>customer_id</code> para 96.096 pessoas. Com <code>customer_id</code>, zero clientes compraram mais de uma vez; com <code>customer_unique_id</code>, 2.997 pessoas fizeram mais de um pedido na base inteira, com qualquer status. <strong>Implicação:</strong> como o <code>customer_id</code> é criado a cada pedido, uma análise de recompra com essa chave indicaria ao Chief que o programa de fidelização não tem público. O número da P09 na aula 8 será diferente de 2.997, porque lá entram apenas pedidos entregues de jan/2017 a ago/2018.</p>
+        <p><strong>Resultado:</strong> há 99.441 <code>customer_id</code> para 96.096 pessoas. Com <code>customer_id</code>, zero clientes compraram mais de uma vez; com <code>customer_unique_id</code>, 2.997 pessoas fizeram mais de um pedido na base inteira, com qualquer status. <strong>Implicação:</strong> como o <code>customer_id</code> é criado a cada pedido, uma análise de recompra com essa chave indicaria ao Chief que o programa de fidelização não tem público. O número da P09 na aula 9 será diferente de 2.997, porque lá entram apenas pedidos entregues de jan/2017 a ago/2018.</p>
 
         <h4>Armadilha 3: avaliação duplicada por pedido</h4>
         <div class="code-block"><span class="code-keyword">select</span> count(*) <span class="code-keyword">as</span> pedidos_com_mais_de_uma_avaliacao
@@ -579,7 +579,7 @@ decisão de modelagem que ela exige.</div>
 
       <section data-lesson-section="concepts">
         <h2>7. Modelagem dimensional: fatos, dimensões, grão e chaves</h2>
-        <p>A camada bruta responde a qualquer pergunta, desde que quem consulta conheça as oito armadilhas. Um dashboard não deve depender dessa condição, pois cada view da aula 8 teria de repetir os mesmos cuidados, e um único esquecimento levaria um número errado ao board. A <strong>modelagem dimensional</strong>, sistematizada por Ralph Kimball nos anos 1990 para data warehouses, trata esse problema de uma só vez: as decisões da discovery ficam gravadas na estrutura das tabelas, e as consultas seguintes já partem delas.</p>
+        <p>A camada bruta responde a qualquer pergunta, desde que quem consulta conheça as oito armadilhas. Um dashboard não deve depender dessa condição, pois cada view da aula 9 teria de repetir os mesmos cuidados, e um único esquecimento levaria um número errado ao board. A <strong>modelagem dimensional</strong>, sistematizada por Ralph Kimball nos anos 1990 para data warehouses, trata esse problema de uma só vez: as decisões da discovery ficam gravadas na estrutura das tabelas, e as consultas seguintes já partem delas.</p>
 
         <h3>7.1 Os quatro conceitos</h3>
         <table>
@@ -681,7 +681,7 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
             <tr><td><code>fato_itens_pedido</code></td><td>112.650 itens com <code>pedido_sk</code>, <code>item_seq</code>, chaves das quatro dimensões, <code>status</code>, <code>preco</code> e <code>frete</code>.</td><td>Grão item; chave primária composta <code>(pedido_sk, item_seq)</code>.</td></tr>
             <tr><td><code>fato_pedidos</code></td><td>99.441 pedidos. Três CTEs agregam itens, pagamentos e a última avaliação; calcula <code>hora_compra</code>, <code>dias_entrega</code>, <code>dias_atraso</code> e <code>entregue_no_prazo</code>.</td><td>Armadilhas 3 e 4; pagamento e nota no grão certo.</td></tr>
             <tr><td>Chaves estrangeiras e índices</td><td>Declara no banco as ligações da estrela e indexa as chaves mais usadas.</td><td>As ligações passam a ser verificadas pelo banco, que recusa chaves órfãs.</td></tr>
-            <tr><td>Bloco <code>do $$ … $$</code></td><td>Liga o RLS nas seis tabelas, cria política de leitura para <code>anon</code> e <code>authenticated</code> e concede <code>select</code>.</td><td>Na aula 9, a página lê os dados pela API com a chave publicável; como não há política de escrita, essa chave não permite alterações.</td></tr>
+            <tr><td>Bloco <code>do $$ … $$</code></td><td>Liga o RLS nas seis tabelas, cria política de leitura para <code>anon</code> e <code>authenticated</code> e concede <code>select</code>.</td><td>Na aula 10, a página lê os dados pela API com a chave publicável; como não há política de escrita, essa chave não permite alterações.</td></tr>
             <tr><td>Consulta final</td><td>Reconciliação de receita, itens e pedidos entre origem e estrela.</td><td>Comprovação de que o modelo não perdeu nem duplicou registros.</td></tr>
           </tbody>
         </table>
@@ -737,7 +737,7 @@ itens. Explique como cada armadilha foi tratada. Não escreva o SQL ainda.</div>
 <span class="code-keyword">join</span> public.dim_cliente c <span class="code-keyword">on</span> c.cliente_sk = i.cliente_sk
 <span class="code-keyword">group by</span> c.regiao
 <span class="code-keyword">order by</span> receita <span class="code-keyword">desc</span>;</div>
-        <p>Contagens esperadas: dim_tempo 774, dim_cliente 96.096, dim_produto 32.951, dim_vendedor 3.095, fato_itens_pedido 112.650 e fato_pedidos 99.441. Na segunda consulta, a soma das cinco regiões deve totalizar 13.591.643,70. Essa consulta ainda não responde a nenhuma pergunta do Chief, porque não filtra status nem período; esses filtros ficam a cargo das views da aula 8.</p>
+        <p>Contagens esperadas: dim_tempo 774, dim_cliente 96.096, dim_produto 32.951, dim_vendedor 3.095, fato_itens_pedido 112.650 e fato_pedidos 99.441. Na segunda consulta, a soma das cinco regiões deve totalizar 13.591.643,70. Essa consulta ainda não responde a nenhuma pergunta do Chief, porque não filtra status nem período; esses filtros ficam a cargo das views da aula 9.</p>
         <p>Por fim, abra o <strong>Table Editor</strong> no schema <code>public</code> e faça uma captura de tela com as seis tabelas na lista lateral, conferindo que a imagem não mostra nenhuma string de conexão.</p>
       </section>
 
@@ -814,16 +814,16 @@ git push</div>
 
       <section data-lesson-section="summary">
         <h2>11. Síntese</h2>
-        <p>A confiabilidade do dashboard da aula 9 depende do fluxo anotado e do modelo construídos nesta aula. O fluxo de interação anotado indica, antes de existir qualquer tela, em que passo a leitura do usuário ultrapassa o que o dado autoriza, e exige que a turma defina o elemento da tela que corrige essa distância. A discovery converteu afirmações da IA em fatos verificados por consulta: 99.441 identificadores de cliente que correspondem a 96.096 pessoas, 547 pedidos com avaliação duplicada, 775 pedidos sem item e meses incompletos nas pontas do período. A modelagem dimensional registrou essas constatações na estrutura, com dois fatos porque pagamento e avaliação existem no grão do pedido. Por fim, a reconciliação comprovou que nenhum registro se perdeu nem foi duplicado.</p>
+        <p>A confiabilidade do dashboard da aula 10 depende do fluxo anotado e do modelo construídos nesta aula. O fluxo de interação anotado indica, antes de existir qualquer tela, em que passo a leitura do usuário ultrapassa o que o dado autoriza, e exige que a turma defina o elemento da tela que corrige essa distância. A discovery converteu afirmações da IA em fatos verificados por consulta: 99.441 identificadores de cliente que correspondem a 96.096 pessoas, 547 pedidos com avaliação duplicada, 775 pedidos sem item e meses incompletos nas pontas do período. A modelagem dimensional registrou essas constatações na estrutura, com dois fatos porque pagamento e avaliação existem no grão do pedido. Por fim, a reconciliação comprovou que nenhum registro se perdeu nem foi duplicado.</p>
         <p>As três partes compartilham um procedimento: separar o que se afirma do que a evidência sustenta. No quadro do Miro, esse procedimento aparece no post-it rosa; no SQL Editor, na consulta que confirma ou derruba a hipótese; no modelo, na soma que precisa coincidir até o centavo. Como verificação final, responda: qual pergunta do Chief teria recebido um número errado se a primeira proposta da IA tivesse sido aceita sem conferência?</p>
       </section>
 
       <section data-lesson-section="next-steps">
         <h2>12. Referências e continuidade</h2>
-        <p>Na aula 8 (30/09), a turma decompõe as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão, faz um brainstorming de fluxos no quadro do Miro, constrói o fluxo anotado do dashboard a partir do template desta aula e traduz a raia do dado em views SQL no Supabase de cada estudante. Chegue com o projeto Supabase ativo e a estrela reconciliada. Projetos gratuitos sem uso podem ser pausados pelo Supabase; por isso, abra o painel antes da aula. Mantenha a senha no gerenciador de senhas, fora do repositório.</p>
+        <p>Na aula 9 (07/10), a turma decompõe as 10 perguntas do Chief de Vendas em métrica, recorte, período, filtro e decisão, faz um brainstorming de fluxos no quadro do Miro, constrói o fluxo anotado do dashboard a partir do template desta aula e traduz a raia do dado em views SQL no Supabase de cada estudante. Chegue com o projeto Supabase ativo e a estrela reconciliada. Projetos gratuitos sem uso podem ser pausados pelo Supabase; por isso, abra o painel antes da aula. Mantenha a senha no gerenciador de senhas, fora do repositório.</p>
         <ul>
           <li><a href="https://supabase.com/docs/guides/database/connecting-to-postgres" target="_blank" rel="noopener noreferrer">Supabase: formas de conexão ao Postgres, incluindo Session pooler e IPv6</a>.</li>
-          <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener noreferrer">Supabase: Row Level Security</a>, base da leitura pública da aula 9.</li>
+          <li><a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener noreferrer">Supabase: Row Level Security</a>, base da leitura pública da aula 10.</li>
           <li><a href="https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/" target="_blank" rel="noopener noreferrer">Kimball Group: técnicas de modelagem dimensional</a> (grão, fatos, dimensões, chaves substitutas).</li>
           <li><a href="https://www.postgresql.org/docs/current/sql-select.html#SQL-DISTINCT" target="_blank" rel="noopener noreferrer">PostgreSQL: <code>DISTINCT ON</code></a>.</li>
           <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Documentação do dataset Olist</a>.</li>

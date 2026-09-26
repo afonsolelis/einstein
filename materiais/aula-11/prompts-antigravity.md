@@ -1,4 +1,4 @@
-# Aula 10 — Prompts para o Antigravity
+# Aula 11 — Prompts para o Antigravity
 
 Use estes prompts na ordem. Trabalhe em **modo orientado por revisão**: leia o plano e o diff, autorize comandos conscientemente e só avance quando a evidência pedida aparecer.
 

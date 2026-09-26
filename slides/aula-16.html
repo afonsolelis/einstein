@@ -348,25 +348,20 @@
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 16 · 02/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Previsão de caixa e de demanda</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Organizar entradas, saídas e vendas em séries temporais</li><li>Reconhecer tendência, sazonalidade e eventos especiais</li><li>Validar previsões com janela temporal e baseline sazonal</li><li>Construir cenários de caixa e identificar rupturas de liquidez</li><li>Converter erro previsto em estoque, capacidade e premissas auditáveis</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Demanda: baseline, sazonalidade e erro</li><li>Caixa: saldo projetado e cenários</li><li>Prática guiada, desafio e síntese</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Demanda e caixa são séries temporais que antecipam decisões: a primeira indica quanto estoque e capacidade preparar; a segunda, se haverá liquidez para sustentá-los. Ausência de venda pode significar falta de estoque, não falta de procura.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Demanda: critérios para decidir</h2><ul><li>Baseline sazonal estabelece o mínimo que o modelo deve superar</li><li>Validação em janelas sucessivas mede estabilidade ao longo do tempo</li><li>O custo de subestimar pode ser diferente do custo de superestimar</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Caixa: critérios para decidir</h2><ul><li>Datas de competência e pagamento respondem perguntas diferentes</li><li>Inadimplência e atraso devem entrar como cenários</li><li>Saldo mínimo e necessidade de capital são saídas acionáveis</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: baseline de demanda</h2><div class="code-block">import pandas as pd
-d = pd.read_csv("demanda.csv", parse_dates=["data"]).set_index("data")
-d["baseline_7d"] = d["quantidade"].shift(7)
-erro = (d["quantidade"]-d["baseline_7d"]).abs().mean()
-print("MAE sazonal", erro)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: saldo de caixa</h2><div class="code-block">mov = pd.read_csv("fluxo.csv", parse_dates=["data"])
-diario = mov.groupby("data")["valor"].sum().asfreq("D", fill_value=0)
-saldo = 100000 + diario.cumsum()
-print(saldo.head())</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Compare baseline semanal e média móvel para a demanda, proponha estoque de segurança e projete 60 dias de caixa em três cenários, identificando data, duração e valor da maior necessidade.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar notebook com avaliação temporal da demanda e recomendação de capacidade com faixa de incerteza, acompanhado de quadro executivo de caixa com premissas, menor saldo, necessidade de crédito e ação preventiva.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Previsão de caixa e de demanda é um sistema de alerta baseado em premissas explícitas: vale pelo custo dos erros onde a operação é vulnerável, não por um número definitivo.</p><ul><li>Separar realizado de projetado</li><li>Não usar informação futura nos atributos</li><li>Traduzir erro em estoque, capacidade e liquidez</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, integraremos problema, dados, análise e recomendação em um projeto completo.</p></div>
+    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 16 · 02/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Análise de dados aplicada ao RH</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Definir indicadores de pessoas sem reduzir indivíduos a números</li><li>Investigar rotatividade com recortes e contexto</li><li>Propor intervenção mensurável e eticamente defensável</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade.</p></div>
+    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Taxa de saída precisa de período, população e denominador claros</li><li>Diferenças entre grupos podem refletir função, senioridade ou contexto</li><li>Modelos não devem automatizar decisões sensíveis sem avaliação e recurso</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
+rh = pd.read_csv("colaboradores.csv")
+rot = rh.groupby("area").agg(pessoas=("id","size"),saidas=("saiu","sum"))
+rot["taxa_saida"] = rot["saidas"]/rot["pessoas"]
+print(rot.sort_values("taxa_saida", ascending=False))</div></div>
+    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Analise rotatividade por área e senioridade, identifique uma hipótese e proponha teste de intervenção.</p></div>
+    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar diagnóstico com definição do indicador, recortes, limitações, ação e métrica de acompanhamento.</p></div>
+    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>People analytics deve ampliar cuidado e capacidade de ação, nunca legitimar decisões opacas.</p><ul><li>Minimizar dados pessoais utilizados</li><li>Não inferir causa de associação isolada</li><li>Revisar possíveis impactos entre grupos</li></ul></div>
+    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, projetaremos caixa e demanda com séries temporais em um estudo de caso integrado.</p></div>
     <div class="slide slide-end"><h2>Fim do Laboratório 16</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
   </div>
 

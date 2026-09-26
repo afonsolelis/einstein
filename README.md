@@ -54,19 +54,19 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 | 5 | 09/09 | Metabase local com Docker: subindo a sua própria base |
 | 6 | 16/09 | Inteligência Artificial no dia a dia da administração |
 | 7 | 23/09 | Data Visualization I: Fluxo de interação anotado e modelagem dimensional do Olist com IA |
-| 8 | 30/09 | Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard |
-| 9 | 07/10 | Data Visualization III: Dashboard online com GitHub Pages e Supabase |
+| 8 | 30/09 | Mentoria profissional |
+| 9 | 07/10 | Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard |
 | — | 14/10 | **Não haverá aula** |
-| 10 | 21/10 | Limpeza de dados: Preparando a base para análises |
-| 11 | 28/10 | Fazendo previsões com IA: Vendas e Tendências |
-| 12 | 04/11 | Testes A/B: do desenho do experimento à decisão de negócio |
-| 13 | 11/11 | Auditoria e forense de dados: anomalias, riscos e fraudes |
-| 14 | 18/11 | IA aplicada à estratégia e tomada de decisão |
-| 15 | 25/11 | Estudo de Caso: Análise de dados aplicada ao RH |
-| 16 | 02/12 | Estudo de Caso: Previsão de caixa e de demanda |
-| 17 | 09/12 | Projeto Integrador: Resolvendo um problema de negócio real |
-| 18 | 16/12 | Apresentação de resultados e recomendações executivas |
-| 19 | 23/12 | Apresentação final de projetos |
+| 10 | 21/10 | Data Visualization III: Dashboard online com GitHub Pages e Supabase |
+| 11 | 28/10 | Limpeza de dados: Preparando a base para análises |
+| 12 | 04/11 | Fazendo previsões com IA: Vendas e Tendências |
+| 13 | 11/11 | Testes A/B: do desenho do experimento à decisão de negócio |
+| 14 | 18/11 | Auditoria e forense de dados: anomalias, riscos e fraudes |
+| 15 | 25/11 | IA aplicada à estratégia e tomada de decisão |
+| 16 | 02/12 | Estudo de Caso: Análise de dados aplicada ao RH |
+| 17 | 09/12 | Estudo de Caso: Previsão de caixa e de demanda |
+| 18 | 16/12 | Projeto Integrador: Resolvendo um problema de negócio real |
+| 19 | 23/12 | Apresentação de resultados e recomendações executivas |
 
 ---
 

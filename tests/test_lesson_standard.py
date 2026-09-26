@@ -11,9 +11,13 @@ assert SPEC and SPEC.loader
 SPEC.loader.exec_module(MODULE)
 
 
+# Encontros sem conteúdo de laboratório: slide único, sem prática nem entrega.
+ENCONTROS_ESPECIAIS = {8}
+
+
 class LessonStandardTests(unittest.TestCase):
     def test_every_scheduled_lesson_has_valid_structure(self):
-        for lesson in range(1, 20):
+        for lesson in sorted(set(range(1, 20)) - ENCONTROS_ESPECIAIS):
             with self.subTest(lesson=lesson):
                 self.assertEqual([], MODULE.validate(ROOT, lesson))
 
