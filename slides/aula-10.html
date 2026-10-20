@@ -342,6 +342,10 @@
     .tres { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1120px); margin-bottom: 1rem; }
     .tres .painel p { margin: 0 0 0.5rem; font-size: clamp(0.85rem, 1.15vw, 1rem); color: var(--muted); }
     .tres .painel h3 span { color: var(--teal); font-weight: 400; }
+    .fases { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1120px); margin-bottom: 1.1rem; }
+    .fases .painel { border-top: 4px solid var(--teal); }
+    .fases .painel ol { margin: 0; padding-left: 1.7rem; font-size: clamp(0.92rem, 1.3vw, 1.12rem); }
+    .fases .painel ol li { margin-bottom: 0.2rem; }
     .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
     .chips span { padding: 0.25rem 0.55rem; border: 1px solid rgba(75, 196, 232, 0.3); border-radius: 999px; color: #dff6ff; background: rgba(0, 163, 217, 0.12); font-size: clamp(0.78rem, 1.05vw, 0.95rem); }
 
@@ -447,6 +451,11 @@
       .painel h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
       .painel ul { font-size: 0.86rem !important; }
       .painel ul li { margin-bottom: 0.15rem; }
+      .fases { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.6rem; }
+      .fases .painel { padding: 0.45rem 0.55rem; }
+      .fases .painel h3 { font-size: 0.86rem; margin-bottom: 0.15rem; }
+      .fases .painel ol { padding-left: 1.2rem; font-size: 0.74rem; line-height: 1.25; }
+      .fases .painel ol li { margin-bottom: 0.05rem; }
       .tres { gap: 0.4rem; margin-bottom: 0.6rem; }
       .tres .painel { padding: 0.5rem 0.45rem; }
       .tres .painel h3 { font-size: 0.86rem; }
@@ -505,13 +514,13 @@
       <h2>Roteiro do laboratório</h2>
       <ul class="agenda">
         <li><b>19:00</b> Retomada do fluxo anotado e da especificação</li>
-        <li><b>19:10</b> Arquitetura e chaves</li>
-        <li><b>19:30</b> Construção do dashboard com o agente</li>
+        <li><b>19:10</b> Arquitetura, chaves e preparação (passos 1 a 4)</li>
+        <li><b>19:30</b> Construção com o agente (passos 5 a 9)</li>
         <li><b>20:30</b> Intervalo</li>
-        <li><b>20:40</b> Revisão humana do código</li>
-        <li><b>21:05</b> Publicação no GitHub Pages</li>
-        <li><b>21:20</b> Teste de leitura em voz alta</li>
-        <li><b>21:40</b> Recomendação e síntese</li>
+        <li><b>20:40</b> Revisão e teste local (passos 10 e 11)</li>
+        <li><b>21:05</b> Publicação no GitHub Pages (passos 12 a 14)</li>
+        <li><b>21:20</b> Reconciliação e teste de leitura (passos 15 e 16)</li>
+        <li><b>21:40</b> Entrega, recomendação e síntese (passo 17)</li>
       </ul>
     </div>
 
@@ -657,7 +666,88 @@ pct.format(taxa) + <span class="code-string">'%'</span>;                  <span 
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Construção com o agente</h2>
+      <p class="kicker">Roteiro da prática</p>
+      <h2>Passo a passo do dashboard</h2>
+      <div class="fases">
+        <div class="painel"><h3>Preparação</h3><ol start="1"><li>Abrir o Codespace</li><li>Conferir as views</li><li>Copiar URL e chave</li><li>Testar uma view</li></ol></div>
+        <div class="painel"><h3>Construção</h3><ol start="5"><li>Criar a pasta</li><li>Pedir o plano</li><li>Aprovar o plano</li><li>Configurar a chave</li><li>Conferir o código</li></ol></div>
+        <div class="painel"><h3>Publicação</h3><ol start="10"><li>Revisar o diff</li><li>Testar no Codespace</li><li>Commit e push</li><li>Ativar o Pages</li><li>Abrir no celular</li></ol></div>
+        <div class="painel"><h3>Validação</h3><ol start="15"><li>Reconciliar</li><li>Teste de leitura</li><li>README e entrega</li></ol></div>
+      </div>
+      <p>Cada passo tem um critério de conferência. Só avance quando ele for atendido, pois um erro de chave no passo 3 reaparece como dez cartões vazios no passo 14.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 1 de 17 · Preparação</p>
+      <h2>Abrir o Codespace do fork</h2>
+      <ol>
+        <li>No GitHub, abra o seu fork e, se houver commits novos do curso, clique em Sync fork</li>
+        <li>Em Code, aba Codespaces, abra o Codespace que você já usa</li>
+        <li>No terminal, traga as atualizações e confira o remoto:</li>
+      </ol>
+      <div class="code-block">git pull
+git remote -v    <span class="code-comment"># deve mostrar o seu usuário, e não o repositório do curso</span></div>
+      <p style="margin-top: 1rem">Critério: a pasta <code>aula-09-seunome</code>, com a <code>ESPECIFICACAO.md</code>, aparece na raiz do repositório.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 2 de 17 · Preparação</p>
+      <h2>Conferir as views no Supabase</h2>
+      <p>No SQL Editor do seu projeto, liste as views do gabarito:</p>
+      <div class="code-block"><span class="code-keyword">select</span> table_name <span class="code-keyword">from</span> information_schema.views
+<span class="code-keyword">where</span> table_schema = <span class="code-string">'public'</span> <span class="code-keyword">and</span> table_name <span class="code-keyword">like</span> <span class="code-string">'vw_%'</span>
+<span class="code-keyword">order by</span> 1;</div>
+      <ul style="margin-top: 1rem">
+        <li>São esperadas 11 linhas: <code>vw_itens_entregues</code> e <code>vw_p01</code> a <code>vw_p10</code></li>
+        <li>Se faltar alguma, rode <code>materiais/aula-09/olist/views.sql</code> inteiro</li>
+        <li>Critério: a conferência da seção 8.3 da aula 9 devolve dez <code>confere = true</code></li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 3 de 17 · Preparação</p>
+      <h2>Copiar a URL e a chave publicável</h2>
+      <ol>
+        <li>No painel do Supabase, abra Project Settings e, em seguida, a seção API Keys</li>
+        <li>Copie a chave que começa com <code>sb_publishable_</code>; em projetos antigos, a equivalente é a <em>anon public</em></li>
+        <li>Monte a Project URL no formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> aparece no endereço do painel, depois de <code>/project/</code></li>
+        <li>Deixe de lado a <code>sb_secret_</code> e a senha do banco, que não entram em nenhum arquivo</li>
+      </ol>
+      <p>Guarde os dois valores em um bloco de notas até o passo 8.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 4 de 17 · Preparação</p>
+      <h2>Testar uma view pelo terminal</h2>
+      <div class="code-block">read -p <span class="code-string">"Project URL: "</span> SUPABASE_URL
+read -p <span class="code-string">"Chave publicável: "</span> SUPABASE_KEY
+
+curl -s <span class="code-string">"$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*"</span> \
+  -H <span class="code-string">"apikey: $SUPABASE_KEY"</span> \
+  -H <span class="code-string">"Authorization: Bearer $SUPABASE_KEY"</span>
+
+<span class="code-comment"># esperado: [{"clientes":93104,"clientes_recorrentes":2789,"recompra_pct":3.00}]</span></div>
+      <p style="margin-top: 1rem">O <code>read</code> pede os valores sem gravá-los em arquivo. Se a resposta for <code>401</code> ou <code>[]</code>, consulte o slide de diagnóstico antes de seguir, porque o painel herdará o mesmo erro.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 5 de 17 · Construção</p>
+      <h2>Criar a pasta do dashboard</h2>
+      <div class="code-block">mkdir aula-10-seunome
+
+aula-10-seunome/
+├── index.html     <span class="code-comment"># cartões e textos fixos: pergunta, período, fonte</span>
+├── supabase.js    <span class="code-comment"># Project URL, chave publicável e a função lerView</span>
+├── app.js         <span class="code-comment"># um bloco por cartão: lê, calcula o título, desenha</span>
+├── style.css      <span class="code-comment"># layout responsivo</span>
+└── README.md      <span class="code-comment"># URL, reconciliação, teste de leitura e recomendação</span></div>
+      <p style="margin-top: 1rem">A pasta fica na raiz, ao lado de <code>aula-09-seunome</code>. Use o nome em minúsculas e sem espaço, pois o endereço publicado diferencia maiúsculas de minúsculas.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 6 de 17 · Construção</p>
+      <h2>Pedir o plano ao agente</h2>
+      <p>Abra o Copilot Chat em modo agente, confirme que a execução de comandos depende da sua aprovação e cole o prompt.</p>
       <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-09-seunome/ESPECIFICACAO.md. Crie a pasta aula-10-seunome com
 index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
 no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
@@ -684,6 +774,53 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 7 de 17 · Construção</p>
+      <h2>Revisar o plano antes do código</h2>
+      <ol>
+        <li>A ordem dos cartões é a da especificação?</li>
+        <li>O visual de cada pergunta é o registrado na especificação?</li>
+        <li>Cada fórmula de título usa apenas colunas que existem na view?</li>
+        <li>Algum título já traz o resultado? “Título: beleza_saude lidera” indica valor digitado; a fórmula correta ordena a view por receita e lê a primeira linha</li>
+      </ol>
+      <p>Com as quatro respostas conferidas, responda ao agente que o plano está aprovado. Corrigir um plano exige uma frase, enquanto corrigir dez cartões já escritos consome boa parte da aula.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 8 de 17 · Construção</p>
+      <h2>Configurar o supabase.js</h2>
+      <div class="code-block"><span class="code-comment">// A chave publicável pode ficar aqui; a secreta e a senha, nunca.</span>
+<span class="code-keyword">const</span> SUPABASE_URL = <span class="code-string">'https://SEU-PROJETO.supabase.co'</span>;
+<span class="code-keyword">const</span> SUPABASE_KEY = <span class="code-string">'sb_publishable_COLE_A_SUA_CHAVE'</span>;
+
+<span class="code-keyword">async function</span> lerView(view) {
+  <span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(`${SUPABASE_URL}/rest/v1/${view}?select=*`, {
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+  });
+  <span class="code-keyword">if</span> (!resposta.ok) <span class="code-keyword">throw new</span> Error(`${view} respondeu HTTP ${resposta.status}`);
+  <span class="code-keyword">return</span> resposta.json();
+}</div>
+      <p style="margin-top: 1rem">Cole os valores do passo 3 nas duas primeiras constantes. A URL termina em <code>.supabase.co</code>, sem <code>/rest/v1</code> e sem barra final.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 9 de 17 · Construção</p>
+      <h2>Conferir as peças do código</h2>
+      <div class="code-block"><span class="code-comment">&lt;!-- index.html: o Chart.js e o supabase.js carregam antes do app.js --&gt;</span>
+&lt;script src=<span class="code-string">"https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="code-string">"supabase.js"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="code-string">"app.js"</span> defer&gt;&lt;/script&gt;
+
+<span class="code-comment">// app.js: um padrão único de carregamento e erro para os dez cartões</span>
+<span class="code-keyword">async function</span> preencherCartao(id, view, desenhar) {
+  <span class="code-keyword">const</span> cartao = document.getElementById(id);
+  <span class="code-keyword">try</span> { desenhar(cartao, <span class="code-keyword">await</span> lerView(view)); }
+  <span class="code-keyword">catch</span> (erro) { cartao.querySelector(<span class="code-string">'.corpo'</span>).textContent = erro.message; }
+}</div>
+      <p style="margin-top: 1rem">Localize essas peças no código do agente. O esqueleto completo, com dois cartões, está na seção 7.2 do material e serve de ponto de partida se o agente travar.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 10 de 17 · Publicação</p>
       <h2>Revisão humana do diff</h2>
       <ol>
         <li>Há número digitado? Procure com <code>grep -nE '[0-9]{2,}[.,][0-9]' aula-10-seunome/*</code> e justifique cada ocorrência</li>
@@ -695,6 +832,7 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 11 de 17 · Publicação</p>
       <h2>Teste no Codespace antes de publicar</h2>
       <div class="code-block">python -m http.server 8000</div>
       <ul style="margin-top: 1rem">
@@ -706,15 +844,38 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Publicação no GitHub Pages</h2>
+      <p class="kicker">Passo 12 de 17 · Publicação</p>
+      <h2>Commit e push do dashboard</h2>
+      <div class="code-block">grep -rn <span class="code-string">"sb_secret_"</span> aula-10-seunome   <span class="code-comment"># precisa voltar vazio</span>
+git status
+git add aula-10-seunome
+git commit -m <span class="code-string">"Publica o dashboard do Chief de Vendas lendo as views do Supabase"</span>
+git push</div>
+      <p style="margin-top: 1rem">O fork é público, e um commit fica no histórico mesmo depois de apagado o arquivo. Por isso a busca pela chave secreta vem antes do <code>git add</code>, e não depois do push.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 13 de 17 · Publicação</p>
+      <h2>Ativar o GitHub Pages</h2>
       <ol>
-        <li><code>git add</code>, <code>git commit</code> e <code>git push</code> da pasta <code>aula-10-seunome</code></li>
-        <li>No seu fork, abra Settings e, em seguida, Pages</li>
-        <li>Em Source, escolha Deploy from a branch; em Branch, selecione main e a pasta /(root); depois, clique em Save</li>
-        <li>Aguarde o término do pages build and deployment na aba Actions</li>
+        <li>No seu fork, abra Settings e, no menu lateral, Pages</li>
+        <li>Em Build and deployment, escolha Source: Deploy from a branch</li>
+        <li>Em Branch, selecione main e a pasta /(root); depois, clique em Save</li>
+        <li>Acompanhe o pages build and deployment na aba Actions; a primeira publicação leva alguns minutos</li>
       </ol>
+      <p>Se a seção Pages pedir upgrade de plano, o repositório é privado. No plano gratuito, o Pages publica apenas repositórios públicos, e por isso o trabalho deve estar no fork público do curso.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 14 de 17 · Publicação</p>
+      <h2>Abrir o painel no celular</h2>
       <span class="url">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-10-seunome/</span>
-      <p>Abra o endereço no celular, fora do Codespace. Esse teste reproduz a condição em que o board acessará o painel.</p>
+      <ul>
+        <li>Abra o endereço no celular, fora do Codespace, que é a condição em que o board acessará o painel</li>
+        <li>Critério: os dez cartões carregam, sem rolagem horizontal</li>
+        <li>No notebook, a aba Network deve mostrar status 200 em cada <code>vw_p…</code></li>
+        <li>Cada novo <code>git push</code> dispara outro deploy; se a página mostrar a versão antiga, aguarde o fim em Actions e recarregue com <code>Ctrl + Shift + R</code></li>
+      </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
@@ -730,6 +891,7 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 15 de 17 · Validação</p>
       <h2>Reconciliação entre tela e view</h2>
       <table class="tabela">
         <thead><tr><th class="hide-mobile">Cartão</th><th>Na tela</th><th>View · coluna</th><th>Na view</th><th>Igual?</th></tr></thead>
@@ -743,6 +905,7 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
+      <p class="kicker">Passo 16 de 17 · Validação</p>
       <h2>Teste de leitura em voz alta</h2>
       <ul>
         <li>Outro grupo abre a sua URL no celular, sem receber explicação</li>
@@ -754,6 +917,7 @@ colunas e a fórmula do título. Espere a minha aprovação.</div></div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="challenge">
+      <p class="kicker">Passo 17 de 17 · Validação</p>
       <h2>Desafio e entrega</h2>
       <p>Pasta <code>aula-10-seunome</code> com commit, push e URL funcionando:</p>
       <ul>
