@@ -1,4 +1,4 @@
-# Aula 11 — Prompts para o Antigravity
+# Aula 12 — Prompts para o Antigravity
 
 Use estes prompts na ordem. Trabalhe em **modo orientado por revisão**: leia o plano e o diff, autorize comandos conscientemente e só avance quando a evidência pedida aparecer.
 
@@ -21,7 +21,7 @@ base tratada, fila de revisão, relatório de qualidade e revisão da IA.
 ## Prompt 1 — Perfil da base, sem limpar
 
 ```text
-Crie Aula_10_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
+Crie Aula_12_SeuNome.ipynb. Nas primeiras células, importe pathlib e pandas,
 carregue @hospital_patients_real_world.csv em um DataFrame chamado bruta e
 mostre: cinco linhas, shape, nomes das colunas, dtypes, ausências por coluna,
 linhas duplicadas, PatientID duplicado e valores únicos de Gender e Diagnosis.

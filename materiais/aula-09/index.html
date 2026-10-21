@@ -162,7 +162,7 @@
     </div>
 
     <div class="content">
-      <p class="desc">O Chief de Vendas da Olist precisa apresentar ao board as estratégias comerciais de 2019, e cada estratégia deve vir sustentada por dados. Esta aula continua diretamente a aula 7, na qual cada estudante carregou os dados brutos do Olist no próprio Supabase, construiu e reconciliou o esquema estrela e, com a turma, montou no quadro do Miro o frame modelo do fluxo de interação anotado. Nesta aula, a turma decide o que o dashboard vai mostrar, em que ordem e com que ressalvas, antes de desenhar qualquer gráfico. O percurso parte das 10 perguntas do Chief, passa por um brainstorming cronometrado no quadro do Miro, produz o fluxo de interação anotado do dashboard e termina em 10 views SQL conferidas contra números de referência. Essas views constituem o contrato que a aula 10 consome pela API REST.</p>
+      <p class="desc">O Chief de Vendas da Olist precisa apresentar ao board as estratégias comerciais de 2019, e cada estratégia deve vir sustentada por dados. Esta aula continua diretamente a aula 7, na qual cada estudante carregou os dados brutos do Olist no próprio Supabase, construiu e reconciliou o esquema estrela e, com a turma, montou no quadro do Miro o frame modelo do fluxo de interação anotado. Nesta aula, a turma decide o que o dashboard vai mostrar, em que ordem e com que ressalvas, antes de desenhar qualquer gráfico. O percurso parte das 10 perguntas do Chief, passa por um brainstorming cronometrado no quadro do Miro, produz o fluxo de interação anotado do dashboard e termina em 10 views SQL conferidas contra números de referência. Essas views constituem o contrato que a aula 11 consome pela API REST.</p>
 
       <div class="alert-box">
         <h4>O que precisa estar pronto desde a aula 7</h4>
@@ -272,7 +272,7 @@
         <p>Para verificar a ordem, leem-se apenas os títulos dos cartões, de cima para baixo. Se eles formarem um parágrafo com sentido, o dashboard está ordenado; se soarem como um índice de eixos, a ordem ainda precisa ser revista.</p>
 
         <h3>4.5 Golfo de avaliação: o que se vê e o que o dado autoriza</h3>
-        <p>Donald Norman chama de golfo de avaliação a distância entre o que o sistema mostra e o que a pessoa entende que ele mostra. Num dashboard, esse golfo aparece quando o Chief lê numa barra uma conclusão que a base não sustenta: “frete caro espanta cliente”, quando a base só registra vendas que aconteceram. Nesse caso, nenhum número está errado, e ainda assim a decisão resultante é equivocada. O fluxo de interação anotado serve para encontrar esses pontos antes de a tela ser construída, e a tela da aula 10 deve fechá-los com título, unidade, período e nota de origem.</p>
+        <p>Donald Norman chama de golfo de avaliação a distância entre o que o sistema mostra e o que a pessoa entende que ele mostra. Num dashboard, esse golfo aparece quando o Chief lê numa barra uma conclusão que a base não sustenta: “frete caro espanta cliente”, quando a base só registra vendas que aconteceram. Nesse caso, nenhum número está errado, e ainda assim a decisão resultante é equivocada. O fluxo de interação anotado serve para encontrar esses pontos antes de a tela ser construída, e a tela da aula 11 deve fechá-los com título, unidade, período e nota de origem.</p>
       </section>
 
       <section data-lesson-section="concepts">
@@ -398,7 +398,7 @@
         <p>Depois do intervalo, cada grupo volta aos passos da sua pergunta no frame do dashboard e procura as âncoras: em que passo o Chief concluiria algo que a view não autoriza? Cada grupo registra pelo menos duas âncoras nos cinco campos da seção 5.1; a turma precisa terminar com pelo menos quatro registradas. A tabela da seção 7 traz as divergências mais prováveis, mas o grupo deve procurar as suas antes de consultá-la.</p>
         <div class="alert-box">
           <h4>O quadro como registro oficial</h4>
-          <p>Tudo o que for decidido na discussão precisa estar em post-it antes de o cronômetro tocar. Na aula 10, a tela é construída a partir do frame e da <code>ESPECIFICACAO.md</code>, e não da memória de quem estava presente.</p>
+          <p>Tudo o que for decidido na discussão precisa estar em post-it antes de o cronômetro tocar. Na aula 11, a tela é construída a partir do frame e da <code>ESPECIFICACAO.md</code>, e não da memória de quem estava presente.</p>
         </div>
       </section>
 
@@ -425,7 +425,7 @@
       <section data-lesson-section="guided-practice">
         <h2>8. Da raia do dado às views SQL</h2>
         <h3>8.1 A view como contrato</h3>
-        <p>Cada post-it verde do frame nomeia a fonte de um passo. A view é a forma executável desse post-it: um <code>select</code> salvo no banco com nome, colunas, grão, filtro e período fixos. Ela funciona como contrato entre o fluxo e a tela por três motivos. Primeiro, a regra de negócio fica num único lugar: se a convenção de receita mudar, muda a view, e o dashboard continua igual. Segundo, a tela da aula 10 só consegue mostrar o que a view entrega, o que impede o HTML de recalcular números por conta própria. Terceiro, a view pode ser conferida contra um número de referência antes de existir qualquer gráfico.</p>
+        <p>Cada post-it verde do frame nomeia a fonte de um passo. A view é a forma executável desse post-it: um <code>select</code> salvo no banco com nome, colunas, grão, filtro e período fixos. Ela funciona como contrato entre o fluxo e a tela por três motivos. Primeiro, a regra de negócio fica num único lugar: se a convenção de receita mudar, muda a view, e o dashboard continua igual. Segundo, a tela da aula 11 só consegue mostrar o que a view entrega, o que impede o HTML de recalcular números por conta própria. Terceiro, a view pode ser conferida contra um número de referência antes de existir qualquer gráfico.</p>
         <p>Duas cláusulas aparecem em todas as views do gabarito. <code>with (security_invoker = on)</code> faz a view respeitar as permissões e o RLS de quem consulta, e não as de quem a criou. <code>grant select … to anon, authenticated</code> permite que a chave publicável leia a view pela API; como não há permissão de escrita, ninguém altera dados por ela.</p>
 
         <h3>8.2 A IA escreve a view do grupo</h3>
@@ -716,7 +716,7 @@ from faixas group by decil order by decil;</div>
         </div>
 
         <h3>8.5 Aplicar o gabarito</h3>
-        <p>Depois de registrar a diferença encontrada, todos aplicam o gabarito. O trabalho do grupo permanece no repositório, e o gabarito garante que a turma inteira chegue à aula 10 com as mesmas 11 views e os mesmos nomes de colunas.</p>
+        <p>Depois de registrar a diferença encontrada, todos aplicam o gabarito. O trabalho do grupo permanece no repositório, e o gabarito garante que a turma inteira chegue à aula 11 com as mesmas 11 views e os mesmos nomes de colunas.</p>
         <ol>
           <li>Salve o SQL do grupo em <code>aula-09-seunome/views.sql</code> e anote a diferença encontrada.</li>
           <li>Apague as views do grupo no Supabase, para que a API exponha só as do gabarito:</li>
@@ -739,7 +739,7 @@ order by 1;   <span class="code-comment">-- esperado: 11 linhas, de vw_itens_ent
 
       <section data-lesson-section="guided-practice">
         <h2>9. Teste uma view pela API REST</h2>
-        <p>O Supabase publica automaticamente uma API REST (PostgREST) para as tabelas e views do schema <code>public</code>. É por ela que o dashboard da aula 10, hospedado no GitHub Pages, vai ler os números. O teste no terminal separa dois problemas que costumam aparecer juntos: a correção da view e das permissões, verificada nesta aula, e a correção do HTML, verificada na aula 10.</p>
+        <p>O Supabase publica automaticamente uma API REST (PostgREST) para as tabelas e views do schema <code>public</code>. É por ela que o dashboard da aula 11, hospedado no GitHub Pages, vai ler os números. O teste no terminal separa dois problemas que costumam aparecer juntos: a correção da view e das permissões, verificada nesta aula, e a correção do HTML, verificada na aula 11.</p>
         <ol>
           <li>No painel do Supabase, abra <strong>Project Settings</strong>, na seção <strong>API Keys</strong>, e copie a chave publicável, que começa com <code>sb_publishable_</code> (em projetos antigos, a chave <strong>anon public</strong>). A <strong>Project URL</strong> tem o formato <code>https://&lt;ref&gt;.supabase.co</code>; o <code>&lt;ref&gt;</code> é o identificador que aparece no endereço do painel, depois de <code>/project/</code>.</li>
           <li>No terminal do Codespace, rode os comandos abaixo. O <code>read</code> pede os dois valores sem gravá-los em arquivo.</li>
@@ -824,7 +824,7 @@ git push</div>
 
       <section data-lesson-section="next-steps">
         <h2>13. Referências e continuidade</h2>
-        <p>Na aula 10, a <code>ESPECIFICACAO.md</code> e o frame do dashboard servem de base para um painel HTML publicado no GitHub Pages do seu fork, que lê estas views pela API REST. Cada suporte na tela decidido nesta aula (título que afirma, unidade, período e nota de origem) torna-se um elemento do cartão. A aula 10 parte dos seguintes itens, que devem estar prontos:</p>
+        <p>Na aula 11, a <code>ESPECIFICACAO.md</code> e o frame do dashboard servem de base para um painel HTML publicado no GitHub Pages do seu fork, que lê estas views pela API REST. Cada suporte na tela decidido nesta aula (título que afirma, unidade, período e nota de origem) torna-se um elemento do cartão. A aula 11 parte dos seguintes itens, que devem estar prontos:</p>
         <ul>
           <li><code>ESPECIFICACAO.md</code> em <code>aula-09-seunome/</code>, com commit e push no seu fork;</li>
           <li><code>views.sql</code> do grupo, escrito antes do gabarito, com a diferença encontrada;</li>

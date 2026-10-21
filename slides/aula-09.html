@@ -524,7 +524,7 @@
       <ul>
         <li>Aula 7: carga do Olist no Supabase, discovery, esquema estrela reconciliado e frame da turma com o template do fluxo no quadro do Miro</li>
         <li>Aula 9: conversão das 10 perguntas em fluxo de interação anotado do dashboard e em 10 views conferidas contra números de referência</li>
-        <li>Aula 10: publicação do dashboard no GitHub Pages, com leitura das views pela API REST</li>
+        <li>Aula 11: publicação do dashboard no GitHub Pages, com leitura das views pela API REST</li>
         <li>Para hoje, cada estudante precisa ter o projeto Supabase ativo com a estrela reconciliada, acesso ao quadro do Miro e o <code>DISCOVERY.md</code> e o <code>MODELO_ESTRELA.md</code> no fork</li>
       </ul>
     </div>
@@ -750,7 +750,7 @@
 
     <div class="slide slide-content dense" data-lesson-section="concepts">
       <h2>Da raia do dado à view</h2>
-      <p>A view funciona como contrato entre o fluxo e a tela, pois o dashboard da aula 10 exibe apenas o que as views entregam.</p>
+      <p>A view funciona como contrato entre o fluxo e a tela, pois o dashboard da aula 11 exibe apenas o que as views entregam.</p>
       <div class="cols">
         <div class="card dado"><h3>Post-it verde</h3><p><code>vw_p06_frete_regiao</code>; grão de item entregue; sem registro de desistência</p></div>
         <div class="card"><h3>View</h3><p>colunas <code>regiao</code>, <code>frete_sobre_preco_pct</code>, <code>frete_medio_item</code>, <code>itens</code>; filtro e período dentro dela</p></div>
@@ -800,7 +800,7 @@ select p, valor, referencia, valor = referencia as confere from (
 
     <div class="slide slide-content dense" data-lesson-section="guided-practice">
       <h2>Aplicação do gabarito <code>views.sql</code></h2>
-      <p>O gabarito garante que todos cheguem à aula 10 com as mesmas 11 views, independentemente do resultado do grupo.</p>
+      <p>O gabarito garante que todos cheguem à aula 11 com as mesmas 11 views, independentemente do resultado do grupo.</p>
       <ol>
         <li>Salve a sua versão em <code>aula-09-seunome/views.sql</code> e anote a diferença encontrada.</li>
         <li>Apague as views <code>_grupo</code> do Supabase com <code>drop view</code>.</li>
@@ -819,7 +819,7 @@ read -p "Chave publicável: " SUPABASE_KEY
 curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
   -H "apikey: $SUPABASE_KEY" \
   -H "Authorization: Bearer $SUPABASE_KEY"</div></div>
-      <p>O resultado esperado é uma lista JSON com <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00, que é o mesmo conteúdo lido pelo dashboard na aula 10.</p>
+      <p>O resultado esperado é uma lista JSON com <code>clientes</code> 93104, <code>clientes_recorrentes</code> 2789 e <code>recompra_pct</code> 3.00, que é o mesmo conteúdo lido pelo dashboard na aula 11.</p>
     </div>
 
     <div class="slide slide-content dense" data-lesson-section="challenge">
@@ -839,13 +839,13 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
       <ul>
         <li>Os cinco elementos da pergunta orientam a forma do gráfico, e a ordem dos cartões organiza o argumento</li>
         <li>O fluxo anotado indica em que pontos a leitura do Chief ultrapassa o que o dado autoriza</li>
-        <li>As views conferidas contra a referência sustentam a tela da aula 10</li>
+        <li>As views conferidas contra a referência sustentam a tela da aula 11</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="next-steps">
-      <h2>Próximos passos: aula 10</h2>
-      <p>Aula 10 (21/10): o fluxo anotado e a <code>ESPECIFICACAO.md</code> serão convertidos num dashboard HTML publicado no GitHub Pages do seu fork, com leitura das views pela API REST. A aula começa pela verificação destes itens:</p>
+      <h2>Próximos passos: aula 11</h2>
+      <p>Aula 11 (21/10): o fluxo anotado e a <code>ESPECIFICACAO.md</code> serão convertidos num dashboard HTML publicado no GitHub Pages do seu fork, com leitura das views pela API REST. A aula começa pela verificação destes itens:</p>
       <ul>
         <li><code>ESPECIFICACAO.md</code> e <code>views.sql</code> do grupo com commit e push</li>
         <li>Frame do dashboard no quadro do Miro, com as âncoras registradas</li>
@@ -856,7 +856,7 @@ curl -s "$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*" \
 
     <div class="slide slide-end">
       <h2>Fim do Laboratório 9</h2>
-      <p>Na aula 10, a especificação e as views produzidas hoje serão a base do dashboard publicado.</p>
+      <p>Na aula 11, a especificação e as views produzidas hoje serão a base do dashboard publicado.</p>
     </div>
   </div>
 

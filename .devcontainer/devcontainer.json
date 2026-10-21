@@ -7,10 +7,17 @@
       "dockerDashComposeVersion": "latest"
     }
   },
-  "forwardPorts": [3000],
+  "forwardPorts": [
+    3000,
+    8501
+  ],
   "portsAttributes": {
     "3000": {
       "label": "Metabase",
+      "onAutoForward": "notify"
+    },
+    "8501": {
+      "label": "Streamlit",
       "onAutoForward": "notify"
     }
   },

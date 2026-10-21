@@ -156,7 +156,6 @@
       box-shadow: 0 0 10px rgba(0, 215, 176, 0.75);
     }
     .slide-content strong { color: #fff; font-weight: 700; }
-    .slide-content a { color: var(--cyan-light); }
     .slide-content em { color: var(--cyan-light); font-style: normal; }
     .slide-content code {
       padding: 0.14em 0.45em;
@@ -169,7 +168,6 @@
     }
 
     .code-block {
-      font-variant-ligatures: none;
       white-space: pre-wrap;
       position: relative;
       z-index: 1;
@@ -192,6 +190,68 @@
     .code-comment { color: #7890a1; font-style: italic; }
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
+
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
 
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
@@ -304,89 +364,6 @@
     .ctrl-btn-only-icon { min-width: 42px; padding-inline: 0.7rem; }
     .slide-counter { min-width: 4.5rem; color: #7ee7d4; font-family: 'Fira Code', monospace; font-size: 0.84rem; text-align: center; }
 
-
-    /* Componentes da aula 10 */
-    .kicker { position: relative; z-index: 1; margin: 0 0 0.6rem; color: #7ee7d4; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-    .slide-content ol { position: relative; z-index: 1; max-width: 1120px; margin: 0 0 1rem; padding-left: 1.6rem; color: var(--text); font-size: clamp(1.02rem, 1.55vw, 1.35rem); font-weight: 300; line-height: 1.45; }
-    .slide-content ol li { margin-bottom: 0.35rem; padding-left: 0.2rem; }
-    .slide-content ol li::before { display: none; }
-    .slide-content ol li::marker { color: var(--teal); font-weight: 700; }
-
-    .agenda { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.2rem 3rem; }
-    .agenda li { margin-bottom: 0.3rem; }
-    .agenda b { display: inline-block; min-width: 3.4rem; color: var(--cyan-light); font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.86em; }
-
-    .arq { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0.4rem 0 1.1rem; }
-    .arq svg { display: block; width: 100%; height: auto; }
-    .arq .arq-v { display: none; }
-    .arq .caixa { fill: rgba(8, 47, 73, 0.72); stroke: rgba(75, 196, 232, 0.4); stroke-width: 1.5; }
-    .arq .caixa-nav { fill: rgba(0, 215, 176, 0.12); stroke: var(--teal); }
-    .arq .titulo { fill: #ffffff; font: 700 17px 'Outfit', system-ui, sans-serif; }
-    .arq .sub { fill: #a9c3d4; font: 400 13px 'Outfit', system-ui, sans-serif; }
-    .arq .mono { fill: var(--cyan-light); font: 400 12px 'Fira Code', monospace; }
-    .arq .num { fill: #062f3c; font: 700 13px 'Outfit', system-ui, sans-serif; }
-    .arq .bola { fill: var(--teal); }
-    .arq .seta { stroke: var(--cyan-light); stroke-width: 2; fill: none; }
-    .arq .rotulo { fill: #d7e5ef; font: 600 12px 'Outfit', system-ui, sans-serif; }
-    .arq .bloqueio { stroke: #f87171; stroke-width: 2; }
-    .arq .bloqueio-texto { fill: #fca5a5; font: 600 12px 'Outfit', system-ui, sans-serif; }
-
-    .duas { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; width: min(100%, 1120px); }
-    .painel { padding: clamp(0.9rem, 1.8vw, 1.4rem); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; background: rgba(4, 20, 34, 0.55); }
-    .painel h3 { margin: 0 0 0.5rem; color: #ffffff; font-size: clamp(1.05rem, 1.6vw, 1.35rem); }
-    .painel h3 code { font-size: 0.8em; }
-    .painel ul { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem) !important; }
-    .painel.ok { border-top: 4px solid var(--teal); }
-    .painel.nunca { border-top: 4px solid #f87171; }
-
-    .tres { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1120px); margin-bottom: 1rem; }
-    .tres .painel p { margin: 0 0 0.5rem; font-size: clamp(0.85rem, 1.15vw, 1rem); color: var(--muted); }
-    .tres .painel h3 span { color: var(--teal); font-weight: 400; }
-    .fases { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; width: min(100%, 1120px); margin-bottom: 1.1rem; }
-    .fases .painel { border-top: 4px solid var(--teal); }
-    .fases .painel ol { margin: 0; padding-left: 1.7rem; font-size: clamp(0.92rem, 1.3vw, 1.12rem); }
-    .fases .painel ol li { margin-bottom: 0.2rem; }
-    .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .chips span { padding: 0.25rem 0.55rem; border: 1px solid rgba(75, 196, 232, 0.3); border-radius: 999px; color: #dff6ff; background: rgba(0, 163, 217, 0.12); font-size: clamp(0.78rem, 1.05vw, 0.95rem); }
-
-    .anatomia { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.6rem; align-items: center; width: min(100%, 1120px); }
-    .mock { padding: 1.1rem 1.2rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; background: rgba(15, 23, 42, 0.8); box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3); }
-    .mock .m-tag { display: inline-block; padding: 0.12rem 0.5rem; border: 1px solid rgba(75, 196, 232, 0.3); border-radius: 999px; color: var(--cyan-light); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; }
-    .mock .m-perg { color: #94a3b8; font-size: 0.8rem; margin-left: 0.4rem; }
-    .mock .m-tit { margin: 0.45rem 0 0.2rem; color: #fff; font-size: clamp(0.95rem, 1.35vw, 1.15rem); font-weight: 600; line-height: 1.25; }
-    .mock .m-sub { color: #94a3b8; font-size: 0.78rem; }
-    .mock .m-bar { display: grid; grid-template-columns: 6rem 1fr 3rem; gap: 0.5rem; align-items: center; margin-top: 0.5rem; color: #cbd5e1; font-size: 0.8rem; }
-    .mock .m-bar i { display: block; height: 14px; border-radius: 0 4px 4px 0; }
-    .mock .m-nota { margin-top: 0.7rem; padding: 0.4rem 0.6rem; border-left: 3px solid #d0772a; color: #cbd5e1; background: rgba(208, 119, 42, 0.08); font-size: 0.76rem; }
-    .mock .m-fonte { margin-top: 0.5rem; color: #94a3b8; font-size: 0.72rem; }
-    .mock .m-fonte code { font-size: 0.95em; }
-    .marca { display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; margin-right: 0.35rem; border-radius: 50%; color: #062f3c; background: var(--teal); font-size: 0.72em; font-weight: 800; vertical-align: 0.1em; }
-
-    .erros { position: relative; z-index: 1; display: grid; grid-template-columns: max-content 1fr; gap: 0.45rem 1.2rem; width: min(100%, 1120px); margin: 0; color: var(--text); font-size: clamp(0.98rem, 1.45vw, 1.25rem); font-weight: 300; line-height: 1.35; }
-    .erros dt { color: #ffffff; font-family: 'Fira Code', monospace; font-size: 0.86em; font-weight: 600; }
-    .erros dd { margin: 0; }
-
-    .tabela { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0 0 1rem; border-collapse: collapse; color: var(--text); font-size: clamp(0.9rem, 1.3vw, 1.12rem); }
-    .tabela th, .tabela td { padding: 0.5rem 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; }
-    .tabela th { color: var(--cyan-light); font-weight: 600; }
-    .tabela td code { font-size: 0.82em; overflow-wrap: anywhere; }
-
-    .formato { position: relative; z-index: 1; width: min(100%, 1120px); margin: 0 0 1rem; padding: 1rem 1.2rem; border-left: 5px solid var(--teal); border-radius: 0 14px 14px 0; background: rgba(4, 20, 34, 0.6); }
-    .formato p { margin: 0 0 0.45rem !important; }
-    .formato p:last-child { margin-bottom: 0 !important; }
-    .formato b { color: #7ee7d4; font-weight: 700; }
-
-    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
-    .prompt-wrap .code-block { width: 100%; margin: 0; padding-top: 3rem; }
-    .copy-prompt { position: absolute; top: 0.6rem; right: 0.8rem; z-index: 2; padding: 0.45rem 0.75rem; border: 1px solid rgba(126, 231, 212, 0.35); border-radius: 8px; color: #dffcf6; background: rgba(0, 163, 137, 0.2); cursor: pointer; }
-    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
-    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
-
-    .link-destaque { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.6rem; margin: 0.2rem 0 1.1rem; padding: 0.8rem 1.15rem; border: 1px solid rgba(126, 231, 212, 0.38); border-radius: 10px; color: #e9fffb !important; background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2)); font-weight: 700; text-decoration: none; }
-    .link-destaque:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
-    .link-destaque:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
-    .url { position: relative; z-index: 1; display: inline-block; margin: 0.2rem 0 0.8rem; padding: 0.5rem 0.8rem; border-radius: 8px; color: #e9fffb; background: rgba(0, 163, 217, 0.14); font-family: 'Fira Code', monospace; font-size: clamp(0.8rem, 1.3vw, 1.05rem); overflow-wrap: anywhere; }
-
     @media (max-width: 768px) {
       :root { --controls-height: 62px; }
       .slide { padding: 4.25rem 1.5rem calc(var(--controls-height) + 2rem); }
@@ -404,8 +381,14 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
-      .slide-start::before { top: 0; width: 24%; opacity: 0.68; }
+      .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
       .slide-start p { max-width: 84%; font-size: clamp(1.05rem, 5vw, 1.45rem); }
       .slide-start .badge { padding: 0.4rem 0.75rem; font-size: 0.7rem; }
@@ -418,14 +401,6 @@
       .slide-counter { min-width: 3.4rem; font-size: 0.72rem; }
     }
 
-    /* Cinco atalhos no rodapé: compacta os botões nas telas mais estreitas */
-    @media (max-width: 440px) {
-      .btn-group { gap: 0.15rem; }
-      a.ctrl-btn { padding-inline: 0.45rem; }
-      .ctrl-btn-only-icon { min-width: 34px; padding: 0.45rem; }
-      .slide-counter { min-width: 2.9rem; font-size: 0.68rem; }
-    }
-
     @media (max-height: 680px) and (min-width: 769px) {
       .slide { padding-top: 4.25rem; }
       .slide-content h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); margin-bottom: 1rem; }
@@ -436,529 +411,215 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
-  
-    @media (max-width: 768px) {
-      .kicker { font-size: 0.66rem; margin-bottom: 0.35rem; }
-      .slide-content ol { font-size: clamp(0.88rem, 3.6vw, 1rem); line-height: 1.32; padding-left: 1.2rem; }
-      .slide-content ol li { margin-bottom: 0.22rem; }
-      .agenda { grid-template-columns: 1fr; gap: 0; }
-      .agenda li { margin-bottom: 0.2rem !important; }
-      .arq .arq-h { display: none; }
-      .arq .arq-v { display: block; max-width: 300px; }
-      .arq { margin: 0 0 0.6rem; }
-      .duas, .anatomia { grid-template-columns: 1fr; gap: 0.6rem; }
-      .painel { padding: 0.65rem 0.8rem; }
-      .painel h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
-      .painel ul { font-size: 0.86rem !important; }
-      .painel ul li { margin-bottom: 0.15rem; }
-      .fases { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.6rem; }
-      .fases .painel { padding: 0.45rem 0.55rem; }
-      .fases .painel h3 { font-size: 0.86rem; margin-bottom: 0.15rem; }
-      .fases .painel ol { padding-left: 1.2rem; font-size: 0.74rem; line-height: 1.25; }
-      .fases .painel ol li { margin-bottom: 0.05rem; }
-      .tres { gap: 0.4rem; margin-bottom: 0.6rem; }
-      .tres .painel { padding: 0.5rem 0.45rem; }
-      .tres .painel h3 { font-size: 0.86rem; }
-      .tres .painel h3 span { display: block; font-size: 0.72rem; }
-      .tres .painel p { display: none; }
-      .chips { gap: 0.25rem; }
-      .chips span { padding: 0.12rem 0.35rem; font-size: 0.7rem; }
-      .mock { padding: 0.7rem 0.8rem; }
-      .mock .m-perg { display: none; }
-      .mock .m-bar { grid-template-columns: 4.6rem 1fr 2.6rem; font-size: 0.72rem; margin-top: 0.3rem; }
-      .mock .m-nota { font-size: 0.7rem; margin-top: 0.45rem; }
-      .anatomia ul { font-size: 0.84rem !important; }
-      .anatomia ul li { margin-bottom: 0.12rem !important; padding-left: 0 !important; }
-      .anatomia ul li::before { display: none; }
-      .erros { grid-template-columns: 1fr; gap: 0 0; font-size: 0.86rem; }
-      .erros dd { margin-bottom: 0.4rem; color: #b9cfdc; }
-      .tabela { font-size: 0.76rem; }
-      .tabela th, .tabela td { padding: 0.32rem 0.25rem; }
-      .tabela td code { padding: 0.05em 0.2em; font-size: 0.74em; }
-      .formato { padding: 0.6rem 0.75rem; }
-      .prompt-wrap .code-block { padding-top: 2.6rem; max-height: 46vh; }
-      .copy-prompt { top: 0.4rem; right: 0.5rem; padding: 0.35rem 0.55rem; font-size: 0.72rem; }
-      .link-destaque { padding: 0.6rem 0.85rem; font-size: 0.9rem; margin-bottom: 0.7rem; }
-      .hide-mobile { display: none !important; }
-    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 10 · 21/10</div><h1>Dashboard online</h1><p>Data Visualization III. Publicação no GitHub Pages de um dashboard que lê as views do Supabase e responde às dez perguntas do Chief de Vendas</p></div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <p class="kicker">Retomada das aulas 7 e 9</p>
-      <h2>O case Olist nas aulas 7 a 9</h2>
-      <p>O Chief de Vendas da Olist apresenta ao board as estratégias comerciais de 2019, e a turma atua como a equipe de dados que sustenta cada afirmação. Esta aula parte dos artefatos produzidos nas duas anteriores.</p>
-      <ul>
-        <li>Aula 7: o Olist carregado no Supabase de cada estudante e transformado em esquema estrela reconciliado</li>
-        <li>Aula 9: as dez perguntas convertidas em fluxo de interação anotado, <code>ESPECIFICACAO.md</code> e <code>views.sql</code>, com o frame do dashboard no quadro do Miro</li>
-        <li>Para hoje: a conferência com dez <code>confere = true</code> no seu Supabase, a Project URL e a chave publicável</li>
-        <li>Aula 10: publicação da especificação como dashboard, lido do seu banco e compreensível para outro grupo sem explicação oral</li>
-      </ul>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 10 · 21/10</div>
+      <h1>Dashboard financeiro interativo</h1>
+      <p>Cotações do Yahoo Finance lidas por API e organizadas em um painel Streamlit no Codespace</p>
     </div>
-
     <div class="slide slide-content" data-lesson-section="objectives">
       <h2>Objetivos de aprendizagem</h2>
       <ul>
-        <li>Construir com IA agêntica um dashboard HTML que consome as views do Supabase pela API REST</li>
-        <li>Implementar na tela os suportes decididos no fluxo anotado: título que afirma, unidade, período e nota de origem</li>
-        <li>Publicar o dashboard no GitHub Pages e verificar que ele funciona fora do Codespace</li>
-        <li>Reconciliar cada número exibido com a view de origem e submeter o painel a um teste de leitura por outro grupo</li>
+        <li>Consultar cotações históricas por API com a biblioteca <code>yfinance</code>.</li>
+        <li>Comparar ativos de preços diferentes em base 100, em um único eixo.</li>
+        <li>Calcular retorno, volatilidade anualizada e queda máxima de cada ativo.</li>
+        <li>Construir um dashboard interativo em Streamlit e abri-lo pela aba PORTS.</li>
+        <li>Redigir uma leitura para o comitê financeiro sustentada pelos números do painel.</li>
       </ul>
     </div>
-
     <div class="slide slide-content" data-lesson-section="agenda">
       <h2>Roteiro do laboratório</h2>
-      <ul class="agenda">
-        <li><b>19:00</b> Retomada do fluxo anotado e da especificação</li>
-        <li><b>19:10</b> Arquitetura, chaves e preparação (passos 1 a 4)</li>
-        <li><b>19:30</b> Construção com o agente (passos 5 a 9)</li>
-        <li><b>20:30</b> Intervalo</li>
-        <li><b>20:40</b> Revisão e teste local (passos 10 e 11)</li>
-        <li><b>21:05</b> Publicação no GitHub Pages (passos 12 a 14)</li>
-        <li><b>21:20</b> Reconciliação e teste de leitura (passos 15 e 16)</li>
-        <li><b>21:40</b> Entrega, recomendação e síntese (passo 17)</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>A especificação como contrato</h2>
-      <p>O agente escreve o HTML, mas o que a tela afirma é definido pela <code>ESPECIFICACAO.md</code> da aula 9. Cada campo da especificação determina um elemento do dashboard.</p>
       <ul>
-        <li><strong>Pergunta e decisão:</strong> posição do cartão na narrativa</li>
-        <li><strong>View e colunas:</strong> o que o <code>fetch</code> lê</li>
-        <li><strong>Visual escolhido:</strong> o gráfico, que o agente não substitui por outro</li>
-        <li><strong>Título que afirma:</strong> frase montada a partir dos dados, e não digitada</li>
-        <li><strong>Âncora e suporte na tela:</strong> unidade, período, base de comparação e nota</li>
+        <li>19:00 · Case do comitê financeiro e o que é uma API.</li>
+        <li>19:25 · Exploração no Jupyter: preços, base 100 e indicadores.</li>
+        <li>20:15 · Do notebook ao painel: primeira versão em Streamlit.</li>
+        <li>21:00 · Evolução do painel com o Copilot e revisão dos números.</li>
+        <li>21:40 · Leitura para o comitê, commit e push.</li>
       </ul>
     </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts" data-slide="arquitetura">
-      <h2>Arquitetura do dashboard</h2>
-      <figure class="arq" role="img" aria-label="Arquitetura: o GitHub Pages entrega os arquivos; o navegador chama a API REST do Supabase, que lê as views sobre o esquema estrela">
-        <svg class="arq-h" viewBox="0 0 1100 230" aria-hidden="true">
-          <defs><marker id="ponta-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker></defs>
-          <g><rect class="caixa" x="0" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="22" cy="94" r="12"/><text class="num" x="22" y="99" text-anchor="middle">1</text><text class="titulo" x="40" y="100">GitHub Pages</text><text class="sub" x="14" y="132">entrega os arquivos</text><text class="mono" x="14" y="160">usuario.github.io</text></g>
-          <g><rect class="caixa caixa-nav" x="237" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="259" cy="94" r="12"/><text class="num" x="259" y="99" text-anchor="middle">2</text><text class="titulo" x="277" y="100">Navegador</text><text class="sub" x="251" y="132">executa o app.js</text><text class="mono" x="251" y="160">celular, notebook</text></g>
-          <g><rect class="caixa" x="474" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="496" cy="94" r="12"/><text class="num" x="496" y="99" text-anchor="middle">3</text><text class="titulo" x="514" y="100">API REST</text><text class="sub" x="488" y="132">PostgREST</text><text class="mono" x="488" y="160">/rest/v1/vw_p01…</text></g>
-          <g><rect class="caixa" x="711" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="733" cy="94" r="12"/><text class="num" x="733" y="99" text-anchor="middle">4</text><text class="titulo" x="751" y="100">Views</text><text class="sub" x="725" y="132">uma por pergunta</text><text class="mono" x="725" y="160">vw_p01 … vw_p10</text></g>
-          <g><rect class="caixa" x="948" y="70" width="152" height="112" rx="14"/><circle class="bola" cx="970" cy="94" r="12"/><text class="num" x="970" y="99" text-anchor="middle">5</text><text class="titulo" x="988" y="100">Estrela</text><text class="sub" x="962" y="132">RLS: só leitura</text><text class="mono" x="962" y="160">fato_* · dim_*</text></g>
-          <line class="seta" x1="157" y1="126" x2="232" y2="126" marker-end="url(#ponta-h)"/>
-          <text class="rotulo" x="194" y="100" text-anchor="middle">HTML,</text>
-          <text class="rotulo" x="194" y="114" text-anchor="middle">JS, CSS</text>
-          <line class="seta" x1="394" y1="126" x2="469" y2="126" marker-end="url(#ponta-h)"/>
-          <text class="rotulo" x="432" y="86" text-anchor="middle">fetch +</text>
-          <text class="rotulo" x="432" y="100" text-anchor="middle">chave</text>
-          <text class="rotulo" x="432" y="114" text-anchor="middle">publicável</text>
-          <line class="seta" x1="631" y1="126" x2="706" y2="126" marker-end="url(#ponta-h)"/>
-          <text class="rotulo" x="668" y="100" text-anchor="middle">SELECT</text>
-          <text class="rotulo" x="668" y="114" text-anchor="middle">como anon</text>
-          <line class="seta" x1="868" y1="126" x2="943" y2="126" marker-end="url(#ponta-h)"/>
-          <text class="rotulo" x="906" y="100" text-anchor="middle">security_</text>
-          <text class="rotulo" x="906" y="114" text-anchor="middle">invoker</text>
-          <line class="bloqueio" x1="237" y1="222" x2="626" y2="222"/><text class="bloqueio-texto" x="432" y="214" text-anchor="middle">chave secreta e senha do banco nunca passam por aqui</text>
-        </svg>
-        <svg class="arq-v" viewBox="0 0 330 430" aria-hidden="true">
-          <defs><marker id="ponta-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker></defs>
-          <g><rect class="caixa" x="0" y="0" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="29" r="11"/><text class="num" x="22" y="34" text-anchor="middle">1</text><text class="titulo" x="42" y="25">GitHub Pages</text><text class="sub" x="42" y="45">entrega HTML, JS e CSS</text></g>
-          <g><rect class="caixa caixa-nav" x="0" y="92" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="121" r="11"/><text class="num" x="22" y="126" text-anchor="middle">2</text><text class="titulo" x="42" y="117">Navegador</text><text class="sub" x="42" y="137">executa o app.js</text></g>
-          <g><rect class="caixa" x="0" y="184" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="213" r="11"/><text class="num" x="22" y="218" text-anchor="middle">3</text><text class="titulo" x="42" y="209">API REST do Supabase</text><text class="mono" x="42" y="230">/rest/v1/vw_p01…</text></g>
-          <g><rect class="caixa" x="0" y="276" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="305" r="11"/><text class="num" x="22" y="310" text-anchor="middle">4</text><text class="titulo" x="42" y="301">Views vw_p01 … vw_p10</text><text class="sub" x="42" y="321">security_invoker = on</text></g>
-          <g><rect class="caixa" x="0" y="368" width="330" height="58" rx="12"/><circle class="bola" cx="22" cy="397" r="11"/><text class="num" x="22" y="402" text-anchor="middle">5</text><text class="titulo" x="42" y="393">Esquema estrela</text><text class="sub" x="42" y="413">RLS: só leitura para anon</text></g>
-          <line class="seta" x1="40" y1="61" x2="40" y2="87" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="80">arquivos estáticos</text>
-          <line class="seta" x1="40" y1="153" x2="40" y2="179" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="172">fetch + chave publicável</text>
-          <line class="seta" x1="40" y1="245" x2="40" y2="271" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="264">SELECT como anon</text>
-          <line class="seta" x1="40" y1="337" x2="40" y2="363" marker-end="url(#ponta-v)"/><text class="rotulo" x="54" y="356">permissões de quem chama</text>
-        </svg>
-      </figure>
-      <p>O GitHub Pages apenas entrega os arquivos estáticos. Os dados são buscados no Supabase pelo navegador de quem abre o painel.</p>
-    </div>
-
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Cada view como endpoint da API</h2>
-      <div class="code-block"><span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(
-  `${SUPABASE_URL}<span class="code-string">/rest/v1/vw_p09_recompra?select=*</span>`,
-  { headers: { apikey: SUPABASE_KEY,
-               Authorization: `Bearer ${SUPABASE_KEY}` } }
-);
-<span class="code-keyword">const</span> linhas = <span class="code-keyword">await</span> resposta.json();
-<span class="code-comment">// [{"clientes":93104,"clientes_recorrentes":2789,"recompra_pct":3.00}]</span></div>
-      <p style="margin-top: 1rem">O Supabase publica cada view do schema <code>public</code> como um endpoint da API REST. A resposta é uma lista de linhas em JSON, com os mesmos nomes de coluna da view.</p>
+      <h2>Case do comitê financeiro</h2>
+      <p>O comitê financeiro de um grupo hospitalar acompanha mensalmente as empresas de saúde listadas na B3, porque elas são concorrentes, compradoras de serviços e referência de valor para o setor. Hoje esse acompanhamento é feito com planilhas copiadas à mão.</p>
+      <ul>
+        <li>Quais empresas do setor superaram o Ibovespa no período?</li>
+        <li>Quais oscilaram mais e quanto chegaram a cair a partir de um pico?</li>
+        <li>As ações do setor sobem e caem juntas?</li>
+      </ul>
     </div>
-
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Chave publicável × chave secreta</h2>
-      <p>A Project URL e as chaves ficam no Supabase, em Project Settings, na seção API Keys.</p>
-      <div class="duas">
-        <div class="painel ok"><h3>Publicável <code>sb_publishable_…</code></h3><ul><li>Pode constar no HTML e no commit</li><li>Identifica o projeto; em projetos antigos, é a <em>anon public</em></li><li>Lê só o que o grant e o RLS liberam</li></ul></div>
-        <div class="painel nunca"><h3>Secreta <code>sb_secret_…</code> e senha</h3><ul><li>Não deve constar no HTML, em commits, capturas de tela ou prompts</li><li>Ignora o RLS, de modo que quem a obtém pode escrever e apagar dados</li><li>Em projetos antigos, é a <em>service_role</em></li></ul></div>
+      <h2>O que é uma API de dados</h2>
+      <p>Uma API é um endereço que devolve dados estruturados quando recebe um pedido em formato combinado. O painel deixa de depender de uma cópia manual, porque cada atualização refaz a consulta na fonte.</p>
+      <ul>
+        <li>O Yahoo Finance publica cotações, e a biblioteca <code>yfinance</code> faz o pedido e entrega um DataFrame.</li>
+        <li>A biblioteca não é um produto oficial do Yahoo: a API pode mudar, limitar pedidos ou atrasar dados.</li>
+        <li>As cotações chegam com atraso e servem para estudo, não para operar na bolsa.</li>
+      </ul>
+    </div>
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <h2>Como o Yahoo nomeia os ativos</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>RDOR3.SA</strong><span>Rede D'Or</span></div>
+        <div class="metric"><strong>HAPV3.SA</strong><span>Hapvida</span></div>
+        <div class="metric"><strong>FLRY3.SA</strong><span>Fleury</span></div>
+        <div class="metric"><strong>RADL3.SA</strong><span>Raia Drogasil</span></div>
+        <div class="metric"><strong>^BVSP</strong><span>Ibovespa</span></div>
       </div>
+      <p>O sufixo <code>.SA</code> indica ações negociadas na B3, e o acento circunflexo indica um índice. O dólar comercial aparece como <code>USDBRL=X</code>.</p>
     </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Prepare o Codespace</h2>
+      <p>A aula usa três bibliotecas que o Codespace criado no início do semestre ainda não tem. No terminal, instale-as uma vez e crie a pasta da entrega.</p>
+      <div class="code-block">pip install yfinance streamlit plotly
+mkdir aula-10-seunome</div>
+      <p>Dentro da pasta, crie o notebook <code>Aula_10_SeuNome.ipynb</code> para a exploração.</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 1 · Primeira consulta</h2>
+      <div class="code-block">import pandas as pd
+import yfinance as yf
 
+rdor = yf.Ticker("RDOR3.SA")
+historico = rdor.history(period="6mo")
+historico.tail()</div>
+      <p>Cada linha é um pregão, com abertura, máxima, mínima, fechamento, volume, proventos e desdobramentos.</p>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 2 · Vários ativos em base 100</h2>
+      <div class="code-block">tickers = ["RDOR3.SA", "HAPV3.SA", "FLRY3.SA", "RADL3.SA", "^BVSP"]
+dados = yf.download(tickers, period="1y", auto_adjust=True, progress=False)
+fechamento = dados["Close"].dropna()
+
+base_100 = fechamento / fechamento.iloc[0] * 100
+base_100.plot(figsize=(10, 4), title="Base 100 no início do período")</div>
+      <p>O Ibovespa vale cerca de 200 mil pontos e a Hapvida menos de R$ 10. Dividir cada série pelo primeiro valor coloca todas no mesmo eixo e evita o gráfico de dois eixos.</p>
+    </div>
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Por que a leitura pública é segura aqui</h2>
+      <h2>Três indicadores para o comitê</h2>
       <ul>
-        <li><code>estrela.sql</code> liga o RLS nas seis tabelas com uma política apenas de SELECT para <code>anon</code></li>
-        <li><code>views.sql</code> cria as views com <code>security_invoker = on</code> e dá <code>grant select</code> a <code>anon</code></li>
-        <li>Como não existe política de insert, update ou delete, a chave publicável não altera dados</li>
-        <li>Por outro lado, tudo o que o grant libera fica legível por qualquer pessoa; por isso, dados pessoais reais não devem ser publicados dessa forma</li>
+        <li>Retorno no período: variação entre o primeiro e o último fechamento.</li>
+        <li>Volatilidade anualizada: desvio padrão dos retornos diários multiplicado por √252, o número aproximado de pregões em um ano.</li>
+        <li>Queda máxima: a maior perda medida a partir do pico anterior, que indica o pior momento de quem comprou no topo.</li>
       </ul>
+      <p>O parâmetro <code>auto_adjust=True</code> desconta dividendos e desdobramentos, sem o que um grupamento de ações apareceria como queda.</p>
     </div>
-
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Passo 3 · Tabela de indicadores</h2>
+      <div class="code-block">retornos = fechamento.pct_change().dropna()
+resumo = pd.DataFrame({
+    "retorno_pct": (fechamento.iloc[-1] / fechamento.iloc[0] - 1) * 100,
+    "volatilidade_pct": retornos.std() * 252 ** 0.5 * 100,
+    "queda_maxima_pct": (fechamento / fechamento.cummax() - 1).min() * 100,
+}).round(1).sort_values("retorno_pct", ascending=False)
+resumo</div>
+    </div>
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <h2>Checkpoint da consulta de 21/10</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>+105,0%</strong><span>Fleury em 1 ano</span></div>
+        <div class="metric"><strong>+43,3%</strong><span>Ibovespa em 1 ano</span></div>
+        <div class="metric"><strong>−73,2%</strong><span>Hapvida em 1 ano</span></div>
+        <div class="metric"><strong>−42,2%</strong><span>Hapvida em 13/11/2025</span></div>
+      </div>
+      <p>Os valores mudam a cada pregão, e a sua consulta pode diferir nas casas decimais. Encontre o pior dia com <code>retornos["HAPV3.SA"].nsmallest(3)</code> e anote a data.</p>
+    </div>
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Conversão e formatação de números</h2>
-      <div class="code-block"><span class="code-keyword">const</span> taxa = Number(linha.recompra_pct);    <span class="code-comment">// 3.00 chega como 3</span>
-<span class="code-keyword">const</span> brl = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>,
-  { style: <span class="code-string">'currency'</span>, currency: <span class="code-string">'BRL'</span> });
-<span class="code-keyword">const</span> pct = <span class="code-keyword">new</span> Intl.NumberFormat(<span class="code-string">'pt-BR'</span>,
-  { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-brl.format(Number(<span class="code-string">'13181027.13'</span>));      <span class="code-comment">// "R$ 13.181.027,13"</span>
-pct.format(taxa) + <span class="code-string">'%'</span>;                  <span class="code-comment">// "3,00%"</span></div>
-      <p style="margin-top: 1rem">A API já entrega números JSON; <code>Number()</code> funciona como conversão defensiva, caso a view passe a enviar texto. O <code>Intl</code> restitui a vírgula decimal, o ponto de milhar e os zeros que o JSON descarta.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Anatomia de um cartão</h2>
-      <div class="anatomia">
-        <div class="mock" aria-label="Exemplo de cartão da pergunta 8">
-          <span class="m-tag"><span class="marca">1</span>P08 · SATISFAÇÃO</span><span class="m-perg">O atraso derruba a nota do cliente?</span>
-          <div class="m-tit"><span class="marca">2</span>Com atraso, a nota média cai de 4,29 para 2,27 e 62,4% das avaliações são 1 ou 2</div>
-          <div class="m-sub"><span class="marca">3</span>% de notas 1 e 2 · pedidos entregues e avaliados · jan/2017 a ago/2018</div>
-          <div class="m-bar"><span>No prazo</span><i style="width:9.2%;background:#0a9ad0"></i><span>9,2%</span></div>
-          <div class="m-bar"><span><span class="marca">4</span>Atraso</span><i style="width:62.4%;background:#d0772a"></i><span>62,4%</span></div>
-          <div class="m-nota"><span class="marca">5</span>Atraso e nota baixa andam juntos; a view não prova que um causa o outro.</div>
-          <div class="m-fonte"><span class="marca">6</span>Fonte: <code>public.vw_p08_nota_prazo</code></div>
-        </div>
-        <ul>
-          <li><span class="marca">1</span>Pergunta e tipo</li>
-          <li><span class="marca">2</span>Título que afirma, calculado com os dados</li>
-          <li><span class="marca">3</span>Unidade, filtro e período</li>
-          <li><span class="marca">4</span>Visual escolhido na especificação</li>
-          <li><span class="marca">5</span>Suporte da âncora: o que o dado não autoriza</li>
-          <li><span class="marca">6</span>Nota de origem com a view</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Dashboard de referência</h2>
-      <a class="link-destaque" href="../materiais/aula-10/dashboard-referencia/index.html">Abrir o dashboard de referência</a>
+      <h2>Do notebook ao painel</h2>
+      <p>O notebook responde às perguntas de quem o escreveu. O painel permite que o comitê escolha empresas e período sem ler código.</p>
       <ul>
-        <li>Cole a Project URL e a chave publicável do seu projeto; os valores ficam armazenados apenas no seu navegador</li>
-        <li>Os dez cartões leem as views de <code>views.sql</code> e desenham os gráficos com Chart.js</li>
-        <li>Cada título é calculado a partir da view, e a opção Ver as linhas permite reconciliar a tela com a view</li>
-        <li>A referência serve de gabarito para o comportamento do painel; a aparência do seu segue a especificação do seu grupo</li>
+        <li>O Streamlit executa o arquivo <code>app.py</code> de cima a baixo a cada clique em um filtro.</li>
+        <li>Por isso a consulta à API fica em uma função com <code>@st.cache_data</code>, que guarda o resultado por 15 minutos e poupa pedidos ao Yahoo.</li>
+        <li>Filtros ficam em uma linha acima dos gráficos, e todos os gráficos respondem a eles.</li>
       </ul>
     </div>
-
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <h2>Ordem narrativa dos cartões</h2>
-      <div class="tres">
-        <div class="painel"><h3>1. Contexto <span>onde estamos</span></h3><p>ritmo, geografia e mix</p><div class="chips"><span>P01</span><span>P05</span><span>P03</span></div></div>
-        <div class="painel"><h3>2. Tensão <span>o que ameaça</span></h3><p>sellers, recompra, prazo e nota</p><div class="chips"><span>P10</span><span>P09</span><span>P07</span><span>P08</span></div></div>
-        <div class="painel"><h3>3. Decisão <span>onde agir</span></h3><p>categorias, frete e calendário</p><div class="chips"><span>P04</span><span>P06</span><span>P02</span></div></div>
-      </div>
-      <p>Esta é a ordem do dashboard de referência. Se a turma votou outra ordem na aula 9, prevalece a ordem registrada na especificação.</p>
+      <h2>Passo 4 · Filtros e consulta com cache</h2>
+      <p>Crie <code>aula-10-seunome/app.py</code> com o início do painel:</p>
+      <div class="code-block">import streamlit as st
+import yfinance as yf
+st.title("Empresas de saúde na B3")
+opcoes = ["RDOR3.SA", "HAPV3.SA", "FLRY3.SA", "RADL3.SA"]
+tickers = st.multiselect("Empresas", opcoes, default=opcoes[:2])
+periodo = st.selectbox("Período", ["3mo", "6mo", "1y", "2y"], index=2)
+
+@st.cache_data(ttl=900)
+def baixar(tickers, periodo):
+    dados = yf.download(list(tickers) + ["^BVSP"], period=periodo, auto_adjust=True, progress=False)
+    return dados["Close"].dropna()</div>
     </div>
-
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Roteiro da prática</p>
-      <h2>Passo a passo do dashboard</h2>
-      <div class="fases">
-        <div class="painel"><h3>Preparação</h3><ol start="1"><li>Abrir o Codespace</li><li>Conferir as views</li><li>Copiar URL e chave</li><li>Testar uma view</li></ol></div>
-        <div class="painel"><h3>Construção</h3><ol start="5"><li>Criar a pasta</li><li>Pedir o plano</li><li>Aprovar o plano</li><li>Configurar a chave</li><li>Conferir o código</li></ol></div>
-        <div class="painel"><h3>Publicação</h3><ol start="10"><li>Revisar o diff</li><li>Testar no Codespace</li><li>Commit e push</li><li>Ativar o Pages</li><li>Abrir no celular</li></ol></div>
-        <div class="painel"><h3>Validação</h3><ol start="15"><li>Reconciliar</li><li>Teste de leitura</li><li>README e entrega</li></ol></div>
-      </div>
-      <p>Cada passo tem um critério de conferência. Só avance quando ele for atendido, pois um erro de chave no passo 3 reaparece como dez cartões vazios no passo 14.</p>
+      <h2>Passo 4 · Gráfico que responde aos filtros</h2>
+      <p>Complete o arquivo com as linhas abaixo. Sem empresa selecionada, <code>st.stop()</code> encerra a execução antes de chamar a API.</p>
+      <div class="code-block">if not tickers:
+    st.stop()
+fechamento = baixar(tuple(tickers), periodo)
+st.line_chart(fechamento / fechamento.iloc[0] * 100)</div>
+      <p>A tupla é necessária porque o cache identifica cada chamada pelos argumentos, e listas não servem como chave.</p>
     </div>
-
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 1 de 17 · Preparação</p>
-      <h2>Abrir o Codespace do fork</h2>
+      <h2>Passo 5 · Rodar e abrir pela aba PORTS</h2>
+      <div class="code-block">streamlit run aula-10-seunome/app.py</div>
       <ol>
-        <li>No GitHub, abra o seu fork e, se houver commits novos do curso, clique em Sync fork</li>
-        <li>Em Code, aba Codespaces, abra o Codespace que você já usa</li>
-        <li>No terminal, traga as atualizações e confira o remoto:</li>
+        <li>O terminal informa que o app está na porta 8501.</li>
+        <li>Abra a aba PORTS do Codespace, localize a porta 8501 e clique no globo.</li>
+        <li>O endereço <code>localhost:8501</code> não funciona no seu navegador, porque o app roda na máquina do Codespace.</li>
+        <li>Para encerrar, use <code>Ctrl+C</code> no terminal.</li>
       </ol>
-      <div class="code-block">git pull
-git remote -v    <span class="code-comment"># deve mostrar o seu usuário, e não o repositório do curso</span></div>
-      <p style="margin-top: 1rem">Critério: a pasta <code>aula-09-seunome</code>, com a <code>ESPECIFICACAO.md</code>, aparece na raiz do repositório.</p>
     </div>
-
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 2 de 17 · Preparação</p>
-      <h2>Conferir as views no Supabase</h2>
-      <p>No SQL Editor do seu projeto, liste as views do gabarito:</p>
-      <div class="code-block"><span class="code-keyword">select</span> table_name <span class="code-keyword">from</span> information_schema.views
-<span class="code-keyword">where</span> table_schema = <span class="code-string">'public'</span> <span class="code-keyword">and</span> table_name <span class="code-keyword">like</span> <span class="code-string">'vw_%'</span>
-<span class="code-keyword">order by</span> 1;</div>
-      <ul style="margin-top: 1rem">
-        <li>São esperadas 11 linhas: <code>vw_itens_entregues</code> e <code>vw_p01</code> a <code>vw_p10</code></li>
-        <li>Se faltar alguma, rode <code>materiais/aula-09/olist/views.sql</code> inteiro</li>
-        <li>Critério: a conferência da seção 8.3 da aula 9 devolve dez <code>confere = true</code></li>
-      </ul>
+      <div class="prompt-label">Prompt · Copilot em modo agente</div>
+      <h2>Passo 6 · Evoluir o painel</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Evolua @aula-10-seunome/app.py com Streamlit, yfinance e Plotly, mantendo @st.cache_data e preços ajustados:
+1. Cartões com o retorno de cada empresa e a diferença em p.p. para o Ibovespa.
+2. Linhas em base 100, um eixo só, Ibovespa tracejado em cinza, cor fixa por empresa.
+3. Empresa em foco: candles, média móvel de N dias (slider) e volume em gráfico separado.
+4. Dispersão volatilidade × retorno e mapa de calor da correlação dos retornos diários.
+5. Tabela de indicadores e download das cotações em CSV.
+Mostre o plano antes de editar. Se a API falhar, exiba erro e não invente dados.</div></div>
     </div>
-
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 3 de 17 · Preparação</p>
-      <h2>Copiar a URL e a chave publicável</h2>
-      <ol>
-        <li>No painel do Supabase, abra Project Settings e, em seguida, a seção API Keys</li>
-        <li>Copie a chave que começa com <code>sb_publishable_</code>; em projetos antigos, a equivalente é a <em>anon public</em></li>
-        <li>Monte a Project URL no formato <code>https://&lt;ref&gt;.supabase.co</code>, em que <code>&lt;ref&gt;</code> aparece no endereço do painel, depois de <code>/project/</code></li>
-        <li>Deixe de lado a <code>sb_secret_</code> e a senha do banco, que não entram em nenhum arquivo</li>
-      </ol>
-      <p>Guarde os dois valores em um bloco de notas até o passo 8.</p>
+      <h2>Painel de referência</h2>
+      <p>O painel completo está em <code>materiais/aula-10/dashboard-financeiro/app.py</code>, no repositório da disciplina. Compare-o com o seu depois de revisar o código proposto pelo Copilot.</p>
+      <div class="code-block">streamlit run materiais/aula-10/dashboard-financeiro/app.py</div>
+      <a class="download-link" href="../materiais/aula-10/dashboard-financeiro/app.py" download="app.py">⬇️ Baixar app.py de referência</a>
     </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 4 de 17 · Preparação</p>
-      <h2>Testar uma view pelo terminal</h2>
-      <div class="code-block">read -p <span class="code-string">"Project URL: "</span> SUPABASE_URL
-read -p <span class="code-string">"Chave publicável: "</span> SUPABASE_KEY
-
-curl -s <span class="code-string">"$SUPABASE_URL/rest/v1/vw_p09_recompra?select=*"</span> \
-  -H <span class="code-string">"apikey: $SUPABASE_KEY"</span> \
-  -H <span class="code-string">"Authorization: Bearer $SUPABASE_KEY"</span>
-
-<span class="code-comment"># esperado: [{"clientes":93104,"clientes_recorrentes":2789,"recompra_pct":3.00}]</span></div>
-      <p style="margin-top: 1rem">O <code>read</code> pede os valores sem gravá-los em arquivo. Se a resposta for <code>401</code> ou <code>[]</code>, consulte o slide de diagnóstico antes de seguir, porque o painel herdará o mesmo erro.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 5 de 17 · Construção</p>
-      <h2>Criar a pasta do dashboard</h2>
-      <div class="code-block">mkdir aula-10-seunome
-
-aula-10-seunome/
-├── index.html     <span class="code-comment"># cartões e textos fixos: pergunta, período, fonte</span>
-├── supabase.js    <span class="code-comment"># Project URL, chave publicável e a função lerView</span>
-├── app.js         <span class="code-comment"># um bloco por cartão: lê, calcula o título, desenha</span>
-├── style.css      <span class="code-comment"># layout responsivo</span>
-└── README.md      <span class="code-comment"># URL, reconciliação, teste de leitura e recomendação</span></div>
-      <p style="margin-top: 1rem">A pasta fica na raiz, ao lado de <code>aula-09-seunome</code>. Use o nome em minúsculas e sem espaço, pois o endereço publicado diferencia maiúsculas de minúsculas.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 6 de 17 · Construção</p>
-      <h2>Pedir o plano ao agente</h2>
-      <p>Abra o Copilot Chat em modo agente, confirme que a execução de comandos depende da sua aprovação e cole o prompt.</p>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia @aula-09-seunome/ESPECIFICACAO.md. Crie a pasta aula-10-seunome com
-index.html, supabase.js, app.js e style.css: um dashboard estático, publicado
-no GitHub Pages, que responde às 10 perguntas do Chief de Vendas da Olist.
-
-Regras:
-- Dados só pela API REST do Supabase: fetch em SUPABASE_URL/rest/v1/&lt;view&gt;?select=*
-  com os headers apikey e Authorization: Bearer, usando a chave publicável que
-  vou colar em supabase.js. Nunca use chave secreta nem senha do banco.
-- Nenhum número digitado no HTML ou no JavaScript: valores, títulos e rótulos
-  numéricos saem das linhas da view.
-- Um cartão por pergunta, na ordem narrativa da especificação. Cada cartão tem
-  título que afirma montado com os dados; subtítulo com unidade, período
-  (jan/2017 a ago/2018) e filtro; o visual da especificação; a nota da âncora
-  tratada; e a fonte com o nome da view.
-- Converta valores com Number() e formate com Intl.NumberFormat('pt-BR').
-- Chart.js 4 de https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js.
-  Sem eixo y duplo; barra horizontal ordenada para ranking; linha para meses.
-- Cada cartão mostra "carregando" e, se a chamada falhar, uma mensagem com o
-  status HTTP e a view, sem derrubar os outros cartões.
-- HTML, CSS e JS puros, sem build; funciona com python -m http.server e no
-  GitHub Pages; sem rolagem horizontal no celular.
-Antes de escrever código, liste os arquivos e, para cada pergunta, a view, as
-colunas e a fórmula do título. Espere a minha aprovação.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 7 de 17 · Construção</p>
-      <h2>Revisar o plano antes do código</h2>
-      <ol>
-        <li>A ordem dos cartões é a da especificação?</li>
-        <li>O visual de cada pergunta é o registrado na especificação?</li>
-        <li>Cada fórmula de título usa apenas colunas que existem na view?</li>
-        <li>Algum título já traz o resultado? “Título: beleza_saude lidera” indica valor digitado; a fórmula correta ordena a view por receita e lê a primeira linha</li>
-      </ol>
-      <p>Com as quatro respostas conferidas, responda ao agente que o plano está aprovado. Corrigir um plano exige uma frase, enquanto corrigir dez cartões já escritos consome boa parte da aula.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 8 de 17 · Construção</p>
-      <h2>Configurar o supabase.js</h2>
-      <div class="code-block"><span class="code-comment">// A chave publicável pode ficar aqui; a secreta e a senha, nunca.</span>
-<span class="code-keyword">const</span> SUPABASE_URL = <span class="code-string">'https://SEU-PROJETO.supabase.co'</span>;
-<span class="code-keyword">const</span> SUPABASE_KEY = <span class="code-string">'sb_publishable_COLE_A_SUA_CHAVE'</span>;
-
-<span class="code-keyword">async function</span> lerView(view) {
-  <span class="code-keyword">const</span> resposta = <span class="code-keyword">await</span> fetch(`${SUPABASE_URL}/rest/v1/${view}?select=*`, {
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-  });
-  <span class="code-keyword">if</span> (!resposta.ok) <span class="code-keyword">throw new</span> Error(`${view} respondeu HTTP ${resposta.status}`);
-  <span class="code-keyword">return</span> resposta.json();
-}</div>
-      <p style="margin-top: 1rem">Cole os valores do passo 3 nas duas primeiras constantes. A URL termina em <code>.supabase.co</code>, sem <code>/rest/v1</code> e sem barra final.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 9 de 17 · Construção</p>
-      <h2>Conferir as peças do código</h2>
-      <div class="code-block"><span class="code-comment">&lt;!-- index.html: o Chart.js e o supabase.js carregam antes do app.js --&gt;</span>
-&lt;script src=<span class="code-string">"https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"</span>&gt;&lt;/script&gt;
-&lt;script src=<span class="code-string">"supabase.js"</span>&gt;&lt;/script&gt;
-&lt;script src=<span class="code-string">"app.js"</span> defer&gt;&lt;/script&gt;
-
-<span class="code-comment">// app.js: um padrão único de carregamento e erro para os dez cartões</span>
-<span class="code-keyword">async function</span> preencherCartao(id, view, desenhar) {
-  <span class="code-keyword">const</span> cartao = document.getElementById(id);
-  <span class="code-keyword">try</span> { desenhar(cartao, <span class="code-keyword">await</span> lerView(view)); }
-  <span class="code-keyword">catch</span> (erro) { cartao.querySelector(<span class="code-string">'.corpo'</span>).textContent = erro.message; }
-}</div>
-      <p style="margin-top: 1rem">Localize essas peças no código do agente. O esqueleto completo, com dois cartões, está na seção 7.2 do material e serve de ponto de partida se o agente travar.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 10 de 17 · Publicação</p>
-      <h2>Revisão humana do diff</h2>
-      <ol>
-        <li>Há número digitado? Procure com <code>grep -nE '[0-9]{2,}[.,][0-9]' aula-10-seunome/*</code> e justifique cada ocorrência</li>
-        <li>O erro aparece? Troque o nome de uma view no código e recarregue a página; apenas aquele cartão deve falhar</li>
-        <li>O título afirma e vem do dado? Se a view mudar, a frase deve mudar junto</li>
-        <li>Unidade, período e fonte estão em todos os cartões?</li>
-      </ol>
-      <p>O diff é aceito somente quando as quatro respostas forem afirmativas.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 11 de 17 · Publicação</p>
-      <h2>Teste no Codespace antes de publicar</h2>
-      <div class="code-block">python -m http.server 8000</div>
-      <ul style="margin-top: 1rem">
-        <li>Execute o comando na raiz do repositório e abra a aba PORTS</li>
-        <li>Na porta 8000, clique no globo e acrescente <code>/aula-10-seunome/</code> ao endereço</li>
-        <li>Com <code>F12</code>, abra a aba Network e verifique se cada <code>vw_p…</code> responde com status 200</li>
-        <li>Pare o servidor com <code>Ctrl + C</code> quando terminar</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 12 de 17 · Publicação</p>
-      <h2>Commit e push do dashboard</h2>
-      <div class="code-block">grep -rn <span class="code-string">"sb_secret_"</span> aula-10-seunome   <span class="code-comment"># precisa voltar vazio</span>
-git status
-git add aula-10-seunome
-git commit -m <span class="code-string">"Publica o dashboard do Chief de Vendas lendo as views do Supabase"</span>
-git push</div>
-      <p style="margin-top: 1rem">O fork é público, e um commit fica no histórico mesmo depois de apagado o arquivo. Por isso a busca pela chave secreta vem antes do <code>git add</code>, e não depois do push.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 13 de 17 · Publicação</p>
-      <h2>Ativar o GitHub Pages</h2>
-      <ol>
-        <li>No seu fork, abra Settings e, no menu lateral, Pages</li>
-        <li>Em Build and deployment, escolha Source: Deploy from a branch</li>
-        <li>Em Branch, selecione main e a pasta /(root); depois, clique em Save</li>
-        <li>Acompanhe o pages build and deployment na aba Actions; a primeira publicação leva alguns minutos</li>
-      </ol>
-      <p>Se a seção Pages pedir upgrade de plano, o repositório é privado. No plano gratuito, o Pages publica apenas repositórios públicos, e por isso o trabalho deve estar no fork público do curso.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 14 de 17 · Publicação</p>
-      <h2>Abrir o painel no celular</h2>
-      <span class="url">https://&lt;usuario&gt;.github.io/&lt;repo&gt;/aula-10-seunome/</span>
-      <ul>
-        <li>Abra o endereço no celular, fora do Codespace, que é a condição em que o board acessará o painel</li>
-        <li>Critério: os dez cartões carregam, sem rolagem horizontal</li>
-        <li>No notebook, a aba Network deve mostrar status 200 em cada <code>vw_p…</code></li>
-        <li>Cada novo <code>git push</code> dispara outro deploy; se a página mostrar a versão antiga, aguarde o fim em Actions e recarregue com <code>Ctrl + Shift + R</code></li>
-      </ul>
-    </div>
-
     <div class="slide slide-content" data-lesson-section="concepts">
-      <h2>Diagnóstico de erros comuns</h2>
-      <dl class="erros">
-        <dt>401</dt><dd>Chave errada, incompleta ou de outro projeto</dd>
-        <dt>404 PGRST205</dt><dd>View inexistente ou cache da API: <code>notify pgrst, 'reload schema';</code></dd>
-        <dt>200 com []</dt><dd>RLS ligado sem política de leitura: confira o final de <code>estrela.sql</code></dd>
-        <dt>404 do Pages</dt><dd>Caminho ou maiúscula errada, ou o deploy ainda está rodando</dd>
-        <dt>CORS</dt><dd>Em geral, indica URL errada, pois a API do Supabase aceita qualquer origem</dd>
-        <dt>Sem Pages</dt><dd>Repositório privado no plano gratuito; o fork precisa ser público</dd>
-      </dl>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 15 de 17 · Validação</p>
-      <h2>Reconciliação entre tela e view</h2>
-      <table class="tabela">
-        <thead><tr><th class="hide-mobile">Cartão</th><th>Na tela</th><th>View · coluna</th><th>Na view</th><th>Igual?</th></tr></thead>
-        <tbody>
-          <tr><td class="hide-mobile">P05</td><td>SP 38,4%</td><td><code>vw_p05 · participacao_pct</code></td><td>38.4</td><td>sim</td></tr>
-          <tr><td class="hide-mobile">P09</td><td>3,00%</td><td><code>vw_p09 · recompra_pct</code></td><td>3.00</td><td>sim</td></tr>
-          <tr><td class="hide-mobile">P01</td><td>R$ 987,8 mil</td><td><code>vw_p01 · receita</code></td><td>987765.37</td><td>sim, arredondado</td></tr>
-        </tbody>
-      </table>
-      <div class="code-block">select * from vw_p05_receita_estado where estado = 'SP';</div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <p class="kicker">Passo 16 de 17 · Validação</p>
-      <h2>Teste de leitura em voz alta</h2>
+      <h2>Cuidados ao ler o painel</h2>
       <ul>
-        <li>Outro grupo abre a sua URL no celular, sem receber explicação</li>
-        <li>O grupo lê cada cartão em uma frase, e você anota a frase literal, entre aspas</li>
-        <li>Cada frase que ultrapassa o que o dado autoriza gera um ajuste na tela</li>
-        <li>Registre a divergência como âncora, com os cinco campos das aulas 7 e 9 (passo, leitura do usuário, o que o dado autoriza, consequência e suporte na tela), no frame do dashboard no quadro do Miro</li>
+        <li>Uma queda brusca pode ser um evento da empresa ou um erro de dado. Antes de concluir, confira a data na página de relações com investidores.</li>
+        <li>Correlação alta indica que os preços se movem juntos, não que um causa o outro.</li>
+        <li>O retorno depende do período escolhido: troque de 1 ano para 2 anos e veja se a ordem muda.</li>
+        <li>O painel descreve o passado e não constitui recomendação de investimento.</li>
       </ul>
-      <p>Durante o teste, o autor não explica nem defende o painel, pois essa também será a condição de leitura no board.</p>
     </div>
-
     <div class="slide slide-content" data-lesson-section="challenge">
-      <p class="kicker">Passo 17 de 17 · Validação</p>
       <h2>Desafio e entrega</h2>
-      <p>Pasta <code>aula-10-seunome</code> com commit, push e URL funcionando:</p>
+      <p>Na pasta <code>aula-10-seunome</code>, entregue o <code>app.py</code> funcionando, o notebook e um <code>README.md</code> com a leitura para o comitê.</p>
       <ul>
-        <li><code>index.html</code>, <code>supabase.js</code>, <code>app.js</code> e <code>style.css</code></li>
-        <li><code>README.md</code> com a URL publicada e a tabela de reconciliação dos dez cartões</li>
-        <li>Frases do teste de leitura e o ajuste que cada uma gerou</li>
-        <li>Recomendação ao Chief de Vendas com o número que a sustenta e o que a invalidaria</li>
-        <li><strong>Critério de aceite:</strong> a URL abre no celular, os dez cartões carregam e nenhum número está digitado</li>
+        <li>Data e hora da consulta, empresas e período escolhidos.</li>
+        <li>Resposta às três perguntas do comitê, cada uma com o número que a sustenta.</li>
+        <li>A data da maior queda diária encontrada e o evento que a explica, com o link da fonte.</li>
+        <li>Commit e push até o fim da aula.</li>
       </ul>
     </div>
-
-    <div class="slide slide-content" data-lesson-section="challenge">
-      <h2>A recomendação ao Chief de Vendas</h2>
-      <div class="formato">
-        <p><b>Recomendação:</b> atacar o prazo no RJ antes de subsidiar frete no Nordeste.</p>
-        <p><b>Número que sustenta:</b> RJ tem 12.312 entregas e 12,2% com atraso; com atraso, a nota média cai para 2,27.</p>
-        <p><b>O que a invalidaria:</b> se o atraso do RJ vier de poucos vendedores, a ação deve recair sobre esses sellers, e não sobre a promessa de prazo.</p>
-      </div>
-      <p>A recomendação só é aceita quando traz o número que a sustenta e a condição que a invalidaria.</p>
-    </div>
-
     <div class="slide slide-content" data-lesson-section="summary">
-      <h2>Síntese da sequência</h2>
+      <h2>Síntese</h2>
       <ul>
-        <li>Aula 7: os dados brutos foram carregados no Supabase e organizados em um esquema estrela reconciliado com a origem</li>
-        <li>Aula 9: as perguntas do Chief de Vendas foram convertidas em fluxo de interação anotado, âncoras e views conferidas</li>
-        <li>Aula 10: as views passaram a alimentar um dashboard público, testado por leitores que não participaram da construção</li>
+        <li>A API substitui a cópia manual e permite refazer a consulta a qualquer momento.</li>
+        <li>A base 100 compara ativos de escalas diferentes em um único eixo.</li>
+        <li>Retorno, volatilidade e queda máxima descrevem desempenho e risco do mesmo período.</li>
+        <li>O Streamlit reexecuta o script a cada filtro, e o cache evita pedidos repetidos à API.</li>
+        <li>Toda afirmação ao comitê cita o número, o período e a data da consulta.</li>
       </ul>
-      <p>Nas três aulas, a IA produziu propostas e código, e a turma verificou os resultados por consultas SQL, por reconciliação e pelo teste de leitura de outro grupo.</p>
     </div>
-
     <div class="slide slide-content" data-lesson-section="next-steps">
       <h2>Próximos passos</h2>
-      <p>O laboratório 11 trata da limpeza de dados com IA e Pandas, preservando a camada bruta.</p>
-      <ul>
-        <li>Antes de sair, abra a sua URL no celular</li>
-        <li>Commit e push do <code>README.md</code> com reconciliação, frases e recomendação</li>
-      </ul>
+      <p>No laboratório 11, em 28/10, o case Olist volta ao centro: o dashboard das dez perguntas do Chief de Vendas será publicado no GitHub Pages, lendo as views do Supabase. Os princípios de hoje continuam valendo, com um eixo por gráfico, cores fixas por entidade e números conferíveis em tabela.</p>
     </div>
-
-    <div class="slide slide-end"><h2>Fim do Laboratório 10</h2><p>A entrega inclui a URL publicada, a reconciliação dos dez cartões, as frases do teste de leitura e a recomendação ao Chief de Vendas.</p></div>
+    <div class="slide slide-end"><h2>Fim do Laboratório 10</h2><p>A entrega inclui o painel funcionando, o notebook de exploração e a leitura para o comitê no README.md.</p></div>
   </div>
 
   <div id="controls">
@@ -966,15 +627,14 @@ git push</div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-10/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
-      <a href="../materiais/aula-07/dados/olist_pedidos_clientes.xlsx" download class="ctrl-btn" id="btn-dados" title="Baixar os três arquivos Excel do Olist"><span class="ctrl-icon">⬇️</span> Dados</a>
-      <a href="https://miro.com/welcomeonboard/YUtZL0c5TWQ3RHc5a1NMWXJsZGl0cXhZOGptTkYzK1BHak9YZ2pkb1lpMHRFc09mVzB3d0E1SVlMK2VRN3RjTmZpMTRDUkJJbWk3dWVsYmk2M3VWREd5d3ZCaDVPc09Qd0ZydjE1OGY0dmF0QjRMMEJ6QWo2Z2x5MmpsOGxJbnJzVXVvMm53MW9OWFg5bkJoVXZxdFhRPT0hdjE=?share_link_id=789986392238" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="Convite para o quadro da turma no Miro"><span class="ctrl-icon">🧩</span> Miro</a>
-      <a href="../materiais/aula-10/dashboard-referencia/index.html" class="ctrl-btn" title="Abrir o dashboard de referência"><span class="ctrl-icon">📈</span> Dashboard</a>
+      <a href="../materiais/aula-10/dashboard-financeiro/app.py" download="app.py" class="ctrl-btn" title="Baixar o app de referência"><span class="ctrl-icon">⬇️</span> App</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia">⛶</button>
     </div>
   </div>
+
 
   <script>
     const slides = document.querySelectorAll('.slide');
@@ -996,7 +656,7 @@ git push</div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -1010,40 +670,25 @@ git push</div>
       }
     });
 
-    // Um único botão baixa os três Excels do Olist; o href cobre o caso sem JavaScript
-    const arquivosOlist = ['olist_pedidos_clientes.xlsx', 'olist_itens_pagamentos_avaliacoes.xlsx', 'olist_catalogo.xlsx'];
-    document.getElementById('btn-dados').addEventListener('click', (e) => {
-      e.preventDefault();
-      arquivosOlist.forEach((nome, i) => setTimeout(() => {
-        const link = document.createElement('a');
-        link.href = `../materiais/aula-07/dados/${nome}`;
-        link.download = nome;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      }, i * 400));
-    });
-
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
     });
 
-  
-    function copyText(text) {
-      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-      return new Promise((resolve, reject) => {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.setAttribute('readonly', '');
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        const ok = document.execCommand('copy');
-        textarea.remove();
-        ok ? resolve() : reject(new Error('copy'));
-      });
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
     }
 
     document.querySelectorAll('.copy-prompt').forEach(button => {

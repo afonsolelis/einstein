@@ -77,7 +77,7 @@ def validate(root: Path, lesson: int, complete: bool = False) -> list[str]:
     directory_links = [h for h in sp.hrefs + mp.hrefs if not h.startswith(("#", "http", "mailto:")) and h.endswith("/")]
     if directory_links:
         errors.append(f"navegação offline: links para diretórios: {', '.join(directory_links)}")
-    if re.search(r"\b(?:TODO|TBD|PLACEHOLDER)\b|\{\{[^}]+\}\}", slides + material, re.I):
+    if re.search(r"\b(?:TODO|TBD|PLACEHOLDER)\b|\{\{[^}]+\}\}", slides + material):
         errors.append("conteúdo: placeholder ou marcador pendente encontrado")
 
     if complete:

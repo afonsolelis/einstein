@@ -57,14 +57,14 @@ Ao concluir a unidade curricular, o estudante será capaz de:
 | 8 | 30/09 | Mentoria profissional |
 | 9 | 07/10 | Data Visualization II: Brainstorming das perguntas de negócio e fluxo de interação do dashboard |
 | — | 14/10 | **Não haverá aula** |
-| 10 | 21/10 | Data Visualization III: Dashboard online com GitHub Pages e Supabase |
-| 11 | 28/10 | Limpeza de dados: Preparando a base para análises |
-| 12 | 04/11 | Fazendo previsões com IA: Vendas e Tendências |
-| 13 | 11/11 | Testes A/B: do desenho do experimento à decisão de negócio |
-| 14 | 18/11 | Auditoria e forense de dados: anomalias, riscos e fraudes |
-| 15 | 25/11 | IA aplicada à estratégia e tomada de decisão |
-| 16 | 02/12 | Estudo de Caso: Análise de dados aplicada ao RH |
-| 17 | 09/12 | Estudo de Caso: Previsão de caixa e de demanda |
+| 10 | 21/10 | Dashboard financeiro interativo com dados do Yahoo Finance |
+| 11 | 28/10 | Data Visualization III: Dashboard online com GitHub Pages e Supabase |
+| 12 | 04/11 | Limpeza de dados: Preparando a base para análises |
+| 13 | 11/11 | Fazendo previsões com IA: Vendas e Tendências |
+| 14 | 18/11 | Testes A/B: do desenho do experimento à decisão de negócio |
+| 15 | 25/11 | Auditoria e forense de dados: anomalias, riscos e fraudes |
+| 16 | 02/12 | IA aplicada à estratégia e tomada de decisão |
+| 17 | 09/12 | Estudo de Caso: Análise de dados aplicada ao RH |
 | 18 | 16/12 | Projeto Integrador: Resolvendo um problema de negócio real |
 | 19 | 23/12 | Apresentação de resultados e recomendações executivas |
 
@@ -111,7 +111,8 @@ O repositório contém uma configuração em `.devcontainer/devcontainer.json`. 
 um Codespace, o ambiente instala automaticamente Python, Jupyter e as bibliotecas de
 `requirements.txt`, além das extensões Python e Jupyter do VS Code. A configuração
 também habilita **Docker e Docker Compose** dentro do Codespace (feature
-`docker-in-docker`) e encaminha a **porta 3000**, usada pelo Metabase do laboratório 5.
+`docker-in-docker`) e encaminha a **porta 3000**, usada pelo Metabase do laboratório 5, e a
+**porta 8501**, usada pelo painel Streamlit do laboratório 10.
 
 1. No GitHub, selecione `Code → Codespaces → Create codespace`.
 2. Aguarde a instalação das dependências terminar.
