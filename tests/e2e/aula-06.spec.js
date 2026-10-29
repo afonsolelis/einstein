@@ -1,88 +1,110 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
-// Supabase simulado em memória com as mesmas regras de supabase/tbl-aula-06.sql.
-function fakeRoom({ legacy = false } = {}) {
+// As páginas do TBL falam com o contrato próprio do app (aulas-projeto, ADR-18): /static/js/aulas.js e
+// /api/v1/einstein/tbl/{sala}/... Aqui o app é simulado em memória com as regras do modelo único
+// (app/rpc/tbl/modelo.py, parâmetros do Einstein) e o cliente aulas.js vem do repositório do app, ao lado deste.
+const AULAS_JS = process.env.AULAS_JS || path.join(__dirname, '..', '..', '..', 'aulas-projeto', 'app', 'static', 'js', 'aulas.js');
+
+function fakeRoom() {
   const TOKEN = 'token-de-teste';
-  const db = { status: 'lobby', stage: null, endsAt: null, participants: new Map(), votes: new Map() };
+  const db = { fase: 'lobby', endsAt: null, participants: new Map(), votes: new Map() };
   const now = () => Date.now();
-  const fail = message => ({ status: 400, body: { message } });
-  const next = { round1: ['discussion', 600], discussion: ['round2', 100] };
-  const timeline = () => {
-    if (db.status === 'lobby') return { phase: 'lobby', endsAt: null };
-    if (db.status === 'revealed') return { phase: 'reveal', endsAt: null };
-    let stage = db.stage, endsAt = db.endsAt;
-    while (now() >= endsAt && next[stage]) { endsAt += next[stage][1] * 1000; stage = next[stage][0]; }
-    return now() < endsAt ? { phase: stage, endsAt } : { phase: 'reveal', endsAt: null };
-  };
-  const phase = () => timeline().phase;
-  const distribution = round => [0, 1, 2, 3].map(choice => ({
-    choice,
-    votes: [...db.votes].filter(([key, c]) => key.endsWith(`:${round}`) && c === choice).length
-  }));
-  const state = id => {
-    const { phase: p, endsAt } = timeline();
-    const transitions = [];
-    if (p === 'reveal') {
-      for (const pid of db.participants.keys()) {
-        const a = db.votes.get(`${pid}:1`), b = db.votes.get(`${pid}:2`);
-        if (a == null || b == null) continue;
-        const t = transitions.find(x => x.from_choice === a && x.to_choice === b);
-        t ? t.people++ : transitions.push({ from_choice: a, to_choice: b, people: 1 });
-      }
+  const fail = (status, codigo, mensagem) => ({ status, body: { erro: { codigo, mensagem } } });
+  const next = { voto1: ['discussao', 600], discussao: ['voto2', 100], voto2: ['revelacao', null] };
+  // Avanço pelo relógio (Einstein): cada fase vencida passa à seguinte.
+  const clock = () => {
+    while (next[db.fase] && db.endsAt != null && now() >= db.endsAt) {
+      const [fase, d] = next[db.fase];
+      db.fase = fase; db.endsAt = d == null ? null : db.endsAt + d * 1000;
     }
-    return {
-      case_title: 'Caso', case_text: 'Texto do caso',
-      options: ['A', 'B', 'C', 'D'].map(letter => ({ letter, title: `Opção ${letter}`, text: 'x', gain: 'g', cost: 'c' })),
-      phase: p, remaining: endsAt ? Math.max(0, Math.ceil((endsAt - now()) / 1000)) : 0,
-      participants: db.participants.size, enrolled: db.participants.size,
-      votes_round1: [...db.votes.keys()].filter(k => k.endsWith(':1')).length,
-      votes_round2: [...db.votes.keys()].filter(k => k.endsWith(':2')).length,
-      round1: p === 'reveal' ? distribution(1) : [], round2: p === 'reveal' ? distribution(2) : [],
-      transitions,
-      mine: { ...(legacy ? {} : { joined: db.participants.has(id) }), round1: db.votes.get(`${id}:1`) ?? null, round2: db.votes.get(`${id}:2`) ?? null }
-    };
   };
-  const hostState = () => ({
+  const distribution = round => [0, 1, 2, 3].map(escolha => ({
+    escolha,
+    votos: [...db.votes].filter(([key, c]) => key.endsWith(`:${round}`) && c === escolha).length
+  }));
+  const trajetos = () => {
+    const t = [];
+    for (const pid of db.participants.keys()) {
+      const a = db.votes.get(`${pid}:1`), b = db.votes.get(`${pid}:2`);
+      if (a == null || b == null) continue;
+      const x = t.find(y => y.de === a && y.para === b);
+      x ? x.pessoas++ : t.push({ de: a, para: b, pessoas: 1 });
+    }
+    return t;
+  };
+  const state = id => {
+    clock();
+    const f = db.fase;
+    const meus = {};
+    for (const r of [1, 2]) if (db.votes.has(`${id}:${r}`)) meus[r] = { escolha: db.votes.get(`${id}:${r}`), justificativa: null };
+    const s = {
+      caso_titulo: 'Caso', caso_texto: 'Texto do caso',
+      alternativas: f === 'lobby' ? null : ['A', 'B', 'C', 'D'].map(letra => ({ letra, titulo: `Opção ${letra}`, texto: 'x', ganho: 'g', custo: 'c' })),
+      fase: f, restante: db.endsAt ? Math.max(0, Math.ceil((db.endsAt - now()) / 1000)) : null,
+      participantes: db.participants.size, inscritos: db.participants.size,
+      inscrito: db.participants.has(id), meus_votos: meus
+    };
+    if (['discussao', 'voto2', 'revelacao'].includes(f)) s.rodada1 = distribution(1);
+    if (f === 'revelacao') Object.assign(s, { rodada2: distribution(2), trajetos: trajetos() });
+    return s;
+  };
+  const painel = () => ({
     ...state(null),
-    round1: distribution(1),
-    roster: [...db.participants].map(([id, name]) => ({ name, online: true, r1: db.votes.get(`${id}:1`) ?? null, r2: db.votes.get(`${id}:2`) ?? null }))
+    alternativas: ['A', 'B', 'C', 'D'].map(letra => ({ letra, titulo: `Opção ${letra}`, texto: 'x', ganho: 'g', custo: 'c' })),
+    rodada1: distribution(1), rodada2: distribution(2), trajetos: trajetos(),
+    votos1: [...db.votes.keys()].filter(k => k.endsWith(':1')).length,
+    votos2: [...db.votes.keys()].filter(k => k.endsWith(':2')).length,
+    turma: [...db.participants].map(([id, nome]) => ({ nome, online: true, r1: db.votes.get(`${id}:1`) ?? null, r2: db.votes.get(`${id}:2`) ?? null }))
   });
-  const rpc = {
-    tbl_enter: b => { db.participants.set(b.p_id, b.p_name); return { id: b.p_id, name: b.p_name }; },
-    tbl_vote: b => {
-      if (!db.participants.has(b.p_id)) return fail('Entre na sala antes de votar.');
-      if (phase() !== `round${b.p_round}`) return fail('Esta rodada não está aberta.');
-      db.votes.set(`${b.p_id}:${b.p_round}`, b.p_choice);
-      return { saved: true };
+  const authorized = headers => headers.authorization === `Bearer ${TOKEN}`;
+  const api = {
+    entrar: ({ body }) => {
+      const dono = [...db.participants].find(([, n]) => n.toLowerCase() === body.nome.toLowerCase());
+      if (dono && dono[0] !== body.participante) return fail(409, 'nome_em_uso', 'Esse nome já está em uso nesta sala. Escolha outro.');
+      db.participants.set(body.participante, body.nome);
+      return { participante: body.participante, nome: body.nome };
     },
-    tbl_state: b => state(b.p_id),
-    tbl_host_state: b => b.p_token === TOKEN ? hostState() : fail('Token do professor inválido.'),
-    tbl_host: b => {
-      if (b.p_token !== TOKEN) return fail('Token do professor inválido.');
-      const { phase: p, endsAt } = timeline();
-      const open = (stage, seconds) => { db.status = 'running'; db.stage = stage; db.endsAt = now() + seconds * 1000; };
-      if (b.p_action === 'start') { db.votes.clear(); open('round1', 100); }
-      if (b.p_action === 'advance') {
-        if (p === 'lobby') open('round1', 100);
-        if (p === 'round1') open('discussion', 600);
-        if (p === 'discussion') open('round2', 100);
-        if (p === 'round2') db.status = 'revealed';
+    votar: ({ body }) => {
+      if (!db.participants.has(body.participante)) return fail(404, 'participante_inexistente', 'Participante não encontrado. Entre novamente na sala.');
+      clock();
+      if (db.fase !== `voto${body.rodada}`) return fail(409, 'rodada_fechada', 'Esta rodada não está aberta.');
+      db.votes.set(`${body.participante}:${body.rodada}`, body.escolha);
+      return { questao: 1, rodada: body.rodada, escolha: body.escolha };
+    },
+    estado: ({ query }) => state(query.get('participante')),
+    host: ({ body, headers }) => {
+      if (!authorized(headers)) return fail(401, 'nao_autenticado', 'Token do professor inválido.');
+      clock();
+      const open = (fase, seconds) => { db.fase = fase; db.endsAt = now() + seconds * 1000; };
+      const a = body.acao;
+      if (a === 'iniciar') { db.votes.clear(); open('voto1', 100); }
+      if (a === 'avancar') {
+        if (db.fase === 'lobby') open('voto1', 100);
+        else if (db.fase === 'voto1') open('discussao', 600);
+        else if (db.fase === 'discussao') open('voto2', 100);
+        else if (db.fase === 'voto2') { db.fase = 'revelacao'; db.endsAt = null; }
       }
-      if (b.p_action === 'extend') { db.stage = p; db.endsAt = endsAt + 60_000; }
-      if (b.p_action === 'reveal') db.status = 'revealed';
-      if (b.p_action === 'lobby') { db.status = 'lobby'; db.votes.clear(); }
-      if (b.p_action === 'clear') { db.status = 'lobby'; db.votes.clear(); db.participants.clear(); }
-      return hostState();
+      if (a === 'estender') db.endsAt += 60_000;
+      if (a === 'revelar') { db.fase = 'revelacao'; db.endsAt = null; }
+      if (a === 'lobby') { db.fase = 'lobby'; db.endsAt = null; db.votes.clear(); }
+      if (a === 'reiniciar') { db.fase = 'lobby'; db.endsAt = null; db.votes.clear(); db.participants.clear(); }
+      return painel();
     }
   };
   const offline = new Set();
   const attach = async context => {
-    await context.route('**/rest/v1/rpc/*', async route => {
-      const fn = new URL(route.request().url()).pathname.split('/').pop();
-      if (offline.has(fn)) { offline.delete(fn); return route.abort('internetdisconnected'); }
-      const result = rpc[fn](route.request().postDataJSON());
-      const failed = result && result.status === 400;
-      await route.fulfill({ status: failed ? 400 : 200, contentType: 'application/json', body: JSON.stringify(failed ? result.body : result) });
+    await context.route('**/static/js/aulas.js', route => route.fulfill({ contentType: 'text/javascript', body: fs.readFileSync(AULAS_JS, 'utf-8') }));
+    // Sem tempo real na simulação: as páginas seguem com a consulta a cada 2 s.
+    await context.route('**/api/v1/einstein/eventos*', route => route.fulfill({ status: 204, body: '' }));
+    await context.route('**/api/v1/einstein/tbl/*/*', async route => {
+      const url = new URL(route.request().url());
+      const acao = url.pathname.split('/').pop();
+      if (offline.has(acao)) { offline.delete(acao); return route.abort('internetdisconnected'); }
+      const result = api[acao]({ body: route.request().postDataJSON() || {}, query: url.searchParams, headers: route.request().headers() });
+      const failed = result && result.body && result.body.erro;
+      await route.fulfill({ status: failed ? result.status : 200, contentType: 'application/json', body: JSON.stringify(failed ? result.body : result) });
     });
   };
   return { TOKEN, db, attach, offline };
@@ -184,10 +206,10 @@ test('voltar ao lobby pede confirmação antes de apagar votos', async ({ browse
   await host.click('[data-action="start"]');
   expect(asked).toContain('votos anteriores');
   asked = '';
-  Object.assign(room.db, { status: 'running', stage: 'round1', endsAt: Date.now() + 100_000 });
+  Object.assign(room.db, { fase: 'voto1', endsAt: Date.now() + 100_000 });
   await host.click('[data-action="lobby"]');
   expect(asked).toContain('votos desta sequência serão apagados');
-  expect(room.db.status).toBe('running');
+  expect(room.db.fase).toBe('voto1');
 });
 
 test('reiniciar para nova turma devolve os alunos ao formulário de entrada', async ({ browser }) => {
@@ -205,28 +227,11 @@ test('reiniciar para nova turma devolve os alunos ao formulário de entrada', as
   expect(room.db.participants.size).toBe(1);
 });
 
-test('com as funções antigas do Supabase, o aluno removido volta ao formulário ao tentar votar', async ({ browser }) => {
-  const room = fakeRoom({ legacy: true });
-  const host = await openHost(browser, room);
-  const student = await openStudent(browser, room, 'Fábio');
-  await host.click('[data-action="clear"]');
-  await expect(host.locator('#reset-message')).toContainText('Sala reiniciada');
-  await host.click('[data-action="start"]');
-  await expect(student.page.locator('[data-choice]')).toHaveCount(4);
-  await student.page.click('[data-choice="2"]');
-  await expect(student.page.locator('#join-panel')).toBeVisible();
-  await expect(student.page.locator('#name')).toHaveValue('Fábio');
-  await student.page.click('#join-form button');
-  await expect(student.page.locator('[data-choice]')).toHaveCount(4);
-  await student.page.click('[data-choice="2"]');
-  await expect(student.page.locator('#message')).toContainText('Escolha C registrada');
-});
-
 test('falha de rede ao reabrir a página não apaga a identidade do aluno', async ({ browser }) => {
   const room = fakeRoom();
   const { page } = await openStudent(browser, room, 'Eva');
   const id = await page.evaluate(() => JSON.parse(localStorage.getItem('tbl:einstein-ia-a06-2026-2')).id);
-  room.offline.add('tbl_state');
+  room.offline.add('estado');
   await page.reload();
   await expect(page.locator('#message')).toContainText('Sem conexão');
   await expect(page.locator('#message')).toHaveText('');
