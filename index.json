@@ -59,7 +59,27 @@
       "materiais/aula-12/prompts-antigravity.md",
       "materiais/aula-13/dados/olist_pedidos.csv",
       "materiais/aula-13/prompts-previsao.md",
-      "materiais/aula-13/referencia/previsao_referencia.py"
+      "materiais/aula-13/referencia/previsao_referencia.py",
+      "materiais/aula-14/dados/README.md",
+      "materiais/aula-14/dados/experimento_agendamento.csv",
+      "materiais/aula-14/dados/gerar_experimento.py",
+      "materiais/aula-14/prompts-ab.md",
+      "materiais/aula-14/referencia/ab_referencia.py",
+      "materiais/aula-15/dados/README.md",
+      "materiais/aula-15/dados/contas_a_pagar.csv",
+      "materiais/aula-15/dados/fornecedores.csv",
+      "materiais/aula-15/dados/gerar_contas.py",
+      "materiais/aula-15/prompts-auditoria.md",
+      "materiais/aula-15/referencia/auditoria_referencia.py",
+      "materiais/aula-16/prompts-estrategia.md",
+      "materiais/aula-16/referencia/estrategia_referencia.py",
+      "materiais/aula-17/dados/README.md",
+      "materiais/aula-17/dados/gerar_rh.py",
+      "materiais/aula-17/dados/rh_enfermagem.csv",
+      "materiais/aula-17/prompts-rh.md",
+      "materiais/aula-17/referencia/rh_referencia.py",
+      "materiais/aula-18/prompts-projeto.md",
+      "materiais/aula-19/prompts-apresentacao.md"
     ],
     "live_activities": [
       "tbl/aula-06/index.html",
@@ -87,8 +107,18 @@
       "tests/e2e/aula-11.spec.js",
       "tests/e2e/aula-12.spec.js",
       "tests/e2e/aula-13.spec.js",
+      "tests/e2e/aula-14.spec.js",
+      "tests/e2e/aula-15.spec.js",
+      "tests/e2e/aula-16.spec.js",
+      "tests/e2e/aula-17.spec.js",
+      "tests/e2e/aula-18.spec.js",
+      "tests/e2e/aula-19.spec.js",
       "tests/test_aula_12_dataset.py",
       "tests/test_aula_13_dataset.py",
+      "tests/test_aula_14_dataset.py",
+      "tests/test_aula_15_dataset.py",
+      "tests/test_aula_16_checkpoints.py",
+      "tests/test_aula_17_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -778,22 +808,24 @@
       "tag": "Inferência",
       "status": "complete",
       "topics": [
-        "estudo de caso",
-        "qui-quadrado",
+        "desenho de experimento",
         "tamanho amostral",
-        "teste t",
-        "testes A/B",
-        "testes estatísticos"
+        "limpeza orientada ao experimento",
+        "verificação da divisão dos grupos (SRM)",
+        "qui-quadrado",
+        "teste t de Welch",
+        "olhar o p-valor todo dia (peeking)"
       ],
       "objectives": [
-        "Formular hipótese, métrica e unidade experimental antes do teste",
-        "Escolher teste t ou qui-quadrado conforme o desfecho",
-        "Interpretar efeito, intervalo e tamanho amostral junto ao p-valor",
-        "Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas"
+        "Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados",
+        "Limpar os registros do experimento com regras de negócio e contagem",
+        "Verificar a divisão entre variantes com o teste de SRM",
+        "Comparar proporções com qui-quadrado e médias com o teste t de Welch",
+        "Redigir uma recomendação com intervalo de confiança e limitações"
       ],
       "slides": {
         "path": "slides/aula-14.html",
-        "slide_count": 13,
+        "slide_count": 30,
         "sections": [
           "agenda",
           "challenge",
@@ -806,13 +838,15 @@
       },
       "material": {
         "path": "materiais/aula-14/index.html",
-        "section_count": 7,
+        "section_count": 20,
         "highlights": [
-          "Cadeia entre contexto,  desenho,  teste e ação",
-          "Efeito estatístico,  impacto econômico e sensibilidade"
+          "Base sintética de 14.392 sessões de um experimento na página de agendamento",
+          "Tamanho amostral de 4.234 usuários por grupo calculado antes de olhar os dados",
+          "Limpeza de duplicadas, usuários internos e expostos às duas variantes, com SRM antes e depois",
+          "Conclusão de 40,5% contra 42,8% (p = 0,019) e simulação A/A do peeking"
         ],
-        "activity": "Analisar um experimento com ticket e conversão e conduzir o caso de uma campanha comercial da auditoria da base à recomendação ao comitê",
-        "deliverable": "Protocolo do experimento e relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante"
+        "activity": "Conduzir com a IA o experimento da página de agendamento, do cálculo de tamanho amostral à decisão, limpando a base segundo as regras do experimento",
+        "deliverable": "Notebook executado, plano do experimento, tabela de limpeza, resultados dos testes, parecer de decisão, commit e push"
       }
     },
     {
@@ -822,23 +856,24 @@
       "tag": "Auditoria · Forense",
       "status": "complete",
       "topics": [
-        "auditoria",
-        "anomalias",
-        "riscos",
-        "análise forense",
-        "fraudes",
+        "auditoria de contas a pagar",
+        "regras de auditoria",
+        "duplicidade e fracionamento",
+        "Lei de Benford",
+        "Isolation Forest",
+        "matriz de risco",
         "cadeia de custódia"
       ],
       "objectives": [
-        "Distinguir erro, evento raro e fraude",
-        "Combinar regras e escores de anomalia com contexto de negócio",
-        "Priorizar alertas por impacto e explicabilidade",
-        "Relacionar transações, entidades e padrões suspeitos preservando a cadeia de custódia",
-        "Documentar achados sem ultrapassar a evidência"
+        "Preservar a entrada com hash e registrar a cadeia de custódia da análise",
+        "Limpar a base segundo as regras de alçada, calendário e cadastro",
+        "Aplicar testes de regra e medir quantos alarmes cada um produz",
+        "Testar a aderência à Lei de Benford no total e por fornecedor",
+        "Combinar sinais em uma matriz de risco e justificar a fila de exame"
       ],
       "slides": {
         "path": "slides/aula-15.html",
-        "slide_count": 13,
+        "slide_count": 30,
         "sections": [
           "agenda",
           "challenge",
@@ -851,15 +886,15 @@
       },
       "material": {
         "path": "materiais/aula-15/index.html",
-        "section_count": 7,
+        "section_count": 20,
         "highlights": [
-          "Regras de negócio, métodos estatísticos e custo operacional dos falsos positivos",
-          "Fila de auditoria combinando limite por fornecedor e escore IsolationForest",
-          "Hash SHA-256 da fonte e rede de transações entre contas",
-          "Dossiê do caso prioritário com inventário, consultas, hipóteses alternativas e lacunas"
+          "Contas a pagar sintéticas com 5.440 lançamentos e 120 fornecedores, com irregularidades e ruídos inocentes plantados",
+          "Regras de duplicidade, fracionamento abaixo da alçada, cadastro e calendário com contagens conferidas",
+          "Lei de Benford global e por fornecedor e Isolation Forest como triagem complementar",
+          "Fila priorizada de 172 pagamentos a examinar e hash da entrada para cadeia de custódia"
         ],
-        "activity": "Combinar regra e escore para revisar alertas de pagamentos e reconstruir o caso prioritário preservando a evidência",
-        "deliverable": "Ranking com motivo, valor em risco, evidência e revisão, e dossiê do caso prioritário com inventário, consultas, achados, alternativas e lacunas"
+        "activity": "Conduzir com a IA a auditoria das contas a pagar, das regras de negócio à fila priorizada de exame, distinguindo indício, anomalia e fraude",
+        "deliverable": "Notebook executado, achados por regra, fila de exame priorizada, log de custódia, parecer ao comitê, commit e push"
       }
     },
     {
@@ -869,18 +904,24 @@
       "tag": "IA · Estratégia",
       "status": "complete",
       "topics": [
-        "inteligência artificial",
-        "estratégia",
-        "decisão"
+        "enquadramento da decisão",
+        "premissas e evidências",
+        "matriz de decisão ponderada",
+        "análise de sensibilidade",
+        "cenários",
+        "crítica adversarial e pre-mortem",
+        "vieses no uso de IA"
       ],
       "objectives": [
-        "Estruturar uma decisão em alternativas,  critérios e cenários",
-        "Combinar previsão e julgamento sem automatizar responsabilidade",
-        "Testar robustez da recomendação a mudanças de premissas"
+        "Enquadrar uma decisão com objetivo, alternativas, critérios e responsável",
+        "Separar dado de suposição nas premissas sugeridas pela IA",
+        "Construir uma matriz de decisão ponderada com critérios normalizados",
+        "Testar a sensibilidade do ranking aos pesos e a cenários de crescimento",
+        "Redigir um memorando com a recomendação e o que a faria mudar"
       ],
       "slides": {
         "path": "slides/aula-16.html",
-        "slide_count": 11,
+        "slide_count": 27,
         "sections": [
           "agenda",
           "challenge",
@@ -893,13 +934,15 @@
       },
       "material": {
         "path": "materiais/aula-16/index.html",
-        "section_count": 7,
+        "section_count": 19,
         "highlights": [
-          "Matriz de decisão,  cenários e utilidade",
-          "Sensibilidade,  premissas e governança"
+          "Indicadores por estado a partir da base do Olist limpa na aula 13",
+          "Matriz ponderada com RJ 0,537 e MG 0,508 nos pesos de base",
+          "Pontos de inversão do ranking na sensibilidade dos pesos e teto de custo por cenário",
+          "Crítica adversarial, pre-mortem e memorando de decisão com a alternativa de não abrir"
         ],
-        "activity": "Avaliar alternativas de expansão em cenários de demanda e risco",
-        "deliverable": "Memo com alternativas, critérios, cenário adverso e gatilho de revisão"
+        "activity": "Usar a IA para enquadrar e criticar a decisão de abrir um centro de distribuição, com matriz ponderada, sensibilidade e cenários calculados no notebook",
+        "deliverable": "Notebook executado, registro de premissas, matriz e sensibilidade, memorando de decisão, commit e push"
       }
     },
     {
@@ -909,18 +952,24 @@
       "tag": "Estudo de Caso",
       "status": "complete",
       "topics": [
-        "recursos humanos",
-        "análise de dados",
-        "estudo de caso"
+        "rotatividade voluntária",
+        "limpeza orientada à definição de saída",
+        "taxas por segmento",
+        "confusão",
+        "regressão logística",
+        "ética e LGPD",
+        "ações por segmento"
       ],
       "objectives": [
-        "Definir indicadores de pessoas sem reduzir indivíduos a números",
-        "Investigar rotatividade com recortes e contexto",
-        "Propor intervenção mensurável e eticamente defensável"
+        "Definir rotatividade voluntária e traduzi-la em regras de limpeza",
+        "Comparar taxas de saída por segmento da equipe",
+        "Distinguir associação de efeito de uma variável de confusão",
+        "Ler uma regressão logística contra a taxa base",
+        "Recomendar ações por segmento, sem decisão sobre indivíduos"
       ],
       "slides": {
         "path": "slides/aula-17.html",
-        "slide_count": 11,
+        "slide_count": 32,
         "sections": [
           "agenda",
           "challenge",
@@ -933,13 +982,15 @@
       },
       "material": {
         "path": "materiais/aula-17/index.html",
-        "section_count": 7,
+        "section_count": 21,
         "highlights": [
-          "Rotatividade,  coortes e denominadores",
-          "Privacidade,  equidade e limites causais"
+          "Base sintética de 3.090 registros da enfermagem com relações e problemas plantados",
+          "Limpeza de transferências, admissões recentes e saídas involuntárias até 2.789 profissionais",
+          "Segmentos de maior saída e a armadilha das faltas explicada pelo turno",
+          "Regressão logística sem idade e gênero, comparação com a taxa base e verificação de disparidade"
         ],
-        "activity": "Analisar rotatividade por área e senioridade e propor intervenção",
-        "deliverable": "Diagnóstico com indicador, recortes, limitações, ação e métrica"
+        "activity": "Conduzir com a IA a análise de rotatividade da enfermagem, da definição de saída voluntária às ações por segmento, sem decisão individual",
+        "deliverable": "Notebook executado, tabela de limpeza, taxas por segmento, modelo avaliado, parecer de ações, commit e push"
       }
     },
     {
@@ -949,17 +1000,23 @@
       "tag": "Projeto",
       "status": "complete",
       "topics": [
-        "projeto integrador",
-        "problema de negócio"
+        "carta do projeto",
+        "escolha do problema",
+        "limpeza orientada à decisão",
+        "análise principal",
+        "verificação adversarial",
+        "recomendação com limitações"
       ],
       "objectives": [
-        "Delimitar problema,  usuário e decisão do projeto",
-        "Construir análise reproduzível com evidências",
-        "Planejar entrega com escopo,  riscos e critérios de sucesso"
+        "Formular um problema de negócio com decisão, decisor e métrica de sucesso",
+        "Derivar da decisão as regras de limpeza, cada uma com contagem",
+        "Aplicar à base escolhida o método estudado na aula de origem",
+        "Submeter a análise a uma verificação adversarial com a IA",
+        "Registrar recomendação, limitações e evidências em um repositório versionado"
       ],
       "slides": {
         "path": "slides/aula-18.html",
-        "slide_count": 11,
+        "slide_count": 24,
         "sections": [
           "agenda",
           "challenge",
@@ -972,13 +1029,14 @@
       },
       "material": {
         "path": "materiais/aula-18/index.html",
-        "section_count": 7,
+        "section_count": 18,
         "highlights": [
-          "Canvas do problema,  escopo mínimo e critérios de aceite",
-          "Matriz de riscos,  revisão cruzada e reprodutibilidade"
+          "Quatro problemas com bases das aulas 13, 14, 15 e 17",
+          "Tabela que liga problema, aula de origem, método e artefato esperado",
+          "Conferências por critério e pergunta de controle em cada etapa"
         ],
-        "activity": "Produzir o primeiro resultado verificável do projeto e receber revisão",
-        "deliverable": "Repositório executável, dados documentados, análise, visual e backlog"
+        "activity": "Resolver em dupla um problema de negócio com uma das quatro bases, da carta do projeto à recomendação, com a IA escrevendo o código",
+        "deliverable": "Pasta do projeto com carta, notebook executado, README com recomendação e limitações, commit e push"
       }
     },
     {
@@ -988,18 +1046,23 @@
       "tag": "Apresentação",
       "status": "complete",
       "topics": [
-        "apresentação",
-        "resultados",
-        "recomendações executivas"
+        "pirâmide de Minto",
+        "resumo executivo",
+        "títulos afirmativos",
+        "apresentação em HTML",
+        "checagem de números",
+        "ensaio e pitch"
       ],
       "objectives": [
-        "Selecionar evidências essenciais para uma audiência executiva",
-        "Estruturar apresentação em decisão,  evidência e recomendação",
-        "Responder objeções com limites e próximos testes"
+        "Organizar o resultado do projeto com a resposta antes dos argumentos",
+        "Redigir um resumo executivo de uma página",
+        "Construir sete telas com títulos afirmativos e números rastreáveis",
+        "Gerar com a IA uma apresentação em um único arquivo HTML",
+        "Defender a recomendação em um pitch de 5 minutos diante da banca"
       ],
       "slides": {
         "path": "slides/aula-19.html",
-        "slide_count": 11,
+        "slide_count": 23,
         "sections": [
           "agenda",
           "challenge",
@@ -1012,13 +1075,15 @@
       },
       "material": {
         "path": "materiais/aula-19/index.html",
-        "section_count": 7,
+        "section_count": 18,
         "highlights": [
-          "Narrativa executiva orientada à decisão",
-          "Gráficos com mensagem,  recomendação e ensaio"
+          "Resposta primeiro com a pirâmide de Minto e resumo executivo de uma página",
+          "Roteiro de sete telas e apresentação em HTML gerada pelo agente",
+          "Checagem de cada número contra o notebook e ensaio com perguntas da banca",
+          "Síntese do percurso das 19 aulas"
         ],
-        "activity": "Converter o projeto em uma fala de cinco minutos e ensaiar objeções",
-        "deliverable": "Deck, resumo de uma página e roteiro de respostas"
+        "activity": "Transformar o projeto da aula 18 em apresentação executiva em HTML, checar os números e ensaiar o pitch de 5 minutos",
+        "deliverable": "apresentacao.html, RESUMO_EXECUTIVO.md, pitch apresentado, commit e push"
       }
     }
   ]
