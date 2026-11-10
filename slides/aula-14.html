@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,30 +411,449 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 14 · 18/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Testes A/B: do desenho do experimento à decisão de negócio</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li><li>Defender uma recomendação com limitações explícitas</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos: hipótese, teste e tamanho amostral</li><li>Estudo de caso completo, do dado bruto à recomendação</li><li>Desafio, síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Do teste ao caso</h2><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: os dois testes</h2><div class="code-block">from scipy.stats import ttest_ind, chi2_contingency
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 14 · 18/11</div>
+      <h1>Testes A/B com limpeza orientada ao negócio</h1>
+      <p>Do plano do experimento à decisão sobre a nova página de agendamento de uma rede hospitalar fictícia</p>
+    </div>
 
-t, p = ttest_ind(grupo_a["ticket"], grupo_b["ticket"], equal_var=False)
-chi2, p_prop, gl, esperado = chi2_contingency(tabela_conversao)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: auditar antes de testar</h2><div class="code-block">import pandas as pd
-base = pd.read_csv("campanha.csv")
-print(base.groupby("grupo")["receita"].agg(["count","mean","median","std"]))
-print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê, validando pressupostos e analisando ticket e conversão.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar o protocolo do experimento e um relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Experimentos confiáveis começam no desenho; o valor do teste aparece quando a evidência estatística vira consequência econômica e risco.</p><ul><li>Definir métrica primária antes de olhar resultados</li><li>Verificar equilíbrio entre grupos e dados faltantes</li><li>Reportar efeito absoluto e relativo</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos detecção de padrões incomuns à auditoria e à análise forense de dados.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 14</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados.</li>
+        <li>Limpar os registros do experimento com regras de negócio e contagem.</li>
+        <li>Verificar a divisão entre variantes com o teste de SRM.</li>
+        <li>Comparar proporções com qui-quadrado e médias com o teste t de Welch.</li>
+        <li>Redigir uma recomendação com intervalo de confiança e limitações.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h35 · Plano</h3><p>Pergunta de negócio, hipótese, métricas e tamanho amostral.</p></article>
+        <article class="deck-card"><h3>19h35 às 20h35 · Limpeza</h3><p>Perfil, regras de exclusão, uma linha por usuário e teste de SRM.</p></article>
+        <article class="deck-card"><h3>20h35 às 21h35 · Testes</h3><p>Qui-quadrado, intervalo de confiança, Welch e leitura diária do p-valor.</p></article>
+        <article class="deck-card"><h3>21h35 às 22h00 · Entrega</h3><p>Parecer para a diretoria, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>O resultado da base sem limpeza</h2>
+      <p>Calculada por sessão sobre o arquivo bruto, a conclusão do agendamento sugere uma vantagem expressiva da página nova.</p>
+      <div class="metric-row">
+        <div class="metric"><strong>32,2%</strong><span>conclusão na página A</span></div>
+        <div class="metric"><strong>37,5%</strong><span>conclusão na página B</span></div>
+        <div class="metric"><strong>5,3 p.p.</strong><span>diferença aparente</span></div>
+        <div class="metric"><strong>0,0002</strong><span>p-valor do teste de SRM</span></div>
+      </div>
+      <p>O teste de SRM indica que a divisão entre as variantes não corresponde ao sorteio. Antes de qualquer conclusão, é preciso descobrir quem entrou na base.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Cada etapa deixa um arquivo conferível</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>Plano</strong><span>Hipótese, métricas e tamanho amostral.</span></div>
+        <div class="flow-step"><strong>CSV bruto</strong><span>14.392 sessões, sem edição.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span>Duplicadas, internos e contaminados.</span></div>
+        <div class="flow-step"><strong>SRM</strong><span>Divisão 50/50 conferida.</span></div>
+        <div class="flow-step"><strong>Testes</strong><span>Qui-quadrado e Welch.</span></div>
+        <div class="flow-step"><strong>Parecer</strong><span>Efeito, intervalo e limitações.</span></div>
+      </div>
+      <p>Os números do parecer saem do notebook. Nenhum valor é digitado à mão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Pergunta de negócio</div>
+      <h2>A decisão que orienta a aula</h2>
+      <p>Uma rede hospitalar fictícia criou uma nova página de agendamento online (B) e a testou contra a página atual (A) durante 14 dias, de 02 a 15/03/2026.</p>
+      <ul>
+        <li>Pergunta: a página B aumenta a proporção de pacientes que concluem o agendamento?</li>
+        <li>Unidade sorteada: o usuário, e não a sessão.</li>
+        <li>Decisão apoiada: substituir a página atual pela nova em toda a rede.</li>
+        <li>Custo de errar: trocar a página sem ganho ou perder agendamentos.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Plano do experimento</div>
+      <h2>Decisões registradas antes dos dados</h2>
+      <table class="deck-table">
+        <thead><tr><th>Item</th><th>Definição</th></tr></thead>
+        <tbody>
+          <tr><td>Hipótese</td><td>a taxa de conclusão em B difere da taxa em A</td></tr>
+          <tr><td>Métrica primária</td><td>proporção de usuários que concluíram o agendamento</td></tr>
+          <tr><td>Métrica secundária</td><td>tempo até concluir, em segundos, entre quem concluiu</td></tr>
+          <tr><td>Efeito mínimo</td><td>3 pontos percentuais sobre a taxa histórica de 40%</td></tr>
+          <tr><td>Alfa e poder</td><td>5% e 80%, teste bicaudal</td></tr>
+          <tr><td>Duração</td><td>14 dias, para cobrir duas semanas completas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 1</div>
+      <h2>Tamanho amostral para duas proporções</h2>
+      <p>O tamanho amostral responde quantos usuários cada grupo precisa para detectar o efeito mínimo com o poder escolhido.</p>
+      <div class="code-block">n = (z_alfa/2 · √(2·p̄·(1−p̄)) + z_poder · √(p1·(1−p1) + p2·(1−p2)))² / (p2 − p1)²
+
+p1 = 0,40   p2 = 0,43   p̄ = 0,415   z_alfa/2 = 1,96   z_poder = 0,84</div>
+      <p>Efeitos menores ou taxas mais próximas de 50% exigem amostras maiores.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas de trabalho no Codespace</h2>
+      <div class="code-block">mkdir -p aula-14-seunome/entrada aula-14-seunome/saidas
+cp materiais/aula-14/dados/experimento_agendamento.csv aula-14-seunome/entrada/
+ls -lh aula-14-seunome/entrada</div>
+      <p>A pasta <code>entrada</code> guarda o CSV bruto e não é editada. O notebook fica em <code>aula-14-seunome</code>, e os arquivos gerados vão para <code>saidas</code>. Abra o Copilot em modo agente ou o agente que você já usa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Plano</div>
+      <h2>Cálculo do tamanho amostral</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de análise neste laboratório. Crie aula-14-seunome/Aula_14_SeuNome.ipynb. Na primeira célula, registre em texto a hipótese, a métrica primária, a métrica secundária, o efeito mínimo de 3 pontos percentuais sobre a taxa de 40%, alfa de 5%, poder de 80% e duração de 14 dias.
+
+Na célula seguinte, calcule o tamanho amostral por grupo para um teste bicaudal de duas proporções usando scipy.stats.norm, sem statsmodels, e arredonde para cima. Espero 4.234 usuários por grupo. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 1 · Base</div>
+      <h2>A base do experimento</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>14.392</strong><span>sessões, uma por linha</span></div>
+        <div class="metric"><strong>10.575</strong><span>usuários distintos</span></div>
+        <div class="metric"><strong>8</strong><span>colunas</span></div>
+        <div class="metric"><strong>14</strong><span>dias de experimento</span></div>
+      </div>
+      <p>Cada linha registra uma visita à página de agendamento, com variante exibida, dispositivo, marcação de usuário interno, conclusão e tempo. Os dados são sintéticos e foram gerados para esta aula.</p>
+      <a class="download-link" href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv">⬇️ Baixar experimento_agendamento.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Perfil</div>
+      <h2>Perfil da base antes da limpeza</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No mesmo notebook, carregue aula-14-seunome/entrada/experimento_agendamento.csv em um DataFrame chamado bruta, convertendo data para data.
+
+Mostre: shape, dtypes, linhas duplicadas, sessao_id repetido, usuários distintos, sessões e usuários com usuario_interno igual a "sim", usuários que aparecem nas duas variantes e sessões por variante. Não limpe nem remova nada. Espero 14.392 linhas e 8 colunas; se divergir, pare e me avise.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Conferência do perfil</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>240</strong><span>linhas duplicadas</span></div>
+        <div class="metric"><strong>15</strong><span>usuários internos</span></div>
+        <div class="metric"><strong>160</strong><span>usuários nas duas variantes</span></div>
+        <div class="metric"><strong>6.974 × 7.418</strong><span>sessões em A e em B</span></div>
+      </div>
+      <ul>
+        <li>As linhas duplicadas repetem a mesma sessão, enviada duas vezes pelo log.</li>
+        <li>Os usuários internos são a equipe de TI, que testou sobretudo a página B.</li>
+        <li>Nenhum desses achados autoriza remoção antes da regra de negócio.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Regras de negócio</div>
+      <h2>Quatro regras para a limpeza</h2>
+      <table class="deck-table">
+        <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr><td>Remover linhas duplicadas</td><td>a sessão ocorreu uma vez</td><td>restam 14.152</td></tr>
+          <tr><td>Excluir usuários internos</td><td>a equipe de TI não é paciente</td><td>636 sessões fora</td></tr>
+          <tr><td>Excluir quem viu as duas variantes</td><td>a exposição não pode ser atribuída</td><td>160 usuários fora</td></tr>
+          <tr><td>Uma linha por usuário</td><td>o usuário é a unidade sorteada</td><td>10.400 usuários</td></tr>
+        </tbody>
+      </table>
+      <p>As regras são as mesmas para A e para B e foram definidas sem consultar o resultado.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Regras</div>
+      <h2>Aplicação das regras com contagem</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie sessoes a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
+1. Remover linhas duplicadas.
+2. Excluir usuario_interno igual a "sim".
+3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
+4. Criar usuarios com uma linha por usuario_id: variante, dispositivo, primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+
+Espero 14.152, 13.516, 13.044 sessões e 10.400 usuários. Salve a tabela regra, justificativa, linhas_antes, linhas_depois em aula-14-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir, investigue; não ajuste a regra.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 2</div>
+      <h2>Conferência da divisão entre variantes</h2>
+      <p>O sorteio prometeu 50% dos usuários para cada página. O teste de SRM (sample ratio mismatch) compara a divisão observada com a prometida por meio de um qui-quadrado de aderência.</p>
+      <ul>
+        <li>p-valor muito baixo indica que algo além do sorteio decidiu quem entrou em cada grupo.</li>
+        <li>Com SRM, os grupos deixam de ser comparáveis e o teste A/B perde validade.</li>
+        <li>A conduta é investigar a causa antes de comparar as métricas.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · SRM</div>
+      <h2>Teste de SRM antes e depois</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Aplique scipy.stats.chisquare à contagem por variante em dois momentos: nas sessões de bruta e nos usuários de usuarios. Mostre as contagens e os p-valores lado a lado.
+
+Explique em duas frases qual regra de limpeza explica a diferença entre os dois resultados, mostrando a contagem de sessões internas por variante como evidência. Não prossiga para os testes das métricas se o SRM da base limpa tiver p-valor abaixo de 0,01.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Conferência da base limpa</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>10.400</strong><span>usuários válidos</span></div>
+        <div class="metric"><strong>5.280</strong><span>usuários em A</span></div>
+        <div class="metric"><strong>5.120</strong><span>usuários em B</span></div>
+        <div class="metric"><strong>0,117</strong><span>p-valor do SRM</span></div>
+      </div>
+      <ul>
+        <li>Na base bruta, o SRM tinha p-valor de 0,0002.</li>
+        <li>A equipe de TI gerou 588 sessões em B e 54 em A, o que desequilibrava a divisão.</li>
+        <li>Os dois grupos superam os 4.234 usuários exigidos pelo plano.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 3</div>
+      <h2>p-valor e intervalo de confiança</h2>
+      <ul>
+        <li>O p-valor mede quão incomum seria a diferença observada se as duas páginas fossem equivalentes.</li>
+        <li>O p-valor não informa o tamanho do efeito nem a probabilidade de a hipótese ser verdadeira.</li>
+        <li>O intervalo de confiança de 95% mostra a faixa de efeitos compatíveis com os dados.</li>
+        <li>A decisão compara essa faixa com o efeito mínimo que justifica a mudança.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Proporções</div>
+      <h2>Qui-quadrado da métrica primária</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com usuarios, calcule a taxa de conclusão por variante e a diferença B menos A em pontos percentuais. Monte a tabela de contingência variante × concluiu e aplique scipy.stats.chi2_contingency com correction=False.
+
+Calcule o intervalo de confiança de 95% da diferença pela aproximação normal. Mostre taxas, diferença, intervalo, estatística e p-valor, e salve em aula-14-seunome/saidas/resultado_primario.csv. Compare em uma frase o intervalo com o efeito mínimo de 3 pontos percentuais.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Médias</div>
+      <h2>Teste t de Welch da métrica secundária</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Filtre os usuários que concluíram o agendamento e compare tempo_segundos entre B e A com scipy.stats.ttest_ind e equal_var=False. Mostre média, mediana e desvio padrão por variante, a diferença das médias e o p-valor.
+
+Faça um histograma sobreposto dos tempos das duas páginas. Explique por que o teste usa apenas quem concluiu e por que Welch é preferível ao teste t com variâncias iguais.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conferência 3</div>
+      <h2>Leitura dos resultados</h2>
+      <table class="deck-table">
+        <thead><tr><th>Medida</th><th>Página A</th><th>Página B</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Conclusão</td><td>40,5%</td><td>42,8%</td><td>+2,3 p.p., IC de 0,4 a 4,2; p = 0,019</td></tr>
+          <tr><td>Tempo médio</td><td>322,5 s</td><td>292,6 s</td><td>−30,0 s; p &lt; 0,001</td></tr>
+          <tr><td>Base bruta, por sessão</td><td>32,2%</td><td>37,5%</td><td>+5,3 p.p., número inválido</td></tr>
+        </tbody>
+      </table>
+      <p>A página B aumenta a conclusão, mas a estimativa de 2,3 p.p. fica abaixo do efeito mínimo planejado, e o intervalo inclui valores acima e abaixo de 3 p.p.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 4</div>
+      <h2>A leitura diária do p-valor</h2>
+      <p>Olhar o p-valor todos os dias e encerrar o teste na primeira vez que ele cair abaixo de 5% multiplica as chances de declarar um efeito inexistente.</p>
+      <ul>
+        <li>Cada leitura é uma nova oportunidade de um falso positivo.</li>
+        <li>A duração e o tamanho amostral foram fixados no plano para evitar esse viés.</li>
+        <li>Encerrar cedo por p-valor alto também é um erro, pois o teste ainda não tinha poder.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · Leitura diária</div>
+      <h2>p-valor acumulado e simulação A/A</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Para cada dia do experimento, recalcule o qui-quadrado da conclusão com os usuários cuja primeira_data é até aquele dia e faça um gráfico do p-valor com uma linha horizontal em 0,05.
+
+Depois simule 2.000 testes A/A com numpy (semente 14), com as duas páginas a 40% e 371 usuários por grupo por dia durante 14 dias. Calcule a proporção de simulações com p-valor abaixo de 0,05 apenas no último dia e em pelo menos um dos 14 dias. Explique o resultado.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 4</div>
+      <h2>Conferência da leitura diária</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>0,516</strong><span>p-valor no 5º dia</span></div>
+        <div class="metric"><strong>0,035</strong><span>p-valor no 12º dia</span></div>
+        <div class="metric"><strong>5,4%</strong><span>falsos positivos no fim</span></div>
+        <div class="metric"><strong>22,3%</strong><span>falsos positivos com leitura diária</span></div>
+      </div>
+      <ul>
+        <li>Quem encerrasse no 5º dia concluiria, sem poder estatístico, que as páginas são equivalentes.</li>
+        <li>Na simulação A/A, a leitura diária eleva o falso positivo de cerca de 5% para 22,3%.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 8 · Parecer</div>
+      <h2>Parecer para a diretoria</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie aula-14-seunome/PARECER_AB.md com: pergunta de negócio, plano registrado, regras de limpeza e contagens, resultado do SRM antes e depois, taxas, diferença com intervalo de confiança e p-valor, resultado do tempo, leitura diária e simulação A/A, recomendação e três limitações.
+
+Use somente números produzidos no notebook; não invente valores. Separe o que os dados mostram do que é recomendação. Depois proponha git add, commit e push, sem executar antes da minha aprovação.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio em dupla</div>
+      <h2>A página B deve substituir a atual?</h2>
+      <p>Responda à diretoria com base no notebook.</p>
+      <ul>
+        <li>Um ganho estimado de 2,3 p.p., com intervalo de 0,4 a 4,2, justifica a troca?</li>
+        <li>Que peso a redução de 30 segundos deve ter, se não era a métrica primária?</li>
+        <li>O que teria acontecido se a equipe de TI tivesse ficado na base?</li>
+        <li>Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 21h35</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>Aula_14_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>saidas/regras_de_limpeza.csv</code> com a contagem de cada regra.</li>
+        <li><code>saidas/resultado_primario.csv</code> com taxas, intervalo e p-valor.</li>
+        <li>Gráficos do tempo por variante e do p-valor diário.</li>
+        <li><code>PARECER_AB.md</code>, commit e push.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>O plano fixou hipótese, métricas, efeito mínimo e tamanho amostral antes dos dados.</li>
+        <li>As regras de limpeza seguiram a unidade sorteada e a população de pacientes.</li>
+        <li>O SRM revelou a contaminação pela equipe de TI e confirmou a base limpa.</li>
+        <li>O intervalo de confiança, e não apenas o p-valor, sustentou a leitura do efeito.</li>
+        <li>A IA escreveu o código, e a turma respondeu pelas regras e pela decisão.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 25/11, a disciplina trata de auditoria e forense de dados, com detecção de anomalias, riscos e fraudes.</p>
+      <p>Antes de sair, execute o notebook inteiro, revise o parecer e faça commit e push.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -374,6 +861,7 @@ print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-14/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -401,7 +889,7 @@ print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -418,6 +906,36 @@ print(pd.crosstab(base["grupo"], base["converteu"]))</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

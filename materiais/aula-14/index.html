@@ -7,48 +7,62 @@
   <title>Material · 14</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,44 +118,395 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-14.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dados/experimento_agendamento.csv" download="experimento_agendamento.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-ab.md" download="prompts-ab.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 14</div>
+      <div class="badge">LABORATÓRIO 14 · 18/11</div>
       <h1>Testes A/B: do desenho do experimento à decisão de negócio</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica. Este laboratório percorre o ciclo inteiro: desenho do experimento, escolha do teste, análise de um caso real e conversão da evidência em decisão.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Formular hipótese, métrica e unidade experimental antes do teste</li><li>Escolher teste t ou qui-quadrado conforme o desfecho</li><li>Interpretar efeito, intervalo e tamanho amostral junto ao p-valor</li><li>Traduzir uma dúvida gerencial em hipótese testável e defender a recomendação com limitações explícitas</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Teste A/B estima se uma diferença observada é compatível com acaso sob uma hipótese nula; significância não mede relevância econômica.</p><ul><li>Teste t compara médias sob pressupostos verificáveis</li><li>Qui-quadrado avalia associação entre categorias e proporções</li><li>Amostra deve ser planejada pelo menor efeito de interesse</li></ul><p>Um estudo de caso estatístico conecta contexto, desenho, dados, teste e ação. Pular uma dessas etapas transforma cálculo correto em decisão frágil.</p><ul><li>A unidade de análise precisa corresponder à unidade da intervenção</li><li>Pressupostos e qualidade dos dados vêm antes do p-valor</li><li>Sensibilidade mostra se a conclusão depende de escolhas arbitrárias</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade. Comece pelos dois testes que sustentam a decisão:</p><div class="code-block">from scipy.stats import ttest_ind, chi2_contingency
+      <p class="desc">Uma rede hospitalar fictícia criou uma nova página de agendamento online e quer saber se ela aumenta a proporção de pacientes que concluem o agendamento. Durante 14 dias, metade dos usuários viu a página atual (A) e metade viu a nova (B). Calculado sobre o arquivo bruto, o resultado sugere uma vantagem de 5,3 pontos percentuais para B, mas a divisão entre os grupos não corresponde ao sorteio. Neste laboratório, o plano do experimento é registrado antes dos dados, a base é limpa segundo regras de negócio, a divisão é conferida com o teste de SRM e as duas métricas são comparadas com qui-quadrado e teste t de Welch. A IA escreve a maior parte do código no GitHub Codespaces. A turma decide as regras, confere as contagens e responde pela recomendação.</p>
 
-resultado = ttest_ind(ticket_a, ticket_b, equal_var=False)
-print({"estatistica":resultado.statistic, "p_valor":resultado.pvalue})
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados.</li>
+          <li>Limpar os registros do experimento com regras de negócio e contagem.</li>
+          <li>Verificar a divisão entre variantes com o teste de SRM.</li>
+          <li>Comparar proporções com qui-quadrado e médias com o teste t de Welch.</li>
+          <li>Redigir uma recomendação com intervalo de confiança e limitações.</li>
+        </ul>
+      </section>
 
-tabela = [[convertidos_a, nao_a],[convertidos_b, nao_b]]
-chi2, p, gl, esperado = chi2_contingency(tabela)
-print({"chi2":chi2, "p_valor":p})</div><p>No caso da campanha, audite a base antes de testar qualquer hipótese:</p><div class="code-block">import pandas as pd
-base = pd.read_csv("campanha.csv")
-print(base.groupby("grupo")["receita"].agg(["count","mean","median","std"]))
-print(pd.crosstab(base["grupo"], base["converteu"]))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">efeito = base.groupby("grupo")["receita"].mean().diff().iloc[-1]
-receita_incremental = efeito * base.query("grupo == 'B'").shape[0]
-print({"efeito_medio":efeito, "impacto_estimado":receita_incremental})</div><p>Conduza o caso de uma campanha comercial desde a auditoria da base até a recomendação ao comitê, analisando ticket e conversão e validando os pressupostos de cada teste.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar o protocolo do experimento e um relatório de uma página com hipótese, método, efeito, incerteza, impacto estimado e decisão condicionada ao efeito mínimo relevante.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Definir métrica primária antes de olhar resultados</li><li>Evitar encerrar o teste antecipadamente por conveniência</li><li>Reconstruir o desenho do estudo e verificar equilíbrio entre grupos</li><li>Justificar o teste selecionado e checar randomização e perdas</li><li>Reportar efeito absoluto e relativo, separando evidência de recomendação</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Experimentos confiáveis começam no desenho; o valor do teste aparece quando a evidência estatística é convertida em consequência econômica e risco.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, aplicaremos detecção de padrões incomuns à auditoria e à análise forense de dados.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <section data-lesson-section="concepts">
+        <h2>2. O problema concreto</h2>
+        <p>Um teste A/B compara duas versões de uma página, de um processo ou de uma mensagem, sorteando quem recebe cada uma. O sorteio é o que permite atribuir a diferença de resultado à versão, e não a outra causa. Quando algo além do sorteio decide quem entra em cada grupo, a comparação perde essa propriedade, por mais sofisticado que seja o teste estatístico aplicado depois.</p>
+        <p>No arquivo bruto desta aula, a página A tem 32,2% de sessões com agendamento concluído e a página B, 37,5%. A diferença de 5,3 pontos percentuais seria um argumento forte para a troca. Ao mesmo tempo, B recebeu 7.418 sessões e A, 6.974, desequilíbrio que o teste de SRM classifica como improvável sob um sorteio 50/50 (p-valor de 0,0002). A explicação está em registros que não representam pacientes: a equipe de TI testou a página nova dezenas de vezes, alguns usuários viram as duas páginas e parte das sessões foi gravada em duplicidade.</p>
+        <p>Na aula 13, a limpeza dependia da pergunta sobre a expedição. Aqui ela depende do desenho do experimento: a unidade sorteada e a população a que a decisão se aplica definem quais registros contam.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado do início ao fim, a tabela de regras com contagens, o resultado da métrica primária com intervalo de confiança, os gráficos de tempo e de p-valor diário e o <code>PARECER_AB.md</code> endereçado à diretoria.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. O plano do experimento</h2>
+        <p>As decisões abaixo são registradas antes de abrir a base. Fixá-las antes impede que a escolha da métrica, do efeito ou da duração se ajuste ao resultado que se gostaria de ver.</p>
+        <table>
+          <thead><tr><th>Item</th><th>Definição</th><th>Justificativa</th></tr></thead>
+          <tbody>
+            <tr><td>Pergunta de negócio</td><td>a página B aumenta a proporção de pacientes que concluem o agendamento?</td><td>a diretoria decide se troca a página em toda a rede</td></tr>
+            <tr><td>Hipótese</td><td>a taxa de conclusão em B difere da taxa em A</td><td>teste bicaudal, pois B também poderia piorar a conclusão</td></tr>
+            <tr><td>Unidade sorteada</td><td>usuário</td><td>o mesmo paciente vê sempre a mesma página</td></tr>
+            <tr><td>Métrica primária</td><td>proporção de usuários que concluíram o agendamento</td><td>é o resultado que a troca pretende melhorar</td></tr>
+            <tr><td>Métrica secundária</td><td>tempo até concluir, em segundos, entre quem concluiu</td><td>indica esforço do paciente, mas não decide sozinha</td></tr>
+            <tr><td>Efeito mínimo de interesse</td><td>3 pontos percentuais sobre a taxa histórica de 40%</td><td>abaixo disso, a diretoria considera que a troca não compensa o custo</td></tr>
+            <tr><td>Alfa e poder</td><td>5% e 80%</td><td>convenções usuais de risco de falso positivo e de falso negativo</td></tr>
+            <tr><td>Duração</td><td>14 dias, de 02 a 15/03/2026</td><td>duas semanas completas cobrem a variação entre dias úteis e fim de semana</td></tr>
+          </tbody>
+        </table>
+        <h3>3.1 Tamanho amostral</h3>
+        <p>O tamanho amostral indica quantos usuários cada grupo precisa para que um efeito real de 3 pontos percentuais seja detectado em 80% das repetições do experimento, mantendo em 5% o risco de declarar um efeito inexistente. Para duas proporções, com teste bicaudal, usa-se a fórmula abaixo, em que p1 é a taxa histórica, p2 é a taxa com o efeito mínimo e p̄ é a média das duas.</p>
+        <div class="code-block">n = (z_alfa/2 · √(2·p̄·(1−p̄)) + z_poder · √(p1·(1−p1) + p2·(1−p2)))² / (p2 − p1)²</div>
+        <p>Com p1 = 0,40, p2 = 0,43, z de 1,96 para alfa de 5% e z de 0,84 para poder de 80%, o resultado é de 4.234 usuários por grupo. Reduzir o efeito mínimo para 2 pontos percentuais multiplicaria a amostra por pouco mais de dois, pois o denominador da fórmula é o quadrado do efeito.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. A base do experimento</h2>
+        <p>O arquivo <code>experimento_agendamento.csv</code> é sintético. Ele foi produzido pelo script <code>materiais/aula-14/dados/gerar_experimento.py</code>, com semente fixa, e não descreve pacientes, usuários nem instituições reais. Os problemas de qualidade foram inseridos de propósito e estão descritos no <code>README.md</code> da pasta de dados, que a turma deve ler somente depois de concluir o perfil.</p>
+        <div class="download-panel"><a href="dados/experimento_agendamento.csv" download="experimento_agendamento.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-ab.md" download="prompts-ab.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table>
+          <thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead>
+          <tbody>
+            <tr><td><code>sessao_id</code></td><td>identificador da visita à página</td><td>texto</td></tr>
+            <tr><td><code>usuario_id</code></td><td>identificador do usuário sorteado</td><td>texto</td></tr>
+            <tr><td><code>data</code></td><td>dia da sessão</td><td>data</td></tr>
+            <tr><td><code>variante</code></td><td>página exibida, A ou B</td><td>texto</td></tr>
+            <tr><td><code>dispositivo</code></td><td>celular ou computador</td><td>texto</td></tr>
+            <tr><td><code>usuario_interno</code></td><td>"sim" para contas da equipe da rede</td><td>texto</td></tr>
+            <tr><td><code>concluiu</code></td><td>1 se a sessão terminou em agendamento</td><td>inteiro</td></tr>
+            <tr><td><code>tempo_segundos</code></td><td>tempo até concluir; vazio quando não concluiu</td><td>inteiro anulável</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Inventário da cópia usada na aula</strong>14.392 linhas, 8 colunas, sessões de 02/03/2026 a 15/03/2026. <code>SHA-256 3b6b13db7720df3c07d8e7b9cfeed99bf80040261ba185f89905d0f18bbc80c3</code></div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Protocolo de trabalho com a IA</h2>
+        <p>O protocolo é o mesmo da aula 13. O agente recebe o arquivo, a pergunta e o resultado esperado, apresenta um plano antes de editar, e cada etapa é executada e reconciliada antes da seguinte.</p>
+        <ol>
+          <li>Contextualize: informe o arquivo, o plano do experimento e o resultado esperado.</li>
+          <li>Peça um plano antes da edição, para verificar se o agente entendeu a etapa.</li>
+          <li>Leia o código proposto, procurando números fixos, filtros sem regra e testes trocados.</li>
+          <li>Execute uma etapa por vez no notebook.</li>
+          <li>Reconcilie: toda transformação informa quantas linhas entraram, quantas saíram e por qual regra.</li>
+        </ol>
+        <p>O ambiente é o GitHub Codespaces da disciplina. Pandas, NumPy, Matplotlib e SciPy já estão instalados, pois o SciPy acompanha o scikit-learn do <code>requirements.txt</code>.</p>
+        <div class="alert-box"><h4>Regras de exclusão não podem depender do resultado</h4><p>Toda regra de limpeza é aplicada igualmente às duas variantes e justificada pelo desenho do experimento. Testar várias limpezas e escolher a que produz o menor p-valor equivale a fabricar o resultado. Se uma regra nova parecer necessária depois de ver os números, ela deve ser registrada como tal no parecer, com o resultado obtido com e sem ela.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ambiente</span>
+        <h2>6. Pastas de trabalho no Codespace</h2>
+        <p>No terminal do Codespace, crie a estrutura da entrega. A pasta <code>entrada</code> recebe a cópia do CSV e não é editada; os arquivos gerados vão para <code>saidas</code>.</p>
+        <div class="code-block">mkdir -p aula-14-seunome/entrada aula-14-seunome/saidas
+cp materiais/aula-14/dados/experimento_agendamento.csv aula-14-seunome/entrada/
+ls -lh aula-14-seunome/entrada</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · plano</span>
+        <h2>7. Fase A: plano e tamanho amostral</h2>
+        <p>O notebook começa pelo plano, em texto, e pelo cálculo do tamanho amostral. A célula de plano é o registro que o parecer vai citar.</p>
+        <div class="prompt-block">Atue como meu assistente de análise neste laboratório. Crie
+aula-14-seunome/Aula_14_SeuNome.ipynb. Na primeira célula, registre em texto a
+hipótese, a métrica primária, a métrica secundária, o efeito mínimo de 3 pontos
+percentuais sobre a taxa de 40%, alfa de 5%, poder de 80% e duração de 14 dias.
+
+Na célula seguinte, calcule o tamanho amostral por grupo para um teste
+bicaudal de duas proporções usando scipy.stats.norm, sem statsmodels, e
+arredonde para cima. Espero 4.234 usuários por grupo. Mostre o plano antes de
+editar.</div>
+        <div class="code-block">import numpy as np
+from scipy import stats
+
+p1, p2 = 0.40, 0.43
+p_media = (p1 + p2) / 2
+z_alfa = stats.norm.ppf(1 - 0.05 / 2)
+z_poder = stats.norm.ppf(0.80)
+
+n = (z_alfa * np.sqrt(2 * p_media * (1 - p_media))
+     + z_poder * np.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2 / (p2 - p1) ** 2
+print(int(np.ceil(n)))  # 4234</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · perfil</span>
+        <h2>8. Fase B: perfil da base sem limpeza</h2>
+        <div class="prompt-block">No mesmo notebook, carregue aula-14-seunome/entrada/experimento_agendamento.csv
+em um DataFrame chamado bruta, convertendo data para data.
+
+Mostre: shape, dtypes, linhas duplicadas, sessao_id repetido, usuários
+distintos, sessões e usuários com usuario_interno igual a "sim", usuários que
+aparecem nas duas variantes e sessões por variante. Não limpe nem remova nada.
+Espero 14.392 linhas e 8 colunas; se divergir, pare e me avise.</div>
+        <div class="code-block">import pandas as pd
+
+bruta = pd.read_csv("entrada/experimento_agendamento.csv", parse_dates=["data"])
+
+print("shape:", bruta.shape)
+print("linhas duplicadas:", bruta.duplicated().sum())
+print("usuários distintos:", bruta["usuario_id"].nunique())
+internos = bruta["usuario_interno"].eq("sim")
+print("sessões internas:", internos.sum(), "| usuários:", bruta.loc[internos, "usuario_id"].nunique())
+variantes = bruta.groupby("usuario_id")["variante"].nunique()
+print("usuários nas duas variantes:", (variantes &gt; 1).sum())
+display(bruta["variante"].value_counts())</div>
+        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(14392, 8)</code>, com 240 linhas duplicadas, 10.575 usuários distintos, 642 sessões de 15 usuários internos, 160 usuários nas duas variantes e 6.974 sessões em A contra 7.418 em B. A coluna <code>tempo_segundos</code> está vazia nas sessões sem conclusão, o que é esperado.</div>
+        <p>As 240 duplicadas têm o mesmo <code>sessao_id</code> e todos os campos iguais, padrão de um log reenviado. As sessões internas estão concentradas em B: 588 contra 54 em A, porque a equipe de TI validava a página nova.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · regras</span>
+        <h2>9. Fase C: aplicação das regras com contagem</h2>
+        <p>Cada regra decorre do desenho do experimento, e não do resultado.</p>
+        <table>
+          <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito conferido</th></tr></thead>
+          <tbody>
+            <tr><td>Remover linhas duplicadas</td><td>a sessão ocorreu uma vez; a cópia viria do reenvio do log</td><td>240 linhas fora; restam 14.152</td></tr>
+            <tr><td>Excluir usuários internos</td><td>a decisão trata de pacientes, e a equipe de TI não é paciente</td><td>636 sessões de 15 usuários fora; restam 13.516</td></tr>
+            <tr><td>Excluir usuários expostos às duas variantes</td><td>não há como atribuir o resultado a uma página</td><td>472 sessões de 160 usuários fora; restam 13.044</td></tr>
+            <tr><td>Uma linha por usuário</td><td>o usuário é a unidade sorteada; sessões do mesmo usuário não são independentes</td><td>10.400 usuários</td></tr>
+          </tbody>
+        </table>
+        <div class="prompt-block">Crie sessoes a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta
+ordem e mostre as linhas antes e depois de cada regra:
+1. Remover linhas duplicadas.
+2. Excluir usuario_interno igual a "sim".
+3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
+4. Criar usuarios com uma linha por usuario_id: variante, dispositivo,
+   primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+
+Espero 14.152, 13.516, 13.044 sessões e 10.400 usuários. Salve a tabela regra,
+justificativa, linhas_antes, linhas_depois em
+aula-14-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir,
+investigue; não ajuste a regra.</div>
+        <div class="code-block">sessoes = bruta.drop_duplicates()
+sessoes = sessoes[sessoes["usuario_interno"].eq("nao")]
+variantes = sessoes.groupby("usuario_id")["variante"].nunique()
+contaminados = variantes[variantes &gt; 1].index
+sessoes = sessoes[~sessoes["usuario_id"].isin(contaminados)]
+
+usuarios = sessoes.groupby("usuario_id").agg(
+    variante=("variante", "first"),
+    dispositivo=("dispositivo", "first"),
+    primeira_data=("data", "min"),
+    concluiu=("concluiu", "max"),
+    tempo_segundos=("tempo_segundos", "max"),
+)
+print(len(sessoes), len(usuarios))  # 13044 10400</div>
+        <p>A agregação por usuário usa o máximo de <code>concluiu</code> porque o paciente conta como convertido se concluiu o agendamento em qualquer sessão. Na base, cada usuário conclui no máximo uma vez, de modo que o máximo de <code>tempo_segundos</code> é o tempo dessa sessão.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · SRM</span>
+        <h2>10. Fase D: teste de SRM antes e depois</h2>
+        <p>O teste de SRM (sample ratio mismatch) compara a divisão observada entre os grupos com a divisão prometida pelo sorteio. Usa-se um qui-quadrado de aderência sobre as contagens por variante. Um p-valor muito baixo indica que algo além do sorteio interferiu na alocação, e nesse caso os grupos deixam de ser comparáveis. Plataformas de experimentação costumam adotar limiares mais rigorosos que 5% para esse alarme, como 1%, porque o teste é aplicado a todo experimento.</p>
+        <div class="prompt-block">Aplique scipy.stats.chisquare à contagem por variante em dois momentos: nas
+sessões de bruta e nos usuários de usuarios. Mostre as contagens e os p-valores
+lado a lado.
+
+Explique em duas frases qual regra de limpeza explica a diferença entre os dois
+resultados, mostrando a contagem de sessões internas por variante como
+evidência. Não prossiga para os testes das métricas se o SRM da base limpa tiver
+p-valor abaixo de 0,01.</div>
+        <div class="code-block">srm_bruta = stats.chisquare(bruta["variante"].value_counts().sort_index())
+srm_limpa = stats.chisquare(usuarios["variante"].value_counts().sort_index())
+print(f"{srm_bruta.pvalue:.2g}", round(srm_limpa.pvalue, 3))  # 0.00021 0.117</div>
+        <div class="evidence"><strong>Checkpoint</strong>Na base bruta, 6.974 e 7.418 sessões, com p-valor de 0,0002. Na base limpa, 5.280 usuários em A e 5.120 em B, com p-valor de 0,117. Os dois grupos superam os 4.234 usuários do plano, marca atingida no 12º dia, 13/03/2026.</div>
+        <p>A diferença de 160 usuários entre A e B na base limpa é compatível com o sorteio. O desequilíbrio da base bruta vinha principalmente das 588 sessões internas registradas em B.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>11. Conceitos para ler o resultado</h2>
+        <h3>11.1 p-valor</h3>
+        <p>O p-valor mede quão incomum seria uma diferença igual ou maior que a observada se as duas páginas fossem equivalentes. Um p-valor de 0,019 indica que, sob equivalência, uma diferença desse tamanho apareceria em cerca de 1,9% das repetições do experimento. O p-valor não informa o tamanho do efeito, nem a probabilidade de B ser melhor, nem a importância do resultado para o negócio.</p>
+        <h3>11.2 Intervalo de confiança</h3>
+        <p>O intervalo de confiança de 95% da diferença reúne os efeitos compatíveis com os dados. Ele responde à pergunta que a diretoria de fato faz, sobre quanto a página nova muda a conclusão, e permite comparar a faixa com o efeito mínimo do plano. Para a diferença entre duas proporções, usa-se a aproximação normal: diferença ± 1,96 × erro padrão.</p>
+        <h3>11.3 Qui-quadrado e teste t de Welch</h3>
+        <p>A métrica primária é uma proporção, e a comparação entre duas proporções independentes se faz com o qui-quadrado de independência sobre a tabela variante × concluiu, que equivale ao teste z de duas proporções. A métrica secundária é uma média de tempo, comparada com o teste t. A versão de Welch não supõe variâncias iguais nos dois grupos, suposição que raramente se verifica em tempos de navegação.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · proporções</span>
+        <h2>12. Fase E: qui-quadrado da métrica primária</h2>
+        <div class="prompt-block">Com usuarios, calcule a taxa de conclusão por variante e a diferença B menos A
+em pontos percentuais. Monte a tabela de contingência variante × concluiu e
+aplique scipy.stats.chi2_contingency com correction=False.
+
+Calcule o intervalo de confiança de 95% da diferença pela aproximação normal.
+Mostre taxas, diferença, intervalo, estatística e p-valor, e salve em
+aula-14-seunome/saidas/resultado_primario.csv. Compare em uma frase o
+intervalo com o efeito mínimo de 3 pontos percentuais.</div>
+        <div class="code-block">tabela = pd.crosstab(usuarios["variante"], usuarios["concluiu"])
+qui2, p_valor, _, _ = stats.chi2_contingency(tabela, correction=False)
+
+taxas = usuarios.groupby("variante")["concluiu"].mean()
+n = usuarios["variante"].value_counts()
+diferenca = taxas["B"] - taxas["A"]
+erro = np.sqrt(sum(taxas[v] * (1 - taxas[v]) / n[v] for v in ["A", "B"]))
+ic = (diferenca - 1.96 * erro, diferenca + 1.96 * erro)
+print(taxas.round(3).to_dict(), round(qui2, 2), round(p_valor, 4))</div>
+        <div class="evidence"><strong>Checkpoint</strong>Conclusão de 40,5% em A (2.138 de 5.280) e 42,8% em B (2.189 de 5.120). Diferença de 2,3 pontos percentuais, com intervalo de 0,4 a 4,2. Qui-quadrado de 5,47 e p-valor de 0,019.</div>
+        <p>O resultado indica que B aumenta a conclusão, pois o intervalo exclui o zero. A estimativa central, porém, fica abaixo do efeito mínimo de 3 pontos que o plano considerou necessário para justificar a troca, e o intervalo inclui tanto valores abaixo quanto acima dele. Os dados não permitem afirmar que o ganho atinge o patamar planejado.</p>
+        <p>A mesma comparação feita por sessão na base bruta daria 5,3 pontos percentuais. A diferença vem sobretudo dos usuários internos, que concluíam quase todas as sessões em B, e da contagem de várias sessões do mesmo paciente.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · médias</span>
+        <h2>13. Fase F: teste t de Welch da métrica secundária</h2>
+        <div class="prompt-block">Filtre os usuários que concluíram o agendamento e compare tempo_segundos entre
+B e A com scipy.stats.ttest_ind e equal_var=False. Mostre média, mediana e
+desvio padrão por variante, a diferença das médias e o p-valor.
+
+Faça um histograma sobreposto dos tempos das duas páginas. Explique por que o
+teste usa apenas quem concluiu e por que Welch é preferível ao teste t com
+variâncias iguais.</div>
+        <div class="code-block">concluintes = usuarios[usuarios["concluiu"] == 1]
+tempo_a = concluintes.loc[concluintes["variante"] == "A", "tempo_segundos"]
+tempo_b = concluintes.loc[concluintes["variante"] == "B", "tempo_segundos"]
+
+welch = stats.ttest_ind(tempo_b, tempo_a, equal_var=False)
+print(round(tempo_a.mean(), 1), round(tempo_b.mean(), 1), f"{welch.pvalue:.2g}")
+# 322.5 292.6 1.2e-11</div>
+        <div class="evidence"><strong>Checkpoint</strong>Tempo médio de 322,5 segundos em A e 292,6 em B, diferença de 30,0 segundos a favor de B, com estatística t de −6,8 e p-valor da ordem de 10<sup>−11</sup>.</div>
+        <p>O tempo só existe para quem concluiu, por isso o teste se restringe a esse grupo. Essa restrição tem uma consequência: se B leva a concluir pacientes que antes desistiam, o grupo de concluintes de B pode ter composição diferente da de A. A redução de tempo é uma evidência favorável a B, mas a métrica secundária não substitui a primária na decisão.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · leitura diária</span>
+        <h2>14. Fase G: leitura diária do p-valor e simulação A/A</h2>
+        <p>Acompanhar o p-valor todos os dias e encerrar o teste na primeira vez que ele cair abaixo de 5% é uma prática comum, conhecida em inglês como peeking. Cada leitura é uma nova oportunidade de falso positivo, e o risco acumulado supera muito os 5% planejados.</p>
+        <div class="prompt-block">Para cada dia do experimento, recalcule o qui-quadrado da conclusão com os
+usuários cuja primeira_data é até aquele dia e faça um gráfico do p-valor com
+uma linha horizontal em 0,05.
+
+Depois simule 2.000 testes A/A com numpy (semente 14), com as duas páginas a
+40% e 371 usuários por grupo por dia durante 14 dias. Calcule a proporção de
+simulações com p-valor abaixo de 0,05 apenas no último dia e em pelo menos um
+dos 14 dias. Explique o resultado.</div>
+        <table>
+          <thead><tr><th>Dia</th><th>Usuários acumulados</th><th>p-valor</th></tr></thead>
+          <tbody>
+            <tr><td>02/03 (1º)</td><td>784</td><td>0,080</td></tr>
+            <tr><td>06/03 (5º)</td><td>3.770</td><td>0,516</td></tr>
+            <tr><td>10/03 (9º)</td><td>6.762</td><td>0,242</td></tr>
+            <tr><td>13/03 (12º)</td><td>8.927</td><td>0,035</td></tr>
+            <tr><td>15/03 (14º)</td><td>10.400</td><td>0,019</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Checkpoint</strong>Na simulação A/A, em que as duas páginas são iguais por construção, 5,4% dos testes dão p-valor abaixo de 0,05 quando se olha apenas o último dia, e 22,3% dão p-valor abaixo de 0,05 em pelo menos um dos 14 dias.</div>
+        <p>A série real mostra o problema no sentido oposto. No 5º dia, com menos usuários do que o plano exigia, o p-valor era de 0,516, e quem encerrasse ali concluiria que as páginas são equivalentes. O plano fixou a duração justamente para que a decisão não dependesse do dia em que alguém olhou o painel.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 8 · parecer</span>
+        <h2>15. Fase H: parecer para a diretoria</h2>
+        <div class="prompt-block">Crie aula-14-seunome/PARECER_AB.md com: pergunta de negócio, plano
+registrado, regras de limpeza e contagens, resultado do SRM antes e depois,
+taxas, diferença com intervalo de confiança e p-valor, resultado do tempo,
+leitura diária e simulação A/A, recomendação e três limitações.
+
+Use somente números produzidos no notebook; não invente valores. Separe o que
+os dados mostram do que é recomendação. Depois proponha git add, commit e push,
+sem executar antes da minha aprovação.</div>
+        <p>O parecer distingue três camadas. A evidência é o que o notebook mediu: 2,3 pontos percentuais, com intervalo de 0,4 a 4,2. A interpretação relaciona a evidência ao plano: o ganho é real, mas pode ser menor que o mínimo de 3 pontos. A recomendação é uma decisão de gestão que considera também o custo da troca e a redução de 30 segundos no tempo. Leia o parecer e o diff antes de autorizar o versionamento:</p>
+        <div class="code-block">git status
+git add aula-14-seunome
+git diff --staged --stat
+git commit -m "Entrega a análise do teste A/B da aula 14"
+git push</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>16. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h35</td><td>problema, plano do experimento e tamanho amostral</td><td>4.234 usuários por grupo</td></tr>
+            <tr><td>19h35 às 19h55</td><td>pastas, cópia do CSV e perfil</td><td>14.392 linhas, 240 duplicadas, 15 internos, 160 contaminados</td></tr>
+            <tr><td>19h55 às 20h20</td><td>aplicação das regras e tabela por usuário</td><td>14.152, 13.516, 13.044 e 10.400</td></tr>
+            <tr><td>20h20 às 20h35</td><td>teste de SRM antes e depois</td><td>p-valor de 0,0002 e de 0,117</td></tr>
+            <tr><td>20h35 às 21h00</td><td>conceitos e qui-quadrado da métrica primária</td><td>+2,3 p.p., IC de 0,4 a 4,2, p = 0,019</td></tr>
+            <tr><td>21h00 às 21h15</td><td>teste t de Welch do tempo</td><td>−30,0 s</td></tr>
+            <tr><td>21h15 às 21h35</td><td>leitura diária e simulação A/A</td><td>5,4% contra 22,3%</td></tr>
+            <tr><td>21h35 às 22h00</td><td>parecer, revisão, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+          </tbody>
+        </table>
+        <p>O script <code>materiais/aula-14/referencia/ab_referencia.py</code> reproduz todos os números desta tabela. Execute-o depois de concluir o notebook e compare os resultados.</p>
+        <div class="code-block">python materiais/aula-14/referencia/ab_referencia.py</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>17. Desafio e entrega</h2>
+        <p>Em dupla, redija no <code>PARECER_AB.md</code> a resposta à diretoria para quatro perguntas. Um ganho estimado de 2,3 pontos percentuais, com intervalo de 0,4 a 4,2, justifica substituir a página em toda a rede? Que peso a redução de 30 segundos deve ter, se o tempo não era a métrica primária? O que teria acontecido com a conclusão e com o SRM se a equipe de TI tivesse ficado na base? Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</p>
+        <p>Quem terminar antes pode comparar a conclusão por dispositivo e discutir por que um recorte escolhido depois de ver os dados não tem o mesmo peso que a métrica primária do plano.</p>
+        <p>Entrega verificável, na pasta <code>aula-14-seunome</code>:</p>
+        <ul>
+          <li><code>Aula_14_SeuNome.ipynb</code> executado do início ao fim, com o plano na primeira célula.</li>
+          <li><code>saidas/regras_de_limpeza.csv</code> com linhas antes e depois de cada regra.</li>
+          <li><code>saidas/resultado_primario.csv</code> com taxas, diferença, intervalo e p-valor.</li>
+          <li>Gráficos do tempo por variante e do p-valor diário.</li>
+          <li><code>PARECER_AB.md</code> com evidência, interpretação, recomendação e limitações, seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>18. Checklist de qualidade</h2>
+        <ul>
+          <li>O plano, com efeito mínimo, alfa, poder e duração, aparece antes de qualquer leitura da base.</li>
+          <li>O tamanho amostral foi calculado por fórmula e resultou em 4.234 usuários por grupo.</li>
+          <li>O CSV em <code>entrada</code> permanece idêntico ao arquivo copiado.</li>
+          <li>Cada regra de limpeza tem justificativa ligada ao desenho do experimento e contagem antes e depois.</li>
+          <li>As regras foram aplicadas igualmente a A e a B.</li>
+          <li>A análise usa uma linha por usuário, a unidade sorteada.</li>
+          <li>O SRM foi verificado antes da comparação das métricas.</li>
+          <li>A métrica primária aparece com intervalo de confiança, e não apenas com p-valor.</li>
+          <li>O teste do tempo usa Welch e se restringe a quem concluiu.</li>
+          <li>O parecer explica por que a decisão não foi tomada no 5º nem no 12º dia.</li>
+          <li>Nenhum número do parecer foi digitado sem origem no notebook.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>19. Síntese</h2>
+        <p>O experimento começou por um plano registrado antes dos dados, com métrica primária, efeito mínimo de 3 pontos percentuais e 4.234 usuários por grupo. A limpeza seguiu o desenho: duplicadas, contas da equipe de TI e usuários expostos às duas páginas saíram da base, e a análise passou a ter uma linha por usuário. O teste de SRM mostrou que a base bruta não respeitava o sorteio e que a base limpa respeitava.</p>
+        <p>Na base limpa, a página B elevou a conclusão de 40,5% para 42,8%, com intervalo de 0,4 a 4,2 pontos e p-valor de 0,019, e reduziu o tempo médio em 30 segundos. A base bruta teria indicado 5,3 pontos, mais que o dobro. A leitura diária do p-valor e a simulação A/A mostraram por que a duração foi fixada no plano. A IA escreveu o código das oito etapas, enquanto as regras, a conferência e a recomendação couberam à turma.</p>
+        <p>O resultado vale para esta base sintética e para este desenho. A recomendação final depende do custo da troca, informação que o experimento não mede.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>20. Referências e continuidade</h2>
+        <p>No laboratório de 25/11, a disciplina trata de auditoria e forense de dados. A verificação de SRM, que comparou uma distribuição observada com a esperada, reaparece como ferramenta para detectar anomalias e registros que não deveriam estar na base.</p>
+        <ul>
+          <li>Anderson, Williams, Sweeney, Camm e Cochran. Estatística Aplicada à Administração e Economia. Cengage Learning, 2011. Capítulos sobre inferência para duas populações e testes de qui-quadrado.</li>
+          <li>Kohavi, Tang e Xu. Trustworthy Online Controlled Experiments. Cambridge University Press, 2020. Capítulos sobre SRM e sobre a leitura contínua de resultados.</li>
+          <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html">Documentação do SciPy sobre <code>chi2_contingency</code></a>.</li>
+          <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">Documentação do SciPy sobre <code>ttest_ind</code></a>.</li>
+          <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html">Documentação do SciPy sobre <code>chisquare</code></a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-14.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dados/experimento_agendamento.csv" download="experimento_agendamento.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-ab.md" download="prompts-ab.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
