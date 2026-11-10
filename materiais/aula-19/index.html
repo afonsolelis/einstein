@@ -7,48 +7,62 @@
   <title>Material · 19</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,35 +118,295 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-19.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="prompts-apresentacao.md" download="prompts-apresentacao.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 19</div>
+      <div class="badge">LABORATÓRIO 19 · 23/12</div>
       <h1>Apresentação de resultados e recomendações executivas</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Comunicação executiva reduz complexidade sem esconder incerteza. A audiência precisa entender o que decidir, por quê e como acompanhar. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Selecionar evidências essenciais para uma audiência executiva</li><li>Estruturar apresentação em decisão, evidência e recomendação</li><li>Responder objeções com limites e próximos testes</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Comunicação executiva reduz complexidade sem esconder incerteza. A audiência precisa entender o que decidir, por quê e como acompanhar.</p><ul><li>Abra com decisão e impacto, não com histórico do notebook</li><li>Use poucos gráficos, cada um com mensagem no título</li><li>Recomendação inclui dono, prazo, métrica e condição de revisão</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">mensagem = {"decisao":"executar piloto","evidencia":"MAE 18% menor que baseline","risco":"queda de dados","proximo_passo":"piloto de 30 dias"}
-print("\n".join(f"{k}: {v}" for k,v in mensagem.items()))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">def titulo_executivo(metrica, mudanca, causa):
-    return f"{metrica} {mudanca}; principal sinal: {causa}"
-print(titulo_executivo("Conversão","+6%","clientes recorrentes"))</div><p>Converta o projeto em uma fala de cinco minutos, faça ensaio cronometrado e registre três objeções.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar deck final, resumo de uma página e roteiro de respostas sobre método, impacto e risco.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Título de cada slide afirma uma conclusão</li><li>Fonte e período aparecem nos gráficos</li><li>Recomendação possui responsável e métrica</li><li>Ensaio respeita o tempo disponível</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Uma apresentação forte não exibe a totalidade do trabalho: mostra a cadeia mínima de evidências necessária para decidir.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, defenderemos os projetos e consolidaremos aprendizados do semestre.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">O projeto da aula 18 terminou com um notebook, uma contestação e um README que outra pessoa consegue reexecutar. Esse material atende a quem vai conferir a análise, mas não a quem vai decidir. Um diretor dispõe de poucos minutos e precisa saber primeiro o que deve fazer. Neste último laboratório, a dupla reorganiza o resultado com a resposta antes dos argumentos, redige um resumo executivo de uma página, constrói com a IA uma apresentação de sete telas em um único arquivo HTML, confere cada número contra o notebook, ensaia diante de uma banca simulada e apresenta um pitch de 5 minutos. Os números continuam saindo do notebook; o que muda é a ordem e a forma em que chegam ao decisor.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Organizar o resultado do projeto com a resposta antes dos argumentos.</li>
+          <li>Redigir um resumo executivo de uma página.</li>
+          <li>Construir sete telas com títulos afirmativos e números rastreáveis.</li>
+          <li>Gerar com a IA uma apresentação em um único arquivo HTML.</li>
+          <li>Defender a recomendação em um pitch de 5 minutos diante da banca.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O problema da ordem cronológica</h2>
+        <p>Quem fez a análise tende a apresentá-la na ordem em que o trabalho aconteceu: a base, a limpeza, o método, o resultado e, por último, a recomendação. Essa sequência é natural para o autor, porque reproduz o raciocínio que ele percorreu. Para o decisor, ela adia a única informação de que ele precisa para agir, e em reuniões curtas é comum que o tempo acabe antes de a recomendação aparecer.</p>
+        <p>A ordem executiva inverte essa sequência. A recomendação abre a apresentação, os argumentos vêm em seguida e as evidências sustentam cada argumento. O método e as regras de limpeza continuam disponíveis, mas passam para um anexo, consultado quando a banca pergunta. Nenhuma evidência é descartada; apenas sua posição muda.</p>
+        <table>
+          <thead><tr><th>Posição</th><th>Ordem cronológica</th><th>Ordem executiva</th></tr></thead>
+          <tbody>
+            <tr><td>Início</td><td>descrição da base</td><td>recomendação e decisão pedida</td></tr>
+            <tr><td>Meio</td><td>limpeza e método</td><td>argumentos com evidência</td></tr>
+            <tr><td>Fim</td><td>resultado e recomendação</td><td>limitações e o que mudaria a decisão</td></tr>
+            <tr><td>Anexo</td><td>não existe</td><td>regras de limpeza e método</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá, na pasta <code>projeto-final-seunome</code>, o <code>RESUMO_EXECUTIVO.md</code>, o <code>ROTEIRO_TELAS.md</code>, a <code>apresentacao.html</code> e a tabela de checagem dos números, publicados por commit e push, além do pitch apresentado à turma.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. A pirâmide de Minto</h2>
+        <p>Barbara Minto, consultora da McKinsey, sistematizou na década de 1970 o princípio da pirâmide para relatórios e apresentações executivas. A comunicação se organiza de cima para baixo: no topo fica a resposta, abaixo dela os argumentos que a sustentam e, na base, as evidências de cada argumento. Cada nível responde à pergunta "por quê?" feita ao nível de cima.</p>
+        <ol>
+          <li>Resposta: a recomendação em uma frase, dirigida ao decisor da carta do projeto.</li>
+          <li>Argumentos: de dois a quatro motivos independentes que sustentam a resposta.</li>
+          <li>Evidências: os números do notebook que sustentam cada argumento, com a célula de origem.</li>
+        </ol>
+        <p>A pirâmide também funciona como teste. Se um argumento não tem evidência abaixo dele, ou se a resposta não decorre dos argumentos, o problema é da análise e não da apresentação, e deve ser resolvido no notebook antes de qualquer tela.</p>
+        <p>Um exemplo com os números da aula 13: a resposta é "recomenda-se escalar a expedição pela previsão da regressão, com folga de 185 pedidos". O primeiro argumento afirma que a regressão erra menos que a regra atual, sustentado pelo MAE de 185,0 contra 197,8 da previsão ingênua. O segundo afirma que o erro é tolerável, sustentado pela proporção de 12,2% da média semanal do teste.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Sete telas com títulos afirmativos</h2>
+        <p>A apresentação tem sete telas, uma ideia por tela. A sequência abaixo distribui a pirâmide de modo que a recomendação apareça logo no início e as limitações apareçam antes dos próximos passos, e não escondidas no anexo.</p>
+        <table>
+          <thead><tr><th>Tela</th><th>Função</th><th>Origem no projeto</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>recomendação e decisão pedida</td><td>topo da pirâmide</td></tr>
+            <tr><td>2</td><td>problema de negócio e métrica de sucesso</td><td><code>CARTA_DO_PROJETO.md</code></td></tr>
+            <tr><td>3</td><td>evidência principal, com gráfico</td><td>artefato principal em <code>saidas/</code></td></tr>
+            <tr><td>4</td><td>comparação com a referência</td><td>análise principal</td></tr>
+            <tr><td>5</td><td>mecanismo que explica o resultado</td><td>leitura da análise</td></tr>
+            <tr><td>6</td><td>limitações e o que mudaria a decisão</td><td><code>CONTESTACAO.md</code></td></tr>
+            <tr><td>7</td><td>próximos passos com responsável e prazo</td><td>seção final do notebook</td></tr>
+          </tbody>
+        </table>
+        <p>O título de cada tela enuncia a conclusão daquela tela, e o gráfico ou a tabela abaixo dele a comprova. Um título de assunto, como "Resultados do modelo", obriga o decisor a extrair a conclusão sozinho; um título afirmativo, como "A regressão erra 185 pedidos por semana", entrega a conclusão e deixa ao gráfico a função de prova.</p>
+        <table>
+          <thead><tr><th>Título de assunto</th><th>Título afirmativo</th></tr></thead>
+          <tbody>
+            <tr><td>Resultados do modelo</td><td>A regressão erra 185 pedidos por semana</td></tr>
+            <tr><td>Análise por setor</td><td>A UTI concentra a maior taxa de desligamento</td></tr>
+            <tr><td>Comparação entre grupos</td><td>A nova página de agendamento elevou a conclusão no grupo testado</td></tr>
+          </tbody>
+        </table>
+        <p>O primeiro exemplo usa o resultado da aula 13. Os outros dois ilustram apenas a forma; os números e setores reais vêm do projeto de cada dupla.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Por que a apresentação é um arquivo HTML</h2>
+        <p>Desde a aula 1, todo o trabalho da disciplina foi versionado no Git e executado no Codespace. Uma apresentação em HTML segue o mesmo fluxo: o agente escreve o arquivo diretamente na pasta do projeto, o diff mostra cada número alterado, e a entrega é feita por commit e push, sem anexar arquivos binários. Os próprios slides da disciplina são arquivos HTML desse tipo.</p>
+        <p>Três requisitos técnicos garantem que a apresentação funcione na sala. O arquivo é único e não depende de CDN nem de fonte externa, de modo que abre mesmo sem internet. A navegação é feita por setas e espaço, como em qualquer software de apresentação. As telas mantêm a proporção 16:9, compatível com o projetor.</p>
+        <div class="alert-box"><h4>O número da tela precisa ser idêntico ao do notebook</h4><p>Ao gerar o HTML, a IA pode arredondar, reescrever ou até inventar um número plausível para completar uma frase. Um valor de 185 que aparece como 180 na tela, ou uma taxa calculada sem o denominador correto, compromete a recomendação inteira diante da banca. Por isso a checagem da seção 10 compara cada número da apresentação com a célula que o produziu, e a correção é feita no HTML, nunca no notebook.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ponto de partida</span>
+        <h2>6. O projeto da aula 18 no Codespace</h2>
+        <p>Abra o Codespace, atualize o repositório e confira se a pasta do projeto está completa. Reexecute o notebook inteiro antes de começar, porque a apresentação usa os números dessa execução, e não os de memória.</p>
+        <div class="code-block">cd projeto-final-seunome
+git pull
+ls
+# CARTA_DO_PROJETO.md  CONTESTACAO.md  Projeto_Final_SeuNome.ipynb  README.md  entrada  saidas</div>
+        <p>Leia também a revisão cruzada recebida na aula 18. As perguntas que a outra dupla fez costumam reaparecer na banca.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · pirâmide</span>
+        <h2>7. Fase A: resposta, argumentos e evidências</h2>
+        <div class="prompt-block">Leia projeto-final-seunome/README.md, CARTA_DO_PROJETO.md, CONTESTACAO.md e a
+seção final do notebook. Ainda não crie arquivos. Organize o resultado em uma
+pirâmide de Minto: no topo, a recomendação em uma frase dirigida ao decisor da
+carta; abaixo, de dois a quatro argumentos; sob cada argumento, os números que
+o sustentam, com a célula de origem.
+
+Use somente números que estão no notebook. Se algum argumento não tiver
+evidência, aponte a lacuna em vez de completá-la.</div>
+        <p>Revise a pirâmide antes de aprovar. Os argumentos devem ser independentes entre si: se dois deles dependem do mesmo número, eles são um argumento só. Uma lacuna apontada pela IA indica trabalho a fazer no notebook, e não uma frase a reescrever.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · resumo</span>
+        <h2>8. Fase B: resumo executivo de uma página</h2>
+        <p>O resumo executivo é a versão em texto da pirâmide. Ele circula por e-mail antes ou depois da reunião e deve permitir a decisão mesmo para quem não assistir à apresentação.</p>
+        <div class="prompt-block">Com a pirâmide aprovada, crie projeto-final-seunome/RESUMO_EXECUTIVO.md com no
+máximo 350 palavras, nesta ordem: recomendação e decisão pedida; contexto em
+duas frases; argumentos com seus números; principal limitação; resultado que
+faria a recomendação mudar; próximo passo com responsável e prazo.
+
+Escreva em prosa formal, sem negrito de ênfase, sem frases de efeito e sem
+jargão técnico sem explicação. Conte as palavras ao final.</div>
+        <div class="code-block">wc -w projeto-final-seunome/RESUMO_EXECUTIVO.md</div>
+        <div class="evidence"><strong>Critérios de conferência</strong>A primeira frase contém a recomendação e o decisor. Cada número tem origem em uma célula do notebook. A limitação principal vem da <code>CONTESTACAO.md</code>. O texto tem no máximo 350 palavras. Pergunta de controle: um diretor que leia só o primeiro parágrafo sabe o que precisa decidir?</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · roteiro</span>
+        <h2>9. Fase C: roteiro das sete telas</h2>
+        <p>O roteiro é escrito antes do HTML para que a discussão sobre conteúdo não se misture com a discussão sobre aparência. Cada tela recebe um título afirmativo, uma única ideia, o arquivo de onde vem o gráfico e a fala correspondente.</p>
+        <div class="prompt-block">A partir do RESUMO_EXECUTIVO.md, escreva projeto-final-seunome/ROTEIRO_TELAS.md
+com sete telas nesta ordem: recomendação; problema e métrica; evidência
+principal; comparação com a referência; mecanismo; limitações e o que mudaria a
+decisão; próximos passos.
+
+Para cada tela, informe: título afirmativo de no máximo 10 palavras, uma ideia,
+o gráfico ou tabela (com o arquivo de saidas/ de onde vem) e a fala de 30 a 45
+segundos. Não crie o HTML ainda.</div>
+        <p>Se o gráfico de uma tela ainda não existe em <code>saidas/</code>, gere-o no notebook e salve como PNG antes de passar à fase seguinte:</p>
+        <div class="code-block">import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 5.6))  # proporção próxima de 16:9
+# ... gráfico do artefato principal ...
+ax.set_title("Título afirmativo da tela 3")
+fig.savefig("saidas/tela_3.png", dpi=150, bbox_inches="tight")</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · HTML</span>
+        <h2>10. Fase D: apresentação em um único HTML</h2>
+        <div class="prompt-block">Com o ROTEIRO_TELAS.md aprovado, crie projeto-final-seunome/apresentacao.html:
+um único arquivo, sem CDN nem fonte externa, com CSS e JavaScript embutidos.
+Cada tela em proporção 16:9, navegação por setas e espaço, contador de telas e
+um anexo após a tela 7 com regras de limpeza e método.
+
+Gráficos devem ser imagens PNG geradas pelo notebook em saidas/ e embutidas em
+base64, ou tabelas HTML. Cada número na tela deve ser idêntico ao do notebook.
+Mostre o plano antes de editar.</div>
+        <p>Para ver a apresentação, sirva a pasta do projeto e abra a porta 8000 pela aba PORTS do Codespace. O endereço <code>localhost</code> não funciona no navegador do estudante, porque o servidor roda na máquina do Codespace. Outra opção é baixar o arquivo pelo explorador de arquivos e abri-lo diretamente no navegador.</p>
+        <div class="code-block">python -m http.server 8000 --directory projeto-final-seunome</div>
+        <div class="evidence"><strong>Critérios de conferência</strong>O arquivo abre sem internet. Setas e espaço trocam de tela e o contador acompanha. As telas mantêm 16:9. Nenhuma tela tem mais de uma ideia nem exige rolagem. O anexo traz as regras de limpeza e o método.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · números</span>
+        <h2>11. Fase E: checagem de cada número</h2>
+        <p>A checagem é a etapa que mais protege a dupla diante da banca. Ela transforma a afirmação "os números vêm do notebook" em uma tabela verificável.</p>
+        <div class="prompt-block">Extraia todos os números de projeto-final-seunome/apresentacao.html e de
+RESUMO_EXECUTIVO.md. Para cada um, localize a célula do notebook que o produz e
+monte a tabela numero, onde_aparece, celula_de_origem, valor_no_notebook,
+confere.
+
+Salve em projeto-final-seunome/saidas/checagem_numeros.csv. Se algum número não
+tiver origem ou divergir, liste-o e proponha a correção no HTML, sem alterar o
+notebook para fazer o número coincidir.</div>
+        <div class="code-block">import pandas as pd
+
+checagem = pd.read_csv("saidas/checagem_numeros.csv")
+pendentes = checagem[checagem["confere"].astype(str).str.lower() != "true"]
+display(pendentes)
+assert pendentes.empty, "há números sem origem ou divergentes"</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · ensaio</span>
+        <h2>12. Fase F: ensaio com perguntas da banca</h2>
+        <p>A IA simula uma banca com três perfis, cada um com um tipo de preocupação: o custo da decisão, a viabilidade operacional e a validade estatística. As perguntas vêm uma por vez, para que a dupla responda como responderia na sala.</p>
+        <div class="prompt-block">Atue como a banca: uma diretora financeira, um gerente de operações e um
+professor de estatística. Leia apresentacao.html, RESUMO_EXECUTIVO.md e
+CONTESTACAO.md e faça as oito perguntas mais difíceis que eles fariam, uma por
+vez. Espere minha resposta antes da próxima.
+
+Ao final, avalie cada resposta como sustentada, parcialmente sustentada ou sem
+evidência, citando o trecho do projeto que a apoia, e liste o que devo
+acrescentar ao anexo.</div>
+        <p>Respostas avaliadas como sem evidência indicam uma lacuna real. Acrescente ao anexo a tabela ou o gráfico que a resolve, ou reconheça a limitação na tela 6.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>13. Estrutura do pitch de 5 minutos</h2>
+        <p>A apresentação abre pela recomendação, como manda a pirâmide. A fala, em seguida, percorre a sequência de problema, evidência, comparação e mecanismo para sustentá-la, e termina com o que faria a dupla mudar de recomendação. Esse último passo mostra à banca que a dupla conhece os limites da própria evidência.</p>
+        <table>
+          <thead><tr><th>Passo</th><th>Tempo</th><th>Conteúdo</th></tr></thead>
+          <tbody>
+            <tr><td>Problema</td><td>0:30</td><td>decisão pedida e decisor</td></tr>
+            <tr><td>Evidência</td><td>1:00</td><td>o número principal e sua origem</td></tr>
+            <tr><td>Comparação</td><td>0:45</td><td>o resultado contra a referência</td></tr>
+            <tr><td>Mecanismo</td><td>0:45</td><td>por que o resultado ocorre</td></tr>
+            <tr><td>Recomendação</td><td>1:15</td><td>ação, prazo e responsável</td></tr>
+            <tr><td>Revisão</td><td>0:45</td><td>o resultado que faria a recomendação mudar</td></tr>
+          </tbody>
+        </table>
+        <p>Os tempos somam 5 minutos. As perguntas da banca vêm depois, e as respostas usam o anexo, e não a memória.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>14. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h20</td><td>ordem executiva, pirâmide e reexecução do notebook</td><td>notebook reexecutado</td></tr>
+            <tr><td>19h20 às 19h40</td><td>pirâmide e resumo executivo</td><td>até 350 palavras, recomendação na primeira frase</td></tr>
+            <tr><td>19h40 às 20h00</td><td>roteiro das sete telas</td><td>sete títulos afirmativos</td></tr>
+            <tr><td>20h00 às 20h30</td><td>geração e revisão do HTML</td><td>abre sem internet e navega por teclado</td></tr>
+            <tr><td>20h30 às 20h45</td><td>checagem dos números</td><td>nenhuma divergência pendente</td></tr>
+            <tr><td>20h45 às 21h00</td><td>ensaio com a banca simulada</td><td>anexo atualizado</td></tr>
+            <tr><td>21h00 às 21h50</td><td>pitches de 5 minutos e perguntas</td><td>tempo cumprido e respostas pelo anexo</td></tr>
+            <tr><td>21h50 às 22h00</td><td>README, commit e push</td><td>apresentação publicada no GitHub</td></tr>
+          </tbody>
+        </table>
+        <p>O tempo dos pitches depende do número de duplas. Com turmas maiores, o professor pode sortear parte das duplas para a banca aberta e ouvir as demais em grupos paralelos.</p>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>15. Desafio e entrega</h2>
+        <p>Cada dupla apresenta o pitch de 5 minutos e responde a 3 minutos de perguntas da turma e do professor. A turma observa quatro pontos: se a recomendação aparece na primeira tela, se cada número dito em voz alta está na checagem, se a dupla explica o que faria a recomendação mudar e se as respostas recorrem ao anexo.</p>
+        <p>Entrega verificável, na pasta <code>projeto-final-seunome</code>:</p>
+        <ul>
+          <li><code>RESUMO_EXECUTIVO.md</code> com no máximo 350 palavras.</li>
+          <li><code>ROTEIRO_TELAS.md</code> com sete títulos afirmativos e as falas.</li>
+          <li><code>apresentacao.html</code> em arquivo único, sem CDN.</li>
+          <li><code>saidas/checagem_numeros.csv</code> sem divergência pendente.</li>
+          <li>README atualizado com o link para a apresentação, seguido de commit e push.</li>
+        </ul>
+        <div class="code-block">git add projeto-final-seunome
+git diff --staged --stat
+git commit -m "Entrega a apresentação executiva do projeto integrador"
+git push</div>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>16. Checklist de qualidade</h2>
+        <ul>
+          <li>O notebook foi reexecutado antes da construção da apresentação.</li>
+          <li>A recomendação está na primeira frase do resumo e na primeira tela.</li>
+          <li>Cada argumento da pirâmide tem pelo menos uma evidência do notebook.</li>
+          <li>Os sete títulos são afirmativos e têm no máximo 10 palavras.</li>
+          <li>A apresentação abre sem internet, navega por teclado e mantém 16:9.</li>
+          <li>Todo número da apresentação e do resumo consta da checagem e confere.</li>
+          <li>As limitações aparecem na tela 6, e não apenas no anexo.</li>
+          <li>O pitch cabe em 5 minutos e termina com o que mudaria a recomendação.</li>
+          <li>O README aponta para a apresentação e o push foi confirmado.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>17. Síntese</h2>
+        <p>Este laboratório não acrescentou análise ao projeto. A pirâmide de Minto reorganizou o resultado com a recomendação no topo, o resumo executivo levou essa estrutura para uma página e as sete telas a distribuíram com títulos afirmativos. A IA gerou o HTML e simulou a banca, e a checagem ligou cada número da apresentação à célula que o produziu, de modo que a forma executiva não alterou a evidência.</p>
+        <p>O curso percorreu dezenove aulas em quatro etapas. Nas aulas 1 a 5, a turma configurou o Codespace, aprendeu Git, modelou dados e consultou bases com SQL e Metabase. Nas aulas 6 a 11, usou IA no trabalho administrativo e construiu visualizações e dashboards publicados. Nas aulas 12 a 17, limpou bases segundo regras de negócio, fez previsões, testou hipóteses, auditou pagamentos e analisou estratégia e pessoas. Nas aulas 18 e 19, reuniu esse percurso em um projeto com decisão real e o comunicou a um decisor. Em todas as etapas, a IA escreveu boa parte do código, enquanto as regras, a conferência dos números e a recomendação ficaram sob responsabilidade da turma.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>18. Referências e continuidade</h2>
+        <p>O repositório com os trabalhos das dezenove aulas continua com cada estudante. Com README, notebooks e histórico de commits, ele pode ser apresentado como portfólio em processos seletivos e retomado em disciplinas posteriores. Antes de encerrar, registre no README do projeto o que a dupla faria diferente com mais tempo ou com mais dados.</p>
+        <ul>
+          <li>Minto, B. <a href="https://www.barbaraminto.com/">The Pyramid Principle: Logic in Writing and Thinking</a>. Londres: Pearson, edição revista.</li>
+          <li>Knaflic, C. N. Storytelling com dados: um guia sobre visualização de dados para profissionais de negócios. Rio de Janeiro: Alta Books, 2019.</li>
+          <li><a href="../aula-18/index.html">Material da aula 18</a>, com a carta do projeto, a contestação e o README.</li>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">Documentação do MDN sobre HTML</a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-19.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="prompts-apresentacao.md" download="prompts-apresentacao.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>

@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,23 +411,364 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
+    .deck-table a { color: var(--cyan-light); }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 19 · 23/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Apresentação de resultados e recomendações executivas</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Selecionar evidências essenciais para uma audiência executiva</li><li>Estruturar apresentação em decisão, evidência e recomendação</li><li>Responder objeções com limites e próximos testes</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Comunicação executiva reduz complexidade sem esconder incerteza. A audiência precisa entender o que decidir, por quê e como acompanhar.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Abra com decisão e impacto, não com histórico do notebook</li><li>Use poucos gráficos, cada um com mensagem no título</li><li>Recomendação inclui dono, prazo, métrica e condição de revisão</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">mensagem = {"decisao":"executar piloto","evidencia":"MAE 18% menor que baseline","risco":"queda de dados","proximo_passo":"piloto de 30 dias"}
-print("\n".join(f"{k}: {v}" for k,v in mensagem.items()))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Converta o projeto em uma fala de cinco minutos, faça ensaio cronometrado e registre três objeções.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar deck final, resumo de uma página e roteiro de respostas sobre método, impacto e risco.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma apresentação forte não exibe a totalidade do trabalho: mostra a cadeia mínima de evidências necessária para decidir.</p><ul><li>Título de cada slide afirma uma conclusão</li><li>Fonte e período aparecem nos gráficos</li><li>Recomendação possui responsável e métrica</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, defenderemos os projetos e consolidaremos aprendizados do semestre.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 19</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 19 · 23/12</div>
+      <h1>Apresentação executiva com IA</h1>
+      <p>O projeto integrador vira um resumo de uma página, uma apresentação de sete telas e um pitch de 5 minutos</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Organizar o resultado do projeto com a resposta antes dos argumentos.</li>
+        <li>Redigir um resumo executivo de uma página.</li>
+        <li>Construir sete telas com títulos afirmativos e números rastreáveis.</li>
+        <li>Gerar com a IA uma apresentação em um único arquivo HTML.</li>
+        <li>Defender a recomendação em um pitch de 5 minutos diante da banca.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h40 · Estrutura</h3><p>Pirâmide de Minto e resumo executivo.</p></article>
+        <article class="deck-card"><h3>19h40 às 20h30 · Telas</h3><p>Roteiro de sete telas e geração do HTML.</p></article>
+        <article class="deck-card"><h3>20h30 às 21h00 · Revisão</h3><p>Checagem dos números e ensaio com a banca.</p></article>
+        <article class="deck-card"><h3>21h00 às 22h00 · Pitch</h3><p>Apresentações de 5 minutos, perguntas, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>A diretoria lê a resposta primeiro</h2>
+      <p>Uma apresentação de projeto costuma seguir a ordem em que o trabalho foi feito: base, limpeza, método, resultado e, no fim, a recomendação. O decisor, porém, quer saber primeiro o que deve fazer e só depois por quê.</p>
+      <ul>
+        <li>Na ordem cronológica, a recomendação aparece quando o tempo já acabou.</li>
+        <li>Na ordem executiva, a recomendação abre e os argumentos a sustentam.</li>
+        <li>As evidências continuam todas presentes, apenas em outra posição.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 1</div>
+      <h2>Pirâmide de Minto</h2>
+      <p>Barbara Minto propôs organizar a comunicação de cima para baixo, em três níveis.</p>
+      <ol>
+        <li>Resposta: a recomendação em uma frase, dirigida ao decisor.</li>
+        <li>Argumentos: de dois a quatro motivos que sustentam a resposta.</li>
+        <li>Evidências: os números do notebook que sustentam cada argumento.</li>
+      </ol>
+      <p>Cada nível responde à pergunta "por quê?" feita ao nível de cima.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Comparação</div>
+      <h2>Ordem cronológica e ordem executiva</h2>
+      <table class="deck-table">
+        <thead><tr><th>Posição</th><th>Ordem cronológica</th><th>Ordem executiva</th></tr></thead>
+        <tbody>
+          <tr><td>Início</td><td>descrição da base</td><td>recomendação e decisão pedida</td></tr>
+          <tr><td>Meio</td><td>limpeza e método</td><td>argumentos com evidência</td></tr>
+          <tr><td>Fim</td><td>resultado e recomendação</td><td>limitações e o que mudaria a decisão</td></tr>
+          <tr><td>Anexo</td><td>não existe</td><td>regras de limpeza e método</td></tr>
+        </tbody>
+      </table>
+      <p>O método não desaparece. Ele passa para o anexo, de onde sai quando a banca pergunta.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ponto de partida</div>
+      <h2>O projeto da aula 18 no Codespace</h2>
+      <div class="code-block">cd projeto-final-seunome
+git pull
+ls
+# CARTA_DO_PROJETO.md  CONTESTACAO.md  Projeto_Final_SeuNome.ipynb  README.md  entrada  saidas</div>
+      <p>Reexecute o notebook inteiro antes de começar. A apresentação usa os números dessa execução, e não os de memória.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Pirâmide</div>
+      <h2>Resposta, argumentos e evidências</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Leia projeto-final-seunome/README.md, CARTA_DO_PROJETO.md, CONTESTACAO.md e a seção final do notebook. Ainda não crie arquivos. Organize o resultado em uma pirâmide de Minto: no topo, a recomendação em uma frase dirigida ao decisor da carta; abaixo, de dois a quatro argumentos; sob cada argumento, os números que o sustentam, com a célula de origem.
+
+Use somente números que estão no notebook. Se algum argumento não tiver evidência, aponte a lacuna em vez de completá-la.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Resumo</div>
+      <h2>Resumo executivo de uma página</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com a pirâmide aprovada, crie projeto-final-seunome/RESUMO_EXECUTIVO.md com no máximo 350 palavras, nesta ordem: recomendação e decisão pedida; contexto em duas frases; argumentos com seus números; principal limitação; resultado que faria a recomendação mudar; próximo passo com responsável e prazo.
+
+Escreva em prosa formal, sem negrito de ênfase, sem frases de efeito e sem jargão técnico sem explicação. Conte as palavras ao final.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Critérios do resumo executivo</h2>
+      <ul>
+        <li>A primeira frase contém a recomendação e o decisor.</li>
+        <li>Cada número tem origem em uma célula do notebook.</li>
+        <li>A limitação principal vem da <code>CONTESTACAO.md</code>.</li>
+        <li>O texto cabe em uma página e tem no máximo 350 palavras.</li>
+      </ul>
+      <p>Pergunta de controle: um diretor que leia só o primeiro parágrafo sabe o que precisa decidir?</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 2</div>
+      <h2>Sete telas e suas funções</h2>
+      <table class="deck-table">
+        <thead><tr><th>Tela</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>recomendação e decisão pedida</td></tr>
+          <tr><td>2</td><td>problema de negócio e métrica de sucesso</td></tr>
+          <tr><td>3</td><td>evidência principal, com gráfico</td></tr>
+          <tr><td>4</td><td>comparação com a referência</td></tr>
+          <tr><td>5</td><td>mecanismo que explica o resultado</td></tr>
+          <tr><td>6</td><td>limitações e o que mudaria a decisão</td></tr>
+          <tr><td>7</td><td>próximos passos com responsável e prazo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 3</div>
+      <h2>Título de assunto e título afirmativo</h2>
+      <table class="deck-table">
+        <thead><tr><th>Título de assunto</th><th>Título afirmativo</th></tr></thead>
+        <tbody>
+          <tr><td>Resultados do modelo</td><td>A regressão erra 185 pedidos por semana</td></tr>
+          <tr><td>Análise por setor</td><td>A UTI concentra a maior taxa de desligamento</td></tr>
+          <tr><td>Comparação entre grupos</td><td>A nova página de agendamento elevou a conclusão no grupo testado</td></tr>
+        </tbody>
+      </table>
+      <p>O título afirmativo enuncia a conclusão da tela, e o gráfico abaixo dele a comprova. Os exemplos ilustram a forma; os números vêm do seu projeto.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Roteiro</div>
+      <h2>Roteiro das sete telas</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">A partir do RESUMO_EXECUTIVO.md, escreva projeto-final-seunome/ROTEIRO_TELAS.md com sete telas nesta ordem: recomendação; problema e métrica; evidência principal; comparação com a referência; mecanismo; limitações e o que mudaria a decisão; próximos passos.
+
+Para cada tela, informe: título afirmativo de no máximo 10 palavras, uma ideia, o gráfico ou tabela (com o arquivo de saidas/ de onde vem) e a fala de 30 a 45 segundos. Não crie o HTML ainda.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · HTML</div>
+      <h2>Apresentação em um único HTML</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com o ROTEIRO_TELAS.md aprovado, crie projeto-final-seunome/apresentacao.html: um único arquivo, sem CDN nem fonte externa, com CSS e JavaScript embutidos. Cada tela em proporção 16:9, navegação por setas e espaço, contador de telas e um anexo após a tela 7 com regras de limpeza e método.
+
+Gráficos devem ser imagens PNG geradas pelo notebook em saidas/ e embutidas em base64, ou tabelas HTML. Cada número na tela deve ser idêntico ao do notebook. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Critérios técnicos da apresentação</h2>
+      <ul>
+        <li>O arquivo abre sem internet, pois não depende de CDN.</li>
+        <li>Setas e espaço trocam de tela, e o contador acompanha.</li>
+        <li>As telas mantêm 16:9 em projetor e notebook.</li>
+        <li>Nenhuma tela tem mais de uma ideia ou rolagem.</li>
+      </ul>
+      <div class="code-block">python -m http.server 8000 --directory projeto-final-seunome</div>
+      <p>Abra a porta 8000 pela aba PORTS do Codespace e escolha <code>apresentacao.html</code>.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Números</div>
+      <h2>Checagem de cada número</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Extraia todos os números de projeto-final-seunome/apresentacao.html e de RESUMO_EXECUTIVO.md. Para cada um, localize a célula do notebook que o produz e monte a tabela numero, onde_aparece, celula_de_origem, valor_no_notebook, confere.
+
+Salve em projeto-final-seunome/saidas/checagem_numeros.csv. Se algum número não tiver origem ou divergir, liste-o e proponha a correção no HTML, sem alterar o notebook para fazer o número coincidir.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Ensaio</div>
+      <h2>Ensaio com perguntas da banca</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como a banca: uma diretora financeira, um gerente de operações e um professor de estatística. Leia apresentacao.html, RESUMO_EXECUTIVO.md e CONTESTACAO.md e faça as oito perguntas mais difíceis que eles fariam, uma por vez. Espere minha resposta antes da próxima.
+
+Ao final, avalie cada resposta como sustentada, parcialmente sustentada ou sem evidência, citando o trecho do projeto que a apoia, e liste o que devo acrescentar ao anexo.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Pitch</div>
+      <h2>Estrutura do pitch de 5 minutos</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>Problema</strong><span>0:30 · decisão e decisor.</span></div>
+        <div class="flow-step"><strong>Evidência</strong><span>1:00 · o número principal.</span></div>
+        <div class="flow-step"><strong>Comparação</strong><span>0:45 · contra a referência.</span></div>
+        <div class="flow-step"><strong>Mecanismo</strong><span>0:45 · por que ocorre.</span></div>
+        <div class="flow-step"><strong>Recomendação</strong><span>1:15 · ação, prazo e dono.</span></div>
+        <div class="flow-step"><strong>Revisão</strong><span>0:45 · o que mudaria a decisão.</span></div>
+      </div>
+      <p>A apresentação abre pela recomendação, e a fala segue esta sequência para sustentá-la. As perguntas da banca vêm depois dos 5 minutos.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio · pitch</div>
+      <h2>Pitch e perguntas da banca</h2>
+      <p>A partir das 21h00, cada dupla apresenta por 5 minutos e responde a 3 minutos de perguntas da turma e do professor.</p>
+      <ul>
+        <li>A recomendação aparece na primeira tela?</li>
+        <li>Cada número dito em voz alta está na checagem?</li>
+        <li>A dupla explica o que faria a recomendação mudar?</li>
+        <li>A resposta às perguntas usa o anexo, e não memória?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 22h00</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>RESUMO_EXECUTIVO.md</code> com no máximo 350 palavras.</li>
+        <li><code>ROTEIRO_TELAS.md</code> com sete títulos afirmativos.</li>
+        <li><code>apresentacao.html</code> em arquivo único, sem CDN.</li>
+        <li><code>saidas/checagem_numeros.csv</code> sem divergência pendente.</li>
+        <li>README atualizado com o link da apresentação, commit e push.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>A pirâmide de Minto colocou a recomendação antes dos argumentos.</li>
+        <li>O resumo executivo coube em uma página e partiu da decisão.</li>
+        <li>As sete telas usaram títulos afirmativos e números rastreados.</li>
+        <li>A checagem ligou cada número a uma célula do notebook.</li>
+        <li>O ensaio com a IA antecipou as perguntas da banca.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Percurso do curso</div>
+      <h2>As 19 aulas em quatro etapas</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>Aulas 1 a 5 · Fundamentos</h3><p>Codespaces, Git, modelagem, SQL e Metabase.</p></article>
+        <article class="deck-card"><h3>Aulas 6 a 11 · Comunicação</h3><p>IA no trabalho, visualização e dashboards publicados.</p></article>
+        <article class="deck-card"><h3>Aulas 12 a 17 · Análise</h3><p>Limpeza, previsão, teste A/B, auditoria, estratégia e RH.</p></article>
+        <article class="deck-card"><h3>Aulas 18 e 19 · Integração</h3><p>Projeto com decisão real e apresentação executiva.</p></article>
+      </div>
+      <p>Em todas as etapas, a IA escreveu código e a turma respondeu pelas regras, pelos números e pela recomendação.</p>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Encerramento do curso</h2>
+      <p>O repositório com os projetos das 19 aulas continua com cada estudante e pode ser usado como portfólio, com README, notebooks e histórico de commits.</p>
+      <p>Antes de sair, confirme o push da apresentação e registre no README o que você faria diferente com mais tempo.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -394,7 +803,7 @@ print("\n".join(f"{k}: {v}" for k,v in mensagem.items()))</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -411,6 +820,36 @@ print("\n".join(f"{k}: {v}" for k,v in mensagem.items()))</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();
