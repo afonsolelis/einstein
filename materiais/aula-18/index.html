@@ -7,48 +7,62 @@
   <title>Material · 18</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,35 +118,312 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-18.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="prompts-projeto.md" download="prompts-projeto.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 18</div>
+      <div class="badge">LABORATÓRIO 18 · 16/12</div>
       <h1>Projeto Integrador: Resolvendo um problema de negócio real</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Delimitar problema, usuário e decisão do projeto</li><li>Construir análise reproduzível com evidências</li><li>Planejar entrega com escopo, riscos e critérios de sucesso</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável.</p><ul><li>Um bom problema tem responsável, frequência e consequência</li><li>Escopo mínimo viável reduz risco de uma entrega ampla e superficial</li><li>Critérios de aceite tornam progresso e qualidade observáveis</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">projeto = {"decisao":"priorizar clientes","usuario":"gerência comercial","metrica":"receita incremental","prazo":"09/12"}
-for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">riscos = [{"risco":"dados incompletos","prob":4,"impacto":5},{"risco":"escopo amplo","prob":3,"impacto":4}]
-for r in riscos: r["exposicao"] = r["prob"]*r["impacto"]
-print(sorted(riscos,key=lambda x:x["exposicao"],reverse=True))</div><p>Desenhe o canvas do projeto, produza um primeiro resultado verificável e faça revisão cruzada com outra equipe.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar repositório executável, fonte de dados documentada, análise, visual executivo e backlog final.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Problema e decisão claramente definidos</li><li>Dados e licenças documentados</li><li>Notebook executável do início ao fim</li><li>Limitações e próximos testes explícitos</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>O projeto vale pela qualidade da decisão que habilita e pela transparência de como chegou ao resultado.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, transformaremos o trabalho técnico em recomendação executiva convincente.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">Nas aulas 12 a 17, cada técnica foi apresentada com a pergunta já formulada, a base preparada e os números de conferência fornecidos pelo professor. No projeto integrador, a dupla assume essas decisões. Escolhe um entre quatro problemas de negócio, redige a carta do projeto, deriva da decisão as regras de limpeza, aplica o método estudado na aula de origem, submete a análise a uma verificação adversarial e registra a recomendação em um repositório que outra pessoa consiga reexecutar. A IA continua escrevendo a maior parte do código no GitHub Codespaces. Como não há números esperados, a conferência de cada etapa passa a depender de critérios verificáveis, descritos neste material.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Formular um problema de negócio com decisão, decisor e métrica de sucesso.</li>
+          <li>Derivar da decisão as regras de limpeza, cada uma com contagem.</li>
+          <li>Aplicar à base escolhida o método estudado na aula de origem.</li>
+          <li>Submeter a análise a uma verificação adversarial com a IA.</li>
+          <li>Registrar recomendação, limitações e evidências em um repositório versionado.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O que muda no projeto integrador</h2>
+        <p>Nas aulas anteriores, o professor definia a pergunta e conferia a base antes da turma. Os checkpoints numéricos, como as 96.690 vendas da aula 13, permitiam detectar rapidamente uma leitura errada ou uma regra mal aplicada. No projeto integrador, essa rede de proteção deixa de existir, porque cada dupla pode formular a pergunta de modo diferente e, portanto, chegar a contagens diferentes a partir da mesma base.</p>
+        <p>A conferência se desloca do número para o critério. Em vez de perguntar se o notebook produziu 84 semanas, pergunta-se se a soma das semanas fecha com o total de vendas, se cada regra cita a decisão e se a recomendação resiste à objeção mais forte. Esses critérios valem para qualquer uma das quatro bases e permitem que uma dupla revise o trabalho de outra.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá uma pasta <code>projeto-final-seunome</code> com carta do projeto, notebook executado, regras de limpeza, artefato principal, contestação e README, publicada por commit e push. Esse material é a base da apresentação executiva da aula 19.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. Os quatro problemas à escolha</h2>
+        <p>Cada problema reaproveita uma base já trabalhada no curso. A familiaridade com os dados reduz o tempo gasto com leitura de colunas e concentra o esforço da dupla nas decisões. Os links abaixo apontam para os arquivos no repositório da disciplina; no Codespace, a cópia é feita pelo terminal, como mostra a seção 6.</p>
+        <table>
+          <thead><tr><th>Problema</th><th>Decisor provável</th><th>Base</th><th>Aula de origem</th></tr></thead>
+          <tbody>
+            <tr><td>Quantos pedidos esperar na próxima semana do marketplace</td><td>Diretoria de Operações</td><td><a href="../aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv"><code>olist_pedidos.csv</code></a></td><td><a href="../aula-13/index.html">Aula 13 · previsão</a></td></tr>
+            <tr><td>Se a nova página de agendamento deve ser adotada</td><td>Gerência de Atendimento</td><td><a href="../aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv"><code>experimento_agendamento.csv</code></a></td><td><a href="../aula-14/index.html">Aula 14 · teste A/B</a></td></tr>
+            <tr><td>Quais pagamentos devem ser revisados antes da liberação</td><td>Controladoria</td><td><a href="../aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv"><code>contas_a_pagar.csv</code></a></td><td><a href="../aula-15/index.html">Aula 15 · auditoria</a></td></tr>
+            <tr><td>Onde concentrar a ação de retenção da enfermagem</td><td>Diretoria de Pessoas</td><td><a href="../aula-17/dados/rh_enfermagem.csv" download="rh_enfermagem.csv"><code>rh_enfermagem.csv</code></a></td><td><a href="../aula-17/index.html">Aula 17 · RH</a></td></tr>
+          </tbody>
+        </table>
+        <p>A dupla pode reformular o problema dentro da mesma base, desde que a nova formulação continue apoiando uma decisão concreta. Por exemplo, a base do Olist também permite estudar a demanda por estado, e a base de contas a pagar permite priorizar fornecedores em vez de pagamentos.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Método e artefato de cada problema</h2>
+        <p>O método do projeto é o da aula de origem. A tabela abaixo indica o que a análise principal deve produzir e qual comparação de referência a sustenta. Sem uma referência, o resultado não tem com o que ser comparado e a recomendação perde fundamento, como se viu na aula 13 com a previsão ingênua.</p>
+        <table>
+          <thead><tr><th>Problema</th><th>Método</th><th>Referência</th><th>Artefato esperado</th></tr></thead>
+          <tbody>
+            <tr><td>Demanda semanal</td><td>série semanal, referências simples e regressão em teste temporal</td><td>previsão ingênua</td><td><code>real_versus_previsto.csv</code> e previsão em faixa</td></tr>
+            <tr><td>Página de agendamento</td><td>verificação da divisão dos grupos, qui-quadrado na conclusão e teste t de Welch no tempo</td><td>grupo de controle</td><td>tabela de resultado por grupo, com intervalo e valor-p</td></tr>
+            <tr><td>Pagamentos suspeitos</td><td>regras de auditoria, Lei de Benford, Isolation Forest e pontuação de risco</td><td>padrão dos pagamentos sem alerta</td><td>fila de revisão com motivo de cada alerta</td></tr>
+            <tr><td>Rotatividade</td><td>taxa de saída voluntária por segmento e regressão logística sem variáveis sensíveis</td><td>taxa geral da enfermagem</td><td>ranking de segmentos com numerador e denominador</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Protocolo de trabalho com a IA</h2>
+        <p>O protocolo é o mesmo das aulas anteriores, com uma etapa adicional. Como não há números esperados, a dupla pede à IA, em um prompt separado, que conteste a análise que ela própria ajudou a construir.</p>
+        <ol>
+          <li>Contextualize com a carta do projeto e o arquivo da base.</li>
+          <li>Peça um plano antes de qualquer edição.</li>
+          <li>Leia o código proposto e o diff, procurando números fixos e linhas removidas sem regra.</li>
+          <li>Execute uma etapa por vez no notebook.</li>
+          <li>Registre o que foi aceito, alterado ou rejeitado, para a seção "Uso da IA" do README.</li>
+        </ol>
+        <p>O ambiente é o GitHub Codespaces da disciplina, com Jupyter, Pandas, scikit-learn e Matplotlib já instalados. Use o Copilot em modo agente ou o agente com que você já trabalha.</p>
+        <div class="alert-box"><h4>A regra de limpeza não pode ser escolhida pelo resultado</h4><p>Quando a dupla já conhece o resultado que gostaria de obter, surge a tentação de testar regras de limpeza até que ele apareça. Esse procedimento produz uma conclusão que reflete a escolha da regra, e não os dados. Por isso as regras são propostas a partir da carta, antes da análise principal, e qualquer alteração posterior fica registrada com o motivo.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ambiente</span>
+        <h2>6. Pastas do projeto no Codespace</h2>
+        <p>Abra o Codespace do repositório da disciplina e crie a estrutura do projeto. A pasta <code>entrada</code> recebe a cópia da base e não é editada; os arquivos gerados vão para <code>saidas</code>. Troque <code>aula-XX</code> e <code>ARQUIVO.csv</code> pelos valores da base escolhida.</p>
+        <div class="code-block">mkdir -p projeto-final-seunome/entrada projeto-final-seunome/saidas
+cp materiais/aula-XX/dados/ARQUIVO.csv projeto-final-seunome/entrada/
+sha256sum projeto-final-seunome/entrada/*.csv</div>
+        <p>Guarde o hash SHA-256 impresso pelo último comando. Ele entra no README e permite verificar, ao final, que a base de entrada não foi alterada durante o projeto.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · carta</span>
+        <h2>7. Fase A: carta do projeto</h2>
+        <p>A carta fixa a decisão antes de qualquer código. Ela é curta, mas cada campo restringe as etapas seguintes: o decisor define a linguagem do parecer, a unidade de análise define o grão da tabela e a métrica de sucesso define o que conta como resultado.</p>
+        <div class="prompt-block">Vamos iniciar um projeto de análise. Ainda não escreva código. Leia o
+cabeçalho e dez linhas de projeto-final-seunome/entrada/ARQUIVO.csv e me ajude
+a redigir projeto-final-seunome/CARTA_DO_PROJETO.md com: problema de negócio em
+uma frase, decisão que a análise apoia, quem decide, unidade de análise,
+período, métrica de sucesso e o resultado que faria a recomendação mudar.
+
+Faça perguntas quando faltar informação, em vez de supor. Não invente números
+nem dados que não estejam no arquivo.</div>
+        <p>Um exemplo de carta para o problema da demanda semanal, com os números da aula 13:</p>
+        <div class="code-block"># Carta do projeto
+
+Problema: a expedição não sabe quantos pedidos esperar na próxima semana.
+Decisão apoiada: escala de turnos e contratação de frete da semana seguinte.
+Decisor: diretora de Operações.
+Unidade de análise: pedidos vendidos por semana, de segunda a domingo.
+Período: 09/01/2017 a 19/08/2018.
+Métrica de sucesso: erro médio absoluto menor que o da previsão ingênua.
+Mudaria a recomendação: um erro médio maior que a folga de capacidade semanal.</div>
+        <div class="evidence"><strong>Critérios de conferência</strong>A decisão é uma ação concreta. O decisor tem cargo definido. A métrica tem unidade e período. A carta informa que resultado faria a dupla recomendar o contrário. Pergunta de controle: outra dupla, lendo só a carta, saberia o que a análise precisa responder?</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · perfil</span>
+        <h2>8. Fase B: perfil da base sem limpeza</h2>
+        <p>O perfil mostra o que a base contém antes de qualquer decisão. A separação entre problemas que afetam a decisão e problemas irrelevantes para ela evita duas falhas opostas: limpar o que não importa e deixar passar o que distorce o resultado.</p>
+        <div class="prompt-block">Crie projeto-final-seunome/Projeto_Final_SeuNome.ipynb. Na primeira célula de
+texto, copie o problema e a decisão da CARTA_DO_PROJETO.md. Carregue a base em
+um DataFrame chamado bruta e mostre: shape, dtypes, ausências por coluna,
+duplicidade da chave, valores únicos das colunas categóricas e intervalo das
+datas.
+
+Não limpe nem remova nada. Ao final, liste os problemas encontrados, separando
+o que pode afetar a decisão do que é irrelevante para ela. Mostre o plano antes
+de editar.</div>
+        <div class="code-block">from pathlib import Path
+import pandas as pd
+
+entrada = next(Path("entrada").glob("*.csv"))
+bruta = pd.read_csv(entrada)
+
+print("arquivo:", entrada.name, "| shape:", bruta.shape)
+display(bruta.dtypes.rename("tipo").to_frame())
+display(bruta.isna().sum().rename("ausentes").to_frame())
+for coluna in bruta.select_dtypes("object").columns:
+    print(coluna, bruta[coluna].nunique(), "valores distintos")</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · regras</span>
+        <h2>9. Fase C: regras de limpeza derivadas da decisão</h2>
+        <p>Cada regra precisa de uma justificativa que mencione a decisão da carta. Na aula 13, por exemplo, os pedidos cancelados saíram porque a decisão era sobre expedição; se fosse sobre atendimento, ficariam. Uma regra sem essa ligação é uma preferência da dupla ou da IA e não deve ser aplicada.</p>
+        <div class="prompt-block">Com base no perfil e na CARTA_DO_PROJETO.md, proponha regras de limpeza. Para
+cada regra, apresente a justificativa ligada à decisão; se não houver ligação
+com a decisão, não proponha a regra. Aguarde minha aprovação.
+
+Depois de aprovado, crie dados a partir de bruta sem alterá-la, aplique as
+regras em ordem e salve a tabela regra, justificativa, linhas_antes,
+linhas_depois em projeto-final-seunome/saidas/regras_de_limpeza.csv. Casos
+duvidosos recebem flag e não são removidos.</div>
+        <div class="code-block">registro = []
+
+def aplicar(df, mascara_manter, regra, justificativa):
+    depois = df[mascara_manter].copy()
+    registro.append({"regra": regra, "justificativa": justificativa,
+                     "linhas_antes": len(df), "linhas_depois": len(depois)})
+    return depois
+
+dados = bruta.copy(deep=True)
+# exemplo: dados = aplicar(dados, dados["status"] != "cancelado",
+#                          "exclui cancelados", "não geram expedição")
+
+pd.DataFrame(registro).to_csv("saidas/regras_de_limpeza.csv", index=False)
+assert len(bruta) - len(dados) == sum(r["linhas_antes"] - r["linhas_depois"] for r in registro)</div>
+        <div class="evidence"><strong>Critérios de conferência</strong>O CSV em <code>entrada</code> mantém o hash da etapa 0. Cada regra cita a decisão. A soma das linhas removidas fecha com a diferença entre a base bruta e a tratada. Casos duvidosos aparecem como flag. Pergunta de controle: se a decisão fosse outra, alguma regra mudaria? A resposta deve estar escrita no notebook.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · análise</span>
+        <h2>10. Fase D: análise principal com o método da aula</h2>
+        <p>A análise principal aplica o método da seção 4. Antes do código, a dupla pede à IA que explique qual pergunta o método responde e qual referência será usada, para verificar se o agente entendeu o problema. Os números aparecem sempre com o denominador: uma taxa de 18% significa coisas diferentes sobre 50 ou sobre 5.000 pessoas.</p>
+        <div class="prompt-block">Aplique à base tratada o método da aula de origem do projeto (aula XX),
+conforme a CARTA_DO_PROJETO.md. Antes de escrever o código, explique em até
+cinco linhas qual pergunta o método responde e qual comparação de referência
+será usada.
+
+Salve o artefato principal em projeto-final-seunome/saidas/ e faça um gráfico
+com título, unidade e fonte. Mostre os números com denominador. Não escreva
+conclusões além do que os números mostram.</div>
+        <p>Consulte o material da aula de origem para os detalhes do método. Os prompts daquela aula podem ser reaproveitados, desde que os caminhos e as regras sejam ajustados à carta do projeto.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · contestação</span>
+        <h2>11. Fase E: verificação adversarial</h2>
+        <p>A IA que escreveu o código tende a defendê-lo quando a mesma conversa pede uma revisão. Por isso a contestação é pedida em um prompt separado, com um papel explícito de revisor cético. Quando possível, repita o prompt em outro modelo de IA e compare as listas.</p>
+        <div class="prompt-block">Agora atue como revisor cético da diretoria. Leia o notebook inteiro e liste
+até cinco motivos pelos quais a conclusão pode estar errada: vazamento de
+informação, denominador inadequado, regra de limpeza que favorece o resultado,
+comparação ausente, associação lida como causa ou amostra pequena.
+
+Para cada motivo, proponha um teste que o confirme ou descarte. Não altere o
+notebook; apenas escreva a lista em projeto-final-seunome/CONTESTACAO.md.</div>
+        <p>Cada objeção recebe um destino. A dupla executa o teste proposto e registra o resultado na própria <code>CONTESTACAO.md</code>. Uma objeção confirmada altera a análise ou entra como limitação; uma objeção descartada permanece no arquivo com o resultado do teste que a descartou.</p>
+        <table>
+          <thead><tr><th>Objeção comum</th><th>Teste que a confirma ou descarta</th></tr></thead>
+          <tbody>
+            <tr><td>Vazamento de informação futura</td><td>refazer a separação respeitando a ordem temporal e comparar o erro</td></tr>
+            <tr><td>Denominador inadequado</td><td>recalcular a taxa com o denominador alternativo e comparar o ranking</td></tr>
+            <tr><td>Regra de limpeza que favorece o resultado</td><td>repetir a análise sem a regra e verificar se a conclusão se mantém</td></tr>
+            <tr><td>Associação lida como causa</td><td>procurar um fator que explique as duas variáveis e reescrever a frase</td></tr>
+            <tr><td>Amostra pequena</td><td>informar o tamanho de cada grupo e o intervalo de confiança</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · recomendação</span>
+        <h2>12. Fase F: recomendação com limitações</h2>
+        <p>A recomendação é dirigida ao decisor da carta e se apoia em poucos números, cada um com origem identificada. Quando a evidência não sustenta uma recomendação, a conclusão correta é dizer isso e indicar o dado que faltou, o que também orienta uma decisão.</p>
+        <div class="prompt-block">Com o notebook e a CONTESTACAO.md atualizados, escreva a seção final do
+notebook com: a recomendação em uma frase, dirigida ao decisor da carta; os três
+números que a sustentam, cada um com a célula de origem; a comparação de
+referência; as limitações confirmadas na contestação; e o resultado que faria a
+recomendação mudar.
+
+Use somente números calculados no notebook. Se a evidência não sustentar uma
+recomendação, diga isso e proponha o dado que faltou.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · README e Git</span>
+        <h2>13. Fase G: README do projeto e versionamento</h2>
+        <p>O README é a porta de entrada do projeto no GitHub. Ele permite que outra pessoa entenda a decisão, confira a base pelo hash e reexecute o notebook. A seção "Uso da IA" registra as sugestões aceitas, alteradas e rejeitadas, como no <code>REVISAO_IA.md</code> da aula 12.</p>
+        <div class="prompt-block">Crie projeto-final-seunome/README.md com: título, problema, decisão, base e
+hash SHA-256, regras de limpeza, método, resultado principal, recomendação,
+limitações, como reexecutar o notebook e uma seção "Uso da IA" com sugestões
+aceitas, alteradas e rejeitadas.
+
+Reinicie o kernel e execute o notebook inteiro. Depois mostre git status e
+proponha git add, commit e push apenas da pasta do projeto, sem executar antes
+da minha aprovação e sem usar force.</div>
+        <div class="code-block">git status
+git add projeto-final-seunome
+git diff --staged --stat
+git commit -m "Entrega o projeto integrador"
+git push</div>
+        <div class="evidence"><strong>Critérios de conferência</strong>O notebook executa do início ao fim após reiniciar o kernel. Cada número da recomendação aponta para uma célula. Toda objeção da contestação está confirmada ou descartada com teste. O README permite reexecutar o projeto. Pergunta de controle: a recomendação continua de pé se a objeção mais forte estiver certa?</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>14. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h15</td><td>apresentação dos quatro problemas e escolha da dupla</td><td>problema e base anotados</td></tr>
+            <tr><td>19h15 às 19h30</td><td>pastas, cópia da base e carta do projeto</td><td>hash registrado e carta com os sete campos</td></tr>
+            <tr><td>19h30 às 19h50</td><td>perfil da base</td><td>problemas separados entre relevantes e irrelevantes</td></tr>
+            <tr><td>19h50 às 20h20</td><td>regras de limpeza</td><td>tabela de regras com soma fechada</td></tr>
+            <tr><td>20h20 às 20h55</td><td>análise principal</td><td>artefato salvo e referência calculada</td></tr>
+            <tr><td>20h55 às 21h20</td><td>contestação e testes</td><td>cada objeção com destino</td></tr>
+            <tr><td>21h20 às 21h40</td><td>recomendação e README</td><td>números com célula de origem</td></tr>
+            <tr><td>21h40 às 22h00</td><td>revisão cruzada, commit e push</td><td>parecer da outra dupla recebido</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>15. Desafio e entrega</h2>
+        <p>Às 21h40, cada dupla lê o README de outra dupla e responde por escrito, em um comentário ou arquivo <code>REVISAO_CRUZADA.md</code> no repositório revisado, a quatro perguntas. A decisão e o decisor estão claros? Alguma regra de limpeza parece escolhida para favorecer o resultado? Qual limitação mais enfraquece a recomendação? Que pergunta a diretoria faria primeiro? As respostas recebidas alimentam o ensaio da aula 19.</p>
+        <p>Entrega verificável, na pasta <code>projeto-final-seunome</code>:</p>
+        <ul>
+          <li><code>CARTA_DO_PROJETO.md</code> com decisão, decisor e métrica de sucesso.</li>
+          <li><code>Projeto_Final_SeuNome.ipynb</code> executado do início ao fim.</li>
+          <li><code>saidas/regras_de_limpeza.csv</code> e o artefato principal da seção 4.</li>
+          <li><code>CONTESTACAO.md</code> com o resultado de cada teste.</li>
+          <li><code>README.md</code> com a seção "Uso da IA", seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>16. Checklist de qualidade</h2>
+        <ul>
+          <li>A carta do projeto foi escrita antes do primeiro código.</li>
+          <li>O hash da base de entrada é o mesmo no início e no fim.</li>
+          <li>Cada regra de limpeza cita a decisão e tem contagem antes e depois.</li>
+          <li>Nenhuma regra foi alterada depois da análise sem registro do motivo.</li>
+          <li>A análise principal tem comparação de referência.</li>
+          <li>Todo número aparece com denominador ou unidade.</li>
+          <li>A contestação foi pedida em prompt separado e cada objeção tem destino.</li>
+          <li>A recomendação informa o que a faria mudar.</li>
+          <li>O README registra o uso da IA e permite reexecutar o projeto.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>17. Síntese</h2>
+        <p>O projeto integrador repetiu o percurso das aulas 12 a 17 com uma diferença: as decisões que antes vinham prontas ficaram com a dupla. A carta do projeto fixou a decisão antes do código, e por isso as regras de limpeza puderam ser justificadas e contadas sem depender do resultado. O método da aula de origem produziu o artefato principal, e a contestação, pedida em prompt separado, distinguiu objeções confirmadas de objeções descartadas.</p>
+        <p>Sem números esperados, a qualidade do projeto foi verificada por critérios: soma das regras fechada, número com origem, objeção com teste e README reexecutável. Esses critérios também permitiram a revisão cruzada entre duplas.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>18. Referências e continuidade</h2>
+        <p>No laboratório de 23/12, o projeto vira uma apresentação executiva: resumo de uma página, sete telas com títulos afirmativos e pitch de 5 minutos. Mantenha a pasta do projeto atualizada no GitHub, porque a aula 19 parte exatamente desse estado.</p>
+        <ul>
+          <li>Materiais das aulas de origem: <a href="../aula-13/index.html">aula 13</a>, <a href="../aula-14/index.html">aula 14</a>, <a href="../aula-15/index.html">aula 15</a> e <a href="../aula-17/index.html">aula 17</a>.</li>
+          <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a>, fonte da base da aula 13.</li>
+          <li><a href="https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes">Documentação do GitHub sobre arquivos README</a>.</li>
+          <li><a href="https://pandas.pydata.org/docs/user_guide/index.html">Guia do usuário do Pandas</a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-18.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="prompts-projeto.md" download="prompts-projeto.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>

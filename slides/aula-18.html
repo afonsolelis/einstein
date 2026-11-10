@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,23 +411,366 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
+    .deck-table a { color: var(--cyan-light); }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 18 · 16/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Projeto Integrador: Resolvendo um problema de negócio real</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Delimitar problema, usuário e decisão do projeto</li><li>Construir análise reproduzível com evidências</li><li>Planejar entrega com escopo, riscos e critérios de sucesso</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Projeto integrador demonstra competência ao conectar uma decisão real a dados, método, validação e comunicação utilizável.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Um bom problema tem responsável, frequência e consequência</li><li>Escopo mínimo viável reduz risco de uma entrega ampla e superficial</li><li>Critérios de aceite tornam progresso e qualidade observáveis</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">projeto = {"decisao":"priorizar clientes","usuario":"gerência comercial","metrica":"receita incremental","prazo":"09/12"}
-for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Desenhe o canvas do projeto, produza um primeiro resultado verificável e faça revisão cruzada com outra equipe.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar repositório executável, fonte de dados documentada, análise, visual executivo e backlog final.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>O projeto vale pela qualidade da decisão que habilita e pela transparência de como chegou ao resultado.</p><ul><li>Problema e decisão claramente definidos</li><li>Dados e licenças documentados</li><li>Notebook executável do início ao fim</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, transformaremos o trabalho técnico em recomendação executiva convincente.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 18</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 18 · 16/12</div>
+      <h1>Projeto integrador com IA</h1>
+      <p>Um problema de negócio real, uma base conhecida e o percurso completo do curso, da pergunta à recomendação</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Formular um problema de negócio com decisão, decisor e métrica de sucesso.</li>
+        <li>Derivar da decisão as regras de limpeza, cada uma com contagem.</li>
+        <li>Aplicar à base escolhida o método estudado na aula de origem.</li>
+        <li>Submeter a análise a uma verificação adversarial com a IA.</li>
+        <li>Registrar recomendação, limitações e evidências em um repositório versionado.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h30 · Escolha</h3><p>Quatro problemas, carta do projeto e protocolo com a IA.</p></article>
+        <article class="deck-card"><h3>19h30 às 20h20 · Dados</h3><p>Perfil da base e regras de limpeza derivadas da decisão.</p></article>
+        <article class="deck-card"><h3>20h20 às 21h20 · Análise</h3><p>Método da aula de origem e verificação adversarial.</p></article>
+        <article class="deck-card"><h3>21h20 às 22h00 · Entrega</h3><p>Recomendação, README, revisão cruzada, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>O projeto reúne as etapas do curso</h2>
+      <p>Nas aulas anteriores, cada técnica apareceu isolada e com a pergunta já formulada pelo professor. No projeto integrador, a dupla formula a pergunta, decide o que conta como dado válido, escolhe o método e responde pela recomendação.</p>
+      <ul>
+        <li>A base é conhecida, e o esforço se concentra nas decisões.</li>
+        <li>A IA escreve o código, como nas aulas 12 a 17.</li>
+        <li>A aula 19 transforma o resultado em apresentação executiva.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Escolha da dupla</div>
+      <h2>Quatro problemas à escolha</h2>
+      <table class="deck-table">
+        <thead><tr><th>Problema</th><th>Base</th><th>Aula de origem</th></tr></thead>
+        <tbody>
+          <tr><td>Demanda semanal do marketplace</td><td><a href="../materiais/aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv"><code>olist_pedidos.csv</code></a></td><td>13 · previsão</td></tr>
+          <tr><td>Nova página de agendamento</td><td><a href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv"><code>experimento_agendamento.csv</code></a></td><td>14 · teste A/B</td></tr>
+          <tr><td>Pagamentos suspeitos</td><td><a href="../materiais/aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv"><code>contas_a_pagar.csv</code></a></td><td>15 · auditoria</td></tr>
+          <tr><td>Rotatividade da enfermagem</td><td><a href="../materiais/aula-17/dados/rh_enfermagem.csv" download="rh_enfermagem.csv"><code>rh_enfermagem.csv</code></a></td><td>17 · RH</td></tr>
+        </tbody>
+      </table>
+      <p>A dupla escolhe um problema e trabalha sobre uma cópia da base.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Cada etapa produz um artefato</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>Carta</strong><span>Problema, decisão, decisor e métrica.</span></div>
+        <div class="flow-step"><strong>Perfil</strong><span>O que a base contém.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span>Limpeza com contagem.</span></div>
+        <div class="flow-step"><strong>Análise</strong><span>Método da aula de origem.</span></div>
+        <div class="flow-step"><strong>Contestação</strong><span>Verificação adversarial.</span></div>
+        <div class="flow-step"><strong>Recomendação</strong><span>Decisão, limites e README.</span></div>
+      </div>
+      <p>A recomendação só usa números produzidos pelo notebook, como na aula 13.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">IA no laboratório</div>
+      <h2>Protocolo de trabalho com a IA</h2>
+      <ol>
+        <li>Contextualize com a carta do projeto e o arquivo da base.</li>
+        <li>Peça um plano antes de qualquer edição.</li>
+        <li>Leia o código proposto e o diff.</li>
+        <li>Execute uma etapa por vez no notebook.</li>
+        <li>Registre o que foi aceito, alterado ou rejeitado.</li>
+      </ol>
+      <p>Neste projeto não há números esperados fornecidos pelo professor. A conferência passa a depender de critérios verificáveis em cada etapa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas do projeto no Codespace</h2>
+      <div class="code-block">mkdir -p projeto-final-seunome/entrada projeto-final-seunome/saidas
+cp materiais/aula-XX/dados/ARQUIVO.csv projeto-final-seunome/entrada/
+sha256sum projeto-final-seunome/entrada/*.csv</div>
+      <p>Troque <code>aula-XX</code> e <code>ARQUIVO.csv</code> pela base escolhida. O hash registrado no README prova que a entrada não mudou durante o projeto.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Carta do projeto</div>
+      <h2>Carta do projeto antes do código</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Vamos iniciar um projeto de análise. Ainda não escreva código. Leia o cabeçalho e dez linhas de projeto-final-seunome/entrada/ARQUIVO.csv e me ajude a redigir projeto-final-seunome/CARTA_DO_PROJETO.md com: problema de negócio em uma frase, decisão que a análise apoia, quem decide, unidade de análise, período, métrica de sucesso e o resultado que faria a recomendação mudar.
+
+Faça perguntas quando faltar informação, em vez de supor. Não invente números nem dados que não estejam no arquivo.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Critérios da carta do projeto</h2>
+      <ul>
+        <li>A decisão é uma ação concreta, como escalar, adotar, bloquear ou priorizar.</li>
+        <li>O decisor tem cargo definido, e não "a empresa".</li>
+        <li>A métrica de sucesso tem unidade e período.</li>
+        <li>A carta diz que resultado faria a dupla recomendar o contrário.</li>
+      </ul>
+      <p>Pergunta de controle: outra dupla, lendo só a carta, saberia o que a análise precisa responder?</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Perfil</div>
+      <h2>Perfil da base sem limpeza</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie projeto-final-seunome/Projeto_Final_SeuNome.ipynb. Na primeira célula de texto, copie o problema e a decisão da CARTA_DO_PROJETO.md. Carregue a base em um DataFrame chamado bruta e mostre: shape, dtypes, ausências por coluna, duplicidade da chave, valores únicos das colunas categóricas e intervalo das datas.
+
+Não limpe nem remova nada. Ao final, liste os problemas encontrados, separando o que pode afetar a decisão do que é irrelevante para ela. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Regras</div>
+      <h2>Regras de limpeza derivadas da decisão</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com base no perfil e na CARTA_DO_PROJETO.md, proponha regras de limpeza. Para cada regra, apresente a justificativa ligada à decisão; se não houver ligação com a decisão, não proponha a regra. Aguarde minha aprovação.
+
+Depois de aprovado, crie dados a partir de bruta sem alterá-la, aplique as regras em ordem e salve a tabela regra, justificativa, linhas_antes, linhas_depois em projeto-final-seunome/saidas/regras_de_limpeza.csv. Casos duvidosos recebem flag e não são removidos.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Critérios do perfil e das regras</h2>
+      <ul>
+        <li>O CSV em <code>entrada</code> mantém o hash registrado na etapa 0.</li>
+        <li>Cada regra cita a decisão da carta na justificativa.</li>
+        <li>A soma das linhas removidas fecha com a diferença entre a base bruta e a tratada.</li>
+        <li>Casos duvidosos aparecem como flag, e não como linha apagada.</li>
+      </ul>
+      <p>Pergunta de controle: se a decisão fosse outra, alguma regra mudaria? A resposta deve estar escrita no notebook.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Análise principal</div>
+      <h2>Método e artefato de cada problema</h2>
+      <table class="deck-table">
+        <thead><tr><th>Problema</th><th>Método</th><th>Artefato</th></tr></thead>
+        <tbody>
+          <tr><td>Demanda semanal</td><td>série semanal, referência simples e regressão em teste temporal</td><td>real versus previsto e previsão em faixa</td></tr>
+          <tr><td>Página de agendamento</td><td>verificação da divisão dos grupos, qui-quadrado na conclusão e teste t de Welch no tempo</td><td>tabela de resultado por grupo</td></tr>
+          <tr><td>Pagamentos suspeitos</td><td>regras de auditoria, Lei de Benford, Isolation Forest e pontuação de risco</td><td>fila de revisão com motivo</td></tr>
+          <tr><td>Rotatividade</td><td>taxa de saída voluntária por segmento e regressão logística sem variáveis sensíveis</td><td>ranking de segmentos com denominador</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Análise</div>
+      <h2>Análise principal com o método da aula</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Aplique à base tratada o método da aula de origem do projeto (aula XX), conforme a CARTA_DO_PROJETO.md. Antes de escrever o código, explique em até cinco linhas qual pergunta o método responde e qual comparação de referência será usada.
+
+Salve o artefato principal em projeto-final-seunome/saidas/ e faça um gráfico com título, unidade e fonte. Mostre os números com denominador. Não escreva conclusões além do que os números mostram.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Contestação</div>
+      <h2>Verificação adversarial da análise</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Agora atue como revisor cético da diretoria. Leia o notebook inteiro e liste até cinco motivos pelos quais a conclusão pode estar errada: vazamento de informação, denominador inadequado, regra de limpeza que favorece o resultado, comparação ausente, associação lida como causa ou amostra pequena.
+
+Para cada motivo, proponha um teste que o confirme ou descarte. Não altere o notebook; apenas escreva a lista em projeto-final-seunome/CONTESTACAO.md.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Leitura da contestação</div>
+      <h2>O que fazer com cada objeção</h2>
+      <ul>
+        <li>Execute o teste proposto antes de aceitar ou descartar a objeção.</li>
+        <li>Objeção confirmada altera a análise ou entra como limitação.</li>
+        <li>Objeção descartada fica registrada com o resultado do teste.</li>
+        <li>Se possível, repita a contestação em outro modelo de IA.</li>
+      </ul>
+      <p>A IA que escreveu o código tende a defendê-lo. Por isso o papel de revisor é pedido em um prompt separado.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Recomendação</div>
+      <h2>Recomendação com limitações</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com o notebook e a CONTESTACAO.md atualizados, escreva a seção final do notebook com: a recomendação em uma frase, dirigida ao decisor da carta; os três números que a sustentam, cada um com a célula de origem; a comparação de referência; as limitações confirmadas na contestação; e o resultado que faria a recomendação mudar.
+
+Use somente números calculados no notebook. Se a evidência não sustentar uma recomendação, diga isso e proponha o dado que faltou.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · README e Git</div>
+      <h2>README do projeto e versionamento</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie projeto-final-seunome/README.md com: título, problema, decisão, base e hash SHA-256, regras de limpeza, método, resultado principal, recomendação, limitações, como reexecutar o notebook e uma seção "Uso da IA" com sugestões aceitas, alteradas e rejeitadas.
+
+Reinicie o kernel e execute o notebook inteiro. Depois mostre git status e proponha git add, commit e push apenas da pasta do projeto, sem executar antes da minha aprovação e sem usar force.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência final</div>
+      <h2>Critérios dos artefatos finais</h2>
+      <ul>
+        <li>O notebook executa do início ao fim após reiniciar o kernel.</li>
+        <li>Cada número da recomendação aponta para uma célula do notebook.</li>
+        <li>Toda objeção da contestação está confirmada ou descartada com teste.</li>
+        <li>O README permite que outra pessoa reexecute o projeto.</li>
+      </ul>
+      <p>Pergunta de controle: a recomendação continua de pé se a objeção mais forte estiver certa?</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio · revisão cruzada</div>
+      <h2>Revisão por outra dupla</h2>
+      <p>Às 21h40, cada dupla lê o README de outra dupla e responde por escrito.</p>
+      <ul>
+        <li>A decisão e o decisor estão claros?</li>
+        <li>Alguma regra de limpeza parece escolhida para favorecer o resultado?</li>
+        <li>Qual limitação mais enfraquece a recomendação?</li>
+        <li>Que pergunta a diretoria faria primeiro?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 22h00</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>CARTA_DO_PROJETO.md</code> com decisão, decisor e métrica.</li>
+        <li><code>Projeto_Final_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>saidas/regras_de_limpeza.csv</code> e o artefato principal.</li>
+        <li><code>CONTESTACAO.md</code> com o resultado de cada teste.</li>
+        <li><code>README.md</code> com a seção "Uso da IA", commit e push.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>A carta do projeto fixou a decisão antes de qualquer código.</li>
+        <li>As regras de limpeza foram justificadas pela decisão e contadas.</li>
+        <li>O método da aula de origem produziu o artefato principal.</li>
+        <li>A contestação separou objeções confirmadas de objeções descartadas.</li>
+        <li>O README tornou o projeto reexecutável e registrou o uso da IA.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 23/12, o projeto vira uma apresentação executiva de sete telas e um pitch de 5 minutos para a banca.</p>
+      <p>Antes de sair, confirme que o push chegou ao GitHub e que o README abre corretamente no repositório.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -394,7 +805,7 @@ for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -411,6 +822,36 @@ for chave, valor in projeto.items(): print(f"{chave}: {valor}")</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();
