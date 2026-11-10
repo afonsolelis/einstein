@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,26 +411,488 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 17 · 09/12</div><h1>Laboratório de Dados &amp; IA</h1><p>Estudo de Caso: Análise de dados aplicada ao RH</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Definir indicadores de pessoas sem reduzir indivíduos a números</li><li>Investigar rotatividade com recortes e contexto</li><li>Propor intervenção mensurável e eticamente defensável</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Taxa de saída precisa de período, população e denominador claros</li><li>Diferenças entre grupos podem refletir função, senioridade ou contexto</li><li>Modelos não devem automatizar decisões sensíveis sem avaliação e recurso</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">import pandas as pd
-rh = pd.read_csv("colaboradores.csv")
-rot = rh.groupby("area").agg(pessoas=("id","size"),saidas=("saiu","sum"))
-rot["taxa_saida"] = rot["saidas"]/rot["pessoas"]
-print(rot.sort_values("taxa_saida", ascending=False))</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Analise rotatividade por área e senioridade, identifique uma hipótese e proponha teste de intervenção.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar diagnóstico com definição do indicador, recortes, limitações, ação e métrica de acompanhamento.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>People analytics deve ampliar cuidado e capacidade de ação, nunca legitimar decisões opacas.</p><ul><li>Minimizar dados pessoais utilizados</li><li>Não inferir causa de associação isolada</li><li>Revisar possíveis impactos entre grupos</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, integraremos problema, dados, análise e recomendação em um projeto completo.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 17</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 17 · 09/12</div>
+      <h1>Rotatividade da enfermagem com IA</h1>
+      <p>Um estudo de caso de RH em que a pergunta da diretoria orienta a limpeza, a análise por segmento e a leitura de um modelo</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Definir rotatividade voluntária e traduzi-la em regras de limpeza.</li>
+        <li>Comparar taxas de saída por segmento da equipe.</li>
+        <li>Distinguir associação de efeito de uma variável de confusão.</li>
+        <li>Ler uma regressão logística contra a taxa base.</li>
+        <li>Recomendar ações por segmento, sem decisão sobre indivíduos.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h30 · Caso</h3><p>Pergunta da diretoria, definição de rotatividade e protocolo com a IA.</p></article>
+        <article class="deck-card"><h3>19h30 às 20h30 · Limpeza e segmentos</h3><p>Três regras com contagem, taxas por segmento e a armadilha das faltas.</p></article>
+        <article class="deck-card"><h3>20h30 às 21h30 · Modelo e ética</h3><p>Regressão logística, taxa base, coeficientes e disparidade por gênero.</p></article>
+        <article class="deck-card"><h3>21h30 às 22h00 · Entrega</h3><p>Parecer para a diretoria de enfermagem, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>Uma taxa de saída que mistura motivos</h2>
+      <p>O sistema de RH registra 587 desligamentos em 3.090 linhas, o que sugere uma rotatividade de 19,0%. Esse número soma aposentadorias, fins de contrato e registros duplicados de transferência.</p>
+      <div class="metric-row">
+        <div class="metric"><strong>3.090</strong><span>linhas no sistema</span></div>
+        <div class="metric"><strong>587</strong><span>desligamentos registrados</span></div>
+        <div class="metric"><strong>19,0%</strong><span>taxa sem limpeza</span></div>
+        <div class="metric"><strong>17,3%</strong><span>saída voluntária após limpeza</span></div>
+      </div>
+      <p>A diretoria só pode agir sobre a saída que a gestão consegue influenciar, e por isso a definição vem antes do cálculo.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Cada etapa deixa um arquivo conferível</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>CSV bruto</strong><span>3.090 registros, sem edição.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span>Transferência, admissão e motivo.</span></div>
+        <div class="flow-step"><strong>Segmentos</strong><span>Taxas por turno, unidade e faixa.</span></div>
+        <div class="flow-step"><strong>Confusão</strong><span>Faltas comparadas dentro do turno.</span></div>
+        <div class="flow-step"><strong>Modelo</strong><span>Logística sem idade e gênero.</span></div>
+        <div class="flow-step"><strong>Parecer</strong><span>Ações por segmento.</span></div>
+      </div>
+      <p>Os números do parecer saem do notebook. Nenhum valor é digitado à mão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Pergunta de negócio</div>
+      <h2>A decisão que orienta a aula</h2>
+      <p>A diretoria de enfermagem de uma rede hospitalar fictícia, com cinco unidades, precisa escolher onde investir primeiro para reduzir a rotatividade.</p>
+      <ul>
+        <li>Pergunta: em quais segmentos da equipe a saída voluntária se concentra, e com quais fatores ela se associa?</li>
+        <li>Alavancas disponíveis: escala, horas extras, remuneração e liderança.</li>
+        <li>Unidade de análise: o profissional em 2025, resumido por segmento.</li>
+        <li>Fora do escopo: ranquear, vigiar ou desligar pessoas.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Limpeza como decisão</div>
+      <h2>O que conta como rotatividade voluntária</h2>
+      <table class="deck-table">
+        <thead><tr><th>Registro</th><th>Conduta</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Pedido de demissão</td><td>conta como saída</td><td>decisão do profissional, sensível à gestão</td></tr>
+          <tr><td>Aposentadoria</td><td>sai da análise</td><td>não responde às alavancas da diretoria</td></tr>
+          <tr><td>Fim de contrato temporário</td><td>sai da análise</td><td>a saída já estava prevista na admissão</td></tr>
+          <tr><td>Transferência entre unidades</td><td>fica o registro mais recente</td><td>a pessoa continua na rede</td></tr>
+        </tbody>
+      </table>
+      <p>Contar aposentadoria como permanência também seria erro, porque o profissional não ficou. Por isso o registro sai da base, em vez de virar zero.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">IA no laboratório</div>
+      <h2>Protocolo de trabalho com a IA</h2>
+      <ol>
+        <li>Contextualize com o arquivo, a pergunta da diretoria e o resultado esperado.</li>
+        <li>Peça um plano antes de qualquer edição.</li>
+        <li>Leia o código proposto e confira cada contagem.</li>
+        <li>Execute uma etapa por vez no notebook.</li>
+        <li>Recuse qualquer sugestão de lista nominal de pessoas em risco.</li>
+      </ol>
+      <p>A base é sintética. Em dados reais de RH, idade, gênero e desempenho são dados pessoais protegidos pela LGPD.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas de trabalho no Codespace</h2>
+      <div class="code-block">mkdir -p aula-17-seunome/entrada aula-17-seunome/saidas
+cp materiais/aula-17/dados/rh_enfermagem.csv aula-17-seunome/entrada/
+ls -lh aula-17-seunome/entrada</div>
+      <p>A pasta <code>entrada</code> guarda o CSV bruto e não é editada. O notebook fica em <code>aula-17-seunome</code>, e os arquivos gerados vão para <code>saidas</code>. Abra o Copilot em modo agente ou o agente que você já usa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 1 · Base</div>
+      <h2>A base sintética de enfermagem</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>3.090</strong><span>registros</span></div>
+        <div class="metric"><strong>16</strong><span>colunas</span></div>
+        <div class="metric"><strong>5</strong><span>unidades</span></div>
+        <div class="metric"><strong>2025</strong><span>ano de referência</span></div>
+      </div>
+      <p>Cada linha traz unidade, cargo, turno, tempo de casa, horas extras, salário em relação ao mercado, distância, avaliação da liderança, treinamentos, faltas, idade, gênero e motivo do desligamento.</p>
+      <a class="download-link" href="../materiais/aula-17/dados/rh_enfermagem.csv" download="rh_enfermagem.csv">⬇️ Baixar rh_enfermagem.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Perfil</div>
+      <h2>Perfil da base antes da limpeza</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de análise de RH neste laboratório. Crie aula-17-seunome/Aula_17_SeuNome.ipynb e carregue aula-17-seunome/entrada/rh_enfermagem.csv em um DataFrame chamado bruta, convertendo data_registro para data.
+
+Mostre: shape, dtypes, id_profissional duplicado, ausências por coluna, contagem de motivo_desligamento, quantos registros têm tempo_casa_meses igual a zero e a taxa de desligou sem limpeza. Não limpe nem remova nada. Espero 3.090 linhas e 16 colunas; se divergir, pare e me avise. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Conferência do perfil</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>90</strong><span>id_profissional duplicado</span></div>
+        <div class="metric"><strong>107</strong><span>tempo de casa zero</span></div>
+        <div class="metric"><strong>483</strong><span>pedidos de demissão</span></div>
+        <div class="metric"><strong>104</strong><span>aposentadorias e fins de contrato</span></div>
+      </div>
+      <ul>
+        <li>As 2.503 ausências de <code>motivo_desligamento</code> correspondem a quem permaneceu.</li>
+        <li>Os ids duplicados têm duas unidades e duas datas de registro.</li>
+        <li>Nenhum desses achados autoriza remoção antes da regra de negócio.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Regras de negócio</div>
+      <h2>Três regras para a limpeza</h2>
+      <table class="deck-table">
+        <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr><td>Manter o registro mais recente</td><td>a transferência não é saída da rede</td><td>90 fora; restam 3.000</td></tr>
+          <tr><td>Excluir tempo de casa zero</td><td>admissão de dezembro, sem ciclo observável</td><td>107 fora; restam 2.893</td></tr>
+          <tr><td>Excluir saídas não voluntárias</td><td>aposentadoria e fim de contrato</td><td>104 fora; restam 2.789</td></tr>
+        </tbody>
+      </table>
+      <p>O alvo <code>saida_voluntaria</code> vale 1 para pedido de demissão e 0 para quem permaneceu.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Regras</div>
+      <h2>Aplicação das regras com contagem</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No mesmo notebook, crie base a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
+1. Transferências: ordenar por id_profissional e data_registro e manter o registro mais recente de cada id.
+2. Excluir registros com tempo_casa_meses igual a zero.
+3. Excluir motivo_desligamento igual a "Aposentadoria" ou "Fim de contrato temporário".
+Crie saida_voluntaria = 1 para "Pedido de demissão" e 0 para os demais.
+
+Espero 3.000, 2.893 e 2.789 linhas e 483 saídas voluntárias. Salve regra, justificativa, linhas_antes, linhas_depois em aula-17-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir, investigue; não ajuste a regra para acertar a contagem.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Conferência da base limpa</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>2.789</strong><span>profissionais analisados</span></div>
+        <div class="metric"><strong>483</strong><span>saídas voluntárias</span></div>
+        <div class="metric"><strong>17,3%</strong><span>taxa de saída voluntária</span></div>
+      </div>
+      <ul>
+        <li>A taxa caiu de 19,0% para 17,3% porque a definição ficou mais precisa.</li>
+        <li>Os 483 pedidos de demissão foram preservados pelas três regras.</li>
+        <li>Os 17,3% passam a ser a taxa base de comparação de todos os segmentos.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Segmentos</div>
+      <h2>Taxas de saída por segmento</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Calcule a taxa de saida_voluntaria, com o número de profissionais, por turno, por unidade e por três faixas: horas_extras_mes (até 10, 10 a 20, acima de 20), salario_vs_mercado (abaixo de 0,90, 0,90 a 1,00, acima de 1,00) e faltas (0 a 1, 2 a 3, 4 ou mais).
+
+Use pd.cut com limites [-1, 10, 20, 100], [0, 0.9, 1.0, 2] e [-1, 1, 3, 100]. Faça um gráfico de barras horizontais por variável, com uma linha vertical na taxa geral de 17,3%. Salve as tabelas em aula-17-seunome/saidas/taxas_por_segmento.csv.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 3</div>
+      <h2>Onde a saída se concentra</h2>
+      <table class="deck-table">
+        <thead><tr><th>Segmento</th><th>Profissionais</th><th>Taxa de saída</th></tr></thead>
+        <tbody>
+          <tr><td>Horas extras acima de 20 h</td><td>362</td><td>37,8%</td></tr>
+          <tr><td>Unidade Leste</td><td>491</td><td>31,4%</td></tr>
+          <tr><td>Salário abaixo de 90% do mercado</td><td>423</td><td>29,8%</td></tr>
+          <tr><td>Turno noturno</td><td>1.073</td><td>26,6%</td></tr>
+          <tr><td>4 faltas ou mais</td><td>934</td><td>22,4%</td></tr>
+        </tbody>
+      </table>
+      <p>Todos os cinco segmentos superam a taxa geral de 17,3%, mas nem todos indicam uma alavanca de gestão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 1</div>
+      <h2>Associação e variável de confusão</h2>
+      <p>Uma variável de confusão influencia ao mesmo tempo o fator observado e o resultado, e produz uma associação sem relação de causa entre os dois.</p>
+      <ul>
+        <li>Quem trabalha à noite falta mais: 4,39 faltas em média, contra 2,04 no diurno.</li>
+        <li>Quem trabalha à noite também sai mais: 26,6%, contra 11,8% no diurno.</li>
+        <li>Faltas e saída aparecem juntas porque ambas acompanham o turno.</li>
+        <li>O teste consiste em comparar faltas dentro de cada turno.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Confusão</div>
+      <h2>Faltas comparadas dentro do turno</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Monte uma tabela cruzada com a taxa de saida_voluntaria por turno nas linhas e faixa de faltas nas colunas, em percentual com uma casa decimal. Mostre também a média de faltas e de horas_extras_mes por turno.
+
+Explique em até cinco linhas se as faltas continuam associadas à saída quando o turno é mantido fixo, e o que isso significa para uma política que puna faltas como forma de reduzir a rotatividade. Não afirme causalidade.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 4</div>
+      <h2>Faltas dentro de cada turno</h2>
+      <table class="deck-table">
+        <thead><tr><th>Turno</th><th>0 a 1 falta</th><th>2 a 3 faltas</th><th>4 ou mais</th></tr></thead>
+        <tbody>
+          <tr><td>Administrativo</td><td>9,0%</td><td>11,2%</td><td>11,1%</td></tr>
+          <tr><td>Diurno</td><td>11,9%</td><td>10,9%</td><td>14,1%</td></tr>
+          <tr><td>Noturno</td><td>27,4%</td><td>27,8%</td><td>25,9%</td></tr>
+        </tbody>
+      </table>
+      <p>Dentro do noturno, a taxa fica entre 25,9% e 27,8% em qualquer faixa de faltas. A diferença geral, de 13,1% para 22,4%, vem do turno.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 2</div>
+      <h2>Regressão logística e taxa base</h2>
+      <ul>
+        <li>A regressão logística estima a probabilidade de saída a partir de vários fatores ao mesmo tempo.</li>
+        <li>Cada coeficiente mede a associação de um fator com os demais mantidos fixos.</li>
+        <li>Com atributos padronizados, os coeficientes ficam comparáveis entre si.</li>
+        <li>A taxa base prevê que ninguém sai e acerta 82,7% no teste, porque a maioria permanece.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Modelo</div>
+      <h2>Regressão logística sem idade e gênero</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Treine um Pipeline do scikit-learn com StandardScaler nas colunas horas_extras_mes, salario_vs_mercado, avaliacao_lider, tempo_casa_meses, distancia_km, treinamentos e faltas, OneHotEncoder(drop="first") em turno, cargo e unidade, e LogisticRegression(max_iter=1000). Não use idade nem genero.
+
+Separe 30% para teste com stratify=y e random_state=42. Mostre a acurácia da taxa base (prever que ninguém sai), a acurácia do modelo, a matriz de confusão e o recall. Liste os coeficientes ordenados e interprete cada um como associação, não como causa.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 5</div>
+      <h2>Leitura do modelo no teste</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>82,7%</strong><span>acurácia da taxa base</span></div>
+        <div class="metric"><strong>83,6%</strong><span>acurácia do modelo</span></div>
+        <div class="metric"><strong>22 de 145</strong><span>saídas identificadas</span></div>
+        <div class="metric"><strong>15,2%</strong><span>recall</span></div>
+      </div>
+      <ul>
+        <li>Maiores associações com a saída: noturno (0,69) e horas extras (0,48).</li>
+        <li>Maiores associações com a permanência: salário (−0,67) e liderança (−0,58).</li>
+        <li>Faltas ficam em −0,02 quando o turno entra no modelo.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 3</div>
+      <h2>Ética, LGPD e uso do modelo</h2>
+      <ul>
+        <li>O modelo orienta políticas por segmento e não decide sobre pessoas.</li>
+        <li>Com recall de 15,2%, uma lista individual erraria a maioria das saídas.</li>
+        <li>Idade e gênero ficam fora porque não são alavancas legítimas de gestão.</li>
+        <li>Retirar a variável não garante igualdade, e a disparidade precisa ser medida.</li>
+        <li>A LGPD exige finalidade definida e dados mínimos para o tratamento.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Disparidade</div>
+      <h2>Verificação de disparidade por gênero</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No conjunto de teste, recupere a coluna genero pelo índice e compare, para cada gênero, o número de profissionais, a taxa real de saida_voluntaria e a probabilidade média prevista pelo modelo, em percentual.
+
+Comente se o modelo subestima ou superestima a saída de algum grupo e se o tamanho do grupo permite conclusão. Registre em aula-17-seunome/saidas/disparidade_genero.csv. Não reintroduza genero no modelo.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 6</div>
+      <h2>Disparidade por gênero no teste</h2>
+      <table class="deck-table">
+        <thead><tr><th>Gênero</th><th>Profissionais</th><th>Taxa real</th><th>Prevista</th></tr></thead>
+        <tbody>
+          <tr><td>Feminino</td><td>639</td><td>16,6%</td><td>17,1%</td></tr>
+          <tr><td>Masculino</td><td>174</td><td>18,4%</td><td>16,0%</td></tr>
+          <tr><td>Não informado</td><td>24</td><td>29,2%</td><td>21,5%</td></tr>
+        </tbody>
+      </table>
+      <p>Com 24 pessoas, 7 saídas mudam a taxa em quase 30 pontos. A diferença do grupo não informado não sustenta conclusão e precisa de acompanhamento com mais dados.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · Parecer</div>
+      <h2>Parecer para a diretoria</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie aula-17-seunome/PARECER_RH.md com: pergunta da diretoria, definição de rotatividade voluntária, regras de limpeza e contagens, os cinco segmentos de maior taxa, o resultado da comparação de faltas dentro do turno, acurácia e recall do modelo contra a taxa base, coeficientes interpretados como associação, verificação de disparidade e três ações por segmento.
+
+Use somente números produzidos no notebook. Não inclua nenhum id_profissional nem lista de pessoas. Depois proponha git add, commit e push, sem executar antes da minha aprovação.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Recomendação</div>
+      <h2>Ações por segmento</h2>
+      <table class="deck-table">
+        <thead><tr><th>Segmento</th><th>Evidência</th><th>Ação proposta</th></tr></thead>
+        <tbody>
+          <tr><td>Noturno com mais de 20 h extras</td><td>254 pessoas, 104 saídas, 40,9%</td><td>reforçar a escala e limitar as horas extras</td></tr>
+          <tr><td>Unidade Leste</td><td>liderança 2,76 contra 3,79</td><td>desenvolver a liderança local</td></tr>
+          <tr><td>Salário abaixo de 90%</td><td>423 pessoas, 29,8%</td><td>revisar a faixa salarial</td></tr>
+        </tbody>
+      </table>
+      <p>Cada ação deve ser avaliada depois de implantada, porque a análise mostra associação e não comprova o efeito.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio em dupla</div>
+      <h2>Por onde a diretoria deve começar?</h2>
+      <p>Responda à diretoria de enfermagem com base no notebook.</p>
+      <ul>
+        <li>Qual das três ações atinge mais saídas, e qual custa menos?</li>
+        <li>Por que a Unidade Leste deixa de aparecer como fator de saída quando liderança e horas extras entram no modelo?</li>
+        <li>Que argumento usar contra uma política de punição por faltas?</li>
+        <li>Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 21h40</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>Aula_17_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>saidas/regras_de_limpeza.csv</code> com a contagem de cada regra.</li>
+        <li><code>saidas/taxas_por_segmento.csv</code> e <code>saidas/disparidade_genero.csv</code>.</li>
+        <li><code>PARECER_RH.md</code> sem nenhum dado individual.</li>
+        <li>Commit e push da pasta <code>aula-17-seunome</code>.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>A definição de rotatividade voluntária orientou as três regras de limpeza.</li>
+        <li>As taxas por segmento mostraram onde a saída se concentra.</li>
+        <li>A comparação dentro do turno revelou que as faltas acompanham o turno.</li>
+        <li>A acurácia de 83,6% quase igualou a taxa base, e o modelo serve à leitura de fatores.</li>
+        <li>O parecer recomendou ações por segmento, sem decisão sobre pessoas.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 16/12, o Projeto Integrador reúne limpeza, análise e recomendação em um problema de negócio escolhido pela dupla.</p>
+      <p>Antes de sair, execute o notebook inteiro, revise o parecer e faça commit e push.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -370,6 +900,7 @@ print(rot.sort_values("taxa_saida", ascending=False))</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-17/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-17/dados/rh_enfermagem.csv" download="rh_enfermagem.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -397,7 +928,7 @@ print(rot.sort_values("taxa_saida", ascending=False))</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -414,6 +945,36 @@ print(rot.sort_values("taxa_saida", ascending=False))</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

@@ -7,48 +7,62 @@
   <title>Material · 17</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,37 +118,445 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-17.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dados/rh_enfermagem.csv" download="rh_enfermagem.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-rh.md" download="prompts-rh.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 17</div>
-      <h1>Estudo de Caso: Análise de dados aplicada ao RH</h1>
+      <div class="badge">LABORATÓRIO 17 · 09/12</div>
+      <h1>Estudo de caso de RH: rotatividade da enfermagem com IA</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Definir indicadores de pessoas sem reduzir indivíduos a números</li><li>Investigar rotatividade com recortes e contexto</li><li>Propor intervenção mensurável e eticamente defensável</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>People analytics conecta dados de jornada, clima e desempenho a perguntas organizacionais, respeitando finalidade, privacidade e equidade.</p><ul><li>Taxa de saída precisa de período, população e denominador claros</li><li>Diferenças entre grupos podem refletir função, senioridade ou contexto</li><li>Modelos não devem automatizar decisões sensíveis sem avaliação e recurso</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import pandas as pd
-rh = pd.read_csv("colaboradores.csv")
-rot = rh.groupby("area").agg(pessoas=("id","size"),saidas=("saiu","sum"))
-rot["taxa_saida"] = rot["saidas"]/rot["pessoas"]
-print(rot.sort_values("taxa_saida", ascending=False))</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">coortes = pd.crosstab([rh["area"],rh["senioridade"]], rh["saiu"], normalize="index")
-print(coortes.round(3))</div><p>Analise rotatividade por área e senioridade, identifique uma hipótese e proponha teste de intervenção.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar diagnóstico com definição do indicador, recortes, limitações, ação e métrica de acompanhamento.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Minimizar dados pessoais utilizados</li><li>Não inferir causa de associação isolada</li><li>Revisar possíveis impactos entre grupos</li><li>Oferecer transparência e contestação</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>People analytics deve ampliar cuidado e capacidade de ação, nunca legitimar decisões opacas.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, integraremos problema, dados, análise e recomendação em um projeto completo.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">A diretoria de enfermagem de uma rede hospitalar fictícia, com cinco unidades, perde profissionais em ritmo que compromete as escalas e precisa decidir onde investir primeiro: escala, horas extras, remuneração ou liderança. A base disponível tem 3.090 registros de 2025 e, lida sem critério, mistura pedidos de demissão com aposentadorias, fins de contrato e transferências internas. Neste laboratório, a definição de rotatividade voluntária orienta a limpeza, as taxas por segmento mostram onde a saída se concentra, uma variável de confusão é desmontada e uma regressão logística é lida contra a taxa base. A IA escreve a maior parte do código no GitHub Codespaces. A turma decide as regras, confere as contagens, verifica a disparidade do modelo e responde pela recomendação, que trata de segmentos e nunca de pessoas.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Definir rotatividade voluntária e traduzi-la em regras de limpeza.</li>
+          <li>Comparar taxas de saída por segmento da equipe.</li>
+          <li>Distinguir associação de efeito de uma variável de confusão.</li>
+          <li>Ler uma regressão logística contra a taxa base.</li>
+          <li>Recomendar ações por segmento, sem decisão sobre indivíduos.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O problema concreto</h2>
+        <p>O sistema de RH registra 587 desligamentos em 3.090 linhas, o que sugere uma rotatividade de 19,0%. Esse número reúne situações que a diretoria não controla. Uma aposentadoria encerra um ciclo previsto, um contrato temporário termina na data combinada na admissão, e a transferência de uma técnica da Unidade Norte para a Unidade Sul aparece no sistema como dois registros, embora a pessoa continue na rede.</p>
+        <p>A diretoria só consegue agir sobre a saída que responde à gestão, isto é, o pedido de demissão. Por isso a primeira decisão da aula é conceitual: definir rotatividade voluntária. Depois da limpeza, a taxa passa a 17,3%, e é sobre ela que se comparam segmentos e se avaliam fatores.</p>
+        <p>As aulas 12 e 13 trataram a limpeza como decisão de negócio em bases hospitalares e de vendas. Aqui o mesmo princípio se aplica a dados de pessoas, o que acrescenta uma exigência: a análise precisa respeitar a finalidade declarada e a proteção de dados pessoais.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado do início ao fim, a tabela de regras com contagens, as taxas por segmento, a verificação de disparidade e o <code>PARECER_RH.md</code> endereçado à diretoria de enfermagem.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. A pergunta da diretoria define a limpeza</h2>
+        <p>A pergunta desta aula é: em quais segmentos da equipe a saída voluntária se concentra, e com quais fatores ela se associa? As alavancas disponíveis são a escala, as horas extras, a remuneração e a liderança. A unidade de análise é o profissional em 2025, e os resultados são resumidos por segmento. Ranquear, vigiar ou desligar pessoas está fora do escopo, e essa exclusão também é uma regra da análise.</p>
+        <table>
+          <thead><tr><th>Registro</th><th>Conduta</th><th>Motivo</th></tr></thead>
+          <tbody>
+            <tr><td>Pedido de demissão</td><td>conta como saída voluntária</td><td>decisão do profissional, sensível às alavancas de gestão</td></tr>
+            <tr><td>Aposentadoria</td><td>sai da análise</td><td>não responde às alavancas da diretoria</td></tr>
+            <tr><td>Fim de contrato temporário</td><td>sai da análise</td><td>a saída já estava prevista na admissão</td></tr>
+            <tr><td>Transferência entre unidades</td><td>fica o registro mais recente</td><td>a pessoa continua na rede</td></tr>
+            <tr><td>Admissão em dezembro</td><td>sai da análise</td><td>não houve tempo para observar permanência ou saída</td></tr>
+          </tbody>
+        </table>
+        <p>Aposentadorias e fins de contrato são excluídos, e não recodificados como permanência. Marcá-los com zero afirmaria que esses profissionais ficaram, o que é falso, e reduziria artificialmente a taxa dos segmentos mais antigos e dos contratos temporários.</p>
+        <table>
+          <thead><tr><th>Regra</th><th>Justificativa de negócio</th><th>Efeito conferido</th></tr></thead>
+          <tbody>
+            <tr><td>Manter o registro mais recente de cada <code>id_profissional</code></td><td>a transferência não é saída da rede</td><td>90 registros fora; restam 3.000</td></tr>
+            <tr><td>Excluir <code>tempo_casa_meses</code> igual a zero</td><td>admissão de dezembro, sem ciclo observável</td><td>107 fora; restam 2.893</td></tr>
+            <tr><td>Excluir aposentadoria e fim de contrato temporário</td><td>saídas não voluntárias</td><td>104 fora (40 e 64); restam 2.789</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. A base sintética de enfermagem</h2>
+        <p>O arquivo <code>rh_enfermagem.csv</code> é sintético e foi gerado pelo script <code>materiais/aula-17/dados/gerar_rh.py</code>, com semente fixa. A rede, as unidades e as pessoas são fictícias. Usou-se base sintética porque dados reais de RH são dados pessoais e, em parte, sensíveis, e não poderiam circular em sala nem ser enviados a um serviço de IA. O README da pasta de dados descreve as relações que o gerador planta, o que permite conferir se a análise as recupera.</p>
+        <div class="download-panel"><a href="dados/rh_enfermagem.csv" download="rh_enfermagem.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-rh.md" download="prompts-rh.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table>
+          <thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead>
+          <tbody>
+            <tr><td><code>id_profissional</code></td><td>identificador sintético do profissional</td><td>texto</td></tr>
+            <tr><td><code>data_registro</code></td><td>data do registro no sistema</td><td>data</td></tr>
+            <tr><td><code>unidade</code>, <code>cargo</code>, <code>turno</code></td><td>lotação, função e turno de trabalho</td><td>texto</td></tr>
+            <tr><td><code>tempo_casa_meses</code></td><td>meses desde a admissão</td><td>inteiro</td></tr>
+            <tr><td><code>horas_extras_mes</code></td><td>média mensal de horas extras</td><td>decimal</td></tr>
+            <tr><td><code>salario_vs_mercado</code></td><td>salário dividido pela mediana de mercado do cargo</td><td>decimal</td></tr>
+            <tr><td><code>distancia_km</code></td><td>distância entre a residência e a unidade</td><td>decimal</td></tr>
+            <tr><td><code>avaliacao_lider</code></td><td>nota média da equipe para a liderança imediata, de 1 a 5</td><td>decimal</td></tr>
+            <tr><td><code>treinamentos</code>, <code>faltas</code></td><td>treinamentos concluídos e faltas no ano</td><td>inteiro</td></tr>
+            <tr><td><code>idade</code>, <code>genero</code></td><td>dados pessoais, usados apenas na verificação de disparidade</td><td>inteiro e texto</td></tr>
+            <tr><td><code>desligou</code>, <code>motivo_desligamento</code></td><td>indicador de desligamento e motivo registrado</td><td>inteiro e texto anulável</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Inventário da cópia usada na aula</strong>3.090 linhas, 16 colunas, 3.000 profissionais distintos, registros de 01/01/2025 a 31/12/2025. <code>SHA-256 dfaebee6ba7b5cf2093bbf31b1b728f5a4220367c8f03ca6dbfd2a5a5f9cc7b4</code></div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Protocolo de trabalho com a IA e proteção de dados</h2>
+        <p>O agente de código produz em poucos minutos um notebook completo, inclusive um notebook que conta aposentadoria como rotatividade ou que devolve uma lista de pessoas com maior risco de saída. O controle se faz por uma sequência de ações observáveis, repetida a cada etapa.</p>
+        <ol>
+          <li>Contextualize: informe o arquivo, a pergunta da diretoria e o resultado esperado.</li>
+          <li>Peça um plano antes da edição, para verificar se o agente entendeu a etapa.</li>
+          <li>Leia o código proposto e o diff, procurando filtros sem regra e números fixos.</li>
+          <li>Execute uma etapa por vez e confira a contagem esperada.</li>
+          <li>Recuse qualquer saída que identifique pessoas, como listas ordenadas por probabilidade.</li>
+        </ol>
+        <p>O ambiente é o GitHub Codespaces da disciplina, com Jupyter, Pandas, scikit-learn e Matplotlib já instalados. Use o Copilot em modo agente ou o agente com que você já trabalha.</p>
+        <div class="alert-box"><h4>Dados de RH reais não entram no agente</h4><p>Esta aula usa apenas a base sintética. Em uma empresa, idade, gênero, salário, faltas e avaliações são dados pessoais tratados sob a LGPD, que exige finalidade definida, necessidade e acesso mínimo. Enviar esses dados a um serviço de IA externo depende de base legal e de contrato com o fornecedor, e um modelo de rotatividade não deve servir para decisões individuais de desligamento ou promoção.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ambiente</span>
+        <h2>6. Pastas de trabalho no Codespace</h2>
+        <p>Abra o Codespace do repositório da disciplina e, no terminal, crie a estrutura da entrega. A pasta <code>entrada</code> recebe a cópia do CSV e não é editada. Os arquivos gerados vão para <code>saidas</code>, o que permite apagar a saída e reconstruí-la a partir da entrada.</p>
+        <div class="code-block">mkdir -p aula-17-seunome/entrada aula-17-seunome/saidas
+cp materiais/aula-17/dados/rh_enfermagem.csv aula-17-seunome/entrada/
+ls -lh aula-17-seunome/entrada</div>
+        <p>O arquivo tem cerca de 311 KB. Se o tamanho for muito diferente, a cópia falhou e deve ser refeita.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · perfil</span>
+        <h2>7. Fase A: perfil da base sem limpeza</h2>
+        <p>A primeira leitura não remove nada. Ela mostra o que a base contém, para que as regras da seção 3 sejam confrontadas com evidência.</p>
+        <div class="prompt-block">Atue como meu assistente de análise de RH neste laboratório. Crie
+aula-17-seunome/Aula_17_SeuNome.ipynb e carregue
+aula-17-seunome/entrada/rh_enfermagem.csv em um DataFrame chamado bruta,
+convertendo data_registro para data.
+
+Mostre: shape, dtypes, id_profissional duplicado, ausências por coluna,
+contagem de motivo_desligamento, quantos registros têm tempo_casa_meses igual a
+zero e a taxa de desligou sem limpeza. Não limpe nem remova nada. Espero 3.090
+linhas e 16 colunas; se divergir, pare e me avise. Mostre o plano antes de
+editar.</div>
+        <div class="code-block">from pathlib import Path
+import pandas as pd
+
+entrada = Path("entrada/rh_enfermagem.csv")
+bruta = pd.read_csv(entrada, parse_dates=["data_registro"])
+
+print("shape:", bruta.shape)
+print("id duplicado:", bruta["id_profissional"].duplicated().sum())
+display(bruta.isna().sum().rename("ausentes").to_frame())
+display(bruta["motivo_desligamento"].value_counts())
+print("tempo de casa zero:", (bruta["tempo_casa_meses"] == 0).sum())
+print("taxa sem limpeza:", round(100 * bruta["desligou"].mean(), 1))</div>
+        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(3090, 16)</code>, com 90 ids duplicados, 107 registros com tempo de casa zero, 483 pedidos de demissão, 64 fins de contrato temporário, 40 aposentadorias e taxa sem limpeza de 19,0%. As 2.503 ausências de <code>motivo_desligamento</code> correspondem a quem permaneceu e não são defeito da base.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · regras</span>
+        <h2>8. Fase B: aplicação das regras com contagem</h2>
+        <p>As regras são aplicadas em ordem, sobre uma cópia, e cada uma registra as linhas antes e depois. A ordem importa: a deduplicação vem primeiro porque o registro de origem de uma transferência não carrega o desligamento.</p>
+        <div class="prompt-block">No mesmo notebook, crie base a partir de bruta, sem alterar bruta nem o CSV.
+Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
+1. Transferências: ordenar por id_profissional e data_registro e manter o
+   registro mais recente de cada id.
+2. Excluir registros com tempo_casa_meses igual a zero.
+3. Excluir motivo_desligamento igual a "Aposentadoria" ou "Fim de contrato
+   temporário".
+Crie saida_voluntaria = 1 para "Pedido de demissão" e 0 para os demais.
+
+Espero 3.000, 2.893 e 2.789 linhas e 483 saídas voluntárias. Salve regra,
+justificativa, linhas_antes, linhas_depois em
+aula-17-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir,
+investigue; não ajuste a regra para acertar a contagem.</div>
+        <div class="code-block">MOTIVOS_FORA = ["Aposentadoria", "Fim de contrato temporário"]
+
+base = (bruta.sort_values(["id_profissional", "data_registro"])
+             .drop_duplicates("id_profissional", keep="last"))
+base = base[base["tempo_casa_meses"] &gt; 0]
+base = base[~base["motivo_desligamento"].isin(MOTIVOS_FORA)].copy()
+base["saida_voluntaria"] = (base["motivo_desligamento"] == "Pedido de demissão").astype(int)
+
+print(len(base), base["saida_voluntaria"].sum(), round(100 * base["saida_voluntaria"].mean(), 1))
+# 2789 483 17.3</div>
+        <div class="evidence"><strong>Checkpoint</strong>2.789 profissionais, 483 saídas voluntárias e taxa de 17,3%. A queda de 19,0% para 17,3% decorre da definição mais precisa, e os 483 pedidos de demissão atravessam as três regras sem perda.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · segmentos</span>
+        <h2>9. Fase C: taxas de saída por segmento</h2>
+        <p>A taxa geral de 17,3% serve de referência. Um segmento interessa à diretoria quando combina taxa acima dela com tamanho suficiente para que a diferença não seja acaso.</p>
+        <div class="prompt-block">Calcule a taxa de saida_voluntaria, com o número de profissionais, por turno,
+por unidade e por três faixas: horas_extras_mes (até 10, 10 a 20, acima de
+20), salario_vs_mercado (abaixo de 0,90, 0,90 a 1,00, acima de 1,00) e faltas
+(0 a 1, 2 a 3, 4 ou mais).
+
+Use pd.cut com limites [-1, 10, 20, 100], [0, 0.9, 1.0, 2] e [-1, 1, 3, 100].
+Faça um gráfico de barras horizontais por variável, com uma linha vertical na
+taxa geral de 17,3%. Salve as tabelas em
+aula-17-seunome/saidas/taxas_por_segmento.csv.</div>
+        <div class="code-block">base["faixa_horas_extras"] = pd.cut(base["horas_extras_mes"], [-1, 10, 20, 100],
+                                   labels=["até 10 h", "10 a 20 h", "acima de 20 h"])
+
+def taxa_por(coluna):
+    tabela = base.groupby(coluna, observed=True)["saida_voluntaria"].agg(["size", "mean"])
+    return tabela.assign(taxa=(100 * tabela["mean"]).round(1)).drop(columns="mean")
+
+display(taxa_por("turno"))
+display(taxa_por("faixa_horas_extras"))</div>
+        <table>
+          <thead><tr><th>Variável</th><th>Segmento</th><th>Profissionais</th><th>Taxa de saída</th></tr></thead>
+          <tbody>
+            <tr><td>Turno</td><td>Administrativo / Diurno / Noturno</td><td>301 / 1.415 / 1.073</td><td>10,3% / 11,8% / 26,6%</td></tr>
+            <tr><td>Unidade</td><td>Leste</td><td>491</td><td>31,4%</td></tr>
+            <tr><td>Unidade</td><td>Centro, Norte, Oeste e Sul</td><td>de 465 a 689</td><td>de 13,9% a 15,3%</td></tr>
+            <tr><td>Horas extras</td><td>até 10 h / 10 a 20 h / acima de 20 h</td><td>1.196 / 1.231 / 362</td><td>9,9% / 18,5% / 37,8%</td></tr>
+            <tr><td>Salário</td><td>abaixo de 90% / 90% a 100% / acima de 100%</td><td>423 / 1.071 / 1.295</td><td>29,8% / 20,8% / 10,3%</td></tr>
+            <tr><td>Faltas</td><td>0 a 1 / 2 a 3 / 4 ou mais</td><td>778 / 1.077 / 934</td><td>13,1% / 16,0% / 22,4%</td></tr>
+          </tbody>
+        </table>
+        <p>Todas as variáveis mostram gradiente. A tabela sozinha, porém, não informa quais gradientes refletem uma alavanca de gestão e quais apenas acompanham outra variável. A próxima fase testa esse ponto com as faltas.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>10. Associação e variável de confusão</h2>
+        <p>Uma variável de confusão influencia ao mesmo tempo o fator observado e o resultado, e produz entre os dois uma associação que não decorre de relação causal. Nesta base, o turno noturno cumpre esse papel em relação às faltas. Quem trabalha à noite falta mais, com média de 4,39 faltas no ano contra 2,04 no diurno, e também pede demissão com mais frequência, 26,6% contra 11,8%. As faltas aparecem associadas à saída porque ambas acompanham o turno.</p>
+        <p>A consequência prática é direta. Se a diretoria lesse a tabela da fase C como evidência de que faltas levam à saída, poderia propor punição por faltas, que pressionaria justamente o turno já sobrecarregado e não atacaria a causa provável. O teste consiste em manter o turno fixo e verificar se o gradiente das faltas persiste.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · confusão</span>
+        <h2>11. Fase D: faltas comparadas dentro do turno</h2>
+        <div class="prompt-block">Monte uma tabela cruzada com a taxa de saida_voluntaria por turno nas linhas e
+faixa de faltas nas colunas, em percentual com uma casa decimal. Mostre também
+a média de faltas e de horas_extras_mes por turno.
+
+Explique em até cinco linhas se as faltas continuam associadas à saída quando o
+turno é mantido fixo, e o que isso significa para uma política que puna faltas
+como forma de reduzir a rotatividade. Não afirme causalidade.</div>
+        <div class="code-block">base["faixa_faltas"] = pd.cut(base["faltas"], [-1, 1, 3, 100],
+                             labels=["0 a 1", "2 a 3", "4 ou mais"])
+cruzada = (base.groupby(["turno", "faixa_faltas"], observed=True)["saida_voluntaria"]
+               .mean().mul(100).round(1).unstack())
+display(cruzada)
+display(base.groupby("turno")[["faltas", "horas_extras_mes"]].mean().round(2))</div>
+        <table>
+          <thead><tr><th>Turno</th><th>0 a 1 falta</th><th>2 a 3 faltas</th><th>4 ou mais</th></tr></thead>
+          <tbody>
+            <tr><td>Administrativo</td><td>9,0%</td><td>11,2%</td><td>11,1%</td></tr>
+            <tr><td>Diurno</td><td>11,9%</td><td>10,9%</td><td>14,1%</td></tr>
+            <tr><td>Noturno</td><td>27,4%</td><td>27,8%</td><td>25,9%</td></tr>
+          </tbody>
+        </table>
+        <p>Dentro do noturno, a taxa fica entre 25,9% e 27,8% em qualquer faixa de faltas, e no diurno as variações são de poucos pontos e sem direção estável. O gradiente geral, de 13,1% para 22,4%, decorre da composição: a faixa de mais faltas concentra profissionais do noturno. O gerador da base confirma essa leitura, já que as faltas foram simuladas a partir do turno e das horas extras e não entram no cálculo da saída.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>12. Regressão logística, taxa base e coeficientes</h2>
+        <h3>12.1 O que o modelo estima</h3>
+        <p>A regressão logística estima a probabilidade de um evento binário, aqui o pedido de demissão, a partir de vários fatores ao mesmo tempo. Cada coeficiente mede a associação de um fator com a saída quando os demais estão fixos. Com os atributos numéricos padronizados pelo <code>StandardScaler</code>, um coeficiente corresponde ao efeito de um desvio padrão do fator, o que permite comparar fatores medidos em unidades diferentes, como horas e razão salarial.</p>
+        <h3>12.2 Por que comparar com a taxa base</h3>
+        <p>Como 82,7% dos profissionais do teste permaneceram, uma regra que prevê que ninguém sai acerta 82,7% sem olhar nenhum dado. Uma acurácia de 83% ou 84% parece alta e quase não acrescenta informação. Por isso a avaliação inclui a matriz de confusão e o recall, que mede a fração das saídas reais que o modelo identificou.</p>
+        <h3>12.3 Teste estratificado</h3>
+        <p>A separação em treino e teste usa <code>stratify=y</code> para que as duas partes mantenham a mesma proporção de saídas. Diferentemente da aula 13, a base não é uma série temporal, e a separação aleatória estratificada é adequada.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · modelo</span>
+        <h2>13. Fase E: regressão logística sem idade e gênero</h2>
+        <div class="prompt-block">Treine um Pipeline do scikit-learn com StandardScaler nas colunas
+horas_extras_mes, salario_vs_mercado, avaliacao_lider, tempo_casa_meses,
+distancia_km, treinamentos e faltas, OneHotEncoder(drop="first") em turno,
+cargo e unidade, e LogisticRegression(max_iter=1000). Não use idade nem genero.
+
+Separe 30% para teste com stratify=y e random_state=42. Mostre a acurácia da
+taxa base (prever que ninguém sai), a acurácia do modelo, a matriz de confusão
+e o recall. Liste os coeficientes ordenados e interprete cada um como
+associação, não como causa.</div>
+        <div class="code-block">from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, recall_score
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+numericas = ["horas_extras_mes", "salario_vs_mercado", "avaliacao_lider",
+             "tempo_casa_meses", "distancia_km", "treinamentos", "faltas"]
+categoricas = ["turno", "cargo", "unidade"]
+X, y = base[numericas + categoricas], base["saida_voluntaria"]
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.3, stratify=y, random_state=42)
+
+modelo = Pipeline([
+    ("prep", ColumnTransformer([("num", StandardScaler(), numericas),
+                                ("cat", OneHotEncoder(drop="first"), categoricas)])),
+    ("logit", LogisticRegression(max_iter=1000)),
+]).fit(X_tr, y_tr)
+
+prob = modelo.predict_proba(X_te)[:, 1]
+pred = (prob &gt;= 0.5).astype(int)
+print(round(100 * (1 - y_te.mean()), 1), round(100 * accuracy_score(y_te, pred), 1))
+print(confusion_matrix(y_te, pred), round(100 * recall_score(y_te, pred), 1))
+# 82.7 83.6 | [[678 14] [123 22]] | 15.2</div>
+        <div class="evidence"><strong>Checkpoint</strong>Treino com 1.952 profissionais e teste com 837, dos quais 145 saíram. Acurácia da taxa base de 82,7% e do modelo de 83,6%. Matriz de confusão com 678 verdadeiros negativos, 14 falsos positivos, 123 falsos negativos e 22 verdadeiros positivos, o que dá recall de 15,2%.</div>
+        <table>
+          <thead><tr><th>Fator (padronizado)</th><th>Coeficiente</th><th>Leitura como associação</th></tr></thead>
+          <tbody>
+            <tr><td>Turno noturno</td><td>0,69</td><td>maior chance de saída, com os demais fatores fixos</td></tr>
+            <tr><td>Horas extras</td><td>0,48</td><td>maior chance de saída a cada desvio padrão</td></tr>
+            <tr><td>Distância</td><td>0,15</td><td>associação positiva fraca</td></tr>
+            <tr><td>Faltas</td><td>−0,02</td><td>praticamente nula quando o turno está no modelo</td></tr>
+            <tr><td>Unidade Leste</td><td>−0,19</td><td>a diferença da unidade é absorvida por liderança e horas extras</td></tr>
+            <tr><td>Tempo de casa</td><td>−0,25</td><td>quem está há mais tempo sai menos</td></tr>
+            <tr><td>Avaliação da liderança</td><td>−0,58</td><td>liderança mais bem avaliada, menor chance de saída</td></tr>
+            <tr><td>Salário em relação ao mercado</td><td>−0,67</td><td>maior salário relativo, menor chance de saída</td></tr>
+          </tbody>
+        </table>
+        <p>O modelo ganha menos de um ponto de acurácia sobre a taxa base e identifica 22 das 145 saídas. Como ferramenta para apontar quem vai sair, ele seria inútil e eticamente inadequado. Como instrumento de leitura, ele mostra que a alta taxa da Unidade Leste se associa à liderança mais mal avaliada (2,76 contra 3,79 nas demais) e às horas extras mais altas (16,14 contra cerca de 11 nas demais), e que as faltas deixam de se associar à saída quando o turno entra no modelo, como a fase D antecipou.</p>
+        <p>O coeficiente negativo de <code>cargo_Técnico de enfermagem</code> (−0,21) ilustra o cuidado na leitura. A taxa bruta dos técnicos é maior que a dos enfermeiros (17,9% contra 16,2%), mas os técnicos recebem, em média, salário relativo mais baixo. Mantido o salário fixo, o cargo se associa a menor saída. O sinal de um coeficiente depende das variáveis que estão no modelo.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>14. Ética, LGPD e disparidade</h2>
+        <p>Idade e gênero ficaram fora do modelo porque não são alavancas legítimas de gestão e porque seu uso em decisões sobre pessoas pode configurar discriminação. Retirar a variável, porém, não garante tratamento igual, já que outras colunas podem carregar a mesma informação por correlação. Por isso a disparidade é medida depois do treino, comparando a taxa real de saída com a probabilidade média prevista em cada grupo.</p>
+        <p>A LGPD acrescenta três exigências ao trabalho com dados de pessoas. O tratamento precisa de finalidade específica, aqui o desenho de políticas por segmento. Os dados devem ser os mínimos necessários para essa finalidade. E decisões tomadas unicamente com base em tratamento automatizado que afetem interesses do titular dão a ele o direito de solicitar revisão. Um modelo de rotatividade usado para desligar ou deixar de promover alguém violaria a finalidade declarada e exporia a organização a esse questionamento.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · disparidade</span>
+        <h2>15. Fase F: verificação de disparidade por gênero</h2>
+        <div class="prompt-block">No conjunto de teste, recupere a coluna genero pelo índice e compare, para
+cada gênero, o número de profissionais, a taxa real de saida_voluntaria e a
+probabilidade média prevista pelo modelo, em percentual.
+
+Comente se o modelo subestima ou superestima a saída de algum grupo e se o
+tamanho do grupo permite conclusão. Registre em
+aula-17-seunome/saidas/disparidade_genero.csv. Não reintroduza genero no modelo.</div>
+        <div class="code-block">teste = base.loc[X_te.index, ["genero"]].assign(real=y_te, prevista=prob)
+disparidade = teste.groupby("genero").agg(
+    profissionais=("real", "size"),
+    taxa_real=("real", "mean"),
+    prob_media=("prevista", "mean"),
+)
+disparidade[["taxa_real", "prob_media"]] *= 100
+display(disparidade.round(1))
+disparidade.round(1).to_csv("saidas/disparidade_genero.csv")</div>
+        <table>
+          <thead><tr><th>Gênero</th><th>Profissionais no teste</th><th>Taxa real</th><th>Probabilidade média prevista</th></tr></thead>
+          <tbody>
+            <tr><td>Feminino</td><td>639</td><td>16,6%</td><td>17,1%</td></tr>
+            <tr><td>Masculino</td><td>174</td><td>18,4%</td><td>16,0%</td></tr>
+            <tr><td>Não informado</td><td>24</td><td>29,2%</td><td>21,5%</td></tr>
+          </tbody>
+        </table>
+        <p>Para o grupo feminino, que reúne a maior parte da equipe, previsão e realidade diferem em 0,5 ponto. Para o grupo masculino, o modelo subestima a saída em 2,4 pontos, diferença compatível com a variação esperada em 174 pessoas. O grupo não informado tem 24 pessoas, e 7 saídas bastam para produzir a taxa de 29,2%. Esse tamanho não sustenta conclusão, e a recomendação adequada é acompanhar o indicador quando houver mais dados, sem reintroduzir o gênero no modelo.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · parecer</span>
+        <h2>16. Fase G: parecer e ações por segmento</h2>
+        <div class="prompt-block">Crie aula-17-seunome/PARECER_RH.md com: pergunta da diretoria, definição de
+rotatividade voluntária, regras de limpeza e contagens, os cinco segmentos de
+maior taxa, o resultado da comparação de faltas dentro do turno, acurácia e
+recall do modelo contra a taxa base, coeficientes interpretados como
+associação, verificação de disparidade e três ações por segmento.
+
+Use somente números produzidos no notebook. Não inclua nenhum id_profissional
+nem lista de pessoas. Depois proponha git add, commit e push, sem executar
+antes da minha aprovação.</div>
+        <p>A combinação de turno e faixa de horas extras identifica onde a saída se concentra em números absolutos, o que orienta a prioridade.</p>
+        <table>
+          <thead><tr><th>Segmento</th><th>Evidência</th><th>Ação proposta</th></tr></thead>
+          <tbody>
+            <tr><td>Noturno com mais de 20 h extras por mês</td><td>254 profissionais, 104 saídas, taxa de 40,9%</td><td>reforçar a escala noturna e limitar as horas extras</td></tr>
+            <tr><td>Noturno com 10 a 20 h extras por mês</td><td>698 profissionais, 157 saídas, taxa de 22,5%</td><td>mesma ação, com efeito sobre o maior volume de saídas</td></tr>
+            <tr><td>Unidade Leste</td><td>taxa de 31,4%; liderança avaliada em 2,76 contra 3,79</td><td>programa de desenvolvimento da liderança local</td></tr>
+            <tr><td>Salário abaixo de 90% do mercado</td><td>423 profissionais, taxa de 29,8%</td><td>revisão da faixa salarial dos cargos afetados</td></tr>
+          </tbody>
+        </table>
+        <p>A análise mostra associação, e não comprova que cada ação reduzirá a saída. O parecer deve propor acompanhamento depois da implantação, comparando a taxa do segmento antes e depois e, quando possível, com uma unidade que ainda não recebeu a ação, desenho que retoma o raciocínio dos testes A/B da aula 14.</p>
+        <p>Leia o parecer e o diff antes de autorizar o versionamento:</p>
+        <div class="code-block">git status
+git add aula-17-seunome
+git diff --staged --stat
+git commit -m "Entrega o estudo de caso de rotatividade da aula 17"
+git push</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>17. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h30</td><td>caso, definição de rotatividade voluntária e protocolo com a IA</td><td>a dupla enuncia a pergunta e as exclusões</td></tr>
+            <tr><td>19h30 às 19h45</td><td>pastas, cópia do CSV e perfil</td><td>3.090 linhas, 90 duplicados e 107 admissões recentes</td></tr>
+            <tr><td>19h45 às 20h05</td><td>aplicação das regras</td><td>3.000, 2.893 e 2.789 linhas; 483 saídas</td></tr>
+            <tr><td>20h05 às 20h30</td><td>taxas por segmento e confusão das faltas</td><td>37,8% acima de 20 h extras; faltas estáveis no noturno</td></tr>
+            <tr><td>20h30 às 21h05</td><td>regressão logística e leitura dos coeficientes</td><td>83,6% contra 82,7%; recall de 15,2%</td></tr>
+            <tr><td>21h05 às 21h20</td><td>ética, LGPD e disparidade</td><td>tabela por gênero no teste</td></tr>
+            <tr><td>21h20 às 21h40</td><td>parecer e ações por segmento</td><td>nenhum dado individual no parecer</td></tr>
+            <tr><td>21h40 às 22h00</td><td>revisão, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+          </tbody>
+        </table>
+        <p>O script <code>materiais/aula-17/referencia/rh_referencia.py</code> reproduz todos os números deste material. Execute-o depois de concluir o notebook e compare os resultados.</p>
+        <div class="code-block">python materiais/aula-17/referencia/rh_referencia.py</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>18. Desafio e entrega</h2>
+        <p>Em dupla, responda no <code>PARECER_RH.md</code> a quatro perguntas da diretoria. Qual das ações propostas atinge mais saídas, e qual custa menos? Por que a Unidade Leste deixa de aparecer como fator de saída quando liderança e horas extras entram no modelo? Que argumento usar contra uma política de punição por faltas? Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</p>
+        <p>Quem terminar antes pode retreinar o modelo sem a coluna <code>faltas</code> e verificar se a acurácia e os demais coeficientes mudam, o que confirma ou refuta a leitura da fase D.</p>
+        <p>Entrega verificável, na pasta <code>aula-17-seunome</code>:</p>
+        <ul>
+          <li><code>Aula_17_SeuNome.ipynb</code> executado do início ao fim, sem depender da ordem manual das células.</li>
+          <li><code>saidas/regras_de_limpeza.csv</code> com linhas antes e depois de cada regra.</li>
+          <li><code>saidas/taxas_por_segmento.csv</code> e <code>saidas/disparidade_genero.csv</code>.</li>
+          <li><code>PARECER_RH.md</code> com ações por segmento e nenhum dado individual, seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>19. Checklist de qualidade</h2>
+        <ul>
+          <li>O CSV em <code>entrada</code> permanece idêntico ao arquivo copiado.</li>
+          <li>A definição de rotatividade voluntária está escrita no início do notebook.</li>
+          <li>Cada regra de limpeza tem justificativa e contagem antes e depois.</li>
+          <li>Aposentadorias e fins de contrato foram excluídos, e não marcados como permanência.</li>
+          <li>As taxas por segmento informam também o número de profissionais.</li>
+          <li>A associação entre faltas e saída foi verificada dentro de cada turno.</li>
+          <li>O modelo não usa idade nem gênero.</li>
+          <li>A acurácia do modelo está comparada com a da taxa base e acompanhada do recall.</li>
+          <li>Os coeficientes estão descritos como associação.</li>
+          <li>A disparidade por gênero foi medida e os grupos pequenos foram identificados.</li>
+          <li>Nenhum <code>id_profissional</code>, lista ordenada ou probabilidade individual aparece no parecer.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>20. Síntese</h2>
+        <p>A análise partiu da pergunta da diretoria de enfermagem. A definição de rotatividade voluntária fixou as três regras de limpeza, que levaram a taxa de 19,0% para 17,3% sem perder nenhum pedido de demissão. As taxas por segmento mostraram a concentração da saída no turno noturno, nas horas extras acima de 20 por mês, na Unidade Leste e nos salários abaixo de 90% do mercado.</p>
+        <p>A comparação dentro do turno mostrou que a associação entre faltas e saída decorre do turno, e a regressão logística confirmou essa leitura ao atribuir às faltas coeficiente próximo de zero. O modelo acertou 83,6% contra 82,7% da taxa base e identificou 15,2% das saídas, desempenho que o restringe à leitura de fatores. A IA escreveu o código das sete fases, e a turma respondeu pela definição, pelas exclusões, pela verificação de disparidade e pela recomendação por segmento.</p>
+        <p>Os resultados valem para esta base sintética, cujas relações foram planejadas no gerador. Em uma rede real, as mesmas etapas produziriam outros números, e as ações propostas precisariam de acompanhamento para que se avaliasse seu efeito.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>21. Referências e continuidade</h2>
+        <p>No laboratório de 16/12, o Projeto Integrador pede que cada dupla escolha um problema de negócio e percorra o mesmo caminho: pergunta, regras de limpeza com contagem, análise, modelo quando couber e recomendação delimitada pela evidência.</p>
+        <ul>
+          <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm">Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018)</a>, em especial os artigos 6º e 20.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">Documentação do scikit-learn sobre <code>LogisticRegression</code></a>.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">Documentação do scikit-learn sobre <code>confusion_matrix</code></a>.</li>
+          <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.crosstab.html">Documentação do Pandas sobre tabelas cruzadas</a>.</li>
+          <li>Anderson, Sweeney, Williams, Camm e Cochran, <cite>Estatística Aplicada à Administração e Economia</cite>, Cengage Learning, bibliografia da disciplina.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-17.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dados/rh_enfermagem.csv" download="rh_enfermagem.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-rh.md" download="prompts-rh.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
