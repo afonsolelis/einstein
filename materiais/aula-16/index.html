@@ -7,48 +7,62 @@
   <title>Material · 16</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,37 +118,376 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-16.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="../aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-estrategia.md" download="prompts-estrategia.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 16</div>
+      <div class="badge">LABORATÓRIO 16 · 02/12</div>
       <h1>IA aplicada à estratégia e tomada de decisão</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
-for nome,v in alternativas.items():
-    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
-print(alternativas)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">for peso_risco in [0.4,0.8,1.2]:
-    escolha = max(alternativas, key=lambda k: alternativas[k]["retorno"]-peso_risco*alternativas[k]["risco"])
-    print(peso_risco, escolha)</div><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li><li>Definir gatilhos para reavaliar a decisão</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, aplicaremos análise de dados a decisões de recursos humanos.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">A diretoria de um marketplace avalia abrir um centro de distribuição regional fora de São Paulo e precisa escolher o estado, ou decidir que ainda não é o momento. Neste laboratório, a turma enquadra a decisão, separa dado de suposição, constrói uma matriz de decisão ponderada com a base de pedidos do Olist já limpa na aula 13, testa a sensibilidade do ranking e pede à IA o argumento mais forte contra a própria recomendação. A IA estrutura, calcula e critica. A recomendação final, e a condição que a faria mudar, são redigidas pela dupla.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Enquadrar uma decisão com objetivo, alternativas, critérios e responsável.</li>
+          <li>Separar dado de suposição nas premissas sugeridas pela IA.</li>
+          <li>Construir uma matriz de decisão ponderada com critérios normalizados.</li>
+          <li>Testar a sensibilidade do ranking aos pesos e a cenários de crescimento.</li>
+          <li>Redigir um memorando com a recomendação e o que a faria mudar.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O problema concreto</h2>
+        <p>Na base limpa da aula 13, São Paulo concentra 41,7% das vendas e tem o menor frete médio do país, R$ 17,41 por pedido. Clientes de outros estados pagam mais: R$ 23,96 no Rio de Janeiro, R$ 29,85 na Bahia e R$ 36,05 em Pernambuco. Um centro de distribuição mais próximo desses clientes pode reduzir frete e prazo, mas tem custo fixo e só se justifica com volume suficiente.</p>
+        <p>Perguntas desse tipo costumam ser levadas a uma IA na forma "qual o melhor estado para abrir um CD?". A resposta chega rápida, bem escrita e com números plausíveis, e é justamente essa fluência que exige cuidado. O modelo tende a aceitar o enquadramento recebido, preenche lacunas com valores sem fonte e se ancora no primeiro número disponível. A aula usa a IA de outra forma: primeiro para estruturar a decisão, depois para escrever o código que mede a evidência e, por fim, para atacar a recomendação da dupla.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado, a tabela de premissas classificadas, a matriz de decisão, a análise de sensibilidade, os cenários de custo e o <code>MEMORANDO_DECISAO.md</code> endereçado à diretoria.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. Enquadramento da decisão</h2>
+        <p>Uma decisão estratégica bem enquadrada tem cinco elementos: o objetivo que ela deve atender, quem decide e responde por ela, as alternativas, os critérios que permitem compará-las e as informações que ainda faltam. A ordem importa. Quando os dados vêm antes do enquadramento, a análise tende a medir o que está disponível, e não o que a decisão exige.</p>
+        <table>
+          <thead><tr><th>Elemento</th><th>Nesta aula</th></tr></thead>
+          <tbody>
+            <tr><td>Objetivo</td><td>reduzir frete e prazo para a maior parcela possível de clientes fora de SP</td></tr>
+            <tr><td>Responsável</td><td>Diretoria de Operações, que assina o memorando</td></tr>
+            <tr><td>Alternativas</td><td>dez estados candidatos ou não abrir agora</td></tr>
+            <tr><td>Critérios</td><td>volume de vendas, frete médio por pedido e crescimento</td></tr>
+            <tr><td>Informações que faltam</td><td>custo anual do centro e redução real de frete</td></tr>
+          </tbody>
+        </table>
+        <p>A alternativa "não abrir agora" entra desde o início. Sem ela, qualquer método de comparação sempre aponta um vencedor, mesmo quando nenhuma opção compensa o investimento.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. Três riscos ao usar IA em estratégia</h2>
+        <p>Os modelos de linguagem são úteis para estruturar problemas e escrever código de análise, mas apresentam três comportamentos que afetam diretamente decisões estratégicas.</p>
+        <h3>4.1 Concordância com o enquadramento</h3>
+        <p>Se o prompt pergunta "por que o Rio de Janeiro é a melhor opção?", o modelo tende a produzir razões a favor do Rio de Janeiro. A pergunta embute a resposta. O controle consiste em pedir alternativas, inclusive a de não agir, e solicitar explicitamente o argumento contrário.</p>
+        <h3>4.2 Números plausíveis sem fonte</h3>
+        <p>Pedida a estimar o custo de um centro de distribuição, a IA devolve um valor com aparência de pesquisa de mercado, sem origem verificável. Por isso, toda premissa numérica da aula é marcada como dado, quando vem da base, ou como suposição, quando depende de confirmação de uma área da empresa.</p>
+        <h3>4.3 Ancoragem</h3>
+        <p>O primeiro número que aparece na conversa passa a orientar as estimativas seguintes. Na base, as vendas cresceram 142,4% entre os trechos comparáveis de 2017 e 2018, porque a plataforma estava em expansão. Projetar essa taxa para o próximo ano é ancorar o futuro em uma fase que não se repete. A aula trabalha com três cenários declarados como suposição, em vez de um valor único.</p>
+        <div class="alert-box"><h4>A IA não assina o memorando</h4><p>O modelo pode redigir, calcular e criticar. Quem responde pela recomendação é a dupla, e o memorando deve deixar claro quais números vêm da base, quais são suposições e quem precisa confirmá-las. Dados internos de empresas reais, contratos e valores sigilosos não devem ser enviados ao serviço de IA.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ambiente</span>
+        <h2>5. Pastas de trabalho no Codespace</h2>
+        <p>A base é o arquivo <code>olist_pedidos.csv</code> da aula 13, derivado do <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a>, com 99.441 pedidos e uma linha por pedido. No Codespace, crie a estrutura da entrega e copie a base para a pasta de entrada.</p>
+        <div class="download-panel"><a href="../aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-estrategia.md" download="prompts-estrategia.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <div class="code-block">mkdir -p aula-16-seunome/entrada aula-16-seunome/saidas
+cp materiais/aula-13/dados/olist_pedidos.csv aula-16-seunome/entrada/
+ls -lh aula-16-seunome/entrada</div>
+        <p>Use o Copilot em modo agente ou o agente com que você já trabalha. O notebook fica em <code>aula-16-seunome</code>, e os arquivos gerados vão para <code>saidas</code>.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · enquadramento</span>
+        <h2>6. Fase A: estrutura da decisão antes dos dados</h2>
+        <p>O primeiro prompt não pede código nem recomendação. Ele pede à IA que estruture o problema e diga quais critérios a base disponível consegue medir.</p>
+        <div class="prompt-block">Atue como analista de estratégia. A diretoria de um marketplace avalia abrir
+um centro de distribuição regional fora de São Paulo, ou não abrir agora.
+Ainda não recomende nenhuma alternativa e não escreva código.
+
+Estruture a decisão em: objetivo, quem decide, alternativas (inclua "não
+abrir"), critérios mensuráveis, informações que faltam e riscos de cada
+critério. Para cada critério, diga se ele pode ser medido com uma base de
+pedidos que tem estado do cliente, data, status, valor dos produtos e frete.</div>
+        <p>Compare a resposta com a tabela da seção 3. Critérios como prazo de entrega, custo de aluguel ou disponibilidade de mão de obra são legítimos, mas não podem ser medidos com esta base. Eles entram no memorando como informação que falta, e não como número estimado pela IA.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · indicadores</span>
+        <h2>7. Fase B: indicadores por estado</h2>
+        <p>Os indicadores partem das mesmas regras de limpeza da aula 13, que definiram a janela de análise e o que conta como venda. Reaplicá-las garante que a decisão estratégica use a mesma população validada antes.</p>
+        <div class="prompt-block">Crie aula-16-seunome/Aula_16_SeuNome.ipynb. Carregue
+aula-16-seunome/entrada/olist_pedidos.csv e aplique as regras da aula 13:
+compras de 2017-01-09 até antes de 2018-08-20 e exclusão dos status canceled e
+unavailable. Espero 96.690 vendas.
+
+Agregue por customer_state: pedidos, receita (soma de valor_produtos),
+frete_medio, peso_frete (frete total sobre receita) e participacao. Calcule o
+crescimento comparando 09/01 a 19/08 de 2018 com o mesmo trecho de 2017. Salve
+em aula-16-seunome/saidas/indicadores_estado.csv, ordenado por pedidos.</div>
+        <div class="code-block">import pandas as pd
+
+bruta = pd.read_csv("entrada/olist_pedidos.csv", parse_dates=["order_purchase_timestamp"])
+data = bruta["order_purchase_timestamp"]
+vendas = bruta[(data &gt;= "2017-01-09") &amp; (data &lt; "2018-08-20")
+               &amp; ~bruta["order_status"].isin(["canceled", "unavailable"])].copy()
+assert len(vendas) == 96_690
+
+data = vendas["order_purchase_timestamp"]
+estado = vendas.groupby("customer_state").agg(
+    pedidos=("order_id", "count"),
+    receita=("valor_produtos", "sum"),
+    frete_total=("valor_frete", "sum"),
+    frete_medio=("valor_frete", "mean"),
+)
+estado["peso_frete"] = estado["frete_total"] / estado["receita"]
+estado["participacao"] = estado["pedidos"] / estado["pedidos"].sum()
+
+p2017 = vendas[(data &gt;= "2017-01-09") &amp; (data &lt; "2017-08-20")].groupby("customer_state").size()
+p2018 = vendas[(data &gt;= "2018-01-09") &amp; (data &lt; "2018-08-20")].groupby("customer_state").size()
+estado["crescimento"] = p2018 / p2017 - 1
+estado.sort_values("pedidos", ascending=False).to_csv("saidas/indicadores_estado.csv")</div>
+        <p>O crescimento compara o mesmo trecho do calendário nos dois anos, de 09/01 a 19/08. Comparar o ano de 2018 inteiro com o de 2017 inteiro seria impossível, porque a janela termina em agosto de 2018, e misturaria efeitos de sazonalidade como a Black Friday.</p>
+        <table>
+          <thead><tr><th>Estado</th><th>Pedidos</th><th>Participação</th><th>Frete médio</th><th>Peso do frete</th><th>Crescimento</th></tr></thead>
+          <tbody>
+            <tr><td>SP</td><td>40.279</td><td>41,7%</td><td>R$ 17,41</td><td>13,8%</td><td>172,2%</td></tr>
+            <tr><td>RJ</td><td>12.531</td><td>13,0%</td><td>R$ 23,96</td><td>16,8%</td><td>115,7%</td></tr>
+            <tr><td>MG</td><td>11.324</td><td>11,7%</td><td>R$ 23,48</td><td>17,1%</td><td>133,7%</td></tr>
+            <tr><td>RS</td><td>5.364</td><td>5,5%</td><td>R$ 24,89</td><td>18,2%</td><td>103,5%</td></tr>
+            <tr><td>PR</td><td>4.881</td><td>5,0%</td><td>R$ 23,64</td><td>17,2%</td><td>135,5%</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Checkpoint</strong>96.690 vendas em 27 estados. Frete médio geral de R$ 22,88 por pedido e crescimento geral de 142,4% no trecho comparável.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · premissas</span>
+        <h2>8. Fase C: premissas classificadas</h2>
+        <p>Toda decisão depende de premissas, e a IA lista muitas delas com facilidade. O trabalho da dupla é verificar a origem de cada uma.</p>
+        <div class="prompt-block">Liste as premissas necessárias para decidir sobre o centro de distribuição.
+Para cada uma, classifique como DADO (indique a coluna ou o cálculo do
+notebook que a sustenta) ou SUPOSIÇÃO (indique quem na empresa deve
+confirmá-la).
+
+Não invente valores. Se uma premissa exigir número que não está na base, como
+custo do centro ou redução de frete, escreva A CONFIRMAR em vez de estimar.
+Salve a tabela em aula-16-seunome/premissas.md.</div>
+        <table>
+          <thead><tr><th>Premissa</th><th>Natureza</th><th>Origem ou responsável</th></tr></thead>
+          <tbody>
+            <tr><td>Pedidos e frete por estado</td><td>dado</td><td>base limpa da aula 13</td></tr>
+            <tr><td>Candidatos fora de SP com 1.500 vendas ou mais</td><td>regra da turma</td><td>registrada no notebook</td></tr>
+            <tr><td>Pesos de 0,5 para volume, 0,3 para frete e 0,2 para crescimento</td><td>suposição</td><td>diretoria</td></tr>
+            <tr><td>Crescimento de 0%, 20% ou 50% no próximo ano</td><td>suposição</td><td>planejamento comercial</td></tr>
+            <tr><td>Redução de 25% no frete com o centro</td><td>suposição</td><td>área de logística</td></tr>
+            <tr><td>Custo anual do centro</td><td>a confirmar</td><td>área financeira</td></tr>
+          </tbody>
+        </table>
+        <p>O valor de frete da base é o cobrado no pedido. A economia que o centro traria para a empresa, e não apenas para o cliente, depende de contratos de transporte que a base não contém. Por isso, a redução de 25% é uma suposição didática, usada para mostrar o raciocínio, e não uma estimativa de mercado.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>9. Matriz de decisão ponderada</h2>
+        <p>A matriz de decisão ponderada compara alternativas por vários critérios ao mesmo tempo. Como os critérios estão em unidades diferentes (pedidos, reais e percentuais), cada um é normalizado de 0 a 1 entre os candidatos: o menor valor recebe 0, o maior recebe 1 e os demais ficam proporcionalmente entre eles. A nota final é a soma dos critérios normalizados multiplicados pelos pesos.</p>
+        <p>Os três critérios puxam em direções diferentes. Volume favorece estados com muitos pedidos, onde o centro atenderia mais clientes. Frete médio favorece estados distantes, onde a economia por pedido seria maior. Crescimento favorece estados em expansão. Os pesos expressam a prioridade da diretoria entre esses objetivos e, por serem uma escolha, precisam ser testados.</p>
+        <p>A normalização também tem um efeito que precisa ser lido com atenção: ela transforma diferenças pequenas em notas distantes quando os candidatos estão próximos. O frete médio de RJ, R$ 23,96, e o de MG, R$ 23,48, diferem em R$ 0,48, mas a normalização registra 0,039 e 0,000.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · matriz</span>
+        <h2>10. Fase D: matriz com os pesos de base</h2>
+        <div class="prompt-block">A partir de indicadores_estado.csv, selecione como candidatos os estados fora
+de SP com pelo menos 1.500 vendas. Espero 10 candidatos.
+
+Normalize volume (pedidos), frete_medio e crescimento de 0 a 1 entre os
+candidatos, pelo mínimo e pelo máximo. Calcule a nota com pesos 0,5, 0,3 e 0,2
+e ordene. Salve aula-16-seunome/saidas/matriz_decisao.csv com os valores
+originais, os normalizados e a nota. Explique em duas frases o que a
+normalização faz com a diferença entre RJ e MG.</div>
+        <div class="code-block">candidatos = estado[(estado.index != "SP") &amp; (estado["pedidos"] &gt;= 1_500)]
+criterios = candidatos[["pedidos", "frete_medio", "crescimento"]]
+normalizado = (criterios - criterios.min()) / (criterios.max() - criterios.min())
+
+pesos = {"pedidos": 0.5, "frete_medio": 0.3, "crescimento": 0.2}
+nota = sum(normalizado[c] * p for c, p in pesos.items()).sort_values(ascending=False)
+display(nota.round(3))</div>
+        <table>
+          <thead><tr><th>Posição</th><th>Estado</th><th>Nota</th><th>Pedidos</th><th>Frete médio</th><th>Crescimento</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>RJ</td><td>0,537</td><td>12.531</td><td>R$ 23,96</td><td>115,7%</td></tr>
+            <tr><td>2</td><td>MG</td><td>0,508</td><td>11.324</td><td>R$ 23,48</td><td>133,7%</td></tr>
+            <tr><td>3</td><td>PE</td><td>0,384</td><td>1.631</td><td>R$ 36,05</td><td>143,4%</td></tr>
+            <tr><td>4</td><td>BA</td><td>0,294</td><td>3.329</td><td>R$ 29,85</td><td>133,7%</td></tr>
+            <tr><td>5</td><td>DF</td><td>0,227</td><td>2.095</td><td>R$ 23,73</td><td>198,7%</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Checkpoint</strong>Os 10 candidatos são BA, DF, ES, GO, MG, PE, PR, RJ, RS e SC. Com os pesos de base, RJ lidera com 0,537, seguido de MG com 0,508. A diferença é de 0,029 ponto.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · sensibilidade</span>
+        <h2>11. Fase E: sensibilidade do ranking aos pesos</h2>
+        <p>A análise de sensibilidade responde a uma pergunta direta: quanto os pesos precisariam mudar para que outro estado liderasse? Varia-se um peso de cada vez, mantendo a proporção entre os outros dois.</p>
+        <div class="prompt-block">Para cada critério, varie o peso de 0 a 1 em passos de 0,001, mantendo a
+proporção entre os outros dois pesos. Registre os valores de peso em que o
+primeiro colocado muda e quem passa a liderar.
+
+Mostre o resultado em uma tabela e em um gráfico da nota de RJ, MG e PE em
+função do peso do frete. Salve em aula-16-seunome/saidas/sensibilidade.csv.</div>
+        <table>
+          <thead><tr><th>Critério</th><th>Peso de base</th><th>Ponto de inversão</th><th>Novo líder</th></tr></thead>
+          <tbody>
+            <tr><td>Frete médio</td><td>0,30</td><td>a partir de 0,397</td><td>PE</td></tr>
+            <tr><td>Crescimento</td><td>0,20</td><td>a partir de 0,307 (e DF a partir de 0,433)</td><td>MG</td></tr>
+            <tr><td>Volume</td><td>0,50</td><td>abaixo de 0,410</td><td>PE</td></tr>
+          </tbody>
+        </table>
+        <p>Uma variação de cerca de 0,1 em qualquer peso troca o primeiro colocado. A matriz, portanto, não descobre a resposta sozinha: ela traduz prioridades em ranking. Se a diretoria valoriza economia por pedido acima de volume, Pernambuco passa à frente; se valoriza crescimento, Minas Gerais lidera. O memorando precisa declarar os pesos adotados e mostrar onde a recomendação muda.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · cenários</span>
+        <h2>12. Fase F: cenários e teto de custo</h2>
+        <p>A matriz compara os candidatos entre si, mas não diz se algum deles compensa. Para essa segunda pergunta, calcula-se o teto de custo: o custo anual máximo que a economia de frete suposta consegue pagar.</p>
+        <div class="prompt-block">Para RJ e MG, some pedidos e frete dos últimos 12 meses da janela (compras a
+partir de 2017-08-20). Projete o próximo ano em três cenários de crescimento:
+pessimista 0%, base 20% e otimista 50%.
+
+Calcule o teto de custo anual do centro como 25% do frete projetado, que é a
+economia suposta. Mostre a tabela e explique que o centro só se paga se o
+custo anual informado pela área financeira ficar abaixo desse teto. Salve em
+aula-16-seunome/saidas/cenarios.csv.</div>
+        <div class="code-block">ultimos_12 = vendas[vendas["order_purchase_timestamp"] &gt;= "2017-08-20"]
+base_12m = ultimos_12.groupby("customer_state").agg(
+    pedidos=("order_id", "count"), frete=("valor_frete", "sum"))
+
+linhas = []
+for uf in ["RJ", "MG"]:
+    for cenario, taxa in {"pessimista": 0.0, "base": 0.2, "otimista": 0.5}.items():
+        frete = base_12m.loc[uf, "frete"] * (1 + taxa)
+        linhas.append({"estado": uf, "cenario": cenario,
+                       "pedidos": round(base_12m.loc[uf, "pedidos"] * (1 + taxa)),
+                       "teto_custo": round(frete * 0.25)})
+cenarios = pd.DataFrame(linhas)
+cenarios.to_csv("saidas/cenarios.csv", index=False)</div>
+        <table>
+          <thead><tr><th>Estado</th><th>Cenário</th><th>Pedidos por ano</th><th>Frete projetado</th><th>Teto de custo anual</th></tr></thead>
+          <tbody>
+            <tr><td>RJ</td><td>pessimista</td><td>9.669</td><td>R$ 237.134</td><td>R$ 59.283</td></tr>
+            <tr><td>RJ</td><td>base</td><td>11.603</td><td>R$ 284.561</td><td>R$ 71.140</td></tr>
+            <tr><td>RJ</td><td>otimista</td><td>14.504</td><td>R$ 355.701</td><td>R$ 88.925</td></tr>
+            <tr><td>MG</td><td>pessimista</td><td>8.833</td><td>R$ 210.838</td><td>R$ 52.710</td></tr>
+            <tr><td>MG</td><td>base</td><td>10.600</td><td>R$ 253.006</td><td>R$ 63.252</td></tr>
+            <tr><td>MG</td><td>otimista</td><td>13.250</td><td>R$ 316.258</td><td>R$ 79.064</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Checkpoint</strong>No cenário base, o centro no RJ se paga apenas se custar menos de R$ 71.140 por ano. Acima de R$ 88.925, nenhum cenário justifica o RJ, e a alternativa "não abrir agora" passa a ser a recomendação coerente com a evidência.</div>
+        <p>O teto depende do volume desta base pública, que não informa se cobre toda a operação da empresa. Com outro volume, o teto muda na mesma proporção. Essa limitação entra no memorando.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · crítica</span>
+        <h2>13. Fase G: crítica adversarial e pre-mortem</h2>
+        <p>Depois de redigir uma recomendação provisória, a dupla pede à IA que a ataque. O pre-mortem, técnica proposta por Gary Klein, inverte a pergunta usual: em vez de perguntar o que pode dar errado, supõe-se que a decisão já fracassou e procura-se a causa mais provável.</p>
+        <div class="prompt-block">Nossa recomendação provisória é: [escreva a recomendação da dupla]. Atue
+agora como conselheiro cético da diretoria.
+
+1. Apresente o argumento mais forte contra essa recomendação, usando apenas os
+   números do notebook.
+2. Faça um pre-mortem: suponha que, dois anos depois, a decisão se mostrou
+   errada, e liste as três causas mais prováveis.
+3. Aponte qual premissa, se estiver errada, mais altera a decisão.
+Não suavize a crítica e não proponha números que não estejam no notebook.</div>
+        <p>Cada crítica recebe uma resposta no memorando: aceita, com ajuste na recomendação, ou rejeitada, com o motivo. Uma crítica que a dupla não consegue responder indica uma informação a buscar antes da decisão.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 8 · memorando</span>
+        <h2>14. Fase H: memorando de decisão</h2>
+        <div class="prompt-block">Crie aula-16-seunome/MEMORANDO_DECISAO.md com no máximo uma página: decisão
+recomendada, alternativas consideradas, evidência (ranking, sensibilidade e
+cenários), premissas a confirmar com responsável, resposta às críticas do
+conselheiro e a condição que faria a dupla mudar de recomendação.
+
+Use somente números do notebook. A recomendação final é da dupla: escreva-a
+como redigida por nós, sem acrescentar argumentos novos. Depois proponha git
+add, commit e push, sem executar antes da minha aprovação.</div>
+        <p>Leia o memorando e o diff antes de autorizar o versionamento. A persistência da entrega é feita por commit e push:</p>
+        <div class="code-block">git status
+git add aula-16-seunome
+git diff --staged --stat
+git commit -m "Entrega o memorando de decisão da aula 16"
+git push</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>15. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h25</td><td>problema, enquadramento e riscos da IA</td><td>a dupla enuncia objetivo e alternativas</td></tr>
+            <tr><td>19h25 às 19h40</td><td>prompt 1 e comparação com a seção 3</td><td>critérios mensuráveis identificados</td></tr>
+            <tr><td>19h40 às 20h10</td><td>indicadores por estado</td><td>96.690 vendas e 27 estados</td></tr>
+            <tr><td>20h10 às 20h30</td><td>premissas classificadas</td><td><code>premissas.md</code> sem valor inventado</td></tr>
+            <tr><td>20h30 às 20h55</td><td>matriz com pesos de base</td><td>RJ 0,537 e MG 0,508</td></tr>
+            <tr><td>20h55 às 21h15</td><td>sensibilidade dos pesos</td><td>inversões em 0,397, 0,307 e 0,410</td></tr>
+            <tr><td>21h15 às 21h30</td><td>cenários e teto de custo</td><td>RJ base com teto de R$ 71.140</td></tr>
+            <tr><td>21h30 às 21h50</td><td>crítica adversarial e memorando</td><td>críticas respondidas</td></tr>
+            <tr><td>21h50 às 22h00</td><td>revisão, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+          </tbody>
+        </table>
+        <p>O script <code>materiais/aula-16/referencia/estrategia_referencia.py</code> reproduz todos os números desta aula. Execute-o depois de concluir o notebook e compare os resultados.</p>
+        <div class="code-block">python materiais/aula-16/referencia/estrategia_referencia.py</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>16. Desafio e entrega</h2>
+        <p>Em dupla, redija no <code>MEMORANDO_DECISAO.md</code> a resposta à diretoria para quatro perguntas. A recomendação é RJ, MG, outro estado ou não abrir agora? Quais pesos a dupla adotou e por que eles representam a prioridade da diretoria? Qual custo anual do centro faria a dupla mudar a recomendação? Que sugestão da IA a dupla rejeitou, e por qual motivo?</p>
+        <p>Quem terminar antes pode acrescentar um quarto critério, o peso do frete no valor do pedido, e verificar se o ranking muda.</p>
+        <p>Entrega verificável, na pasta <code>aula-16-seunome</code>:</p>
+        <ul>
+          <li><code>Aula_16_SeuNome.ipynb</code> executado do início ao fim.</li>
+          <li><code>premissas.md</code> com cada premissa classificada como dado ou suposição.</li>
+          <li><code>saidas/indicadores_estado.csv</code>, <code>matriz_decisao.csv</code>, <code>sensibilidade.csv</code> e <code>cenarios.csv</code>.</li>
+          <li><code>MEMORANDO_DECISAO.md</code> com recomendação, premissas a confirmar e condição de revisão, seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>17. Checklist de qualidade</h2>
+        <ul>
+          <li>O enquadramento inclui a alternativa de não abrir.</li>
+          <li>As regras de limpeza da aula 13 foram reaplicadas, com 96.690 vendas.</li>
+          <li>O crescimento compara o mesmo trecho do calendário nos dois anos.</li>
+          <li>Nenhuma premissa numérica sem origem aparece como dado.</li>
+          <li>Os critérios foram normalizados entre os candidatos antes da ponderação.</li>
+          <li>Os pesos adotados estão declarados e justificados.</li>
+          <li>A sensibilidade mostra em que pesos o primeiro colocado muda.</li>
+          <li>Os cenários usam taxas declaradas, e não o crescimento observado de 142,4%.</li>
+          <li>Cada crítica do conselheiro recebeu resposta no memorando.</li>
+          <li>O memorando diz o que faria a dupla mudar de recomendação.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>18. Síntese</h2>
+        <p>A decisão sobre o centro de distribuição começou pelo enquadramento, com a alternativa de não abrir desde o início. A base limpa da aula 13 forneceu os indicadores por estado, e as premissas foram separadas entre dado e suposição, com o responsável por confirmar cada uma.</p>
+        <p>A matriz ponderada colocou o RJ à frente de MG por 0,029 ponto, diferença que desaparece com variações de cerca de 0,1 em qualquer peso. O teto de custo mostrou que a viabilidade depende do custo anual do centro, número ausente da base. A IA estruturou o problema, escreveu o código e atacou a recomendação, enquanto a escolha dos pesos, a resposta às críticas e a decisão couberam à dupla.</p>
+        <p>O resultado vale para esta base pública, com a janela da aula 13 e as suposições declaradas. Ele não indica onde a empresa real deveria abrir um centro de distribuição.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>19. Referências e continuidade</h2>
+        <p>No laboratório de 09/12, o estudo de caso de RH aplica o mesmo percurso de pergunta, limpeza, análise e recomendação a dados de pessoas, em que as suposições e os riscos de viés têm consequências diretas para indivíduos.</p>
+        <ul>
+          <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a>, fonte e licença do conjunto.</li>
+          <li><a href="https://hbr.org/2007/09/performing-a-project-premortem">Klein, G. Performing a Project Premortem. Harvard Business Review, 2007</a>.</li>
+          <li>Kahneman, D. Rápido e devagar: duas formas de pensar. Rio de Janeiro: Objetiva, 2012, capítulos sobre ancoragem.</li>
+          <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">Documentação do Pandas sobre <code>groupby</code></a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-16.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="../aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-estrategia.md" download="prompts-estrategia.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>

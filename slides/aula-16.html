@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,25 +411,410 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 16 · 02/12</div><h1>Laboratório de Dados &amp; IA</h1><p>IA aplicada à estratégia e tomada de decisão</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Estruturar uma decisão em alternativas, critérios e cenários</li><li>Combinar previsão e julgamento sem automatizar responsabilidade</li><li>Testar robustez da recomendação a mudanças de premissas</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>IA estratégica não escolhe objetivos; ela organiza evidências, estima consequências e ajuda a explorar cenários definidos por pessoas responsáveis.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Previsão descreve o provável; decisão considera valor, custo e restrição</li><li>Cenários evitam confundir uma estimativa pontual com o futuro</li><li>Análise de sensibilidade revela quais premissas controlam a escolha</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">alternativas = {"expandir":{"retorno":1.4,"risco":.7},"piloto":{"retorno":.8,"risco":.2}}
-for nome,v in alternativas.items():
-    v["utilidade"] = v["retorno"] - 0.8*v["risco"]
-print(alternativas)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Construa uma matriz de decisão para expansão de serviço e teste três cenários de demanda e aversão a risco.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar memo decisório com alternativas, critérios, premissas, cenário adverso e gatilho de revisão.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Modelos informam escolhas; governança define objetivos, limites e responsabilidade.</p><ul><li>Tornar critérios e pesos explícitos</li><li>Separar fato, estimativa e preferência</li><li>Registrar conflitos de interesse</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, aplicaremos análise de dados a decisões de recursos humanos.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 16</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 16 · 02/12</div>
+      <h1>IA aplicada à decisão estratégica</h1>
+      <p>A escolha do próximo centro de distribuição com os pedidos do Olist, uma matriz de decisão e a IA no papel de crítica</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Enquadrar uma decisão com objetivo, alternativas, critérios e responsável.</li>
+        <li>Separar dado de suposição nas premissas sugeridas pela IA.</li>
+        <li>Construir uma matriz de decisão ponderada com critérios normalizados.</li>
+        <li>Testar a sensibilidade do ranking aos pesos e a cenários de crescimento.</li>
+        <li>Redigir um memorando com a recomendação e o que a faria mudar.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h40 · Enquadramento</h3><p>Decisão, vieses da IA e premissas classificadas em dado ou suposição.</p></article>
+        <article class="deck-card"><h3>19h40 às 20h30 · Evidência</h3><p>Indicadores por estado a partir da base limpa da aula 13.</p></article>
+        <article class="deck-card"><h3>20h30 às 21h30 · Análise</h3><p>Matriz ponderada, sensibilidade dos pesos e cenários.</p></article>
+        <article class="deck-card"><h3>21h30 às 22h00 · Decisão</h3><p>Crítica adversarial, memorando, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>A decisão em pauta</h2>
+      <p>A diretoria do marketplace avalia abrir um centro de distribuição regional fora de São Paulo, estado que concentra 41,7% das vendas. A pergunta admite uma resposta negativa.</p>
+      <ul>
+        <li>Objetivo: reduzir o frete e o prazo para a maior parcela possível de clientes.</li>
+        <li>Alternativas: dez estados candidatos ou não abrir agora.</li>
+        <li>Responsável: a Diretoria de Operações, que assina o memorando.</li>
+        <li>Papel da IA: estruturar, calcular e criticar, sem decidir.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Do enquadramento ao memorando</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>Enquadrar</strong><span>Objetivo, alternativas e critérios.</span></div>
+        <div class="flow-step"><strong>Premissas</strong><span>Dado ou suposição.</span></div>
+        <div class="flow-step"><strong>Indicadores</strong><span>27 estados, base limpa.</span></div>
+        <div class="flow-step"><strong>Matriz</strong><span>Dez candidatos ponderados.</span></div>
+        <div class="flow-step"><strong>Sensibilidade</strong><span>Pesos e cenários.</span></div>
+        <div class="flow-step"><strong>Memorando</strong><span>Decisão e condição de revisão.</span></div>
+      </div>
+      <p>Cada número do memorando sai do notebook, e cada premissa traz a indicação de quem deve confirmá-la.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Vieses da IA</div>
+      <h2>Três riscos ao usar IA em estratégia</h2>
+      <table class="deck-table">
+        <thead><tr><th>Risco</th><th>Como aparece</th><th>Controle</th></tr></thead>
+        <tbody>
+          <tr><td>Concordância</td><td>a IA aceita o enquadramento dado e justifica a opção sugerida no prompt</td><td>pedir alternativas e o argumento contrário</td></tr>
+          <tr><td>Número sem fonte</td><td>custos e taxas plausíveis, sem origem verificável</td><td>marcar cada número como dado ou suposição</td></tr>
+          <tr><td>Ancoragem</td><td>o primeiro valor citado orienta as estimativas seguintes</td><td>testar cenários e limites, e não um valor único</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas de trabalho no Codespace</h2>
+      <div class="code-block">mkdir -p aula-16-seunome/entrada aula-16-seunome/saidas
+cp materiais/aula-13/dados/olist_pedidos.csv aula-16-seunome/entrada/
+ls -lh aula-16-seunome/entrada</div>
+      <p>A base é a mesma da aula 13, com 99.441 pedidos. O notebook fica em <code>aula-16-seunome</code>, e os arquivos gerados vão para <code>saidas</code>.</p>
+      <a class="download-link" href="../materiais/aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv">⬇️ Baixar olist_pedidos.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Enquadramento</div>
+      <h2>Estrutura da decisão antes dos dados</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como analista de estratégia. A diretoria de um marketplace avalia abrir um centro de distribuição regional fora de São Paulo, ou não abrir agora. Ainda não recomende nenhuma alternativa e não escreva código.
+
+Estruture a decisão em: objetivo, quem decide, alternativas (inclua "não abrir"), critérios mensuráveis, informações que faltam e riscos de cada critério. Para cada critério, diga se ele pode ser medido com uma base de pedidos que tem estado do cliente, data, status, valor dos produtos e frete.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Indicadores</div>
+      <h2>Indicadores por estado com a base limpa</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie aula-16-seunome/Aula_16_SeuNome.ipynb. Carregue aula-16-seunome/entrada/olist_pedidos.csv e aplique as regras da aula 13: compras de 2017-01-09 até antes de 2018-08-20 e exclusão dos status canceled e unavailable. Espero 96.690 vendas.
+
+Agregue por customer_state: pedidos, receita (soma de valor_produtos), frete_medio, peso_frete (frete total sobre receita) e participacao. Calcule o crescimento comparando 09/01 a 19/08 de 2018 com o mesmo trecho de 2017. Salve em aula-16-seunome/saidas/indicadores_estado.csv, ordenado por pedidos.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Conferência dos indicadores</h2>
+      <table class="deck-table">
+        <thead><tr><th>Estado</th><th>Pedidos</th><th>Participação</th><th>Frete médio</th><th>Crescimento</th></tr></thead>
+        <tbody>
+          <tr><td>SP</td><td>40.279</td><td>41,7%</td><td>R$ 17,41</td><td>172%</td></tr>
+          <tr><td>RJ</td><td>12.531</td><td>13,0%</td><td>R$ 23,96</td><td>116%</td></tr>
+          <tr><td>MG</td><td>11.324</td><td>11,7%</td><td>R$ 23,48</td><td>134%</td></tr>
+          <tr><td>RS</td><td>5.364</td><td>5,5%</td><td>R$ 24,89</td><td>104%</td></tr>
+          <tr><td>PR</td><td>4.881</td><td>5,0%</td><td>R$ 23,64</td><td>136%</td></tr>
+        </tbody>
+      </table>
+      <p>O frete médio geral é de R$ 22,88 e as vendas cresceram 142,4% no trecho comparável.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Leitura dos indicadores</div>
+      <h2>O que o crescimento observado mede</h2>
+      <ul>
+        <li>O crescimento de 142,4% compara a plataforma em expansão de 2017 com a de 2018.</li>
+        <li>Projetar essa taxa para o próximo ano supõe que a expansão inicial se repetirá.</li>
+        <li>A IA tende a usar o número disponível como âncora para o futuro.</li>
+        <li>Por isso, os cenários da aula usam 0%, 20% e 50%, declarados como suposição.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Premissas</div>
+      <h2>Classificação das premissas</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Liste as premissas necessárias para decidir sobre o centro de distribuição. Para cada uma, classifique como DADO (indique a coluna ou o cálculo do notebook que a sustenta) ou SUPOSIÇÃO (indique quem na empresa deve confirmá-la).
+
+Não invente valores. Se uma premissa exigir número que não está na base, como custo do centro ou redução de frete, escreva A CONFIRMAR em vez de estimar. Salve a tabela em aula-16-seunome/premissas.md.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Dado ou suposição</div>
+      <h2>Premissas da aula</h2>
+      <table class="deck-table">
+        <thead><tr><th>Premissa</th><th>Natureza</th><th>Origem ou responsável</th></tr></thead>
+        <tbody>
+          <tr><td>Pedidos e frete por estado</td><td>dado</td><td>base limpa da aula 13</td></tr>
+          <tr><td>Candidatos fora de SP com 1.500 vendas ou mais</td><td>regra da turma</td><td>registrada no notebook</td></tr>
+          <tr><td>Pesos 0,5 volume, 0,3 frete e 0,2 crescimento</td><td>suposição</td><td>diretoria</td></tr>
+          <tr><td>Redução de 25% no frete com o centro</td><td>suposição</td><td>área de logística</td></tr>
+          <tr><td>Custo anual do centro</td><td>a confirmar</td><td>área financeira</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito</div>
+      <h2>Matriz de decisão ponderada</h2>
+      <ul>
+        <li>Cada critério é normalizado de 0 a 1 entre os candidatos, pelo mínimo e pelo máximo.</li>
+        <li>A nota final é a soma ponderada dos critérios normalizados.</li>
+        <li>Volume favorece estados com muitos pedidos; frete médio favorece estados com maior economia por pedido.</li>
+        <li>Os pesos expressam prioridades da diretoria e, por isso, precisam de teste.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Matriz</div>
+      <h2>Matriz com os pesos de base</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">A partir de indicadores_estado.csv, selecione como candidatos os estados fora de SP com pelo menos 1.500 vendas. Espero 10 candidatos.
+
+Normalize volume (pedidos), frete_medio e crescimento de 0 a 1 entre os candidatos, pelo mínimo e pelo máximo. Calcule a nota com pesos 0,5, 0,3 e 0,2 e ordene. Salve aula-16-seunome/saidas/matriz_decisao.csv com os valores originais, os normalizados e a nota. Explique em duas frases o que a normalização faz com a diferença entre RJ e MG.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Ranking com os pesos de base</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>RJ 0,537</strong><span>1º lugar</span></div>
+        <div class="metric"><strong>MG 0,508</strong><span>2º lugar</span></div>
+        <div class="metric"><strong>PE 0,384</strong><span>3º lugar</span></div>
+        <div class="metric"><strong>BA 0,294</strong><span>4º lugar</span></div>
+      </div>
+      <ul>
+        <li>RJ lidera em volume, com 12.531 vendas, e tem o menor crescimento entre os três primeiros.</li>
+        <li>PE tem o maior frete médio, R$ 36,05, e o menor volume entre os candidatos.</li>
+        <li>A distância entre RJ e MG é de 0,029 ponto.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Sensibilidade</div>
+      <h2>Sensibilidade do ranking aos pesos</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Para cada critério, varie o peso de 0 a 1 em passos de 0,001, mantendo a proporção entre os outros dois pesos. Registre os valores de peso em que o primeiro colocado muda e quem passa a liderar.
+
+Mostre o resultado em uma tabela e em um gráfico da nota de RJ, MG e PE em função do peso do frete. Salve em aula-16-seunome/saidas/sensibilidade.csv.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 3</div>
+      <h2>Pontos em que o ranking inverte</h2>
+      <table class="deck-table">
+        <thead><tr><th>Critério</th><th>Peso de base</th><th>Inversão</th><th>Novo líder</th></tr></thead>
+        <tbody>
+          <tr><td>Frete médio</td><td>0,30</td><td>a partir de 0,397</td><td>PE</td></tr>
+          <tr><td>Crescimento</td><td>0,20</td><td>a partir de 0,307</td><td>MG</td></tr>
+          <tr><td>Volume</td><td>0,50</td><td>abaixo de 0,410</td><td>PE</td></tr>
+        </tbody>
+      </table>
+      <p>Uma mudança de cerca de 0,1 em qualquer peso troca o primeiro colocado. A matriz ordena as alternativas, mas a ordem depende de prioridades que a diretoria precisa assumir.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Cenários</div>
+      <h2>Cenários e teto de custo do centro</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Para RJ e MG, some pedidos e frete dos últimos 12 meses da janela (compras a partir de 2017-08-20). Projete o próximo ano em três cenários de crescimento: pessimista 0%, base 20% e otimista 50%.
+
+Calcule o teto de custo anual do centro como 25% do frete projetado, que é a economia suposta. Mostre a tabela e explique que o centro só se paga se o custo anual informado pela área financeira ficar abaixo desse teto. Salve em aula-16-seunome/saidas/cenarios.csv.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 4</div>
+      <h2>Teto de custo anual por cenário</h2>
+      <table class="deck-table">
+        <thead><tr><th>Estado</th><th>Pessimista</th><th>Base</th><th>Otimista</th></tr></thead>
+        <tbody>
+          <tr><td>RJ, pedidos por ano</td><td>9.669</td><td>11.603</td><td>14.504</td></tr>
+          <tr><td>RJ, teto de custo</td><td>R$ 59.283</td><td>R$ 71.140</td><td>R$ 88.925</td></tr>
+          <tr><td>MG, pedidos por ano</td><td>8.833</td><td>10.600</td><td>13.250</td></tr>
+          <tr><td>MG, teto de custo</td><td>R$ 52.710</td><td>R$ 63.252</td><td>R$ 79.064</td></tr>
+        </tbody>
+      </table>
+      <p>O teto é o custo anual máximo que a economia de frete suposta consegue pagar no volume desta base.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Leitura dos cenários</div>
+      <h2>A alternativa de não abrir</h2>
+      <ul>
+        <li>A matriz compara candidatos entre si e não informa se algum deles compensa.</li>
+        <li>O teto de custo responde a essa segunda pergunta, desde que o custo real seja conhecido.</li>
+        <li>Se o custo do centro superar R$ 88.925 por ano, nenhum cenário justifica RJ.</li>
+        <li>O frete da base é o valor cobrado no pedido, e a economia para a empresa continua sendo suposição.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · Crítica</div>
+      <h2>Crítica adversarial e pre-mortem</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Nossa recomendação provisória é: [escreva a recomendação da dupla]. Atue agora como conselheiro cético da diretoria.
+
+1. Apresente o argumento mais forte contra essa recomendação, usando apenas os números do notebook.
+2. Faça um pre-mortem: suponha que, dois anos depois, a decisão se mostrou errada, e liste as três causas mais prováveis.
+3. Aponte qual premissa, se estiver errada, mais altera a decisão.
+Não suavize a crítica e não proponha números que não estejam no notebook.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 8 · Memorando</div>
+      <h2>Memorando de decisão</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie aula-16-seunome/MEMORANDO_DECISAO.md com no máximo uma página: decisão recomendada, alternativas consideradas, evidência (ranking, sensibilidade e cenários), premissas a confirmar com responsável, resposta às críticas do conselheiro e a condição que faria a dupla mudar de recomendação.
+
+Use somente números do notebook. A recomendação final é da dupla: escreva-a como redigida por nós, sem acrescentar argumentos novos. Depois proponha git add, commit e push, sem executar antes da minha aprovação.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio em dupla</div>
+      <h2>Recomendação para a diretoria</h2>
+      <p>O memorando precisa responder a quatro perguntas.</p>
+      <ul>
+        <li>RJ, MG, outro estado ou não abrir agora?</li>
+        <li>Quais pesos a dupla adotou e por que eles representam a prioridade da diretoria?</li>
+        <li>Qual custo anual do centro faria a dupla mudar a recomendação?</li>
+        <li>Que sugestão da IA a dupla rejeitou, e por qual motivo?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 21h50</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>Aula_16_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>premissas.md</code> com cada premissa classificada.</li>
+        <li><code>saidas/</code> com indicadores, matriz, sensibilidade e cenários.</li>
+        <li><code>MEMORANDO_DECISAO.md</code> com recomendação e condição de revisão.</li>
+        <li>Commit e push da pasta <code>aula-16-seunome</code>.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>O enquadramento definiu alternativas, incluindo não abrir, antes de qualquer cálculo.</li>
+        <li>As premissas ficaram separadas entre dado da base e suposição a confirmar.</li>
+        <li>A matriz pôs RJ à frente de MG por 0,029 ponto, diferença que some com 0,1 de variação nos pesos.</li>
+        <li>O teto de custo mostrou que a viabilidade depende de um número ausente da base.</li>
+        <li>A IA estruturou, calculou e criticou, e a decisão ficou com a dupla.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 09/12, o estudo de caso de RH aplica o mesmo percurso de pergunta, limpeza, análise e recomendação a dados de pessoas.</p>
+      <p>Antes de sair, execute o notebook inteiro, revise o memorando e faça commit e push.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -369,6 +822,7 @@ print(alternativas)</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-16/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -396,7 +850,7 @@ print(alternativas)</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -413,6 +867,36 @@ print(alternativas)</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();
