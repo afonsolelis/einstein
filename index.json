@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-21",
+  "generated_at": "2026-11-10",
   "course": {
     "title": "Laboratório de Programação, Ciência de Dados & IA",
     "program": "Graduação em Administração",
@@ -56,7 +56,10 @@
       "materiais/aula-11/dashboard-referencia/index.html",
       "materiais/aula-11/dashboard-referencia/app.js",
       "materiais/aula-11/dashboard-referencia/style.css",
-      "materiais/aula-12/prompts-antigravity.md"
+      "materiais/aula-12/prompts-antigravity.md",
+      "materiais/aula-13/dados/olist_pedidos.csv",
+      "materiais/aula-13/prompts-previsao.md",
+      "materiais/aula-13/referencia/previsao_referencia.py"
     ],
     "live_activities": [
       "tbl/aula-06/index.html",
@@ -83,7 +86,9 @@
       "tests/e2e/aula-10.spec.js",
       "tests/e2e/aula-11.spec.js",
       "tests/e2e/aula-12.spec.js",
+      "tests/e2e/aula-13.spec.js",
       "tests/test_aula_12_dataset.py",
+      "tests/test_aula_13_dataset.py",
       "tests/test_lesson_standard.py"
     ],
     "authoring_skills": [
@@ -724,23 +729,25 @@
       "tag": "ML · Regressão",
       "status": "complete",
       "topics": [
-        "engenharia de atributos",
-        "pipelines",
-        "vazamento temporal",
-        "regressão",
-        "previsão de vendas",
-        "tendências"
+        "limpeza orientada ao negócio",
+        "regras de limpeza com contagem",
+        "série temporal semanal",
+        "previsão ingênua e média móvel",
+        "teste temporal e vazamento",
+        "regressão linear",
+        "erro médio absoluto",
+        "previsão em faixa"
       ],
       "objectives": [
-        "Criar atributos derivados sem vazar informação futura",
-        "Organizar transformações em um pipeline reproduzível",
-        "Treinar uma regressão com separação temporal adequada",
-        "Interpretar MAE e comparar com um baseline",
-        "Comunicar previsão como faixa e hipótese,  não certeza"
+        "Traduzir uma pergunta de negócio em regras de limpeza justificadas",
+        "Organizar os pedidos em uma série semanal com contagem conferida",
+        "Comparar uma regressão linear com referências simples em teste temporal",
+        "Interpretar o erro médio absoluto na unidade da decisão",
+        "Redigir um parecer com previsão em faixa e limitações"
       ],
       "slides": {
         "path": "slides/aula-13.html",
-        "slide_count": 12,
+        "slide_count": 29,
         "sections": [
           "agenda",
           "challenge",
@@ -753,14 +760,15 @@
       },
       "material": {
         "path": "materiais/aula-13/index.html",
-        "section_count": 7,
+        "section_count": 19,
         "highlights": [
-          "Atributos, pipelines e prevenção de vazamento temporal",
-          "Regressão, baseline e validação temporal",
-          "MAE, resíduos e limites de uso"
+          "Base de 99.441 pedidos do Olist com quatro regras de limpeza derivadas da decisão de expedição",
+          "Série semanal de 84 semanas com soma conferida e Black Friday sinalizada",
+          "Previsão ingênua, média móvel e regressão linear em teste temporal de 12 semanas",
+          "Contraexemplo de vazamento com separação aleatória e previsão em faixa de um MAE"
         ],
-        "activity": "Comparar baseline e regressão para vendas mensais",
-        "deliverable": "Notebook, tabela real versus previsto e recomendação de uso"
+        "activity": "Conduzir com a IA, no Codespace, a limpeza dos pedidos segundo a pergunta de negócio, a montagem da série semanal e a comparação entre referências simples e regressão linear",
+        "deliverable": "Notebook executado, tabela de regras com contagens, série semanal, real versus previsto, PARECER_PREVISAO.md, commit e push"
       }
     },
     {
