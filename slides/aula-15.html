@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,30 +411,469 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 15 · 25/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Auditoria e forense de dados: anomalias, riscos e fraudes</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Distinguir erro, evento raro e fraude</li><li>Combinar regras e escores de anomalia com contexto de negócio</li><li>Priorizar alertas por impacto e explicabilidade</li><li>Relacionar transações, entidades e padrões suspeitos preservando a cadeia de custódia</li><li>Documentar achados sem ultrapassar a evidência</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Da anomalia ao alerta: regras e escores</li><li>Do alerta ao dossiê: evidência preservada</li><li>Prática guiada, desafio e síntese</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Anomalia é observação incompatível com um padrão esperado; ela é um sinal para investigação, não uma sentença de irregularidade. A análise forense começa quando o alerta precisa virar evidência que outra pessoa consiga reproduzir.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Auditoria: critérios para gerar alertas</h2><ul><li>Regras de negócio capturam riscos conhecidos e são fáceis de explicar</li><li>Métodos estatísticos detectam desvios, mas exigem segmentação</li><li>Taxa de falsos positivos determina o custo operacional da fila</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Forense: do alerta à evidência</h2><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: regra de auditoria</h2><div class="code-block">import pandas as pd
-pag = pd.read_csv("pagamentos.csv")
-limite = pag.groupby("fornecedor")["valor"].transform(lambda s:s.quantile(.99))
-pag["alerta_regra"] = pag["valor"] &gt; limite</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração: preservar a fonte</h2><div class="code-block">import hashlib
-from pathlib import Path
-arquivo = Path("pagamentos.csv")
-print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Monte uma fila de auditoria combinando regra conhecida e escore, revise manualmente os dez primeiros casos e reconstrua a sequência de transações do alerta prioritário, preservando o hash da fonte e produzindo uma linha do tempo.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar ranking de alertas com motivo, valor em risco, evidência e resultado da revisão, acompanhado do dossiê do caso prioritário com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Detecção eficiente combina sinais automáticos com investigação humana, e uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><ul><li>Não rotular fraude sem investigação</li><li>Trabalhar sobre cópia verificada</li><li>Usar linguagem de indício, não de culpa</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, ampliaremos a análise para decisões estratégicas apoiadas por IA.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 15</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 15 · 25/11</div>
+      <h1>Auditoria de contas a pagar com IA</h1>
+      <p>Regras de negócio, Lei de Benford e Isolation Forest para montar uma fila priorizada de pagamentos a examinar</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Preservar a entrada com hash e registrar a cadeia de custódia.</li>
+        <li>Limpar a base segundo as regras de alçada, calendário e cadastro.</li>
+        <li>Aplicar testes de regra e medir quantos alarmes cada um produz.</li>
+        <li>Testar a aderência à Lei de Benford no total e por fornecedor.</li>
+        <li>Combinar sinais em uma matriz de risco e justificar a fila de exame.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h35 · Conceitos</h3><p>Case, indício, anomalia e fraude, cadeia de custódia e protocolo com a IA.</p></article>
+        <article class="deck-card"><h3>19h35 às 20h40 · Limpeza e regras</h3><p>Perfil, normalização do cadastro e quatro testes de regra.</p></article>
+        <article class="deck-card"><h3>20h40 às 21h30 · Testes estatísticos</h3><p>Lei de Benford no total e por fornecedor, seguida do Isolation Forest.</p></article>
+        <article class="deck-card"><h3>21h30 às 22h00 · Fila e entrega</h3><p>Matriz de risco, relatório ao comitê, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>O comitê não consegue examinar tudo</h2>
+      <p>O comitê de auditoria de uma rede hospitalar fictícia recebeu um ano de contas a pagar e dispõe de equipe para examinar poucas centenas de pagamentos.</p>
+      <div class="metric-row">
+        <div class="metric"><strong>5.440</strong><span>lançamentos em 2025</span></div>
+        <div class="metric"><strong>R$ 46,9 mi</strong><span>pagos a fornecedores</span></div>
+        <div class="metric"><strong>120</strong><span>fornecedores cadastrados</span></div>
+        <div class="metric"><strong>R$ 10.000</strong><span>alçada de segunda assinatura</span></div>
+      </div>
+      <p>A pergunta da aula é quais pagamentos examinar primeiro, e por qual motivo cada um entra na lista.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Vocabulário</div>
+      <h2>Indício, anomalia e fraude</h2>
+      <table class="deck-table">
+        <thead><tr><th>Termo</th><th>Significado</th><th>Quem conclui</th></tr></thead>
+        <tbody>
+          <tr><td>Anomalia</td><td>valor estatisticamente raro na base</td><td>o algoritmo</td></tr>
+          <tr><td>Indício</td><td>regra de controle disparada</td><td>o teste de regra</td></tr>
+          <tr><td>Irregularidade</td><td>indício confirmado por documento</td><td>o auditor, após exame</td></tr>
+          <tr><td>Fraude</td><td>irregularidade com intenção comprovada</td><td>a apuração formal</td></tr>
+        </tbody>
+      </table>
+      <p>O laboratório termina na palavra examinar. Nenhum resultado do notebook autoriza acusar um fornecedor ou um solicitante.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Cada etapa deixa um arquivo conferível</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>Custódia</strong><span>Hash da entrada no início e no fim.</span></div>
+        <div class="flow-step"><strong>Limpeza</strong><span>Cadastro, estornos e calendário.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span>Duplicidade, fracionamento e outras.</span></div>
+        <div class="flow-step"><strong>Benford</strong><span>Primeiro dígito, total e por fornecedor.</span></div>
+        <div class="flow-step"><strong>Isolation Forest</strong><span>Triagem estatística complementar.</span></div>
+        <div class="flow-step"><strong>Fila</strong><span>Pontuação, sinais e relatório.</span></div>
+      </div>
+      <p>Cada pagamento da fila carrega a lista dos sinais que o colocaram ali, para que o comitê possa contestá-la.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Cadeia de custódia</div>
+      <h2>A prova precisa ser reproduzível</h2>
+      <ul>
+        <li>O CSV recebido fica em <code>entrada</code> e não é editado.</li>
+        <li>O SHA-256 é calculado antes da análise e conferido ao final.</li>
+        <li>Cada achado registra pagamento, regra, parâmetro e data da execução.</li>
+        <li>O notebook reexecutado do início produz a mesma fila.</li>
+      </ul>
+      <p>Se o hash mudar, a análise perde valor como evidência, porque ninguém consegue provar sobre qual arquivo ela foi feita.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">IA no laboratório</div>
+      <h2>Protocolo de trabalho com a IA</h2>
+      <ol>
+        <li>Contextualize com os arquivos, a alçada e o resultado esperado.</li>
+        <li>Peça um plano antes de qualquer edição.</li>
+        <li>Leia o código e procure parâmetros fixos sem justificativa.</li>
+        <li>Execute uma etapa por vez e confira a contagem.</li>
+        <li>Recuse conclusões sobre intenção ou culpa escritas pelo agente.</li>
+      </ol>
+      <p>A IA escreve os testes. A turma escolhe os parâmetros e responde pela leitura dos alarmes.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas de trabalho no Codespace</h2>
+      <div class="code-block">mkdir -p aula-15-seunome/entrada aula-15-seunome/saidas
+cp materiais/aula-15/dados/contas_a_pagar.csv aula-15-seunome/entrada/
+cp materiais/aula-15/dados/fornecedores.csv aula-15-seunome/entrada/
+sha256sum aula-15-seunome/entrada/*.csv</div>
+      <p>Anote os dois hashes. O de <code>contas_a_pagar.csv</code> deve começar por <code>b3898f2d</code> e o de <code>fornecedores.csv</code>, por <code>2a5fede2</code>.</p>
+      <a class="download-link" href="../materiais/aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv">⬇️ Baixar contas_a_pagar.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Perfil e custódia</div>
+      <h2>Perfil da base com hash de entrada</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de auditoria neste laboratório. Crie aula-15-seunome/Aula_15_SeuNome.ipynb. Na primeira célula, calcule o SHA-256 de entrada/contas_a_pagar.csv e guarde em hash_inicial.
+
+Carregue contas_a_pagar.csv em bruta (data_pagamento como data, fornecedor_id como texto) e fornecedores.csv em cadastro. Mostre shape, dtypes, pagamento_id duplicado, contagem por tipo, valor mínimo e máximo e pagamentos por mês. Não limpe nada. Espero 5.440 linhas e 7 colunas; se divergir, pare. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Limpeza</div>
+      <h2>Limpeza orientada ao negócio</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie base a partir de bruta, sem alterar bruta nem os CSVs. Conte quantos fornecedor_id de bruta não existem em cadastro. Em seguida normalize fornecedor_id com strip e upper, conte quantos códigos mudaram e repita a contagem sem cadastro.
+
+Crie pagamentos apenas com tipo igual a pagamento; os estornos ficam fora dos testes porque não são saída de caixa. Mostre o número de pagamentos, o valor total e quantos têm valor igual ou acima da alçada de R$ 10.000. Espero 61 sem cadastro antes, 47 códigos normalizados, 14 sem cadastro depois e 5.408 pagamentos.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Conferência do perfil e da limpeza</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>61 e 14</strong><span>sem cadastro, antes e depois</span></div>
+        <div class="metric"><strong>47</strong><span>códigos normalizados</span></div>
+        <div class="metric"><strong>32</strong><span>estornos separados</span></div>
+        <div class="metric"><strong>929</strong><span>pagamentos acima da alçada</span></div>
+      </div>
+      <ul>
+        <li>Sem a normalização, 47 pagamentos de fornecedores cadastrados virariam falso alarme.</li>
+        <li>Os 14 restantes pertencem a <code>F901</code> e <code>F902</code>, ausentes do cadastro.</li>
+        <li>A limpeza reduziu alarmes falsos e não apagou nenhum lançamento.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Testes de regra</div>
+      <h2>Quatro regras de controle</h2>
+      <table class="deck-table">
+        <thead><tr><th>Regra</th><th>Critério</th><th>Risco que controla</th></tr></thead>
+        <tbody>
+          <tr><td>Duplicidade</td><td>mesmo fornecedor, nota fiscal e valor</td><td>pagar duas vezes a mesma nota</td></tr>
+          <tr><td>Fracionamento</td><td>mesmo fornecedor e solicitante, R$ 9.000 a R$ 9.999,99, até 6 dias, soma acima da alçada</td><td>fugir da segunda assinatura</td></tr>
+          <tr><td>Sem cadastro</td><td>fornecedor ausente de <code>fornecedores.csv</code></td><td>beneficiário não homologado</td></tr>
+          <tr><td>Dia não útil</td><td>sábado, domingo ou feriado nacional de 2025</td><td>pagamento fora do fluxo normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Regras</div>
+      <h2>Duplicidade, cadastro e calendário</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Em pagamentos, crie as flags booleanas:
+1. duplicidade: duplicated por fornecedor_id, nota_fiscal e valor, mantendo a primeira ocorrência. Compare com a regra ingênua por fornecedor_id e valor e mostre quais fornecedores explicam a diferença.
+2. sem_cadastro: fornecedor_id ausente de cadastro.
+3. dia_nao_util: sábado, domingo ou um destes feriados de 2025: 01/01, 03/03, 04/03, 18/04, 21/04, 01/05, 19/06, 07/09, 12/10, 02/11, 15/11, 20/11 e 25/12.
+
+Espero 18, 14 e 25. Mostre amostras de cada flag. Não remova nenhum pagamento.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Alçada</div>
+      <h2>Fracionamento e valores redondos</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie a flag fracionamento: entre pagamentos de R$ 9.000 a R$ 9.999,99, agrupe por fornecedor_id e solicitante e marque cada pagamento que tenha, a até 6 dias dele (inclusive ele), pelo menos 2 pagamentos somando R$ 10.000 ou mais.
+
+Crie valor_redondo para valor igual ou acima de R$ 1.000 e múltiplo de R$ 100. Calcule, por fornecedor, a proporção de valores redondos e crie redondo_concentrado quando o pagamento é redondo e o fornecedor tem 10 ou mais pagamentos com 30% ou mais de redondos. Espero 116 pagamentos na faixa, 15 em fracionamento, 64 redondos e 40 concentrados.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Conferência das regras</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>77 e 18</strong><span>duplicidade, ingênua e com nota</span></div>
+        <div class="metric"><strong>116 e 15</strong><span>faixa abaixo da alçada e fracionamento</span></div>
+        <div class="metric"><strong>25</strong><span>em dia não útil</span></div>
+        <div class="metric"><strong>64 e 40</strong><span>redondos e concentrados</span></div>
+      </div>
+      <ul>
+        <li>A regra ingênua marca 59 parcelas de contratos mensais e de <code>F045</code>, com notas distintas.</li>
+        <li>Os 15 fracionamentos vêm de <code>F023</code>, <code>F066</code> e <code>F089</code>.</li>
+        <li>As parcelas de R$ 12.000 de <code>F031</code> são redondas, mas o fornecedor fica abaixo de 30%.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 1</div>
+      <h2>A Lei de Benford</h2>
+      <p>Em valores que se espalham por várias ordens de grandeza, o primeiro dígito segue a proporção log10(1 + 1/d), e não a distribuição uniforme.</p>
+      <table class="deck-table">
+        <thead><tr><th>Dígito</th><th>1</th><th>2</th><th>3</th><th>5</th><th>9</th></tr></thead>
+        <tbody>
+          <tr><td>Esperado por Benford</td><td>30,1%</td><td>17,6%</td><td>12,5%</td><td>7,9%</td><td>4,6%</td></tr>
+          <tr><td>Observado nos pagamentos</td><td>28,9%</td><td>16,9%</td><td>12,1%</td><td>8,5%</td><td>5,2%</td></tr>
+        </tbody>
+      </table>
+      <p>Valores inventados por pessoas tendem a espalhar os dígitos de forma uniforme e se afastam dessa curva.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 2</div>
+      <h2>Duas medidas de afastamento</h2>
+      <ul>
+        <li>MAD: média do desvio absoluto entre observado e esperado. Abaixo de 0,006 indica conformidade próxima.</li>
+        <li>Qui-quadrado: teste de hipótese que, com milhares de linhas, rejeita desvios pequenos.</li>
+        <li>Com 50 a 70 pagamentos por fornecedor, o MAD oscila muito; por fornecedor, usa-se o qui-quadrado com limiar rigoroso.</li>
+        <li>Como são 24 fornecedores testados ao mesmo tempo, o limiar adotado é p-valor abaixo de 0,001.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Benford</div>
+      <h2>Benford no total e por fornecedor</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Use os pagamentos com valor de R$ 10 ou mais. Extraia o primeiro dígito significativo e compare a proporção observada com a esperada por Benford, log10(1 + 1/d), em tabela e gráfico de barras. Calcule o MAD e o qui-quadrado (scipy.stats.chisquare) da população inteira.
+
+Repita para cada fornecedor com 50 ou mais pagamentos, salve mad, qui_quadrado e p_valor em saidas/benford_fornecedores.csv e crie a flag fornecedor_fora_benford para p-valor abaixo de 0,001. Mostre quantos fornecedores teriam MAD acima de 0,015 e explique por que esse critério não serve para amostras pequenas.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 3</div>
+      <h2>Conferência de Benford</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>0,0050</strong><span>MAD da população</span></div>
+        <div class="metric"><strong>24</strong><span>fornecedores testados</span></div>
+        <div class="metric"><strong>19</strong><span>com MAD acima de 0,015</span></div>
+        <div class="metric"><strong>1</strong><span>com p-valor abaixo de 0,001</span></div>
+      </div>
+      <ul>
+        <li>A população inteira tem conformidade próxima, com 5.407 valores.</li>
+        <li><code>F077</code> tem 60 pagamentos e nenhum começa por 1, 2 ou 3; o p-valor é da ordem de 10<sup>-19</sup>.</li>
+        <li><code>F031</code> tem p-valor de 0,008 por causa das parcelas do contrato e fica abaixo do limiar.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 3</div>
+      <h2>Isolation Forest como triagem</h2>
+      <p>O Isolation Forest separa os dados com cortes aleatórios. Pagamentos isolados com poucos cortes recebem a marca de anomalia, sem que o algoritmo conheça a alçada, o cadastro ou o calendário.</p>
+      <ul>
+        <li>Atributos: logaritmo do valor, dia da semana e pagamentos do fornecedor no mês.</li>
+        <li>Parâmetros: <code>contamination=0.01</code> e <code>random_state=42</code>.</li>
+        <li>O resultado é uma anomalia estatística, e não um indício de controle.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Isolation Forest</div>
+      <h2>Triagem estatística complementar</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Monte os atributos log_valor (log10 do valor), dia_semana e pagamentos_fornecedor_mes (quantidade de pagamentos do mesmo fornecedor no mesmo mês). Treine IsolationForest(contamination=0.01, random_state=42) do scikit-learn e crie a flag anomalia_isolation.
+
+Mostre quantos pagamentos foram marcados, quantos também dispararam alguma regra ou Benford e a distribuição de valor dos marcados. Explique em duas frases o que o algoritmo encontrou e por que isso não equivale a irregularidade.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 4</div>
+      <h2>Conferência do Isolation Forest</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>55</strong><span>anomalias marcadas</span></div>
+        <div class="metric"><strong>0</strong><span>coincidem com alguma regra</span></div>
+        <div class="metric"><strong>14</strong><span>acima de R$ 100.000</span></div>
+        <div class="metric"><strong>23</strong><span>abaixo de R$ 100</span></div>
+      </div>
+      <ul>
+        <li>O algoritmo encontrou os extremos de valor, que são raros e não violam controle algum.</li>
+        <li>Nenhum dos 172 pagamentos com indício aparece entre as anomalias.</li>
+        <li>Por isso o sinal recebe peso baixo na matriz de risco.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Matriz de risco</div>
+      <h2>Pesos dos sinais na pontuação</h2>
+      <table class="deck-table">
+        <thead><tr><th>Peso</th><th>Sinais</th><th>Justificativa</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>duplicidade, fracionamento, sem cadastro</td><td>violam controle interno explícito</td></tr>
+          <tr><td>2</td><td>fornecedor fora de Benford, dia não útil, redondo concentrado</td><td>padrão atípico que pede justificativa</td></tr>
+          <tr><td>1</td><td>anomalia do Isolation Forest</td><td>raridade estatística sem regra associada</td></tr>
+        </tbody>
+      </table>
+      <p>Entra na fila de exame o pagamento com pontuação igual ou superior a 2. Os pesos são decisão do comitê e ficam registrados no relatório.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 7 · Fila e relatório</div>
+      <h2>Fila priorizada e relatório</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Calcule pontuacao com os pesos: duplicidade, fracionamento e sem_cadastro valem 3; fornecedor_fora_benford, dia_nao_util e redondo_concentrado valem 2; anomalia_isolation vale 1. Crie a coluna sinais com os nomes das flags ativas.
+
+Salve em saidas/fila_de_exame.csv os pagamentos com pontuação 2 ou mais, ordenados por pontuação e valor. Salve saidas/achados.csv com uma linha por pagamento e sinal, incluindo parâmetro e data da execução. Recalcule o SHA-256 da entrada e confirme com assert que é igual a hash_inicial.
+
+Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal e limitações. Use somente números do notebook e escreva "examinar", nunca "fraude comprovada". Proponha git add, commit e push sem executar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 5</div>
+      <h2>Conferência da fila de exame</h2>
+      <table class="deck-table">
+        <thead><tr><th>Sinal principal</th><th>Pagamentos</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Fornecedor fora de Benford</td><td>60</td><td>R$ 420.488,87</td></tr>
+          <tr><td>Redondo concentrado</td><td>40</td><td>R$ 201.000,00</td></tr>
+          <tr><td>Dia não útil</td><td>25</td><td>R$ 148.336,45</td></tr>
+          <tr><td>Duplicidade</td><td>18</td><td>R$ 52.911,55</td></tr>
+          <tr><td>Fracionamento</td><td>15</td><td>R$ 141.068,94</td></tr>
+          <tr><td>Sem cadastro</td><td>14</td><td>R$ 89.179,49</td></tr>
+        </tbody>
+      </table>
+      <p>A fila tem 172 pagamentos e R$ 1.052.985,30, cerca de 2,2% do valor pago no ano.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio em dupla</div>
+      <h2>Parecer para o comitê</h2>
+      <p>Responda no <code>RELATORIO_AUDITORIA.md</code>, com base no notebook.</p>
+      <ul>
+        <li>Que documento o auditor pediria para examinar cada um dos seis sinais?</li>
+        <li>Que explicação legítima poderia justificar os pagamentos de <code>F077</code>?</li>
+        <li>O que muda na fila se o comitê baixar o peso de dia não útil para 1?</li>
+        <li>Que conclusão do agente a dupla precisou corrigir ou suavizar?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 21h45</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>Aula_15_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>saidas/benford_fornecedores.csv</code> com os 24 fornecedores testados.</li>
+        <li><code>saidas/achados.csv</code> e <code>saidas/fila_de_exame.csv</code> com 172 pagamentos.</li>
+        <li><code>RELATORIO_AUDITORIA.md</code> com hashes de início e fim iguais.</li>
+        <li>Commit e push da pasta <code>aula-15-seunome</code>.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>O hash da entrada sustentou a cadeia de custódia do início ao fim.</li>
+        <li>A normalização do cadastro evitou 47 falsos alarmes antes de qualquer teste.</li>
+        <li>A regra com nota fiscal separou 18 duplicidades de 59 parcelas legítimas.</li>
+        <li>Benford apontou um fornecedor, e o Isolation Forest encontrou apenas extremos de valor.</li>
+        <li>A fila priorizou 172 pagamentos para exame, sem afirmar que houve fraude.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 02/12, a disciplina trata de IA aplicada à estratégia e à tomada de decisão.</p>
+      <p>Antes de sair, reexecute o notebook, confira os hashes, revise o relatório e faça commit e push.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -374,6 +881,7 @@ print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-15/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -401,7 +909,7 @@ print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -418,6 +926,36 @@ print(hashlib.sha256(arquivo.read_bytes()).hexdigest())</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

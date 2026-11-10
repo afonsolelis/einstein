@@ -1,0 +1,121 @@
+fornecedor_id,nome,categoria,data_cadastro
+F001,Fornecedor 001 Ltda,Lavanderia,2024-02-17
+F002,Fornecedor 002 Ltda,Tecnologia,2023-02-12
+F003,Fornecedor 003 Ltda,Consultoria,2023-06-18
+F004,Fornecedor 004 Ltda,Materiais médicos,2019-01-05
+F005,Fornecedor 005 Ltda,Lavanderia,2021-11-20
+F006,Fornecedor 006 Ltda,Laboratório,2019-01-04
+F007,Fornecedor 007 Ltda,Manutenção predial,2023-12-15
+F008,Fornecedor 008 Ltda,Serviços de limpeza,2022-02-17
+F009,Fornecedor 009 Ltda,Materiais médicos,2021-10-10
+F010,Fornecedor 010 Ltda,Tecnologia,2019-01-22
+F011,Fornecedor 011 Ltda,Consultoria,2021-11-09
+F012,Fornecedor 012 Ltda,Medicamentos,2020-12-29
+F013,Fornecedor 013 Ltda,Lavanderia,2021-05-27
+F014,Fornecedor 014 Ltda,Materiais médicos,2019-12-07
+F015,Fornecedor 015 Ltda,Materiais médicos,2022-08-05
+F016,Fornecedor 016 Ltda,Consultoria,2024-02-11
+F017,Fornecedor 017 Ltda,Laboratório,2024-02-24
+F018,Fornecedor 018 Ltda,Equipamentos,2021-08-19
+F019,Fornecedor 019 Ltda,Lavanderia,2024-04-07
+F020,Fornecedor 020 Ltda,Lavanderia,2023-04-05
+F021,Fornecedor 021 Ltda,Manutenção predial,2020-10-12
+F022,Fornecedor 022 Ltda,Consultoria,2023-06-01
+F023,Fornecedor 023 Ltda,Materiais médicos,2020-10-10
+F024,Fornecedor 024 Ltda,Laboratório,2022-05-14
+F025,Fornecedor 025 Ltda,Tecnologia,2024-06-21
+F026,Fornecedor 026 Ltda,Serviços de limpeza,2020-03-24
+F027,Fornecedor 027 Ltda,Consultoria,2021-01-08
+F028,Fornecedor 028 Ltda,Nutrição,2021-09-22
+F029,Fornecedor 029 Ltda,Lavanderia,2021-05-03
+F030,Fornecedor 030 Ltda,Serviços de limpeza,2019-05-12
+F031,Fornecedor 031 Ltda,Laboratório,2022-11-03
+F032,Fornecedor 032 Ltda,Manutenção predial,2023-07-10
+F033,Fornecedor 033 Ltda,Tecnologia,2023-05-27
+F034,Fornecedor 034 Ltda,Medicamentos,2023-10-24
+F035,Fornecedor 035 Ltda,Equipamentos,2020-12-24
+F036,Fornecedor 036 Ltda,Consultoria,2022-06-06
+F037,Fornecedor 037 Ltda,Manutenção predial,2021-06-12
+F038,Fornecedor 038 Ltda,Nutrição,2023-10-20
+F039,Fornecedor 039 Ltda,Tecnologia,2024-04-28
+F040,Fornecedor 040 Ltda,Nutrição,2023-06-12
+F041,Fornecedor 041 Ltda,Laboratório,2020-10-04
+F042,Fornecedor 042 Ltda,Materiais médicos,2020-04-27
+F043,Fornecedor 043 Ltda,Equipamentos,2022-12-23
+F044,Fornecedor 044 Ltda,Serviços de limpeza,2023-05-12
+F045,Fornecedor 045 Ltda,Manutenção predial,2021-02-10
+F046,Fornecedor 046 Ltda,Manutenção predial,2023-01-03
+F047,Fornecedor 047 Ltda,Lavanderia,2022-04-21
+F048,Fornecedor 048 Ltda,Manutenção predial,2023-11-27
+F049,Fornecedor 049 Ltda,Tecnologia,2023-08-24
+F050,Fornecedor 050 Ltda,Laboratório,2023-06-05
+F051,Fornecedor 051 Ltda,Lavanderia,2022-03-17
+F052,Fornecedor 052 Ltda,Materiais médicos,2020-08-25
+F053,Fornecedor 053 Ltda,Materiais médicos,2022-01-04
+F054,Fornecedor 054 Ltda,Serviços de limpeza,2020-05-17
+F055,Fornecedor 055 Ltda,Serviços de limpeza,2019-09-20
+F056,Fornecedor 056 Ltda,Equipamentos,2022-04-23
+F057,Fornecedor 057 Ltda,Nutrição,2019-03-13
+F058,Fornecedor 058 Ltda,Serviços de limpeza,2024-02-02
+F059,Fornecedor 059 Ltda,Manutenção predial,2021-11-19
+F060,Fornecedor 060 Ltda,Laboratório,2020-11-11
+F061,Fornecedor 061 Ltda,Manutenção predial,2023-11-05
+F062,Fornecedor 062 Ltda,Equipamentos,2021-02-06
+F063,Fornecedor 063 Ltda,Manutenção predial,2021-08-01
+F064,Fornecedor 064 Ltda,Consultoria,2019-05-27
+F065,Fornecedor 065 Ltda,Tecnologia,2023-07-31
+F066,Fornecedor 066 Ltda,Materiais médicos,2022-10-18
+F067,Fornecedor 067 Ltda,Nutrição,2020-10-23
+F068,Fornecedor 068 Ltda,Consultoria,2020-04-18
+F069,Fornecedor 069 Ltda,Medicamentos,2021-02-22
+F070,Fornecedor 070 Ltda,Lavanderia,2022-05-27
+F071,Fornecedor 071 Ltda,Serviços de limpeza,2022-04-27
+F072,Fornecedor 072 Ltda,Serviços de limpeza,2023-06-19
+F073,Fornecedor 073 Ltda,Consultoria,2024-01-29
+F074,Fornecedor 074 Ltda,Laboratório,2019-02-12
+F075,Fornecedor 075 Ltda,Manutenção predial,2020-04-15
+F076,Fornecedor 076 Ltda,Equipamentos,2019-12-25
+F077,Fornecedor 077 Ltda,Consultoria,2020-12-30
+F078,Fornecedor 078 Ltda,Consultoria,2023-07-04
+F079,Fornecedor 079 Ltda,Consultoria,2022-07-21
+F080,Fornecedor 080 Ltda,Serviços de limpeza,2021-02-24
+F081,Fornecedor 081 Ltda,Nutrição,2019-07-11
+F082,Fornecedor 082 Ltda,Laboratório,2021-03-03
+F083,Fornecedor 083 Ltda,Laboratório,2021-11-01
+F084,Fornecedor 084 Ltda,Nutrição,2019-07-19
+F085,Fornecedor 085 Ltda,Materiais médicos,2019-05-30
+F086,Fornecedor 086 Ltda,Tecnologia,2022-07-17
+F087,Fornecedor 087 Ltda,Serviços de limpeza,2021-11-27
+F088,Fornecedor 088 Ltda,Tecnologia,2019-12-04
+F089,Fornecedor 089 Ltda,Equipamentos,2024-04-23
+F090,Fornecedor 090 Ltda,Nutrição,2022-08-21
+F091,Fornecedor 091 Ltda,Equipamentos,2023-12-27
+F092,Fornecedor 092 Ltda,Consultoria,2021-08-05
+F093,Fornecedor 093 Ltda,Materiais médicos,2022-08-04
+F094,Fornecedor 094 Ltda,Laboratório,2019-10-29
+F095,Fornecedor 095 Ltda,Tecnologia,2023-05-07
+F096,Fornecedor 096 Ltda,Consultoria,2023-08-05
+F097,Fornecedor 097 Ltda,Manutenção predial,2023-05-18
+F098,Fornecedor 098 Ltda,Equipamentos,2022-09-02
+F099,Fornecedor 099 Ltda,Nutrição,2021-04-07
+F100,Fornecedor 100 Ltda,Manutenção predial,2022-11-19
+F101,Fornecedor 101 Ltda,Medicamentos,2020-05-14
+F102,Fornecedor 102 Ltda,Laboratório,2021-08-16
+F103,Fornecedor 103 Ltda,Consultoria,2022-04-22
+F104,Fornecedor 104 Ltda,Lavanderia,2024-03-06
+F105,Fornecedor 105 Ltda,Lavanderia,2024-06-12
+F106,Fornecedor 106 Ltda,Manutenção predial,2023-01-30
+F107,Fornecedor 107 Ltda,Tecnologia,2021-11-08
+F108,Fornecedor 108 Ltda,Laboratório,2021-11-07
+F109,Fornecedor 109 Ltda,Nutrição,2019-04-21
+F110,Fornecedor 110 Ltda,Manutenção predial,2022-09-20
+F111,Fornecedor 111 Ltda,Laboratório,2020-03-25
+F112,Fornecedor 112 Ltda,Nutrição,2019-06-19
+F113,Fornecedor 113 Ltda,Serviços de limpeza,2020-04-18
+F114,Fornecedor 114 Ltda,Tecnologia,2023-09-10
+F115,Fornecedor 115 Ltda,Medicamentos,2019-06-26
+F116,Fornecedor 116 Ltda,Equipamentos,2023-04-19
+F117,Fornecedor 117 Ltda,Lavanderia,2022-07-04
+F118,Fornecedor 118 Ltda,Equipamentos,2024-04-01
+F119,Fornecedor 119 Ltda,Nutrição,2021-01-30
+F120,Fornecedor 120 Ltda,Laboratório,2019-01-03

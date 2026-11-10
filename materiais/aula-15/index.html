@@ -7,48 +7,62 @@
   <title>Material · 15</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,42 +118,465 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-15.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dados/contas_a_pagar.csv" download="contas_a_pagar.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-auditoria.md" download="prompts-auditoria.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 15</div>
+      <div class="badge">LABORATÓRIO 15 · 25/11</div>
       <h1>Auditoria e forense de dados: anomalias, riscos e fraudes</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Anomalia é observação incompatível com um padrão esperado; ela é um sinal para investigação, não uma sentença de irregularidade. A análise forense começa quando o alerta precisa virar evidência que outra pessoa consiga reproduzir. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Distinguir erro, evento raro e fraude</li><li>Combinar regras e escores de anomalia com contexto de negócio</li><li>Priorizar alertas por impacto e explicabilidade</li><li>Relacionar transações, entidades e padrões suspeitos preservando a cadeia de custódia</li><li>Documentar achados sem ultrapassar a evidência</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos e contexto</h2><p>Anomalia é observação incompatível com um padrão esperado; ela é um sinal para investigação, não uma sentença de irregularidade. A análise forense começa quando o alerta precisa virar evidência que outra pessoa consiga reproduzir.</p><p><strong>Auditoria: critérios para gerar alertas</strong></p><ul><li>Regras de negócio capturam riscos conhecidos e são fáceis de explicar</li><li>Métodos estatísticos detectam desvios, mas exigem segmentação</li><li>Taxa de falsos positivos determina o custo operacional da fila</li></ul><p><strong>Forense: do alerta à evidência</strong></p><ul><li>Hashes ajudam a demonstrar que uma evidência não foi alterada</li><li>Junções por conta, dispositivo e endereço revelam redes ocultas</li><li>Padrões circulares, fracionamento e horários incomuns orientam investigação</li></ul><p>No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos. Esses elementos permitem interpretar resultados, comparar alternativas e reconhecer limites.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 no Jupyter do Codespace, com as bibliotecas já instaladas pelo <code>requirements.txt</code>, e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">import pandas as pd
-pag = pd.read_csv("pagamentos.csv")
-limite = pag.groupby("fornecedor")["valor"].transform(lambda s:s.quantile(.99))
-pag["alerta_regra"] = pag["valor"] &gt; limite</div><p>Um escore estatístico complementa a regra e ordena a fila de revisão:</p><div class="code-block">from sklearn.ensemble import IsolationForest
-X = pag[["valor","hora","dias_desde_ultimo"]].fillna(0)
-pag["score"] = -IsolationForest(contamination=.02, random_state=42).fit_predict(X)
-print(pag.sort_values("score", ascending=False).head())</div><p>Antes de investigar o caso prioritário, registre a assinatura da fonte e reconstrua a rede de transações:</p><div class="code-block">import hashlib
+      <p class="desc">O comitê de auditoria de uma rede hospitalar fictícia recebeu as contas a pagar de 2025, com 5.440 lançamentos e R$ 46,9 milhões pagos a fornecedores, e tem equipe para examinar apenas algumas centenas de pagamentos. Neste laboratório, a turma prepara a base segundo as regras de alçada, calendário e cadastro, aplica testes de regra, verifica a aderência dos valores à Lei de Benford, usa o Isolation Forest como triagem complementar e combina os sinais em uma fila priorizada. A IA escreve o código no GitHub Codespaces. A turma escolhe os parâmetros, confere as contagens e redige o relatório, que termina na recomendação de examinar, e não na acusação.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Preservar a entrada com hash e registrar a cadeia de custódia da análise.</li>
+          <li>Limpar a base segundo as regras de alçada, calendário e cadastro.</li>
+          <li>Aplicar testes de regra e medir quantos alarmes cada um produz.</li>
+          <li>Testar a aderência à Lei de Benford no total e por fornecedor.</li>
+          <li>Combinar sinais em uma matriz de risco e justificar a fila de exame.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O problema concreto</h2>
+        <p>Uma auditoria de contas a pagar raramente examina todos os lançamentos. O comitê precisa escolher uma amostra, e a escolha pode ser aleatória ou orientada por risco. A amostra aleatória dá a mesma chance a todos os pagamentos e, por isso, desperdiça horas de exame em lançamentos sem qualquer sinal. A amostra orientada por risco concentra o exame onde os controles foram violados ou onde o padrão foge do esperado, desde que cada critério seja explícito e possa ser contestado.</p>
+        <p>A base desta aula tem 5.440 lançamentos de 2025, dos quais 5.408 são pagamentos e 32 são estornos. Ela contém irregularidades plantadas em quantidades conhecidas e também ruídos inocentes, como parcelas iguais de contratos mensais, que disparam regras sem configurar irregularidade. A aula mostra como separar uns dos outros e como registrar o motivo de cada pagamento entrar na fila.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado do início ao fim, a tabela de Benford por fornecedor, o registro de achados, a fila de exame com 172 pagamentos e o <code>RELATORIO_AUDITORIA.md</code>, com o mesmo hash de entrada no início e no fim.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. Indício, anomalia, irregularidade e fraude</h2>
+        <p>Os quatro termos descrevem graus diferentes de certeza, e confundi-los é o erro mais grave que um relatório de auditoria pode cometer. Uma anomalia é um valor estatisticamente raro, encontrado por um algoritmo que não conhece as regras do negócio. Um indício é uma regra de controle disparada, como um pagamento acima da alçada sem segunda assinatura. A irregularidade só existe quando o exame dos documentos confirma o indício. A fraude exige ainda a comprovação de intenção, o que depende de apuração formal e foge do alcance de qualquer notebook.</p>
+        <table>
+          <thead><tr><th>Termo</th><th>Significado</th><th>Quem conclui</th></tr></thead>
+          <tbody>
+            <tr><td>Anomalia</td><td>valor estatisticamente raro na base</td><td>o algoritmo</td></tr>
+            <tr><td>Indício</td><td>regra de controle disparada</td><td>o teste de regra</td></tr>
+            <tr><td>Irregularidade</td><td>indício confirmado por documento</td><td>o auditor, após exame</td></tr>
+            <tr><td>Fraude</td><td>irregularidade com intenção comprovada</td><td>a apuração formal</td></tr>
+          </tbody>
+        </table>
+        <p>Por esse motivo, o produto do laboratório é uma fila de pagamentos a examinar. O relatório pode afirmar que um pagamento disparou determinada regra, e não que alguém fraudou a empresa.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. A base de contas a pagar</h2>
+        <p>Os arquivos são sintéticos e foram gerados pelo script <code>materiais/aula-15/dados/gerar_contas.py</code>, com semente fixa, de modo que a mesma execução produz os mesmos arquivos byte a byte. A rede hospitalar, os fornecedores e os solicitantes são fictícios. Os pagamentos legítimos seguem uma distribuição log-normal ampla, que se espalha por várias ordens de grandeza e por isso adere à Lei de Benford. O arquivo <code>materiais/aula-15/dados/README.md</code> descreve o inventário e as irregularidades plantadas.</p>
+        <div class="download-panel"><a href="dados/contas_a_pagar.csv" download="contas_a_pagar.csv" class="btn btn-data">⬇️ Baixar contas a pagar</a><a href="dados/fornecedores.csv" download="fornecedores.csv" class="btn btn-data">⬇️ Baixar cadastro de fornecedores</a><a href="prompts-auditoria.md" download="prompts-auditoria.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table>
+          <thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead>
+          <tbody>
+            <tr><td><code>pagamento_id</code></td><td>identificador do lançamento</td><td>texto</td></tr>
+            <tr><td><code>data_pagamento</code></td><td>data em que o pagamento saiu do caixa</td><td>data</td></tr>
+            <tr><td><code>fornecedor_id</code></td><td>código do fornecedor, a cruzar com o cadastro</td><td>texto</td></tr>
+            <tr><td><code>nota_fiscal</code></td><td>documento fiscal que justifica o pagamento</td><td>texto</td></tr>
+            <tr><td><code>valor</code></td><td>valor em reais; negativo nos estornos</td><td>decimal</td></tr>
+            <tr><td><code>solicitante</code></td><td>código de quem pediu a compra</td><td>texto</td></tr>
+            <tr><td><code>tipo</code></td><td><code>pagamento</code> ou <code>estorno</code></td><td>texto</td></tr>
+          </tbody>
+        </table>
+        <p>O cadastro <code>fornecedores.csv</code> traz 120 fornecedores, com código, nome, categoria e data de cadastro. A alçada de aprovação da rede é de R$ 10.000: pagamentos a partir desse valor exigem segunda assinatura.</p>
+        <div class="evidence"><strong>Assinaturas das cópias usadas na aula</strong><code>contas_a_pagar.csv</code>: 5.440 linhas, 7 colunas, <code>SHA-256 b3898f2daa84095b6d56c1ccb661a2dba6c8736e36807770204be4d8b0d3e9ce</code><br><code>fornecedores.csv</code>: 120 linhas, 4 colunas, <code>SHA-256 2a5fede2703f558f2933798055b03f0eb080e84fbcf361b09d640ca7e45918ea</code></div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Cadeia de custódia e protocolo com a IA</h2>
+        <p>Um achado de auditoria só tem valor se for possível provar sobre qual arquivo ele foi produzido. A cadeia de custódia digital resolve esse problema com quatro práticas. O arquivo recebido fica na pasta <code>entrada</code> e não é editado. O hash SHA-256 é calculado antes da análise e conferido ao final, já que qualquer alteração de um único byte muda o hash. Cada achado registra o pagamento, a regra, o parâmetro e a data da execução. O notebook, reexecutado do início, produz a mesma fila.</p>
+        <p>O agente de código acelera a escrita dos testes, mas tende a completar o relatório com conclusões sobre culpa ou intenção que os dados não sustentam. Por isso o protocolo desta aula acrescenta uma etapa ao das aulas anteriores.</p>
+        <ol>
+          <li>Contextualize: informe os arquivos, a alçada e o resultado esperado de cada etapa.</li>
+          <li>Peça um plano antes da edição, para verificar se o agente entendeu a regra.</li>
+          <li>Leia o código e procure parâmetros fixos sem justificativa, como limiares e janelas.</li>
+          <li>Execute uma etapa por vez e confira a contagem com o checkpoint.</li>
+          <li>Recuse ou reescreva qualquer frase do agente que atribua intenção, culpa ou fraude.</li>
+        </ol>
+        <p>O ambiente é o GitHub Codespaces da disciplina, com Jupyter, Pandas, scikit-learn e SciPy já instalados. Use o Copilot em modo agente ou o agente com que você já trabalha.</p>
+        <div class="alert-box"><h4>Divergência de contagem não se resolve ajustando o parâmetro</h4><p>Os números esperados servem para detectar leitura errada, regra mal implementada ou parâmetro trocado. Se o notebook produzir outro valor, investigue o código. Alterar a janela, o limiar ou o peso até o número coincidir destrói a função do checkpoint e, numa auditoria real, comprometeria a independência da análise.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · perfil e custódia</span>
+        <h2>6. Fase A: perfil da base com hash de entrada</h2>
+        <p>No terminal do Codespace, crie a estrutura da entrega, copie os dois arquivos e registre os hashes.</p>
+        <div class="code-block">mkdir -p aula-15-seunome/entrada aula-15-seunome/saidas
+cp materiais/aula-15/dados/contas_a_pagar.csv aula-15-seunome/entrada/
+cp materiais/aula-15/dados/fornecedores.csv aula-15-seunome/entrada/
+sha256sum aula-15-seunome/entrada/*.csv</div>
+        <div class="prompt-block">Atue como meu assistente de auditoria neste laboratório. Crie
+aula-15-seunome/Aula_15_SeuNome.ipynb. Na primeira célula, calcule o SHA-256
+de entrada/contas_a_pagar.csv e guarde em hash_inicial.
+
+Carregue contas_a_pagar.csv em bruta (data_pagamento como data, fornecedor_id
+como texto) e fornecedores.csv em cadastro. Mostre shape, dtypes, pagamento_id
+duplicado, contagem por tipo, valor mínimo e máximo e pagamentos por mês. Não
+limpe nada. Espero 5.440 linhas e 7 colunas; se divergir, pare. Mostre o plano
+antes de editar.</div>
+        <div class="code-block">import hashlib
 from pathlib import Path
-print(hashlib.sha256(Path("pagamentos.csv").read_bytes()).hexdigest())
-rede = pag.groupby(["conta_origem","conta_destino"]).agg(valor=("valor","sum"),eventos=("valor","size")).reset_index()
-print(rede.sort_values("valor", ascending=False).head())</div><p>Monte uma fila de auditoria combinando regra conhecida e escore, revise manualmente os dez primeiros casos e reconstrua a sequência de transações do alerta prioritário, preservando o hash da fonte e produzindo uma linha do tempo.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar ranking de alertas com motivo, valor em risco, evidência e resultado da revisão, acompanhado do dossiê do caso prioritário com inventário de evidências, consultas reproduzíveis, achados, hipóteses alternativas e lacunas.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Não rotular fraude sem investigação</li><li>Segmentar limites por contexto comparável</li><li>Medir precisão da fila revisada</li><li>Trabalhar sobre cópia verificada</li><li>Registrar horário e autor de cada transformação</li><li>Proteger identidade e restringir acesso a dados sensíveis</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Detecção eficiente combina sinais automáticos com investigação humana, e uma investigação forte permite que outra pessoa reproduza o caminho da evidência à conclusão.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, ampliaremos a análise para decisões estratégicas apoiadas por IA.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+import pandas as pd
+
+entrada = Path("entrada")
+hash_inicial = hashlib.sha256((entrada / "contas_a_pagar.csv").read_bytes()).hexdigest()
+
+bruta = pd.read_csv(entrada / "contas_a_pagar.csv",
+                    parse_dates=["data_pagamento"], dtype={"fornecedor_id": "string"})
+cadastro = pd.read_csv(entrada / "fornecedores.csv")
+
+print(hash_inicial)
+print(bruta.shape, bruta["pagamento_id"].duplicated().sum())
+display(bruta["tipo"].value_counts())</div>
+        <div class="evidence"><strong>Checkpoint</strong>O hash começa por <code>b3898f2d</code>. A base tem <code>(5440, 7)</code>, nenhum <code>pagamento_id</code> duplicado, 5.408 pagamentos e 32 estornos. O maior valor é R$ 1.865.925,92.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · limpeza</span>
+        <h2>7. Fase B: limpeza orientada ao negócio</h2>
+        <p>A limpeza desta aula tem uma finalidade específica, que é evitar alarmes falsos. Na exportação do sistema financeiro, 47 códigos de fornecedor saíram com letras minúsculas ou espaços nas bordas. Sem normalização, esses pagamentos de fornecedores homologados apareceriam como pagamentos sem cadastro. Os estornos, por sua vez, não são saída de caixa e distorceriam os testes de alçada e de Benford.</p>
+        <div class="prompt-block">Crie base a partir de bruta, sem alterar bruta nem os CSVs. Conte quantos
+fornecedor_id de bruta não existem em cadastro. Em seguida normalize
+fornecedor_id com strip e upper, conte quantos códigos mudaram e repita a
+contagem sem cadastro.
+
+Crie pagamentos apenas com tipo igual a pagamento; os estornos ficam fora dos
+testes porque não são saída de caixa. Mostre o número de pagamentos, o valor
+total e quantos têm valor igual ou acima da alçada de R$ 10.000. Espero 61 sem
+cadastro antes, 47 códigos normalizados, 14 sem cadastro depois e 5.408
+pagamentos.</div>
+        <div class="code-block">ALCADA = 10_000.00
+
+base = bruta.copy()
+antes = (~base["fornecedor_id"].isin(cadastro["fornecedor_id"])).sum()
+base["fornecedor_id"] = base["fornecedor_id"].str.strip().str.upper()
+normalizados = (base["fornecedor_id"] != bruta["fornecedor_id"]).sum()
+
+pagamentos = base[base["tipo"] == "pagamento"].copy()
+print(antes, normalizados, len(pagamentos))           # 61 47 5408
+print(pagamentos["valor"].sum().round(2))             # 46918492.83
+print((pagamentos["valor"] &gt;= ALCADA).sum())          # 929</div>
+        <div class="evidence"><strong>Checkpoint</strong>61 pagamentos sem cadastro antes da normalização e 14 depois, todos dos códigos <code>F901</code> e <code>F902</code>. São 5.408 pagamentos, R$ 46.918.492,83 no total e 929 acima da alçada.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>8. Testes de regra</h2>
+        <p>Um teste de regra traduz um controle interno em código. Cada regra tem um critério verificável e controla um risco específico. A tabela abaixo descreve as quatro regras da aula e um quinto sinal, de valores redondos, que mede um padrão atípico em vez de uma violação.</p>
+        <table>
+          <thead><tr><th>Regra</th><th>Critério</th><th>Risco que controla</th></tr></thead>
+          <tbody>
+            <tr><td>Duplicidade</td><td>mesmo fornecedor, nota fiscal e valor, mantendo a primeira ocorrência</td><td>pagar duas vezes a mesma nota</td></tr>
+            <tr><td>Fracionamento</td><td>mesmo fornecedor e solicitante, valores de R$ 9.000 a R$ 9.999,99, pelo menos 2 pagamentos a até 6 dias, soma igual ou acima da alçada</td><td>dividir uma compra para fugir da segunda assinatura</td></tr>
+            <tr><td>Sem cadastro</td><td>fornecedor ausente de <code>fornecedores.csv</code></td><td>pagar beneficiário não homologado</td></tr>
+            <tr><td>Dia não útil</td><td>sábado, domingo ou feriado nacional de 2025</td><td>pagamento processado fora do fluxo normal</td></tr>
+            <tr><td>Redondo concentrado</td><td>valor de R$ 1.000 ou mais, múltiplo de R$ 100, em fornecedor com 30% ou mais de valores redondos</td><td>valores estimados em vez de faturados</td></tr>
+          </tbody>
+        </table>
+        <p>O critério de duplicidade inclui a nota fiscal por uma razão de negócio. Contratos de prestação continuada geram parcelas mensais de mesmo valor, cada uma com sua nota. Uma regra que compare apenas fornecedor e valor marcaria todas essas parcelas como duplicadas.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · regras</span>
+        <h2>9. Fase C: duplicidade, cadastro e calendário</h2>
+        <div class="prompt-block">Em pagamentos, crie as flags booleanas:
+1. duplicidade: duplicated por fornecedor_id, nota_fiscal e valor, mantendo a
+   primeira ocorrência. Compare com a regra ingênua por fornecedor_id e valor e
+   mostre quais fornecedores explicam a diferença.
+2. sem_cadastro: fornecedor_id ausente de cadastro.
+3. dia_nao_util: sábado, domingo ou um destes feriados de 2025: 01/01, 03/03,
+   04/03, 18/04, 21/04, 01/05, 19/06, 07/09, 12/10, 02/11, 15/11, 20/11 e 25/12.
+
+Espero 18, 14 e 25. Mostre amostras de cada flag. Não remova nenhum pagamento.</div>
+        <div class="code-block">FERIADOS_2025 = pd.to_datetime([
+    "2025-01-01", "2025-03-03", "2025-03-04", "2025-04-18", "2025-04-21",
+    "2025-05-01", "2025-06-19", "2025-09-07", "2025-10-12", "2025-11-02",
+    "2025-11-15", "2025-11-20", "2025-12-25",
+])
+
+pagamentos["duplicidade"] = pagamentos.duplicated(
+    ["fornecedor_id", "nota_fiscal", "valor"], keep="first")
+ingenua = pagamentos.duplicated(["fornecedor_id", "valor"], keep="first")
+pagamentos["sem_cadastro"] = ~pagamentos["fornecedor_id"].isin(cadastro["fornecedor_id"])
+
+data = pagamentos["data_pagamento"]
+pagamentos["dia_nao_util"] = (data.dt.dayofweek &gt;= 5) | data.isin(FERIADOS_2025)
+
+print(ingenua.sum(), pagamentos["duplicidade"].sum())                 # 77 18
+display(pagamentos[ingenua &amp; ~pagamentos["duplicidade"]]["fornecedor_id"].value_counts())</div>
+        <div class="evidence"><strong>Checkpoint</strong>A regra ingênua marca 77 pagamentos e a regra com nota fiscal, 18. A diferença de 59 vem de <code>F045</code> (26), <code>F012</code>, <code>F031</code> e <code>F058</code> (11 cada), os três últimos com contratos mensais de R$ 18.500, R$ 12.000 e R$ 4.750. São 14 pagamentos sem cadastro e 25 em dia não útil, dos quais 24 em fim de semana e 1 em feriado.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · alçada</span>
+        <h2>10. Fase D: fracionamento e valores redondos</h2>
+        <p>O fracionamento é o controle mais ligado à alçada. Quem quer evitar a segunda assinatura divide uma compra de, por exemplo, R$ 28.000 em três pagamentos logo abaixo de R$ 10.000. A regra procura pagamentos na faixa de R$ 9.000 a R$ 9.999,99 que se agrupem por fornecedor e solicitante em poucos dias.</p>
+        <div class="prompt-block">Crie a flag fracionamento: entre pagamentos de R$ 9.000 a R$ 9.999,99, agrupe
+por fornecedor_id e solicitante e marque cada pagamento que tenha, a até 6 dias
+dele (inclusive ele), pelo menos 2 pagamentos somando R$ 10.000 ou mais.
+
+Crie valor_redondo para valor igual ou acima de R$ 1.000 e múltiplo de R$ 100.
+Calcule, por fornecedor, a proporção de valores redondos e crie
+redondo_concentrado quando o pagamento é redondo e o fornecedor tem 10 ou mais
+pagamentos com 30% ou mais de redondos. Espero 116 pagamentos na faixa, 15 em
+fracionamento, 64 redondos e 40 concentrados.</div>
+        <div class="code-block">import numpy as np
+
+faixa = pagamentos[(pagamentos["valor"] &gt;= 9_000) &amp; (pagamentos["valor"] &lt; ALCADA)]
+pagamentos["fracionamento"] = False
+for _, grupo in faixa.groupby(["fornecedor_id", "solicitante"]):
+    dia = grupo["data_pagamento"].dt.dayofyear.to_numpy()
+    valor = grupo["valor"].to_numpy()
+    for i, d in zip(grupo.index, dia):
+        vizinhos = np.abs(dia - d) &lt;= 6
+        if vizinhos.sum() &gt;= 2 and valor[vizinhos].sum() &gt;= ALCADA:
+            pagamentos.loc[i, "fracionamento"] = True
+
+pagamentos["valor_redondo"] = (pagamentos["valor"] &gt;= 1_000) &amp; (pagamentos["valor"] % 100 == 0)
+proporcao = pagamentos.groupby("fornecedor_id")["valor_redondo"].agg(["mean", "size"])
+concentrados = proporcao[(proporcao["mean"] &gt;= 0.30) &amp; (proporcao["size"] &gt;= 10)].index
+pagamentos["redondo_concentrado"] = (pagamentos["valor_redondo"]
+                                     &amp; pagamentos["fornecedor_id"].isin(concentrados))</div>
+        <div class="evidence"><strong>Checkpoint</strong>116 pagamentos na faixa e 15 em fracionamento: 6 de <code>F023</code> com <code>S14</code>, 6 de <code>F066</code> com <code>S19</code> e 3 de <code>F089</code> com <code>S14</code>. São 64 valores redondos e 40 concentrados, todos de <code>F045</code>, que tem 100% de valores redondos.</div>
+        <p>O solicitante <code>S14</code> aparece em dois fornecedores diferentes. O dado sugere uma pergunta para o exame, e não uma conclusão: o padrão pode refletir uma prática de compras mal orientada, uma necessidade operacional ou uma tentativa deliberada de contornar a alçada. Já <code>F031</code> tem 24% de valores redondos por causa das parcelas de R$ 12.000 e fica abaixo do limiar.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>11. A Lei de Benford</h2>
+        <p>Em conjuntos de valores que se espalham por várias ordens de grandeza, como pagamentos de R$ 50 a R$ 500.000, o primeiro dígito significativo não é uniforme. O dígito 1 aparece em cerca de 30% dos valores e o dígito 9, em menos de 5%, segundo a proporção log10(1 + 1/d). O fenômeno foi descrito por Newcomb em 1881 e por Benford em 1938, e Nigrini o aplicou à auditoria contábil a partir dos anos 1990.</p>
+        <p>O teste interessa à auditoria porque valores inventados por pessoas tendem a distribuir os dígitos de forma mais uniforme e a evitar os dígitos baixos. Um fornecedor cujos pagamentos começam com 4, 5, 6, 7, 8 e 9 em proporções parecidas se afasta da curva e merece exame.</p>
+        <table>
+          <thead><tr><th>Primeiro dígito</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead>
+          <tbody>
+            <tr><td>Esperado por Benford</td><td>30,1%</td><td>17,6%</td><td>12,5%</td><td>9,7%</td><td>7,9%</td><td>6,7%</td><td>5,8%</td><td>5,1%</td><td>4,6%</td></tr>
+            <tr><td>Observado nos 5.407 pagamentos</td><td>28,9%</td><td>16,9%</td><td>12,1%</td><td>9,9%</td><td>8,5%</td><td>7,1%</td><td>6,1%</td><td>5,2%</td><td>5,2%</td></tr>
+          </tbody>
+        </table>
+        <h3>11.1 MAD e qui-quadrado</h3>
+        <p>O desvio absoluto médio (MAD) é a média das diferenças absolutas entre a proporção observada e a esperada nos nove dígitos. Nigrini propõe que um MAD abaixo de 0,006 indica conformidade próxima no primeiro dígito. O qui-quadrado é um teste de hipótese e, com milhares de linhas, rejeita desvios muito pequenos, motivo pelo qual o MAD é preferido para a população inteira.</p>
+        <p>Por fornecedor, a situação se inverte. Com 50 a 70 pagamentos, as proporções oscilam muito por acaso e o MAD ultrapassa os limiares de Nigrini sem qualquer irregularidade. Nesse caso usa-se o qui-quadrado, que leva o tamanho da amostra em conta. Como 24 fornecedores são testados ao mesmo tempo, o limiar adotado é um p-valor abaixo de 0,001, mais rigoroso que o habitual 0,05, para que a chance de um alarme falso entre os 24 testes fique baixa.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · benford</span>
+        <h2>12. Fase E: Benford no total e por fornecedor</h2>
+        <div class="prompt-block">Use os pagamentos com valor de R$ 10 ou mais. Extraia o primeiro dígito
+significativo e compare a proporção observada com a esperada por Benford,
+log10(1 + 1/d), em tabela e gráfico de barras. Calcule o MAD e o qui-quadrado
+(scipy.stats.chisquare) da população inteira.
+
+Repita para cada fornecedor com 50 ou mais pagamentos, salve mad, qui_quadrado
+e p_valor em saidas/benford_fornecedores.csv e crie a flag
+fornecedor_fora_benford para p-valor abaixo de 0,001. Mostre quantos
+fornecedores teriam MAD acima de 0,015 e explique por que esse critério não
+serve para amostras pequenas.</div>
+        <div class="code-block">from scipy.stats import chisquare
+
+benford = np.log10(1 + 1 / np.arange(1, 10))
+populacao = pagamentos[pagamentos["valor"] &gt;= 10].copy()
+populacao["digito"] = populacao["valor"].astype(str).str.lstrip("0.").str[0].astype(int)
+
+def mad(digitos):
+    observada = digitos.value_counts(normalize=True).reindex(range(1, 10), fill_value=0)
+    return float(np.mean(np.abs(observada.values - benford)))
+
+def qui_quadrado(digitos):
+    observada = digitos.value_counts().reindex(range(1, 10), fill_value=0)
+    return chisquare(observada.values, benford * len(digitos))
+
+print(len(populacao), round(mad(populacao["digito"]), 4))   # 5407 0.005
+
+linhas = []
+for fornecedor, grupo in populacao.groupby("fornecedor_id"):
+    if len(grupo) &gt;= 50:
+        teste = qui_quadrado(grupo["digito"])
+        linhas.append({"fornecedor_id": fornecedor, "pagamentos": len(grupo),
+                       "mad": mad(grupo["digito"]), "qui_quadrado": teste.statistic,
+                       "p_valor": teste.pvalue})
+por_fornecedor = pd.DataFrame(linhas).sort_values("p_valor")
+por_fornecedor.to_csv("saidas/benford_fornecedores.csv", index=False)
+fora = por_fornecedor.loc[por_fornecedor["p_valor"] &lt; 0.001, "fornecedor_id"]
+pagamentos["fornecedor_fora_benford"] = pagamentos["fornecedor_id"].isin(fora)</div>
+        <div class="evidence"><strong>Checkpoint</strong>5.407 valores na população, com MAD de 0,0050 e qui-quadrado de 13,8 (p-valor de 0,086). São 24 fornecedores testados, dos quais 19 têm MAD acima de 0,015 e apenas <code>F077</code> tem p-valor abaixo de 0,001, com qui-quadrado de 105,5. O segundo colocado, <code>F031</code>, tem p-valor de 0,008.</div>
+        <p>Os 60 pagamentos de <code>F077</code>, todos classificados como consultoria e situados entre R$ 4.058,64 e R$ 9.758,19, não começam por 1, 2 ou 3. O teste não explica a causa. Valores de uma tabela de honorários com faixa estreita produziriam o mesmo desenho, e por isso o pedido de exame inclui o contrato e as notas desse fornecedor. Já o desvio de <code>F031</code> decorre das 12 parcelas de R$ 12.000, que concentram o dígito 1, e mostra por que o limiar rigoroso é necessário.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>13. Isolation Forest como triagem complementar</h2>
+        <p>O Isolation Forest, proposto por Liu, Ting e Zhou em 2008, constrói árvores que separam os dados com cortes aleatórios. Um ponto comum precisa de muitos cortes até ficar sozinho, e um ponto raro é isolado com poucos. A média de cortes nas árvores vira uma pontuação de anomalia. O parâmetro <code>contamination</code> define a fração de pontos que o modelo marcará; com 0,01, ele marca cerca de 1% dos pagamentos.</p>
+        <p>O algoritmo não conhece a alçada, o cadastro, o calendário nem as notas fiscais. Ele vê apenas os atributos que recebe, e encontra o que é raro nesses atributos. Por isso seu resultado é uma anomalia estatística, que pode ou não coincidir com um indício de controle.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · isolation forest</span>
+        <h2>14. Fase F: triagem com Isolation Forest</h2>
+        <div class="prompt-block">Monte os atributos log_valor (log10 do valor), dia_semana e
+pagamentos_fornecedor_mes (quantidade de pagamentos do mesmo fornecedor no
+mesmo mês). Treine IsolationForest(contamination=0.01, random_state=42) do
+scikit-learn e crie a flag anomalia_isolation.
+
+Mostre quantos pagamentos foram marcados, quantos também dispararam alguma
+regra ou Benford e a distribuição de valor dos marcados. Explique em duas
+frases o que o algoritmo encontrou e por que isso não equivale a
+irregularidade.</div>
+        <div class="code-block">from sklearn.ensemble import IsolationForest
+
+data = pagamentos["data_pagamento"]
+pagamentos["mes"] = data.dt.month
+atributos = pd.DataFrame({
+    "log_valor": np.log10(pagamentos["valor"]),
+    "dia_semana": data.dt.dayofweek,
+    "pagamentos_fornecedor_mes": pagamentos.groupby(["fornecedor_id", "mes"])["valor"].transform("size"),
+})
+floresta = IsolationForest(contamination=0.01, random_state=42).fit(atributos)
+pagamentos["anomalia_isolation"] = floresta.predict(atributos) == -1
+
+regras = ["duplicidade", "fracionamento", "sem_cadastro", "dia_nao_util",
+          "valor_redondo", "fornecedor_fora_benford"]
+print(pagamentos["anomalia_isolation"].sum(),
+      (pagamentos["anomalia_isolation"] &amp; pagamentos[regras].any(axis=1)).sum())   # 55 0</div>
+        <div class="evidence"><strong>Checkpoint</strong>55 anomalias marcadas, nenhuma coincidente com regra ou com Benford. Dessas, 14 têm valor acima de R$ 100.000 e 23, abaixo de R$ 100.</div>
+        <p>O algoritmo encontrou os extremos de valor, que são raros por definição na distribuição log-normal e não violam controle algum. Os 25 pagamentos em dia não útil não foram isolados, possivelmente porque o dia da semana, sozinho, não basta para separá-los quando o valor é comum. O resultado ilustra os limites da técnica: sem os atributos certos, o algoritmo não enxerga a irregularidade, e com qualquer atributo ele sempre marca a fração pedida, haja ou não problema na base. Por isso o sinal recebe o menor peso na matriz de risco.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 7 · fila e relatório</span>
+        <h2>15. Fase G: matriz de risco e fila de exame</h2>
+        <p>A matriz de risco atribui um peso a cada sinal e soma os pesos de cada pagamento. Os pesos refletem a força do sinal: violar um controle explícito pesa mais que um padrão atípico, e este pesa mais que uma raridade estatística. Os valores abaixo são uma decisão do comitê e devem constar do relatório, para que possam ser revistos.</p>
+        <table>
+          <thead><tr><th>Peso</th><th>Sinais</th><th>Justificativa</th></tr></thead>
+          <tbody>
+            <tr><td>3</td><td>duplicidade, fracionamento, sem cadastro</td><td>violam controle interno explícito</td></tr>
+            <tr><td>2</td><td>fornecedor fora de Benford, dia não útil, redondo concentrado</td><td>padrão atípico que pede justificativa documental</td></tr>
+            <tr><td>1</td><td>anomalia do Isolation Forest</td><td>raridade estatística sem regra associada</td></tr>
+          </tbody>
+        </table>
+        <div class="prompt-block">Calcule pontuacao com os pesos: duplicidade, fracionamento e sem_cadastro
+valem 3; fornecedor_fora_benford, dia_nao_util e redondo_concentrado valem 2;
+anomalia_isolation vale 1. Crie a coluna sinais com os nomes das flags ativas.
+
+Salve em saidas/fila_de_exame.csv os pagamentos com pontuação 2 ou mais,
+ordenados por pontuação e valor. Salve saidas/achados.csv com uma linha por
+pagamento e sinal, incluindo parâmetro e data da execução. Recalcule o SHA-256
+da entrada e confirme com assert que é igual a hash_inicial.
+
+Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por
+sinal e limitações. Use somente números do notebook e escreva "examinar",
+nunca "fraude comprovada". Proponha git add, commit e push sem executar.</div>
+        <div class="code-block">PESOS = {
+    "duplicidade": 3, "fracionamento": 3, "sem_cadastro": 3,
+    "fornecedor_fora_benford": 2, "dia_nao_util": 2, "redondo_concentrado": 2,
+    "anomalia_isolation": 1,
+}
+pagamentos["pontuacao"] = sum(pagamentos[s].astype(int) * p for s, p in PESOS.items())
+pagamentos["sinais"] = pagamentos[list(PESOS)].apply(
+    lambda linha: ", ".join(s for s in PESOS if linha[s]), axis=1)
+
+fila = (pagamentos[pagamentos["pontuacao"] &gt;= 2]
+        .sort_values(["pontuacao", "valor"], ascending=[False, False]))
+fila.to_csv("saidas/fila_de_exame.csv", index=False)
+
+hash_final = hashlib.sha256((entrada / "contas_a_pagar.csv").read_bytes()).hexdigest()
+assert hash_final == hash_inicial
+print(len(fila), fila["valor"].sum().round(2))   # 172 1052985.3</div>
+        <table>
+          <thead><tr><th>Sinal</th><th>Pagamentos na fila</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Fornecedor fora de Benford</td><td>60</td><td>R$ 420.488,87</td></tr>
+            <tr><td>Redondo concentrado</td><td>40</td><td>R$ 201.000,00</td></tr>
+            <tr><td>Dia não útil</td><td>25</td><td>R$ 148.336,45</td></tr>
+            <tr><td>Duplicidade</td><td>18</td><td>R$ 52.911,55</td></tr>
+            <tr><td>Fracionamento</td><td>15</td><td>R$ 141.068,94</td></tr>
+            <tr><td>Sem cadastro</td><td>14</td><td>R$ 89.179,49</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Checkpoint</strong>172 pagamentos na fila, somando R$ 1.052.985,30, cerca de 2,2% do valor pago no ano. Cada pagamento da fila tem exatamente um sinal; 47 têm pontuação 3 e 125 têm pontuação 2. Outros 55 pagamentos têm pontuação 1, dada apenas pelo Isolation Forest, e ficam fora da fila.</div>
+        <p>O <code>achados.csv</code> é o registro que sustenta a cadeia de custódia: para cada pagamento e sinal, ele guarda o parâmetro usado (por exemplo, a janela de 6 dias ou o limiar de 0,001) e a data da execução. Leia o relatório e o diff antes de autorizar o versionamento.</p>
+        <div class="code-block">git status
+git add aula-15-seunome
+git diff --staged --stat
+git commit -m "Entrega a auditoria de contas a pagar da aula 15"
+git push</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>16. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h35</td><td>case, vocabulário, custódia e protocolo com a IA</td><td>a dupla distingue indício de anomalia</td></tr>
+            <tr><td>19h35 às 19h55</td><td>pastas, hashes, perfil e limpeza</td><td>5.440 linhas, 47 normalizados, 14 sem cadastro</td></tr>
+            <tr><td>19h55 às 20h40</td><td>duplicidade, calendário, fracionamento e valores redondos</td><td>18, 25, 15 e 40</td></tr>
+            <tr><td>20h40 às 21h10</td><td>Lei de Benford no total e por fornecedor</td><td>MAD de 0,0050 e <code>F077</code> fora</td></tr>
+            <tr><td>21h10 às 21h30</td><td>Isolation Forest</td><td>55 anomalias, nenhuma coincidente</td></tr>
+            <tr><td>21h30 às 21h45</td><td>matriz de risco, fila e hash final</td><td>172 pagamentos e hash igual ao inicial</td></tr>
+            <tr><td>21h45 às 22h00</td><td>relatório, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+          </tbody>
+        </table>
+        <p>O script <code>materiais/aula-15/referencia/auditoria_referencia.py</code> reproduz todos os números desta aula. Execute-o depois de concluir o notebook e compare os resultados.</p>
+        <div class="code-block">python materiais/aula-15/referencia/auditoria_referencia.py</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>17. Desafio e entrega</h2>
+        <p>Em dupla, responda no <code>RELATORIO_AUDITORIA.md</code> a quatro perguntas do comitê. Que documento o auditor pediria para examinar cada um dos seis sinais? Que explicação legítima poderia justificar os pagamentos de <code>F077</code>? O que muda na fila se o comitê baixar o peso de dia não útil para 1? Que conclusão do agente a dupla precisou corrigir ou suavizar, e por qual motivo?</p>
+        <p>Quem terminar antes pode acrescentar à matriz um sinal de pagamento acima da alçada feito a fornecedor cadastrado há menos de 90 dias, usando a coluna <code>data_cadastro</code>, e registrar quantos pagamentos ele acrescenta à fila.</p>
+        <p>Entrega verificável, na pasta <code>aula-15-seunome</code>:</p>
+        <ul>
+          <li><code>Aula_15_SeuNome.ipynb</code> executado do início ao fim, sem depender da ordem manual das células.</li>
+          <li><code>saidas/benford_fornecedores.csv</code> com os 24 fornecedores testados.</li>
+          <li><code>saidas/achados.csv</code> com uma linha por pagamento e sinal.</li>
+          <li><code>saidas/fila_de_exame.csv</code> com 172 pagamentos.</li>
+          <li><code>RELATORIO_AUDITORIA.md</code> com hashes de início e fim iguais, seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>18. Checklist de qualidade</h2>
+        <ul>
+          <li>Os arquivos em <code>entrada</code> têm os mesmos hashes do material.</li>
+          <li>O hash final da entrada é igual ao inicial, verificado por <code>assert</code>.</li>
+          <li>A normalização de <code>fornecedor_id</code> ocorre antes da regra de cadastro.</li>
+          <li>Os estornos estão fora dos testes, mas continuam na base.</li>
+          <li>A duplicidade usa nota fiscal, e a diferença para a regra ingênua está explicada.</li>
+          <li>Cada regra registra seus parâmetros: alçada, faixa, janela, limiares e feriados.</li>
+          <li>Benford por fornecedor usa o qui-quadrado com limiar de 0,001, e não o MAD.</li>
+          <li>O Isolation Forest usa <code>random_state=42</code> e aparece como triagem complementar.</li>
+          <li>Os pesos da matriz de risco estão no relatório.</li>
+          <li>Nenhuma frase do relatório afirma fraude, culpa ou intenção.</li>
+          <li>Nenhum número do relatório foi digitado sem origem no notebook.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>19. Síntese</h2>
+        <p>A auditoria desta aula começou pela custódia: o hash da entrada, calculado antes e conferido depois, garante que a fila foi produzida sobre o arquivo recebido. A limpeza foi orientada à finalidade de evitar alarmes falsos, e a normalização dos códigos de fornecedor eliminou 47 deles antes de qualquer teste. Os testes de regra traduziram controles internos em critérios verificáveis, e a inclusão da nota fiscal na regra de duplicidade separou 18 pagamentos repetidos de 59 parcelas legítimas.</p>
+        <p>Os testes estatísticos tiveram papéis diferentes. A Lei de Benford confirmou a conformidade da população e apontou um único fornecedor, desde que se usasse o teste adequado ao tamanho da amostra. O Isolation Forest marcou 55 extremos de valor sem relação com os controles, o que justifica seu peso baixo. A matriz de risco combinou os sinais em uma fila de 172 pagamentos, cerca de 2,2% do valor pago, cada um com o motivo de sua inclusão.</p>
+        <p>O resultado vale para esta base sintética, com irregularidades plantadas em quantidades conhecidas. Em uma base real, a fila seria maior, as causas seriam desconhecidas e cada sinal dependeria do exame documental para virar achado.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>20. Referências e continuidade</h2>
+        <p>No laboratório de 02/12, a disciplina trata de IA aplicada à estratégia e à tomada de decisão. A distinção entre sinal e conclusão, praticada aqui, volta a ser necessária quando a IA propõe recomendações estratégicas a partir de dados incompletos.</p>
+        <ul>
+          <li>Nigrini, M. J. <em>Benford's Law: Applications for Forensic Accounting, Auditing, and Fraud Detection</em>. Wiley, 2012.</li>
+          <li>Liu, F. T.; Ting, K. M.; Zhou, Z.-H. Isolation Forest. <em>IEEE International Conference on Data Mining</em>, 2008.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">Documentação do scikit-learn sobre <code>IsolationForest</code></a>.</li>
+          <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html">Documentação do SciPy sobre <code>chisquare</code></a>.</li>
+          <li><a href="https://docs.python.org/3/library/hashlib.html">Documentação do Python sobre <code>hashlib</code></a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-15.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dados/contas_a_pagar.csv" download="contas_a_pagar.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-auditoria.md" download="prompts-auditoria.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
