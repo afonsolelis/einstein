@@ -191,6 +191,68 @@
     .code-keyword { color: #d8a7ff; font-weight: 600; }
     .code-string { color: #8de6b8; }
 
+    .prompt-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      color: #7ee7d4;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .prompt-wrap { position: relative; z-index: 1; width: min(100%, 1120px); }
+    .prompt-wrap .code-block { width: 100%; margin: 0; padding-right: 9.5rem; }
+    .copy-prompt {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(126, 231, 212, 0.35);
+      border-radius: 8px;
+      color: #dffcf6;
+      background: rgba(0, 163, 137, 0.2);
+      cursor: pointer;
+    }
+    .copy-prompt:hover { background: rgba(0, 163, 137, 0.34); }
+    .copy-prompt:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .download-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .download-link:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .download-link:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 3px; }
+    .metric-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      width: min(100%, 1120px);
+      margin: 0.4rem 0 1rem;
+    }
+    .metric {
+      min-width: 150px;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .metric strong { display: block; color: #7ee7d4; font-size: clamp(1.35rem, 2vw, 2rem); }
+    .metric span { color: var(--muted); font-size: 0.86rem; }
+
     .slide-start {
       padding-left: clamp(3rem, 10vw, 10rem);
       background:
@@ -319,6 +381,12 @@
       .slide-content li { margin-bottom: 0.38rem; padding-left: 1.35rem; }
       .slide-content li::before { width: 7px; height: 7px; }
       .code-block { max-height: 40vh; margin-top: 0.25rem; padding: 0.8rem; font-size: clamp(0.68rem, 2.8vw, 0.8rem); line-height: 1.42; }
+      .prompt-wrap .code-block { padding: 3.2rem 0.8rem 0.8rem; font-size: clamp(0.61rem, 2.35vw, 0.76rem); }
+      .copy-prompt { top: 0.55rem; right: 0.55rem; padding: 0.42rem 0.6rem; font-size: 0.72rem; }
+      .metric-row { gap: 0.45rem; }
+      .metric { min-width: calc(50% - 0.3rem); padding: 0.55rem 0.7rem; }
+      .metric strong { font-size: 1.2rem; }
+      .metric span { font-size: 0.68rem; }
       .slide-start, .slide-prof, .slide-end { padding-left: 1.75rem; }
       .slide-start::before { width: 24%; opacity: 0.68; }
       .slide-start h1 { max-width: 85%; font-size: clamp(2.75rem, 12vw, 4.2rem); }
@@ -343,27 +411,450 @@
     @media (prefers-reduced-motion: reduce) {
       .slide, .ctrl-btn { transition: none; }
     }
+
+    .slide-content ol {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: var(--text);
+      font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .slide-content ol li { padding-left: 0.4rem; }
+    .slide-content ol li::before { content: none; }
+    .slide-content ol li::marker { color: #7ee7d4; font-weight: 700; }
+
+    .deck-table {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.1rem;
+      border-collapse: collapse;
+      color: var(--text);
+      font-size: clamp(0.92rem, 1.32vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.35;
+    }
+    .deck-table th {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 2px solid rgba(0, 215, 176, 0.5);
+      color: #7ee7d4;
+      font-size: 0.78em;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .deck-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+    .deck-table tbody tr:nth-child(odd) { background: rgba(8, 47, 73, 0.38); }
+    .deck-table td:first-child { color: #fff; font-weight: 600; }
+
+    .deck-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: min(100%, 1120px);
+    }
+    .deck-card {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      background: rgba(8, 47, 73, 0.62);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .deck-card:hover { border-color: rgba(75, 196, 232, 0.4); background: rgba(8, 47, 73, 0.82); }
+    .deck-card h3 { margin: 0 0 0.35rem; color: #7ee7d4; font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 700; }
+    .slide-content .deck-card p { margin: 0; font-size: clamp(0.95rem, 1.35vw, 1.2rem); line-height: 1.4; }
+
+    .flow {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.6rem;
+      width: min(100%, 1120px);
+      margin: 0.2rem 0 1.2rem;
+    }
+    .flow-step {
+      padding: 0.85rem 0.8rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-top: 4px solid var(--teal);
+      border-radius: 0 0 12px 12px;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .flow-step strong { display: block; margin-bottom: 0.3rem; color: #fff; font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+    .flow-step span { display: block; color: var(--muted); font-size: clamp(0.78rem, 1vw, 0.95rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-content ol { font-size: clamp(0.9rem, 3.65vw, 1.04rem); line-height: 1.35; padding-left: 1.2rem; }
+      .deck-table { margin-bottom: 0.7rem; font-size: clamp(0.66rem, 2.75vw, 0.8rem); line-height: 1.25; }
+      .deck-table th, .deck-table td { padding: 0.35rem 0.4rem; }
+      .deck-table th { letter-spacing: 0.04em; }
+      .deck-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .deck-card { padding: 0.6rem 0.8rem; }
+      .deck-card h3 { font-size: 0.92rem; }
+      .slide-content .deck-card p { font-size: 0.84rem; line-height: 1.3; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; margin-bottom: 0.7rem; }
+      .flow-step { padding: 0.5rem 0.6rem; }
+      .flow-step strong { font-size: 0.84rem; margin-bottom: 0.15rem; }
+      .flow-step span { font-size: 0.72rem; line-height: 1.25; }
+    }
+
+    @media (max-height: 680px) and (min-width: 769px) {
+      .slide-content ol { font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.35; }
+      .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
+      .deck-table td { padding: 0.4rem 0.8rem; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
 <body>
   <div id="slider">
-    <div class="slide slide-start active"><div class="badge">LABORATÓRIO 13 · 11/11</div><h1>Laboratório de Dados &amp; IA</h1><p>Fazendo previsões com IA: Vendas e Tendências</p></div>
-    <div class="slide slide-content" data-lesson-section="objectives"><h2>Objetivos de aprendizagem</h2><ul><li>Criar atributos sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="agenda"><h2>Roteiro do laboratório</h2><ul><li>Contexto e decisão de negócio</li><li>Fundamentos e demonstração</li><li>Prática guiada e desafio</li><li>Síntese e continuidade</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Ideia central</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Critérios para decidir</h2><ul><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="concepts"><h2>Atributos são hipóteses</h2><ul><li>Use somente informação disponível no momento da previsão.</li><li>Aprenda codificação e escala apenas no conjunto de treino.</li><li>Documente fonte, fórmula e risco de vazamento.</li><li>Encapsule transformações no mesmo pipeline do modelo.</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Demonstração em Python</h2><div class="code-block">from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
-y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
-modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
-    <div class="slide slide-content" data-lesson-section="guided-practice"><h2>Prática guiada</h2><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></div>
-    <div class="slide slide-content" data-lesson-section="challenge"><h2>Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p></div>
-    <div class="slide slide-content" data-lesson-section="summary"><h2>Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><ul><li>Respeitar a ordem temporal</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li></ul></div>
-    <div class="slide slide-content" data-lesson-section="next-steps"><h2>Próximos passos</h2><p>No próximo laboratório, mudaremos de previsão para inferência em experimentos A/B.</p></div>
-    <div class="slide slide-end"><h2>Fim do Laboratório 13</h2><p>Decisões melhores começam com evidências bem cuidadas.</p></div>
+    <div class="slide slide-start active">
+      <div class="badge">LABORATÓRIO 13 · 11/11</div>
+      <h1>Limpeza e previsão de vendas com IA</h1>
+      <p>A regra de negócio orienta a limpeza dos pedidos do Olist, e a série limpa sustenta a previsão semanal</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="objectives">
+      <div class="prompt-label">Objetivos</div>
+      <h2>Ao final do laboratório</h2>
+      <ul>
+        <li>Traduzir uma pergunta de negócio em regras de limpeza justificadas.</li>
+        <li>Organizar os pedidos em uma série semanal com contagem conferida.</li>
+        <li>Comparar uma regressão linear com referências simples em teste temporal.</li>
+        <li>Interpretar o erro médio absoluto na unidade da decisão.</li>
+        <li>Redigir um parecer com previsão em faixa e limitações.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="agenda">
+      <div class="prompt-label">Agenda · 19h às 22h</div>
+      <h2>Roteiro do laboratório</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>19h00 às 19h40 · Conceitos</h3><p>Pergunta de negócio, limpeza como decisão e protocolo de trabalho com a IA.</p></article>
+        <article class="deck-card"><h3>19h40 às 20h40 · Limpeza</h3><p>Perfil da base, quatro regras de negócio e série semanal conferida.</p></article>
+        <article class="deck-card"><h3>20h40 às 21h40 · Previsão</h3><p>Referência simples, teste temporal, regressão linear e leitura do erro.</p></article>
+        <article class="deck-card"><h3>21h40 às 22h00 · Entrega</h3><p>Parecer para a diretoria, commit e push.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Problema</div>
+      <h2>A previsão herda os defeitos da base</h2>
+      <p>Agregados sem limpeza, os pedidos semanais do Olist terminam com os valores abaixo. Um modelo treinado nessa série aprenderia uma queda que não ocorreu na operação.</p>
+      <div class="metric-row">
+        <div class="metric"><strong>1.875</strong><span>semana até 19/08/2018</span></div>
+        <div class="metric"><strong>1.071</strong><span>semana até 26/08/2018</span></div>
+        <div class="metric"><strong>130</strong><span>semana até 02/09/2018</span></div>
+        <div class="metric"><strong>7</strong><span>semana até 09/09/2018</span></div>
+      </div>
+      <p>A queda decorre do fim da extração dos dados. Reconhecê-la exige conhecer o negócio, e por isso a limpeza vem antes do modelo.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fluxo de trabalho</div>
+      <h2>Cada etapa deixa um arquivo conferível</h2>
+      <div class="flow">
+        <div class="flow-step"><strong>CSV bruto</strong><span>99.441 pedidos, sem edição.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span>Janela, status, itens e eventos.</span></div>
+        <div class="flow-step"><strong>Série semanal</strong><span>84 semanas com soma conferida.</span></div>
+        <div class="flow-step"><strong>Referência</strong><span>Previsão ingênua e média móvel.</span></div>
+        <div class="flow-step"><strong>Modelo</strong><span>Regressão em teste temporal.</span></div>
+        <div class="flow-step"><strong>Parecer</strong><span>Faixa, erro e limitações.</span></div>
+      </div>
+      <p>Os números do parecer saem do notebook. Nenhum valor é digitado à mão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Pergunta de negócio</div>
+      <h2>A decisão que orienta a aula</h2>
+      <p>A Diretoria de Operações do marketplace precisa dimensionar a equipe de separação e expedição da semana seguinte.</p>
+      <ul>
+        <li>Pergunta: quantos pedidos vendidos a operação deve esperar na próxima semana?</li>
+        <li>Unidade: pedidos por semana, de segunda a domingo.</li>
+        <li>Horizonte: uma semana à frente.</li>
+        <li>Decisão apoiada: escala de turnos e contratação de frete.</li>
+        <li>Erro tolerável: definido pela diretoria antes de conhecer o modelo.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Limpeza como decisão</div>
+      <h2>A mesma base admite limpezas diferentes</h2>
+      <table class="deck-table">
+        <thead><tr><th>Decisão</th><th>Pedidos cancelados</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>Escalar a expedição</td><td>saem</td><td>não geram pacote a separar</td></tr>
+          <tr><td>Escalar o atendimento</td><td>ficam</td><td>o cancelamento gera contato com o cliente</td></tr>
+          <tr><td>Projetar a receita</td><td>saem, junto dos pedidos sem itens</td><td>não há valor a faturar</td></tr>
+        </tbody>
+      </table>
+      <p>A limpeza aplica a definição de venda que a decisão exige, e essa definição fica registrada em regra escrita.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">IA no laboratório</div>
+      <h2>Protocolo de trabalho com a IA</h2>
+      <ol>
+        <li>Contextualize com o arquivo, a pergunta de negócio e o resultado esperado.</li>
+        <li>Peça um plano antes de qualquer edição.</li>
+        <li>Leia o código proposto e o diff.</li>
+        <li>Execute uma etapa por vez no notebook.</li>
+        <li>Reconcilie quantas linhas entraram, quantas saíram e por qual regra.</li>
+      </ol>
+      <p>A IA escreve a maior parte do código. A turma responde pelas regras e pelos números.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 0 · Ambiente</div>
+      <h2>Pastas de trabalho no Codespace</h2>
+      <div class="code-block">mkdir -p aula-13-seunome/entrada aula-13-seunome/saidas
+cp materiais/aula-13/dados/olist_pedidos.csv aula-13-seunome/entrada/
+ls -lh aula-13-seunome/entrada</div>
+      <p>A pasta <code>entrada</code> guarda o CSV bruto e não é editada. O notebook fica em <code>aula-13-seunome</code>, e os arquivos gerados vão para <code>saidas</code>. Abra o Copilot em modo agente ou o agente que você já usa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 1 · Base</div>
+      <h2>A base de pedidos do Olist</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>99.441</strong><span>pedidos, um por linha</span></div>
+        <div class="metric"><strong>7</strong><span>colunas</span></div>
+        <div class="metric"><strong>8</strong><span>status de pedido</span></div>
+        <div class="metric"><strong>2016 a 2018</strong><span>datas de compra</span></div>
+      </div>
+      <p>Cada linha traz status, data da compra, estado do cliente, quantidade de itens, valor dos produtos e frete. A fonte é o Brazilian E-Commerce Public Dataset by Olist, o mesmo das aulas 7 a 11.</p>
+      <a class="download-link" href="../materiais/aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv">⬇️ Baixar olist_pedidos.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 1 · Perfil</div>
+      <h2>Perfil da base antes da limpeza</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de análise neste laboratório. Crie aula-13-seunome/Aula_13_SeuNome.ipynb e carregue aula-13-seunome/entrada/olist_pedidos.csv em um DataFrame chamado bruta, convertendo order_purchase_timestamp para data.
+
+Mostre: shape, dtypes, order_id duplicado, ausências por coluna, contagem por order_status, primeira e última data de compra e pedidos por mês. Não limpe nem remova nada. Espero 99.441 linhas e 7 colunas; se divergir, pare e me avise. Mostre o plano antes de editar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 1</div>
+      <h2>Conferência do perfil</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>0</strong><span>order_id duplicado</span></div>
+        <div class="metric"><strong>775</strong><span>pedidos sem itens</span></div>
+        <div class="metric"><strong>1.234</strong><span>cancelados ou indisponíveis</span></div>
+        <div class="metric"><strong>329</strong><span>pedidos em 2016</span></div>
+      </div>
+      <ul>
+        <li>Os meses de 2016 e os de setembro e outubro de 2018 têm volume residual.</li>
+        <li>Os 775 pedidos sem itens não têm valor de produtos.</li>
+        <li>Nenhum desses achados autoriza remoção antes da regra de negócio.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Regras de negócio</div>
+      <h2>Quatro regras para a limpeza</h2>
+      <table class="deck-table">
+        <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr><td>Janela de 09/01/2017 a 19/08/2018</td><td>fora dela a extração é esparsa ou incompleta</td><td>1.596 pedidos fora</td></tr>
+          <tr><td>Venda exclui <code>canceled</code> e <code>unavailable</code></td><td>o pedido não gera expedição</td><td>1.155 pedidos fora</td></tr>
+          <tr><td>Pedido sem itens recebe sinalização</td><td>sem valor de produtos, fica fora da receita</td><td>5 sinalizados</td></tr>
+          <tr><td>Black Friday permanece na série</td><td>evento real de demanda</td><td>1 semana sinalizada</td></tr>
+        </tbody>
+      </table>
+      <p>Restam 96.690 vendas. Cada regra tem justificativa e contagem.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 2 · Regras</div>
+      <h2>Aplicação das regras com contagem</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No mesmo notebook, crie vendas a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
+1. Janela: order_purchase_timestamp de 2017-01-09 até antes de 2018-08-20.
+2. Venda: excluir order_status canceled e unavailable.
+3. Criar a flag sem_itens para itens ausentes, sem remover a linha.
+
+Espero 97.845 linhas após a regra 1, 96.690 após a regra 2 e 5 flags. Salve a tabela regra, justificativa, linhas_antes, linhas_depois em aula-13-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir, pare e investigue; não ajuste a regra para acertar a contagem.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Leitura da série</div>
+      <h2>Erro de dado ou evento do negócio</h2>
+      <table class="deck-table">
+        <thead><tr><th>Observação</th><th>Natureza</th><th>Conduta</th></tr></thead>
+        <tbody>
+          <tr><td>1.176 pedidos em 24/11/2017</td><td>Black Friday, evento real</td><td>manter e sinalizar a semana</td></tr>
+          <tr><td>946 vendas na semana de 21 a 27/05/2018, contra 1.830 na anterior</td><td>coincide com a greve dos caminhoneiros</td><td>manter e registrar no parecer</td></tr>
+          <tr><td>130 pedidos na semana até 02/09/2018</td><td>fim da extração</td><td>cortar pela janela</td></tr>
+        </tbody>
+      </table>
+      <p>A IA lista os pontos fora do padrão. A classificação cabe a quem conhece a operação e responde pela decisão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 3 · Série</div>
+      <h2>Organização em série semanal</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Agregue vendas em uma série semanal de segunda a domingo (resample "W-SUN" sobre order_purchase_timestamp) com as colunas pedidos (contagem de order_id) e receita (soma de valor_produtos). Crie a flag semana_black_friday para a semana encerrada em 2017-11-26.
+
+Verifique com assert que a soma de pedidos é igual ao número de linhas de vendas e que não há semana faltando. Espero 84 semanas, de 2017-01-15 a 2018-08-19. Salve em aula-13-seunome/saidas/vendas_semanais.csv e faça um gráfico de linha de pedidos por semana.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 2</div>
+      <h2>Conferência da série semanal</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>84</strong><span>semanas completas</span></div>
+        <div class="metric"><strong>96.690</strong><span>vendas somadas</span></div>
+        <div class="metric"><strong>2.973</strong><span>semana da Black Friday</span></div>
+        <div class="metric"><strong>1.852</strong><span>última semana</span></div>
+      </div>
+      <ul>
+        <li>A soma semanal reproduz o total de vendas.</li>
+        <li>Cada linha representa uma semana completa, de segunda a domingo.</li>
+        <li>O grão semanal acompanha a decisão de escala. O mensal deixaria 20 pontos para o modelo.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 1</div>
+      <h2>Referência simples para a previsão</h2>
+      <p>Uma regra simples estabelece o erro mínimo que o modelo precisa superar. Se a regressão não reduz esse erro, ela não acrescenta informação à decisão.</p>
+      <ul>
+        <li>Previsão ingênua: a próxima semana repete a semana anterior.</li>
+        <li>Média móvel: a próxima semana repete a média das quatro anteriores.</li>
+        <li>O modelo se justifica pelo erro que retira dessas referências.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 2</div>
+      <h2>O teste simula o futuro</h2>
+      <ul>
+        <li>Treino: as 68 semanas mais antigas com atributos completos.</li>
+        <li>Teste: as 12 semanas mais recentes, de junho a agosto de 2018.</li>
+        <li>Os atributos usam apenas semanas anteriores à semana prevista.</li>
+        <li>A separação aleatória coloca semanas futuras no treino e produz um erro menor do que o real.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conceito 3</div>
+      <h2>O erro na unidade da decisão</h2>
+      <p>O erro médio absoluto (MAE) é a média das diferenças entre o previsto e o realizado, sem considerar o sinal.</p>
+      <ul>
+        <li>Um MAE de 185 significa errar, em média, 185 pedidos por semana.</li>
+        <li>Frente à média de 1.516 pedidos do teste, o erro equivale a 12,2%.</li>
+        <li>A diretoria compara esse valor com a folga de capacidade que consegue manter.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 4 · Referência</div>
+      <h2>Referências simples no teste</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">A partir de aula-13-seunome/saidas/vendas_semanais.csv, crie em um DataFrame dados os atributos semana_anterior (pedidos com shift de 1) e media_4_semanas (média das quatro semanas anteriores, com shift de 1 antes do rolling). Remova as linhas sem atributo completo.
+
+Separe as 12 últimas semanas como teste e as demais como treino, sem embaralhar. Calcule o MAE de duas referências no teste: prever semana_anterior e prever media_4_semanas. Explique em uma frase por que o shift evita usar informação do futuro.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 5 · Modelo</div>
+      <h2>Regressão linear com teste temporal</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Treine uma LinearRegression do scikit-learn no treino com os atributos semana_anterior e media_4_semanas e alvo pedidos. Preveja o teste e calcule o MAE.
+
+Monte uma tabela com real, previsto e erro por semana e salve em aula-13-seunome/saidas/real_versus_previsto.csv. Faça um gráfico com as duas linhas. Em seguida repita o treino com train_test_split aleatório (test_size=12, random_state=42) apenas para comparar o MAE, e explique por que esse segundo número não pode ser usado.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Conferência 3</div>
+      <h2>Leitura dos erros medidos</h2>
+      <table class="deck-table">
+        <thead><tr><th>Método</th><th>MAE no teste</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td>Previsão ingênua</td><td>197,8</td><td>referência a superar</td></tr>
+          <tr><td>Média de 4 semanas</td><td>288,1</td><td>reage devagar às oscilações</td></tr>
+          <tr><td>Regressão linear</td><td>185,0</td><td>reduz 6,5% do erro da ingênua</td></tr>
+          <tr><td>Somente tendência</td><td>451,4</td><td>extrapola o crescimento de 2017</td></tr>
+          <tr><td>Separação aleatória</td><td>99,2</td><td>inválido por vazamento</td></tr>
+        </tbody>
+      </table>
+      <p>O ganho da regressão é pequeno, e o parecer informa essa margem com exatidão.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 6 · Parecer</div>
+      <h2>Previsão em faixa e parecer</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com o modelo treinado, preveja a semana de 20 a 26/08/2018 usando a última semana da série e a média das quatro últimas. Apresente o valor previsto e a faixa de mais ou menos um MAE.
+
+Crie aula-13-seunome/PARECER_PREVISAO.md com: pergunta de negócio, regras de limpeza e contagens, MAE das referências e do modelo, previsão em faixa, as duas semanas de maior erro no teste e três limitações. Use somente números produzidos no notebook; não invente valores. Depois proponha git add, commit e push, sem executar antes da minha aprovação.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 4</div>
+      <h2>Conferência da previsão</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>1.744</strong><span>pedidos previstos</span></div>
+        <div class="metric"><strong>1.559 a 1.929</strong><span>faixa de um MAE</span></div>
+        <div class="metric"><strong>614</strong><span>maior erro, semana até 22/07/2018</span></div>
+      </div>
+      <ul>
+        <li>A base registra 1.058 vendas na semana prevista, mas a extração já estava incompleta, e o valor não valida a previsão.</li>
+        <li>Diferença em relação à referência indica especificação diferente, a investigar no código.</li>
+        <li>O script de referência está em <code>materiais/aula-13/referencia/previsao_referencia.py</code>.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Desafio em dupla</div>
+      <h2>A previsão sustenta a escala?</h2>
+      <p>Responda à Diretoria de Operações com base no notebook.</p>
+      <ul>
+        <li>A margem de 185 pedidos por semana cabe na folga de capacidade da expedição?</li>
+        <li>Que regra de limpeza mudaria se a pergunta fosse sobre o atendimento ao cliente?</li>
+        <li>O que explica as duas semanas de maior erro no teste?</li>
+        <li>Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="challenge">
+      <div class="prompt-label">Entrega · 21h40</div>
+      <h2>Entrega verificável</h2>
+      <ul>
+        <li><code>Aula_13_SeuNome.ipynb</code> executado do início ao fim.</li>
+        <li><code>saidas/regras_de_limpeza.csv</code> com a contagem de cada regra.</li>
+        <li><code>saidas/vendas_semanais.csv</code> com 84 semanas.</li>
+        <li><code>saidas/real_versus_previsto.csv</code> com as 12 semanas de teste.</li>
+        <li><code>PARECER_PREVISAO.md</code>, commit e push.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="summary">
+      <div class="prompt-label">Síntese</div>
+      <h2>Síntese do laboratório</h2>
+      <ul>
+        <li>A pergunta de negócio definiu a janela, a definição de venda e o grão semanal.</li>
+        <li>Cada regra de limpeza ficou registrada com justificativa e contagem.</li>
+        <li>O teste nas semanas mais recentes mediu o erro que a operação enfrentaria.</li>
+        <li>A regressão superou a previsão ingênua por margem pequena, informada no parecer.</li>
+        <li>A IA escreveu o código, e a turma respondeu pelas regras e pela leitura.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-end" data-lesson-section="next-steps">
+      <h2>Próximo laboratório</h2>
+      <p>Em 18/11, passamos da previsão para a inferência com testes A/B, do desenho do experimento à decisão de negócio.</p>
+      <p>Antes de sair, execute o notebook inteiro, revise o parecer e faça commit e push.</p>
+    </div>
   </div>
 
   <div id="controls">
@@ -371,6 +862,7 @@ modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
     <div class="btn-group">
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-13/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
+      <a href="../materiais/aula-13/dados/olist_pedidos.csv" download="olist_pedidos.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -398,7 +890,7 @@ modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
 
     btnPrev.addEventListener('click', () => { if (current > 0) { current--; update(); } });
     btnNext.addEventListener('click', () => { if (current < slides.length - 1) { current++; update(); } });
-    
+
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
@@ -415,6 +907,36 @@ modelo = LinearRegression().fit(X_treino, y_treino)</div></div>
     btnFs.addEventListener('click', () => {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else if (document.exitFullscreen) document.exitFullscreen();
+    });
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    document.querySelectorAll('.copy-prompt').forEach(button => {
+      button.addEventListener('click', async () => {
+        const prompt = button.parentElement.querySelector('.prompt-text').innerText.trim();
+        const original = button.textContent;
+        try {
+          await copyText(prompt);
+          button.textContent = 'Copiado ✓';
+        } catch (error) {
+          button.textContent = 'Selecione o texto';
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1800);
+      });
     });
 
     update();

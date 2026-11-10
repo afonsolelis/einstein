@@ -7,48 +7,62 @@
   <title>Material · 13</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-    
+
     body { margin: 0; font-family: 'Outfit', system-ui, sans-serif; background: #f4f8fb; color: #334155; line-height: 1.7; padding: 3rem 1rem; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
     .container { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2ebf2; }
-    
+
     .header { padding: 4rem; position: relative; border-bottom: 2px solid #f0f4f8; background: #ffffff; }
     .badge { display: inline-block; background: rgba(0, 163, 217, 0.1); color: #1f6fb2; padding: 0.5rem 1.2rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; border: 1px solid rgba(75, 196, 232, 0.3); }
     .header h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: #1a2f5e; font-weight: 800; letter-spacing: -1px; }
-    
+
     .content { padding: 4rem; }
     .desc { font-size: 1.25rem; color: #64748b; margin-bottom: 3rem; font-weight: 400; }
-    
+
     h2, h3 { color: #1a2f5e; font-weight: 600; margin-top: 3rem; margin-bottom: 1.5rem; }
     h2 { font-size: 2rem; border-bottom: 2px solid #f0f4f8; padding-bottom: 1rem; }
     h3 { font-size: 1.4rem; color: #00a3d9; }
-    
+
     p { margin-bottom: 1.5rem; }
     ul, ol { padding-left: 1.5rem; margin-bottom: 2rem; }
     li { padding: 0.4rem 0; }
     strong { color: #1a2f5e; font-weight: 800; }
     em { color: #00a3d9; font-style: normal; font-weight: 600; }
-    
+
     code { background: #e2ebf2; border: 1px solid #cbd5e1; padding: 0.2rem 0.5rem; border-radius: 6px; font-family: 'Fira Code', monospace; color: #1f6fb2; font-size: 0.9em; font-weight: 600; }
-    
+
     .code-block { white-space: pre-wrap; background: #f8fafc; color: #334155; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 1rem; line-height: 1.6; overflow-x: auto; margin: 2rem 0; border: 1px solid #e2ebf2; border-left: 4px solid #00a3d9; }
     .code-comment { color: #94a3b8; font-style: italic; }
     .code-keyword { color: #d946ef; font-weight: 600; }
     .code-string { color: #16a34a; }
-    
+
     .alert-box { background: #fdf4ff; border-left: 4px solid #d946ef; padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 2rem 0; border: 1px solid #fae8ff; border-left-width: 4px; }
     .alert-box h4 { margin: 0 0 0.5rem 0; color: #a21caf; }
     .alert-box p { margin: 0; font-size: 0.95rem; color: #701a75; }
-    
+
     .actions { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; border-top: 2px solid #f0f4f8; padding-top: 3rem; margin-top: 3rem; }
     .btn { padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; cursor: pointer; border: none; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); }
-    
+
     .btn-home { background: #ffffff; color: #64748b; border: 1px solid #e2ebf2; }
     .btn-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
     .btn-slides { background: rgba(0, 163, 217, 0.1); color: #1f6fb2; border: 1px solid rgba(75, 196, 232, 0.3); }
     .btn-slides:hover { background: rgba(0, 163, 217, 0.15); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.15); }
     .btn-print { background: #1a2f5e; color: #ffffff; }
     .btn-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
+    .btn-data { background: #e3f8f3; color: #087466; border: 1px solid #a7e4d8; }
+    .btn-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+
+    a { color: #1f6fb2; }
+    table { display: block; width: 100%; margin: 2rem 0; overflow-x: auto; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; border: 1px solid #dfe8f0; text-align: left; vertical-align: top; }
+    th { color: #1a2f5e; background: #eef6fb; font-weight: 800; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .step-tag { display: inline-block; margin-top: 1rem; padding: 0.35rem 0.8rem; border-radius: 999px; color: #087466; background: #e3f8f3; border: 1px solid #a7e4d8; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .prompt-block { white-space: pre-wrap; background: #0b2033; color: #e2ebf2; padding: 1.5rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.65; overflow-x: auto; margin: 1rem 0 2rem; border: 1px solid rgba(11,73,107,0.4); border-left: 4px solid #00a389; box-shadow: 0 14px 30px rgba(11,32,51,0.12); }
+    .evidence { padding: 1.25rem 1.5rem; margin: 1.5rem 0; border: 1px solid #cfe3f0; border-radius: 12px; background: #f2f9fd; }
+    .evidence strong { display: block; margin-bottom: 0.35rem; }
+    ol { counter-reset: none; }
+    .download-panel { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0 2rem; }
 
     @media (max-width: 768px) {
       .header, .content { padding: 2.5rem; }
@@ -76,6 +90,10 @@
     .floating-nav .nav-home:hover { background: #f8fafc; color: #1a2f5e; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
     .floating-nav .nav-slides { background: rgba(0, 163, 217, 0.12); color: #1f6fb2; border-color: rgba(75, 196, 232, 0.35); }
     .floating-nav .nav-slides:hover { background: rgba(0, 163, 217, 0.2); color: #00a3d9; box-shadow: 0 5px 15px rgba(0,163,217,0.18); }
+    .floating-nav .nav-data { background: #e3f8f3; color: #087466; border-color: #a7e4d8; }
+    .floating-nav .nav-data:hover { background: #d1f2ea; box-shadow: 0 5px 15px rgba(0,163,137,0.14); }
+    .floating-nav .nav-prompts { background: #eef6fb; color: #1f6fb2; border-color: #cfe3f0; }
+    .floating-nav .nav-prompts:hover { background: #dceef8; }
     .floating-nav .nav-print { background: #1a2f5e; color: #ffffff; }
     .floating-nav .nav-print:hover { background: #0b1120; box-shadow: 0 5px 15px rgba(26,47,94,0.3); }
     .floating-nav a:focus-visible, .floating-nav button:focus-visible { outline: 3px solid rgba(0,163,217,0.45); outline-offset: 2px; }
@@ -100,39 +118,394 @@
   <script src="../../assets/pdf-export.js" defer></script>
 </head>
 <body>
-  <nav class="floating-nav" aria-label="Navegacao rapida do material">
+  <nav class="floating-nav" aria-label="Navegação rápida do material">
     <a href="../../index.html" class="nav-home" title="Voltar ao cronograma">🏠 <span class="nav-label">Cronograma</span></a>
     <a href="../../slides/aula-13.html" class="nav-slides" title="Ver os slides da aula">📊 <span class="nav-label">Slides</span></a>
+    <a href="dados/olist_pedidos.csv" download="olist_pedidos.csv" class="nav-data" title="Baixar a base CSV">⬇️ <span class="nav-label">Base CSV</span></a>
+    <a href="prompts-previsao.md" download="prompts-previsao.md" class="nav-prompts" title="Baixar os prompts">✨ <span class="nav-label">Prompts</span></a>
     <button type="button" onclick="window.print()" class="nav-print" title="Imprimir material">🖨️ <span class="nav-label">Imprimir</span></button>
   </nav>
 
   <div class="container">
     <div class="header">
-      <div class="badge">LABORATÓRIO 13</div>
-      <h1>Fazendo previsões com IA: Vendas e Tendências</h1>
+      <div class="badge">LABORATÓRIO 13 · 11/11</div>
+      <h1>Limpeza orientada ao negócio e previsão de vendas com IA</h1>
     </div>
-    
+
     <div class="content">
-      <p class="desc">Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro. Este guia conecta fundamentos, código e critérios de decisão para que a análise possa ser reproduzida e contestada.</p>
-      <section data-lesson-section="objectives"><h2>1. Objetivos de aprendizagem</h2><ul><li>Criar atributos derivados sem vazar informação futura</li><li>Organizar transformações em um pipeline reproduzível</li><li>Treinar uma regressão com separação temporal adequada</li><li>Interpretar MAE e comparar com um baseline</li><li>Comunicar previsão como faixa e hipótese, não certeza</li></ul></section>
-      <section data-lesson-section="concepts"><h2>2. Fundamentos, atributos e contexto</h2><p>Regressão estima uma quantidade contínua. A qualidade só faz sentido em comparação com uma regra simples e em dados que simulam o futuro.</p><ul><li>Atributos são hipóteses codificadas e só podem usar informação disponível no momento da previsão</li><li>Codificação e escala devem ser aprendidas apenas no treino e aplicadas pelo mesmo pipeline ao teste</li><li>Separação aleatória pode vazar padrões temporais</li><li>MAE expressa erro médio na unidade de negócio</li><li>Resíduos revelam períodos e segmentos em que o modelo falha</li></ul><p>Documente fonte, fórmula, momento de disponibilidade e risco de vazamento de cada atributo. No ambiente corporativo, a técnica só gera valor quando a unidade de análise, o período, a fonte e a decisão estão explícitos.</p></section>
-      <div class="alert-box"><h4>Atenção à governança</h4><p>Preserve a fonte, registre premissas e não transforme associação ou saída de modelo em certeza. Dados sensíveis exigem acesso mínimo, finalidade definida e revisão humana proporcional ao risco.</p></div>
-      <section data-lesson-section="guided-practice"><h2>3. Prática guiada em Python</h2><p>Execute em Python 3 com as bibliotecas indicadas no código e adapte os nomes das colunas ao arquivo da atividade.</p><div class="code-block">from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-X_treino, X_teste = X.iloc[:-12], X.iloc[-12:]
-y_treino, y_teste = y.iloc[:-12], y.iloc[-12:]
-modelo = LinearRegression().fit(X_treino, y_treino)</div><p>Uma segunda etapa torna a análise comparável ou operacional:</p><div class="code-block">pred = modelo.predict(X_teste)
-baseline = [y_treino.iloc[-1]] * len(y_teste)
-print("MAE modelo", mean_absolute_error(y_teste,pred))
-print("MAE baseline", mean_absolute_error(y_teste,baseline))</div><p>Treine um baseline e uma regressão para vendas mensais, compare erros e investigue o pior período.</p></section>
-      <section data-lesson-section="challenge"><h2>4. Desafio e entrega</h2><p>Entregar notebook, tabela real versus previsto e recomendação de uso com limite de erro aceitável.</p><p><strong>Critério de aceite:</strong> resultado reproduzível, premissas documentadas, comparação relevante e recomendação vinculada a uma métrica verificável.</p></section>
-      <section data-lesson-section="checklist"><h2>5. Checklist de qualidade</h2><ul><li>Registrar fonte e momento de disponibilidade dos atributos</li><li>Separar treino e teste antes de aprender transformações</li><li>Respeitar a ordem temporal e impedir vazamento</li><li>Comparar contra baseline explícito</li><li>Analisar resíduos por período</li><li>Registrar variáveis e horizonte da previsão</li></ul></section>
-      <section data-lesson-section="summary"><h2>6. Síntese</h2><p>Uma previsão útil supera uma regra simples, explicita incerteza e muda uma decisão operacional.</p><p>Antes de concluir, confronte o achado com uma alternativa simples, verifique os principais riscos e descreva o que faria a recomendação mudar.</p></section>
-      <section data-lesson-section="next-steps"><h2>7. Referências e continuidade</h2><p>No próximo laboratório, mudaremos de previsão para inferência em experimentos A/B.</p><ul><li>Documentação oficial das bibliotecas usadas nos exemplos.</li><li>Dicionário de dados, registro de premissas e checklist da entrega como anexos de continuidade.</li></ul></section>
+      <p class="desc">A Diretoria de Operações de um marketplace precisa saber quantos pedidos esperar na próxima semana para escalar a equipe de separação e expedição. A base disponível tem 99.441 pedidos do Olist e, lida sem critério, termina em uma queda que nunca ocorreu na operação. Neste laboratório, a pergunta de negócio define as regras de limpeza, os pedidos são organizados em uma série semanal e uma regressão linear é comparada com duas regras simples de previsão. A IA escreve a maior parte do código no GitHub Codespaces. A turma decide as regras, confere as contagens e responde pela leitura do resultado.</p>
+
+      <section data-lesson-section="objectives">
+        <h2>1. Objetivos de aprendizagem</h2>
+        <ul>
+          <li>Traduzir uma pergunta de negócio em regras de limpeza justificadas.</li>
+          <li>Organizar os pedidos em uma série semanal com contagem conferida.</li>
+          <li>Comparar uma regressão linear com referências simples em teste temporal.</li>
+          <li>Interpretar o erro médio absoluto na unidade da decisão.</li>
+          <li>Redigir um parecer com previsão em faixa e limitações.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>2. O problema concreto</h2>
+        <p>Uma previsão de vendas é calculada sobre uma série histórica, e a série carrega todas as decisões tomadas, ou omitidas, na preparação dos dados. Quando os pedidos do Olist são agregados por semana sem nenhuma limpeza, as quatro últimas semanas com algum volume somam 1.875, 1.071, 130 e 7 pedidos. Um modelo treinado nessa série aprenderia que a demanda desabou em setembro de 2018.</p>
+        <p>A operação não parou. O conjunto público foi extraído em determinado momento, e os pedidos mais recentes entraram apenas em parte. A planilha não informa isso em nenhuma coluna. Quem identifica a causa é alguém que conhece o negócio e sabe que um marketplace não perde 99% do volume em três semanas sem que isso apareça em outro lugar.</p>
+        <p>Na aula 12, a limpeza tratou de problemas cadastrais, como ausências, categorias e datas incoerentes. Aqui o critério muda de natureza: a base não tem erros de digitação relevantes, e o que precisa ser decidido é quais pedidos contam como venda para a decisão em pauta.</p>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado do início ao fim, a tabela de regras com contagens, a série semanal, a comparação entre real e previsto e o <code>PARECER_PREVISAO.md</code> endereçado à diretoria.</div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>3. A pergunta de negócio define a limpeza</h2>
+        <p>A pergunta desta aula é: quantos pedidos vendidos a operação deve esperar na próxima semana? A unidade é o pedido por semana, contada de segunda a domingo. O horizonte é de uma semana à frente. A decisão apoiada é a escala de turnos da expedição e a contratação de frete.</p>
+        <p>Cada elemento dessa formulação produz uma regra. O horizonte semanal fixa o grão da série. A palavra "vendidos" exige uma definição de venda. A finalidade de expedição determina o destino dos pedidos cancelados. Se a mesma base servisse a outra decisão, as regras seriam outras, como mostra a comparação abaixo.</p>
+        <table>
+          <thead><tr><th>Decisão</th><th>Pedidos cancelados</th><th>Motivo</th></tr></thead>
+          <tbody>
+            <tr><td>Escalar a expedição</td><td>saem da série</td><td>não geram pacote a separar</td></tr>
+            <tr><td>Escalar o atendimento</td><td>ficam na série</td><td>o cancelamento gera contato com o cliente</td></tr>
+            <tr><td>Projetar a receita</td><td>saem, junto dos pedidos sem itens</td><td>não há valor a faturar</td></tr>
+          </tbody>
+        </table>
+        <p>Para a pergunta da expedição, adotam-se quatro regras. As contagens da última coluna foram conferidas pelo professor no arquivo da aula e servem de checkpoint.</p>
+        <table>
+          <thead><tr><th>Regra</th><th>Justificativa de negócio</th><th>Efeito conferido</th></tr></thead>
+          <tbody>
+            <tr><td>Janela de 09/01/2017 a 19/08/2018</td><td>antes dela a operação tem meses esparsos (329 pedidos em 2016); depois dela a extração está incompleta</td><td>1.596 pedidos fora; restam 97.845</td></tr>
+            <tr><td>Venda exclui os status <code>canceled</code> e <code>unavailable</code></td><td>o pedido não chega à expedição</td><td>1.155 pedidos fora; restam 96.690</td></tr>
+            <tr><td>Pedido sem itens recebe a flag <code>sem_itens</code></td><td>conta como pedido, mas não tem valor de produtos para a receita</td><td>5 pedidos sinalizados, todos com status <code>created</code></td></tr>
+            <tr><td>A semana da Black Friday permanece</td><td>trata-se de evento real de demanda, que voltará a ocorrer</td><td>1 semana sinalizada, com 2.973 vendas</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>4. A base de pedidos do Olist</h2>
+        <p>O arquivo <code>olist_pedidos.csv</code> deriva do <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a>, publicado no Kaggle sob licença CC BY-NC-SA 4.0, o mesmo conjunto usado nas aulas 7 a 11. O professor reuniu três tabelas em uma só, com uma linha por pedido: os pedidos, o estado do cliente e os itens somados por pedido. Nenhuma linha foi removida nem corrigida nessa preparação.</p>
+        <div class="download-panel"><a href="dados/olist_pedidos.csv" download="olist_pedidos.csv" class="btn btn-data">⬇️ Baixar base CSV</a><a href="prompts-previsao.md" download="prompts-previsao.md" class="btn btn-slides">✨ Baixar roteiro de prompts</a></div>
+        <table>
+          <thead><tr><th>Coluna</th><th>Significado operacional</th><th>Tipo esperado</th></tr></thead>
+          <tbody>
+            <tr><td><code>order_id</code></td><td>identificador do pedido</td><td>texto</td></tr>
+            <tr><td><code>order_status</code></td><td>situação do pedido, em oito categorias</td><td>texto</td></tr>
+            <tr><td><code>order_purchase_timestamp</code></td><td>data e hora da compra</td><td>data</td></tr>
+            <tr><td><code>customer_state</code></td><td>unidade da federação do cliente</td><td>texto</td></tr>
+            <tr><td><code>itens</code></td><td>quantidade de itens do pedido</td><td>inteiro anulável</td></tr>
+            <tr><td><code>valor_produtos</code></td><td>soma dos preços dos itens, em reais</td><td>decimal anulável</td></tr>
+            <tr><td><code>valor_frete</code></td><td>soma do frete dos itens, em reais</td><td>decimal anulável</td></tr>
+          </tbody>
+        </table>
+        <div class="evidence"><strong>Inventário da cópia usada na aula</strong>99.441 linhas, 7 colunas, compras de 04/09/2016 a 17/10/2018. <code>SHA-256 00efcd40947d6205e21d16a0d1601ac05cfc03c5ddd7b7eaaea5609ba9eb0fe4</code></div>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>5. Protocolo de trabalho com a IA</h2>
+        <p>Um agente de código produz um notebook inteiro em poucos minutos, inclusive um notebook com regra errada. O controle se faz por uma sequência de ações observáveis, repetida a cada etapa.</p>
+        <ol>
+          <li>Contextualize: informe o arquivo, a pergunta de negócio e o resultado esperado.</li>
+          <li>Peça um plano antes da edição, para verificar se o agente entendeu a etapa.</li>
+          <li>Leia o código proposto e o diff, procurando números fixos e linhas removidas sem regra.</li>
+          <li>Execute uma etapa por vez no notebook. Resposta em texto não comprova funcionamento.</li>
+          <li>Reconcilie: toda transformação informa quantas linhas entraram, quantas saíram e por qual regra.</li>
+        </ol>
+        <p>O ambiente é o GitHub Codespaces da disciplina, com Jupyter, Pandas e scikit-learn já instalados. Use o Copilot em modo agente ou o agente com que você já trabalha, como o Antigravity da aula 12. Os prompts deste material funcionam em qualquer um deles.</p>
+        <div class="alert-box"><h4>Divergência de contagem não se resolve ajustando a regra</h4><p>Os números esperados de cada etapa servem para detectar leitura errada do arquivo ou regra mal aplicada. Se o notebook produzir outro valor, investigue o caminho, o filtro e a ordem das regras. Alterar a regra até o número coincidir destrói a função do checkpoint e esconde o erro.</p></div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Etapa 0 · ambiente</span>
+        <h2>6. Pastas de trabalho no Codespace</h2>
+        <p>Abra o Codespace do repositório da disciplina e, no terminal, crie a estrutura da entrega. A pasta <code>entrada</code> recebe a cópia do CSV e não é editada. Os arquivos gerados pelo notebook vão para <code>saidas</code>, o que permite apagar a saída e reconstruí-la a partir da entrada.</p>
+        <div class="code-block">mkdir -p aula-13-seunome/entrada aula-13-seunome/saidas
+cp materiais/aula-13/dados/olist_pedidos.csv aula-13-seunome/entrada/
+ls -lh aula-13-seunome/entrada</div>
+        <p>O arquivo tem cerca de 7,9 MB. Se o tamanho for muito diferente, a cópia falhou e deve ser refeita antes de prosseguir.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 1 · perfil</span>
+        <h2>7. Fase A: perfil da base sem limpeza</h2>
+        <p>A primeira leitura não remove nada. Ela mostra o que a base contém, para que as regras da seção 3 possam ser confrontadas com evidência.</p>
+        <div class="prompt-block">Atue como meu assistente de análise neste laboratório. Crie
+aula-13-seunome/Aula_13_SeuNome.ipynb e carregue
+aula-13-seunome/entrada/olist_pedidos.csv em um DataFrame chamado bruta,
+convertendo order_purchase_timestamp para data.
+
+Mostre: shape, dtypes, order_id duplicado, ausências por coluna, contagem por
+order_status, primeira e última data de compra e pedidos por mês. Não limpe nem
+remova nada. Espero 99.441 linhas e 7 colunas; se divergir, pare e me avise.
+Mostre o plano antes de editar.</div>
+        <p>Uma implementação mínima produz evidência semelhante a esta:</p>
+        <div class="code-block">from pathlib import Path
+import pandas as pd
+
+entrada = Path("entrada/olist_pedidos.csv")
+bruta = pd.read_csv(entrada, parse_dates=["order_purchase_timestamp"])
+
+print("shape:", bruta.shape)
+print("order_id duplicado:", bruta["order_id"].duplicated().sum())
+display(bruta.isna().sum().rename("ausentes").to_frame())
+display(bruta["order_status"].value_counts())
+display(bruta.groupby(bruta["order_purchase_timestamp"].dt.to_period("M")).size())</div>
+        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(99441, 7)</code>, nenhum <code>order_id</code> duplicado, 775 pedidos sem itens, 625 cancelados e 609 indisponíveis. A contagem mensal mostra 4, 324 e 1 pedidos em setembro, outubro e dezembro de 2016, e 16 e 4 pedidos em setembro e outubro de 2018.</div>
+        <p>Dos 775 pedidos sem itens, 603 têm status <code>unavailable</code> e 164 têm status <code>canceled</code>. A ausência de itens está, portanto, concentrada em pedidos que a regra de venda já retira, o que explica por que apenas 5 permanecem depois da limpeza.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 2 · regras</span>
+        <h2>8. Fase B: aplicação das regras com contagem</h2>
+        <p>As regras são aplicadas em ordem, sobre uma cópia, e cada uma registra as linhas antes e depois. A tabela resultante é o documento que a diretoria pode contestar.</p>
+        <div class="prompt-block">No mesmo notebook, crie vendas a partir de bruta, sem alterar bruta nem o
+CSV. Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
+1. Janela: order_purchase_timestamp de 2017-01-09 até antes de 2018-08-20.
+2. Venda: excluir order_status canceled e unavailable.
+3. Criar a flag sem_itens para itens ausentes, sem remover a linha.
+
+Espero 97.845 linhas após a regra 1, 96.690 após a regra 2 e 5 flags. Salve a
+tabela regra, justificativa, linhas_antes, linhas_depois em
+aula-13-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir, pare e
+investigue; não ajuste a regra para acertar a contagem.</div>
+        <div class="code-block">INICIO = "2017-01-09"         # primeira segunda-feira com operação contínua
+FIM_EXCLUSIVO = "2018-08-20"  # a extração perde volume depois de 19/08/2018
+STATUS_FORA = ["canceled", "unavailable"]
+
+data = bruta["order_purchase_timestamp"]
+na_janela = bruta[(data &gt;= INICIO) &amp; (data &lt; FIM_EXCLUSIVO)].copy()
+
+vendas = na_janela[~na_janela["order_status"].isin(STATUS_FORA)].copy()
+vendas["sem_itens"] = vendas["itens"].isna()
+
+print(len(bruta), len(na_janela), len(vendas), int(vendas["sem_itens"].sum()))
+# 99441 97845 96690 5</div>
+        <p>O limite superior é escrito como "antes de 20/08/2018" porque a coluna tem data e hora. Um filtro "até 19/08/2018" compararia com a meia-noite do dia 19 e descartaria as compras feitas ao longo desse domingo.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>9. Erro de dado ou evento do negócio</h2>
+        <p>O gráfico da série mostra três pontos fora do padrão. Os três parecem iguais para um algoritmo de detecção de anomalias e recebem condutas diferentes, porque têm naturezas diferentes.</p>
+        <table>
+          <thead><tr><th>Observação</th><th>Natureza</th><th>Conduta</th></tr></thead>
+          <tbody>
+            <tr><td>1.176 pedidos em 24/11/2017, contra 499 no dia seguinte</td><td>Black Friday, evento real e recorrente</td><td>manter na série e sinalizar a semana</td></tr>
+            <tr><td>946 vendas na semana de 21 a 27/05/2018, contra 1.830 na anterior</td><td>coincide com a greve dos caminhoneiros, de 21 a 30/05/2018</td><td>manter e registrar no parecer como hipótese</td></tr>
+            <tr><td>130 pedidos na semana encerrada em 02/09/2018</td><td>fim da extração do conjunto público</td><td>cortar pela regra de janela</td></tr>
+          </tbody>
+        </table>
+        <p>A relação entre a queda de maio e a greve é uma hipótese apoiada na coincidência de datas. A base não registra o motivo de cada pedido não realizado, e o parecer deve apresentá-la com essa ressalva. A IA lista os pontos fora do padrão com facilidade. A classificação entre erro e evento depende de quem conhece a operação.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 3 · série</span>
+        <h2>10. Fase C: organização em série semanal</h2>
+        <p>A série semanal é a tabela que o modelo vai ler. Cada linha representa uma semana completa, de segunda a domingo, identificada pela data do domingo.</p>
+        <div class="prompt-block">Agregue vendas em uma série semanal de segunda a domingo (resample "W-SUN"
+sobre order_purchase_timestamp) com as colunas pedidos (contagem de order_id)
+e receita (soma de valor_produtos). Crie a flag semana_black_friday para a
+semana encerrada em 2017-11-26.
+
+Verifique com assert que a soma de pedidos é igual ao número de linhas de
+vendas e que não há semana faltando. Espero 84 semanas, de 2017-01-15 a
+2018-08-19. Salve em aula-13-seunome/saidas/vendas_semanais.csv e faça um
+gráfico de linha de pedidos por semana.</div>
+        <div class="code-block">semanal = (
+    vendas.set_index("order_purchase_timestamp")
+    .resample("W-SUN")
+    .agg(pedidos=("order_id", "count"), receita=("valor_produtos", "sum"))
+)
+semanal["semana_black_friday"] = semanal.index == pd.Timestamp("2017-11-26")
+
+assert semanal["pedidos"].sum() == len(vendas)
+assert len(semanal) == 84
+semanal.to_csv("saidas/vendas_semanais.csv")
+semanal["pedidos"].plot(figsize=(11, 4), title="Vendas por semana")</div>
+        <div class="evidence"><strong>Checkpoint</strong>84 semanas, de 15/01/2017 a 19/08/2018, somando 96.690 vendas. A semana da Black Friday registra 2.973 vendas e a última semana, 1.852.</div>
+        <p>O grão mensal deixaria 20 pontos para treinar e testar, quantidade insuficiente para separar um período de teste. O grão diário traria o ciclo dos dias da semana, que não interessa a uma decisão de escala semanal. O grão segue o horizonte da decisão.</p>
+      </section>
+
+      <section data-lesson-section="concepts">
+        <h2>11. Três conceitos para ler uma previsão</h2>
+        <h3>11.1 Referência simples</h3>
+        <p>Antes de qualquer modelo, calcula-se o erro de uma regra que qualquer gestor aplicaria sem computador. A previsão ingênua supõe que a próxima semana repetirá a semana anterior. A média móvel supõe que ela repetirá a média das quatro anteriores. Essas regras fixam o erro que o modelo precisa reduzir. Um modelo que erra tanto quanto a previsão ingênua custa mais e entrega a mesma informação.</p>
+        <h3>11.2 Teste temporal</h3>
+        <p>O modelo é treinado nas semanas mais antigas e avaliado nas 12 mais recentes, de junho a agosto de 2018. Esse desenho reproduz a situação de uso, em que só o passado está disponível no momento da previsão. A separação aleatória, comum em outros problemas, coloca semanas futuras no treino. O modelo passa a prever uma semana conhecendo as vizinhas dos dois lados, e o erro medido fica menor do que o erro que a operação enfrentará. Esse efeito recebe o nome de vazamento temporal.</p>
+        <p>O mesmo cuidado vale para os atributos. A média das quatro semanas precisa ser calculada sobre as semanas anteriores à semana prevista. O deslocamento de uma posição, feito com <code>shift(1)</code>, garante isso.</p>
+        <h3>11.3 Erro médio absoluto</h3>
+        <p>O erro médio absoluto (MAE) é a média das diferenças entre o previsto e o realizado, sem considerar o sinal. Ele é expresso na unidade da série. Um MAE de 185 significa errar, em média, 185 pedidos por semana, e a diretoria pode comparar esse número diretamente com a folga de capacidade da expedição.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 4 · referência</span>
+        <h2>12. Fase D: referências simples no teste</h2>
+        <div class="prompt-block">A partir de aula-13-seunome/saidas/vendas_semanais.csv, crie em um DataFrame
+dados os atributos semana_anterior (pedidos com shift de 1) e media_4_semanas
+(média das quatro semanas anteriores, com shift de 1 antes do rolling).
+Remova as linhas sem atributo completo.
+
+Separe as 12 últimas semanas como teste e as demais como treino, sem
+embaralhar. Calcule o MAE de duas referências no teste: prever semana_anterior
+e prever media_4_semanas. Explique em uma frase por que o shift evita usar
+informação do futuro.</div>
+        <div class="code-block">from sklearn.metrics import mean_absolute_error
+
+dados = semanal[["pedidos"]].copy()
+dados["semana_anterior"] = dados["pedidos"].shift(1)
+dados["media_4_semanas"] = dados["pedidos"].shift(1).rolling(4).mean()
+dados = dados.dropna()
+
+treino, teste = dados.iloc[:-12], dados.iloc[-12:]
+
+mae_ingenuo = mean_absolute_error(teste["pedidos"], teste["semana_anterior"])
+mae_media = mean_absolute_error(teste["pedidos"], teste["media_4_semanas"])
+print(len(treino), len(teste), round(mae_ingenuo, 1), round(mae_media, 1))
+# 68 12 197.8 288.1</div>
+        <div class="evidence"><strong>Checkpoint</strong>68 semanas de treino e 12 de teste. A previsão ingênua erra 197,8 pedidos por semana em média, e a média de quatro semanas, 288,1. A média do teste é de 1.516 pedidos por semana.</div>
+        <p>A média móvel erra mais do que a previsão ingênua neste período porque as semanas de julho e agosto de 2018 oscilam bastante, e a média de quatro semanas demora a acompanhar cada mudança.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 5 · modelo</span>
+        <h2>13. Fase E: regressão linear com teste temporal</h2>
+        <p>A regressão linear combina os dois atributos em uma soma ponderada. Os pesos são aprendidos no treino e aplicados ao teste sem novo ajuste.</p>
+        <div class="prompt-block">Treine uma LinearRegression do scikit-learn no treino com os atributos
+semana_anterior e media_4_semanas e alvo pedidos. Preveja o teste e calcule o
+MAE.
+
+Monte uma tabela com real, previsto e erro por semana e salve em
+aula-13-seunome/saidas/real_versus_previsto.csv. Faça um gráfico com as duas
+linhas. Em seguida repita o treino com train_test_split aleatório
+(test_size=12, random_state=42) apenas para comparar o MAE, e explique por que
+esse segundo número não pode ser usado.</div>
+        <div class="code-block">from sklearn.linear_model import LinearRegression
+
+atributos = ["semana_anterior", "media_4_semanas"]
+modelo = LinearRegression().fit(treino[atributos], treino["pedidos"])
+previsto = modelo.predict(teste[atributos])
+mae_modelo = mean_absolute_error(teste["pedidos"], previsto)
+
+comparacao = teste[["pedidos"]].assign(
+    previsto=previsto.round(0),
+    erro=(teste["pedidos"] - previsto).round(0),
+)
+comparacao.to_csv("saidas/real_versus_previsto.csv")
+print(round(mae_modelo, 1))  # 185.0</div>
+        <table>
+          <thead><tr><th>Método</th><th>MAE no teste</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><td>Previsão ingênua</td><td>197,8</td><td>referência a superar</td></tr>
+            <tr><td>Média de 4 semanas</td><td>288,1</td><td>reage devagar às oscilações</td></tr>
+            <tr><td>Regressão linear</td><td>185,0</td><td>reduz 6,5% do erro da previsão ingênua; equivale a 12,2% da média do teste</td></tr>
+            <tr><td>Regressão somente com tendência</td><td>451,4</td><td>extrapola o crescimento de 2017, que não se manteve em 2018</td></tr>
+            <tr><td>Regressão com separação aleatória</td><td>99,2</td><td>inválido por vazamento temporal</td></tr>
+          </tbody>
+        </table>
+        <p>A regressão supera a previsão ingênua por margem pequena, de 197,8 para 185,0. O resultado é legítimo e deve ser reportado nesse tamanho. Com 84 semanas e dois atributos, o modelo captura pouco além do que a semana anterior já informa. O número 99,2, obtido com separação aleatória, parece melhor e não descreve o uso real, pois foi medido com semanas futuras no treino.</p>
+        <p>As duas semanas de maior erro são as encerradas em 22/07/2018, com 614 pedidos a menos na previsão, e em 05/08/2018, com 498 a menos. Ambas sucedem semanas de volume baixo, e um modelo que se apoia na semana anterior carrega a queda para a previsão seguinte.</p>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <span class="step-tag">Prompt 6 · parecer</span>
+        <h2>14. Fase F: previsão em faixa e parecer</h2>
+        <p>A previsão entregue à diretoria é uma faixa. O valor central vem do modelo e a amplitude vem do erro medido no teste.</p>
+        <div class="prompt-block">Com o modelo treinado, preveja a semana de 20 a 26/08/2018 usando a última
+semana da série e a média das quatro últimas. Apresente o valor previsto e a
+faixa de mais ou menos um MAE.
+
+Crie aula-13-seunome/PARECER_PREVISAO.md com: pergunta de negócio, regras de
+limpeza e contagens, MAE das referências e do modelo, previsão em faixa, as
+duas semanas de maior erro no teste e três limitações. Use somente números
+produzidos no notebook; não invente valores. Depois proponha git add, commit e
+push, sem executar antes da minha aprovação.</div>
+        <div class="code-block">proxima = pd.DataFrame({
+    "semana_anterior": [semanal["pedidos"].iloc[-1]],
+    "media_4_semanas": [semanal["pedidos"].iloc[-4:].mean()],
+})
+ponto = float(modelo.predict(proxima)[0])
+print(round(ponto), round(ponto - mae_modelo), round(ponto + mae_modelo))
+# 1744 1559 1929</div>
+        <div class="evidence"><strong>Checkpoint</strong>Previsão de 1.744 pedidos para a semana de 20 a 26/08/2018, com faixa de 1.559 a 1.929.</div>
+        <p>A base registra 1.058 vendas nessa semana. O valor não serve para validar a previsão, porque a semana está fora da janela justamente por ter extração incompleta. Usá-lo como prova de que o modelo errou repetiria o defeito que a regra de janela corrigiu.</p>
+        <p>A faixa de um MAE é uma aproximação didática. Ela informa a ordem de grandeza do erro típico e não garante que o realizado ficará dentro dela. No teste, 4 das 12 semanas tiveram erro superior a 185 pedidos.</p>
+        <p>Leia o parecer e o diff antes de autorizar o versionamento. A persistência da entrega é feita por commit e push:</p>
+        <div class="code-block">git status
+git add aula-13-seunome
+git diff --staged --stat
+git commit -m "Entrega a previsão semanal de vendas da aula 13"
+git push</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>15. Roteiro de execução em sala</h2>
+        <table>
+          <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
+          <tbody>
+            <tr><td>19h00 às 19h40</td><td>problema, pergunta de negócio, regras e protocolo com a IA</td><td>a dupla enuncia a pergunta e a unidade</td></tr>
+            <tr><td>19h40 às 19h55</td><td>pastas, cópia do CSV e perfil</td><td>99.441 linhas e 775 pedidos sem itens</td></tr>
+            <tr><td>19h55 às 20h20</td><td>aplicação das regras</td><td>97.845, 96.690 e 5 flags</td></tr>
+            <tr><td>20h20 às 20h40</td><td>série semanal e gráfico</td><td>84 semanas e soma de 96.690</td></tr>
+            <tr><td>20h40 às 21h00</td><td>conceitos de previsão e referências simples</td><td>MAE de 197,8 e 288,1</td></tr>
+            <tr><td>21h00 às 21h25</td><td>regressão linear e contraexemplo aleatório</td><td>MAE de 185,0 e de 99,2</td></tr>
+            <tr><td>21h25 às 21h40</td><td>previsão em faixa e parecer</td><td>1.744, entre 1.559 e 1.929</td></tr>
+            <tr><td>21h40 às 22h00</td><td>revisão, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+          </tbody>
+        </table>
+        <p>O script <code>materiais/aula-13/referencia/previsao_referencia.py</code> reproduz todos os números desta tabela. Execute-o depois de concluir o notebook e compare os resultados.</p>
+        <div class="code-block">python materiais/aula-13/referencia/previsao_referencia.py</div>
+      </section>
+
+      <section data-lesson-section="challenge">
+        <h2>16. Desafio e entrega</h2>
+        <p>Em dupla, redija no <code>PARECER_PREVISAO.md</code> a resposta à Diretoria de Operações para quatro perguntas. A margem de 185 pedidos por semana cabe na folga de capacidade da expedição? Que regra de limpeza mudaria se a pergunta fosse sobre o atendimento ao cliente? O que explica as duas semanas de maior erro no teste? Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</p>
+        <p>Quem terminar antes pode repetir as fases D e E com a coluna <code>receita</code> como alvo e comparar se a regressão continua superando a previsão ingênua.</p>
+        <p>Entrega verificável, na pasta <code>aula-13-seunome</code>:</p>
+        <ul>
+          <li><code>Aula_13_SeuNome.ipynb</code> executado do início ao fim, sem depender da ordem manual das células.</li>
+          <li><code>saidas/regras_de_limpeza.csv</code> com linhas antes e depois de cada regra.</li>
+          <li><code>saidas/vendas_semanais.csv</code> com 84 semanas.</li>
+          <li><code>saidas/real_versus_previsto.csv</code> com as 12 semanas de teste.</li>
+          <li><code>PARECER_PREVISAO.md</code> com previsão em faixa e limitações, seguido de commit e push.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="checklist">
+        <h2>17. Checklist de qualidade</h2>
+        <ul>
+          <li>O CSV em <code>entrada</code> permanece idêntico ao arquivo copiado.</li>
+          <li>A pergunta de negócio, a unidade e o horizonte estão escritos no início do notebook.</li>
+          <li>Cada regra de limpeza tem justificativa de negócio e contagem antes e depois.</li>
+          <li>A janela usa limite superior exclusivo em 20/08/2018.</li>
+          <li>A soma dos pedidos semanais é igual ao total de vendas.</li>
+          <li>Os atributos usam <code>shift(1)</code> e não incluem a semana prevista.</li>
+          <li>O teste corresponde às 12 semanas mais recentes, sem embaralhamento.</li>
+          <li>O MAE do modelo está comparado com o das duas referências simples.</li>
+          <li>O resultado da separação aleatória aparece identificado como inválido.</li>
+          <li>O parecer apresenta a previsão em faixa e registra a greve de maio como hipótese.</li>
+          <li>Nenhum número do parecer foi digitado sem origem no notebook.</li>
+        </ul>
+      </section>
+
+      <section data-lesson-section="summary">
+        <h2>18. Síntese</h2>
+        <p>A limpeza desta aula partiu de uma decisão de escala. A pergunta sobre a expedição fixou a janela, a definição de venda e o grão semanal, e cada regra ficou registrada com justificativa e contagem. A mesma base, lida para o atendimento ou para a receita, pediria regras diferentes.</p>
+        <p>Na previsão, o teste nas 12 semanas mais recentes mediu o erro que a operação enfrentaria. A regressão linear reduziu o erro da previsão ingênua de 197,8 para 185,0 pedidos por semana, ganho pequeno e informado como tal. A separação aleatória produziu 99,2, número que não descreve o uso real. A IA escreveu o código das seis fases, enquanto a escolha das regras, a conferência das contagens e a leitura do erro couberam à turma.</p>
+        <p>O resultado vale para este conjunto público, nesta janela e para o horizonte de uma semana. Ele não autoriza afirmar que a regressão linear prevê vendas de marketplaces em geral.</p>
+      </section>
+
+      <section data-lesson-section="next-steps">
+        <h2>19. Referências e continuidade</h2>
+        <p>No laboratório de 18/11, a disciplina passa da previsão para a inferência com testes A/B, do desenho do experimento à decisão de negócio. A noção de comparar um resultado com uma referência, construída aqui com a previsão ingênua, reaparece na comparação entre grupo de controle e grupo de tratamento.</p>
+        <ul>
+          <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a>, fonte e licença do conjunto.</li>
+          <li><a href="https://otexts.com/fpp3/simple-methods.html">Forecasting: Principles and Practice</a>, de Hyndman e Athanasopoulos, seção sobre métodos simples de previsão.</li>
+          <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html">Documentação do Pandas sobre <code>resample</code></a>.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">Documentação do scikit-learn sobre <code>LinearRegression</code></a>.</li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html">Documentação do scikit-learn sobre <code>mean_absolute_error</code></a>.</li>
+        </ul>
+      </section>
 
       <div class="actions">
         <a href="../../index.html" class="btn btn-home">🏠 Voltar ao Cronograma</a>
         <a href="../../slides/aula-13.html" class="btn btn-slides">📊 Ver Slides</a>
+        <a href="dados/olist_pedidos.csv" download="olist_pedidos.csv" class="btn btn-data">⬇️ Baixar Base</a>
+        <a href="prompts-previsao.md" download="prompts-previsao.md" class="btn btn-data">✨ Baixar Prompts</a>
         <button onclick="window.print()" class="btn btn-print">🖨️ Imprimir Material</button>
       </div>
     </div>
