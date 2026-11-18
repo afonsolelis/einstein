@@ -1,0 +1,70 @@
+# Aula 15 · Fase H: monitoramento de anomalias com CrateDB e Grafana
+#
+# Subir:     docker compose up -d
+#            (na cópia em aula-15-seunome, crie antes um .env com DADOS_DIR=../entrada)
+# Conferir:  docker compose ps            (carga termina com "Exited (0)")
+#            docker compose logs carga    (hash da entrada e contagens)
+# Acessar:   aba PORTS do Codespace, porta 3001 (Grafana) e 4200 (console do CrateDB)
+# Encerrar:  docker compose down          (preserva os dados)
+#            docker compose down -v       (apaga o volume do CrateDB)
+#
+# O dashboard é provisionado a partir de grafana/dashboards/*.json. Edite o JSON,
+# salve e aguarde até 10 segundos: o Grafana relê a pasta sozinho.
+#
+# Credenciais de laboratório: o CrateDB usa o superusuário "crate" sem senha e
+# o Grafana libera leitura anônima. Em ambiente compartilhado, configure usuários,
+# senhas e variáveis de ambiente.
+
+services:
+  cratedb:
+    image: crate:5.10.6
+    command: ["crate", "-Cdiscovery.type=single-node", "-Ccluster.name=aula15"]
+    environment:
+      CRATE_HEAP_SIZE: 1g
+    ports:
+      - "4200:4200"   # console web e API HTTP
+    volumes:
+      - crate-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:4200/"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # Serviço de execução única: confere o hash, carrega os CSV e cria as views.
+  carga:
+    image: python:3.12-slim
+    working_dir: /carga
+    command: ["python", "carregar.py"]
+    environment:
+      CRATE_URL: http://cratedb:4200/_sql
+      DADOS: /dados
+      SQL: /sql
+    volumes:
+      - ./carga:/carga:ro
+      - ./sql:/sql:ro
+      - ${DADOS_DIR:-../dados}:/dados:ro   # na pasta do aluno, DADOS_DIR=../entrada no .env
+    depends_on:
+      cratedb:
+        condition: service_healthy
+
+  grafana:
+    image: grafana/grafana-oss:11.6.0
+    ports:
+      - "3001:3000"   # 3000 fica com o Metabase do laboratório 5
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_LANGUAGE: pt-BR
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/auditoria-contas.json
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      carga:
+        condition: service_completed_successfully
+
+volumes:
+  crate-data:

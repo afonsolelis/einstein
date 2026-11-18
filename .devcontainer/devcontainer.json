@@ -9,11 +9,21 @@
   },
   "forwardPorts": [
     3000,
+    3001,
+    4200,
     8501
   ],
   "portsAttributes": {
     "3000": {
       "label": "Metabase",
+      "onAutoForward": "notify"
+    },
+    "3001": {
+      "label": "Grafana",
+      "onAutoForward": "notify"
+    },
+    "4200": {
+      "label": "CrateDB",
       "onAutoForward": "notify"
     },
     "8501": {

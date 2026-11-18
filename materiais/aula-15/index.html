@@ -133,7 +133,7 @@
     </div>
 
     <div class="content">
-      <p class="desc">O comitê de auditoria de uma rede hospitalar fictícia recebeu as contas a pagar de 2025, com 5.440 lançamentos e R$ 46,9 milhões pagos a fornecedores, e tem equipe para examinar apenas algumas centenas de pagamentos. Neste laboratório, a turma prepara a base segundo as regras de alçada, calendário e cadastro, aplica testes de regra, verifica a aderência dos valores à Lei de Benford, usa o Isolation Forest como triagem complementar e combina os sinais em uma fila priorizada. A IA escreve o código no GitHub Codespaces. A turma escolhe os parâmetros, confere as contagens e redige o relatório, que termina na recomendação de examinar, e não na acusação.</p>
+      <p class="desc">O comitê de auditoria de uma rede hospitalar fictícia recebeu as contas a pagar de 2025, com 5.440 lançamentos e R$ 46,9 milhões pagos a fornecedores, e tem equipe para examinar apenas algumas centenas de pagamentos. Neste laboratório, a turma prepara a base segundo as regras de alçada, calendário e cadastro, aplica testes de regra, verifica a aderência dos valores à Lei de Benford, usa o Isolation Forest como triagem complementar, combina os sinais em uma fila priorizada e publica essa fila em um dashboard do Grafana, definido como código sobre o CrateDB. A IA escreve o código no GitHub Codespaces. A turma escolhe os parâmetros, confere as contagens e redige o relatório, que termina na recomendação de examinar, e não na acusação.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
@@ -143,6 +143,7 @@
           <li>Aplicar testes de regra e medir quantos alarmes cada um produz.</li>
           <li>Testar a aderência à Lei de Benford no total e por fornecedor.</li>
           <li>Combinar sinais em uma matriz de risco e justificar a fila de exame.</li>
+          <li>Publicar a fila em um dashboard do Grafana sobre o CrateDB, definido como código.</li>
         </ul>
       </section>
 
@@ -505,16 +506,68 @@ git push</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <h2>16. Roteiro de execução em sala</h2>
+        <span class="step-tag">Prompt 8 · painel como código</span>
+        <h2>16. Fase H: monitoramento com CrateDB e Grafana</h2>
+        <p>O notebook responde à pergunta do comitê uma vez, sobre o arquivo recebido. Quem acompanha os pagamentos ao longo do ano precisa ver os mesmos sinais sem reabrir o notebook a cada consulta. A Fase H leva as regras para um banco de dados e publica a fila em um dashboard. O CrateDB é um banco SQL distribuído, voltado a séries temporais e grandes volumes, que aceita o protocolo do PostgreSQL; por isso o Grafana o lê com o plugin nativo de PostgreSQL, sem extensão adicional. O Grafana, ferramenta de painéis comum em observabilidade, permite descrever cada dashboard em um arquivo JSON, carregado na inicialização por um mecanismo chamado provisionamento.</p>
+        <p>A pasta <code>materiais/aula-15/monitoramento</code> contém tudo o que o Compose precisa:</p>
+        <table>
+          <thead><tr><th>Arquivo</th><th>Função</th></tr></thead>
+          <tbody>
+            <tr><td><code>docker-compose.yml</code></td><td>sobe o CrateDB (porta 4200), roda a carga e sobe o Grafana (porta 3001)</td></tr>
+            <tr><td><code>carga/carregar.py</code></td><td>confere o SHA-256 dos CSV, insere as linhas sem limpeza e registra os hashes na tabela <code>custodia</code></td></tr>
+            <tr><td><code>sql/deteccao.sql</code></td><td>views de limpeza, das quatro regras, de Benford, da fila de exame e do monitor diário</td></tr>
+            <tr><td><code>grafana/provisioning/</code></td><td>fonte de dados do CrateDB e regra de leitura da pasta de dashboards</td></tr>
+            <tr><td><code>grafana/dashboards/auditoria-contas.json</code></td><td>o dashboard, com 10 painéis, versionado como qualquer outro código</td></tr>
+          </tbody>
+        </table>
+        <p>A carga não limpa nada. A normalização do código de fornecedor e a exclusão dos estornos ficam na view <code>v_pagamentos</code>, de modo que a tabela <code>contas_bruta</code> preserva o arquivo recebido e a limpeza continua auditável. As demais views reproduzem as regras do notebook com os mesmos parâmetros. O Isolation Forest fica de fora, porque depende do scikit-learn; como nenhum dos seus 55 pagamentos coincide com outro sinal, a fila em SQL tem os mesmos 172 pagamentos.</p>
+        <div class="code-block">cp -r materiais/aula-15/monitoramento aula-15-seunome/
+cd aula-15-seunome/monitoramento
+echo "DADOS_DIR=../entrada" &gt; .env      # a carga lê os CSV da sua pasta entrada
+docker compose up -d
+docker compose logs carga                 # hashes "confere" e fila com 172 pagamentos</div>
+        <p>No Codespace, abra a aba PORTS e use o endereço da porta 3001 para o Grafana e o da porta 4200 para o console do CrateDB, onde é possível consultar as views diretamente, por exemplo com <code>SELECT * FROM doc.v_fila_exame LIMIT 10</code>. A porta 3000 continua reservada ao Metabase do laboratório 5. O arquivo <code>.env</code> não vai para o repositório; depois de clonar, recrie-o antes de subir o Compose.</p>
+        <div class="evidence"><strong>Checkpoint</strong>O log da carga mostra os dois hashes com a palavra <code>confere</code>, 5.440 linhas carregadas e a fila com 172 pagamentos e R$ 1.052.985,30, distribuídos entre os seis sinais com as mesmas contagens da Fase G. O dashboard mostra 5.408 pagamentos analisados.</div>
+
+        <h3>16.1 Monitor diário</h3>
+        <p>O dashboard acrescenta um sinal que o notebook não tinha: a view <code>v_monitor_diario</code> compara o valor pago em cada dia com a média dos 20 dias anteriores com pagamento, mais três desvios padrão. O CrateDB não aceita uma janela que termine antes da linha atual (<code>ROWS BETWEEN 20 PRECEDING AND 1 PRECEDING</code>), e por isso a view usa a janela que inclui o dia e retira o próprio dia das somas. O SQLite, usado no editor dos slides, aceita a forma direta.</p>
+        <div class="evidence"><strong>Checkpoint</strong>11 dias passam do limite. Em todos, o excesso vem de um pagamento grande, como o de R$ 1.865.925,92 em 17/03. Só 5 desses dias têm algum pagamento da fila, 6 pagamentos que somam R$ 39.014,37, e a coincidência não decorre do sinal.</div>
+        <p>O monitor repete o que o Isolation Forest mostrou: uma regra estatística de volume encontra os dias raros, e não as irregularidades. Os 25 pagamentos em dia não útil aparecem no gráfico como vales, porque esses dias têm um ou dois pagamentos, e um limite superior não os vê. O painel serve para acompanhar o volume e para perguntar o que explica um pico, mas não substitui os testes de regra.</p>
+
+        <h3>16.2 Dashboard como código</h3>
+        <p>O provisionamento lê <code>grafana/dashboards</code> a cada 10 segundos, e a opção <code>allowUiUpdates: false</code> impede salvar alterações pela interface. Toda mudança de painel passa, então, pelo arquivo JSON: fica registrada no diff, pode ser revisada antes do commit e se repete em qualquer máquina que suba o Compose. O princípio é o da cadeia de custódia, agora aplicado ao painel, já que tudo o que o comitê vê tem origem rastreável no repositório.</p>
+        <div class="prompt-block">Abra aula-15-seunome/monitoramento/grafana/dashboards/auditoria-contas.json e
+sql/deteccao.sql e explique em três frases como o Grafana encontra este arquivo e
+de onde vêm os dados de cada painel.
+
+Acrescente um painel com id 11, do tipo barchart, título "Pagamentos em dia não
+útil por mês", datasource de uid cratedb e gridPos logo abaixo do último painel,
+com largura 24. A consulta deve contar as linhas de doc.v_dia_nao_util por mês,
+com o mês em texto (date_format('%Y-%m', data_pagamento)). Não altere os outros
+painéis.
+
+Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como
+conferir no Grafana que as barras somam 25. Mostre o diff e proponha git add e
+commit, sem executar.</div>
+        <div class="code-block">SELECT date_format('%Y-%m', data_pagamento) AS mes, count(*) AS pagamentos
+FROM doc.v_dia_nao_util
+GROUP BY 1
+ORDER BY 1</div>
+        <div class="evidence"><strong>Checkpoint</strong>O painel novo tem 11 barras, de janeiro a novembro, que somam 25; março e maio têm 4 pagamentos cada. Se o painel não aparecer, <code>docker compose logs grafana</code> mostra o erro de provisionamento, em geral uma vírgula a mais no JSON ou um <code>id</code> repetido.</div>
+      </section>
+
+      <section data-lesson-section="guided-practice">
+        <h2>17. Roteiro de execução em sala</h2>
         <table>
           <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
           <tbody>
-            <tr><td>19h00 às 19h35</td><td>case, vocabulário, custódia e protocolo com a IA</td><td>a dupla distingue indício de anomalia</td></tr>
-            <tr><td>19h35 às 19h55</td><td>pastas, hashes, perfil e limpeza</td><td>5.440 linhas, 47 normalizados, 14 sem cadastro</td></tr>
-            <tr><td>19h55 às 20h40</td><td>duplicidade, calendário, fracionamento e valores redondos</td><td>18, 25, 15 e 40</td></tr>
-            <tr><td>20h40 às 21h10</td><td>Lei de Benford no total e por fornecedor</td><td>MAD de 0,0050 e <code>F077</code> fora</td></tr>
-            <tr><td>21h10 às 21h30</td><td>Isolation Forest</td><td>55 anomalias, nenhuma coincidente</td></tr>
-            <tr><td>21h30 às 21h45</td><td>matriz de risco, fila e hash final</td><td>172 pagamentos e hash igual ao inicial</td></tr>
+            <tr><td>19h00 às 19h30</td><td>case, vocabulário, custódia e protocolo com a IA</td><td>a dupla distingue indício de anomalia</td></tr>
+            <tr><td>19h30 às 19h50</td><td>pastas, hashes, perfil e limpeza</td><td>5.440 linhas, 47 normalizados, 14 sem cadastro</td></tr>
+            <tr><td>19h50 às 20h25</td><td>duplicidade, calendário, fracionamento e valores redondos</td><td>18, 25, 15 e 40</td></tr>
+            <tr><td>20h25 às 20h50</td><td>Lei de Benford no total e por fornecedor</td><td>MAD de 0,0050 e <code>F077</code> fora</td></tr>
+            <tr><td>20h50 às 21h05</td><td>Isolation Forest</td><td>55 anomalias, nenhuma coincidente</td></tr>
+            <tr><td>21h05 às 21h20</td><td>matriz de risco, fila e hash final</td><td>172 pagamentos e hash igual ao inicial</td></tr>
+            <tr><td>21h20 às 21h45</td><td>CrateDB, Grafana e painel como código</td><td>172 na fila do Grafana e painel novo com 25</td></tr>
             <tr><td>21h45 às 22h00</td><td>relatório, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
           </tbody>
         </table>
@@ -523,7 +576,7 @@ git push</div>
       </section>
 
       <section data-lesson-section="challenge">
-        <h2>17. Desafio e entrega</h2>
+        <h2>18. Desafio e entrega</h2>
         <p>Em dupla, responda no <code>RELATORIO_AUDITORIA.md</code> a quatro perguntas do comitê. Que documento o auditor pediria para examinar cada um dos seis sinais? Que explicação legítima poderia justificar os pagamentos de <code>F077</code>? O que muda na fila se o comitê baixar o peso de dia não útil para 1? Que conclusão do agente a dupla precisou corrigir ou suavizar, e por qual motivo?</p>
         <p>Quem terminar antes pode acrescentar à matriz um sinal de pagamento acima da alçada feito a fornecedor cadastrado há menos de 90 dias, usando a coluna <code>data_cadastro</code>, e registrar quantos pagamentos ele acrescenta à fila.</p>
         <p>Entrega verificável, na pasta <code>aula-15-seunome</code>:</p>
@@ -532,12 +585,13 @@ git push</div>
           <li><code>saidas/benford_fornecedores.csv</code> com os 24 fornecedores testados.</li>
           <li><code>saidas/achados.csv</code> com uma linha por pagamento e sinal.</li>
           <li><code>saidas/fila_de_exame.csv</code> com 172 pagamentos.</li>
+          <li><code>monitoramento/grafana/dashboards/auditoria-contas.json</code> com o painel 11, validado com <code>python -m json.tool</code>.</li>
           <li><code>RELATORIO_AUDITORIA.md</code> com hashes de início e fim iguais, seguido de commit e push.</li>
         </ul>
       </section>
 
       <section data-lesson-section="checklist">
-        <h2>18. Checklist de qualidade</h2>
+        <h2>19. Checklist de qualidade</h2>
         <ul>
           <li>Os arquivos em <code>entrada</code> têm os mesmos hashes do material.</li>
           <li>O hash final da entrada é igual ao inicial, verificado por <code>assert</code>.</li>
@@ -550,18 +604,21 @@ git push</div>
           <li>Os pesos da matriz de risco estão no relatório.</li>
           <li>Nenhuma frase do relatório afirma fraude, culpa ou intenção.</li>
           <li>Nenhum número do relatório foi digitado sem origem no notebook.</li>
+          <li>O log da carga mostra os hashes conferidos, e o Grafana mostra a mesma fila de 172 pagamentos.</li>
+          <li>O painel novo entrou pelo JSON, e não pela interface do Grafana.</li>
         </ul>
       </section>
 
       <section data-lesson-section="summary">
-        <h2>19. Síntese</h2>
+        <h2>20. Síntese</h2>
         <p>A auditoria desta aula começou pela custódia: o hash da entrada, calculado antes e conferido depois, garante que a fila foi produzida sobre o arquivo recebido. A limpeza foi orientada à finalidade de evitar alarmes falsos, e a normalização dos códigos de fornecedor eliminou 47 deles antes de qualquer teste. Os testes de regra traduziram controles internos em critérios verificáveis, e a inclusão da nota fiscal na regra de duplicidade separou 18 pagamentos repetidos de 59 parcelas legítimas.</p>
         <p>Os testes estatísticos tiveram papéis diferentes. A Lei de Benford confirmou a conformidade da população e apontou um único fornecedor, desde que se usasse o teste adequado ao tamanho da amostra. O Isolation Forest marcou 55 extremos de valor sem relação com os controles, o que justifica seu peso baixo. A matriz de risco combinou os sinais em uma fila de 172 pagamentos, cerca de 2,2% do valor pago, cada um com o motivo de sua inclusão.</p>
+        <p>A Fase H mostrou que as mesmas regras, escritas como views no CrateDB, reproduzem a fila, e que o dashboard pode ser tratado como código: o painel acrescentado pela dupla tem origem no diff do repositório. O monitor diário, por sua vez, repetiu a lição do Isolation Forest, ao encontrar 11 dias de volume alto sem relação com os sinais de controle.</p>
         <p>O resultado vale para esta base sintética, com irregularidades plantadas em quantidades conhecidas. Em uma base real, a fila seria maior, as causas seriam desconhecidas e cada sinal dependeria do exame documental para virar achado.</p>
       </section>
 
       <section data-lesson-section="next-steps">
-        <h2>20. Referências e continuidade</h2>
+        <h2>21. Referências e continuidade</h2>
         <p>No laboratório de 02/12, a disciplina trata de IA aplicada à estratégia e à tomada de decisão. A distinção entre sinal e conclusão, praticada aqui, volta a ser necessária quando a IA propõe recomendações estratégicas a partir de dados incompletos.</p>
         <ul>
           <li>Nigrini, M. J. <em>Benford's Law: Applications for Forensic Accounting, Auditing, and Fraud Detection</em>. Wiley, 2012.</li>
@@ -569,6 +626,8 @@ git push</div>
           <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">Documentação do scikit-learn sobre <code>IsolationForest</code></a>.</li>
           <li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html">Documentação do SciPy sobre <code>chisquare</code></a>.</li>
           <li><a href="https://docs.python.org/3/library/hashlib.html">Documentação do Python sobre <code>hashlib</code></a>.</li>
+          <li><a href="https://cratedb.com/docs/crate/reference/en/latest/">Documentação de referência do CrateDB</a>.</li>
+          <li><a href="https://grafana.com/docs/grafana/latest/administration/provisioning/">Documentação do Grafana sobre provisionamento de fontes de dados e dashboards</a>.</li>
         </ul>
       </section>
 

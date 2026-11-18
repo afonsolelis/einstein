@@ -515,6 +515,106 @@
       .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
       .deck-table td { padding: 0.4rem 0.8rem; }
     }
+
+    /* Fase H: animações em SVG. Cada elemento com data-t aparece em t ms quando o slide abre;
+       o botão Reiniciar animação, no rodapé, roda de novo desde o início. */
+    .anim { position: relative; z-index: 1; display: block; width: min(100%, 1120px); height: clamp(220px, 44vh, 420px); overflow: visible; }
+    .anim text { fill: var(--text); font-family: 'Fira Code', monospace; font-size: 15px; }
+    .anim .t-sm { fill: var(--muted); font-size: 13px; }
+    .anim .t-b { fill: #fff; font-weight: 600; }
+    .anim .t-lg { fill: #fff; font-size: 19px; font-weight: 600; }
+    .anim .t-xl { fill: #7ee7d4; font-size: 30px; font-weight: 600; }
+    .anim .t-ok { fill: #7ee7d4; }
+    .anim .t-alerta { fill: #ff8a8a; }
+    .anim .cx { fill: rgba(8, 47, 73, 0.85); stroke: rgba(75, 196, 232, 0.45); stroke-width: 1.5; }
+    .anim .cx-forte { fill: rgba(0, 163, 137, 0.16); stroke: var(--teal); stroke-width: 2; }
+    .anim .cx-codigo { fill: rgba(4, 20, 34, 0.85); stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; }
+    .anim .seta { fill: none; stroke: var(--cyan-light); stroke-width: 2.5; marker-end: url(#ponta); }
+    .anim .seta-git { fill: none; stroke: #d8a7ff; stroke-width: 2.5; stroke-dasharray: 7 6; marker-end: url(#ponta-git); }
+    .anim .grade { stroke: rgba(255, 255, 255, 0.07); stroke-width: 1; }
+    .anim .barra { fill: var(--cyan); }
+    .anim .barra-nova { fill: #f5a524; }
+    .anim .realce { fill: rgba(245, 165, 36, 0.16); stroke: #f5a524; stroke-width: 1.5; }
+    .anim .pacote { fill: var(--teal); }
+    .anim .serie { fill: none; stroke: var(--cyan-light); stroke-width: 1.4; }
+    .anim .limite { fill: none; stroke: #8faabd; stroke-width: 1.4; stroke-dasharray: 6 5; }
+    .anim .ponto { fill: #ff5d5d; stroke: #fff; stroke-width: 1; }
+    .anim [data-t] { opacity: 0; transition: opacity 0.5s ease, transform 0.6s ease, stroke-dashoffset 0.9s ease; }
+    .anim [data-t].on { opacity: 1; }
+    .anim .seta[data-t], .anim .seta-git[data-t] { stroke-dashoffset: 400; }
+    .anim .seta[data-t] { stroke-dasharray: 400; }
+    .anim .seta[data-t].on { stroke-dashoffset: 0; }
+    .anim .cresce[data-t] { transform: scaleY(0); transform-box: fill-box; transform-origin: bottom; }
+    .anim .cresce[data-t].on { transform: scaleY(1); }
+    .anim .viaja[data-t] { transform: translateX(var(--de, 0)); }
+    .anim .viaja[data-t].on { transform: translateX(var(--ate, 0)); transition: opacity 0.2s ease, transform 1.1s ease-in-out; }
+    .anim.anim-reset [data-t] { transition: none !important; }
+    .anim-legenda { position: relative; z-index: 1; max-width: 1120px; margin-top: 0.6rem; }
+
+    /* Fase H: editor SQL que roda no próprio slide (SQLite compilado para WebAssembly). */
+    .sql-lab { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 0.9rem; width: min(100%, 1180px); }
+    .sql-presets { display: flex; flex-wrap: wrap; gap: 0.4rem; grid-column: 1 / -1; }
+    .sql-presets button, .sql-run {
+      padding: 0.42rem 0.75rem;
+      border: 1px solid rgba(75, 196, 232, 0.28);
+      border-radius: 8px;
+      color: #dceaf2;
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+    .sql-presets button[aria-pressed="true"] { border-color: var(--teal); color: #fff; background: rgba(0, 163, 137, 0.28); }
+    .sql-presets button:focus-visible, .sql-run:focus-visible, .sql-editor:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .sql-run { border-color: rgba(126, 231, 212, 0.45); color: #e9fffb; background: linear-gradient(135deg, rgba(0, 163, 137, 0.4), rgba(0, 163, 217, 0.28)); font-weight: 700; }
+    .sql-run:disabled { opacity: 0.4; cursor: wait; }
+    .sql-coluna { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+    .sql-editor {
+      width: 100%;
+      height: clamp(180px, 38vh, 380px);
+      padding: 0.8rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 5px solid var(--teal);
+      border-radius: 0 12px 12px 0;
+      color: #e5eef5;
+      background: rgba(4, 20, 34, 0.82);
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(0.72rem, 0.95vw, 0.9rem);
+      line-height: 1.45;
+      resize: none;
+      tab-size: 2;
+      white-space: pre;
+      overflow: auto;
+    }
+    .sql-barra { display: flex; align-items: center; gap: 0.7rem; color: var(--muted); font-size: 0.82rem; }
+    .sql-status { font-family: 'Fira Code', monospace; }
+    .sql-status.erro { color: #ff8a8a; }
+    .sql-saida {
+      height: clamp(180px, 38vh, 380px);
+      overflow: auto;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-radius: 12px;
+      background: rgba(8, 47, 73, 0.55);
+      scrollbar-color: var(--cyan) transparent;
+    }
+    .sql-saida table { width: 100%; border-collapse: collapse; color: var(--text); font-family: 'Fira Code', monospace; font-size: clamp(0.66rem, 0.85vw, 0.8rem); }
+    .sql-saida th { position: sticky; top: 0; padding: 0.4rem 0.55rem; color: #7ee7d4; background: #0a2a40; text-align: left; white-space: nowrap; }
+    .sql-saida td { padding: 0.3rem 0.55rem; border-top: 1px solid rgba(255, 255, 255, 0.06); white-space: nowrap; }
+    .sql-saida td.num { text-align: right; }
+    .sql-saida tr.nova { animation: linha-nova 0.5s ease both; }
+    .sql-saida .vazio { padding: 1rem; color: var(--muted); font-size: 0.9rem; }
+    @keyframes linha-nova { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 768px) {
+      .anim { height: clamp(180px, 34vh, 280px); }
+      .sql-lab { grid-template-columns: 1fr; gap: 0.5rem; }
+      .sql-editor, .sql-saida { height: 24vh; }
+      .sql-presets button { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
+      #anim-reiniciar { padding-inline: 0.65rem; font-size: 0; }
+      #anim-reiniciar .ctrl-icon { margin: 0; font-size: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .anim [data-t], .sql-saida tr.nova { transition: none; animation: none; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
@@ -535,6 +635,7 @@
         <li>Aplicar testes de regra e medir quantos alarmes cada um produz.</li>
         <li>Testar a aderência à Lei de Benford no total e por fornecedor.</li>
         <li>Combinar sinais em uma matriz de risco e justificar a fila de exame.</li>
+        <li>Publicar a fila em um dashboard do Grafana definido como código.</li>
       </ul>
     </div>
 
@@ -542,10 +643,10 @@
       <div class="prompt-label">Agenda · 19h às 22h</div>
       <h2>Roteiro do laboratório</h2>
       <div class="deck-grid">
-        <article class="deck-card"><h3>19h00 às 19h35 · Conceitos</h3><p>Case, indício, anomalia e fraude, cadeia de custódia e protocolo com a IA.</p></article>
-        <article class="deck-card"><h3>19h35 às 20h40 · Limpeza e regras</h3><p>Perfil, normalização do cadastro e quatro testes de regra.</p></article>
-        <article class="deck-card"><h3>20h40 às 21h30 · Testes estatísticos</h3><p>Lei de Benford no total e por fornecedor, seguida do Isolation Forest.</p></article>
-        <article class="deck-card"><h3>21h30 às 22h00 · Fila e entrega</h3><p>Matriz de risco, relatório ao comitê, commit e push.</p></article>
+        <article class="deck-card"><h3>19h00 às 19h30 · Conceitos</h3><p>Case, indício, anomalia e fraude, cadeia de custódia e protocolo com a IA.</p></article>
+        <article class="deck-card"><h3>19h30 às 20h25 · Limpeza e regras</h3><p>Perfil, normalização do cadastro e quatro testes de regra.</p></article>
+        <article class="deck-card"><h3>20h25 às 21h05 · Testes estatísticos</h3><p>Lei de Benford no total e por fornecedor, seguida do Isolation Forest.</p></article>
+        <article class="deck-card"><h3>21h05 às 22h00 · Fila, monitoramento e entrega</h3><p>Matriz de risco, CrateDB e Grafana com dashboard como código, relatório, commit e push.</p></article>
       </div>
     </div>
 
@@ -833,6 +934,212 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
       <p>A fila tem 172 pagamentos e R$ 1.052.985,30, cerca de 2,2% do valor pago no ano.</p>
     </div>
 
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fase H · Monitoramento</div>
+      <h2>Do notebook ao painel no Grafana</h2>
+      <svg class="anim" viewBox="0 0 1000 330" role="img" aria-label="O CSV com hash passa pela carga, entra no CrateDB, onde as views SQL calculam os sinais, e o Grafana lê essas views; abaixo, o arquivo JSON do dashboard, versionado no Git, é provisionado no Grafana">
+        <defs>
+          <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
+          <marker id="ponta-git" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d8a7ff"/></marker>
+        </defs>
+        <g data-t="0">
+          <rect class="cx" x="10" y="40" width="180" height="96" rx="10"/>
+          <text class="t-b" x="24" y="72">contas_a_pagar.csv</text>
+          <text class="t-sm" x="24" y="98">5.440 linhas</text>
+          <text class="t-sm" x="24" y="120">SHA-256 b3898f2d…</text>
+        </g>
+        <path class="seta" data-t="500" d="M192,88 L240,88"/>
+        <g data-t="900">
+          <rect class="cx" x="246" y="40" width="160" height="96" rx="10"/>
+          <text class="t-b" x="262" y="72">serviço carga</text>
+          <text class="t-sm" x="262" y="98">confere o hash</text>
+          <text class="t-sm" x="262" y="120">insere sem limpar</text>
+        </g>
+        <path class="seta" data-t="1400" d="M408,88 L456,88"/>
+        <g data-t="1800">
+          <rect class="cx-forte" x="462" y="14" width="236" height="164" rx="12"/>
+          <text class="t-lg" x="480" y="44">CrateDB</text>
+          <text class="t-sm" x="480" y="70">tabela contas_bruta</text>
+          <text class="t-sm" x="480" y="96">v_pagamentos (limpeza)</text>
+          <text class="t-sm" x="480" y="122">v_duplicidade … v_sinais</text>
+          <text class="t-ok" x="480" y="158">v_fila_exame: 172</text>
+        </g>
+        <circle class="pacote viaja" data-t="2600" cx="700" cy="96" r="7" style="--de: 0px; --ate: 46px"/>
+        <path class="seta" data-t="2400" d="M700,96 L762,96"/>
+        <text class="t-sm" data-t="2400" x="704" y="80">SQL</text>
+        <g data-t="2900">
+          <rect class="cx" x="768" y="14" width="222" height="164" rx="12"/>
+          <text class="t-lg" x="786" y="44">Grafana · 3001</text>
+          <rect class="barra cresce" data-t="3300" x="790" y="98" width="26" height="62"/>
+          <rect class="barra cresce" data-t="3450" x="826" y="118" width="26" height="42"/>
+          <rect class="barra cresce" data-t="3600" x="862" y="132" width="26" height="28"/>
+          <rect class="barra cresce" data-t="3750" x="898" y="140" width="26" height="20"/>
+          <rect class="barra cresce" data-t="3900" x="934" y="146" width="26" height="14"/>
+        </g>
+        <g data-t="4500">
+          <rect class="cx-codigo" x="462" y="232" width="236" height="84" rx="10"/>
+          <text class="t-b" x="478" y="262">auditoria-contas.json</text>
+          <text class="t-sm" x="478" y="288">versionado no Git</text>
+          <text class="t-sm" x="478" y="306">muda por commit</text>
+        </g>
+        <path class="seta-git" data-t="5000" d="M700,274 L878,274 L878,186"/>
+        <text class="t-sm" data-t="5000" x="712" y="300">provisionamento a cada 10 s</text>
+        <text class="t-sm" data-t="5600" x="10" y="200">Mesmas regras do notebook,</text>
+        <text class="t-sm" data-t="5600" x="10" y="222">escritas como views SQL.</text>
+      </svg>
+      <p class="anim-legenda">O notebook continua sendo a prova da análise. O CrateDB guarda a base e recalcula os sinais em SQL, e o Grafana exibe as views para quem acompanha o ano, sem reabrir o notebook.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Fase H · Componentes</div>
+      <h2>Papel de cada serviço no Compose</h2>
+      <table class="deck-table">
+        <thead><tr><th>Serviço</th><th>Papel na aula</th><th>Acesso</th></tr></thead>
+        <tbody>
+          <tr><td>cratedb</td><td>banco SQL distribuído; guarda a base bruta e calcula as views de detecção</td><td>porta 4200, console web</td></tr>
+          <tr><td>carga</td><td>confere o SHA-256, insere os CSV e cria as views de <code>sql/deteccao.sql</code></td><td>termina com código 0</td></tr>
+          <tr><td>grafana</td><td>lê as views pelo protocolo do PostgreSQL e desenha o dashboard provisionado</td><td>porta 3001, leitura anônima</td></tr>
+        </tbody>
+      </table>
+      <p>A porta 3000 continua reservada ao Metabase do laboratório 5. No Codespace, as duas portas abrem pela aba PORTS, e não por <code>localhost</code> no navegador.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa H · Ambiente</div>
+      <h2>CrateDB e Grafana no Codespace</h2>
+      <div class="code-block">cp -r materiais/aula-15/monitoramento aula-15-seunome/
+cd aula-15-seunome/monitoramento
+echo "DADOS_DIR=../entrada" > .env
+docker compose up -d
+docker compose logs carga</div>
+      <ul>
+        <li>O log da carga mostra os dois hashes com a palavra <code>confere</code> e a fila com 172 pagamentos.</li>
+        <li>Na aba PORTS, abra a porta 3001 para o Grafana e a 4200 para o console do CrateDB.</li>
+        <li>Para encerrar, use <code>docker compose down</code>; com <code>-v</code>, o volume do banco também é apagado.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Código ao vivo · SQL no navegador</div>
+      <h2>As regras em SQL, executadas no slide</h2>
+      <div class="sql-lab" id="sql-lab">
+        <div class="sql-presets" role="group" aria-label="Consultas prontas">
+          <button type="button" data-preset="dup" aria-pressed="true">Duplicidade</button>
+          <button type="button" data-preset="cad" aria-pressed="false">Sem cadastro</button>
+          <button type="button" data-preset="frac" aria-pressed="false">Fracionamento</button>
+          <button type="button" data-preset="ben" aria-pressed="false">Benford por fornecedor</button>
+          <button type="button" data-preset="mon" aria-pressed="false">Monitor diário</button>
+        </div>
+        <div class="sql-coluna">
+          <textarea class="sql-editor" id="sql-editor" spellcheck="false" wrap="off" aria-label="Consulta SQL"></textarea>
+          <div class="sql-barra">
+            <button class="sql-run" id="sql-run" type="button" disabled>Executar · Ctrl+Enter</button>
+            <span class="sql-status" id="sql-status" aria-live="polite">carregando o SQLite…</span>
+          </div>
+        </div>
+        <div class="sql-saida" id="sql-saida"><div class="vazio">O resultado aparece aqui.</div></div>
+      </div>
+      <p class="anim-legenda">O editor roda SQLite no navegador sobre a base da aula, com a view <code>v_pagamentos</code> já normalizada. As views equivalentes do CrateDB estão em <code>sql/deteccao.sql</code>; o monitor diário mostra a principal diferença de dialeto.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Monitor diário</div>
+      <h2>Limite de três desvios ao longo do ano</h2>
+      <svg class="anim" id="anim-monitor" data-anim="monitor" viewBox="0 0 1000 330" role="img" aria-label="Valor pago por dia em 2025, em escala logarítmica, desenhado dia a dia; a linha tracejada é a média dos 20 dias anteriores mais três desvios padrão, e os pontos vermelhos são os 11 dias que passam do limite"></svg>
+      <ul>
+        <li>Os 11 dias passam do limite por causa de um pagamento grande, como o de R$ 1,87 milhão em 17/03.</li>
+        <li>Só 5 desses dias têm algum pagamento da fila, e por coincidência: são 6 pagamentos que somam R$ 39.014,37.</li>
+        <li>Os 25 pagamentos em dia não útil aparecem como vales, que um limite superior não detecta.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Dashboard como código</div>
+      <h2>Painel definido em arquivo JSON</h2>
+      <svg class="anim" viewBox="0 0 1000 330" role="img" aria-label="Um bloco novo é acrescentado ao JSON do dashboard, passa por um commit, o Grafana relê a pasta em até 10 segundos e o painel novo aparece abaixo dos existentes">
+        <defs>
+          <marker id="ponta-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
+        </defs>
+        <rect class="cx-codigo" x="10" y="10" width="420" height="310" rx="12"/>
+        <text class="t-sm" x="28" y="38">auditoria-contas.json</text>
+        <text x="28" y="70">"panels": [</text>
+        <text class="t-sm" x="48" y="96">{ "id": 9, "title": "Fila de exame", … },</text>
+        <text class="t-sm" x="48" y="120">{ "id": 10, "title": "Cadeia de custódia", … },</text>
+        <g data-t="600">
+          <rect class="realce" x="40" y="132" width="376" height="140" rx="8"/>
+          <text x="52" y="156">{ "id": 11,</text>
+          <text x="68" y="180">"type": "barchart",</text>
+          <text x="68" y="204">"title": "Dia não útil por mês",</text>
+          <text x="68" y="228">"rawSql": "SELECT date_format(…)</text>
+          <text x="68" y="252">  FROM doc.v_dia_nao_util …" }</text>
+        </g>
+        <text x="28" y="300">]</text>
+        <path class="seta" data-t="1700" d="M434,170 L500,170" style="marker-end: url(#ponta-b)"/>
+        <g data-t="2100">
+          <rect class="cx" x="506" y="120" width="150" height="100" rx="10"/>
+          <text class="t-b" x="522" y="152">git commit</text>
+          <text class="t-sm" x="522" y="178">diff revisável</text>
+          <text class="t-sm" x="522" y="200">um painel a mais</text>
+        </g>
+        <path class="seta" data-t="2700" d="M660,170 L716,170" style="marker-end: url(#ponta-b)"/>
+        <text class="t-sm" data-t="2700" x="664" y="156">10 s</text>
+        <g data-t="3100">
+          <rect class="cx" x="722" y="10" width="268" height="310" rx="12"/>
+          <text class="t-b" x="738" y="38">Grafana</text>
+          <rect x="738" y="52" width="114" height="44" rx="5" fill="rgba(255,255,255,0.07)"/>
+          <rect x="860" y="52" width="114" height="44" rx="5" fill="rgba(255,255,255,0.07)"/>
+          <rect x="738" y="104" width="236" height="56" rx="5" fill="rgba(255,255,255,0.07)"/>
+          <rect x="738" y="168" width="236" height="22" rx="5" fill="rgba(255,255,255,0.07)"/>
+        </g>
+        <g data-t="3700">
+          <rect class="realce" x="738" y="198" width="236" height="110" rx="6"/>
+          <text class="t-sm" x="748" y="216">Dia não útil por mês</text>
+        </g>
+        <rect class="barra-nova cresce" data-t="3900" x="752" y="290" width="14" height="5"/>
+        <rect class="barra-nova cresce" data-t="3950" x="771" y="290" width="14" height="5"/>
+        <rect class="barra-nova cresce" data-t="4000" x="790" y="274" width="14" height="21"/>
+        <rect class="barra-nova cresce" data-t="4050" x="809" y="285" width="14" height="10"/>
+        <rect class="barra-nova cresce" data-t="4100" x="828" y="274" width="14" height="21"/>
+        <rect class="barra-nova cresce" data-t="4150" x="847" y="280" width="14" height="15"/>
+        <rect class="barra-nova cresce" data-t="4200" x="866" y="285" width="14" height="10"/>
+        <rect class="barra-nova cresce" data-t="4250" x="885" y="280" width="14" height="15"/>
+        <rect class="barra-nova cresce" data-t="4300" x="904" y="290" width="14" height="5"/>
+        <rect class="barra-nova cresce" data-t="4350" x="923" y="285" width="14" height="10"/>
+        <rect class="barra-nova cresce" data-t="4400" x="942" y="285" width="14" height="10"/>
+      </svg>
+      <ul>
+        <li>O JSON fica no repositório, e o diff mostra exatamente qual consulta e qual painel mudaram.</li>
+        <li><code>allowUiUpdates: false</code> impede salvar pela interface; toda mudança passa pelo arquivo.</li>
+        <li>Quem clona o repositório e roda <code>docker compose up</code> recebe o mesmo dashboard.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Prompt 8 · Painel como código</div>
+      <h2>Painel novo no arquivo JSON</h2>
+      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Abra aula-15-seunome/monitoramento/grafana/dashboards/auditoria-contas.json e sql/deteccao.sql e explique em três frases como o Grafana encontra este arquivo e de onde vêm os dados de cada painel.
+
+Acrescente um painel com id 11, do tipo barchart, título "Pagamentos em dia não útil por mês", datasource de uid cratedb e gridPos logo abaixo do último painel, com largura 24. A consulta deve contar as linhas de doc.v_dia_nao_util por mês, com o mês em texto (date_format('%Y-%m', data_pagamento)). Não altere os outros painéis.
+
+Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conferir no Grafana que as barras somam 25. Mostre o diff e proponha git add e commit, sem executar.</div></div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência 6</div>
+      <h2>Conferência do monitoramento</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>172</strong><span>pagamentos na fila do Grafana</span></div>
+        <div class="metric"><strong>11</strong><span>dias acima do limite</span></div>
+        <div class="metric"><strong>5</strong><span>desses dias com pagamento na fila</span></div>
+        <div class="metric"><strong>25</strong><span>pagamentos no painel novo</span></div>
+      </div>
+      <ul>
+        <li>As views reproduzem as contagens do notebook, sinal por sinal, sem o Isolation Forest.</li>
+        <li>O painel novo tem 11 barras, de janeiro a novembro, com 4 pagamentos em março e em maio.</li>
+        <li>Se o painel não aparecer, rode <code>docker compose logs grafana</code> e procure o erro de provisionamento.</li>
+      </ul>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="challenge">
       <div class="prompt-label">Desafio em dupla</div>
       <h2>Parecer para o comitê</h2>
@@ -853,6 +1160,7 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
         <li><code>saidas/benford_fornecedores.csv</code> com os 24 fornecedores testados.</li>
         <li><code>saidas/achados.csv</code> e <code>saidas/fila_de_exame.csv</code> com 172 pagamentos.</li>
         <li><code>RELATORIO_AUDITORIA.md</code> com hashes de início e fim iguais.</li>
+        <li><code>monitoramento/grafana/dashboards/auditoria-contas.json</code> com o painel 11 validado.</li>
         <li>Commit e push da pasta <code>aula-15-seunome</code>.</li>
       </ul>
     </div>
@@ -866,6 +1174,7 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
         <li>A regra com nota fiscal separou 18 duplicidades de 59 parcelas legítimas.</li>
         <li>Benford apontou um fornecedor, e o Isolation Forest encontrou apenas extremos de valor.</li>
         <li>A fila priorizou 172 pagamentos para exame, sem afirmar que houve fraude.</li>
+        <li>As views do CrateDB reproduziram a fila, e o Grafana a exibiu a partir de um JSON versionado.</li>
       </ul>
     </div>
 
@@ -886,6 +1195,7 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-fs" title="Tela Cheia">⛶</button>
+      <button class="ctrl-btn" id="anim-reiniciar" type="button" title="Roda a animação deste slide de novo desde o início" style="display:none"><span class="ctrl-icon">↻</span> Reiniciar animação</button>
     </div>
   </div>
 
@@ -913,6 +1223,7 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
+      if (e.target.closest('textarea, input, select')) return;
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         if (current < slides.length - 1) { current++; update(); }
@@ -959,6 +1270,325 @@ Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal
     });
 
     update();
+  </script>
+
+  <script src="../materiais/aula-15/dados/base_slides.js"></script>
+  <script>
+    // Fase H. Animações: cada elemento com data-t aparece em t ms quando o slide abre e a animação
+    // para no estado final; o botão Reiniciar animação, no rodapé, roda de novo desde o início.
+    // data-anim="monitor" desenha o monitor diário com a base real (base_slides.js).
+    (() => {
+      const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const NS = 'http://www.w3.org/2000/svg';
+      const DADOS = window.AULA15_DADOS;
+
+      function linhasCsv(texto) {
+        const [cab, ...linhas] = texto.trim().split('\n');
+        const campos = cab.split(',');
+        return linhas.map(l => { const v = l.split(','); return Object.fromEntries(campos.map((c, i) => [c, v[i]])); });
+      }
+
+      // Mesma regra de v_monitor_diario: média dos 20 dias anteriores com pagamento + 3 desvios.
+      function serieMonitor() {
+        const porDia = new Map();
+        for (const c of linhasCsv(DADOS.contas)) {
+          if (c.tipo !== 'pagamento') continue;
+          porDia.set(c.data_pagamento, (porDia.get(c.data_pagamento) || 0) + Number(c.valor));
+        }
+        const dias = [...porDia.keys()].sort();
+        return dias.map((dia, i) => {
+          const valor = porDia.get(dia);
+          const ant = dias.slice(Math.max(0, i - 20), i).map(d => porDia.get(d));
+          if (ant.length < 10) return { dia, valor, limite: null, acima: false };
+          const media = ant.reduce((a, b) => a + b, 0) / ant.length;
+          const quad = ant.reduce((a, b) => a + b * b, 0) / ant.length;
+          const limite = media + 3 * Math.sqrt(Math.max(quad - media * media, 0));
+          return { dia, valor, limite, acima: valor > limite };
+        });
+      }
+
+      function el(nome, attrs, pai, texto) {
+        const e = document.createElementNS(NS, nome);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+        if (texto !== undefined) e.textContent = texto;
+        if (pai) pai.appendChild(e);
+        return e;
+      }
+
+      function animMonitor(svg) {
+        svg.innerHTML = '';
+        if (!DADOS) { el('text', { x: 20, y: 40 }, svg, 'base_slides.js não carregou.'); return () => {}; }
+        const serie = svg._serie || (svg._serie = serieMonitor());
+        const X0 = 92, X1 = 985, Y0 = 290, Y1 = 30;
+        const doAno = d => (Date.parse(d + 'T00:00:00Z') - Date.UTC(2025, 0, 1)) / 86400000;
+        const X = d => X0 + doAno(d) / 364 * (X1 - X0);
+        const Y = v => Y0 - (Math.log10(Math.max(v, 100)) - 2) / 5 * (Y0 - Y1);
+        [[100, 'R$ 100'], [1e4, 'R$ 10 mil'], [1e6, 'R$ 1 mi']].forEach(([v, r]) => {
+          el('line', { class: 'grade', x1: X0, x2: X1, y1: Y(v), y2: Y(v) }, svg);
+          el('text', { class: 't-sm', x: X0 - 8, y: Y(v) + 4, 'text-anchor': 'end' }, svg, r);
+        });
+        'jan fev mar abr mai jun jul ago set out nov dez'.split(' ').forEach((m, i) => {
+          const d = `2025-${String(i + 1).padStart(2, '0')}-01`;
+          el('text', { class: 't-sm', x: X(d), y: Y0 + 26 }, svg, m);
+        });
+        const linha = el('polyline', { class: 'serie', points: '' }, svg);
+        const lim = el('polyline', { class: 'limite', points: '' }, svg);
+        const pontos = el('g', {}, svg);
+        el('text', { class: 't-sm', x: X1, y: 18, 'text-anchor': 'end' }, svg, 'dias acima do limite');
+        const contador = el('text', { class: 't-xl', x: X1 - 190, y: 22, 'text-anchor': 'end' }, svg, '0');
+        const legenda = el('g', {}, svg);
+        el('line', { class: 'serie', x1: X0, x2: X0 + 26, y1: 12, y2: 12 }, legenda);
+        el('text', { class: 't-sm', x: X0 + 34, y: 16 }, legenda, 'valor pago no dia');
+        el('line', { class: 'limite', x1: X0 + 200, x2: X0 + 226, y1: 12, y2: 12 }, legenda);
+        el('text', { class: 't-sm', x: X0 + 234, y: 16 }, legenda, 'média de 20 dias + 3 desvios');
+
+        function desenhar(k) {
+          const parte = serie.slice(0, k);
+          linha.setAttribute('points', parte.map(p => `${X(p.dia).toFixed(1)},${Y(p.valor).toFixed(1)}`).join(' '));
+          lim.setAttribute('points', parte.filter(p => p.limite).map(p => `${X(p.dia).toFixed(1)},${Y(p.limite).toFixed(1)}`).join(' '));
+          pontos.innerHTML = '';
+          let n = 0;
+          parte.forEach(p => { if (p.acima) { n++; el('circle', { class: 'ponto', cx: X(p.dia), cy: Y(p.valor), r: 6 }, pontos); } });
+          contador.textContent = n;
+        }
+        if (reduz) { desenhar(serie.length); return () => {}; }
+        const TOTAL = 7000, ini = performance.now();
+        let raf = 0;
+        const quadro = agora => {
+          const f = Math.min((agora - ini) / TOTAL, 1);
+          desenhar(Math.ceil(f * serie.length));
+          if (f < 1) raf = requestAnimationFrame(quadro);
+        };
+        raf = requestAnimationFrame(quadro);
+        return () => cancelAnimationFrame(raf);
+      }
+
+      function animTempo(svg) {
+        const els = [...svg.querySelectorAll('[data-t]')];
+        let timers = [];
+        if (reduz) { els.forEach(e => e.classList.add('on')); return () => {}; }
+        svg.classList.add('anim-reset');
+        els.forEach(e => e.classList.remove('on'));
+        void svg.getBoundingClientRect();
+        svg.classList.remove('anim-reset');
+        els.forEach(e => timers.push(setTimeout(() => e.classList.add('on'), +e.dataset.t)));
+        return () => timers.forEach(clearTimeout);
+      }
+
+      const iniciar = svg => {
+        if (svg._parar) svg._parar();
+        svg._parar = svg.dataset.anim === 'monitor' ? animMonitor(svg) : animTempo(svg);
+      };
+      const parar = svg => { if (svg._parar) svg._parar(); svg._parar = null; };
+      const botao = document.getElementById('anim-reiniciar');
+      botao.addEventListener('click', () => {
+        document.querySelectorAll('.slide.active svg.anim').forEach(iniciar);
+        botao.blur(); // devolve o foco ao deck, para as setas continuarem passando slide
+      });
+      const mostrarBotao = () => { botao.style.display = document.querySelector('.slide.active svg.anim') ? '' : 'none'; };
+      document.querySelectorAll('.slide').forEach(slide => {
+        const svgs = slide.querySelectorAll('svg.anim');
+        if (!svgs.length) return;
+        let ativo = slide.classList.contains('active');
+        const atualizar = () => { svgs.forEach(svg => ativo ? iniciar(svg) : parar(svg)); mostrarBotao(); };
+        new MutationObserver(() => {
+          const agora = slide.classList.contains('active');
+          if (agora !== ativo) { ativo = agora; atualizar(); }
+        }).observe(slide, { attributes: true, attributeFilter: ['class'] });
+        if (ativo) atualizar();
+      });
+    })();
+
+    // Fase H. Editor SQL no slide: SQLite (sql.js, WebAssembly) carregado só quando o slide abre.
+    (() => {
+      const lab = document.getElementById('sql-lab');
+      if (!lab) return;
+      const SQLJS = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/';
+      const editor = document.getElementById('sql-editor');
+      const executar = document.getElementById('sql-run');
+      const status = document.getElementById('sql-status');
+      const saida = document.getElementById('sql-saida');
+      const PRESETS = {
+        dup: `-- Regra 1: duplicidade pela chave fornecedor + nota fiscal + valor.
+-- A primeira ocorrência fica de fora; esperado: 18 linhas.
+SELECT pagamento_id, data_pagamento, fornecedor_id, nota_fiscal, valor
+FROM (
+  SELECT p.*, row_number() OVER (
+    PARTITION BY fornecedor_id, nota_fiscal, valor
+    ORDER BY pagamento_id) AS ocorrencia
+  FROM v_pagamentos p
+) t
+WHERE ocorrencia > 1
+ORDER BY pagamento_id;`,
+        cad: `-- Regra 2: fornecedor ausente do cadastro, depois da normalização.
+-- Esperado: F901 com 9 pagamentos e F902 com 5.
+SELECT p.fornecedor_id, count(*) AS pagamentos, round(sum(p.valor), 2) AS valor_total
+FROM v_pagamentos p
+LEFT JOIN fornecedores f ON f.fornecedor_id = p.fornecedor_id
+WHERE f.fornecedor_id IS NULL
+GROUP BY p.fornecedor_id;`,
+        frac: `-- Regra 4: fracionamento. Mesmo fornecedor e solicitante, valores entre
+-- R$ 9.000 e a alçada, a até 6 dias, que somados passam de R$ 10.000.
+-- Esperado: 15 linhas.
+SELECT a.pagamento_id, a.data_pagamento, a.fornecedor_id, a.solicitante, a.valor,
+       count(*) AS na_janela, round(sum(b.valor), 2) AS soma
+FROM v_pagamentos a
+JOIN v_pagamentos b
+  ON a.fornecedor_id = b.fornecedor_id
+ AND a.solicitante = b.solicitante
+ AND abs(julianday(a.data_pagamento) - julianday(b.data_pagamento)) <= 6
+WHERE a.valor >= 9000 AND a.valor < 10000
+  AND b.valor >= 9000 AND b.valor < 10000
+GROUP BY a.pagamento_id
+HAVING count(*) >= 2 AND sum(b.valor) >= 10000
+ORDER BY a.fornecedor_id, a.data_pagamento;`,
+        ben: `-- Benford por fornecedor com 50 ou mais pagamentos.
+-- Qui-quadrado acima de 26,12 equivale a p < 0,001 (8 graus de liberdade).
+WITH digitos AS (
+  SELECT fornecedor_id,
+         CAST(substr(CAST(CAST(valor AS INTEGER) AS TEXT), 1, 1) AS INTEGER) AS d
+  FROM v_pagamentos WHERE valor >= 10
+), n AS (
+  SELECT fornecedor_id, count(*) AS total FROM digitos
+  GROUP BY fornecedor_id HAVING count(*) >= 50
+), esperado AS (
+  SELECT n.fornecedor_id, n.total, d.d, n.total * log10(1 + 1.0 / d.d) AS esp
+  FROM n, (SELECT DISTINCT d FROM digitos) d
+)
+SELECT e.fornecedor_id, e.total AS pagamentos,
+       round(sum((coalesce(o.qtd, 0) - e.esp) * (coalesce(o.qtd, 0) - e.esp) / e.esp), 1)
+         AS qui_quadrado
+FROM esperado e
+LEFT JOIN (SELECT fornecedor_id, d, count(*) AS qtd FROM digitos GROUP BY 1, 2) o
+  ON o.fornecedor_id = e.fornecedor_id AND o.d = e.d
+GROUP BY e.fornecedor_id, e.total
+ORDER BY qui_quadrado DESC;`,
+        mon: `-- Monitor diário: valor do dia contra a média dos 20 dias anteriores
+-- mais três desvios. O SQLite aceita a janela que termina em 1 PRECEDING;
+-- o CrateDB não aceita, e v_monitor_diario contorna isso com somas.
+WITH diario AS (
+  SELECT data_pagamento AS dia, sum(valor) AS valor_pago
+  FROM v_pagamentos GROUP BY data_pagamento
+), janela AS (
+  SELECT dia, valor_pago,
+    count(*) OVER w AS dias_anteriores,
+    avg(valor_pago) OVER w AS media_20d,
+    avg(valor_pago * valor_pago) OVER w AS media_quadrados
+  FROM diario
+  WINDOW w AS (ORDER BY dia ROWS BETWEEN 20 PRECEDING AND 1 PRECEDING)
+)
+SELECT dia, round(valor_pago) AS valor_pago, round(media_20d) AS media_20d,
+       round(media_20d + 3 * sqrt(media_quadrados - media_20d * media_20d)) AS limite
+FROM janela
+WHERE dias_anteriores >= 10
+  AND valor_pago > media_20d + 3 * sqrt(media_quadrados - media_20d * media_20d)
+ORDER BY dia;`,
+      };
+      let db = null, carregando = null;
+
+      function carregarScript(src) {
+        return new Promise((ok, falha) => {
+          const s = document.createElement('script');
+          s.src = src; s.onload = ok; s.onerror = falha;
+          document.head.appendChild(s);
+        });
+      }
+
+      function linhasCsv(texto) {
+        const [cab, ...linhas] = texto.trim().split('\n');
+        return { campos: cab.split(','), linhas: linhas.map(l => l.split(',')) };
+      }
+
+      async function preparar() {
+        if (!window.AULA15_DADOS) throw new Error('base_slides.js não carregou');
+        await carregarScript(SQLJS + 'sql-wasm.js');
+        const SQL = await window.initSqlJs({ locateFile: f => SQLJS + f });
+        const banco = new SQL.Database();
+        banco.create_function('log10', x => (x > 0 ? Math.log10(x) : null));
+        banco.create_function('sqrt', x => (x >= 0 ? Math.sqrt(x) : null));
+        banco.run(`CREATE TABLE contas_bruta (pagamento_id TEXT, data_pagamento TEXT, fornecedor_id TEXT,
+                   nota_fiscal TEXT, valor REAL, solicitante TEXT, tipo TEXT);
+                   CREATE TABLE fornecedores (fornecedor_id TEXT, nome TEXT, categoria TEXT, data_cadastro TEXT);`);
+        const inserir = (tabela, texto, numericas) => {
+          const { campos, linhas } = linhasCsv(texto);
+          const st = banco.prepare(`INSERT INTO ${tabela} VALUES (${campos.map(() => '?').join(',')})`);
+          banco.run('BEGIN');
+          linhas.forEach(v => st.run(v.map((x, i) => (numericas.includes(campos[i]) ? Number(x) : x))));
+          banco.run('COMMIT');
+          st.free();
+          return linhas.length;
+        };
+        const n = inserir('contas_bruta', window.AULA15_DADOS.contas, ['valor']);
+        inserir('fornecedores', window.AULA15_DADOS.fornecedores, []);
+        banco.run(`CREATE VIEW v_pagamentos AS
+                   SELECT pagamento_id, data_pagamento, upper(trim(fornecedor_id)) AS fornecedor_id,
+                          nota_fiscal, valor, solicitante
+                   FROM contas_bruta WHERE tipo = 'pagamento'`);
+        status.textContent = `${n.toLocaleString('pt-BR')} linhas carregadas · SQLite no navegador`;
+        return banco;
+      }
+
+      const formatar = v => (typeof v === 'number' && !Number.isInteger(v)
+        ? v.toLocaleString('pt-BR', { maximumFractionDigits: 4 })
+        : v === null ? 'NULL' : String(v));
+
+      function rodar() {
+        if (!db) return;
+        const t0 = performance.now();
+        try {
+          const res = db.exec(editor.value);
+          const ms = performance.now() - t0;
+          const ultimo = res[res.length - 1];
+          if (!ultimo) { saida.innerHTML = '<div class="vazio">A consulta não devolveu linhas.</div>'; status.textContent = `0 linhas · ${ms.toFixed(0)} ms`; status.classList.remove('erro'); return; }
+          const tabela = document.createElement('table');
+          const cab = tabela.createTHead().insertRow();
+          ultimo.columns.forEach(c => { const th = document.createElement('th'); th.textContent = c; cab.appendChild(th); });
+          const corpo = tabela.createTBody();
+          ultimo.values.slice(0, 500).forEach((linha, i) => {
+            const tr = corpo.insertRow();
+            tr.className = 'nova';
+            tr.style.animationDelay = `${Math.min(i, 40) * 25}ms`;
+            linha.forEach(v => { const td = tr.insertCell(); td.textContent = formatar(v); if (typeof v === 'number') td.className = 'num'; });
+          });
+          saida.replaceChildren(tabela);
+          saida.scrollTop = 0;
+          status.textContent = `${ultimo.values.length} linhas · ${ms.toFixed(0)} ms`;
+          status.classList.remove('erro');
+        } catch (erro) {
+          status.textContent = erro.message;
+          status.classList.add('erro');
+        }
+      }
+
+      function escolher(chave) {
+        lab.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === chave)));
+        editor.value = PRESETS[chave];
+        rodar();
+      }
+
+      lab.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => escolher(b.dataset.preset)));
+      executar.addEventListener('click', rodar);
+      editor.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); rodar(); }
+        if (e.key === 'Escape') editor.blur(); // devolve as setas à navegação dos slides
+      });
+      editor.value = PRESETS.dup;
+
+      const slide = lab.closest('.slide');
+      const abrir = () => {
+        if (carregando) return;
+        carregando = preparar()
+          .then(banco => { db = banco; executar.disabled = false; rodar(); })
+          .catch(() => {
+            status.textContent = 'Sem conexão para baixar o sql.js. As mesmas consultas rodam no console do CrateDB (porta 4200).';
+            status.classList.add('erro');
+            carregando = null;
+          });
+      };
+      new MutationObserver(() => { if (slide.classList.contains('active')) abrir(); })
+        .observe(slide, { attributes: true, attributeFilter: ['class'] });
+      if (slide.classList.contains('active')) abrir();
+    })();
   </script>
 </body>
 </html>

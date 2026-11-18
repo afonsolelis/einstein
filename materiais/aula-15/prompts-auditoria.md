@@ -79,6 +79,30 @@ Salve em saidas/fila_de_exame.csv os pagamentos com pontuação 2 ou mais, orden
 Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal e limitações. Use somente números do notebook e escreva "examinar", nunca "fraude comprovada". Proponha git add, commit e push sem executar.
 ```
 
+## Prompt 8 · Painel como código: CrateDB e Grafana
+
+Preparação no terminal, a partir da raiz do repositório:
+
+```bash
+cp -r materiais/aula-15/monitoramento aula-15-seunome/
+cd aula-15-seunome/monitoramento
+echo "DADOS_DIR=../entrada" > .env
+docker compose up -d
+docker compose logs carga
+```
+
+O log deve mostrar os dois hashes com a palavra `confere` e a fila com 172 pagamentos. Abra a porta 3001 (Grafana) e a 4200 (console do CrateDB) pela aba PORTS do Codespace.
+
+```text
+Abra aula-15-seunome/monitoramento/grafana/dashboards/auditoria-contas.json e sql/deteccao.sql e explique em três frases como o Grafana encontra este arquivo e de onde vêm os dados de cada painel.
+
+Acrescente um painel com id 11, do tipo barchart, título "Pagamentos em dia não útil por mês", datasource de uid cratedb e gridPos logo abaixo do último painel, com largura 24. A consulta deve contar as linhas de doc.v_dia_nao_util por mês, com o mês em texto (date_format('%Y-%m', data_pagamento)). Não altere os outros painéis.
+
+Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conferir no Grafana que as barras somam 25. Mostre o diff e proponha git add e commit, sem executar.
+```
+
+Conferência: o painel novo tem 11 barras, de janeiro a novembro, que somam 25, com 4 pagamentos em março e em maio. O dashboard mostra 11 dias acima do limite no monitor diário, dos quais só 5 têm algum pagamento da fila.
+
 ## Conferência final
 
 Execute o script de referência e compare com o notebook:

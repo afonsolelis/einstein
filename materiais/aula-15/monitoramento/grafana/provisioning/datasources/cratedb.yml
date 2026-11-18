@@ -1,0 +1,18 @@
+# Fonte de dados provisionada: o CrateDB fala o protocolo do PostgreSQL na
+# porta 5432, por isso o Grafana usa o plugin nativo de PostgreSQL.
+apiVersion: 1
+
+datasources:
+  - name: CrateDB
+    uid: cratedb
+    type: grafana-postgresql-datasource
+    access: proxy
+    url: cratedb:5432
+    user: crate
+    isDefault: true
+    editable: false
+    jsonData:
+      database: doc
+      sslmode: disable
+      postgresVersion: 1400
+      timescaledb: false

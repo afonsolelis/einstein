@@ -1,0 +1,15 @@
+# Dashboards como código: o Grafana lê os JSON desta pasta a cada 10 segundos.
+# allowUiUpdates: false impede salvar alterações pela interface; a mudança
+# entra pelo arquivo, passa por commit e fica no histórico do repositório.
+apiVersion: 1
+
+providers:
+  - name: aula-15
+    folder: Aula 15
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    updateIntervalSeconds: 10
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false
