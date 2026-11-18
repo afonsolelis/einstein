@@ -804,12 +804,15 @@
     {
       "number": 14,
       "date": "18/11",
-      "theme": "Testes A/B: do desenho do experimento à decisão de negócio",
-      "tag": "Inferência",
+      "theme": "Testes A/B com Claude na sua máquina: do estudo da base à decisão de negócio",
+      "tag": "Inferência · Claude",
       "status": "complete",
       "topics": [
+        "Claude Code no terminal e no Claude Desktop",
+        "prompts no formato CREATE",
         "desenho de experimento",
         "tamanho amostral",
+        "estudo estatístico descritivo da base",
         "limpeza orientada ao experimento",
         "verificação da divisão dos grupos (SRM)",
         "qui-quadrado",
@@ -817,15 +820,15 @@
         "olhar o p-valor todo dia (peeking)"
       ],
       "objectives": [
+        "Conduzir uma análise local com o Claude Code, no terminal ou no Claude Desktop, por prompts no formato CREATE",
         "Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados",
-        "Limpar os registros do experimento com regras de negócio e contagem",
-        "Verificar a divisão entre variantes com o teste de SRM",
-        "Comparar proporções com qui-quadrado e médias com o teste t de Welch",
-        "Redigir uma recomendação com intervalo de confiança e limitações"
+        "Descrever a base com medidas-resumo e identificar o que ameaça o experimento",
+        "Limpar os registros com regras de negócio e verificar a divisão entre variantes com o teste de SRM",
+        "Comparar proporções com qui-quadrado e médias com Welch, e redigir uma recomendação com intervalo de confiança"
       ],
       "slides": {
         "path": "slides/aula-14.html",
-        "slide_count": 30,
+        "slide_count": 38,
         "sections": [
           "agenda",
           "challenge",
@@ -845,8 +848,8 @@
           "Limpeza de duplicadas, usuários internos e expostos às duas variantes, com SRM antes e depois",
           "Conclusão de 40,5% contra 42,8% (p = 0,019) e simulação A/A do peeking"
         ],
-        "activity": "Conduzir com a IA o experimento da página de agendamento, do cálculo de tamanho amostral à decisão, limpando a base segundo as regras do experimento",
-        "deliverable": "Notebook executado, plano do experimento, tabela de limpeza, resultados dos testes, parecer de decisão, commit e push"
+        "activity": "Conduzir no Claude Code local, com nove prompts CREATE, o estudo estatístico da base, a limpeza segundo o desenho do experimento, o SRM e os testes até a decisão, com a teoria explicada enquanto o agente executa cada etapa",
+        "deliverable": "Pasta aula-14-ab com CLAUDE.md, prompts.md, scripts de analise/, saidas/ (plano, estudo da base, regras, SRM, resultados e gráficos) e PARECER_AB.md"
       }
     },
     {

@@ -515,6 +515,105 @@
       .deck-table { font-size: clamp(0.85rem, 1.15vw, 1.02rem); }
       .deck-table td { padding: 0.4rem 0.8rem; }
     }
+
+    /* Etapas com prompt CREATE: o prompt fica à direita, a revisão à esquerda. */
+    .slide-etapa { padding-top: clamp(3.6rem, 7vh, 5rem); }
+    .slide-content.slide-etapa h2 { margin-bottom: 0.9rem; font-size: clamp(1.8rem, 3vw, 2.7rem); }
+    .etapa-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+      gap: 1rem;
+      width: min(100%, 1180px);
+      height: min(58vh, 520px);
+    }
+    .etapa-lado { display: flex; flex-direction: column; gap: 0.65rem; min-height: 0; overflow: auto; scrollbar-color: var(--cyan) transparent; }
+    .etapa-item {
+      padding: 0.7rem 0.95rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .etapa-gate { border-left-color: #f5a524; }
+    .etapa-rotulo { display: block; margin-bottom: 0.3rem; color: #7ee7d4; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .etapa-gate .etapa-rotulo { color: #f5c46b; }
+    .slide-content .etapa-item p,
+    .slide-content .etapa-item ul { margin: 0; font-size: clamp(0.8rem, 1.02vw, 0.96rem); line-height: 1.38; }
+    .slide-content .etapa-item li { margin-bottom: 0.22rem; padding-left: 1.05rem; }
+    .slide-content .etapa-item li::before { top: 0.52em; width: 6px; height: 6px; }
+    .prompt-wrap.etapa-prompt { width: 100%; min-height: 0; }
+    .etapa-prompt .code-block { height: 100%; max-height: none; padding: 3.3rem 1.2rem 1rem 1.4rem; font-size: clamp(0.72rem, 0.96vw, 0.9rem); line-height: 1.45; }
+    .prompt-text .k { color: #7ee7d4; font-weight: 600; }
+    .deck-grid.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .slide-content .deck-grid.c3 .deck-card p { font-size: clamp(0.85rem, 1.15vw, 1.05rem); }
+
+    /* Animação em SVG: cada elemento com data-t aparece em t ms quando o slide abre. */
+    .anim { position: relative; z-index: 1; display: block; width: min(100%, 1120px); height: clamp(220px, 42vh, 400px); overflow: visible; }
+    .anim text { fill: var(--text); font-family: 'Fira Code', monospace; font-size: 15px; }
+    .anim .t-sm { fill: var(--muted); font-size: 13px; }
+    .anim .t-b { fill: #fff; font-weight: 600; }
+    .anim .t-ok { fill: #7ee7d4; }
+    .anim .t-alerta { fill: #f5c46b; }
+    .anim .cx { fill: rgba(8, 47, 73, 0.85); stroke: rgba(75, 196, 232, 0.45); stroke-width: 1.5; }
+    .anim .cx-forte { fill: rgba(0, 163, 137, 0.16); stroke: var(--teal); stroke-width: 2; }
+    .anim .cx-voce { fill: rgba(245, 165, 36, 0.12); stroke: #f5a524; stroke-width: 1.5; }
+    .anim .seta { fill: none; stroke: var(--cyan-light); stroke-width: 2.5; marker-end: url(#ponta); }
+    .anim .volta { fill: none; stroke: #f5a524; stroke-width: 2; stroke-dasharray: 7 6; marker-end: url(#ponta-volta); }
+    .anim [data-t] { opacity: 0; transition: opacity 0.5s ease, stroke-dashoffset 0.9s ease; }
+    .anim [data-t].on { opacity: 1; }
+    .anim .seta[data-t] { stroke-dasharray: 400; stroke-dashoffset: 400; }
+    .anim .seta[data-t].on { stroke-dashoffset: 0; }
+    .anim.anim-reset [data-t] { transition: none !important; }
+    .anim-legenda { position: relative; z-index: 1; max-width: 1120px; margin-top: 0.6rem; }
+
+    /* Simulador A/A executado no próprio slide. */
+    .sim { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1rem; width: min(100%, 1120px); }
+    .sim-svg { display: block; width: 100%; height: clamp(180px, 36vh, 330px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(4, 20, 34, 0.72); }
+    .sim-svg text { fill: var(--muted); font-family: 'Fira Code', monospace; font-size: 12px; }
+    .sim-svg .grade { stroke: rgba(255, 255, 255, 0.07); }
+    .sim-svg .corte { stroke: #f5a524; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .sim-svg .caminho { fill: none; stroke: rgba(75, 196, 232, 0.45); stroke-width: 1.3; }
+    .sim-svg .caminho.cruzou { stroke: #f5a524; stroke-width: 1.6; }
+    .sim-lado { display: flex; flex-direction: column; gap: 0.7rem; }
+    .sim-lado .metric { min-width: 0; }
+    .sim-botao {
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(126, 231, 212, 0.38);
+      border-radius: 10px;
+      color: #e9fffb;
+      background: linear-gradient(135deg, rgba(0, 163, 137, 0.28), rgba(0, 163, 217, 0.2));
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .sim-botao:hover { background: linear-gradient(135deg, rgba(0, 163, 137, 0.42), rgba(0, 163, 217, 0.3)); }
+    .sim-botao:focus-visible { outline: 3px solid var(--cyan-light); outline-offset: 2px; }
+    .slide-content .sim-nota { margin: 0; color: var(--muted); font-size: clamp(0.78rem, 0.95vw, 0.9rem); line-height: 1.35; }
+
+    @media (max-width: 768px) {
+      .slide-etapa { padding-top: 3.6rem; }
+      .slide-content.slide-etapa h2 { margin-bottom: 0.5rem; font-size: clamp(1.3rem, 5.8vw, 1.7rem); }
+      .etapa-grid { grid-template-columns: 1fr; gap: 0.45rem; height: auto; }
+      .etapa-lado .etapa-obs, .etapa-lado .etapa-gate { display: none; }
+      .etapa-item { padding: 0.45rem 0.7rem; }
+      .etapa-prompt .code-block { height: 42vh; padding: 2.8rem 0.7rem 0.7rem; font-size: 0.62rem; }
+      .deck-grid.c3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .slide-content .deck-grid.c3 .deck-card p { font-size: 0.78rem; }
+      .anim { height: clamp(150px, 30vh, 240px); }
+      .sim { grid-template-columns: 1fr; gap: 0.5rem; }
+      .sim-svg { height: 24vh; }
+      .sim-lado { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; }
+      .sim-lado .metric { flex: 1 1 40%; }
+      .sim-botao { flex: 1 1 100%; padding: 0.5rem; font-size: 0.85rem; }
+      .slide-content .sim-nota { display: none; }
+      .slide-content .nota-desktop { display: none; }
+      #anim-reiniciar { padding-inline: 0.65rem; font-size: 0; }
+      #anim-reiniciar .ctrl-icon { margin: 0; font-size: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .anim [data-t] { transition: none; }
+    }
   </style>
   <script src="../assets/pdf-export.js" defer></script>
 </head>
@@ -522,19 +621,19 @@
   <div id="slider">
     <div class="slide slide-start active">
       <div class="badge">LABORATÓRIO 14 · 18/11</div>
-      <h1>Testes A/B com limpeza orientada ao negócio</h1>
-      <p>Do plano do experimento à decisão sobre a nova página de agendamento de uma rede hospitalar fictícia</p>
+      <h1>Testes A/B com Claude na sua máquina</h1>
+      <p>Do estudo estatístico da base à decisão sobre a nova página de agendamento, com prompts CREATE executados no Claude Code</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="objectives">
       <div class="prompt-label">Objetivos</div>
       <h2>Ao final do laboratório</h2>
       <ul>
+        <li>Conduzir uma análise local com o Claude Code, no terminal ou no Claude Desktop, por prompts no formato CREATE.</li>
         <li>Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados.</li>
-        <li>Limpar os registros do experimento com regras de negócio e contagem.</li>
-        <li>Verificar a divisão entre variantes com o teste de SRM.</li>
-        <li>Comparar proporções com qui-quadrado e médias com o teste t de Welch.</li>
-        <li>Redigir uma recomendação com intervalo de confiança e limitações.</li>
+        <li>Descrever a base com medidas-resumo e identificar o que ameaça o experimento.</li>
+        <li>Limpar os registros com regras de negócio e verificar a divisão entre variantes com o teste de SRM.</li>
+        <li>Comparar proporções com qui-quadrado e médias com Welch, e redigir uma recomendação com intervalo de confiança.</li>
       </ul>
     </div>
 
@@ -542,10 +641,10 @@
       <div class="prompt-label">Agenda · 19h às 22h</div>
       <h2>Roteiro do laboratório</h2>
       <div class="deck-grid">
-        <article class="deck-card"><h3>19h00 às 19h35 · Plano</h3><p>Pergunta de negócio, hipótese, métricas e tamanho amostral.</p></article>
-        <article class="deck-card"><h3>19h35 às 20h35 · Limpeza</h3><p>Perfil, regras de exclusão, uma linha por usuário e teste de SRM.</p></article>
-        <article class="deck-card"><h3>20h35 às 21h35 · Testes</h3><p>Qui-quadrado, intervalo de confiança, Welch e leitura diária do p-valor.</p></article>
-        <article class="deck-card"><h3>21h35 às 22h00 · Entrega</h3><p>Parecer para a diretoria, commit e push.</p></article>
+        <article class="deck-card"><h3>19h00 às 19h30 · Abertura</h3><p>Problema, Claude local, formato CREATE e etapa 00.</p></article>
+        <article class="deck-card"><h3>19h30 às 20h35 · Base</h3><p>Plano, estudo estatístico, regras de limpeza e SRM (etapas 01 a 04).</p></article>
+        <article class="deck-card"><h3>20h35 às 21h35 · Testes</h3><p>Qui-quadrado, Welch e leitura diária do p-valor (etapas 05 a 07).</p></article>
+        <article class="deck-card"><h3>21h35 às 22h00 · Parecer</h3><p>Parecer para a diretoria e entrega (etapa 08).</p></article>
       </div>
     </div>
 
@@ -563,20 +662,6 @@
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Fluxo de trabalho</div>
-      <h2>Cada etapa deixa um arquivo conferível</h2>
-      <div class="flow">
-        <div class="flow-step"><strong>Plano</strong><span>Hipótese, métricas e tamanho amostral.</span></div>
-        <div class="flow-step"><strong>CSV bruto</strong><span>14.392 sessões, sem edição.</span></div>
-        <div class="flow-step"><strong>Regras</strong><span>Duplicadas, internos e contaminados.</span></div>
-        <div class="flow-step"><strong>SRM</strong><span>Divisão 50/50 conferida.</span></div>
-        <div class="flow-step"><strong>Testes</strong><span>Qui-quadrado e Welch.</span></div>
-        <div class="flow-step"><strong>Parecer</strong><span>Efeito, intervalo e limitações.</span></div>
-      </div>
-      <p>Os números do parecer saem do notebook. Nenhum valor é digitado à mão.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
       <div class="prompt-label">Pergunta de negócio</div>
       <h2>A decisão que orienta a aula</h2>
       <p>Uma rede hospitalar fictícia criou uma nova página de agendamento online (B) e a testou contra a página atual (A) durante 14 dias, de 02 a 15/03/2026.</p>
@@ -589,7 +674,210 @@
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Plano do experimento</div>
+      <div class="prompt-label">Como a aula funciona</div>
+      <h2>Primeiro o prompt, depois a teoria</h2>
+      <svg class="anim" viewBox="0 0 1000 310" role="img" aria-label="Ciclo de cada etapa: você cola o prompt CREATE, o agente apresenta um plano, você autoriza, o agente escreve e executa o script, e você confere os números; enquanto o agente trabalha, a aula explica a teoria; se um número divergir, o prompt é refeito">
+        <defs>
+          <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
+          <marker id="ponta-volta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f5a524"/></marker>
+        </defs>
+        <g data-t="0">
+          <rect class="cx-voce" x="10" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="24" y="72">1 · Prompt</text>
+          <text class="t-sm" x="24" y="98">você cola o</text>
+          <text class="t-sm" x="24" y="118">CREATE da etapa</text>
+        </g>
+        <path class="seta" data-t="500" d="M152,88 L170,88"/>
+        <g data-t="800">
+          <rect class="cx" x="176" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="190" y="72">2 · Plano</text>
+          <text class="t-sm" x="190" y="98">o agente lê e</text>
+          <text class="t-sm" x="190" y="118">propõe um plano</text>
+        </g>
+        <path class="seta" data-t="1200" d="M318,88 L336,88"/>
+        <g data-t="1500">
+          <rect class="cx-voce" x="342" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="356" y="72">3 · Seu ok</text>
+          <text class="t-sm" x="356" y="98">você autoriza</text>
+          <text class="t-sm" x="356" y="118">ou corrige</text>
+        </g>
+        <path class="seta" data-t="1900" d="M484,88 L502,88"/>
+        <g data-t="2200">
+          <rect class="cx" x="508" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="522" y="72">4 · Script</text>
+          <text class="t-sm" x="522" y="98">escreve e roda</text>
+          <text class="t-sm" x="522" y="118">analise/NN.py</text>
+        </g>
+        <path class="seta" data-t="2600" d="M650,88 L668,88"/>
+        <g data-t="2900">
+          <rect class="cx-voce" x="674" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="688" y="72">5 · Conferir</text>
+          <text class="t-sm" x="688" y="98">os números</text>
+          <text class="t-sm" x="688" y="118">batem?</text>
+        </g>
+        <path class="seta" data-t="3300" d="M816,88 L834,88"/>
+        <g data-t="3600">
+          <rect class="cx-forte" x="840" y="40" width="150" height="96" rx="10"/>
+          <text class="t-b" x="854" y="72">6 · Próxima</text>
+          <text class="t-ok" x="854" y="98">etapa</text>
+          <text class="t-sm" x="854" y="118">saidas/ pronta</text>
+        </g>
+        <g data-t="4200">
+          <rect class="cx-forte" x="176" y="176" width="472" height="62" rx="10"/>
+          <text class="t-b" x="196" y="203">Teoria em sala, enquanto o agente</text>
+          <text class="t-ok" x="196" y="226">lê, planeja e executa (passos 2 a 4)</text>
+        </g>
+        <path class="volta" data-t="5000" d="M744,138 L744,280 L80,280 L80,142"/>
+        <text class="t-alerta" data-t="5000" x="262" y="302">número divergiu: refaça o prompt, não a regra</text>
+      </svg>
+      <p class="anim-legenda">Cada etapa abre com o prompt. Enquanto o agente lê, planeja e executa, a aula explica a teoria que o prompt usou. A etapa só fecha quando os números conferem.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Ferramenta</div>
+      <h2>Claude Code no terminal ou no Desktop</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>Terminal</h3><p>Na pasta da aula, o comando <code>claude</code> abre o agente. Ele lê e escreve arquivos e executa comandos dessa pasta, sempre pedindo permissão.</p></article>
+        <article class="deck-card"><h3>Claude Desktop</h3><p>Na aba Code do aplicativo, escolha a pasta <code>aula-14-ab</code>. O agente é o mesmo; muda só a janela em que a conversa aparece.</p></article>
+        <article class="deck-card"><h3>O que sai do computador</h3><p>O CSV e os scripts ficam na sua máquina. O que o agente lê para responder é enviado ao modelo, por isso a base da aula é sintética.</p></article>
+        <article class="deck-card"><h3>Quem responde pelo resultado</h3><p>O agente escreve e executa o código. Você autoriza cada plano, confere as contagens e assina o parecer.</p></article>
+      </div>
+      <p class="nota-desktop">Os dois caminhos exigem uma conta Claude com acesso ao Claude Code. Quem não tiver acesso trabalha em dupla com quem tem.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Formato dos prompts</div>
+      <h2>Os seis campos do prompt CREATE</h2>
+      <div class="deck-grid c3">
+        <article class="deck-card"><h3>[C] Personagem</h3><p>O papel do agente e o que ele não faz nesta etapa.</p></article>
+        <article class="deck-card"><h3>[R] Pedido</h3><p>O que fazer, em qual arquivo, com a lista do que precisa estar coberto.</p></article>
+        <article class="deck-card"><h3>[E] Exemplos</h3><p>Um trecho no formato exato esperado. O agente copia a forma.</p></article>
+        <article class="deck-card"><h3>[A] Ajustes</h3><p>Restrições e números esperados: o que fazer se a contagem divergir.</p></article>
+        <article class="deck-card"><h3>[T] Tipo de saída</h3><p>Formato e tamanho: Markdown, CSV, gráfico, até quantas linhas.</p></article>
+        <article class="deck-card"><h3>[E] Extras</h3><p>O que ler antes, quando mostrar o plano, registrar o prompt e parar.</p></article>
+      </div>
+      <p>Cada campo responde a uma pergunta que o agente faria se pudesse. Campo vazio vira suposição do agente.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 00 · Pasta de trabalho</div>
+      <h2>A pasta da aula no seu computador</h2>
+      <div class="code-block">mkdir -p aula-14-ab/entrada
+cd aula-14-ab
+curl -L -o entrada/experimento_agendamento.csv https://afonsolelis.github.io/einstein/materiais/aula-14/dados/experimento_agendamento.csv
+claude</div>
+      <p>No Windows, use <code>mkdir aula-14-ab\entrada</code> e <code>curl.exe</code> no PowerShell. No Claude Desktop, crie a pasta, baixe o CSV pelo botão Base, no rodapé, e escolha a pasta na aba Code.</p>
+      <a class="download-link" href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv">⬇️ Baixar experimento_agendamento.csv</a>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 00 · Prompt CREATE</div>
+      <h2>Ambiente e regras do projeto</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>CLAUDE.md</code>, <code>.venv</code> e <code>prompts.md</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele pede permissão antes de criar a <code>.venv</code> e de instalar pacotes. Leia o comando antes de aprovar.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>14.392 linhas e 8 colunas?</li><li>SHA-256 iniciado por <code>3b6b13db</code>?</li><li>As regras do <code>CLAUDE.md</code> estão escritas?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você é meu assistente de análise de dados neste laboratório e trabalha
+somente dentro desta pasta, aula-14-ab. Nesta etapa você prepara o
+ambiente e escreve as regras do projeto; não analisa dados.
+
+<span class="k">[R] Pedido</span>
+1. Crie CLAUDE.md com as regras do projeto listadas em Ajustes.
+2. Verifique se há Python 3.10 ou superior. Crie um ambiente virtual em
+   .venv e instale pandas, numpy, scipy e matplotlib.
+3. Confira entrada/experimento_agendamento.csv: linhas de dados,
+   colunas e SHA-256.
+
+<span class="k">[E] Exemplos</span>
+Trecho esperado do CLAUDE.md:
+## Regras
+- entrada/ é somente leitura.
+- Cada etapa vira um script analise/NN_nome.py, executado com o Python
+  da .venv, que grava o que produz em saidas/.
+
+<span class="k">[A] Ajustes</span>
+- Regras do CLAUDE.md: entrada/ é somente leitura; uma etapa, um script;
+  todo número citado vem de um script executado; regras de limpeza não
+  dependem do resultado e valem para A e B; cada prompt recebido é
+  registrado em prompts.md com a data e os arquivos gerados.
+- Não instale nada fora da .venv. Se não houver Python, pare e me
+  explique como instalar no meu sistema operacional.
+- Espero 14.392 linhas de dados, 8 colunas e SHA-256 iniciado por
+  3b6b13db. Se divergir, pare e me avise.
+
+<span class="k">[T] Tipo de saída</span>
+CLAUDE.md com até 25 linhas e, no chat, um resumo com a versão do
+Python, as bibliotecas instaladas e a conferência do CSV.
+
+<span class="k">[E] Extras</span>
+Mostre o plano e espere meu ok antes de instalar qualquer coisa. Ao
+terminar, registre este prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 00 · Enquanto o agente trabalha</div>
+      <h2>O que o agente faz com o seu pedido</h2>
+      <ul>
+        <li>Lê os arquivos que o prompt cita e o <code>CLAUDE.md</code>, que funciona como memória do projeto em toda conversa.</li>
+        <li>Propõe um plano. No terminal, Shift+Tab alterna para o modo de plano, em que ele só lê e propõe.</li>
+        <li>Pede permissão para cada comando que altera o computador, como criar a <code>.venv</code> ou instalar pacotes.</li>
+        <li>Executa, lê a saída e corrige o próprio erro. Um erro de importação, por exemplo, vira uma nova tentativa.</li>
+        <li>Para quando o pedido termina, porque o campo Extras manda parar. Sem essa ordem, ele tende a seguir adiante.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 01 · Prompt CREATE</div>
+      <h2>Plano do experimento e tamanho amostral</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>saidas/plano.md</code> e <code>analise/01_tamanho_amostral.py</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>O prompt proíbe abrir a base. O plano tem de existir antes de qualquer número do experimento.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>4.234 usuários por grupo?</li><li>A hipótese é bicaudal?</li><li>A unidade sorteada é o usuário?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você é estatístico de experimentos. Nesta etapa registra o plano do
+teste A/B e calcula o tamanho amostral, sem abrir a base de dados.
+
+<span class="k">[R] Pedido</span>
+1. Crie saidas/plano.md com: pergunta de negócio, hipótese, unidade
+   sorteada, métrica primária, métrica secundária, efeito mínimo, alfa,
+   poder e duração.
+2. Crie analise/01_tamanho_amostral.py, que calcula o tamanho amostral
+   por grupo para um teste bicaudal de duas proporções e acrescenta o
+   resultado ao fim de saidas/plano.md.
+
+<span class="k">[E] Exemplos</span>
+| Item | Definição |
+|---|---|
+| Métrica primária | proporção de usuários que concluíram o agendamento |
+
+<span class="k">[A] Ajustes</span>
+- Dados do plano: página atual A e nova página B; pergunta: B aumenta a
+  proporção de pacientes que concluem o agendamento?; unidade sorteada:
+  usuário; taxa histórica de 40%; efeito mínimo de 3 pontos
+  percentuais; alfa de 5%; poder de 80%; 14 dias, de 02 a 15/03/2026;
+  métrica secundária: tempo até concluir, entre quem concluiu.
+- Use scipy.stats.norm, sem statsmodels, e arredonde para cima.
+- Espero 4.234 usuários por grupo. Se divergir, pare e me mostre a conta.
+- Não leia nada em entrada/ nesta etapa.
+
+<span class="k">[T] Tipo de saída</span>
+plano.md com uma tabela de até 12 linhas e o tamanho amostral;
+script com até 30 linhas e comentários curtos.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre a fórmula antes de escrever o código, espere meu
+ok, execute o script, registre o prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 01 · Enquanto o agente trabalha</div>
       <h2>Decisões registradas antes dos dados</h2>
       <table class="deck-table">
         <thead><tr><th>Item</th><th>Definição</th></tr></thead>
@@ -602,74 +890,167 @@
           <tr><td>Duração</td><td>14 dias, para cobrir duas semanas completas</td></tr>
         </tbody>
       </table>
+      <p>Fixar o plano antes impede que métrica, efeito ou duração se ajustem ao resultado desejado.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 1</div>
+      <div class="prompt-label">Etapa 01 · Enquanto o agente trabalha</div>
       <h2>Tamanho amostral para duas proporções</h2>
       <p>O tamanho amostral responde quantos usuários cada grupo precisa para detectar o efeito mínimo com o poder escolhido.</p>
       <div class="code-block">n = (z_alfa/2 · √(2·p̄·(1−p̄)) + z_poder · √(p1·(1−p1) + p2·(1−p2)))² / (p2 − p1)²
 
-p1 = 0,40   p2 = 0,43   p̄ = 0,415   z_alfa/2 = 1,96   z_poder = 0,84</div>
-      <p>Efeitos menores ou taxas mais próximas de 50% exigem amostras maiores.</p>
+p1 = 0,40   p2 = 0,43   p̄ = 0,415   z_alfa/2 = 1,96   z_poder = 0,84   →   n = 4.234</div>
+      <p>O denominador é o quadrado do efeito: reduzir o efeito mínimo para 2 pontos multiplicaria a amostra por pouco mais de dois.</p>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Etapa 0 · Ambiente</div>
-      <h2>Pastas de trabalho no Codespace</h2>
-      <div class="code-block">mkdir -p aula-14-seunome/entrada aula-14-seunome/saidas
-cp materiais/aula-14/dados/experimento_agendamento.csv aula-14-seunome/entrada/
-ls -lh aula-14-seunome/entrada</div>
-      <p>A pasta <code>entrada</code> guarda o CSV bruto e não é editada. O notebook fica em <code>aula-14-seunome</code>, e os arquivos gerados vão para <code>saidas</code>. Abra o Copilot em modo agente ou o agente que você já usa.</p>
-    </div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 02 · Prompt CREATE</div>
+      <h2>Estudo estatístico da base bruta</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/02_estudo_base.py</code>, <code>saidas/estudo_base.md</code> e dois PNG</p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele descreve sem limpar. Se propuser remover duplicadas aqui, recuse: a limpeza é a etapa 03.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>Explicou por que há 9.363 tempos vazios?</li><li>Usou mediana e quartis para o tempo?</li><li>Achou os usuários com dezenas de sessões?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você é analista de dados e faz o estudo exploratório da base bruta de
+um experimento. Descreve e mede; não remove nem corrige nada.
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 1 · Plano</div>
-      <h2>Cálculo do tamanho amostral</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de análise neste laboratório. Crie aula-14-seunome/Aula_14_SeuNome.ipynb. Na primeira célula, registre em texto a hipótese, a métrica primária, a métrica secundária, o efeito mínimo de 3 pontos percentuais sobre a taxa de 40%, alfa de 5%, poder de 80% e duração de 14 dias.
+<span class="k">[R] Pedido</span>
+Crie analise/02_estudo_base.py, que lê entrada/experimento_agendamento.csv
+e grava saidas/estudo_base.md com:
+1. Estrutura: linhas, colunas, tipo de cada coluna, período e usuários
+   distintos.
+2. Qualidade: nulos por coluna e em que situação aparecem, linhas
+   duplicadas e sessao_id repetido.
+3. Variáveis categóricas: frequência e percentual de variante,
+   dispositivo e usuario_interno.
+4. Variáveis numéricas: média, mediana, desvio padrão, quartis, mínimo,
+   máximo e assimetria de tempo_segundos; taxa geral de conclusão.
+5. Distribuição de sessões por usuário e de sessões por dia.
+6. Indícios que ameaçam o experimento: sessões internas por variante e
+   usuários que aparecem nas duas variantes.
+Grave em saidas/ o histograma de tempo_segundos e o gráfico de sessões
+por dia, uma linha por variante.
 
-Na célula seguinte, calcule o tamanho amostral por grupo para um teste bicaudal de duas proporções usando scipy.stats.norm, sem statsmodels, e arredonde para cima. Espero 4.234 usuários por grupo. Mostre o plano antes de editar.</div></div>
-    </div>
+<span class="k">[E] Exemplos</span>
+Formato de cada achado no fim do relatório:
+- Achado: 240 linhas idênticas em todos os campos.
+- Evidência: bruta.duplicated().sum() = 240.
+- Ameaça ao experimento: a mesma sessão contaria duas vezes.
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Etapa 1 · Base</div>
-      <h2>A base do experimento</h2>
-      <div class="metric-row">
-        <div class="metric"><strong>14.392</strong><span>sessões, uma por linha</span></div>
-        <div class="metric"><strong>10.575</strong><span>usuários distintos</span></div>
-        <div class="metric"><strong>8</strong><span>colunas</span></div>
-        <div class="metric"><strong>14</strong><span>dias de experimento</span></div>
+<span class="k">[A] Ajustes</span>
+- Não remova nem altere registros; a limpeza é a etapa seguinte.
+- Espero 14.392 linhas e 8 colunas. Se divergir, pare e me avise.
+- Não compare a conclusão de A e B nesta etapa: isso é teste, não
+  descrição.
+- Não leia o README da pasta de dados.
+- Use somente números calculados pelo script.
+
+<span class="k">[T] Tipo de saída</span>
+estudo_base.md com até 90 linhas, em tabelas curtas, terminando na
+lista de achados; dois PNG em saidas/.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md e saidas/plano.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div></div>
       </div>
-      <p>Cada linha registra uma visita à página de agendamento, com variante exibida, dispositivo, marcação de usuário interno, conclusão e tempo. Os dados são sintéticos e foram gerados para esta aula.</p>
-      <a class="download-link" href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv">⬇️ Baixar experimento_agendamento.csv</a>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 02 · Enquanto o agente trabalha</div>
+      <h2>Tipo de variável e medida-resumo</h2>
+      <table class="deck-table">
+        <thead><tr><th>Coluna</th><th>Tipo</th><th>Resumo adequado</th></tr></thead>
+        <tbody>
+          <tr><td><code>variante</code>, <code>dispositivo</code></td><td>categórica nominal</td><td>frequência e percentual</td></tr>
+          <tr><td><code>usuario_interno</code></td><td>categórica binária</td><td>contagem por variante</td></tr>
+          <tr><td><code>concluiu</code></td><td>binária, 0 ou 1</td><td>proporção, que é a média de 0 e 1</td></tr>
+          <tr><td><code>tempo_segundos</code></td><td>contínua, assimétrica</td><td>mediana, quartis e média</td></tr>
+          <tr><td><code>data</code></td><td>temporal</td><td>contagem por dia</td></tr>
+        </tbody>
+      </table>
+      <p>Média de variante não existe, e desvio padrão de uma coluna binária diz pouco. O tipo da variável escolhe a estatística.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 02 · Enquanto o agente trabalha</div>
+      <h2>Média e mediana num tempo assimétrico</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>279,2 s</strong><span>média</span></div>
+        <div class="metric"><strong>257 s</strong><span>mediana</span></div>
+        <div class="metric"><strong>176 a 359 s</strong><span>1º e 3º quartis</span></div>
+        <div class="metric"><strong>1.512 s</strong><span>máximo</span></div>
+      </div>
+      <ul>
+        <li>A assimetria de 1,16 indica cauda longa à direita: poucos agendamentos demorados puxam a média para cima.</li>
+        <li>Os 9.363 tempos vazios não são falha de coleta: só existe tempo para quem concluiu. É um nulo estrutural.</li>
+        <li>Preencher esses vazios com zero ou com a média criaria tempos que nunca aconteceram.</li>
+      </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 2 · Perfil</div>
-      <h2>Perfil da base antes da limpeza</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">No mesmo notebook, carregue aula-14-seunome/entrada/experimento_agendamento.csv em um DataFrame chamado bruta, convertendo data para data.
-
-Mostre: shape, dtypes, linhas duplicadas, sessao_id repetido, usuários distintos, sessões e usuários com usuario_interno igual a "sim", usuários que aparecem nas duas variantes e sessões por variante. Não limpe nem remova nada. Espero 14.392 linhas e 8 colunas; se divergir, pare e me avise.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 1</div>
-      <h2>Conferência do perfil</h2>
+      <div class="prompt-label">Etapa 02 · Conferência</div>
+      <h2>O que o estudo encontrou</h2>
       <div class="metric-row">
         <div class="metric"><strong>240</strong><span>linhas duplicadas</span></div>
-        <div class="metric"><strong>15</strong><span>usuários internos</span></div>
+        <div class="metric"><strong>15</strong><span>usuários com 33 a 50 sessões</span></div>
         <div class="metric"><strong>160</strong><span>usuários nas duas variantes</span></div>
         <div class="metric"><strong>6.974 × 7.418</strong><span>sessões em A e em B</span></div>
       </div>
       <ul>
-        <li>As linhas duplicadas repetem a mesma sessão, enviada duas vezes pelo log.</li>
-        <li>Os usuários internos são a equipe de TI, que testou sobretudo a página B.</li>
-        <li>Nenhum desses achados autoriza remoção antes da regra de negócio.</li>
+        <li>8.130 dos 10.575 usuários têm uma única linha; fora daqueles 15, ninguém passa de 5.</li>
+        <li>Os 15 são a equipe de TI (<code>usuario_interno = "sim"</code>), com 588 sessões em B e 54 em A.</li>
+        <li>Nenhum desses achados autoriza remoção antes de uma regra ligada ao desenho do experimento.</li>
       </ul>
     </div>
 
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 03 · Prompt CREATE</div>
+      <h2>Regras de limpeza com contagem</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/03_limpeza.py</code>, <code>saidas/regras_de_limpeza.csv</code> e <code>saidas/usuarios.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Se a contagem não bater, ele deve investigar. Recuse qualquer proposta de mudar a regra para acertar o número.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>14.152, 13.516, 13.044 e 10.400?</li><li>A mesma regra para A e B?</li><li>O CSV de entrada ficou intacto?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você aplica regras de limpeza definidas pelo desenho do experimento.
+Não propõe regras novas nem muda a ordem.
+
+<span class="k">[R] Pedido</span>
+Crie analise/03_limpeza.py, que lê o CSV bruto, aplica as regras nesta
+ordem e mostra as linhas antes e depois de cada uma:
+1. Remover linhas duplicadas.
+2. Excluir as sessões com usuario_interno igual a "sim".
+3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
+4. Agregar uma linha por usuario_id com variante, dispositivo,
+   primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+Grave saidas/regras_de_limpeza.csv e saidas/usuarios.csv.
+
+<span class="k">[E] Exemplos</span>
+regra,justificativa,linhas_antes,linhas_depois
+remover_duplicadas,a sessão ocorreu uma vez; a cópia vem do reenvio do log,14392,14152
+
+<span class="k">[A] Ajustes</span>
+- Espero 14.152, 13.516 e 13.044 sessões e 10.400 usuários.
+- Se algum número divergir, investigue o caminho, o filtro e a ordem;
+  não ajuste a regra para acertar a contagem.
+- As regras valem igualmente para A e para B.
+- O CSV em entrada/ não é alterado.
+
+<span class="k">[T] Tipo de saída</span>
+Os dois CSV e, no chat, uma tabela com regra, linhas antes e linhas
+depois.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md e saidas/estudo_base.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Regras de negócio</div>
+      <div class="prompt-label">Etapa 03 · Enquanto o agente trabalha</div>
       <h2>Quatro regras para a limpeza</h2>
       <table class="deck-table">
         <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito</th></tr></thead>
@@ -683,39 +1064,70 @@ Mostre: shape, dtypes, linhas duplicadas, sessao_id repetido, usuários distinto
       <p>As regras são as mesmas para A e para B e foram definidas sem consultar o resultado.</p>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 3 · Regras</div>
-      <h2>Aplicação das regras com contagem</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie sessoes a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta ordem e mostre as linhas antes e depois de cada regra:
-1. Remover linhas duplicadas.
-2. Excluir usuario_interno igual a "sim".
-3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
-4. Criar usuarios com uma linha por usuario_id: variante, dispositivo, primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 03 · Enquanto o agente trabalha</div>
+      <h2>A unidade de análise é o usuário</h2>
+      <ul>
+        <li>O sorteio escolheu usuários, e cada usuário viu sempre a mesma página.</li>
+        <li>Sessões do mesmo usuário não são independentes: quem voltou três vezes contaria três vezes.</li>
+        <li>Os testes supõem observações independentes. Analisar por sessão estreita o intervalo de confiança sem razão.</li>
+        <li>Na agregação, o usuário conta como convertido se concluiu em qualquer sessão, por isso o máximo de <code>concluiu</code>.</li>
+      </ul>
+    </div>
 
-Espero 14.152, 13.516, 13.044 sessões e 10.400 usuários. Salve a tabela regra, justificativa, linhas_antes, linhas_depois em aula-14-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir, investigue; não ajuste a regra.</div></div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 04 · Prompt CREATE</div>
+      <h2>Teste de SRM antes e depois</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/04_srm.py</code> e <code>saidas/srm.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>O prompt traz uma condição de parada. Um agente bem instruído não segue para os testes com o alarme disparado.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>0,0002 na base bruta?</li><li>0,117 na base limpa?</li><li>Citou as sessões internas como evidência?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você confere se o sorteio foi respeitado antes de qualquer comparação
+de resultado.
+
+<span class="k">[R] Pedido</span>
+Crie analise/04_srm.py, que aplica scipy.stats.chisquare à contagem por
+variante em dois momentos, nas sessões da base bruta e nos usuários de
+saidas/usuarios.csv, com divisão esperada de 50/50. Grave saidas/srm.csv
+e mostre as contagens e os p-valores lado a lado. Mostre também as
+sessões internas por variante na base bruta, como evidência.
+
+<span class="k">[E] Exemplos</span>
+momento,A,B,p_valor
+bruta_sessoes,6974,7418,0.00021
+
+<span class="k">[A] Ajustes</span>
+- O alarme de SRM dispara com p-valor abaixo de 0,01.
+- Se o alarme disparar na base limpa, pare e não prossiga para os
+  testes das métricas.
+- Não calcule taxas de conclusão nesta etapa.
+
+<span class="k">[T] Tipo de saída</span>
+srm.csv com duas linhas e, no chat, até três frases dizendo qual regra
+de limpeza explica a diferença entre os dois resultados.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 2</div>
+      <div class="prompt-label">Etapa 04 · Enquanto o agente trabalha</div>
       <h2>Conferência da divisão entre variantes</h2>
       <p>O sorteio prometeu 50% dos usuários para cada página. O teste de SRM (sample ratio mismatch) compara a divisão observada com a prometida por meio de um qui-quadrado de aderência.</p>
       <ul>
         <li>p-valor muito baixo indica que algo além do sorteio decidiu quem entrou em cada grupo.</li>
         <li>Com SRM, os grupos deixam de ser comparáveis e o teste A/B perde validade.</li>
-        <li>A conduta é investigar a causa antes de comparar as métricas.</li>
+        <li>Plataformas de experimentação usam limiar de 1%, porque o teste roda em todo experimento.</li>
       </ul>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 4 · SRM</div>
-      <h2>Teste de SRM antes e depois</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Aplique scipy.stats.chisquare à contagem por variante em dois momentos: nas sessões de bruta e nos usuários de usuarios. Mostre as contagens e os p-valores lado a lado.
-
-Explique em duas frases qual regra de limpeza explica a diferença entre os dois resultados, mostrando a contagem de sessões internas por variante como evidência. Não prossiga para os testes das métricas se o SRM da base limpa tiver p-valor abaixo de 0,01.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 2</div>
+      <div class="prompt-label">Etapa 04 · Conferência</div>
       <h2>Conferência da base limpa</h2>
       <div class="metric-row">
         <div class="metric"><strong>10.400</strong><span>usuários válidos</span></div>
@@ -730,35 +1142,117 @@ Explique em duas frases qual regra de limpeza explica a diferença entre os dois
       </ul>
     </div>
 
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 05 · Prompt CREATE</div>
+      <h2>Qui-quadrado da métrica primária</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/05_conclusao.py</code> e <code>saidas/resultado_primario.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele relata evidência e não recomenda. Se escrever que B é melhor sem citar o intervalo, peça a correção.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>40,5% e 42,8%?</li><li>Intervalo de 0,4 a 4,2 p.p.?</li><li>Sem correção de Yates?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você testa a métrica primária do plano. Relata a evidência; a
+recomendação não é sua.
+
+<span class="k">[R] Pedido</span>
+Crie analise/05_conclusao.py, que usa saidas/usuarios.csv para:
+1. Calcular a taxa de conclusão por variante e a diferença B menos A em
+   pontos percentuais.
+2. Montar a tabela de contingência variante × concluiu e aplicar
+   scipy.stats.chi2_contingency com correction=False.
+3. Calcular o intervalo de confiança de 95% da diferença pela
+   aproximação normal.
+4. Para comparação, calcular a taxa por sessão na base bruta, sem
+   limpeza.
+Grave saidas/resultado_primario.csv.
+
+<span class="k">[E] Exemplos</span>
+variante,usuarios,concluiram,taxa
+A,5280,2138,0.405
+
+<span class="k">[A] Ajustes</span>
+- Espero 40,5% em A, 42,8% em B e p-valor próximo de 0,019.
+- Não use a correção de Yates.
+- Compare o intervalo com o efeito mínimo de 3 pontos de
+  saidas/plano.md.
+- Não escreva que B é melhor sem citar o intervalo.
+
+<span class="k">[T] Tipo de saída</span>
+resultado_primario.csv e, no chat, uma tabela com taxas, diferença,
+intervalo, estatística e p-valor, seguida de duas frases.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md e saidas/srm.csv. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 3</div>
+      <div class="prompt-label">Etapa 05 · Enquanto o agente trabalha</div>
       <h2>p-valor e intervalo de confiança</h2>
       <ul>
         <li>O p-valor mede quão incomum seria a diferença observada se as duas páginas fossem equivalentes.</li>
         <li>O p-valor não informa o tamanho do efeito nem a probabilidade de a hipótese ser verdadeira.</li>
-        <li>O intervalo de confiança de 95% mostra a faixa de efeitos compatíveis com os dados.</li>
-        <li>A decisão compara essa faixa com o efeito mínimo que justifica a mudança.</li>
+        <li>O intervalo de confiança de 95% mostra a faixa de efeitos compatíveis com os dados: diferença ± 1,96 × erro padrão.</li>
+        <li>O qui-quadrado sobre a tabela variante × concluiu equivale ao teste z de duas proporções.</li>
+        <li>A decisão compara a faixa do intervalo com o efeito mínimo que justifica a mudança.</li>
       </ul>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 5 · Proporções</div>
-      <h2>Qui-quadrado da métrica primária</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Com usuarios, calcule a taxa de conclusão por variante e a diferença B menos A em pontos percentuais. Monte a tabela de contingência variante × concluiu e aplique scipy.stats.chi2_contingency com correction=False.
-
-Calcule o intervalo de confiança de 95% da diferença pela aproximação normal. Mostre taxas, diferença, intervalo, estatística e p-valor, e salve em aula-14-seunome/saidas/resultado_primario.csv. Compare em uma frase o intervalo com o efeito mínimo de 3 pontos percentuais.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 6 · Médias</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 06 · Prompt CREATE</div>
       <h2>Teste t de Welch da métrica secundária</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Filtre os usuários que concluíram o agendamento e compare tempo_segundos entre B e A com scipy.stats.ttest_ind e equal_var=False. Mostre média, mediana e desvio padrão por variante, a diferença das médias e o p-valor.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/06_tempo.py</code>, <code>saidas/resultado_tempo.csv</code> e o histograma</p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Veja se ele filtra quem concluiu antes do teste. Sem o filtro, os tempos vazios derrubam o cálculo ou somem calados.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>322,5 s em A e 292,6 s em B?</li><li><code>equal_var=False</code>?</li><li>Tratou o tempo como secundário?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você testa a métrica secundária do plano, o tempo até concluir.
 
-Faça um histograma sobreposto dos tempos das duas páginas. Explique por que o teste usa apenas quem concluiu e por que Welch é preferível ao teste t com variâncias iguais.</div></div>
+<span class="k">[R] Pedido</span>
+Crie analise/06_tempo.py, que filtra em saidas/usuarios.csv os usuários
+que concluíram e:
+1. Mostra n, média, mediana e desvio padrão de tempo_segundos por
+   variante.
+2. Aplica scipy.stats.ttest_ind(B, A, equal_var=False).
+3. Grava o histograma sobreposto dos dois grupos em
+   saidas/tempo_por_variante.png e a tabela em saidas/resultado_tempo.csv.
+
+<span class="k">[E] Exemplos</span>
+variante,n,media,mediana,desvio_padrao
+A,2138,322.5,...,...
+
+<span class="k">[A] Ajustes</span>
+- Espero média de 322,5 s em A e 292,6 s em B.
+- Não use o teste t com variâncias iguais.
+- Lembre no texto que esta é a métrica secundária.
+
+<span class="k">[T] Tipo de saída</span>
+CSV, PNG e, no chat, até quatro frases: o resultado, por que o teste
+usa apenas quem concluiu e por que Welch.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conferência 3</div>
+      <div class="prompt-label">Etapa 06 · Enquanto o agente trabalha</div>
+      <h2>Welch e o recorte de quem concluiu</h2>
+      <ul>
+        <li>O teste t compara médias. A versão de Welch não supõe variâncias iguais: o desvio padrão do tempo é de 151,6 s em A e 137,7 s em B.</li>
+        <li>Com mais de 2 mil concluintes por grupo, a média amostral se aproxima da normal mesmo com o tempo assimétrico.</li>
+        <li>O tempo só existe para quem concluiu. Se B converte pacientes que antes desistiam, os concluintes de B podem ter outro perfil.</li>
+        <li>Por isso o tempo é métrica secundária: reforça a leitura, mas não decide sozinho.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapas 05 e 06 · Conferência</div>
       <h2>Leitura dos resultados</h2>
       <table class="deck-table">
         <thead><tr><th>Medida</th><th>Página A</th><th>Página B</th><th>Resultado</th></tr></thead>
@@ -771,27 +1265,67 @@ Faça um histograma sobreposto dos tempos das duas páginas. Explique por que o 
       <p>A página B aumenta a conclusão, mas a estimativa de 2,3 p.p. fica abaixo do efeito mínimo planejado, e o intervalo inclui valores acima e abaixo de 3 p.p.</p>
     </div>
 
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 07 · Prompt CREATE</div>
+      <h2>Leitura diária e simulação A/A</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/07_leitura_diaria.py</code>, <code>saidas/p_valor_diario.csv</code> e o gráfico</p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>A simulação leva alguns segundos. Enquanto ela roda, o próximo slide faz a mesma conta no navegador.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>0,516 no 5º dia e 0,019 no 14º?</li><li>Cerca de 5% e cerca de 22% na simulação?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você mostra o risco de decidir um teste A/B olhando o p-valor todos os
+dias.
+
+<span class="k">[R] Pedido</span>
+Crie analise/07_leitura_diaria.py com duas partes.
+1. Para cada dia do experimento, recalcule o qui-quadrado da conclusão
+   (correction=False) com os usuários cuja primeira_data é até aquele
+   dia. Grave saidas/p_valor_diario.csv e o gráfico
+   saidas/p_valor_diario.png, com uma linha horizontal em 0,05.
+2. Simule 2.000 testes A/A com numpy.random.default_rng(14): as duas
+   páginas com 40% de conclusão, 371 usuários por grupo por dia, 14
+   dias, teste z de duas proporções sobre o acumulado. Calcule a
+   proporção de simulações com p-valor abaixo de 0,05 só no último dia
+   e em pelo menos um dos 14 dias.
+
+<span class="k">[E] Exemplos</span>
+dia,usuarios,p_valor
+2026-03-02,784,0.080
+
+<span class="k">[A] Ajustes</span>
+- Espero p-valor de 0,516 no 5º dia e de 0,019 no 14º.
+- Na simulação, espero cerca de 5% no último dia e cerca de 22% em
+  algum dia.
+- Não altere a duração nem o tamanho amostral do plano.
+
+<span class="k">[T] Tipo de saída</span>
+CSV, PNG e, no chat, os dois percentuais da simulação e até três
+frases de explicação.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md e saidas/plano.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 4</div>
-      <h2>A leitura diária do p-valor</h2>
-      <p>Olhar o p-valor todos os dias e encerrar o teste na primeira vez que ele cair abaixo de 5% multiplica as chances de declarar um efeito inexistente.</p>
-      <ul>
-        <li>Cada leitura é uma nova oportunidade de um falso positivo.</li>
-        <li>A duração e o tamanho amostral foram fixados no plano para evitar esse viés.</li>
-        <li>Encerrar cedo por p-valor alto também é um erro, pois o teste ainda não tinha poder.</li>
-      </ul>
+      <div class="prompt-label">Etapa 07 · Enquanto o agente trabalha</div>
+      <h2>Testes A/A olhados todos os dias</h2>
+      <div class="sim">
+        <svg class="sim-svg" id="sim-svg" viewBox="0 0 640 300" role="img" aria-label="p-valor acumulado, dia a dia, de 40 testes A/A simulados; em laranja, os que caíram abaixo de 0,05 em algum dia"></svg>
+        <div class="sim-lado">
+          <div class="metric"><strong id="sim-final">—</strong><span>abaixo de 0,05 só no 14º dia</span></div>
+          <div class="metric"><strong id="sim-algum">—</strong><span>abaixo de 0,05 em algum dia</span></div>
+          <button class="sim-botao" id="sim-rodar" type="button">Simular 1.000 testes A/A</button>
+          <p class="sim-nota">As duas páginas têm 40% de conclusão e 371 usuários por grupo por dia. O gráfico mostra 40 dos testes. A referência em Python, com semente 14, dá 5,4% e 22,3%.</p>
+        </div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 7 · Leitura diária</div>
-      <h2>p-valor acumulado e simulação A/A</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Para cada dia do experimento, recalcule o qui-quadrado da conclusão com os usuários cuja primeira_data é até aquele dia e faça um gráfico do p-valor com uma linha horizontal em 0,05.
-
-Depois simule 2.000 testes A/A com numpy (semente 14), com as duas páginas a 40% e 371 usuários por grupo por dia durante 14 dias. Calcule a proporção de simulações com p-valor abaixo de 0,05 apenas no último dia e em pelo menos um dos 14 dias. Explique o resultado.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 4</div>
+      <div class="prompt-label">Etapa 07 · Conferência</div>
       <h2>Conferência da leitura diária</h2>
       <div class="metric-row">
         <div class="metric"><strong>0,516</strong><span>p-valor no 5º dia</span></div>
@@ -801,27 +1335,73 @@ Depois simule 2.000 testes A/A com numpy (semente 14), com as duas páginas a 40
       </div>
       <ul>
         <li>Quem encerrasse no 5º dia concluiria, sem poder estatístico, que as páginas são equivalentes.</li>
-        <li>Na simulação A/A, a leitura diária eleva o falso positivo de cerca de 5% para 22,3%.</li>
+        <li>Cada leitura é uma nova chance de falso positivo: a leitura diária eleva o risco de cerca de 5% para 22,3%.</li>
+        <li>A duração e o tamanho amostral foram fixados no plano para evitar esse viés.</li>
       </ul>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 8 · Parecer</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 08 · Prompt CREATE</div>
       <h2>Parecer para a diretoria</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie aula-14-seunome/PARECER_AB.md com: pergunta de negócio, plano registrado, regras de limpeza e contagens, resultado do SRM antes e depois, taxas, diferença com intervalo de confiança e p-valor, resultado do tempo, leitura diária e simulação A/A, recomendação e três limitações.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>PARECER_AB.md</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Cada número do parecer deve citar o arquivo de <code>saidas/</code> de onde veio. Número sem origem volta para o agente.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>Evidência separada da recomendação?</li><li>Três limitações concretas?</li><li>Nenhum custo inventado?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você redige o parecer técnico de um teste A/B para a diretoria de uma
+rede hospitalar. Separa evidência, interpretação e recomendação.
 
-Use somente números produzidos no notebook; não invente valores. Separe o que os dados mostram do que é recomendação. Depois proponha git add, commit e push, sem executar antes da minha aprovação.</div></div>
+<span class="k">[R] Pedido</span>
+Crie PARECER_AB.md com: pergunta de negócio, plano registrado, estudo
+da base, regras de limpeza e contagens, SRM antes e depois, taxas,
+diferença com intervalo de confiança e p-valor, resultado do tempo,
+leitura diária e simulação A/A, recomendação e três limitações.
+
+<span class="k">[E] Exemplos</span>
+## Evidência
+Na base limpa, a conclusão foi de 40,5% em A e 42,8% em B
+(saidas/resultado_primario.csv).
+
+<span class="k">[A] Ajustes</span>
+- Use somente números presentes em saidas/; cite o arquivo de origem
+  de cada número.
+- Não invente custo, receita nem prazo de implantação.
+- Explique por que a decisão não foi tomada no 5º nem no 12º dia.
+- A recomendação considera o efeito mínimo de 3 pontos do plano.
+
+<span class="k">[T] Tipo de saída</span>
+Markdown com até 80 linhas, em seções com títulos curtos.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md, saidas/ inteira e prompts.md. Mostre o sumário antes de
+escrever e espere meu ok. Ao terminar, registre o prompt. Se a pasta
+estiver num repositório Git, proponha git add, commit e push, sem
+executar antes da minha aprovação.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 08 · Enquanto o agente trabalha</div>
+      <h2>Evidência, interpretação e recomendação</h2>
+      <div class="deck-grid c3">
+        <article class="deck-card"><h3>Evidência</h3><p>O que os scripts mediram: +2,3 p.p., intervalo de 0,4 a 4,2, p = 0,019; −30 s no tempo.</p></article>
+        <article class="deck-card"><h3>Interpretação</h3><p>A relação com o plano: o ganho existe, mas pode ser menor que o mínimo de 3 pontos.</p></article>
+        <article class="deck-card"><h3>Recomendação</h3><p>Decisão de gestão, que pesa também o custo da troca, dado que o experimento não mede.</p></article>
+      </div>
+      <p>O agente redige as três camadas. A dupla confere se cada número tem origem e se a recomendação não ultrapassa a evidência.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="challenge">
       <div class="prompt-label">Desafio em dupla</div>
       <h2>A página B deve substituir a atual?</h2>
-      <p>Responda à diretoria com base no notebook.</p>
+      <p>Responda à diretoria com base nos arquivos de <code>saidas/</code>.</p>
       <ul>
         <li>Um ganho estimado de 2,3 p.p., com intervalo de 0,4 a 4,2, justifica a troca?</li>
         <li>Que peso a redução de 30 segundos deve ter, se não era a métrica primária?</li>
         <li>O que teria acontecido se a equipe de TI tivesse ficado na base?</li>
-        <li>Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</li>
+        <li>Que plano do agente a dupla recusou ou corrigiu, e por qual motivo?</li>
       </ul>
     </div>
 
@@ -829,11 +1409,11 @@ Use somente números produzidos no notebook; não invente valores. Separe o que 
       <div class="prompt-label">Entrega · 21h35</div>
       <h2>Entrega verificável</h2>
       <ul>
-        <li><code>Aula_14_SeuNome.ipynb</code> executado do início ao fim.</li>
-        <li><code>saidas/regras_de_limpeza.csv</code> com a contagem de cada regra.</li>
-        <li><code>saidas/resultado_primario.csv</code> com taxas, intervalo e p-valor.</li>
+        <li>Pasta <code>aula-14-ab</code> com <code>CLAUDE.md</code>, <code>prompts.md</code> e os scripts de <code>analise/</code>.</li>
+        <li><code>saidas/estudo_base.md</code>, <code>regras_de_limpeza.csv</code>, <code>srm.csv</code> e <code>resultado_primario.csv</code>.</li>
         <li>Gráficos do tempo por variante e do p-valor diário.</li>
-        <li><code>PARECER_AB.md</code>, commit e push.</li>
+        <li><code>PARECER_AB.md</code> com evidência, interpretação, recomendação e limitações.</li>
+        <li>A pasta compactada no envio da aula ou, se estiver num repositório, commit e push.</li>
       </ul>
     </div>
 
@@ -842,17 +1422,17 @@ Use somente números produzidos no notebook; não invente valores. Separe o que 
       <h2>Síntese do laboratório</h2>
       <ul>
         <li>O plano fixou hipótese, métricas, efeito mínimo e tamanho amostral antes dos dados.</li>
-        <li>As regras de limpeza seguiram a unidade sorteada e a população de pacientes.</li>
-        <li>O SRM revelou a contaminação pela equipe de TI e confirmou a base limpa.</li>
+        <li>O estudo descritivo achou duplicadas, a equipe de TI e usuários nas duas páginas antes de qualquer teste.</li>
+        <li>As regras de limpeza seguiram a unidade sorteada, e o SRM confirmou a base limpa.</li>
         <li>O intervalo de confiança, e não apenas o p-valor, sustentou a leitura do efeito.</li>
-        <li>A IA escreveu o código, e a turma respondeu pelas regras e pela decisão.</li>
+        <li>O Claude escreveu e executou os scripts; a turma autorizou os planos, conferiu os números e respondeu pela decisão.</li>
       </ul>
     </div>
 
     <div class="slide slide-end" data-lesson-section="next-steps">
       <h2>Próximo laboratório</h2>
       <p>Em 25/11, a disciplina trata de auditoria e forense de dados, com detecção de anomalias, riscos e fraudes.</p>
-      <p>Antes de sair, execute o notebook inteiro, revise o parecer e faça commit e push.</p>
+      <p>Antes de sair, peça ao agente que execute todos os scripts de <code>analise/</code> em ordem e confira se <code>saidas/</code> não mudou.</p>
     </div>
   </div>
 
@@ -862,6 +1442,7 @@ Use somente números produzidos no notebook; não invente valores. Separe o que 
       <a href="../index.html" class="ctrl-btn" title="Voltar ao Cronograma"><span class="ctrl-icon">🏠</span> Home</a>
       <a href="../materiais/aula-14/index.html" class="ctrl-btn" title="Ir para o Material"><span class="ctrl-icon">📎</span> Material</a>
       <a href="../materiais/aula-14/dados/experimento_agendamento.csv" download="experimento_agendamento.csv" class="ctrl-btn" title="Baixar a base CSV"><span class="ctrl-icon">⬇️</span> Base</a>
+      <button class="ctrl-btn" id="anim-reiniciar" type="button" title="Roda a animação deste slide de novo desde o início" style="display:none"><span class="ctrl-icon">↻</span> Reiniciar animação</button>
       <span class="slide-counter" id="slide-counter" aria-live="polite"></span>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-prev" title="Slide Anterior (Seta Esquerda)">◄</button>
       <button class="ctrl-btn ctrl-btn-only-icon" id="btn-next" title="Próximo Slide (Seta Direita ou Espaço)">►</button>
@@ -893,6 +1474,7 @@ Use somente números produzidos no notebook; não invente valores. Separe o que 
     document.addEventListener('keydown', (e) => {
       const interactiveTarget = e.target.closest('button, a');
       if (e.key === ' ' && interactiveTarget) return;
+      if (e.target.closest('textarea, input, select')) return;
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         if (current < slides.length - 1) { current++; update(); }
@@ -937,6 +1519,107 @@ Use somente números produzidos no notebook; não invente valores. Separe o que 
         window.setTimeout(() => { button.textContent = original; }, 1800);
       });
     });
+
+    /* Animação em SVG: cada elemento com data-t aparece em t ms quando o slide abre. */
+    (() => {
+      const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const iniciar = svg => {
+        if (svg._parar) svg._parar();
+        const els = [...svg.querySelectorAll('[data-t]')];
+        if (reduz) { els.forEach(e => e.classList.add('on')); svg._parar = null; return; }
+        svg.classList.add('anim-reset');
+        els.forEach(e => e.classList.remove('on'));
+        void svg.getBoundingClientRect();
+        svg.classList.remove('anim-reset');
+        const timers = els.map(e => setTimeout(() => e.classList.add('on'), +e.dataset.t));
+        svg._parar = () => timers.forEach(clearTimeout);
+      };
+      const botao = document.getElementById('anim-reiniciar');
+      botao.addEventListener('click', () => {
+        document.querySelectorAll('.slide.active svg.anim').forEach(iniciar);
+        botao.blur();
+      });
+      const mostrarBotao = () => { botao.style.display = document.querySelector('.slide.active svg.anim') ? '' : 'none'; };
+      document.querySelectorAll('.slide').forEach(slide => {
+        const svgs = slide.querySelectorAll('svg.anim');
+        if (!svgs.length) return;
+        let ativo = false;
+        const verificar = () => {
+          const agora = slide.classList.contains('active');
+          if (agora !== ativo) { ativo = agora; if (ativo) svgs.forEach(iniciar); }
+          mostrarBotao();
+        };
+        new MutationObserver(verificar).observe(slide, { attributes: true, attributeFilter: ['class'] });
+        verificar();
+      });
+    })();
+
+    /* Simulador A/A: mesma conta do script da etapa 07, feita no navegador. */
+    (() => {
+      const svg = document.getElementById('sim-svg');
+      const botao = document.getElementById('sim-rodar');
+      if (!svg || !botao) return;
+      const NS = 'http://www.w3.org/2000/svg';
+      const DIAS = 14, POR_DIA = 371, TAXA = 0.40, ALFA = 0.05, MOSTRAR = 40;
+      const el = (nome, attrs, pai, texto) => {
+        const e = document.createElementNS(NS, nome);
+        Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
+        if (texto !== undefined) e.textContent = texto;
+        pai.appendChild(e);
+        return e;
+      };
+      // Função de distribuição normal pela aproximação de Abramowitz e Stegun (7.1.26).
+      const phi = z => {
+        const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+        const erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z / 2);
+        return z >= 0 ? (1 + erf) / 2 : (1 - erf) / 2;
+      };
+      const binomial = () => { let c = 0; for (let i = 0; i < POR_DIA; i++) if (Math.random() < TAXA) c++; return c; };
+      const umTeste = () => {
+        let ca = 0, cb = 0, n = 0;
+        const ps = [];
+        for (let d = 0; d < DIAS; d++) {
+          ca += binomial(); cb += binomial(); n += POR_DIA;
+          const pm = (ca + cb) / (2 * n);
+          const z = (cb / n - ca / n) / Math.sqrt(pm * (1 - pm) * (2 / n));
+          ps.push(2 * (1 - phi(Math.abs(z))));
+        }
+        return ps;
+      };
+      const X0 = 52, X1 = 625, Y0 = 268, Y1 = 14;
+      const X = d => X0 + d / (DIAS - 1) * (X1 - X0);
+      const Y = p => Y0 - p * (Y0 - Y1);
+      const eixos = () => {
+        svg.innerHTML = '';
+        [0, 0.25, 0.5, 0.75, 1].forEach(v => {
+          el('line', { class: 'grade', x1: X0, x2: X1, y1: Y(v), y2: Y(v) }, svg);
+          el('text', { x: X0 - 8, y: Y(v) + 4, 'text-anchor': 'end' }, svg, v.toString().replace('.', ','));
+        });
+        [1, 5, 10, 14].forEach(d => el('text', { x: X(d - 1), y: Y0 + 22, 'text-anchor': 'middle' }, svg, `dia ${d}`));
+        el('line', { class: 'corte', x1: X0, x2: X1, y1: Y(ALFA), y2: Y(ALFA) }, svg);
+        el('text', { x: X1, y: Y(ALFA) - 6, 'text-anchor': 'end', fill: '#f5c46b' }, svg, '0,05');
+      };
+      const fmt = v => `${(100 * v).toFixed(1).replace('.', ',')}%`;
+      const rodar = () => {
+        eixos();
+        const N = 1000;
+        let final = 0, algum = 0;
+        for (let i = 0; i < N; i++) {
+          const ps = umTeste();
+          const cruzou = ps.some(p => p < ALFA);
+          if (ps[DIAS - 1] < ALFA) final++;
+          if (cruzou) algum++;
+          if (i < MOSTRAR) {
+            el('polyline', { class: cruzou ? 'caminho cruzou' : 'caminho', points: ps.map((p, d) => `${X(d).toFixed(1)},${Y(p).toFixed(1)}`).join(' ') }, svg);
+          }
+        }
+        document.getElementById('sim-final').textContent = fmt(final / N);
+        document.getElementById('sim-algum').textContent = fmt(algum / N);
+        botao.blur();
+      };
+      eixos();
+      botao.addEventListener('click', rodar);
+    })();
 
     update();
   </script>

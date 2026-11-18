@@ -129,16 +129,18 @@
   <div class="container">
     <div class="header">
       <div class="badge">LABORATÓRIO 14 · 18/11</div>
-      <h1>Testes A/B: do desenho do experimento à decisão de negócio</h1>
+      <h1>Testes A/B com Claude na sua máquina: do estudo da base à decisão de negócio</h1>
     </div>
 
     <div class="content">
-      <p class="desc">Uma rede hospitalar fictícia criou uma nova página de agendamento online e quer saber se ela aumenta a proporção de pacientes que concluem o agendamento. Durante 14 dias, metade dos usuários viu a página atual (A) e metade viu a nova (B). Calculado sobre o arquivo bruto, o resultado sugere uma vantagem de 5,3 pontos percentuais para B, mas a divisão entre os grupos não corresponde ao sorteio. Neste laboratório, o plano do experimento é registrado antes dos dados, a base é limpa segundo regras de negócio, a divisão é conferida com o teste de SRM e as duas métricas são comparadas com qui-quadrado e teste t de Welch. A IA escreve a maior parte do código no GitHub Codespaces. A turma decide as regras, confere as contagens e responde pela recomendação.</p>
+      <p class="desc">Uma rede hospitalar fictícia criou uma nova página de agendamento online e quer saber se ela aumenta a proporção de pacientes que concluem o agendamento. Durante 14 dias, metade dos usuários viu a página atual (A) e metade viu a nova (B). Calculado sobre o arquivo bruto, o resultado sugere uma vantagem de 5,3 pontos percentuais para B, mas a divisão entre os grupos não corresponde ao sorteio. Neste laboratório, o plano do experimento é registrado antes dos dados, a base é limpa segundo regras de negócio, a divisão é conferida com o teste de SRM e as duas métricas são comparadas com qui-quadrado e teste t de Welch. A análise roda no computador de cada estudante, com o Claude Code no terminal ou no Claude Desktop, conduzido por nove prompts no formato CREATE. O agente escreve e executa os scripts; a turma autoriza cada plano, confere as contagens e responde pela recomendação.</p>
 
       <section data-lesson-section="objectives">
         <h2>1. Objetivos de aprendizagem</h2>
         <ul>
+          <li>Conduzir uma análise local com o Claude Code, no terminal ou no Claude Desktop, por prompts no formato CREATE.</li>
           <li>Registrar hipótese, métricas, efeito mínimo e tamanho amostral antes de ver os dados.</li>
+          <li>Descrever a base com medidas-resumo adequadas ao tipo de cada variável e identificar o que ameaça o experimento.</li>
           <li>Limpar os registros do experimento com regras de negócio e contagem.</li>
           <li>Verificar a divisão entre variantes com o teste de SRM.</li>
           <li>Comparar proporções com qui-quadrado e médias com o teste t de Welch.</li>
@@ -151,7 +153,7 @@
         <p>Um teste A/B compara duas versões de uma página, de um processo ou de uma mensagem, sorteando quem recebe cada uma. O sorteio é o que permite atribuir a diferença de resultado à versão, e não a outra causa. Quando algo além do sorteio decide quem entra em cada grupo, a comparação perde essa propriedade, por mais sofisticado que seja o teste estatístico aplicado depois.</p>
         <p>No arquivo bruto desta aula, a página A tem 32,2% de sessões com agendamento concluído e a página B, 37,5%. A diferença de 5,3 pontos percentuais seria um argumento forte para a troca. Ao mesmo tempo, B recebeu 7.418 sessões e A, 6.974, desequilíbrio que o teste de SRM classifica como improvável sob um sorteio 50/50 (p-valor de 0,0002). A explicação está em registros que não representam pacientes: a equipe de TI testou a página nova dezenas de vezes, alguns usuários viram as duas páginas e parte das sessões foi gravada em duplicidade.</p>
         <p>Na aula 13, a limpeza dependia da pergunta sobre a expedição. Aqui ela depende do desenho do experimento: a unidade sorteada e a população a que a decisão se aplica definem quais registros contam.</p>
-        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá um notebook executado do início ao fim, a tabela de regras com contagens, o resultado da métrica primária com intervalo de confiança, os gráficos de tempo e de p-valor diário e o <code>PARECER_AB.md</code> endereçado à diretoria.</div>
+        <div class="evidence"><strong>Resultado esperado</strong>Ao final, cada dupla terá uma pasta com os scripts de cada etapa, o estudo estatístico da base, a tabela de regras com contagens, o resultado da métrica primária com intervalo de confiança, os gráficos de tempo e de p-valor diário e o <code>PARECER_AB.md</code> endereçado à diretoria.</div>
       </section>
 
       <section data-lesson-section="concepts">
@@ -197,41 +199,122 @@
       </section>
 
       <section data-lesson-section="concepts">
-        <h2>5. Protocolo de trabalho com a IA</h2>
-        <p>O protocolo é o mesmo da aula 13. O agente recebe o arquivo, a pergunta e o resultado esperado, apresenta um plano antes de editar, e cada etapa é executada e reconciliada antes da seguinte.</p>
+        <h2>5. Claude Code na sua máquina</h2>
+        <p>Nesta aula a análise roda no computador de cada estudante, e não no Codespace. O agente é o Claude Code, que pode ser usado de duas formas. No terminal, o comando <code>claude</code>, executado dentro da pasta da aula, abre uma conversa em que o agente lê e escreve arquivos daquela pasta e executa comandos, sempre pedindo permissão para o que altera o computador. No Claude Desktop, a aba Code oferece o mesmo agente numa janela do aplicativo, depois que a pasta de trabalho é escolhida. As duas formas exigem uma conta Claude com acesso ao Claude Code; quem não tiver acesso trabalha em dupla com quem tem.</p>
+        <p>Para instalar a versão de terminal, siga as instruções da documentação oficial do Claude Code. Em macOS e Linux, o instalador é <code>curl -fsSL https://claude.ai/install.sh | bash</code>; no Windows, em PowerShell, <code>irm https://claude.ai/install.ps1 | iex</code>. Na primeira execução de <code>claude</code>, o navegador abre para o login.</p>
+        <p>O CSV, os scripts e as saídas ficam na sua máquina. O que o agente lê para responder, porém, é enviado ao modelo. A base desta aula é sintética, o que permite esse envio; com dados reais de pacientes, a mesma prática exigiria autorização e uma conta institucional adequada.</p>
+        <h3>5.1 O formato CREATE</h3>
+        <p>Todos os prompts da aula seguem o formato CREATE, em seis campos. Cada campo responde a uma pergunta que o agente faria se pudesse, e o campo deixado vazio vira suposição do agente.</p>
+        <table>
+          <thead><tr><th>Campo</th><th>O que contém</th><th>Exemplo nesta aula</th></tr></thead>
+          <tbody>
+            <tr><td>[C] Personagem</td><td>o papel do agente e o que ele não faz na etapa</td><td>analista que descreve a base sem limpar nada</td></tr>
+            <tr><td>[R] Pedido</td><td>o que fazer, em qual arquivo, com a lista do que deve estar coberto</td><td><code>analise/03_limpeza.py</code> com quatro regras em ordem</td></tr>
+            <tr><td>[E] Exemplos</td><td>um trecho no formato exato esperado</td><td>a primeira linha de <code>regras_de_limpeza.csv</code></td></tr>
+            <tr><td>[A] Ajustes</td><td>restrições, proibições e números esperados</td><td>espero 10.400 usuários; não ajuste a regra</td></tr>
+            <tr><td>[T] Tipo de saída</td><td>formato e tamanho do que será entregue</td><td>Markdown com até 90 linhas</td></tr>
+            <tr><td>[E] Extras</td><td>o que ler antes, quando mostrar o plano, registrar e parar</td><td>mostre o plano, espere meu ok, registre o prompt e pare</td></tr>
+          </tbody>
+        </table>
+        <h3>5.2 Protocolo de cada etapa</h3>
         <ol>
-          <li>Contextualize: informe o arquivo, o plano do experimento e o resultado esperado.</li>
-          <li>Peça um plano antes da edição, para verificar se o agente entendeu a etapa.</li>
-          <li>Leia o código proposto, procurando números fixos, filtros sem regra e testes trocados.</li>
-          <li>Execute uma etapa por vez no notebook.</li>
-          <li>Reconcilie: toda transformação informa quantas linhas entraram, quantas saíram e por qual regra.</li>
+          <li>Cole o prompt da etapa. Nos slides, o botão Copiar prompt copia o texto inteiro.</li>
+          <li>Leia o plano que o agente apresenta. No terminal, Shift+Tab alterna para o modo de plano, em que ele apenas lê e propõe.</li>
+          <li>Autorize ou corrija. Leia cada comando antes de aprovar, sobretudo instalações e exclusões.</li>
+          <li>Acompanhe a execução. Enquanto o agente trabalha, os slides apresentam a teoria que o prompt usou.</li>
+          <li>Confira os números esperados. Se divergirem, peça investigação; não aceite que a regra mude para acertar a contagem.</li>
         </ol>
-        <p>O ambiente é o GitHub Codespaces da disciplina. Pandas, NumPy, Matplotlib e SciPy já estão instalados, pois o SciPy acompanha o scikit-learn do <code>requirements.txt</code>.</p>
+        <p>Cada etapa produz um script em <code>analise/</code>, executado com o Python do ambiente virtual da pasta, e grava seus resultados em <code>saidas/</code>. Os scripts são reexecutáveis, e o parecer final só cita números que estão em <code>saidas/</code>.</p>
         <div class="alert-box"><h4>Regras de exclusão não podem depender do resultado</h4><p>Toda regra de limpeza é aplicada igualmente às duas variantes e justificada pelo desenho do experimento. Testar várias limpezas e escolher a que produz o menor p-valor equivale a fabricar o resultado. Se uma regra nova parecer necessária depois de ver os números, ela deve ser registrada como tal no parecer, com o resultado obtido com e sem ela.</p></div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Etapa 0 · ambiente</span>
-        <h2>6. Pastas de trabalho no Codespace</h2>
-        <p>No terminal do Codespace, crie a estrutura da entrega. A pasta <code>entrada</code> recebe a cópia do CSV e não é editada; os arquivos gerados vão para <code>saidas</code>.</p>
-        <div class="code-block">mkdir -p aula-14-seunome/entrada aula-14-seunome/saidas
-cp materiais/aula-14/dados/experimento_agendamento.csv aula-14-seunome/entrada/
-ls -lh aula-14-seunome/entrada</div>
+        <span class="step-tag">Etapa 00 · ambiente</span>
+        <h2>6. Pasta de trabalho e regras do projeto</h2>
+        <p>Crie a pasta da aula, baixe o CSV para <code>entrada</code> e abra o agente. Em macOS e Linux:</p>
+        <div class="code-block">mkdir -p aula-14-ab/entrada
+cd aula-14-ab
+curl -L -o entrada/experimento_agendamento.csv https://afonsolelis.github.io/einstein/materiais/aula-14/dados/experimento_agendamento.csv
+claude</div>
+        <p>No Windows, em PowerShell, use <code>mkdir aula-14-ab\entrada</code> e <code>curl.exe</code> no lugar de <code>curl</code>. No Claude Desktop, crie a pasta, baixe o CSV pelo botão desta página e escolha <code>aula-14-ab</code> na aba Code.</p>
+        <div class="prompt-block">[C] Personagem
+Você é meu assistente de análise de dados neste laboratório e trabalha
+somente dentro desta pasta, aula-14-ab. Nesta etapa você prepara o
+ambiente e escreve as regras do projeto; não analisa dados.
+
+[R] Pedido
+1. Crie CLAUDE.md com as regras do projeto listadas em Ajustes.
+2. Verifique se há Python 3.10 ou superior. Crie um ambiente virtual em
+   .venv e instale pandas, numpy, scipy e matplotlib.
+3. Confira entrada/experimento_agendamento.csv: linhas de dados,
+   colunas e SHA-256.
+
+[E] Exemplos
+Trecho esperado do CLAUDE.md:
+## Regras
+- entrada/ é somente leitura.
+- Cada etapa vira um script analise/NN_nome.py, executado com o Python
+  da .venv, que grava o que produz em saidas/.
+
+[A] Ajustes
+- Regras do CLAUDE.md: entrada/ é somente leitura; uma etapa, um script;
+  todo número citado vem de um script executado; regras de limpeza não
+  dependem do resultado e valem para A e B; cada prompt recebido é
+  registrado em prompts.md com a data e os arquivos gerados.
+- Não instale nada fora da .venv. Se não houver Python, pare e me
+  explique como instalar no meu sistema operacional.
+- Espero 14.392 linhas de dados, 8 colunas e SHA-256 iniciado por
+  3b6b13db. Se divergir, pare e me avise.
+
+[T] Tipo de saída
+CLAUDE.md com até 25 linhas e, no chat, um resumo com a versão do
+Python, as bibliotecas instaladas e a conferência do CSV.
+
+[E] Extras
+Mostre o plano e espere meu ok antes de instalar qualquer coisa. Ao
+terminar, registre este prompt em prompts.md e pare.</div>
+        <p>O <code>CLAUDE.md</code> é lido pelo agente no início de cada conversa naquela pasta e funciona como memória do projeto. As regras escritas nele, como a de que <code>entrada</code> é somente leitura, valem para todas as etapas seguintes sem precisar ser repetidas.</p>
+        <div class="evidence"><strong>Checkpoint</strong>Ambiente virtual <code>.venv</code> criado com pandas, numpy, scipy e matplotlib; 14.392 linhas de dados, 8 colunas e SHA-256 <code>3b6b13db7720df3c07d8e7b9cfeed99bf80040261ba185f89905d0f18bbc80c3</code>.</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 1 · plano</span>
-        <h2>7. Fase A: plano e tamanho amostral</h2>
-        <p>O notebook começa pelo plano, em texto, e pelo cálculo do tamanho amostral. A célula de plano é o registro que o parecer vai citar.</p>
-        <div class="prompt-block">Atue como meu assistente de análise neste laboratório. Crie
-aula-14-seunome/Aula_14_SeuNome.ipynb. Na primeira célula, registre em texto a
-hipótese, a métrica primária, a métrica secundária, o efeito mínimo de 3 pontos
-percentuais sobre a taxa de 40%, alfa de 5%, poder de 80% e duração de 14 dias.
+        <span class="step-tag">Etapa 01 · plano</span>
+        <h2>7. Plano do experimento e tamanho amostral</h2>
+        <p>O plano é registrado em <code>saidas/plano.md</code> antes de o agente abrir a base, e o prompt proíbe essa leitura de forma explícita. O script calcula o tamanho amostral da seção 3.1.</p>
+        <div class="prompt-block">[C] Personagem
+Você é estatístico de experimentos. Nesta etapa registra o plano do
+teste A/B e calcula o tamanho amostral, sem abrir a base de dados.
 
-Na célula seguinte, calcule o tamanho amostral por grupo para um teste
-bicaudal de duas proporções usando scipy.stats.norm, sem statsmodels, e
-arredonde para cima. Espero 4.234 usuários por grupo. Mostre o plano antes de
-editar.</div>
+[R] Pedido
+1. Crie saidas/plano.md com: pergunta de negócio, hipótese, unidade
+   sorteada, métrica primária, métrica secundária, efeito mínimo, alfa,
+   poder e duração.
+2. Crie analise/01_tamanho_amostral.py, que calcula o tamanho amostral
+   por grupo para um teste bicaudal de duas proporções e acrescenta o
+   resultado ao fim de saidas/plano.md.
+
+[E] Exemplos
+| Item | Definição |
+|---|---|
+| Métrica primária | proporção de usuários que concluíram o agendamento |
+
+[A] Ajustes
+- Dados do plano: página atual A e nova página B; pergunta: B aumenta a
+  proporção de pacientes que concluem o agendamento?; unidade sorteada:
+  usuário; taxa histórica de 40%; efeito mínimo de 3 pontos
+  percentuais; alfa de 5%; poder de 80%; 14 dias, de 02 a 15/03/2026;
+  métrica secundária: tempo até concluir, entre quem concluiu.
+- Use scipy.stats.norm, sem statsmodels, e arredonde para cima.
+- Espero 4.234 usuários por grupo. Se divergir, pare e me mostre a conta.
+- Não leia nada em entrada/ nesta etapa.
+
+[T] Tipo de saída
+plano.md com uma tabela de até 12 linhas e o tamanho amostral;
+script com até 30 linhas e comentários curtos.
+
+[E] Extras
+Leia CLAUDE.md. Mostre a fórmula antes de escrever o código, espere meu
+ok, execute o script, registre o prompt em prompts.md e pare.</div>
         <div class="code-block">import numpy as np
 from scipy import stats
 
@@ -246,34 +329,63 @@ print(int(np.ceil(n)))  # 4234</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 2 · perfil</span>
-        <h2>8. Fase B: perfil da base sem limpeza</h2>
-        <div class="prompt-block">No mesmo notebook, carregue aula-14-seunome/entrada/experimento_agendamento.csv
-em um DataFrame chamado bruta, convertendo data para data.
+        <span class="step-tag">Etapa 02 · estudo da base</span>
+        <h2>8. Estudo estatístico da base bruta</h2>
+        <p>Antes de limpar, a base é descrita. O estudo exploratório responde que tipo de dado cada coluna guarda, como ele se distribui e o que, nesses números, ameaça o experimento. O prompt proíbe remover registros e proíbe comparar a conclusão de A e B, porque essa comparação já é um teste.</p>
+        <div class="prompt-block">[C] Personagem
+Você é analista de dados e faz o estudo exploratório da base bruta de
+um experimento. Descreve e mede; não remove nem corrige nada.
 
-Mostre: shape, dtypes, linhas duplicadas, sessao_id repetido, usuários
-distintos, sessões e usuários com usuario_interno igual a "sim", usuários que
-aparecem nas duas variantes e sessões por variante. Não limpe nem remova nada.
-Espero 14.392 linhas e 8 colunas; se divergir, pare e me avise.</div>
-        <div class="code-block">import pandas as pd
+[R] Pedido
+Crie analise/02_estudo_base.py, que lê entrada/experimento_agendamento.csv
+e grava saidas/estudo_base.md com:
+1. Estrutura: linhas, colunas, tipo de cada coluna, período e usuários
+   distintos.
+2. Qualidade: nulos por coluna e em que situação aparecem, linhas
+   duplicadas e sessao_id repetido.
+3. Variáveis categóricas: frequência e percentual de variante,
+   dispositivo e usuario_interno.
+4. Variáveis numéricas: média, mediana, desvio padrão, quartis, mínimo,
+   máximo e assimetria de tempo_segundos; taxa geral de conclusão.
+5. Distribuição de sessões por usuário e de sessões por dia.
+6. Indícios que ameaçam o experimento: sessões internas por variante e
+   usuários que aparecem nas duas variantes.
+Grave em saidas/ o histograma de tempo_segundos e o gráfico de sessões
+por dia, uma linha por variante.
 
-bruta = pd.read_csv("entrada/experimento_agendamento.csv", parse_dates=["data"])
+[E] Exemplos
+Formato de cada achado no fim do relatório:
+- Achado: 240 linhas idênticas em todos os campos.
+- Evidência: bruta.duplicated().sum() = 240.
+- Ameaça ao experimento: a mesma sessão contaria duas vezes.
 
-print("shape:", bruta.shape)
-print("linhas duplicadas:", bruta.duplicated().sum())
-print("usuários distintos:", bruta["usuario_id"].nunique())
-internos = bruta["usuario_interno"].eq("sim")
-print("sessões internas:", internos.sum(), "| usuários:", bruta.loc[internos, "usuario_id"].nunique())
-variantes = bruta.groupby("usuario_id")["variante"].nunique()
-print("usuários nas duas variantes:", (variantes &gt; 1).sum())
-display(bruta["variante"].value_counts())</div>
-        <div class="evidence"><strong>Checkpoint</strong>O resultado esperado é <code>(14392, 8)</code>, com 240 linhas duplicadas, 10.575 usuários distintos, 642 sessões de 15 usuários internos, 160 usuários nas duas variantes e 6.974 sessões em A contra 7.418 em B. A coluna <code>tempo_segundos</code> está vazia nas sessões sem conclusão, o que é esperado.</div>
-        <p>As 240 duplicadas têm o mesmo <code>sessao_id</code> e todos os campos iguais, padrão de um log reenviado. As sessões internas estão concentradas em B: 588 contra 54 em A, porque a equipe de TI validava a página nova.</p>
+[A] Ajustes
+- Não remova nem altere registros; a limpeza é a etapa seguinte.
+- Espero 14.392 linhas e 8 colunas. Se divergir, pare e me avise.
+- Não compare a conclusão de A e B nesta etapa: isso é teste, não
+  descrição.
+- Não leia o README da pasta de dados.
+- Use somente números calculados pelo script.
+
+[T] Tipo de saída
+estudo_base.md com até 90 linhas, em tabelas curtas, terminando na
+lista de achados; dois PNG em saidas/.
+
+[E] Extras
+Leia CLAUDE.md e saidas/plano.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div>
+        <h3>8.1 Tipo de variável e medida-resumo</h3>
+        <p>A medida-resumo depende do tipo da variável. Colunas categóricas, como <code>variante</code> e <code>dispositivo</code>, resumem-se por frequência e percentual. A coluna <code>concluiu</code> é binária, e sua média é a proporção de conclusões. O tempo é contínuo e assimétrico: a média de 279,2 segundos fica acima da mediana de 257, com quartis de 176 e 359 segundos, máximo de 1.512 e assimetria de 1,16. Poucos agendamentos demorados puxam a média para cima, por isso mediana e quartis descrevem melhor o tempo típico.</p>
+        <h3>8.2 Nulos estruturais</h3>
+        <p>A coluna <code>tempo_segundos</code> tem 9.363 valores vazios, todos em sessões sem conclusão. Não se trata de falha de coleta: o tempo até concluir só existe para quem concluiu. Preencher esses vazios com zero ou com a média criaria tempos que nunca aconteceram e distorceria a métrica secundária.</p>
+        <h3>8.3 O que ameaça o experimento</h3>
+        <p>A distribuição de linhas por usuário mostra o achado principal. Dos 10.575 usuários, 8.130 têm uma única linha, e fora de um grupo de 15 ninguém passa de 5. Esses 15 têm de 33 a 50 sessões cada e são as contas da equipe de TI, marcadas com <code>usuario_interno = "sim"</code>, com 588 sessões em B e 54 em A. O estudo encontra ainda 240 linhas duplicadas e 160 usuários que aparecem nas duas variantes.</p>
+        <div class="evidence"><strong>Checkpoint</strong>14.392 linhas e 8 colunas, 10.575 usuários, 61,4% das sessões em celular, entre 870 e 1.459 sessões por dia, 9.363 tempos vazios, 240 duplicadas, 642 sessões internas de 15 usuários, 160 usuários nas duas variantes e 6.974 sessões em A contra 7.418 em B.</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 3 · regras</span>
-        <h2>9. Fase C: aplicação das regras com contagem</h2>
+        <span class="step-tag">Etapa 03 · regras</span>
+        <h2>9. Regras de limpeza com contagem</h2>
         <p>Cada regra decorre do desenho do experimento, e não do resultado.</p>
         <table>
           <thead><tr><th>Regra</th><th>Justificativa</th><th>Efeito conferido</th></tr></thead>
@@ -284,18 +396,38 @@ display(bruta["variante"].value_counts())</div>
             <tr><td>Uma linha por usuário</td><td>o usuário é a unidade sorteada; sessões do mesmo usuário não são independentes</td><td>10.400 usuários</td></tr>
           </tbody>
         </table>
-        <div class="prompt-block">Crie sessoes a partir de bruta, sem alterar bruta nem o CSV. Aplique nesta
-ordem e mostre as linhas antes e depois de cada regra:
-1. Remover linhas duplicadas.
-2. Excluir usuario_interno igual a "sim".
-3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
-4. Criar usuarios com uma linha por usuario_id: variante, dispositivo,
-   primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+        <div class="prompt-block">[C] Personagem
+Você aplica regras de limpeza definidas pelo desenho do experimento.
+Não propõe regras novas nem muda a ordem.
 
-Espero 14.152, 13.516, 13.044 sessões e 10.400 usuários. Salve a tabela regra,
-justificativa, linhas_antes, linhas_depois em
-aula-14-seunome/saidas/regras_de_limpeza.csv. Se algum número divergir,
-investigue; não ajuste a regra.</div>
+[R] Pedido
+Crie analise/03_limpeza.py, que lê o CSV bruto, aplica as regras nesta
+ordem e mostra as linhas antes e depois de cada uma:
+1. Remover linhas duplicadas.
+2. Excluir as sessões com usuario_interno igual a "sim".
+3. Excluir todas as sessões de usuários que aparecem nas duas variantes.
+4. Agregar uma linha por usuario_id com variante, dispositivo,
+   primeira_data, concluiu (máximo) e tempo_segundos (máximo).
+Grave saidas/regras_de_limpeza.csv e saidas/usuarios.csv.
+
+[E] Exemplos
+regra,justificativa,linhas_antes,linhas_depois
+remover_duplicadas,a sessão ocorreu uma vez; a cópia vem do reenvio do log,14392,14152
+
+[A] Ajustes
+- Espero 14.152, 13.516 e 13.044 sessões e 10.400 usuários.
+- Se algum número divergir, investigue o caminho, o filtro e a ordem;
+  não ajuste a regra para acertar a contagem.
+- As regras valem igualmente para A e para B.
+- O CSV em entrada/ não é alterado.
+
+[T] Tipo de saída
+Os dois CSV e, no chat, uma tabela com regra, linhas antes e linhas
+depois.
+
+[E] Extras
+Leia CLAUDE.md e saidas/estudo_base.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div>
         <div class="code-block">sessoes = bruta.drop_duplicates()
 sessoes = sessoes[sessoes["usuario_interno"].eq("nao")]
 variantes = sessoes.groupby("usuario_id")["variante"].nunique()
@@ -310,26 +442,45 @@ usuarios = sessoes.groupby("usuario_id").agg(
     tempo_segundos=("tempo_segundos", "max"),
 )
 print(len(sessoes), len(usuarios))  # 13044 10400</div>
-        <p>A agregação por usuário usa o máximo de <code>concluiu</code> porque o paciente conta como convertido se concluiu o agendamento em qualquer sessão. Na base, cada usuário conclui no máximo uma vez, de modo que o máximo de <code>tempo_segundos</code> é o tempo dessa sessão.</p>
+        <p>A agregação por usuário usa o máximo de <code>concluiu</code> porque o paciente conta como convertido se concluiu o agendamento em qualquer sessão. Na base, cada usuário conclui no máximo uma vez, de modo que o máximo de <code>tempo_segundos</code> é o tempo dessa sessão. Analisar por sessão contaria várias vezes o mesmo paciente e estreitaria o intervalo de confiança sem razão, porque os testes supõem observações independentes.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 4 · SRM</span>
-        <h2>10. Fase D: teste de SRM antes e depois</h2>
-        <p>O teste de SRM (sample ratio mismatch) compara a divisão observada entre os grupos com a divisão prometida pelo sorteio. Usa-se um qui-quadrado de aderência sobre as contagens por variante. Um p-valor muito baixo indica que algo além do sorteio interferiu na alocação, e nesse caso os grupos deixam de ser comparáveis. Plataformas de experimentação costumam adotar limiares mais rigorosos que 5% para esse alarme, como 1%, porque o teste é aplicado a todo experimento.</p>
-        <div class="prompt-block">Aplique scipy.stats.chisquare à contagem por variante em dois momentos: nas
-sessões de bruta e nos usuários de usuarios. Mostre as contagens e os p-valores
-lado a lado.
+        <span class="step-tag">Etapa 04 · SRM</span>
+        <h2>10. Teste de SRM antes e depois</h2>
+        <p>O teste de SRM (sample ratio mismatch) compara a divisão observada entre os grupos com a divisão prometida pelo sorteio. Usa-se um qui-quadrado de aderência sobre as contagens por variante. Um p-valor muito baixo indica que algo além do sorteio interferiu na alocação, e nesse caso os grupos deixam de ser comparáveis. Plataformas de experimentação costumam adotar limiares mais rigorosos que 5% para esse alarme, como 1%, porque o teste é aplicado a todo experimento. O prompt traduz essa conduta numa condição de parada para o agente.</p>
+        <div class="prompt-block">[C] Personagem
+Você confere se o sorteio foi respeitado antes de qualquer comparação
+de resultado.
 
-Explique em duas frases qual regra de limpeza explica a diferença entre os dois
-resultados, mostrando a contagem de sessões internas por variante como
-evidência. Não prossiga para os testes das métricas se o SRM da base limpa tiver
-p-valor abaixo de 0,01.</div>
+[R] Pedido
+Crie analise/04_srm.py, que aplica scipy.stats.chisquare à contagem por
+variante em dois momentos, nas sessões da base bruta e nos usuários de
+saidas/usuarios.csv, com divisão esperada de 50/50. Grave saidas/srm.csv
+e mostre as contagens e os p-valores lado a lado. Mostre também as
+sessões internas por variante na base bruta, como evidência.
+
+[E] Exemplos
+momento,A,B,p_valor
+bruta_sessoes,6974,7418,0.00021
+
+[A] Ajustes
+- O alarme de SRM dispara com p-valor abaixo de 0,01.
+- Se o alarme disparar na base limpa, pare e não prossiga para os
+  testes das métricas.
+- Não calcule taxas de conclusão nesta etapa.
+
+[T] Tipo de saída
+srm.csv com duas linhas e, no chat, até três frases dizendo qual regra
+de limpeza explica a diferença entre os dois resultados.
+
+[E] Extras
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div>
         <div class="code-block">srm_bruta = stats.chisquare(bruta["variante"].value_counts().sort_index())
 srm_limpa = stats.chisquare(usuarios["variante"].value_counts().sort_index())
 print(f"{srm_bruta.pvalue:.2g}", round(srm_limpa.pvalue, 3))  # 0.00021 0.117</div>
         <div class="evidence"><strong>Checkpoint</strong>Na base bruta, 6.974 e 7.418 sessões, com p-valor de 0,0002. Na base limpa, 5.280 usuários em A e 5.120 em B, com p-valor de 0,117. Os dois grupos superam os 4.234 usuários do plano, marca atingida no 12º dia, 13/03/2026.</div>
-        <p>A diferença de 160 usuários entre A e B na base limpa é compatível com o sorteio. O desequilíbrio da base bruta vinha principalmente das 588 sessões internas registradas em B.</p>
       </section>
 
       <section data-lesson-section="concepts">
@@ -339,20 +490,46 @@ print(f"{srm_bruta.pvalue:.2g}", round(srm_limpa.pvalue, 3))  # 0.00021 0.117</d
         <h3>11.2 Intervalo de confiança</h3>
         <p>O intervalo de confiança de 95% da diferença reúne os efeitos compatíveis com os dados. Ele responde à pergunta que a diretoria de fato faz, sobre quanto a página nova muda a conclusão, e permite comparar a faixa com o efeito mínimo do plano. Para a diferença entre duas proporções, usa-se a aproximação normal: diferença ± 1,96 × erro padrão.</p>
         <h3>11.3 Qui-quadrado e teste t de Welch</h3>
-        <p>A métrica primária é uma proporção, e a comparação entre duas proporções independentes se faz com o qui-quadrado de independência sobre a tabela variante × concluiu, que equivale ao teste z de duas proporções. A métrica secundária é uma média de tempo, comparada com o teste t. A versão de Welch não supõe variâncias iguais nos dois grupos, suposição que raramente se verifica em tempos de navegação.</p>
+        <p>A métrica primária é uma proporção, e a comparação entre duas proporções independentes se faz com o qui-quadrado de independência sobre a tabela variante × concluiu, que equivale ao teste z de duas proporções. A métrica secundária é uma média de tempo, comparada com o teste t. A versão de Welch não supõe variâncias iguais nos dois grupos: entre os concluintes, o desvio padrão do tempo é de 151,6 segundos em A e de 137,7 em B. Com mais de 2 mil concluintes por grupo, a média amostral se aproxima da distribuição normal mesmo com o tempo assimétrico.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 5 · proporções</span>
-        <h2>12. Fase E: qui-quadrado da métrica primária</h2>
-        <div class="prompt-block">Com usuarios, calcule a taxa de conclusão por variante e a diferença B menos A
-em pontos percentuais. Monte a tabela de contingência variante × concluiu e
-aplique scipy.stats.chi2_contingency com correction=False.
+        <span class="step-tag">Etapa 05 · proporções</span>
+        <h2>12. Qui-quadrado da métrica primária</h2>
+        <div class="prompt-block">[C] Personagem
+Você testa a métrica primária do plano. Relata a evidência; a
+recomendação não é sua.
 
-Calcule o intervalo de confiança de 95% da diferença pela aproximação normal.
-Mostre taxas, diferença, intervalo, estatística e p-valor, e salve em
-aula-14-seunome/saidas/resultado_primario.csv. Compare em uma frase o
-intervalo com o efeito mínimo de 3 pontos percentuais.</div>
+[R] Pedido
+Crie analise/05_conclusao.py, que usa saidas/usuarios.csv para:
+1. Calcular a taxa de conclusão por variante e a diferença B menos A em
+   pontos percentuais.
+2. Montar a tabela de contingência variante × concluiu e aplicar
+   scipy.stats.chi2_contingency com correction=False.
+3. Calcular o intervalo de confiança de 95% da diferença pela
+   aproximação normal.
+4. Para comparação, calcular a taxa por sessão na base bruta, sem
+   limpeza.
+Grave saidas/resultado_primario.csv.
+
+[E] Exemplos
+variante,usuarios,concluiram,taxa
+A,5280,2138,0.405
+
+[A] Ajustes
+- Espero 40,5% em A, 42,8% em B e p-valor próximo de 0,019.
+- Não use a correção de Yates.
+- Compare o intervalo com o efeito mínimo de 3 pontos de
+  saidas/plano.md.
+- Não escreva que B é melhor sem citar o intervalo.
+
+[T] Tipo de saída
+resultado_primario.csv e, no chat, uma tabela com taxas, diferença,
+intervalo, estatística e p-valor, seguida de duas frases.
+
+[E] Extras
+Leia CLAUDE.md e saidas/srm.csv. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div>
         <div class="code-block">tabela = pd.crosstab(usuarios["variante"], usuarios["concluiu"])
 qui2, p_valor, _, _ = stats.chi2_contingency(tabela, correction=False)
 
@@ -368,15 +545,36 @@ print(taxas.round(3).to_dict(), round(qui2, 2), round(p_valor, 4))</div>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 6 · médias</span>
-        <h2>13. Fase F: teste t de Welch da métrica secundária</h2>
-        <div class="prompt-block">Filtre os usuários que concluíram o agendamento e compare tempo_segundos entre
-B e A com scipy.stats.ttest_ind e equal_var=False. Mostre média, mediana e
-desvio padrão por variante, a diferença das médias e o p-valor.
+        <span class="step-tag">Etapa 06 · médias</span>
+        <h2>13. Teste t de Welch da métrica secundária</h2>
+        <div class="prompt-block">[C] Personagem
+Você testa a métrica secundária do plano, o tempo até concluir.
 
-Faça um histograma sobreposto dos tempos das duas páginas. Explique por que o
-teste usa apenas quem concluiu e por que Welch é preferível ao teste t com
-variâncias iguais.</div>
+[R] Pedido
+Crie analise/06_tempo.py, que filtra em saidas/usuarios.csv os usuários
+que concluíram e:
+1. Mostra n, média, mediana e desvio padrão de tempo_segundos por
+   variante.
+2. Aplica scipy.stats.ttest_ind(B, A, equal_var=False).
+3. Grava o histograma sobreposto dos dois grupos em
+   saidas/tempo_por_variante.png e a tabela em saidas/resultado_tempo.csv.
+
+[E] Exemplos
+variante,n,media,mediana,desvio_padrao
+A,2138,322.5,...,...
+
+[A] Ajustes
+- Espero média de 322,5 s em A e 292,6 s em B.
+- Não use o teste t com variâncias iguais.
+- Lembre no texto que esta é a métrica secundária.
+
+[T] Tipo de saída
+CSV, PNG e, no chat, até quatro frases: o resultado, por que o teste
+usa apenas quem concluiu e por que Welch.
+
+[E] Extras
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div>
         <div class="code-block">concluintes = usuarios[usuarios["concluiu"] == 1]
 tempo_a = concluintes.loc[concluintes["variante"] == "A", "tempo_segundos"]
 tempo_b = concluintes.loc[concluintes["variante"] == "B", "tempo_segundos"]
@@ -389,17 +587,42 @@ print(round(tempo_a.mean(), 1), round(tempo_b.mean(), 1), f"{welch.pvalue:.2g}")
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 7 · leitura diária</span>
-        <h2>14. Fase G: leitura diária do p-valor e simulação A/A</h2>
-        <p>Acompanhar o p-valor todos os dias e encerrar o teste na primeira vez que ele cair abaixo de 5% é uma prática comum, conhecida em inglês como peeking. Cada leitura é uma nova oportunidade de falso positivo, e o risco acumulado supera muito os 5% planejados.</p>
-        <div class="prompt-block">Para cada dia do experimento, recalcule o qui-quadrado da conclusão com os
-usuários cuja primeira_data é até aquele dia e faça um gráfico do p-valor com
-uma linha horizontal em 0,05.
+        <span class="step-tag">Etapa 07 · leitura diária</span>
+        <h2>14. Leitura diária do p-valor e simulação A/A</h2>
+        <p>Acompanhar o p-valor todos os dias e encerrar o teste na primeira vez que ele cair abaixo de 5% é uma prática comum, conhecida em inglês como peeking. Cada leitura é uma nova oportunidade de falso positivo, e o risco acumulado supera muito os 5% planejados. Os slides trazem um simulador que faz a mesma conta no navegador, enquanto o agente executa o script.</p>
+        <div class="prompt-block">[C] Personagem
+Você mostra o risco de decidir um teste A/B olhando o p-valor todos os
+dias.
 
-Depois simule 2.000 testes A/A com numpy (semente 14), com as duas páginas a
-40% e 371 usuários por grupo por dia durante 14 dias. Calcule a proporção de
-simulações com p-valor abaixo de 0,05 apenas no último dia e em pelo menos um
-dos 14 dias. Explique o resultado.</div>
+[R] Pedido
+Crie analise/07_leitura_diaria.py com duas partes.
+1. Para cada dia do experimento, recalcule o qui-quadrado da conclusão
+   (correction=False) com os usuários cuja primeira_data é até aquele
+   dia. Grave saidas/p_valor_diario.csv e o gráfico
+   saidas/p_valor_diario.png, com uma linha horizontal em 0,05.
+2. Simule 2.000 testes A/A com numpy.random.default_rng(14): as duas
+   páginas com 40% de conclusão, 371 usuários por grupo por dia, 14
+   dias, teste z de duas proporções sobre o acumulado. Calcule a
+   proporção de simulações com p-valor abaixo de 0,05 só no último dia
+   e em pelo menos um dos 14 dias.
+
+[E] Exemplos
+dia,usuarios,p_valor
+2026-03-02,784,0.080
+
+[A] Ajustes
+- Espero p-valor de 0,516 no 5º dia e de 0,019 no 14º.
+- Na simulação, espero cerca de 5% no último dia e cerca de 22% em
+  algum dia.
+- Não altere a duração nem o tamanho amostral do plano.
+
+[T] Tipo de saída
+CSV, PNG e, no chat, os dois percentuais da simulação e até três
+frases de explicação.
+
+[E] Extras
+Leia CLAUDE.md e saidas/plano.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div>
         <table>
           <thead><tr><th>Dia</th><th>Usuários acumulados</th><th>p-valor</th></tr></thead>
           <tbody>
@@ -410,27 +633,44 @@ dos 14 dias. Explique o resultado.</div>
             <tr><td>15/03 (14º)</td><td>10.400</td><td>0,019</td></tr>
           </tbody>
         </table>
-        <div class="evidence"><strong>Checkpoint</strong>Na simulação A/A, em que as duas páginas são iguais por construção, 5,4% dos testes dão p-valor abaixo de 0,05 quando se olha apenas o último dia, e 22,3% dão p-valor abaixo de 0,05 em pelo menos um dos 14 dias.</div>
+        <div class="evidence"><strong>Checkpoint</strong>Na simulação A/A de referência, em que as duas páginas são iguais por construção, 5,4% dos testes dão p-valor abaixo de 0,05 quando se olha apenas o último dia, e 22,3% dão p-valor abaixo de 0,05 em pelo menos um dos 14 dias. A implementação do agente pode sortear de outro modo e chegar a valores próximos, como 5% e 22%.</div>
         <p>A série real mostra o problema no sentido oposto. No 5º dia, com menos usuários do que o plano exigia, o p-valor era de 0,516, e quem encerrasse ali concluiria que as páginas são equivalentes. O plano fixou a duração justamente para que a decisão não dependesse do dia em que alguém olhou o painel.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
-        <span class="step-tag">Prompt 8 · parecer</span>
-        <h2>15. Fase H: parecer para a diretoria</h2>
-        <div class="prompt-block">Crie aula-14-seunome/PARECER_AB.md com: pergunta de negócio, plano
-registrado, regras de limpeza e contagens, resultado do SRM antes e depois,
-taxas, diferença com intervalo de confiança e p-valor, resultado do tempo,
+        <span class="step-tag">Etapa 08 · parecer</span>
+        <h2>15. Parecer para a diretoria</h2>
+        <div class="prompt-block">[C] Personagem
+Você redige o parecer técnico de um teste A/B para a diretoria de uma
+rede hospitalar. Separa evidência, interpretação e recomendação.
+
+[R] Pedido
+Crie PARECER_AB.md com: pergunta de negócio, plano registrado, estudo
+da base, regras de limpeza e contagens, SRM antes e depois, taxas,
+diferença com intervalo de confiança e p-valor, resultado do tempo,
 leitura diária e simulação A/A, recomendação e três limitações.
 
-Use somente números produzidos no notebook; não invente valores. Separe o que
-os dados mostram do que é recomendação. Depois proponha git add, commit e push,
-sem executar antes da minha aprovação.</div>
-        <p>O parecer distingue três camadas. A evidência é o que o notebook mediu: 2,3 pontos percentuais, com intervalo de 0,4 a 4,2. A interpretação relaciona a evidência ao plano: o ganho é real, mas pode ser menor que o mínimo de 3 pontos. A recomendação é uma decisão de gestão que considera também o custo da troca e a redução de 30 segundos no tempo. Leia o parecer e o diff antes de autorizar o versionamento:</p>
-        <div class="code-block">git status
-git add aula-14-seunome
-git diff --staged --stat
-git commit -m "Entrega a análise do teste A/B da aula 14"
-git push</div>
+[E] Exemplos
+## Evidência
+Na base limpa, a conclusão foi de 40,5% em A e 42,8% em B
+(saidas/resultado_primario.csv).
+
+[A] Ajustes
+- Use somente números presentes em saidas/; cite o arquivo de origem
+  de cada número.
+- Não invente custo, receita nem prazo de implantação.
+- Explique por que a decisão não foi tomada no 5º nem no 12º dia.
+- A recomendação considera o efeito mínimo de 3 pontos do plano.
+
+[T] Tipo de saída
+Markdown com até 80 linhas, em seções com títulos curtos.
+
+[E] Extras
+Leia CLAUDE.md, saidas/ inteira e prompts.md. Mostre o sumário antes de
+escrever e espere meu ok. Ao terminar, registre o prompt. Se a pasta
+estiver num repositório Git, proponha git add, commit e push, sem
+executar antes da minha aprovação.</div>
+        <p>O parecer distingue três camadas. A evidência é o que os scripts mediram: 2,3 pontos percentuais, com intervalo de 0,4 a 4,2. A interpretação relaciona a evidência ao plano: o ganho é real, mas pode ser menor que o mínimo de 3 pontos. A recomendação é uma decisão de gestão que considera também o custo da troca e a redução de 30 segundos no tempo. Leia o parecer inteiro e confira a origem de cada número antes de aceitá-lo.</p>
       </section>
 
       <section data-lesson-section="guided-practice">
@@ -438,32 +678,35 @@ git push</div>
         <table>
           <thead><tr><th>Horário</th><th>Ação</th><th>Conferência</th></tr></thead>
           <tbody>
-            <tr><td>19h00 às 19h35</td><td>problema, plano do experimento e tamanho amostral</td><td>4.234 usuários por grupo</td></tr>
-            <tr><td>19h35 às 19h55</td><td>pastas, cópia do CSV e perfil</td><td>14.392 linhas, 240 duplicadas, 15 internos, 160 contaminados</td></tr>
-            <tr><td>19h55 às 20h20</td><td>aplicação das regras e tabela por usuário</td><td>14.152, 13.516, 13.044 e 10.400</td></tr>
-            <tr><td>20h20 às 20h35</td><td>teste de SRM antes e depois</td><td>p-valor de 0,0002 e de 0,117</td></tr>
-            <tr><td>20h35 às 21h00</td><td>conceitos e qui-quadrado da métrica primária</td><td>+2,3 p.p., IC de 0,4 a 4,2, p = 0,019</td></tr>
-            <tr><td>21h00 às 21h15</td><td>teste t de Welch do tempo</td><td>−30,0 s</td></tr>
-            <tr><td>21h15 às 21h35</td><td>leitura diária e simulação A/A</td><td>5,4% contra 22,3%</td></tr>
-            <tr><td>21h35 às 22h00</td><td>parecer, revisão, commit e push</td><td>notebook reexecutado do início ao fim</td></tr>
+            <tr><td>19h00 às 19h30</td><td>problema, Claude local, formato CREATE e etapa 00</td><td>14.392 linhas e SHA-256 conferido</td></tr>
+            <tr><td>19h30 às 19h45</td><td>etapa 01: plano e tamanho amostral</td><td>4.234 usuários por grupo</td></tr>
+            <tr><td>19h45 às 20h10</td><td>etapa 02: estudo estatístico da base</td><td>240 duplicadas, 15 internos, 160 contaminados, 9.363 tempos vazios</td></tr>
+            <tr><td>20h10 às 20h25</td><td>etapa 03: regras e tabela por usuário</td><td>14.152, 13.516, 13.044 e 10.400</td></tr>
+            <tr><td>20h25 às 20h35</td><td>etapa 04: SRM antes e depois</td><td>p-valor de 0,0002 e de 0,117</td></tr>
+            <tr><td>20h35 às 21h00</td><td>etapa 05: qui-quadrado da métrica primária</td><td>+2,3 p.p., IC de 0,4 a 4,2, p = 0,019</td></tr>
+            <tr><td>21h00 às 21h15</td><td>etapa 06: Welch do tempo</td><td>−30,0 s</td></tr>
+            <tr><td>21h15 às 21h35</td><td>etapa 07: leitura diária e simulação A/A</td><td>5,4% contra 22,3%</td></tr>
+            <tr><td>21h35 às 22h00</td><td>etapa 08: parecer e entrega</td><td>todo número do parecer com origem em <code>saidas/</code></td></tr>
           </tbody>
         </table>
-        <p>O script <code>materiais/aula-14/referencia/ab_referencia.py</code> reproduz todos os números desta tabela. Execute-o depois de concluir o notebook e compare os resultados.</p>
-        <div class="code-block">python materiais/aula-14/referencia/ab_referencia.py</div>
+        <p>O script <code>materiais/aula-14/referencia/ab_referencia.py</code> reproduz os números desta tabela. Ao final, baixe-o para a pasta da aula e peça ao agente que o execute com o Python da <code>.venv</code> e compare cada número com <code>saidas/</code>.</p>
+        <div class="code-block">.venv/bin/python ab_referencia.py        # macOS e Linux
+.venv\Scripts\python ab_referencia.py    # Windows</div>
       </section>
 
       <section data-lesson-section="challenge">
         <h2>17. Desafio e entrega</h2>
-        <p>Em dupla, redija no <code>PARECER_AB.md</code> a resposta à diretoria para quatro perguntas. Um ganho estimado de 2,3 pontos percentuais, com intervalo de 0,4 a 4,2, justifica substituir a página em toda a rede? Que peso a redução de 30 segundos deve ter, se o tempo não era a métrica primária? O que teria acontecido com a conclusão e com o SRM se a equipe de TI tivesse ficado na base? Que sugestão da IA a dupla alterou ou rejeitou, e por qual motivo?</p>
-        <p>Quem terminar antes pode comparar a conclusão por dispositivo e discutir por que um recorte escolhido depois de ver os dados não tem o mesmo peso que a métrica primária do plano.</p>
-        <p>Entrega verificável, na pasta <code>aula-14-seunome</code>:</p>
+        <p>Em dupla, redija no <code>PARECER_AB.md</code> a resposta à diretoria para quatro perguntas. Um ganho estimado de 2,3 pontos percentuais, com intervalo de 0,4 a 4,2, justifica substituir a página em toda a rede? Que peso a redução de 30 segundos deve ter, se o tempo não era a métrica primária? O que teria acontecido com a conclusão e com o SRM se a equipe de TI tivesse ficado na base? Que plano do agente a dupla recusou ou corrigiu, e por qual motivo?</p>
+        <p>Quem terminar antes pode pedir ao agente a conclusão por dispositivo e discutir por que um recorte escolhido depois de ver os dados não tem o mesmo peso que a métrica primária do plano.</p>
+        <p>Entrega verificável, na pasta <code>aula-14-ab</code>:</p>
         <ul>
-          <li><code>Aula_14_SeuNome.ipynb</code> executado do início ao fim, com o plano na primeira célula.</li>
-          <li><code>saidas/regras_de_limpeza.csv</code> com linhas antes e depois de cada regra.</li>
-          <li><code>saidas/resultado_primario.csv</code> com taxas, diferença, intervalo e p-valor.</li>
+          <li><code>CLAUDE.md</code>, <code>prompts.md</code> e os scripts de <code>analise/</code>, reexecutáveis em ordem.</li>
+          <li><code>saidas/plano.md</code> e <code>saidas/estudo_base.md</code>, com os dois gráficos do estudo.</li>
+          <li><code>saidas/regras_de_limpeza.csv</code>, <code>saidas/srm.csv</code> e <code>saidas/resultado_primario.csv</code>.</li>
           <li>Gráficos do tempo por variante e do p-valor diário.</li>
-          <li><code>PARECER_AB.md</code> com evidência, interpretação, recomendação e limitações, seguido de commit e push.</li>
+          <li><code>PARECER_AB.md</code> com evidência, interpretação, recomendação e limitações.</li>
         </ul>
+        <p>Envie a pasta compactada pelo canal da turma. Se a pasta estiver dentro de um repositório Git, faça commit e push depois de revisar o diff.</p>
       </section>
 
       <section data-lesson-section="checklist">
@@ -471,7 +714,8 @@ git push</div>
         <ul>
           <li>O plano, com efeito mínimo, alfa, poder e duração, aparece antes de qualquer leitura da base.</li>
           <li>O tamanho amostral foi calculado por fórmula e resultou em 4.234 usuários por grupo.</li>
-          <li>O CSV em <code>entrada</code> permanece idêntico ao arquivo copiado.</li>
+          <li>O CSV em <code>entrada</code> permanece idêntico ao arquivo baixado.</li>
+          <li>O estudo da base usa mediana e quartis para o tempo e explica os nulos estruturais.</li>
           <li>Cada regra de limpeza tem justificativa ligada ao desenho do experimento e contagem antes e depois.</li>
           <li>As regras foram aplicadas igualmente a A e a B.</li>
           <li>A análise usa uma linha por usuário, a unidade sorteada.</li>
@@ -479,14 +723,15 @@ git push</div>
           <li>A métrica primária aparece com intervalo de confiança, e não apenas com p-valor.</li>
           <li>O teste do tempo usa Welch e se restringe a quem concluiu.</li>
           <li>O parecer explica por que a decisão não foi tomada no 5º nem no 12º dia.</li>
-          <li>Nenhum número do parecer foi digitado sem origem no notebook.</li>
+          <li>Nenhum número do parecer foi digitado sem origem em <code>saidas/</code>.</li>
+          <li>Cada plano do agente foi lido antes da autorização, e os prompts estão registrados em <code>prompts.md</code>.</li>
         </ul>
       </section>
 
       <section data-lesson-section="summary">
         <h2>19. Síntese</h2>
-        <p>O experimento começou por um plano registrado antes dos dados, com métrica primária, efeito mínimo de 3 pontos percentuais e 4.234 usuários por grupo. A limpeza seguiu o desenho: duplicadas, contas da equipe de TI e usuários expostos às duas páginas saíram da base, e a análise passou a ter uma linha por usuário. O teste de SRM mostrou que a base bruta não respeitava o sorteio e que a base limpa respeitava.</p>
-        <p>Na base limpa, a página B elevou a conclusão de 40,5% para 42,8%, com intervalo de 0,4 a 4,2 pontos e p-valor de 0,019, e reduziu o tempo médio em 30 segundos. A base bruta teria indicado 5,3 pontos, mais que o dobro. A leitura diária do p-valor e a simulação A/A mostraram por que a duração foi fixada no plano. A IA escreveu o código das oito etapas, enquanto as regras, a conferência e a recomendação couberam à turma.</p>
+        <p>O experimento começou por um plano registrado antes dos dados, com métrica primária, efeito mínimo de 3 pontos percentuais e 4.234 usuários por grupo. O estudo estatístico da base encontrou as ameaças antes de qualquer teste, e a limpeza seguiu o desenho: duplicadas, contas da equipe de TI e usuários expostos às duas páginas saíram da base, e a análise passou a ter uma linha por usuário. O teste de SRM mostrou que a base bruta não respeitava o sorteio e que a base limpa respeitava.</p>
+        <p>Na base limpa, a página B elevou a conclusão de 40,5% para 42,8%, com intervalo de 0,4 a 4,2 pontos e p-valor de 0,019, e reduziu o tempo médio em 30 segundos. A base bruta teria indicado 5,3 pontos, mais que o dobro. A leitura diária do p-valor e a simulação A/A mostraram por que a duração foi fixada no plano. O Claude Code escreveu e executou os scripts das nove etapas, enquanto a autorização dos planos, as regras, a conferência e a recomendação couberam à turma.</p>
         <p>O resultado vale para esta base sintética e para este desenho. A recomendação final depende do custo da troca, informação que o experimento não mede.</p>
       </section>
 
