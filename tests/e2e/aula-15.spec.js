@@ -36,8 +36,8 @@ test('aula 15 percorre prompts, controles e navegação cruzada', async ({ page 
   const total = await page.locator('.slide').count();
   const previous = page.locator('#btn-prev');
   const next = page.locator('#btn-next');
-  expect(total).toBe(30);
-  await expect(page.locator('.copy-prompt')).toHaveCount(7);
+  expect(total).toBe(39);
+  await expect(page.locator('.copy-prompt')).toHaveCount(10);
   await expect(page.locator('#slide-counter')).toHaveText(`1 / ${total}`);
   await expect(previous).toBeDisabled();
 

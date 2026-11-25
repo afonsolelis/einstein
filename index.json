@@ -856,27 +856,31 @@
       "number": 15,
       "date": "25/11",
       "theme": "Auditoria e forense de dados: anomalias, riscos e fraudes",
-      "tag": "Auditoria · Forense",
+      "tag": "Auditoria · Claude",
       "status": "complete",
       "topics": [
+        "Claude Code no terminal e no Claude Desktop",
+        "prompts no formato CREATE",
         "auditoria de contas a pagar",
         "regras de auditoria",
         "duplicidade e fracionamento",
         "Lei de Benford",
         "Isolation Forest",
         "matriz de risco",
-        "cadeia de custódia"
+        "cadeia de custódia",
+        "painel local com Plotly e monitor diário"
       ],
       "objectives": [
+        "Conduzir uma auditoria de dados local com o Claude Code, no terminal ou no Claude Desktop, por prompts no formato CREATE",
         "Preservar a entrada com hash e registrar a cadeia de custódia da análise",
         "Limpar a base segundo as regras de alçada, calendário e cadastro",
         "Aplicar testes de regra e medir quantos alarmes cada um produz",
         "Testar a aderência à Lei de Benford no total e por fornecedor",
-        "Combinar sinais em uma matriz de risco e justificar a fila de exame"
+        "Combinar sinais em uma matriz de risco, justificar a fila de exame e publicá-la num painel local"
       ],
       "slides": {
         "path": "slides/aula-15.html",
-        "slide_count": 30,
+        "slide_count": 39,
         "sections": [
           "agenda",
           "challenge",
@@ -889,15 +893,15 @@
       },
       "material": {
         "path": "materiais/aula-15/index.html",
-        "section_count": 20,
+        "section_count": 23,
         "highlights": [
           "Contas a pagar sintéticas com 5.440 lançamentos e 120 fornecedores, com irregularidades e ruídos inocentes plantados",
           "Regras de duplicidade, fracionamento abaixo da alçada, cadastro e calendário com contagens conferidas",
           "Lei de Benford global e por fornecedor e Isolation Forest como triagem complementar",
-          "Fila priorizada de 172 pagamentos a examinar e hash da entrada para cadeia de custódia"
+          "Fila priorizada de 172 pagamentos a examinar, hash da entrada para cadeia de custódia e painel HTML local com monitor diário"
         ],
-        "activity": "Conduzir com a IA a auditoria das contas a pagar, das regras de negócio à fila priorizada de exame, distinguindo indício, anomalia e fraude",
-        "deliverable": "Notebook executado, achados por regra, fila de exame priorizada, log de custódia, parecer ao comitê, commit e push"
+        "activity": "Conduzir no Claude Code local, com dez prompts CREATE, a auditoria das contas a pagar, da custódia e da limpeza às regras, a Benford, ao Isolation Forest, à fila priorizada e ao painel, distinguindo indício, anomalia e fraude",
+        "deliverable": "Pasta aula-15-auditoria com CLAUDE.md, prompts.md, scripts de analise/, saidas/ (custódia, sinais, Benford, fila de exame, achados e painel.html) e RELATORIO_AUDITORIA.md"
       }
     },
     {

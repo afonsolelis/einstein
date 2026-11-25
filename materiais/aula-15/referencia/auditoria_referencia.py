@@ -1,13 +1,15 @@
-"""Referência da aula 15: auditoria de contas a pagar com regras, Benford e
-Isolation Forest.
+"""Referência da aula 15: auditoria de contas a pagar com regras, Benford,
+Isolation Forest e monitor diário.
 
-Execute a partir da raiz do repositório:
+Execute com o Python da .venv da pasta da aula, ou a partir da raiz do
+repositório:
 
     python materiais/aula-15/referencia/auditoria_referencia.py
 
-O script reproduz os números de conferência do material. Ele serve para comparar
-com o notebook construído em aula e não substitui a leitura do código gerado
-pelo agente.
+O script procura os CSV em entrada/ (pasta da aula) e, se não os encontrar,
+em materiais/aula-15/dados/. Ele reproduz os números de conferência do
+material, serve para comparar com os scripts de analise/ e não substitui a
+leitura do código gerado pelo agente.
 """
 
 import hashlib
@@ -18,7 +20,9 @@ import pandas as pd
 from scipy.stats import chisquare
 from sklearn.ensemble import IsolationForest
 
-DADOS = Path(__file__).resolve().parents[1] / "dados"
+DADOS = Path("entrada")
+if not (DADOS / "contas_a_pagar.csv").exists():
+    DADOS = Path(__file__).resolve().parents[1] / "dados"
 CONTAS = DADOS / "contas_a_pagar.csv"
 FORNECEDORES = DADOS / "fornecedores.csv"
 
@@ -73,7 +77,7 @@ print("duplicidade pela regra com nota fiscal:", int(pagamentos["duplicidade"].s
 faixa = pagamentos[(pagamentos["valor"] >= 9_000) & (pagamentos["valor"] < ALCADA)]
 pagamentos["fracionamento"] = False
 for _, grupo in faixa.groupby(["fornecedor_id", "solicitante"]):
-    dia = grupo["data_pagamento"].dt.dayofyear.to_numpy()
+    dia = grupo["data_pagamento"].dt.day_of_year.to_numpy()
     valor = grupo["valor"].to_numpy()
     for i, d in zip(grupo.index, dia):
         vizinhos = np.abs(dia - d) <= 6   # pagamentos a até 6 dias deste
@@ -87,7 +91,7 @@ print("sem cadastro após normalização:", int(pagamentos["sem_cadastro"].sum()
       sorted(pagamentos.loc[pagamentos["sem_cadastro"], "fornecedor_id"].unique()))
 
 data = pagamentos["data_pagamento"]
-pagamentos["dia_nao_util"] = (data.dt.dayofweek >= 5) | data.isin(FERIADOS_2025)
+pagamentos["dia_nao_util"] = (data.dt.day_of_week >= 5) | data.isin(FERIADOS_2025)
 print("pagamentos em fim de semana ou feriado:", int(pagamentos["dia_nao_util"].sum()))
 
 pagamentos["valor_redondo"] = (pagamentos["valor"] >= 1_000) & (pagamentos["valor"] % 100 == 0)
@@ -145,7 +149,7 @@ pagamentos["fornecedor_fora_benford"] = pagamentos["fornecedor_id"].isin(fora)
 pagamentos["mes"] = data.dt.month
 atributos = pd.DataFrame({
     "log_valor": np.log10(pagamentos["valor"]),
-    "dia_semana": data.dt.dayofweek,
+    "dia_semana": data.dt.day_of_week,
     "pagamentos_fornecedor_mes": pagamentos.groupby(["fornecedor_id", "mes"])["valor"].transform("size"),
 })
 floresta = IsolationForest(contamination=0.01, random_state=42).fit(atributos)
@@ -171,7 +175,24 @@ anomalias = pagamentos[pagamentos["anomalia_isolation"]]
 print("anomalias acima de R$ 100.000:", int((anomalias["valor"] >= 100_000).sum()),
       "| abaixo de R$ 100:", int((anomalias["valor"] < 100).sum()))
 
-# 6. Custódia: a entrada não mudou durante a análise
+# 6. Monitor diário: valor pago no dia contra a média dos 20 dias anteriores
+# com pagamento mais três desvios padrão (populacional), com pelo menos 10
+# dias anteriores.
+serie = pagamentos.groupby("data_pagamento")["valor"].sum().sort_index()
+anteriores = serie.shift(1).rolling(20, min_periods=1)
+limite = anteriores.mean() + 3 * anteriores.std(ddof=0)
+acima = (anteriores.count() >= 10) & (serie > limite)
+dias_alarme = serie.index[acima]
+print("dias com pagamento:", len(serie), "| dias acima do limite:", int(acima.sum()))
+print("maior dia:", serie.idxmax().date(), "R$", f"{serie.max():,.2f}")
+na_fila = fila[fila["data_pagamento"].isin(dias_alarme)]
+print("dias acima do limite com pagamento da fila:", na_fila["data_pagamento"].nunique(),
+      "| pagamentos:", len(na_fila), "| valor: R$", f"{na_fila['valor'].sum():,.2f}")
+nao_util_mes = (pagamentos[pagamentos["dia_nao_util"]]
+                .groupby(pagamentos["data_pagamento"].dt.strftime("%Y-%m")).size())
+print("pagamentos em dia não útil por mês:", nao_util_mes.to_dict(), "| soma:", int(nao_util_mes.sum()))
+
+# 7. Custódia: a entrada não mudou durante a análise
 hash_final = sha256(CONTAS)
 assert hash_final == hash_inicial
 print("entrada inalterada:", hash_final == hash_inicial)

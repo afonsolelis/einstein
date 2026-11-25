@@ -516,7 +516,40 @@
       .deck-table td { padding: 0.4rem 0.8rem; }
     }
 
-    /* Fase H: animações em SVG. Cada elemento com data-t aparece em t ms quando o slide abre;
+    /* Etapas com prompt CREATE: o prompt fica à direita, a revisão à esquerda. */
+    .slide-etapa { padding-top: clamp(3.6rem, 7vh, 5rem); }
+    .slide-content.slide-etapa h2 { margin-bottom: 0.9rem; font-size: clamp(1.8rem, 3vw, 2.7rem); }
+    .etapa-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+      gap: 1rem;
+      width: min(100%, 1180px);
+      height: min(58vh, 520px);
+    }
+    .etapa-lado { display: flex; flex-direction: column; gap: 0.65rem; min-height: 0; overflow: auto; scrollbar-color: var(--cyan) transparent; }
+    .etapa-item {
+      padding: 0.7rem 0.95rem;
+      border: 1px solid rgba(75, 196, 232, 0.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      background: rgba(8, 47, 73, 0.62);
+    }
+    .etapa-gate { border-left-color: #f5a524; }
+    .etapa-rotulo { display: block; margin-bottom: 0.3rem; color: #7ee7d4; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .etapa-gate .etapa-rotulo { color: #f5c46b; }
+    .slide-content .etapa-item p,
+    .slide-content .etapa-item ul { margin: 0; font-size: clamp(0.8rem, 1.02vw, 0.96rem); line-height: 1.38; }
+    .slide-content .etapa-item li { margin-bottom: 0.22rem; padding-left: 1.05rem; }
+    .slide-content .etapa-item li::before { top: 0.52em; width: 6px; height: 6px; }
+    .prompt-wrap.etapa-prompt { width: 100%; min-height: 0; }
+    .etapa-prompt .code-block { height: 100%; max-height: none; padding: 3.3rem 1.2rem 1rem 1.4rem; font-size: clamp(0.72rem, 0.96vw, 0.9rem); line-height: 1.45; }
+    .prompt-text .k { color: #7ee7d4; font-weight: 600; }
+    .deck-grid.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .slide-content .deck-grid.c3 .deck-card p { font-size: clamp(0.85rem, 1.15vw, 1.05rem); }
+
+    /* Animações em SVG. Cada elemento com data-t aparece em t ms quando o slide abre;
        o botão Reiniciar animação, no rodapé, roda de novo desde o início. */
     .anim { position: relative; z-index: 1; display: block; width: min(100%, 1120px); height: clamp(220px, 44vh, 420px); overflow: visible; }
     .anim text { fill: var(--text); font-family: 'Fira Code', monospace; font-size: 15px; }
@@ -528,6 +561,8 @@
     .anim .t-alerta { fill: #ff8a8a; }
     .anim .cx { fill: rgba(8, 47, 73, 0.85); stroke: rgba(75, 196, 232, 0.45); stroke-width: 1.5; }
     .anim .cx-forte { fill: rgba(0, 163, 137, 0.16); stroke: var(--teal); stroke-width: 2; }
+    .anim .cx-voce { fill: rgba(245, 165, 36, 0.12); stroke: #f5a524; stroke-width: 1.5; }
+    .anim .volta { fill: none; stroke: #f5a524; stroke-width: 2; stroke-dasharray: 7 6; marker-end: url(#ponta-volta); }
     .anim .cx-codigo { fill: rgba(4, 20, 34, 0.85); stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; }
     .anim .seta { fill: none; stroke: var(--cyan-light); stroke-width: 2.5; marker-end: url(#ponta); }
     .anim .seta-git { fill: none; stroke: #d8a7ff; stroke-width: 2.5; stroke-dasharray: 7 6; marker-end: url(#ponta-git); }
@@ -551,7 +586,7 @@
     .anim.anim-reset [data-t] { transition: none !important; }
     .anim-legenda { position: relative; z-index: 1; max-width: 1120px; margin-top: 0.6rem; }
 
-    /* Fase H: editor SQL que roda no próprio slide (SQLite compilado para WebAssembly). */
+    /* Editor SQL que roda no próprio slide (SQLite compilado para WebAssembly). */
     .sql-lab { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 0.9rem; width: min(100%, 1180px); }
     .sql-presets { display: flex; flex-wrap: wrap; gap: 0.4rem; grid-column: 1 / -1; }
     .sql-presets button, .sql-run {
@@ -605,10 +640,19 @@
     @keyframes linha-nova { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
     @media (max-width: 768px) {
+      .slide-etapa { padding-top: 3.6rem; }
+      .slide-content.slide-etapa h2 { margin-bottom: 0.5rem; font-size: clamp(1.3rem, 5.8vw, 1.7rem); }
+      .etapa-grid { grid-template-columns: 1fr; gap: 0.45rem; height: auto; }
+      .etapa-lado .etapa-obs, .etapa-lado .etapa-gate { display: none; }
+      .etapa-item { padding: 0.45rem 0.7rem; }
+      .etapa-prompt .code-block { height: 42vh; padding: 2.8rem 0.7rem 0.7rem; font-size: 0.62rem; }
+      .deck-grid.c3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .slide-content .deck-grid.c3 .deck-card p { font-size: 0.78rem; }
       .anim { height: clamp(180px, 34vh, 280px); }
       .sql-lab { grid-template-columns: 1fr; gap: 0.5rem; }
-      .sql-editor, .sql-saida { height: 24vh; }
+      .sql-editor, .sql-saida { height: 21vh; }
       .sql-presets button { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
+      .slide-content .sql-legenda { display: none; }
       #anim-reiniciar { padding-inline: 0.65rem; font-size: 0; }
       #anim-reiniciar .ctrl-icon { margin: 0; font-size: 1rem; }
     }
@@ -622,20 +666,19 @@
   <div id="slider">
     <div class="slide slide-start active">
       <div class="badge">LABORATÓRIO 15 · 25/11</div>
-      <h1>Auditoria de contas a pagar com IA</h1>
-      <p>Regras de negócio, Lei de Benford e Isolation Forest para montar uma fila priorizada de pagamentos a examinar</p>
+      <h1>Auditoria de contas a pagar com Claude Code</h1>
+      <p>Da custódia à fila de exame, com prompts CREATE no Claude Code</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="objectives">
       <div class="prompt-label">Objetivos</div>
       <h2>Ao final do laboratório</h2>
       <ul>
-        <li>Preservar a entrada com hash e registrar a cadeia de custódia.</li>
-        <li>Limpar a base segundo as regras de alçada, calendário e cadastro.</li>
-        <li>Aplicar testes de regra e medir quantos alarmes cada um produz.</li>
-        <li>Testar a aderência à Lei de Benford no total e por fornecedor.</li>
-        <li>Combinar sinais em uma matriz de risco e justificar a fila de exame.</li>
-        <li>Publicar a fila em um dashboard do Grafana definido como código.</li>
+        <li>Conduzir uma auditoria de dados local com o Claude Code por prompts no formato CREATE.</li>
+        <li>Preservar a entrada com hash e registrar a cadeia de custódia da análise.</li>
+        <li>Limpar a base segundo as regras de alçada, calendário e cadastro, e aplicar testes de regra.</li>
+        <li>Testar a aderência à Lei de Benford e usar o Isolation Forest como triagem complementar.</li>
+        <li>Combinar os sinais numa fila de exame e publicá-la num painel local, gerado por script.</li>
       </ul>
     </div>
 
@@ -643,10 +686,10 @@
       <div class="prompt-label">Agenda · 19h às 22h</div>
       <h2>Roteiro do laboratório</h2>
       <div class="deck-grid">
-        <article class="deck-card"><h3>19h00 às 19h30 · Conceitos</h3><p>Case, indício, anomalia e fraude, cadeia de custódia e protocolo com a IA.</p></article>
-        <article class="deck-card"><h3>19h30 às 20h25 · Limpeza e regras</h3><p>Perfil, normalização do cadastro e quatro testes de regra.</p></article>
-        <article class="deck-card"><h3>20h25 às 21h05 · Testes estatísticos</h3><p>Lei de Benford no total e por fornecedor, seguida do Isolation Forest.</p></article>
-        <article class="deck-card"><h3>21h05 às 22h00 · Fila, monitoramento e entrega</h3><p>Matriz de risco, CrateDB e Grafana com dashboard como código, relatório, commit e push.</p></article>
+        <article class="deck-card"><h3>19h00 às 19h50 · Abertura e base</h3><p>Case, vocabulário, Claude local, formato CREATE e etapas 00 a 02.</p></article>
+        <article class="deck-card"><h3>19h50 às 20h25 · Regras</h3><p>Duplicidade, cadastro, calendário, fracionamento e valores redondos (etapas 03 e 04).</p></article>
+        <article class="deck-card"><h3>20h25 às 21h20 · Estatística e fila</h3><p>Benford, Isolation Forest e matriz de risco (etapas 05 a 07).</p></article>
+        <article class="deck-card"><h3>21h20 às 22h00 · Painel e parecer</h3><p>Painel local, monitor diário, parecer para o comitê e entrega (etapas 08 e 09).</p></article>
       </div>
     </div>
 
@@ -675,88 +718,289 @@
           <tr><td>Fraude</td><td>irregularidade com intenção comprovada</td><td>a apuração formal</td></tr>
         </tbody>
       </table>
-      <p>O laboratório termina na palavra examinar. Nenhum resultado do notebook autoriza acusar um fornecedor ou um solicitante.</p>
+      <p>O laboratório termina na palavra examinar. Nenhum resultado dos scripts autoriza acusar um fornecedor ou um solicitante.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
       <div class="prompt-label">Fluxo de trabalho</div>
       <h2>Cada etapa deixa um arquivo conferível</h2>
       <div class="flow">
-        <div class="flow-step"><strong>Custódia</strong><span>Hash da entrada no início e no fim.</span></div>
-        <div class="flow-step"><strong>Limpeza</strong><span>Cadastro, estornos e calendário.</span></div>
-        <div class="flow-step"><strong>Regras</strong><span>Duplicidade, fracionamento e outras.</span></div>
-        <div class="flow-step"><strong>Benford</strong><span>Primeiro dígito, total e por fornecedor.</span></div>
-        <div class="flow-step"><strong>Isolation Forest</strong><span>Triagem estatística complementar.</span></div>
-        <div class="flow-step"><strong>Fila</strong><span>Pontuação, sinais e relatório.</span></div>
+        <div class="flow-step"><strong>Custódia</strong><span><code>custodia.csv</code> com o hash no início e no fim.</span></div>
+        <div class="flow-step"><strong>Limpeza</strong><span><code>pagamentos.csv</code> com cadastro normalizado.</span></div>
+        <div class="flow-step"><strong>Regras</strong><span><code>sinais_regras.csv</code> e <code>sinais_alcada.csv</code>.</span></div>
+        <div class="flow-step"><strong>Estatística</strong><span><code>sinais_benford.csv</code> e <code>sinais_isolation.csv</code>.</span></div>
+        <div class="flow-step"><strong>Fila</strong><span><code>fila_de_exame.csv</code> e <code>achados.csv</code>.</span></div>
+        <div class="flow-step"><strong>Painel</strong><span><code>painel.html</code> e o relatório.</span></div>
       </div>
       <p>Cada pagamento da fila carrega a lista dos sinais que o colocaram ali, para que o comitê possa contestá-la.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Cadeia de custódia</div>
+      <div class="prompt-label">Como a aula funciona</div>
+      <h2>Primeiro o prompt, depois a teoria</h2>
+      <svg class="anim" viewBox="0 0 1000 310" role="img" aria-label="Ciclo de cada etapa: você cola o prompt CREATE, o agente apresenta um plano, você autoriza, o agente escreve e executa o script, e você confere os números; enquanto o agente trabalha, a aula explica a teoria; se um número divergir, o prompt é refeito sem mudar o parâmetro">
+        <defs>
+          <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
+          <marker id="ponta-volta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f5a524"/></marker>
+        </defs>
+        <g data-t="0">
+          <rect class="cx-voce" x="10" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="24" y="72">1 · Prompt</text>
+          <text class="t-sm" x="24" y="98">você cola o</text>
+          <text class="t-sm" x="24" y="118">CREATE da etapa</text>
+        </g>
+        <path class="seta" data-t="500" d="M152,88 L170,88"/>
+        <g data-t="800">
+          <rect class="cx" x="176" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="190" y="72">2 · Plano</text>
+          <text class="t-sm" x="190" y="98">o agente lê e</text>
+          <text class="t-sm" x="190" y="118">propõe um plano</text>
+        </g>
+        <path class="seta" data-t="1200" d="M318,88 L336,88"/>
+        <g data-t="1500">
+          <rect class="cx-voce" x="342" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="356" y="72">3 · Seu ok</text>
+          <text class="t-sm" x="356" y="98">você autoriza</text>
+          <text class="t-sm" x="356" y="118">ou corrige</text>
+        </g>
+        <path class="seta" data-t="1900" d="M484,88 L502,88"/>
+        <g data-t="2200">
+          <rect class="cx" x="508" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="522" y="72">4 · Script</text>
+          <text class="t-sm" x="522" y="98">escreve e roda</text>
+          <text class="t-sm" x="522" y="118">analise/NN.py</text>
+        </g>
+        <path class="seta" data-t="2600" d="M650,88 L668,88"/>
+        <g data-t="2900">
+          <rect class="cx-voce" x="674" y="40" width="140" height="96" rx="10"/>
+          <text class="t-b" x="688" y="72">5 · Conferir</text>
+          <text class="t-sm" x="688" y="98">contagens e</text>
+          <text class="t-sm" x="688" y="118">linguagem</text>
+        </g>
+        <path class="seta" data-t="3300" d="M816,88 L834,88"/>
+        <g data-t="3600">
+          <rect class="cx-forte" x="840" y="40" width="150" height="96" rx="10"/>
+          <text class="t-b" x="854" y="72">6 · Próxima</text>
+          <text class="t-ok" x="854" y="98">etapa</text>
+          <text class="t-sm" x="854" y="118">saidas/ pronta</text>
+        </g>
+        <g data-t="4200">
+          <rect class="cx-forte" x="176" y="176" width="472" height="62" rx="10"/>
+          <text class="t-b" x="196" y="203">Teoria em sala, enquanto o agente</text>
+          <text class="t-ok" x="196" y="226">lê, planeja e executa (passos 2 a 4)</text>
+        </g>
+        <path class="volta" data-t="5000" d="M744,138 L744,280 L80,280 L80,142"/>
+        <text class="t-alerta" data-t="5000" x="232" y="302">número divergiu: refaça o prompt, não o parâmetro</text>
+      </svg>
+      <p class="anim-legenda">Cada etapa abre com o prompt. Enquanto o agente lê, planeja e executa, a aula explica a teoria que o prompt usou. A etapa só fecha quando os números conferem e nenhuma frase atribui culpa.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Ferramenta</div>
+      <h2>Claude Code no terminal ou no Desktop</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>Terminal</h3><p>Na pasta da aula, o comando <code>claude</code> abre o agente, que lê, escreve e executa comandos ali, sempre pedindo permissão.</p></article>
+        <article class="deck-card"><h3>Claude Desktop</h3><p>Na aba Code, escolha a pasta <code>aula-15-auditoria</code>. O agente é o mesmo; muda só a janela.</p></article>
+        <article class="deck-card"><h3>O que sai do computador</h3><p>Os arquivos ficam na sua máquina, mas o que o agente lê vai ao modelo. Por isso a base é sintética.</p></article>
+        <article class="deck-card"><h3>Quem responde pelo resultado</h3><p>O agente escreve o código. Você fixa os parâmetros, confere as contagens e assina o relatório.</p></article>
+      </div>
+      <p class="nota-desktop">Os dois caminhos exigem uma conta Claude com acesso ao Claude Code. Quem não tiver acesso trabalha em dupla com quem tem.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Formato dos prompts</div>
+      <h2>Os seis campos do prompt CREATE</h2>
+      <div class="deck-grid c3">
+        <article class="deck-card"><h3>[C] Personagem</h3><p>O papel do agente e o que ele não faz nesta etapa.</p></article>
+        <article class="deck-card"><h3>[R] Pedido</h3><p>O que fazer, em qual arquivo, com a lista do que precisa estar coberto.</p></article>
+        <article class="deck-card"><h3>[E] Exemplos</h3><p>Um trecho no formato exato esperado. O agente copia a forma.</p></article>
+        <article class="deck-card"><h3>[A] Ajustes</h3><p>Parâmetros, proibições e números esperados.</p></article>
+        <article class="deck-card"><h3>[T] Tipo de saída</h3><p>Formato e tamanho: CSV, Markdown, gráfico, até quantas linhas.</p></article>
+        <article class="deck-card"><h3>[E] Extras</h3><p>O que ler antes, quando mostrar o plano, registrar o prompt e parar.</p></article>
+      </div>
+      <p>Campo vazio vira suposição do agente. Numa auditoria, a suposição mais perigosa é sobre a janela, o limiar ou o peso.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 00 · Pasta de trabalho</div>
+      <h2>A pasta da aula no seu computador</h2>
+      <div class="code-block">mkdir -p aula-15-auditoria/entrada
+cd aula-15-auditoria
+curl -L -o entrada/contas_a_pagar.csv https://afonsolelis.github.io/einstein/materiais/aula-15/dados/contas_a_pagar.csv
+curl -L -o entrada/fornecedores.csv https://afonsolelis.github.io/einstein/materiais/aula-15/dados/fornecedores.csv
+claude</div>
+      <p>No Windows, use <code>mkdir aula-15-auditoria\entrada</code> e <code>curl.exe</code> no PowerShell. No Claude Desktop, crie a pasta, baixe os dois CSV e escolha a pasta na aba Code.</p>
+      <a class="download-link" href="../materiais/aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv">⬇️ Baixar contas_a_pagar.csv</a>
+      <a class="download-link" href="../materiais/aula-15/dados/fornecedores.csv" download="fornecedores.csv">⬇️ Baixar fornecedores.csv</a>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 00 · Prompt CREATE</div>
+      <h2>Ambiente e regras do projeto</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>CLAUDE.md</code>, <code>.venv</code> e <code>prompts.md</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele pede permissão antes de criar a <code>.venv</code> e de instalar pacotes. Leia o comando antes de aprovar.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>5.440 e 120 linhas?</li><li>Hashes iniciados por <code>b3898f2d</code> e <code>2a5fede2</code>?</li><li>A regra do "examinar" está no <code>CLAUDE.md</code>?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você é meu assistente de auditoria de dados neste laboratório e trabalha
+somente dentro desta pasta, aula-15-auditoria. Nesta etapa você prepara
+o ambiente e escreve as regras do projeto; não analisa dados.
+
+<span class="k">[R] Pedido</span>
+1. Crie CLAUDE.md com as regras do projeto listadas em Ajustes.
+2. Verifique se há Python 3.10 ou superior. Crie um ambiente virtual em
+   .venv e instale pandas, numpy, scipy, scikit-learn, matplotlib e
+   plotly.
+3. Confira os dois CSV de entrada/: linhas de dados, colunas e SHA-256.
+
+<span class="k">[E] Exemplos</span>
+Trecho esperado do CLAUDE.md:
+## Regras
+- entrada/ é somente leitura.
+- Cada etapa vira um script analise/NN_nome.py, executado com o Python
+  da .venv, que grava o que produz em saidas/.
+
+<span class="k">[A] Ajustes</span>
+- Regras do CLAUDE.md: entrada/ é somente leitura; uma etapa, um script;
+  todo número citado vem de um script executado; alçada, janelas,
+  limiares e pesos vêm do prompt e não mudam para acertar contagem;
+  nenhum texto atribui fraude, culpa ou intenção, e o termo usado é
+  "examinar"; cada prompt recebido é registrado em prompts.md com a
+  data e os arquivos gerados.
+- Não instale nada fora da .venv. Se não houver Python, pare e me
+  explique como instalar no meu sistema operacional.
+- Espero contas_a_pagar.csv com 5.440 linhas, 7 colunas e SHA-256
+  iniciado por b3898f2d, e fornecedores.csv com 120 linhas, 4 colunas e
+  SHA-256 iniciado por 2a5fede2. Se divergir, pare e me avise.
+
+<span class="k">[T] Tipo de saída</span>
+CLAUDE.md com até 25 linhas e, no chat, um resumo com a versão do
+Python, as bibliotecas instaladas e a conferência dos dois CSV.
+
+<span class="k">[E] Extras</span>
+Mostre o plano e espere meu ok antes de instalar qualquer coisa. Ao
+terminar, registre este prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 00 · Enquanto o agente trabalha</div>
       <h2>A prova precisa ser reproduzível</h2>
       <ul>
-        <li>O CSV recebido fica em <code>entrada</code> e não é editado.</li>
-        <li>O SHA-256 é calculado antes da análise e conferido ao final.</li>
+        <li>Os CSV recebidos ficam em <code>entrada</code> e não são editados; o <code>CLAUDE.md</code> registra essa regra para todas as etapas.</li>
+        <li>O SHA-256 é calculado antes da análise e conferido ao final. Um único byte alterado muda o hash.</li>
         <li>Cada achado registra pagamento, regra, parâmetro e data da execução.</li>
-        <li>O notebook reexecutado do início produz a mesma fila.</li>
+        <li>Os scripts de <code>analise/</code>, reexecutados em ordem, produzem a mesma fila.</li>
       </ul>
       <p>Se o hash mudar, a análise perde valor como evidência, porque ninguém consegue provar sobre qual arquivo ela foi feita.</p>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">IA no laboratório</div>
-      <h2>Protocolo de trabalho com a IA</h2>
-      <ol>
-        <li>Contextualize com os arquivos, a alçada e o resultado esperado.</li>
-        <li>Peça um plano antes de qualquer edição.</li>
-        <li>Leia o código e procure parâmetros fixos sem justificativa.</li>
-        <li>Execute uma etapa por vez e confira a contagem.</li>
-        <li>Recuse conclusões sobre intenção ou culpa escritas pelo agente.</li>
-      </ol>
-      <p>A IA escreve os testes. A turma escolhe os parâmetros e responde pela leitura dos alarmes.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Etapa 0 · Ambiente</div>
-      <h2>Pastas de trabalho no Codespace</h2>
-      <div class="code-block">mkdir -p aula-15-seunome/entrada aula-15-seunome/saidas
-cp materiais/aula-15/dados/contas_a_pagar.csv aula-15-seunome/entrada/
-cp materiais/aula-15/dados/fornecedores.csv aula-15-seunome/entrada/
-sha256sum aula-15-seunome/entrada/*.csv</div>
-      <p>Anote os dois hashes. O de <code>contas_a_pagar.csv</code> deve começar por <code>b3898f2d</code> e o de <code>fornecedores.csv</code>, por <code>2a5fede2</code>.</p>
-      <a class="download-link" href="../materiais/aula-15/dados/contas_a_pagar.csv" download="contas_a_pagar.csv">⬇️ Baixar contas_a_pagar.csv</a>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 1 · Perfil e custódia</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 01 · Prompt CREATE</div>
       <h2>Perfil da base com hash de entrada</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Atue como meu assistente de auditoria neste laboratório. Crie aula-15-seunome/Aula_15_SeuNome.ipynb. Na primeira célula, calcule o SHA-256 de entrada/contas_a_pagar.csv e guarde em hash_inicial.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/01_perfil.py</code>, <code>saidas/custodia.csv</code> e <code>saidas/perfil.md</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele lê <code>fornecedor_id</code> como texto. Lido como número, um código com espaço quebraria a leitura.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>5.408 pagamentos e 32 estornos?</li><li>Nenhum <code>pagamento_id</code> duplicado?</li><li>Maior valor de R$ 1.865.925,92?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você é auditor de dados e abre a cadeia de custódia da análise.
+Descreve a base recebida; não limpa nem corrige nada.
 
-Carregue contas_a_pagar.csv em bruta (data_pagamento como data, fornecedor_id como texto) e fornecedores.csv em cadastro. Mostre shape, dtypes, pagamento_id duplicado, contagem por tipo, valor mínimo e máximo e pagamentos por mês. Não limpe nada. Espero 5.440 linhas e 7 colunas; se divergir, pare. Mostre o plano antes de editar.</div></div>
+<span class="k">[R] Pedido</span>
+Crie analise/01_perfil.py, que:
+1. Calcula o SHA-256 dos dois CSV de entrada/ e grava
+   saidas/custodia.csv com arquivo, sha256, linhas, momento ("inicio") e
+   data_execucao.
+2. Lê contas_a_pagar.csv com data_pagamento como data e fornecedor_id
+   como texto, e fornecedores.csv.
+3. Grava saidas/perfil.md com: linhas e colunas, tipo de cada coluna,
+   pagamento_id duplicado, contagem por tipo, valor mínimo e máximo e
+   pagamentos por mês.
+
+<span class="k">[E] Exemplos</span>
+arquivo,sha256,linhas,momento,data_execucao
+contas_a_pagar.csv,b3898f2d...,5440,inicio,2026-11-25
+
+<span class="k">[A] Ajustes</span>
+- Espero 5.440 linhas, 7 colunas, nenhum pagamento_id duplicado, 5.408
+  pagamentos, 32 estornos e valor máximo de R$ 1.865.925,92. Se
+  divergir, pare e me avise.
+- Não remova nem altere registros; a limpeza é a etapa seguinte.
+- Não leia o README da pasta de dados.
+
+<span class="k">[T] Tipo de saída</span>
+custodia.csv com duas linhas, perfil.md com até 60 linhas em tabelas
+curtas e, no chat, os dois hashes e as contagens.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 2 · Limpeza</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 02 · Prompt CREATE</div>
       <h2>Limpeza orientada ao negócio</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie base a partir de bruta, sem alterar bruta nem os CSVs. Conte quantos fornecedor_id de bruta não existem em cadastro. Em seguida normalize fornecedor_id com strip e upper, conte quantos códigos mudaram e repita a contagem sem cadastro.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/02_limpeza.py</code>, <code>saidas/pagamentos.csv</code> e <code>saidas/regras_de_limpeza.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>A contagem sem cadastro vem antes e depois da normalização. A diferença é o falso alarme evitado.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>61, 47 e 14?</li><li>5.408 pagamentos e R$ 46.918.492,83?</li><li>929 na alçada ou acima?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você aplica a limpeza de uma auditoria, cuja finalidade é evitar
+alarmes falsos. Não propõe regras novas nem muda a ordem.
 
-Crie pagamentos apenas com tipo igual a pagamento; os estornos ficam fora dos testes porque não são saída de caixa. Mostre o número de pagamentos, o valor total e quantos têm valor igual ou acima da alçada de R$ 10.000. Espero 61 sem cadastro antes, 47 códigos normalizados, 14 sem cadastro depois e 5.408 pagamentos.</div></div>
+<span class="k">[R] Pedido</span>
+Crie analise/02_limpeza.py, que lê os dois CSV de entrada/ e:
+1. Conta quantos fornecedor_id da base não existem no cadastro.
+2. Normaliza fornecedor_id com strip e upper, conta quantos códigos
+   mudaram e repete a contagem sem cadastro.
+3. Mantém apenas tipo igual a pagamento; os estornos ficam fora dos
+   testes porque não são saída de caixa.
+4. Mostra o número de pagamentos, o valor total e quantos têm valor
+   igual ou acima da alçada de R$ 10.000.
+Grave saidas/pagamentos.csv e saidas/regras_de_limpeza.csv.
+
+<span class="k">[E] Exemplos</span>
+regra,justificativa,linhas_antes,linhas_depois
+normalizar_fornecedor,códigos exportados com minúsculas ou espaços,5440,5440
+
+<span class="k">[A] Ajustes</span>
+- Espero 61 sem cadastro antes, 47 códigos normalizados, 14 sem
+  cadastro depois, 5.408 pagamentos, R$ 46.918.492,83 no total e 929 na
+  alçada ou acima.
+- Se algum número divergir, investigue o caminho, o filtro e a ordem;
+  não ajuste a regra para acertar a contagem.
+- Os CSV em entrada/ não são alterados.
+
+<span class="k">[T] Tipo de saída</span>
+Os dois CSV e, no chat, uma tabela com regra, linhas antes e linhas
+depois, seguida das contagens de cadastro e alçada.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md e saidas/perfil.md. Mostre o plano e espere meu ok,
+execute, registre o prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 1</div>
+      <div class="prompt-label">Conferência · etapas 01 e 02</div>
       <h2>Conferência do perfil e da limpeza</h2>
       <div class="metric-row">
         <div class="metric"><strong>61 e 14</strong><span>sem cadastro, antes e depois</span></div>
         <div class="metric"><strong>47</strong><span>códigos normalizados</span></div>
         <div class="metric"><strong>32</strong><span>estornos separados</span></div>
-        <div class="metric"><strong>929</strong><span>pagamentos acima da alçada</span></div>
+        <div class="metric"><strong>929</strong><span>pagamentos na alçada ou acima</span></div>
       </div>
       <ul>
         <li>Sem a normalização, 47 pagamentos de fornecedores cadastrados virariam falso alarme.</li>
         <li>Os 14 restantes pertencem a <code>F901</code> e <code>F902</code>, ausentes do cadastro.</li>
-        <li>A limpeza reduziu alarmes falsos e não apagou nenhum lançamento.</li>
+        <li>A limpeza reduziu alarmes falsos e não apagou nenhum lançamento de <code>entrada</code>.</li>
       </ul>
     </div>
 
@@ -772,29 +1016,105 @@ Crie pagamentos apenas com tipo igual a pagamento; os estornos ficam fora dos te
           <tr><td>Dia não útil</td><td>sábado, domingo ou feriado nacional de 2025</td><td>pagamento fora do fluxo normal</td></tr>
         </tbody>
       </table>
+      <p>A nota fiscal entra na regra de duplicidade porque contratos mensais geram parcelas de mesmo valor, cada uma com sua nota.</p>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 3 · Regras</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 03 · Prompt CREATE</div>
       <h2>Duplicidade, cadastro e calendário</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Em pagamentos, crie as flags booleanas:
-1. duplicidade: duplicated por fornecedor_id, nota_fiscal e valor, mantendo a primeira ocorrência. Compare com a regra ingênua por fornecedor_id e valor e mostre quais fornecedores explicam a diferença.
-2. sem_cadastro: fornecedor_id ausente de cadastro.
-3. dia_nao_util: sábado, domingo ou um destes feriados de 2025: 01/01, 03/03, 04/03, 18/04, 21/04, 01/05, 19/06, 07/09, 12/10, 02/11, 15/11, 20/11 e 25/12.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/03_regras.py</code> e <code>saidas/sinais_regras.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele compara duas versões da mesma regra. A diferença entre elas é o que a nota fiscal protege.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>77 e 18 duplicidades?</li><li>14 sem cadastro e 25 em dia não útil?</li><li>Os feriados estão numa constante?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você traduz controles internos de contas a pagar em regras
+verificáveis. Marca pagamentos; não remove nenhum.
 
-Espero 18, 14 e 25. Mostre amostras de cada flag. Não remova nenhum pagamento.</div></div>
+<span class="k">[R] Pedido</span>
+Crie analise/03_regras.py, que lê saidas/pagamentos.csv e
+entrada/fornecedores.csv e cria três flags booleanas:
+1. duplicidade: duplicated por fornecedor_id, nota_fiscal e valor,
+   mantendo a primeira ocorrência. Compare com a regra ingênua, por
+   fornecedor_id e valor, e mostre quais fornecedores explicam a
+   diferença.
+2. sem_cadastro: fornecedor_id ausente do cadastro.
+3. dia_nao_util: sábado, domingo ou um destes feriados de 2025: 01/01,
+   03/03, 04/03, 18/04, 21/04, 01/05, 19/06, 07/09, 12/10, 02/11, 15/11,
+   20/11 e 25/12.
+Grave saidas/sinais_regras.csv com pagamento_id e as três flags.
+
+<span class="k">[E] Exemplos</span>
+pagamento_id,duplicidade,sem_cadastro,dia_nao_util
+P00001,False,False,False
+
+<span class="k">[A] Ajustes</span>
+- Espero 18 duplicidades, 14 sem cadastro e 25 em dia não útil. A regra
+  ingênua deve marcar 77.
+- Mostre três exemplos de cada flag.
+- Os feriados ficam numa constante no topo do script.
+
+<span class="k">[T] Tipo de saída</span>
+sinais_regras.csv e, no chat, uma tabela com regra, critério e
+contagem, seguida de até três frases sobre a diferença entre as duas
+regras de duplicidade.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 4 · Alçada</div>
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 04 · Prompt CREATE</div>
       <h2>Fracionamento e valores redondos</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Crie a flag fracionamento: entre pagamentos de R$ 9.000 a R$ 9.999,99, agrupe por fornecedor_id e solicitante e marque cada pagamento que tenha, a até 6 dias dele (inclusive ele), pelo menos 2 pagamentos somando R$ 10.000 ou mais.
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/04_alcada.py</code> e <code>saidas/sinais_alcada.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Procure no código a janela de 6 dias e a faixa da alçada. Elas devem estar em constantes, e não espalhadas.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>116 na faixa e 15 em fracionamento?</li><li>64 redondos e 40 concentrados?</li><li>O comentário sobre <code>S14</code> é uma pergunta?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você testa os controles ligados à alçada de aprovação de R$ 10.000.
+Marca pagamentos; não remove nenhum.
 
-Crie valor_redondo para valor igual ou acima de R$ 1.000 e múltiplo de R$ 100. Calcule, por fornecedor, a proporção de valores redondos e crie redondo_concentrado quando o pagamento é redondo e o fornecedor tem 10 ou mais pagamentos com 30% ou mais de redondos. Espero 116 pagamentos na faixa, 15 em fracionamento, 64 redondos e 40 concentrados.</div></div>
+<span class="k">[R] Pedido</span>
+Crie analise/04_alcada.py, que lê saidas/pagamentos.csv e cria:
+1. fracionamento: entre pagamentos de R$ 9.000 a R$ 9.999,99, agrupe por
+   fornecedor_id e solicitante e marque cada pagamento que tenha, a até
+   6 dias dele (inclusive ele), pelo menos 2 pagamentos somando
+   R$ 10.000 ou mais.
+2. valor_redondo: valor igual ou acima de R$ 1.000 e múltiplo de R$ 100.
+3. redondo_concentrado: pagamento redondo de fornecedor com 10 ou mais
+   pagamentos e 30% ou mais de valores redondos.
+Grave saidas/sinais_alcada.csv com pagamento_id e as três flags.
+
+<span class="k">[E] Exemplos</span>
+fornecedor_id,solicitante,pagamentos_marcados
+F023,S14,6
+
+<span class="k">[A] Ajustes</span>
+- Espero 116 pagamentos na faixa, 15 em fracionamento, 64 redondos e 40
+  concentrados.
+- A janela de 6 dias, a faixa e os limiares ficam em constantes no topo
+  do script.
+- Ao comentar o solicitante que aparece em mais de um fornecedor,
+  escreva uma pergunta para o exame, e não uma conclusão.
+
+<span class="k">[T] Tipo de saída</span>
+sinais_alcada.csv e, no chat, os grupos marcados por fornecedor e
+solicitante e a proporção de redondos dos quatro fornecedores com a
+maior proporção.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 2</div>
+      <div class="prompt-label">Conferência · etapas 03 e 04</div>
       <h2>Conferência das regras</h2>
       <div class="metric-row">
         <div class="metric"><strong>77 e 18</strong><span>duplicidade, ingênua e com nota</span></div>
@@ -804,218 +1124,8 @@ Crie valor_redondo para valor igual ou acima de R$ 1.000 e múltiplo de R$ 100. 
       </div>
       <ul>
         <li>A regra ingênua marca 59 parcelas de contratos mensais e de <code>F045</code>, com notas distintas.</li>
-        <li>Os 15 fracionamentos vêm de <code>F023</code>, <code>F066</code> e <code>F089</code>.</li>
+        <li>Os 15 fracionamentos vêm de <code>F023</code>, <code>F066</code> e <code>F089</code>; <code>S14</code> aparece em dois deles.</li>
         <li>As parcelas de R$ 12.000 de <code>F031</code> são redondas, mas o fornecedor fica abaixo de 30%.</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 1</div>
-      <h2>A Lei de Benford</h2>
-      <p>Em valores que se espalham por várias ordens de grandeza, o primeiro dígito segue a proporção log10(1 + 1/d), e não a distribuição uniforme.</p>
-      <table class="deck-table">
-        <thead><tr><th>Dígito</th><th>1</th><th>2</th><th>3</th><th>5</th><th>9</th></tr></thead>
-        <tbody>
-          <tr><td>Esperado por Benford</td><td>30,1%</td><td>17,6%</td><td>12,5%</td><td>7,9%</td><td>4,6%</td></tr>
-          <tr><td>Observado nos pagamentos</td><td>28,9%</td><td>16,9%</td><td>12,1%</td><td>8,5%</td><td>5,2%</td></tr>
-        </tbody>
-      </table>
-      <p>Valores inventados por pessoas tendem a espalhar os dígitos de forma uniforme e se afastam dessa curva.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 2</div>
-      <h2>Duas medidas de afastamento</h2>
-      <ul>
-        <li>MAD: média do desvio absoluto entre observado e esperado. Abaixo de 0,006 indica conformidade próxima.</li>
-        <li>Qui-quadrado: teste de hipótese que, com milhares de linhas, rejeita desvios pequenos.</li>
-        <li>Com 50 a 70 pagamentos por fornecedor, o MAD oscila muito; por fornecedor, usa-se o qui-quadrado com limiar rigoroso.</li>
-        <li>Como são 24 fornecedores testados ao mesmo tempo, o limiar adotado é p-valor abaixo de 0,001.</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 5 · Benford</div>
-      <h2>Benford no total e por fornecedor</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Use os pagamentos com valor de R$ 10 ou mais. Extraia o primeiro dígito significativo e compare a proporção observada com a esperada por Benford, log10(1 + 1/d), em tabela e gráfico de barras. Calcule o MAD e o qui-quadrado (scipy.stats.chisquare) da população inteira.
-
-Repita para cada fornecedor com 50 ou mais pagamentos, salve mad, qui_quadrado e p_valor em saidas/benford_fornecedores.csv e crie a flag fornecedor_fora_benford para p-valor abaixo de 0,001. Mostre quantos fornecedores teriam MAD acima de 0,015 e explique por que esse critério não serve para amostras pequenas.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 3</div>
-      <h2>Conferência de Benford</h2>
-      <div class="metric-row">
-        <div class="metric"><strong>0,0050</strong><span>MAD da população</span></div>
-        <div class="metric"><strong>24</strong><span>fornecedores testados</span></div>
-        <div class="metric"><strong>19</strong><span>com MAD acima de 0,015</span></div>
-        <div class="metric"><strong>1</strong><span>com p-valor abaixo de 0,001</span></div>
-      </div>
-      <ul>
-        <li>A população inteira tem conformidade próxima, com 5.407 valores.</li>
-        <li><code>F077</code> tem 60 pagamentos e nenhum começa por 1, 2 ou 3; o p-valor é da ordem de 10<sup>-19</sup>.</li>
-        <li><code>F031</code> tem p-valor de 0,008 por causa das parcelas do contrato e fica abaixo do limiar.</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Conceito 3</div>
-      <h2>Isolation Forest como triagem</h2>
-      <p>O Isolation Forest separa os dados com cortes aleatórios. Pagamentos isolados com poucos cortes recebem a marca de anomalia, sem que o algoritmo conheça a alçada, o cadastro ou o calendário.</p>
-      <ul>
-        <li>Atributos: logaritmo do valor, dia da semana e pagamentos do fornecedor no mês.</li>
-        <li>Parâmetros: <code>contamination=0.01</code> e <code>random_state=42</code>.</li>
-        <li>O resultado é uma anomalia estatística, e não um indício de controle.</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 6 · Isolation Forest</div>
-      <h2>Triagem estatística complementar</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Monte os atributos log_valor (log10 do valor), dia_semana e pagamentos_fornecedor_mes (quantidade de pagamentos do mesmo fornecedor no mesmo mês). Treine IsolationForest(contamination=0.01, random_state=42) do scikit-learn e crie a flag anomalia_isolation.
-
-Mostre quantos pagamentos foram marcados, quantos também dispararam alguma regra ou Benford e a distribuição de valor dos marcados. Explique em duas frases o que o algoritmo encontrou e por que isso não equivale a irregularidade.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 4</div>
-      <h2>Conferência do Isolation Forest</h2>
-      <div class="metric-row">
-        <div class="metric"><strong>55</strong><span>anomalias marcadas</span></div>
-        <div class="metric"><strong>0</strong><span>coincidem com alguma regra</span></div>
-        <div class="metric"><strong>14</strong><span>acima de R$ 100.000</span></div>
-        <div class="metric"><strong>23</strong><span>abaixo de R$ 100</span></div>
-      </div>
-      <ul>
-        <li>O algoritmo encontrou os extremos de valor, que são raros e não violam controle algum.</li>
-        <li>Nenhum dos 172 pagamentos com indício aparece entre as anomalias.</li>
-        <li>Por isso o sinal recebe peso baixo na matriz de risco.</li>
-      </ul>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Matriz de risco</div>
-      <h2>Pesos dos sinais na pontuação</h2>
-      <table class="deck-table">
-        <thead><tr><th>Peso</th><th>Sinais</th><th>Justificativa</th></tr></thead>
-        <tbody>
-          <tr><td>3</td><td>duplicidade, fracionamento, sem cadastro</td><td>violam controle interno explícito</td></tr>
-          <tr><td>2</td><td>fornecedor fora de Benford, dia não útil, redondo concentrado</td><td>padrão atípico que pede justificativa</td></tr>
-          <tr><td>1</td><td>anomalia do Isolation Forest</td><td>raridade estatística sem regra associada</td></tr>
-        </tbody>
-      </table>
-      <p>Entra na fila de exame o pagamento com pontuação igual ou superior a 2. Os pesos são decisão do comitê e ficam registrados no relatório.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 7 · Fila e relatório</div>
-      <h2>Fila priorizada e relatório</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Calcule pontuacao com os pesos: duplicidade, fracionamento e sem_cadastro valem 3; fornecedor_fora_benford, dia_nao_util e redondo_concentrado valem 2; anomalia_isolation vale 1. Crie a coluna sinais com os nomes das flags ativas.
-
-Salve em saidas/fila_de_exame.csv os pagamentos com pontuação 2 ou mais, ordenados por pontuação e valor. Salve saidas/achados.csv com uma linha por pagamento e sinal, incluindo parâmetro e data da execução. Recalcule o SHA-256 da entrada e confirme com assert que é igual a hash_inicial.
-
-Crie RELATORIO_AUDITORIA.md com hashes, regras, contagens, pesos, fila por sinal e limitações. Use somente números do notebook e escreva "examinar", nunca "fraude comprovada". Proponha git add, commit e push sem executar.</div></div>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 5</div>
-      <h2>Conferência da fila de exame</h2>
-      <table class="deck-table">
-        <thead><tr><th>Sinal principal</th><th>Pagamentos</th><th>Valor</th></tr></thead>
-        <tbody>
-          <tr><td>Fornecedor fora de Benford</td><td>60</td><td>R$ 420.488,87</td></tr>
-          <tr><td>Redondo concentrado</td><td>40</td><td>R$ 201.000,00</td></tr>
-          <tr><td>Dia não útil</td><td>25</td><td>R$ 148.336,45</td></tr>
-          <tr><td>Duplicidade</td><td>18</td><td>R$ 52.911,55</td></tr>
-          <tr><td>Fracionamento</td><td>15</td><td>R$ 141.068,94</td></tr>
-          <tr><td>Sem cadastro</td><td>14</td><td>R$ 89.179,49</td></tr>
-        </tbody>
-      </table>
-      <p>A fila tem 172 pagamentos e R$ 1.052.985,30, cerca de 2,2% do valor pago no ano.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Fase H · Monitoramento</div>
-      <h2>Do notebook ao painel no Grafana</h2>
-      <svg class="anim" viewBox="0 0 1000 330" role="img" aria-label="O CSV com hash passa pela carga, entra no CrateDB, onde as views SQL calculam os sinais, e o Grafana lê essas views; abaixo, o arquivo JSON do dashboard, versionado no Git, é provisionado no Grafana">
-        <defs>
-          <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
-          <marker id="ponta-git" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d8a7ff"/></marker>
-        </defs>
-        <g data-t="0">
-          <rect class="cx" x="10" y="40" width="180" height="96" rx="10"/>
-          <text class="t-b" x="24" y="72">contas_a_pagar.csv</text>
-          <text class="t-sm" x="24" y="98">5.440 linhas</text>
-          <text class="t-sm" x="24" y="120">SHA-256 b3898f2d…</text>
-        </g>
-        <path class="seta" data-t="500" d="M192,88 L240,88"/>
-        <g data-t="900">
-          <rect class="cx" x="246" y="40" width="160" height="96" rx="10"/>
-          <text class="t-b" x="262" y="72">serviço carga</text>
-          <text class="t-sm" x="262" y="98">confere o hash</text>
-          <text class="t-sm" x="262" y="120">insere sem limpar</text>
-        </g>
-        <path class="seta" data-t="1400" d="M408,88 L456,88"/>
-        <g data-t="1800">
-          <rect class="cx-forte" x="462" y="14" width="236" height="164" rx="12"/>
-          <text class="t-lg" x="480" y="44">CrateDB</text>
-          <text class="t-sm" x="480" y="70">tabela contas_bruta</text>
-          <text class="t-sm" x="480" y="96">v_pagamentos (limpeza)</text>
-          <text class="t-sm" x="480" y="122">v_duplicidade … v_sinais</text>
-          <text class="t-ok" x="480" y="158">v_fila_exame: 172</text>
-        </g>
-        <circle class="pacote viaja" data-t="2600" cx="700" cy="96" r="7" style="--de: 0px; --ate: 46px"/>
-        <path class="seta" data-t="2400" d="M700,96 L762,96"/>
-        <text class="t-sm" data-t="2400" x="704" y="80">SQL</text>
-        <g data-t="2900">
-          <rect class="cx" x="768" y="14" width="222" height="164" rx="12"/>
-          <text class="t-lg" x="786" y="44">Grafana · 3001</text>
-          <rect class="barra cresce" data-t="3300" x="790" y="98" width="26" height="62"/>
-          <rect class="barra cresce" data-t="3450" x="826" y="118" width="26" height="42"/>
-          <rect class="barra cresce" data-t="3600" x="862" y="132" width="26" height="28"/>
-          <rect class="barra cresce" data-t="3750" x="898" y="140" width="26" height="20"/>
-          <rect class="barra cresce" data-t="3900" x="934" y="146" width="26" height="14"/>
-        </g>
-        <g data-t="4500">
-          <rect class="cx-codigo" x="462" y="232" width="236" height="84" rx="10"/>
-          <text class="t-b" x="478" y="262">auditoria-contas.json</text>
-          <text class="t-sm" x="478" y="288">versionado no Git</text>
-          <text class="t-sm" x="478" y="306">muda por commit</text>
-        </g>
-        <path class="seta-git" data-t="5000" d="M700,274 L878,274 L878,186"/>
-        <text class="t-sm" data-t="5000" x="712" y="300">provisionamento a cada 10 s</text>
-        <text class="t-sm" data-t="5600" x="10" y="200">Mesmas regras do notebook,</text>
-        <text class="t-sm" data-t="5600" x="10" y="222">escritas como views SQL.</text>
-      </svg>
-      <p class="anim-legenda">O notebook continua sendo a prova da análise. O CrateDB guarda a base e recalcula os sinais em SQL, e o Grafana exibe as views para quem acompanha o ano, sem reabrir o notebook.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Fase H · Componentes</div>
-      <h2>Papel de cada serviço no Compose</h2>
-      <table class="deck-table">
-        <thead><tr><th>Serviço</th><th>Papel na aula</th><th>Acesso</th></tr></thead>
-        <tbody>
-          <tr><td>cratedb</td><td>banco SQL distribuído; guarda a base bruta e calcula as views de detecção</td><td>porta 4200, console web</td></tr>
-          <tr><td>carga</td><td>confere o SHA-256, insere os CSV e cria as views de <code>sql/deteccao.sql</code></td><td>termina com código 0</td></tr>
-          <tr><td>grafana</td><td>lê as views pelo protocolo do PostgreSQL e desenha o dashboard provisionado</td><td>porta 3001, leitura anônima</td></tr>
-        </tbody>
-      </table>
-      <p>A porta 3000 continua reservada ao Metabase do laboratório 5. No Codespace, as duas portas abrem pela aba PORTS, e não por <code>localhost</code> no navegador.</p>
-    </div>
-
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Etapa H · Ambiente</div>
-      <h2>CrateDB e Grafana no Codespace</h2>
-      <div class="code-block">cp -r materiais/aula-15/monitoramento aula-15-seunome/
-cd aula-15-seunome/monitoramento
-echo "DADOS_DIR=../entrada" > .env
-docker compose up -d
-docker compose logs carga</div>
-      <ul>
-        <li>O log da carga mostra os dois hashes com a palavra <code>confere</code> e a fila com 172 pagamentos.</li>
-        <li>Na aba PORTS, abra a porta 3001 para o Grafana e a 4200 para o console do CrateDB.</li>
-        <li>Para encerrar, use <code>docker compose down</code>; com <code>-v</code>, o volume do banco também é apagado.</li>
       </ul>
     </div>
 
@@ -1039,111 +1149,382 @@ docker compose logs carga</div>
         </div>
         <div class="sql-saida" id="sql-saida"><div class="vazio">O resultado aparece aqui.</div></div>
       </div>
-      <p class="anim-legenda">O editor roda SQLite no navegador sobre a base da aula, com a view <code>v_pagamentos</code> já normalizada. As views equivalentes do CrateDB estão em <code>sql/deteccao.sql</code>; o monitor diário mostra a principal diferença de dialeto.</p>
+      <p class="anim-legenda sql-legenda">SQLite no navegador, sobre a view <code>v_pagamentos</code> normalizada: as mesmas contagens do pandas.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Monitor diário</div>
-      <h2>Limite de três desvios ao longo do ano</h2>
-      <svg class="anim" id="anim-monitor" data-anim="monitor" viewBox="0 0 1000 330" role="img" aria-label="Valor pago por dia em 2025, em escala logarítmica, desenhado dia a dia; a linha tracejada é a média dos 20 dias anteriores mais três desvios padrão, e os pontos vermelhos são os 11 dias que passam do limite"></svg>
-      <ul>
-        <li>Os 11 dias passam do limite por causa de um pagamento grande, como o de R$ 1,87 milhão em 17/03.</li>
-        <li>Só 5 desses dias têm algum pagamento da fila, e por coincidência: são 6 pagamentos que somam R$ 39.014,37.</li>
-        <li>Os 25 pagamentos em dia não útil aparecem como vales, que um limite superior não detecta.</li>
-      </ul>
+      <div class="prompt-label">Etapa 05 · Conceito</div>
+      <h2>A Lei de Benford</h2>
+      <p>Em valores que se espalham por várias ordens de grandeza, o primeiro dígito segue a proporção log10(1 + 1/d), e não a distribuição uniforme.</p>
+      <table class="deck-table">
+        <thead><tr><th>Dígito</th><th>1</th><th>2</th><th>3</th><th>5</th><th>9</th></tr></thead>
+        <tbody>
+          <tr><td>Esperado por Benford</td><td>30,1%</td><td>17,6%</td><td>12,5%</td><td>7,9%</td><td>4,6%</td></tr>
+          <tr><td>Observado nos pagamentos</td><td>28,9%</td><td>16,9%</td><td>12,1%</td><td>8,5%</td><td>5,2%</td></tr>
+        </tbody>
+      </table>
+      <p>Valores inventados por pessoas tendem a espalhar os dígitos de forma uniforme e se afastam dessa curva.</p>
     </div>
 
     <div class="slide slide-content" data-lesson-section="concepts">
-      <div class="prompt-label">Dashboard como código</div>
-      <h2>Painel definido em arquivo JSON</h2>
-      <svg class="anim" viewBox="0 0 1000 330" role="img" aria-label="Um bloco novo é acrescentado ao JSON do dashboard, passa por um commit, o Grafana relê a pasta em até 10 segundos e o painel novo aparece abaixo dos existentes">
-        <defs>
-          <marker id="ponta-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4bc4e8"/></marker>
-        </defs>
-        <rect class="cx-codigo" x="10" y="10" width="420" height="310" rx="12"/>
-        <text class="t-sm" x="28" y="38">auditoria-contas.json</text>
-        <text x="28" y="70">"panels": [</text>
-        <text class="t-sm" x="48" y="96">{ "id": 9, "title": "Fila de exame", … },</text>
-        <text class="t-sm" x="48" y="120">{ "id": 10, "title": "Cadeia de custódia", … },</text>
-        <g data-t="600">
-          <rect class="realce" x="40" y="132" width="376" height="140" rx="8"/>
-          <text x="52" y="156">{ "id": 11,</text>
-          <text x="68" y="180">"type": "barchart",</text>
-          <text x="68" y="204">"title": "Dia não útil por mês",</text>
-          <text x="68" y="228">"rawSql": "SELECT date_format(…)</text>
-          <text x="68" y="252">  FROM doc.v_dia_nao_util …" }</text>
-        </g>
-        <text x="28" y="300">]</text>
-        <path class="seta" data-t="1700" d="M434,170 L500,170" style="marker-end: url(#ponta-b)"/>
-        <g data-t="2100">
-          <rect class="cx" x="506" y="120" width="150" height="100" rx="10"/>
-          <text class="t-b" x="522" y="152">git commit</text>
-          <text class="t-sm" x="522" y="178">diff revisável</text>
-          <text class="t-sm" x="522" y="200">um painel a mais</text>
-        </g>
-        <path class="seta" data-t="2700" d="M660,170 L716,170" style="marker-end: url(#ponta-b)"/>
-        <text class="t-sm" data-t="2700" x="664" y="156">10 s</text>
-        <g data-t="3100">
-          <rect class="cx" x="722" y="10" width="268" height="310" rx="12"/>
-          <text class="t-b" x="738" y="38">Grafana</text>
-          <rect x="738" y="52" width="114" height="44" rx="5" fill="rgba(255,255,255,0.07)"/>
-          <rect x="860" y="52" width="114" height="44" rx="5" fill="rgba(255,255,255,0.07)"/>
-          <rect x="738" y="104" width="236" height="56" rx="5" fill="rgba(255,255,255,0.07)"/>
-          <rect x="738" y="168" width="236" height="22" rx="5" fill="rgba(255,255,255,0.07)"/>
-        </g>
-        <g data-t="3700">
-          <rect class="realce" x="738" y="198" width="236" height="110" rx="6"/>
-          <text class="t-sm" x="748" y="216">Dia não útil por mês</text>
-        </g>
-        <rect class="barra-nova cresce" data-t="3900" x="752" y="290" width="14" height="5"/>
-        <rect class="barra-nova cresce" data-t="3950" x="771" y="290" width="14" height="5"/>
-        <rect class="barra-nova cresce" data-t="4000" x="790" y="274" width="14" height="21"/>
-        <rect class="barra-nova cresce" data-t="4050" x="809" y="285" width="14" height="10"/>
-        <rect class="barra-nova cresce" data-t="4100" x="828" y="274" width="14" height="21"/>
-        <rect class="barra-nova cresce" data-t="4150" x="847" y="280" width="14" height="15"/>
-        <rect class="barra-nova cresce" data-t="4200" x="866" y="285" width="14" height="10"/>
-        <rect class="barra-nova cresce" data-t="4250" x="885" y="280" width="14" height="15"/>
-        <rect class="barra-nova cresce" data-t="4300" x="904" y="290" width="14" height="5"/>
-        <rect class="barra-nova cresce" data-t="4350" x="923" y="285" width="14" height="10"/>
-        <rect class="barra-nova cresce" data-t="4400" x="942" y="285" width="14" height="10"/>
-      </svg>
+      <div class="prompt-label">Etapa 05 · Conceito</div>
+      <h2>Duas medidas de afastamento</h2>
       <ul>
-        <li>O JSON fica no repositório, e o diff mostra exatamente qual consulta e qual painel mudaram.</li>
-        <li><code>allowUiUpdates: false</code> impede salvar pela interface; toda mudança passa pelo arquivo.</li>
-        <li>Quem clona o repositório e roda <code>docker compose up</code> recebe o mesmo dashboard.</li>
+        <li>MAD: média do desvio absoluto entre observado e esperado. Abaixo de 0,006 indica conformidade próxima.</li>
+        <li>Qui-quadrado: teste de hipótese que, com milhares de linhas, rejeita desvios pequenos.</li>
+        <li>Com 50 a 70 pagamentos por fornecedor, o MAD oscila muito; por fornecedor, usa-se o qui-quadrado com limiar rigoroso.</li>
+        <li>Como são 24 fornecedores testados ao mesmo tempo, o limiar adotado é p-valor abaixo de 0,001.</li>
       </ul>
     </div>
 
-    <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Prompt 8 · Painel como código</div>
-      <h2>Painel novo no arquivo JSON</h2>
-      <div class="prompt-wrap"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text">Abra aula-15-seunome/monitoramento/grafana/dashboards/auditoria-contas.json e sql/deteccao.sql e explique em três frases como o Grafana encontra este arquivo e de onde vêm os dados de cada painel.
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 05 · Prompt CREATE</div>
+      <h2>Benford no total e por fornecedor</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/05_benford.py</code>, três CSV e <code>saidas/benford.png</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Veja como ele extrai o primeiro dígito de valores abaixo de R$ 10. O filtro de R$ 10 evita o zero à esquerda.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>5.407 valores e MAD de 0,0050?</li><li>24 fornecedores testados?</li><li>Só <code>F077</code> abaixo de 0,001?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você aplica a Lei de Benford a pagamentos, como na auditoria forense.
+Mede o afastamento; não explica a causa.
 
-Acrescente um painel com id 11, do tipo barchart, título "Pagamentos em dia não útil por mês", datasource de uid cratedb e gridPos logo abaixo do último painel, com largura 24. A consulta deve contar as linhas de doc.v_dia_nao_util por mês, com o mês em texto (date_format('%Y-%m', data_pagamento)). Não altere os outros painéis.
+<span class="k">[R] Pedido</span>
+Crie analise/05_benford.py, que usa os pagamentos de
+saidas/pagamentos.csv com valor de R$ 10 ou mais e:
+1. Extrai o primeiro dígito significativo e compara a proporção
+   observada com a esperada, log10(1 + 1/d), em saidas/benford_total.csv
+   e no gráfico de barras saidas/benford.png.
+2. Calcula o MAD e o qui-quadrado (scipy.stats.chisquare) da população.
+3. Repete para cada fornecedor com 50 ou mais pagamentos e grava mad,
+   qui_quadrado e p_valor em saidas/benford_fornecedores.csv.
+4. Cria fornecedor_fora_benford para p-valor abaixo de 0,001 e grava
+   saidas/sinais_benford.csv com pagamento_id e a flag.
 
-Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conferir no Grafana que as barras somam 25. Mostre o diff e proponha git add e commit, sem executar.</div></div>
+<span class="k">[E] Exemplos</span>
+fornecedor_id,pagamentos,mad,qui_quadrado,p_valor
+F077,60,0.1338,105.5,3.2e-19
+
+<span class="k">[A] Ajustes</span>
+- Espero 5.407 valores, MAD de 0,0050 e qui-quadrado de 13,8 na
+  população; 24 fornecedores testados e apenas F077 abaixo de 0,001.
+- Mostre quantos fornecedores teriam MAD acima de 0,015 e explique por
+  que esse critério não serve para amostras pequenas.
+- Por fornecedor, o critério é o qui-quadrado; não troque o limiar.
+
+<span class="k">[T] Tipo de saída</span>
+Três CSV, um PNG e, no chat, a tabela dos cinco fornecedores com menor
+p-valor e até quatro frases sobre MAD e qui-quadrado.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="guided-practice">
-      <div class="prompt-label">Conferência 6</div>
-      <h2>Conferência do monitoramento</h2>
+      <div class="prompt-label">Conferência · etapa 05</div>
+      <h2>Conferência de Benford</h2>
       <div class="metric-row">
-        <div class="metric"><strong>172</strong><span>pagamentos na fila do Grafana</span></div>
-        <div class="metric"><strong>11</strong><span>dias acima do limite</span></div>
-        <div class="metric"><strong>5</strong><span>desses dias com pagamento na fila</span></div>
-        <div class="metric"><strong>25</strong><span>pagamentos no painel novo</span></div>
+        <div class="metric"><strong>0,0050</strong><span>MAD da população</span></div>
+        <div class="metric"><strong>24</strong><span>fornecedores testados</span></div>
+        <div class="metric"><strong>19</strong><span>com MAD acima de 0,015</span></div>
+        <div class="metric"><strong>1</strong><span>com p-valor abaixo de 0,001</span></div>
       </div>
       <ul>
-        <li>As views reproduzem as contagens do notebook, sinal por sinal, sem o Isolation Forest.</li>
-        <li>O painel novo tem 11 barras, de janeiro a novembro, com 4 pagamentos em março e em maio.</li>
-        <li>Se o painel não aparecer, rode <code>docker compose logs grafana</code> e procure o erro de provisionamento.</li>
+        <li>A população inteira tem conformidade próxima, com 5.407 valores.</li>
+        <li><code>F077</code> tem 60 pagamentos e nenhum começa por 1, 2 ou 3; o p-valor é da ordem de 10<sup>-19</sup>.</li>
+        <li><code>F031</code> tem p-valor de 0,008 por causa das parcelas do contrato e fica abaixo do limiar.</li>
       </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 06 · Conceito</div>
+      <h2>Isolation Forest como triagem</h2>
+      <p>O Isolation Forest separa os dados com cortes aleatórios. Pagamentos isolados com poucos cortes recebem a marca de anomalia, sem que o algoritmo conheça a alçada, o cadastro ou o calendário.</p>
+      <ul>
+        <li>Atributos: logaritmo do valor, dia da semana e pagamentos do fornecedor no mês.</li>
+        <li>Parâmetros: <code>contamination=0.01</code> e <code>random_state=42</code>.</li>
+        <li>O resultado é uma anomalia estatística, e não um indício de controle.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 06 · Prompt CREATE</div>
+      <h2>Triagem com Isolation Forest</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/06_isolation.py</code> e <code>saidas/sinais_isolation.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele lê os sinais das etapas anteriores só para contar coincidências. O modelo não recebe essas flags como atributo.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>55 anomalias e 0 coincidentes?</li><li>14 acima de R$ 100.000 e 23 abaixo de R$ 100?</li><li>A explicação evita a palavra irregularidade?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você usa aprendizado de máquina como triagem estatística, sem
+conhecimento das regras do negócio. Relata raridade, e não
+irregularidade.
+
+<span class="k">[R] Pedido</span>
+Crie analise/06_isolation.py, que lê saidas/pagamentos.csv e:
+1. Monta os atributos log_valor (log10 do valor), dia_semana e
+   pagamentos_fornecedor_mes (pagamentos do mesmo fornecedor no mesmo
+   mês).
+2. Treina IsolationForest(contamination=0.01, random_state=42) do
+   scikit-learn e cria a flag anomalia_isolation.
+3. Lê os sinais de saidas/sinais_regras.csv, sinais_alcada.csv e
+   sinais_benford.csv e conta quantas anomalias também dispararam
+   alguma regra ou Benford.
+Grave saidas/sinais_isolation.csv com pagamento_id e a flag.
+
+<span class="k">[E] Exemplos</span>
+faixa_de_valor,anomalias
+acima de R$ 100.000,14
+
+<span class="k">[A] Ajustes</span>
+- Espero 55 anomalias, nenhuma coincidente com regra ou Benford, 14
+  acima de R$ 100.000 e 23 abaixo de R$ 100.
+- Se a contagem divergir por pouco, informe a versão do scikit-learn
+  instalada; não mude contamination nem random_state.
+
+<span class="k">[T] Tipo de saída</span>
+sinais_isolation.csv e, no chat, as contagens e duas frases: o que o
+algoritmo encontrou e por que isso não equivale a irregularidade.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência · etapa 06</div>
+      <h2>Conferência do Isolation Forest</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>55</strong><span>anomalias marcadas</span></div>
+        <div class="metric"><strong>0</strong><span>coincidem com alguma regra</span></div>
+        <div class="metric"><strong>14</strong><span>acima de R$ 100.000</span></div>
+        <div class="metric"><strong>23</strong><span>abaixo de R$ 100</span></div>
+      </div>
+      <ul>
+        <li>O algoritmo encontrou os extremos de valor, que são raros e não violam controle algum.</li>
+        <li>Nenhum dos pagamentos com indício de controle aparece entre as anomalias.</li>
+        <li>Por isso o sinal recebe peso baixo na matriz de risco.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 07 · Conceito</div>
+      <h2>Pesos dos sinais na pontuação</h2>
+      <table class="deck-table">
+        <thead><tr><th>Peso</th><th>Sinais</th><th>Justificativa</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>duplicidade, fracionamento, sem cadastro</td><td>violam controle interno explícito</td></tr>
+          <tr><td>2</td><td>fornecedor fora de Benford, dia não útil, redondo concentrado</td><td>padrão atípico que pede justificativa</td></tr>
+          <tr><td>1</td><td>anomalia do Isolation Forest</td><td>raridade estatística sem regra associada</td></tr>
+        </tbody>
+      </table>
+      <p>Entra na fila de exame o pagamento com pontuação igual ou superior a 2. Os pesos são decisão do comitê e ficam registrados no relatório.</p>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 07 · Prompt CREATE</div>
+      <h2>Matriz de risco e fila de exame</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/07_fila.py</code>, <code>saidas/fila_de_exame.csv</code> e <code>saidas/achados.csv</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>O <code>assert</code> do hash é a última linha do script. Se falhar, a etapa para, e o hash inicial não é recalculado.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>172 pagamentos e R$ 1.052.985,30?</li><li>47 com pontuação 3 e 125 com 2?</li><li><code>custodia.csv</code> com o hash final igual?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você combina os sinais de auditoria numa matriz de risco definida pelo
+comitê e fecha a cadeia de custódia.
+
+<span class="k">[R] Pedido</span>
+Crie analise/07_fila.py, que junta saidas/pagamentos.csv aos quatro
+arquivos saidas/sinais_*.csv e:
+1. Calcula pontuacao com os pesos: duplicidade, fracionamento e
+   sem_cadastro valem 3; fornecedor_fora_benford, dia_nao_util e
+   redondo_concentrado valem 2; anomalia_isolation vale 1.
+2. Cria a coluna sinais com os nomes das flags ativas.
+3. Grava saidas/fila_de_exame.csv com pontuação 2 ou mais, ordenada por
+   pontuação e valor, e saidas/achados.csv com uma linha por pagamento
+   e sinal, com o parâmetro da regra e a data da execução.
+4. Recalcula o SHA-256 de entrada/contas_a_pagar.csv, acrescenta a
+   linha "fim" em saidas/custodia.csv e confirma com assert que é igual
+   ao da linha "inicio".
+
+<span class="k">[E] Exemplos</span>
+pagamento_id,sinal,parametro,data_execucao
+P02247,fracionamento,"faixa 9.000-9.999,99; janela 6 dias",2026-11-25
+
+<span class="k">[A] Ajustes</span>
+- Espero 172 pagamentos na fila, R$ 1.052.985,30, 47 com pontuação 3 e
+  125 com pontuação 2; 55 pagamentos com pontuação 1 ficam fora.
+- Os pesos ficam num dicionário no topo do script.
+- Se o assert falhar, pare e me avise; não recalcule o hash inicial.
+
+<span class="k">[T] Tipo de saída</span>
+Os dois CSV, custodia.csv com quatro linhas e, no chat, uma tabela com
+sinal, pagamentos na fila e valor.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, registre o
+prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência · etapa 07</div>
+      <h2>Conferência da fila de exame</h2>
+      <table class="deck-table">
+        <thead><tr><th>Sinal</th><th>Pagamentos</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Fornecedor fora de Benford</td><td>60</td><td>R$ 420.488,87</td></tr>
+          <tr><td>Redondo concentrado</td><td>40</td><td>R$ 201.000,00</td></tr>
+          <tr><td>Dia não útil</td><td>25</td><td>R$ 148.336,45</td></tr>
+          <tr><td>Duplicidade</td><td>18</td><td>R$ 52.911,55</td></tr>
+          <tr><td>Fracionamento</td><td>15</td><td>R$ 141.068,94</td></tr>
+          <tr><td>Sem cadastro</td><td>14</td><td>R$ 89.179,49</td></tr>
+        </tbody>
+      </table>
+      <p>A fila tem 172 pagamentos e R$ 1.052.985,30, cerca de 2,2% do valor pago no ano. Cada um tem exatamente um sinal.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 08 · Conceito</div>
+      <h2>Um painel que abre com duplo clique</h2>
+      <div class="deck-grid">
+        <article class="deck-card"><h3>Um arquivo só</h3><p><code>painel.html</code> traz os gráficos do Plotly e a própria biblioteca embutida. Abre sem servidor, sem banco e sem internet.</p></article>
+        <article class="deck-card"><h3>Gerado por script</h3><p><code>08_painel.py</code> lê <code>saidas/</code>. Mudar um gráfico é mudar o código, que fica no diff e se repete na reexecução.</p></article>
+        <article class="deck-card"><h3>Sem regra nova escondida</h3><p>O painel não recalcula sinais. Todo número vem dos CSV das etapas anteriores, já conferidos.</p></article>
+        <article class="deck-card"><h3>Um sinal a mais</h3><p>O monitor diário compara o valor pago no dia com a média dos 20 dias anteriores mais três desvios.</p></article>
+      </div>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 08 · Prompt CREATE</div>
+      <h2>Painel local de monitoramento</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>analise/08_painel.py</code>, <code>saidas/monitor_diario.csv</code> e <code>saidas/painel.html</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>A janela precisa excluir o próprio dia. Em pandas, isso se faz deslocando a série com <code>shift(1)</code> antes do <code>rolling(20)</code>.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>276 dias e 11 alarmes?</li><li>Barras de dia não útil somando 25?</li><li>O painel abre sem internet?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você monta o painel de acompanhamento que o comitê vai abrir no
+navegador, sem servidor e sem banco de dados.
+
+<span class="k">[R] Pedido</span>
+Crie analise/08_painel.py, que lê saidas/ e:
+1. Calcula o monitor diário: para cada dia com pagamento, o valor pago,
+   a média e o desvio padrão populacional dos 20 dias anteriores com
+   pagamento e o limite de média mais três desvios. O alarme dispara
+   quando há 10 ou mais dias anteriores e o valor passa do limite.
+   Grave saidas/monitor_diario.csv.
+2. Gera saidas/painel.html com Plotly, autocontido
+   (include_plotlyjs=True), com: indicadores de pagamentos analisados,
+   pagamentos na fila, valor da fila e hash conferido; barras da fila
+   por sinal; linha do valor diário com o limite e os alarmes
+   destacados; barras de pagamentos em dia não útil por mês; tabela com
+   os 20 primeiros da fila.
+
+<span class="k">[E] Exemplos</span>
+dia,valor_pago,media_20d,limite_superior,acima_do_limite
+2025-03-17,2598605.96,...,621136.71,True
+
+<span class="k">[A] Ajustes</span>
+- Espero 276 dias com pagamento, 11 acima do limite e o maior em
+  17/03/2025. Só 5 desses dias têm pagamento da fila.
+- As barras de dia não útil vão de janeiro a novembro e somam 25, com 4
+  em março e 4 em maio.
+- Todo número do painel vem de saidas/; não recalcule regras aqui.
+- Títulos dos gráficos descritivos, sem adjetivos.
+
+<span class="k">[T] Tipo de saída</span>
+monitor_diario.csv, painel.html que abre com duplo clique e, no chat,
+os 11 dias de alarme e até três frases sobre o que o monitor encontrou.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md. Mostre o plano e espere meu ok, execute, abra o painel
+no navegador, registre o prompt em prompts.md e pare.</div></div>
+      </div>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="concepts">
+      <div class="prompt-label">Etapa 08 · Monitor diário</div>
+      <h2>Limite de três desvios ao longo do ano</h2>
+      <svg class="anim" id="anim-monitor" data-anim="monitor" viewBox="0 0 1000 330" role="img" aria-label="Valor pago por dia em 2025, em escala logarítmica, desenhado dia a dia; a linha tracejada é a média dos 20 dias anteriores mais três desvios padrão, e os pontos vermelhos são os 11 dias que passam do limite"></svg>
+      <p class="anim-legenda">Os 11 alarmes vêm de pagamentos grandes, como o de R$ 1,87 milhão em 17/03; só 5 desses dias têm pagamento da fila. Os dias não úteis aparecem como vales.</p>
+    </div>
+
+    <div class="slide slide-content" data-lesson-section="guided-practice">
+      <div class="prompt-label">Conferência · etapa 08</div>
+      <h2>Conferência do painel</h2>
+      <div class="metric-row">
+        <div class="metric"><strong>276</strong><span>dias com pagamento</span></div>
+        <div class="metric"><strong>11</strong><span>dias acima do limite</span></div>
+        <div class="metric"><strong>5</strong><span>desses dias com pagamento na fila</span></div>
+        <div class="metric"><strong>25</strong><span>pagamentos em dia não útil</span></div>
+      </div>
+      <ul>
+        <li>O maior dia é 17/03/2025, com R$ 2.598.605,96 pagos.</li>
+        <li>As barras de dia não útil vão de janeiro a novembro, com 4 pagamentos em março e em maio.</li>
+        <li>Se o painel abrir em branco, confira se o script usou <code>include_plotlyjs=True</code>.</li>
+      </ul>
+    </div>
+
+    <div class="slide slide-content slide-etapa" data-lesson-section="guided-practice">
+      <div class="prompt-label">Etapa 09 · Prompt CREATE</div>
+      <h2>Parecer para o comitê</h2>
+      <div class="etapa-grid">
+        <div class="etapa-lado">
+          <div class="etapa-item"><span class="etapa-rotulo">Artefato</span><p><code>RELATORIO_AUDITORIA.md</code></p></div>
+          <div class="etapa-item etapa-obs"><span class="etapa-rotulo">Observe no agente</span><p>Ele mostra o sumário antes de escrever. Confira se há uma seção de limitações e uma de documentos a pedir.</p></div>
+          <div class="etapa-item etapa-gate"><span class="etapa-rotulo">Revise antes de seguir</span><ul><li>Todo número cita um arquivo de <code>saidas/</code>?</li><li>Nenhuma frase atribui fraude, culpa ou intenção?</li><li>O commit só roda com o seu ok?</li></ul></div>
+        </div>
+        <div class="prompt-wrap etapa-prompt"><button class="copy-prompt" type="button">Copiar prompt</button><div class="code-block prompt-text"><span class="k">[C] Personagem</span>
+Você redige o parecer técnico de uma auditoria de contas a pagar para o
+comitê de auditoria de uma rede hospitalar. Separa sinal, evidência e
+recomendação de exame.
+
+<span class="k">[R] Pedido</span>
+Crie RELATORIO_AUDITORIA.md com: hashes de início e fim, limpeza e
+contagens, regras com critério e parâmetro, Benford no total e por
+fornecedor, Isolation Forest, pesos da matriz de risco, fila por sinal,
+monitor diário, documento a pedir no exame de cada sinal e três
+limitações.
+
+<span class="k">[E] Exemplos</span>
+## Fila de exame
+A fila tem 172 pagamentos, que somam R$ 1.052.985,30
+(saidas/fila_de_exame.csv). Recomenda-se examinar o contrato e as
+notas de F077.
+
+<span class="k">[A] Ajustes</span>
+- Use somente números presentes em saidas/; cite o arquivo de origem
+  de cada número.
+- Escreva "examinar"; nunca "fraude", "desvio comprovado", "culpa" ou
+  "intenção".
+- Inclua uma explicação legítima possível para F077 e para o
+  solicitante S14.
+- Diga o que mudaria na fila se o peso de dia não útil caísse para 1,
+  calculando com os dados de saidas/.
+
+<span class="k">[T] Tipo de saída</span>
+Markdown com até 90 linhas, em seções com títulos curtos.
+
+<span class="k">[E] Extras</span>
+Leia CLAUDE.md, saidas/ inteira e prompts.md. Mostre o sumário antes de
+escrever e espere meu ok. Ao terminar, registre o prompt. Se a pasta
+estiver num repositório Git, proponha git add, commit e push, sem
+executar antes da minha aprovação.</div></div>
+      </div>
     </div>
 
     <div class="slide slide-content" data-lesson-section="challenge">
       <div class="prompt-label">Desafio em dupla</div>
-      <h2>Parecer para o comitê</h2>
-      <p>Responda no <code>RELATORIO_AUDITORIA.md</code>, com base no notebook.</p>
+      <h2>Perguntas do comitê</h2>
+      <p>Responda no <code>RELATORIO_AUDITORIA.md</code>, com base nos arquivos de <code>saidas/</code>.</p>
       <ul>
         <li>Que documento o auditor pediria para examinar cada um dos seis sinais?</li>
         <li>Que explicação legítima poderia justificar os pagamentos de <code>F077</code>?</li>
@@ -1153,15 +1534,15 @@ Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conf
     </div>
 
     <div class="slide slide-content" data-lesson-section="challenge">
-      <div class="prompt-label">Entrega · 21h45</div>
+      <div class="prompt-label">Entrega · 22h00</div>
       <h2>Entrega verificável</h2>
       <ul>
-        <li><code>Aula_15_SeuNome.ipynb</code> executado do início ao fim.</li>
-        <li><code>saidas/benford_fornecedores.csv</code> com os 24 fornecedores testados.</li>
-        <li><code>saidas/achados.csv</code> e <code>saidas/fila_de_exame.csv</code> com 172 pagamentos.</li>
-        <li><code>RELATORIO_AUDITORIA.md</code> com hashes de início e fim iguais.</li>
-        <li><code>monitoramento/grafana/dashboards/auditoria-contas.json</code> com o painel 11 validado.</li>
-        <li>Commit e push da pasta <code>aula-15-seunome</code>.</li>
+        <li><code>CLAUDE.md</code> e <code>prompts.md</code> com os dez prompts registrados.</li>
+        <li>Scripts <code>analise/01_perfil.py</code> a <code>08_painel.py</code>, reexecutáveis em ordem.</li>
+        <li><code>saidas/custodia.csv</code> com hashes de início e fim iguais.</li>
+        <li><code>saidas/fila_de_exame.csv</code> com 172 pagamentos e <code>saidas/achados.csv</code>.</li>
+        <li><code>saidas/painel.html</code>, que abre com duplo clique.</li>
+        <li><code>RELATORIO_AUDITORIA.md</code> revisado pela dupla.</li>
       </ul>
     </div>
 
@@ -1172,16 +1553,16 @@ Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conf
         <li>O hash da entrada sustentou a cadeia de custódia do início ao fim.</li>
         <li>A normalização do cadastro evitou 47 falsos alarmes antes de qualquer teste.</li>
         <li>A regra com nota fiscal separou 18 duplicidades de 59 parcelas legítimas.</li>
-        <li>Benford apontou um fornecedor, e o Isolation Forest encontrou apenas extremos de valor.</li>
+        <li>Benford apontou um fornecedor, e o Isolation Forest e o monitor diário encontraram apenas extremos de valor.</li>
         <li>A fila priorizou 172 pagamentos para exame, sem afirmar que houve fraude.</li>
-        <li>As views do CrateDB reproduziram a fila, e o Grafana a exibiu a partir de um JSON versionado.</li>
+        <li>Os prompts CREATE mantiveram janela, limiares e pesos como decisão do comitê, e não do agente.</li>
       </ul>
     </div>
 
     <div class="slide slide-end" data-lesson-section="next-steps">
       <h2>Próximo laboratório</h2>
       <p>Em 02/12, a disciplina trata de IA aplicada à estratégia e à tomada de decisão.</p>
-      <p>Antes de sair, reexecute o notebook, confira os hashes, revise o relatório e faça commit e push.</p>
+      <p>Antes de sair, reexecute os scripts em ordem, confira <code>custodia.csv</code>, revise o relatório e compare com o script de referência.</p>
     </div>
   </div>
 
@@ -1274,7 +1655,7 @@ Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conf
 
   <script src="../materiais/aula-15/dados/base_slides.js"></script>
   <script>
-    // Fase H. Animações: cada elemento com data-t aparece em t ms quando o slide abre e a animação
+    // Animações: cada elemento com data-t aparece em t ms quando o slide abre e a animação
     // para no estado final; o botão Reiniciar animação, no rodapé, roda de novo desde o início.
     // data-anim="monitor" desenha o monitor diário com a base real (base_slides.js).
     (() => {
@@ -1288,7 +1669,7 @@ Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conf
         return linhas.map(l => { const v = l.split(','); return Object.fromEntries(campos.map((c, i) => [c, v[i]])); });
       }
 
-      // Mesma regra de v_monitor_diario: média dos 20 dias anteriores com pagamento + 3 desvios.
+      // Mesma regra da etapa 08: média dos 20 dias anteriores com pagamento + 3 desvios.
       function serieMonitor() {
         const porDia = new Map();
         for (const c of linhasCsv(DADOS.contas)) {
@@ -1399,7 +1780,7 @@ Valide o arquivo com python -m json.tool, espere 10 segundos e me diga como conf
       });
     })();
 
-    // Fase H. Editor SQL no slide: SQLite (sql.js, WebAssembly) carregado só quando o slide abre.
+    // Editor SQL no slide: SQLite (sql.js, WebAssembly) carregado só quando o slide abre.
     (() => {
       const lab = document.getElementById('sql-lab');
       if (!lab) return;
@@ -1464,8 +1845,8 @@ LEFT JOIN (SELECT fornecedor_id, d, count(*) AS qtd FROM digitos GROUP BY 1, 2) 
 GROUP BY e.fornecedor_id, e.total
 ORDER BY qui_quadrado DESC;`,
         mon: `-- Monitor diário: valor do dia contra a média dos 20 dias anteriores
--- mais três desvios. O SQLite aceita a janela que termina em 1 PRECEDING;
--- o CrateDB não aceita, e v_monitor_diario contorna isso com somas.
+-- mais três desvios. A janela termina em 1 PRECEDING para excluir o
+-- próprio dia, como o shift(1) do pandas na etapa 08.
 WITH diario AS (
   SELECT data_pagamento AS dia, sum(valor) AS valor_pago
   FROM v_pagamentos GROUP BY data_pagamento
@@ -1580,7 +1961,7 @@ ORDER BY dia;`,
         carregando = preparar()
           .then(banco => { db = banco; executar.disabled = false; rodar(); })
           .catch(() => {
-            status.textContent = 'Sem conexão para baixar o sql.js. As mesmas consultas rodam no console do CrateDB (porta 4200).';
+            status.textContent = 'Sem conexão para baixar o sql.js. As mesmas regras estão nos scripts de analise/.';
             status.classList.add('erro');
             carregando = null;
           });
